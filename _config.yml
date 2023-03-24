@@ -18,9 +18,9 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: Leonardo Maglanoc's personal website # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
+tagline: interested in Robotics & AI research and engineering # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -29,23 +29,23 @@ description: >- # used by seo meta and the atom feed
 url: "https://leomaglanoc.github.io/"
 
 github:
-  username: github_username # change to your github username
+  username: LeoMaglanoc # change to your github username
 
 twitter:
-  username: twitter_username # change to your twitter username
+  username: leo_maglanoc # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: Leonardo Maglanoc
+  email: leo.maglanoc@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
-    - https://github.com/username # change to your github homepage
+    - https://twitter.com/leo_maglanoc # change to your twitter homepage
+    - https://github.com/LeoMaglanoc # change to your github homepage
+    - https://www.linkedin.com/in/leonardo-maglanoc/
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
 
 google_site_verification: # fill in to your verification string
 
@@ -80,7 +80,7 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://media.licdn.com/dms/image/C4E03AQFFQLGORhGbgg/profile-displayphoto-shrink_800_800/0/1658861806278?e=1684972800&v=beta&t=C9rRPqyCWqG_B4tWTITceUieDHIx9qQ2vDg8e6aCZs4
 
 # boolean type, the global switch for TOC in posts.
 toc: true
