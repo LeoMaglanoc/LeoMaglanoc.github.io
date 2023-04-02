@@ -5,4 +5,8 @@ categories: [blogpost]
 tags: [research]     
 ---
 
-## TODO
+## Artificial Humans as the End Goal for Robotics
+
+## What Problems need to be solved?
+
+Perception - Planning - Control
