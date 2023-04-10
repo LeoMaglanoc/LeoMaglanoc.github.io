@@ -1,8 +1,11 @@
 ---
 # the default layout is 'page'
+layout: page
 icon: fas fa-info-circle
 order: 4
 ---
+
+# About Me
 
 My name is Leonardo Maglanoc. I was born in Norway and grew up in Germany. I'm a robotics & AI master's student at the Technical University Munich. Currently, I'm working as a [robotics research assistant]({% post_url _posts/2023-03-20-jakob_cps %}) for the TUM Cyber-Physical Systems Group on making physical human-robot interaction provably safe with formal verification. My long term research dream is to enable [humanoid robots]({% post_url _posts/2023-03-20-humanoid_robots %}), who can collaborate with humans and help us out where needed.
 
