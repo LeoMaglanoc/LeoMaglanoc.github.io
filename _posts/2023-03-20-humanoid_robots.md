@@ -21,7 +21,7 @@ Moreover, studying humanoid robots provides a rich research space with many inte
 
 To achieve this goal, some of the major problems that need to be solved include perception, planning, and control. By improving these areas, we can enable robots to interact with humans in a more intuitive and natural way.
 
-Robotics engineers need to be more inspired by biological systems, and more specifically by humans. Virtually all problems roboticists tackle, humans can already achieve very well. Therefore, robotics research should aim to replicate the abilities of humans to enable robots to interact with the world as we do. One inspiration  might be the physical construction of the robot and how to control its mechanics. Another inspiration can be brain-inspired algorithms that mimic the navigational skills of a human .
+Robotics engineers need to be more inspired by biological systems, and more specifically by humans. Virtually all problems roboticists tackle, humans can already achieve very well. Therefore, robotics research should aim to replicate the abilities of humans to enable robots to interact with the world as we do. One inspiration  might be the physical construction of the robot and how to control its mechanics. Another inspiration can be brain-inspired algorithms that mimic the navigational skills of a human.
 
 ### Bipedal Locomotion
 
@@ -41,7 +41,10 @@ Neuroscience research has shown that hippocampal cells, like place cells, grid c
 If you are interested in humanoid robots as much as I am, check out some of these interesting videos to learn more:
 
 {% include youtubePlayer.html id= page.youtubeId1%}
+key takeaway: model-predictive control is cool.
+
 {% include youtubePlayer.html id= page.youtubeId2%}
+key takeaway: Locomotion and vision is intertwined.
 
 ## References
 
