@@ -44,7 +44,7 @@ If you are interested in humanoid robots as much as I am, check out some of thes
 key takeaway: model-predictive control is cool.
 
 {% include youtubePlayer.html id= page.youtubeId2%}
-key takeaway: Locomotion and vision is intertwined.
+key takeaway: cocomotion and vision are intertwined.
 
 ## References
 
