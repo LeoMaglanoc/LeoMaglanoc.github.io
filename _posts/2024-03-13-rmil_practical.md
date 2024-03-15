@@ -16,7 +16,7 @@ The visual-inertial EKF localizer, the pre-recorded landmarks, and pre-recorded 
 
 The user interacts with our system via the haptic controller. The user can set the goal position with the haptic handler. Then the A-star path planner uses that + current pose + occupancy map to calculate a list of collision-free waypoints which is used by the PID controller. The PID controller tries to reach each waypoint (depending on the deviation between current pose and waypoint) and sends the commands to the drone. The drone executes the commands and sends its sensor data consisting of camera feed and inertial measurments from the IMU to the localizer. The current pose is then estimated with the extended kalman filter algorithm (EKF) with the help of pre-recorded landmarks.
 
-## Videos
+## Results
 
 The video below showcases our system in a real lab setting. In the beginning, I'm setting the new goal position with the haptic controller in front of the obstacle in the middle of the room. The drone is able to reach it, albeit while hovering for a while around the last waypoint.
 
