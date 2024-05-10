@@ -11,3 +11,8 @@ My name is Leonardo Maglanoc. I'm a 3rd-semester robotics & AI master's student 
 
 In my free time, I like to spend time with my family, do sports (calisthenics and bodybuilding),
 and read books about philosophy and self-improvement.
+
+# News
+
+- 17.05.24: in Canada for a week to visit the [Upper Bound AI conference](https://www.upperbound.ai/)
+- 15.04.24: started my guided research project at the [Smart Robotics Lab](https://srl.cit.tum.de/) on LiDAR SLAM
