@@ -14,5 +14,6 @@ and read books about philosophy and self-improvement.
 
 # News
 
+- 03.06.24: participating in Siemens Hackathon and [Siemens Research and Innovation Ecosystem Conference](https://ecosystem.siemens.com/researchandinnovation/siemens-rie-munich-conference-2024/overview) 
 - 17.05.24: in Canada for a week to visit the [Upper Bound AI conference](https://www.upperbound.ai/)
-- 15.04.24: started my guided research project at the [Smart Robotics Lab](https://srl.cit.tum.de/) on LiDAR SLAM (Multi-Sensor SLAM with Dense Mapping)
+- 15.04.24: started my guided research project at the [Smart Robotics Lab](https://srl.cit.tum.de/) on Multi-Sensor SLAM (Title: Geometry and Intensity Feature Detection for LiDAR SLAM with Dense Volumetric Mapping)
