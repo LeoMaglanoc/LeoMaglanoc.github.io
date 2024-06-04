@@ -1,9 +1,11 @@
 ---
-# the default layout is 'page'
+# the default layout is 'page', command: bundle exec jekyll serve
 layout: page # home
 icon: fas fa-info-circle
 order: 1
 ---
+
+
 
 # About Me
 
@@ -11,6 +13,8 @@ My name is Leonardo Maglanoc. I'm a 3rd-semester robotics & AI master's student 
 
 In my free time, I like to spend time with my family, do sports (calisthenics and bodybuilding),
 and read books about philosophy and self-improvement.
+
+[view my CV as a PDF]({{leomaglanoc.github.io}}/assets/leonardo_maglanoc_cv.pdf)
 
 # News
 
