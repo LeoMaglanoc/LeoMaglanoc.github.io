@@ -20,4 +20,4 @@ and read books about philosophy and self-improvement.
 
 - 03.06.24: participated in Siemens Hackathon and Siemens Research and Innovation Ecosystem Conference. Presented our project on [Smart 3D Printing with Machine Learning]({% post_url _posts/2024-06-22-siemens %}). We almost got the first place, but missed it by only a few votes.
 - 17.05.24: sponsored as a guest to visit the [Upper Bound AI conference](https://www.upperbound.ai/) in Edmonton, Canada. Listened to many talks on current and future Reinforcement Learning research (e.g. from Richard Sutton).
-- 15.04.24: started my guided research project at the [Smart Robotics Lab](https://srl.cit.tum.de/) on Multi-Sensor SLAM with the title "Geometry and Intensity Feature Detection for LiDAR SLAM with Dense Volumetric Mapping".
+- 15.04.24: started my guided research project at the [Smart Robotics Lab](https://srl.cit.tum.de/) on 3D Computer Vision with the title: "Geometry and Intensity Feature Detection for LiDAR SLAM with Dense Volumetric Mapping".
