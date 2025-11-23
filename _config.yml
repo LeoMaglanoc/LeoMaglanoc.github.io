@@ -237,6 +237,12 @@ defaults:
     values:
       layout: post
       permalink: /blog/:title/
+  - scope:
+      path: ""
+      type: "poetry"
+    values:
+      layout: post
+      permalink: /poetry/:title/
 
 sass:
   style: compressed
