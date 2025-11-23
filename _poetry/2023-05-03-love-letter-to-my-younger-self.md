@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Love Letter to Myself
+title: Love Letter to My Younger Self
 date: 2023-05-03
 tags: [poetry]
 ---
