@@ -38,7 +38,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/humanoid_robots/";
+            window.location.href = "/blog/humanoid-robots/";
           
         },
     },{id: "books-the-godfather",
@@ -49,7 +49,17 @@ ninja.data = [{
             },},{id: "news-member-of-ai-grid-which-is-an-ai-research-network-funded-by-the-federal-ministry-of-education-and-research",
           title: 'Member of AI Grid which is an AI research network funded by the...',
           description: "",
-          section: "News",},{id: "posts-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
+          section: "News",},{id: "poetry-love-letter-to-myself",
+          title: 'Love Letter to Myself',
+          description: "",
+          section: "Poetry",handler: () => {
+              window.location.href = "/poetry/2023-05-03-love-letter-to-myself/";
+            },},{id: "poetry-climbing-mountains",
+          title: 'Climbing Mountains',
+          description: "",
+          section: "Poetry",handler: () => {
+              window.location.href = "/poetry/2025-11-09-climbing-mountains/";
+            },},{id: "posts-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
           title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra',
           description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
           section: "Posts",handler: () => {
