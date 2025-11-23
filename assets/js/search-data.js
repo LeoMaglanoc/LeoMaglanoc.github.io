@@ -9,7 +9,14 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-projects",
+  },{id: "nav-cv",
+          title: "cv",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-projects",
           title: "projects",
           description: "Robotics and AI projects I&#39;m working on.",
           section: "Navigation",
@@ -46,8 +53,8 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-member-of-ai-grid-which-is-an-ai-research-network-funded-by-the-federal-ministry-of-education-and-research",
-          title: 'Member of AI Grid which is an AI research network funded by the...',
+            },},{id: "news-member-of-ai-grid-an-ai-research-network-funded-by-the-federal-ministry-of-education-and-research",
+          title: 'Member of AI Grid, an AI research network funded by the Federal Ministry...',
           description: "",
           section: "News",},{id: "poetry-love-letter-to-myself",
           title: 'Love Letter to Myself',
