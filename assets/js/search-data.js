@@ -56,11 +56,11 @@ ninja.data = [{
             },},{id: "news-member-of-ai-grid-an-ai-research-network-funded-by-the-federal-ministry-of-education-and-research",
           title: 'Member of AI Grid, an AI research network funded by the Federal Ministry...',
           description: "",
-          section: "News",},{id: "poetry-love-letter-to-myself",
-          title: 'Love Letter to Myself',
+          section: "News",},{id: "poetry-love-letter-to-my-younger-self",
+          title: 'Love Letter to My Younger Self',
           description: "",
           section: "Poetry",handler: () => {
-              window.location.href = "/poetry/2023-05-03-love-letter-to-myself/";
+              window.location.href = "/poetry/2023-05-03-love-letter-to-my-younger-self/";
             },},{id: "poetry-climbing-mountains",
           title: 'Climbing Mountains',
           description: "",
