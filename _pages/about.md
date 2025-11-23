@@ -34,6 +34,6 @@ latest_poetry:
 
 Hi 👋, I'm Leo, a Robotics & AI master's student at the Technical University of Munich. I'm currently working on my thesis at [Foundation](https://foundation.bot/), a humanoid robotics startup, where I'm advancing multifingered manipulation with 3D foundation models. 
 
-Previously, I worked as an AI/ML research intern at BMW and completed the [Siemens mentoring programme]({{ '/projects/siemens-mentoring-programme/' | relative_url }}). I've contributed to several academic research projects, covering fields such as [safe human-robot collaboration]({{ '/projects/robotics-research-assistant/' | relative_url }}) , neuro-inspired computing, and spatial perception for navigation (SLAM). I’m experienced in C++, Python, and PyTorch for developing AI-driven robotics and machine learning applications.
+Previously, I worked as an AI/ML research intern at BMW and completed the [Siemens mentoring programme]({{ '/projects/siemens-mentoring-programme/' | relative_url }}). I've contributed to several academic research projects, covering fields such as [safe human-robot collaboration]({{ '/projects/robotics-research-assistant/' | relative_url }}), neuro-inspired computing, and spatial perception for navigation (SLAM). I’m experienced in C++, Python, and PyTorch for developing AI-driven robotics and machine learning applications.
 
 I have an international background: of Asian heritage, born in Norway, and raised in Germany. Outside of work, I enjoy practicing calisthenics and jogging, reading philosophy, and writing poetry.
