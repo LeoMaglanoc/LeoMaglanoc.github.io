@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gravity Sandbox</title>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f1720;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      padding: 12px 16px;
+      background: #111827;
+      border-bottom: 1px solid #1f2937;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    header p {
+      margin: 4px 0 0;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    #canvas-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    canvas {
+      background: linear-gradient(180deg, #0b1222 0%, #0c111c 60%, #0b0f17 100%);
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 700px;
+      aspect-ratio: 4 / 5;
+      touch-action: none;
+    }
+    .hud {
+      padding: 12px 16px 16px;
+      background: #0b1118;
+      border-top: 1px solid #1f2937;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .hud strong {
+      color: #93c5fd;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gravity Sandbox</h1>
+    <p>Drag or touch the ball to move it. Release to let gravity do its work.</p>
+  </header>
+  <div id="canvas-container">
+    <canvas id="scene" width="420" height="520"></canvas>
+  </div>
+  <div class="hud">
+    <div><strong>Controls:</strong> click/drag or touch/drag to reposition the ball.</div>
+    <div><strong>Physics:</strong> gravity, ground bounce with damping, and air drag.</div>
+  </div>
+  <script src="gravity.js"></script>
+</body>
+</html>

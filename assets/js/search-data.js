@@ -48,6 +48,17 @@ ninja.data = [{
             window.location.href = "/blog/humanoid-robots/";
           
         },
+    },{id: "post-interactive-gravity-sandbox",
+        
+          title: "Interactive Gravity Sandbox",
+        
+        description: "A tiny 2D gravity toy you can drag around.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/interactive-visualization/";
+          
+        },
     },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
