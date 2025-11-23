@@ -71,12 +71,12 @@ ninja.data = [{
           title: 'Love Letter to My Younger Self',
           description: "",
           section: "Poetry",handler: () => {
-              window.location.href = "/poetry/2023-05-03-love-letter-to-my-younger-self/";
+              window.location.href = "/poetry/love-letter-to-my-younger-self/";
             },},{id: "poetry-climbing-mountains",
           title: 'Climbing Mountains',
           description: "",
           section: "Poetry",handler: () => {
-              window.location.href = "/poetry/2025-11-09-climbing-mountains/";
+              window.location.href = "/poetry/climbing-mountains/";
             },},{id: "posts-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
           title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra',
           description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
