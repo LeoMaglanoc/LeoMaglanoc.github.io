@@ -231,6 +231,12 @@ defaults:
       path: "assets"
     values:
       sitemap: false
+  - scope:
+      path: ""
+      type: "blogs"
+    values:
+      layout: post
+      permalink: /blog/:title/
 
 sass:
   style: compressed
@@ -264,14 +270,6 @@ jekyll-archives:
       categories: "/blog/:type/:name/"
   books:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
-
-defaults:
-  - scope:
-      path: ""
-      type: "blogs"
-    values:
-      layout: post
-      permalink: /blog/:title/
 
 display_tags: ["research"] # these tags will be displayed on the front page of your blog
 display_categories: ["blogpost"] # these categories will be displayed on the front page of your blog
