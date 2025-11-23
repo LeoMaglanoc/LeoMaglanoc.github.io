@@ -1,3 +1,8 @@
+# My notes
+
+docker compose pull
+docker compose up
+
 # al-folio
 
 <div align="center">

@@ -52,11 +52,11 @@ ninja.data = [
       {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
-  {%- if site.posts_in_search -%}
-    {%- for post in site.posts -%}
-      {
-        {%- assign title = post.title | escape | strip -%}
-        id: "post-{{ title | slugify }}",
+{%- if site.posts_in_search -%}
+  {%- for post in site.blogs -%}
+    {
+      {%- assign title = post.title | escape | strip -%}
+      id: "post-{{ title | slugify }}",
         {% if post.redirect == blank %}
           title: "{{ title | truncatewords: 13 }}",
         {% elsif post.redirect contains '://' %}
@@ -75,11 +75,11 @@ ninja.data = [
             window.location.href = "{{ post.redirect | relative_url }}";
           {% endif %}
         },
-      },
-    {%- endfor -%}
-  {%- endif -%}
-  {%- for collection in site.collections -%}
-    {%- if collection.label != 'posts' -%}
+    },
+  {%- endfor -%}
+{%- endif -%}
+{%- for collection in site.collections -%}
+  {%- if collection.label != 'blogs' -%}
       {%- for item in collection.docs -%}
         {
           {%- if item.inline -%}
