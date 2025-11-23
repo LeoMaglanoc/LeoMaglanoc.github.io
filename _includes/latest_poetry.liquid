@@ -1,0 +1,30 @@
+<div class="news">
+  {% if page.latest_poetry != blank %}
+    {% assign latest_poetry_size = site.poetry | size %}
+    <div
+      class="table-responsive"
+      {% if page.latest_poetry.scrollable and latest_poetry_size > 3 %}
+        style="max-height: 60vw"
+      {% endif %}
+    >
+      <table class="table table-sm table-borderless">
+        {% assign latest_poems = site.poetry | sort: "date" | reverse %}
+        {% if page.latest_poetry.limit %}
+          {% assign latest_poetry_limit = page.latest_poetry.limit %}
+        {% else %}
+          {% assign latest_poetry_limit = latest_poetry_size %}
+        {% endif %}
+        {% for item in latest_poems limit: latest_poetry_limit %}
+          <tr>
+            <th scope="row" style="width: 20%">{{ item.date | date: '%b %d, %Y' }}</th>
+            <td>
+              <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p>No poetry so far...</p>
+  {% endif %}
+</div>

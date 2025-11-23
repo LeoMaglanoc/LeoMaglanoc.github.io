@@ -48,12 +48,28 @@ layout: default
       {% include news.liquid limit=true %}
     {% endif %}
 
+    <!-- Latest projects -->
+    {% if page.latest_projects and page.latest_projects.enabled %}
+      <h2>
+        <a href="{{ '/projects/' | relative_url }}" style="color: inherit">latest projects</a>
+      </h2>
+      {% include latest_projects.liquid %}
+    {% endif %}
+
     <!-- Latest posts -->
     {% if page.latest_posts and page.latest_posts.enabled %}
       <h2>
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest blogs</a>
       </h2>
-      {% include latest_posts.liquid %}
+        {% include latest_posts.liquid %}
+    {% endif %}
+
+    <!-- Latest poetry -->
+    {% if page.latest_poetry and page.latest_poetry.enabled %}
+      <h2>
+        <a href="{{ '/poetry/' | relative_url }}" style="color: inherit">latest poetry</a>
+      </h2>
+      {% include latest_poetry.liquid %}
     {% endif %}
 
     <!-- Selected papers -->

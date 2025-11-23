@@ -3,6 +3,8 @@
 docker compose pull
 docker compose up
 
+http://0.0.0.0:8080
+
 # al-folio
 
 <div align="center">

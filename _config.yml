@@ -16,7 +16,7 @@ footer_text: >
   Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
 keywords: robotics, humanoid robots, ai, reinforcement learning, computer vision, portfolio # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: favicon/favicon.ico # path relative to assets/img/ for the favicon (overrides emoji)
 
 url: https://LeoMaglanoc.github.io # the base hostname & protocol for your site
 baseurl:  # the subpath of your site, e.g. /blog/. Leave blank for root
@@ -96,8 +96,8 @@ pagination:
   enabled: true
 
 related_blog_posts:
-  enabled: true
-  max_related: 5
+  enabled: false
+  max_related: 0
 
 # Giscus comments (RECOMMENDED)
 # Follow instructions on https://giscus.app/ to setup for your repo to fill out the information below.
