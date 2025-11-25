@@ -16,6 +16,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
+        },{id: "nav-google-scholar",
+          title: "google scholar",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/google-scholar/";
+          },
         },{id: "nav-projects",
           title: "projects",
           description: "Robotics and AI projects I&#39;m working on.",
