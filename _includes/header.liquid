@@ -99,15 +99,20 @@
                 </li>
               {% else %}
                 {% assign parent_link = p.permalink | remove: 'index.html' %}
+                {% assign is_external = false %}
                 <li class="nav-item {% if page.url contains parent_link %}active{% endif %}">
-                  {%- if p.permalink contains '://' -%}
+                  {%- if p.external_url -%}
+                    {%- assign url = p.external_url -%}
+                    {%- assign is_external = true -%}
+                  {%- elsif p.permalink contains '://' -%}
                     {%- assign url = p.permalink -%}
+                    {%- assign is_external = true -%}
                   {%- elsif p.permalink contains '/blog/' -%}
                     {%- assign url = '/blog/' -%}
                   {%- else -%}
                     {%- assign url = p.url -%}
                   {%- endif %}
-                  <a class="nav-link" href="{{ url | relative_url }}">
+                  <a class="nav-link" href="{% if is_external %}{{ url }}{% else %}{{ url | relative_url }}{% endif %}">
                     {{- p.title }}
                     {% if page.url contains p.url %}
                       <span class="sr-only">(current)</span>

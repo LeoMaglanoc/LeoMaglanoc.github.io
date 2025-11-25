@@ -3,7 +3,7 @@ layout: default
 permalink: /poetry/
 title: poetry
 nav: true
-nav_order: 5
+nav_order: 6
 pagination:
   enabled: false
 ---

@@ -4,7 +4,7 @@ title: projects
 permalink: /projects/
 description: Robotics and AI projects I'm working on.
 nav: true
-nav_order: 3
+nav_order: 4
 display_categories: [work]
 horizontal: false
 ---
