@@ -355,6 +355,49 @@ ul.task-list input[type="checkbox"] {
       }
     }
   }
+
+  .navbar-social {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 0.75rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      img {
+        width: 1.35rem;
+        height: 1.35rem;
+      }
+
+      svg {
+        width: 1.35rem;
+        height: 1.35rem;
+
+        image {
+          width: 1.35rem;
+          height: 1.35rem;
+        }
+      }
+
+      i::before {
+        color: var(--global-text-color);
+        transition-property: all 0.2s ease-in-out;
+      }
+
+      &:hover {
+        i::before {
+          color: var(--global-theme-color);
+        }
+      }
+    }
+  }
 }
 
 .navbar-toggler {
