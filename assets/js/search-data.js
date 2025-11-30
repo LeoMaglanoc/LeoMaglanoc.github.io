@@ -16,13 +16,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "nav-google-scholar",
-          title: "google scholar",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/google-scholar/";
-          },
         },{id: "nav-projects",
           title: "projects",
           description: "Robotics and AI projects I&#39;m working on.",
@@ -84,6 +77,11 @@ ninja.data = [{
           description: "",
           section: "Poetry",handler: () => {
               window.location.href = "/poetry/climbing-mountains/";
+            },},{id: "posts-displaying-external-posts-on-your-al-folio-blog",
+          title: 'Displaying External Posts on Your al-folio Blog',
+          description: "",
+          section: "Posts",handler: () => {
+              window.location.href = "/blog/2022/displaying-external-posts-on-your-al-folio-blog/";
             },},{id: "posts-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
           title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra',
           description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
@@ -140,11 +138,11 @@ ninja.data = [{
           window.open("https://twitter.com/leo_maglanoc", "_blank");
         },
       },{
-        id: 'social-rss',
-        title: 'RSS Feed',
+        id: 'social-scholar',
+        title: 'Google Scholar',
         section: 'Socials',
         handler: () => {
-          window.open("/feed.xml", "_blank");
+          window.open("https://scholar.google.com/citations?user=bSMJcYMAAAAJ", "_blank");
         },
       },{
       id: 'light-theme',
