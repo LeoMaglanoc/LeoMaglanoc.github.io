@@ -72,6 +72,11 @@ ninja.data = [{
           description: "",
           section: "Poetry",handler: () => {
               window.location.href = "/poetry/love-letter-to-my-younger-self/";
+            },},{id: "poetry-virtue",
+          title: 'Virtue',
+          description: "",
+          section: "Poetry",handler: () => {
+              window.location.href = "/poetry/virute/";
             },},{id: "poetry-climbing-mountains",
           title: 'Climbing Mountains',
           description: "",
