@@ -4,7 +4,6 @@ title: Climbing Mountains
 date: 2025-11-09
 tags: [poetry]
 ---
-
 November 09, 2025
 
 In man's pursuit of dreams and distant heights,<br>
