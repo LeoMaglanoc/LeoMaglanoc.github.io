@@ -23,4 +23,4 @@ My first goal is to provide reliability guarantees through formal verification o
 
 My second goal is to extend the problem setting from humanoid manipulation to loco-manipulation. Why? Because most real tasks require mobility of the autonomous system. And because locomotion and manipulation is inherently a coupled problem, if you want to control the whole body of a humanoid.
 
-My third goal is to bridge the gap between academia and industry, enabling the deployment of reliable and safe AI methods in industrial robotic systems. Being embedded in the Munich robotics ecosystem, for instance, through work experience at BMW or participation in industrial hackathons, I regularly engage with other roboticists, and I'd like to advance collaborations between academia and industry.
+My third goal is to bridge the gap between academia and industry, enabling the deployment of reliable and safe AI methods in industrial robotic systems. As part of the vibrant Munich robotics & AI ecosystem, for instance, I'd like to foster regular interactions with other engineers and to advance collaborations between academia and industry.
