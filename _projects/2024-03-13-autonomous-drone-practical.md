@@ -1,11 +1,9 @@
 ---
 layout: page
-title: Autonomous Drone Practical
+title: TUM Practical on Vision-Based Autonomous Drone
 permalink: /projects/autonomous-drone-practical/
 date: 2024-03-13 14:00:00
 category: work
-importance: 2
-description: Visual-inertial navigation project with AR Drone 2, A* planning, and haptic goal control.
 img: assets/img/drone_software_architecture.PNG
 youtubeId1: G10pKZ9_a9o
 youtubeId2: pHPrIKNTFPE
