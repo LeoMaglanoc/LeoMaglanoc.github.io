@@ -37,26 +37,15 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/poetry/";
           },
-        },{id: "post-my-research-dream",
+        },{id: "post-my-research-goals",
         
-          title: "My Research Dream",
+          title: "My Research Goals",
         
-        description: "Why humanoid robots inspire my long-term research goals.",
+        description: "",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/humanoid-robots/";
-          
-        },
-    },{id: "post-interactive-gravity-sandbox",
-        
-          title: "Interactive Gravity Sandbox",
-        
-        description: "A tiny 2D gravity toy you can drag around.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/interactive-visualization/";
+            window.location.href = "/blog/research-goals/";
           
         },
     },{id: "books-the-godfather",
@@ -92,21 +81,31 @@ ninja.data = [{
           description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
           section: "Posts",handler: () => {
               window.location.href = "/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/";
-            },},{id: "projects-robotics-research-assistant",
-          title: 'Robotics Research Assistant',
-          description: "Provably safe human-robot interaction research with a safety shield at TUM&#39;s Cyber-Physical Systems Group.",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/robotics-research-assistant/";
-            },},{id: "projects-autonomous-drone-practical",
-          title: 'Autonomous Drone Practical',
-          description: "Visual-inertial navigation project with AR Drone 2, A* planning, and haptic goal control.",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/autonomous-drone-practical/";
             },},{id: "projects-siemens-mentoring-programme",
           title: 'Siemens Mentoring Programme',
           description: "Siemens RIE mentorship and hackathon pitch on smart 3D printing with machine learning.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/siemens-mentoring-programme/";
+            },},{id: "projects-tum-practical-on-vision-based-autonomous-drone",
+          title: 'TUM Practical on Vision-Based Autonomous Drone',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/autonomous-drone-practical/";
+            },},{id: "projects-tum-hiwi-on-safe-robotics",
+          title: 'TUM HiWi on Safe Robotics',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/robotics-research-assistant/";
+            },},{id: "projects-ai-ml-research-intern-at-bmw-on-neuro-inspired-computing-for-tactile-sensing",
+          title: 'AI/ML Research Intern at BMW on Neuro-Inspired Computing for Tactile Sensing',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/BMW/";
+            },},{id: "projects-master-39-s-thesis-with-foundation-on-language-guided-humanoid-manipulation",
+          title: 'Master&amp;#39;s Thesis with Foundation on Language-Guided Humanoid Manipulation',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/foundation/";
             },},{
         id: 'social-cv',
         title: 'CV',
@@ -119,7 +118,7 @@ ninja.data = [{
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%6C%65%6F.%6D%61%67%6C%61%6E%6F%63@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+          window.open("mailto:%6C%65%6F.%6D%61%67%6C%61%6E%6F%63@%74%75%6D.%64%65", "_blank");
         },
       },{
         id: 'social-github',
