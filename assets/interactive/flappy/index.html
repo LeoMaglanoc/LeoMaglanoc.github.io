@@ -25,6 +25,7 @@
       display: grid;
       gap: 10px;
       place-items: center;
+      position: relative;
     }
     canvas {
       width: min(92vw, 420px);
@@ -41,12 +42,31 @@
       color: rgba(235, 240, 255, 0.75);
       text-align: center;
     }
+    .restart {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(10, 16, 32, 0.85);
+      color: rgba(255, 255, 255, 0.9);
+      font: 600 0.85rem \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .restart[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="frame">
     <canvas id="c" width="360" height="640" aria-label="Flappy game" tabindex="0"></canvas>
     <div class="hint" id="hint">Tap / Space to flap - R to restart</div>
+    <button class="restart" id="restart" type="button" hidden>Tap to restart</button>
   </div>
 
 <script>
@@ -54,6 +74,7 @@
   const canvas = document.getElementById("c");
   const ctx = canvas.getContext("2d");
   const hint = document.getElementById("hint");
+  const restartBtn = document.getElementById("restart");
 
   const GRAVITY = 1700;
   const FLAP_VEL = -520;
@@ -86,6 +107,7 @@
     tPipe = 0;
     lastTS = null;
     hint.textContent = `Tap / Space to flap - R to restart - Best: ${best}`;
+    restartBtn.hidden = true;
   }
 
   function flap() {
@@ -120,6 +142,7 @@
     best = Math.max(best, score);
     localStorage.setItem(BEST_KEY, String(best));
     hint.textContent = `Game over - Score: ${score} - Best: ${best} - Press R`;
+    restartBtn.hidden = false;
   }
 
   function update(dt) {
@@ -297,6 +320,10 @@
   };
 
   canvas.addEventListener("pointerdown", onPress, { passive: false });
+  restartBtn.addEventListener("pointerdown", (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (over) reset();
+  }, { passive: false });
 
   reset();
   requestAnimationFrame(loop);
