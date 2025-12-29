@@ -13,34 +13,36 @@
       margin: 0;
     }
     body {
-      display: grid;
-      place-items: center;
       background: radial-gradient(circle at 20% 15%, #1b2b46, #0b0f19 55%, #090b12 100%);
       font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
       letter-spacing: 0.2px;
       touch-action: manipulation;
       user-select: none;
+      overflow: hidden;
     }
     .frame {
-      display: grid;
-      gap: 10px;
-      place-items: center;
       position: relative;
+      width: 100vw;
+      height: 100vh;
     }
     canvas {
-      width: min(92vw, 420px);
-      aspect-ratio: 9 / 16;
-      height: auto;
-      border-radius: 18px;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
       background: #0b1020;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      display: block;
       touch-action: manipulation;
     }
     .hint {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.8rem;
       font-weight: 600;
       color: rgba(235, 240, 255, 0.75);
       text-align: center;
+      pointer-events: none;
     }
     .restart {
       position: absolute;
@@ -75,6 +77,7 @@
   const ctx = canvas.getContext("2d");
   const hint = document.getElementById("hint");
   const restartBtn = document.getElementById("restart");
+  const view = { w: canvas.width, h: canvas.height };
 
   const GRAVITY = 1700;
   const FLAP_VEL = -520;
@@ -98,8 +101,22 @@
 
   best = Number(localStorage.getItem(BEST_KEY) || 0);
 
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    view.w = w;
+    view.h = h;
+  }
+
   function reset() {
-    bird = { x: 110, y: canvas.height * 0.45, r: 14, vy: 0 };
+    const startX = Math.min(160, view.w * 0.32);
+    bird = { x: startX, y: view.h * 0.45, r: 14, vy: 0 };
     pipes = [];
     score = 0;
     started = false;
@@ -118,11 +135,11 @@
 
   function spawnPipe() {
     const topMin = 70;
-    const topMax = canvas.height - FLOOR_H - PIPE_GAP - 70;
+    const topMax = view.h - FLOOR_H - PIPE_GAP - 70;
     const topH = topMin + Math.random() * (topMax - topMin);
 
     pipes.push({
-      x: canvas.width + 30,
+      x: view.w + 30,
       topH,
       passed: false
     });
@@ -153,8 +170,8 @@
       bird.y = bird.r;
       bird.vy = 0;
     }
-    if (bird.y + bird.r > canvas.height - FLOOR_H) {
-      bird.y = canvas.height - FLOOR_H - bird.r;
+    if (bird.y + bird.r > view.h - FLOOR_H) {
+      bird.y = view.h - FLOOR_H - bird.r;
       die();
     }
 
@@ -183,7 +200,7 @@
       for (const p of pipes) {
         const topRect = { x: p.x, y: 0, w: PIPE_W, h: p.topH };
         const botY = p.topH + PIPE_GAP;
-        const botRect = { x: p.x, y: botY, w: PIPE_W, h: canvas.height - FLOOR_H - botY };
+        const botRect = { x: p.x, y: botY, w: PIPE_W, h: view.h - FLOOR_H - botY };
 
         if (
           circleRectCollides(bird.x, bird.y, bird.r, topRect.x, topRect.y, topRect.w, topRect.h) ||
@@ -197,8 +214,8 @@
   }
 
   function drawBackground() {
-    const w = canvas.width;
-    const h = canvas.height;
+    const w = view.w;
+    const h = view.h;
 
     const grad = ctx.createLinearGradient(0, 0, 0, h);
     grad.addColorStop(0, "#0b1020");
@@ -226,7 +243,7 @@
       ctx.fillRect(p.x - PIPE_LIP, p.topH - PIPE_LIP, PIPE_W + PIPE_LIP * 2, PIPE_LIP);
 
       const botY = p.topH + PIPE_GAP;
-      const botH = canvas.height - FLOOR_H - botY;
+      const botH = view.h - FLOOR_H - botY;
       ctx.fillRect(p.x, botY, PIPE_W, botH);
       ctx.fillRect(p.x - PIPE_LIP, botY, PIPE_W + PIPE_LIP * 2, PIPE_LIP);
 
@@ -236,11 +253,11 @@
   }
 
   function drawFloor() {
-    const h = canvas.height;
+    const h = view.h;
     ctx.fillStyle = "#151c2b";
-    ctx.fillRect(0, h - FLOOR_H, canvas.width, FLOOR_H);
+    ctx.fillRect(0, h - FLOOR_H, view.w, FLOOR_H);
     ctx.fillStyle = "rgba(255,255,255,0.08)";
-    ctx.fillRect(0, h - FLOOR_H, canvas.width, 2);
+    ctx.fillRect(0, h - FLOOR_H, view.w, 2);
   }
 
   function drawBird() {
@@ -277,17 +294,19 @@
     ctx.fillStyle = "rgba(255,255,255,0.7)";
     const bestLabel = `BEST ${best}`;
     const metrics = ctx.measureText(bestLabel);
-    ctx.fillText(bestLabel, canvas.width - metrics.width - 16, 32);
+    ctx.fillText(bestLabel, view.w - metrics.width - 16, 32);
 
     if (!started && !over) {
       ctx.fillStyle = "rgba(255,255,255,0.85)";
       ctx.font = "600 16px 'Trebuchet MS', sans-serif";
-      ctx.fillText("Tap or Space to start", 86, 320);
+      ctx.textAlign = "center";
+      ctx.fillText("Tap or Space to start", view.w * 0.5, view.h * 0.5);
+      ctx.textAlign = "left";
     }
   }
 
   function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, view.w, view.h);
     drawBackground();
     drawPipes();
     drawFloor();
@@ -325,6 +344,12 @@
     if (over) reset();
   }, { passive: false });
 
+  window.addEventListener("resize", () => {
+    resize();
+    reset();
+  });
+
+  resize();
   reset();
   requestAnimationFrame(loop);
 })();

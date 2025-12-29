@@ -13,34 +13,36 @@
       margin: 0;
     }
     body {
-      display: grid;
-      place-items: center;
       background: radial-gradient(circle at 20% 10%, #273550, #0f1320 55%, #0a0c14 100%);
       font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
       letter-spacing: 0.2px;
       touch-action: manipulation;
       user-select: none;
+      overflow: hidden;
     }
     .frame {
       position: relative;
-      display: grid;
-      gap: 10px;
-      place-items: center;
+      width: 100vw;
+      height: 100vh;
     }
     canvas {
-      width: min(92vw, 960px);
-      aspect-ratio: 16 / 9;
-      height: auto;
-      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
       background: #0b1020;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      display: block;
       touch-action: manipulation;
     }
     .hint {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.8rem;
       font-weight: 600;
       color: rgba(235, 240, 255, 0.75);
       text-align: center;
+      pointer-events: none;
     }
     .controls {
       position: absolute;
@@ -120,6 +122,7 @@
   const hint = document.getElementById("hint");
   const buttons = Array.from(document.querySelectorAll(".btn"));
   const restartBtn = document.getElementById("restart");
+  const view = { w: canvas.width, h: canvas.height };
 
   // --- Constants ---
   const TILE = 32;
@@ -140,6 +143,19 @@
   const JUMP_BUFFER = 0.1;
   const CAMERA_SMOOTH = 0.12;
   const MAX_DT = 0.035;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    view.w = w;
+    view.h = h;
+  }
 
   // --- World data ---
   const TILE_SOLID = 1;
@@ -559,21 +575,21 @@
   function updateCamera(dt) {
     const levelPxW = LEVEL_W * TILE;
     const levelPxH = LEVEL_H * TILE;
-    const targetX = player.x + player.w / 2 - canvas.width / 2;
-    const targetY = player.y + player.h / 2 - canvas.height / 2;
+    const targetX = player.x + player.w / 2 - view.w / 2;
+    const targetY = player.y + player.h / 2 - view.h / 2;
     const smooth = 1 - Math.pow(1 - CAMERA_SMOOTH, dt * 60);
 
     cam.x += (targetX - cam.x) * smooth;
     cam.y += (targetY - cam.y) * smooth;
 
-    cam.x = Math.max(0, Math.min(levelPxW - canvas.width, cam.x));
-    cam.y = Math.max(0, Math.min(levelPxH - canvas.height, cam.y));
+    cam.x = Math.max(0, Math.min(levelPxW - view.w, cam.x));
+    cam.y = Math.max(0, Math.min(levelPxH - view.h, cam.y));
   }
 
   // --- Rendering ---
   function drawBackground() {
-    const w = canvas.width;
-    const h = canvas.height;
+    const w = view.w;
+    const h = view.h;
     const grad = ctx.createLinearGradient(0, 0, 0, h);
     grad.addColorStop(0, "#0f172a");
     grad.addColorStop(1, "#0b0f1b");
@@ -595,9 +611,9 @@
 
   function drawTiles() {
     const startX = Math.floor(cam.x / TILE);
-    const endX = Math.ceil((cam.x + canvas.width) / TILE);
+    const endX = Math.ceil((cam.x + view.w) / TILE);
     const startY = Math.floor(cam.y / TILE);
-    const endY = Math.ceil((cam.y + canvas.height) / TILE);
+    const endY = Math.ceil((cam.y + view.h) / TILE);
 
     ctx.fillStyle = "#1f2a44";
     ctx.strokeStyle = "rgba(255,255,255,0.08)";
@@ -725,16 +741,16 @@
   function drawOverlay() {
     if (!win) return;
     ctx.fillStyle = "rgba(9, 12, 20, 0.7)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, view.w, view.h);
     ctx.fillStyle = "#f8fafc";
     ctx.font = "700 36px 'Trebuchet MS', sans-serif";
-    ctx.fillText("Level complete", canvas.width / 2 - 110, canvas.height / 2 - 10);
+    ctx.fillText("Level complete", view.w / 2 - 110, view.h / 2 - 10);
     ctx.font = "600 18px 'Trebuchet MS', sans-serif";
-    ctx.fillText(`Time ${formatTime(timer)} - R or tap Restart`, canvas.width / 2 - 140, canvas.height / 2 + 20);
+    ctx.fillText(`Time ${formatTime(timer)} - R or tap Restart`, view.w / 2 - 140, view.h / 2 + 20);
   }
 
   function render() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, view.w, view.h);
     drawBackground();
 
     ctx.save();
@@ -761,6 +777,12 @@
     requestAnimationFrame(loop);
   }
 
+  window.addEventListener("resize", () => {
+    resize();
+    if (cam) updateCamera(0);
+  });
+
+  resize();
   buildLevel();
   resetGame();
   requestAnimationFrame(loop);
