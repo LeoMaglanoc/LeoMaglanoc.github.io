@@ -19,6 +19,15 @@
         --panel: rgba(12, 16, 22, 0.72);
         --panel-border: rgba(255, 255, 255, 0.12);
         --shadow: rgba(0, 0, 0, 0.45);
+        --safe-top: env(safe-area-inset-top, 0px);
+        --safe-right: env(safe-area-inset-right, 0px);
+        --safe-bottom: env(safe-area-inset-bottom, 0px);
+        --safe-left: env(safe-area-inset-left, 0px);
+        --ui-gap: clamp(10px, 2.6vw, 18px);
+        --btn-size: clamp(54px, 10vw, 72px);
+        --btn-size-lg: clamp(70px, 12vw, 92px);
+        --btn-font: clamp(0.85rem, 2.4vw, 1rem);
+        --btn-radius: clamp(12px, 2.4vw, 18px);
       }
 
       * {
@@ -89,29 +98,30 @@
         position: fixed;
         left: 0;
         right: 0;
-        bottom: 14px;
+        bottom: 0;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        padding: 0 14px 10px;
+        padding: 0 calc(var(--ui-gap) + var(--safe-right)) calc(var(--ui-gap) + var(--safe-bottom))
+          calc(var(--ui-gap) + var(--safe-left));
         pointer-events: none;
-        gap: 14px;
+        gap: var(--ui-gap);
       }
 
       .control-cluster {
         display: flex;
-        gap: 10px;
+        gap: clamp(10px, 2.4vw, 14px);
         pointer-events: auto;
       }
 
       .control-button {
-        min-width: 64px;
-        min-height: 58px;
-        padding: 10px 12px;
-        font-size: 1rem;
+        min-width: var(--btn-size);
+        min-height: var(--btn-size);
+        padding: 0;
+        font-size: var(--btn-font);
         font-weight: 700;
         letter-spacing: 0.08em;
-        border-radius: 16px;
+        border-radius: var(--btn-radius);
         border: 1px solid rgba(255, 255, 255, 0.18);
         background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.38));
         color: var(--ui);
@@ -127,9 +137,9 @@
       }
 
       .control-button.control-throttle {
-        min-width: 86px;
-        min-height: 70px;
-        font-size: 1.1rem;
+        min-width: var(--btn-size-lg);
+        min-height: var(--btn-size-lg);
+        font-size: calc(var(--btn-font) + 0.1rem);
         background: linear-gradient(160deg, rgba(242, 184, 75, 0.45), rgba(68, 40, 12, 0.6));
         border-color: rgba(242, 184, 75, 0.6);
       }
@@ -183,9 +193,9 @@
 
       #footer-hint {
         position: fixed;
-        bottom: 92px;
-        left: 16px;
-        font-size: 0.8rem;
+        bottom: calc(var(--safe-bottom) + var(--btn-size-lg) + var(--ui-gap) * 2);
+        left: calc(var(--ui-gap) + var(--safe-left));
+        font-size: clamp(0.7rem, 2.2vw, 0.8rem);
         opacity: 0.65;
         letter-spacing: 0.04em;
         text-transform: uppercase;
@@ -197,22 +207,6 @@
           top: 8px;
           left: 8px;
           padding: 8px 10px;
-        }
-
-        .control-button {
-          min-width: 54px;
-          min-height: 52px;
-          font-size: 0.9rem;
-        }
-
-        .control-button.control-throttle {
-          min-width: 72px;
-          min-height: 64px;
-        }
-
-        #footer-hint {
-          bottom: 96px;
-          font-size: 0.75rem;
         }
       }
     </style>
