@@ -48,6 +48,17 @@ ninja.data = [{
             window.location.href = "/blog/research-goals/";
           
         },
+    },{id: "post-flappy-bird-in-a-tiny-canvas",
+        
+          title: "Flappy Bird in a Tiny Canvas",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/flappy-canvas/";
+          
+        },
     },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
