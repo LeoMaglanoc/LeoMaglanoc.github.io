@@ -48,15 +48,15 @@ ninja.data = [{
             window.location.href = "/blog/research-goals/";
           
         },
-    },{id: "post-flappy-bird-in-a-tiny-canvas",
+    },{id: "post-ai-coding-agent-case-study-gaming-library",
         
-          title: "Flappy Bird in a Tiny Canvas",
+          title: "AI Coding Agent Case Study: Gaming Library",
         
         description: "",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/flappy-canvas/";
+            window.location.href = "/blog/AI-coding-agent-case-study/";
           
         },
     },{id: "books-the-godfather",
