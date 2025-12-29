@@ -7,6 +7,13 @@
   <style>
     :root {
       color-scheme: dark;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --ui-gap: clamp(12px, 2.8vw, 20px);
+      --btn-size: clamp(40px, 9vw, 54px);
+      --btn-font: clamp(0.7rem, 2.2vw, 0.9rem);
     }
     html, body {
       height: 100%;
@@ -24,6 +31,7 @@
       position: relative;
       width: 100vw;
       height: 100vh;
+      height: 100svh;
     }
     canvas {
       width: 100%;
@@ -35,7 +43,7 @@
     }
     .hint {
       position: absolute;
-      top: 16px;
+      top: calc(var(--ui-gap) + var(--safe-top));
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.8rem;
@@ -43,24 +51,26 @@
       color: rgba(235, 240, 255, 0.75);
       text-align: center;
       pointer-events: none;
+      max-width: calc(100vw - var(--ui-gap) * 2);
     }
     .restart {
       position: absolute;
-      left: 50%;
-      bottom: 16px;
-      transform: translateX(-50%);
-      padding: 10px 16px;
+      right: calc(var(--ui-gap) + var(--safe-right));
+      bottom: calc(var(--ui-gap) + var(--safe-bottom));
+      width: var(--btn-size);
+      height: var(--btn-size);
+      padding: 0;
+      display: grid;
+      place-items: center;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.25);
       background: rgba(10, 16, 32, 0.85);
       color: rgba(255, 255, 255, 0.9);
-      font: 600 0.85rem \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif;
-      letter-spacing: 0.4px;
+      font: 700 var(--btn-font) "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
       cursor: pointer;
-    }
-    .restart[hidden] {
-      display: none;
+      touch-action: manipulation;
     }
   </style>
 </head>
@@ -68,7 +78,7 @@
   <div class="frame">
     <canvas id="c" width="360" height="640" aria-label="Flappy game" tabindex="0"></canvas>
     <div class="hint" id="hint">Tap / Space to flap - R to restart</div>
-    <button class="restart" id="restart" type="button" hidden>Tap to restart</button>
+    <button class="restart" id="restart" type="button" aria-label="Restart">R</button>
   </div>
 
 <script>
@@ -124,7 +134,6 @@
     tPipe = 0;
     lastTS = null;
     hint.textContent = `Tap / Space to flap - R to restart - Best: ${best}`;
-    restartBtn.hidden = true;
   }
 
   function flap() {
@@ -159,7 +168,6 @@
     best = Math.max(best, score);
     localStorage.setItem(BEST_KEY, String(best));
     hint.textContent = `Game over - Score: ${score} - Best: ${best} - Press R`;
-    restartBtn.hidden = false;
   }
 
   function update(dt) {
@@ -341,7 +349,7 @@
   canvas.addEventListener("pointerdown", onPress, { passive: false });
   restartBtn.addEventListener("pointerdown", (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (over) reset();
+    reset();
   }, { passive: false });
 
   window.addEventListener("resize", () => {
