@@ -48,9 +48,9 @@ ninja.data = [{
             window.location.href = "/blog/research-goals/";
           
         },
-    },{id: "post-ai-coding-agent-case-study-gaming-library",
+    },{id: "post-ai-coding-agent-case-study",
         
-          title: "AI Coding Agent Case Study: Gaming Library",
+          title: "AI Coding Agent Case Study",
         
         description: "",
         section: "Posts",
