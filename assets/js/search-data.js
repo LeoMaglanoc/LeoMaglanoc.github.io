@@ -107,13 +107,13 @@ ninja.data = [{
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/robotics-research-assistant/";
-            },},{id: "projects-ai-ml-research-intern-at-bmw-on-neuromorphic-computing-for-tactile-sensing",
-          title: 'AI/ML Research Intern at BMW on Neuromorphic Computing for Tactile Sensing',
+            },},{id: "projects-ai-ml-research-intern-at-bmw-on-neuromorphic-computing",
+          title: 'AI/ML Research Intern at BMW on Neuromorphic Computing',
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/BMW/";
-            },},{id: "projects-master-39-s-thesis-with-foundation-on-language-guided-humanoid-manipulation",
-          title: 'Master&amp;#39;s Thesis with Foundation on Language-Guided Humanoid Manipulation',
+            },},{id: "projects-master-39-s-thesis-with-humanoid-startup-on-multifingered-manipulation",
+          title: 'Master&amp;#39;s Thesis with Humanoid Startup on Multifingered Manipulation',
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/foundation/";
