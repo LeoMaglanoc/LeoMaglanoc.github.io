@@ -102,13 +102,13 @@ ninja.data = [{
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/autonomous-drone-practical/";
-            },},{id: "projects-tum-hiwi-on-safe-robotics",
-          title: 'TUM HiWi on Safe Robotics',
+            },},{id: "projects-tum-research-assistant-on-safe-robotics",
+          title: 'TUM Research Assistant on Safe Robotics',
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/robotics-research-assistant/";
-            },},{id: "projects-ai-ml-research-intern-at-bmw-on-neuro-inspired-computing-for-tactile-sensing",
-          title: 'AI/ML Research Intern at BMW on Neuro-Inspired Computing for Tactile Sensing',
+            },},{id: "projects-ai-ml-research-intern-at-bmw-on-neuromorphic-computing-for-tactile-sensing",
+          title: 'AI/ML Research Intern at BMW on Neuromorphic Computing for Tactile Sensing',
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/BMW/";
