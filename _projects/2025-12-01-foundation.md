@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Master's Thesis with Foundation on Language-Guided Humanoid Manipulation
+title: Master's Thesis with Humanoid Startup on Multifingered Manipulation
 permalink: /projects/foundation/
 date: 2025-12-01 14:00:00
 category: work
