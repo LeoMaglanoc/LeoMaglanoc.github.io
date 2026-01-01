@@ -4,7 +4,6 @@ title: Siemens Mentoring Programme
 permalink: /projects/siemens-mentoring-programme/
 date: 2024-02-22 14:00:00
 category: work
-description: Siemens RIE mentorship and hackathon pitch on smart 3D printing with machine learning.
 img: assets/img/siemens/siemens_pic_1.jpeg
 ---
 

@@ -33,5 +33,5 @@ My fourth goal is to test the deployment of safe humanoids in real use cases out
 If you are interested in collaborating on any of these topics, please don't hesitate to contact me via email or LinkedIn!
 
 Bonus goals:
-- Algorithmic foundations of AI with neuroscience insights, e.g., continual learning with scalable brain-inspired architectures
+- Algorithmic foundations of AI agents with neuroscience insights, e.g., continual learning with scalable brain-inspired architectures
 - Mathematical theory of AI 
