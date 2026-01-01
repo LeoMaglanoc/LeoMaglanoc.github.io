@@ -1,6 +1,6 @@
 ---
 layout: page
-title: TUM HiWi on Safe Robotics
+title: TUM Research Assistant on Safe Robotics
 permalink: /projects/robotics-research-assistant/
 date: 2024-04-20 14:00:00
 category: work
