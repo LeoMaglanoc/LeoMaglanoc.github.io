@@ -94,7 +94,7 @@ ninja.data = [{
               window.location.href = "/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/";
             },},{id: "projects-siemens-mentoring-programme",
           title: 'Siemens Mentoring Programme',
-          description: "Siemens RIE mentorship and hackathon pitch on smart 3D printing with machine learning.",
+          description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/siemens-mentoring-programme/";
             },},{id: "projects-tum-practical-on-vision-based-autonomous-drone",
