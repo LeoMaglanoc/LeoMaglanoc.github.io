@@ -37,9 +37,9 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/poetry/";
           },
-        },{id: "post-my-research-goals",
+        },{id: "post-my-mission",
         
-          title: "My Research Goals",
+          title: "My Mission",
         
         description: "",
         section: "Posts",
