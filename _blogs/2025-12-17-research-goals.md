@@ -38,5 +38,6 @@ Robotics & AI can be both a force for [good](https://www.darioamodei.com/essay/m
 
 While there are growing efforts in AI safety, physical AI safety, e.g., for autonomous robots operating in human environments, remains underdeveloped.
 
-My long-term vision is to found a research-first robotics startup in Europe dedicated to establishing certifiable safety standards for physical AI, spanning humanoid robots, drones, and more. This will require collaboration between academia, industry, and regulators to set benchmarks for safe embodied AI.
+My long-term vision is to found a research-first robotics startup in Europe dedicated to establishing certifiable safety standards for physical AI. For agentic systems, physical safety cannot be separated from semantic safety: robots must not only act within physical constraints, but also align their behavior with human-defined norms and values. Achieving this will require collaboration among academia, industry, and regulators to define benchmarks for safe, value-aligned embodied AI.
+
 
