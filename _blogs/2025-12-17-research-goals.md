@@ -34,7 +34,7 @@ Overall, my work spans the full technology pipeline of intelligent humanoid syst
 
 ## Long-Term Vision
 
-Robotics & AI can be both a force for [good](https://www.darioamodei.com/essay/machines-of-loving-grace) and for [harm](https://www.darioamodei.com/essay/the-adolescence-of-technology). Already today, LLMs lower barriers to building [dangeours systems](https://red.anthropic.com/2025/biorisk/) and agentic AI can automate access to harmful resources. As AI capabilities continue to improve, these risks will increasingly extend into the physical world. 
+Robotics & AI can be both a force for [good](https://www.darioamodei.com/essay/machines-of-loving-grace) and for [harm](https://www.darioamodei.com/essay/the-adolescence-of-technology). Already today, LLMs lower barriers to building [dangerous systems](https://red.anthropic.com/2025/biorisk/) and agentic AI can automate access to harmful resources. As AI capabilities continue to improve, these risks will increasingly extend into the physical world. 
 
 While there are growing efforts in AI safety, physical AI safety e.g., for autonomous robots operating in human environments, remains underdeveloped.
 
