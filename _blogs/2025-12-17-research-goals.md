@@ -10,7 +10,7 @@ My mission is to enable safe and reliable humanoid autonomy in human environment
 
 ## Near-Term Research
 
-Recent progress with foundation models suggests that we may be close to achieving general humanoid autonomy. However, current real-world deployment will rely on human supervision, similar to safety teleoperation in autonomous driving. Despite massive long-term investments (Google invested ~$30 billion into Waymo in the last 15 years), fully unsupervised autonomy has not been achieved.
+Recent progress with foundation models suggests that we may be close to achieving general humanoid autonomy. However, current real-world deployment will rely on human supervision, similar to safety teleoperation in autonomous driving. Despite massive long-term investments (Google has invested ~$30 billion in Waymo over the last 15 years), fully unsupervised autonomy has not been achieved.
 
 [As Ilya Sutskever remarked](https://www.youtube.com/watch?v=aR20FWCCjAs), we're shifting from the "age of scaling" back into an "age of research". Simply investing more compute or capital is not enough. Instead, we need research on fundamental algorithmic breakthroughs.
 
@@ -29,14 +29,14 @@ In parallel, I'm interested in deeper theoretical questions that may inform long
 Overall, my work spans the full technology pipeline of intelligent humanoid systems:
 
 <div class="text-center">
-  {% include figure.liquid loading="eager" path="assets/img/pipeline.png" class="img-fluid rounded z-depth-1" max-width="900px" %}
+ {% include figure.liquid loading="eager" path="assets/img/pipeline.png" class="img-fluid rounded z-depth-1" max-width="900px" %}
 </div>
 
 ## Long-Term Vision
 
 Robotics & AI can be both a force for [good](https://www.darioamodei.com/essay/machines-of-loving-grace) and for [harm](https://www.darioamodei.com/essay/the-adolescence-of-technology). Already today, LLMs lower barriers to building [dangerous systems](https://red.anthropic.com/2025/biorisk/) and agentic AI can automate access to harmful resources. As AI capabilities continue to improve, these risks will increasingly extend into the physical world. 
 
-While there are growing efforts in AI safety, physical AI safety e.g., for autonomous robots operating in human environments, remains underdeveloped.
+While there are growing efforts in AI safety, physical AI safety, e.g., for autonomous robots operating in human environments, remains underdeveloped.
 
 My long-term vision is to found a research-first robotics startup in Europe dedicated to establishing certifiable safety standards for physical AI, spanning humanoid robots, drones, and more. This will require collaboration between academia, industry, and regulators to set benchmarks for safe embodied AI.
 
