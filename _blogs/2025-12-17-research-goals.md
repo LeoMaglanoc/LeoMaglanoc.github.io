@@ -10,7 +10,7 @@ Recent progress with foundation models suggests that general humanoid autonomy m
 
 As OpenAI co-founder and former Chief Scientist Ilya Sutskever [remarked](https://www.youtube.com/watch?v=aR20FWCCjAs), we are shifting from the "age of scaling" back into an "age of research". Scaling improves capability; it does not provide guarantees. What is required is a set of algorithmic breakthroughs that introduce structure and formal guarantees.
 
-One central challenge is ensuring that learning-based control systems (VLA-based or RL-based) operate within certifiable safety envelopes. My work on our [safety shield](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=bSMJcYMAAAAJ&citation_for_view=bSMJcYMAAAAJ:u5HHmVD_uO8C) for human-robot interaction demonstrates how formal safety verification and runtime failsafe planning can constrain robot behavior in human environments while preserving performance.
+One central challenge is ensuring that learning-based control systems (VLA-based or RL-based) operate within certifiable safety envelopes. My work on our safety shield for human-robot interaction ([T-RO paper](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=bSMJcYMAAAAJ&citation_for_view=bSMJcYMAAAAJ:u5HHmVD_uO8C), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)) demonstrates how formal safety verification and runtime failsafe planning can constrain robot behavior in human environments while preserving performance.
 
 The next step is to extend this approach to humanoid systems. This involves three tightly coupled challenges:
 - Unifying manipulation and locomotion within a single safe loco-manipulation framework
