@@ -45,7 +45,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/research-goals/";
+            window.location.href = "/mission";
           
         },
     },{id: "post-ai-coding-agent-case-study",
