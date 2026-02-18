@@ -1,7 +1,7 @@
 ---
 title: My Mission
 date: 2025-12-17
-permalink: /blog/research-goals/
+permalink: /mission
 categories: [blogpost]
 tags: [research]
 ---
@@ -28,4 +28,3 @@ While substantial effort has been devoted to digital AI safety, physical AI safe
 My long-term vision is to found a research-first physical AI safety startup in Europe dedicated to establishing certifiable safety standards for physical AI and translating them into deployable systems for real-world use (e.g., humanoid robots, autonomous drones, and human-in-the-loop embodied systems such as brain-computer interfaces). For agentic systems, physical safety cannot be separated from semantic safety: robots must not only act within physical constraints, but also [align their behavior with human-defined norms and values](https://www.anthropic.com/news/claude-new-constitution).
 
 Achieving this will require collaboration among academia, industry, and regulators to enable the creation of safe, value-aligned embodied AI that can be deployed responsibly in the real world with meaningful guarantees.
-
