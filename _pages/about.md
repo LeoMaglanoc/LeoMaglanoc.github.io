@@ -39,3 +39,4 @@ My [mission]({{ '/mission' | relative_url }}) is to engineer safe and responsibl
 Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. I've contributed to research spanning safe human-robot collaboration [(IEEE T-RO)](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=bSMJcYMAAAAJ&citation_for_view=bSMJcYMAAAAJ:u5HHmVD_uO8C), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I’m experienced in C++, Python, and PyTorch for developing AI-driven robotics and machine learning applications.
 
 I have an international background: of Asian heritage, born in Norway, and raised in Germany. Outside of work, I practice calisthenics and jogging, read philosophy, and write poetry.
+
