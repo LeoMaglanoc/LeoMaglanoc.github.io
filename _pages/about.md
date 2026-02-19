@@ -32,7 +32,7 @@ latest_poetry:
   limit: 3
 ---
 
-Hi 👋, I'm Leo, a Robotics & AI master's student at the Technical University of Munich working as a research engineer on humanoid robotics. I'm currently writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, where I'm advancing language-guided multifingered manipulation with foundation models. My [mission]({{ '/mission' | relative_url }}) is to engineer safe and responsible humanoid autonomy with formal guarantees ensuring reliable deployment in human environments.
+Hi 👋, I'm Leo, a Robotics & AI master's student at the Technical University of Munich, working as a research engineer on humanoid robotics. I'm currently writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, where I'm advancing language-guided multifingered manipulation with foundation models. My [mission]({{ '/mission' | relative_url }}) is to engineer safe and responsible humanoid autonomy with formal guarantees, ensuring reliable deployment in human environments.
 
 Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. I've contributed to multiple academic research projects, spanning safe human-robot collaboration [(IEEE T-RO)](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=bSMJcYMAAAAJ&citation_for_view=bSMJcYMAAAAJ:u5HHmVD_uO8C), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I’m experienced in C++, Python, and PyTorch for developing AI-driven robotics and machine learning applications.
 
