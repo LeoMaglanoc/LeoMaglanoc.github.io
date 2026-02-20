@@ -35,7 +35,7 @@ I’m Leo, a Robotics & AI research engineer focused on humanoid systems. I’m 
 
 My [mission]({{ '/mission' | relative_url }}) is to engineer humanoid autonomy with formal safety guarantees for reliable deployment in human environments.
 
-Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. I've contributed to research spanning safe human-robot collaboration [(IEEE T-RO)](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=bSMJcYMAAAAJ&citation_for_view=bSMJcYMAAAAJ:u5HHmVD_uO8C), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I’m experienced in Python, PyTorch, and C++ for developing physical AI systems.
+Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. I've contributed to research spanning safe human-robot collaboration ([IEEE T-RO](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=bSMJcYMAAAAJ&citation_for_view=bSMJcYMAAAAJ:u5HHmVD_uO8C), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I’m experienced in Python, PyTorch, and C++ for developing physical AI systems.
 
 I have an international background: of Asian heritage, born in Norway, and raised in Germany. Outside of work, I practice calisthenics and jogging, read philosophy, and write poetry.
 
