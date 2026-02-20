@@ -31,7 +31,7 @@ latest_poetry:
   limit: 3
 ---
 
-I’m Leo, a Robotics & AI research engineer focused on humanoid systems. I’m completing my master’s at the Technical University of Munich and writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, where I develop language-guided multi-finger manipulation using foundation models.
+I’m Leo, a Robotics & AI research engineer focused on safe humanoid systems. I’m completing my master’s at the Technical University of Munich and writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, where I develop language-guided multi-finger manipulation using foundation models.
 
 
 My [mission]({{ '/mission' | relative_url }}) is to make humanoid autonomy deployable in human environments through formal safety guarantees. Long-term, I’m building toward a European physical AI safety company developing certifiable safety infrastructure.
