@@ -33,7 +33,7 @@ latest_poetry:
 
 I’m Leo, a Robotics & AI research engineer focused on humanoid systems. I’m completing my master’s at the Technical University of Munich and writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, advancing language-guided multifingered manipulation with foundation models.
 
-My [mission]({{ '/mission' | relative_url }}) is to engineer humanoid autonomy with formal safety guarantees for reliable deployment in human environments.
+My [mission]({{ '/mission' | relative_url }}) is to engineer humanoid autonomy with formal safety guarantees for reliable deployment in human environments. Long-term, I’m building a European physical AI safety startup developing certifiable safety infrastructure for real-world deployment.
 
 Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. I've contributed to research spanning safe human-robot collaboration ([IEEE T-RO](https://arxiv.org/abs/2412.10180), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I’m experienced in Python, PyTorch, and C++ for developing physical AI systems.
 

@@ -12,7 +12,7 @@ Humanoid robots are becoming capable, but not yet safe enough to deploy at scale
 
 My incoming PhD builds the missing layer: a policy-agnostic runtime safety shield that enforces provable guarantees from intent to torque.
 
-Long-term, I’m building a physical AI safety startup in Europe, developing certifiable safety infrastructure for real-world deployment.
+Long-term, this work aims to establish certifiable safety infrastructure for physical AI in Europe and translate formal guarantees into deployable systems.
 
 ## Near-Term Research
 
