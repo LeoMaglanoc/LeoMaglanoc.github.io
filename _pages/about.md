@@ -31,11 +31,10 @@ latest_poetry:
   limit: 3
 ---
 
-I’m Leo, a Robotics & AI research engineer focused on humanoid systems. I’m completing my master’s at the Technical University of Munich and writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, advancing language-guided multifingered manipulation with foundation models.
+I’m Leo, a Robotics & AI research engineer focused on humanoid systems. I’m completing my master’s at the Technical University of Munich and writing my [thesis]({{ '/projects/foundation/' | relative_url }}) with Foundation, a Silicon Valley-based humanoid startup, where I develop language-guided multi-finger manipulation using foundation models.
 
-My [mission]({{ '/mission' | relative_url }}) is to engineer humanoid autonomy with formal safety guarantees for reliable deployment in human environments. Long-term, I’m building a European physical AI safety startup developing certifiable safety infrastructure for real-world deployment.
 
-Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. I've contributed to research spanning safe human-robot collaboration ([IEEE T-RO](https://arxiv.org/abs/2412.10180), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I’m experienced in Python, PyTorch, and C++ for developing physical AI systems.
+My [mission]({{ '/mission' | relative_url }}) is to make humanoid autonomy deployable in human environments through formal safety guarantees. Long-term, I’m building toward a European physical AI safety company developing certifiable safety infrastructure.
 
-I have an international background: of Asian heritage, born in Norway, and raised in Germany. Outside of work, I practice calisthenics and jogging, read philosophy, and write poetry.
+Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. My research experience includes safe human-robot collaboration ([IEEE T-RO](https://arxiv.org/abs/2412.10180), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I build physical AI systems using Python, PyTorch, and C++.
 
