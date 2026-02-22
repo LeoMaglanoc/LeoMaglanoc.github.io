@@ -10,7 +10,7 @@ I work on making humanoid autonomy deployable through formal safety guarantees.
 
 Humanoid robots are becoming capable, but not yet safe enough to deploy at scale in human environments.
 
-My incoming PhD builds the missing layer: a policy-agnostic runtime safety shield that enforces provable guarantees from semantic intent to torque-level execution.
+My research builds the missing layer: a policy-agnostic runtime safety shield that enforces provable guarantees from semantic intent to torque-level execution.
 
 Long-term, this work aims to establish certifiable safety infrastructure for physical AI in Europe and translate formal guarantees into deployable systems.
 
