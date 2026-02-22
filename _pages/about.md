@@ -36,5 +36,7 @@ I’m Leo, a Robotics & AI research engineer focused on safe humanoid systems. I
 
 My [mission]({{ '/mission' | relative_url }}) is to make humanoid autonomy deployable at scale in human environments through formal safety guarantees — from semantic intent to torque-level execution. Long-term, I’m building toward a European physical AI safety company developing certifiable safety infrastructure.
 
-Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. My research experience includes safe human-robot collaboration ([IEEE T-RO](https://arxiv.org/abs/2412.10180), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation. I build physical AI systems using Python, PyTorch, and C++.
+Previously, I worked as an AI/ML research intern at BMW and completed the Siemens mentoring programme. My research experience includes safe human-robot collaboration ([IEEE T-RO](https://arxiv.org/abs/2412.10180), [demo](https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD)), neuromorphic computing for tactile sensing, and spatial perception (SLAM) for autonomous drone navigation.
+
+I build physical AI systems using Python, PyTorch, and C++.
 
