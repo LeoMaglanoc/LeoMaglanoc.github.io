@@ -6,7 +6,7 @@ categories: [blogpost]
 tags: [research]
 ---
 
-I work on making humanoid autonomy deployable through formal safety guarantees.
+I work on making humanoid autonomy deployable through formal safety guarantees — from semantic intent to torque-level execution.
 
 Humanoid robots are becoming capable, but not yet safe enough to deploy at scale in human environments.
 
