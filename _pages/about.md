@@ -14,7 +14,7 @@ nav_order: 1
     <h1 id="homepage-title">Leonardo Maglanoc</h1>
 
     <p>
-      I’m Leo, a robot learning and applied AI engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM. I’ve worked across the robotics and AI stack, with projects spanning language-guided dexterous manipulation for my master’s thesis at a robotics startup, neuromorphic computing at BMW Research, and safe human-robot collaboration research published in IEEE T-RO.
+      I’m Leo, a robot learning and applied AI engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM. I’ve worked across the robotics and AI stack, with projects spanning language-guided dexterous manipulation for my master’s thesis at a robotics startup, neuromorphic computing at BMW Research, and safe human-robot collaboration research at TUM published in IEEE T-RO.
     </p>
 
     <p>
