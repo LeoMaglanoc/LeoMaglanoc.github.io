@@ -18,7 +18,7 @@ nav_order: 1
     </p>
 
     <p>
-      Today, I’m focused on foundation models for physical AI and exploring agentic AI through hackathons.
+      Today, I’m focused on foundation models for physical AI and exploring agentic AI through hackathons. Born in Norway and raised in Germany, I’m particularly excited to contribute to Europe’s deep-tech ecosystem and build ambitious robotics and AI systems here.
     </p>
   </div>
 </section>
