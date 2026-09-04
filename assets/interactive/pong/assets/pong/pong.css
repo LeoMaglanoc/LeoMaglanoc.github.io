@@ -126,7 +126,7 @@ button { font: inherit; }
 }
 
 .pong-controls {
-  position: absolute;
+  position: fixed;
   z-index: 3;
   bottom: calc(var(--pong-gap) + var(--pong-safe-bottom));
   left: calc(var(--pong-gap) + var(--pong-safe-left));

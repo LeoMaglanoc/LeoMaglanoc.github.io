@@ -21,6 +21,7 @@
   let inferenceBusy = false;
   let tickCount = 0;
   let policyLoadToken = 0;
+  let lastTouchActivation = 0;
 
   function setStatus(message) { status.textContent = message; }
   function clamp(value, minimum, maximum) { return Math.max(minimum, Math.min(maximum, value)); }
@@ -255,8 +256,20 @@
     }
   }
 
-  playButton.addEventListener("click", startGame);
-  restartButton.addEventListener("click", restartGame);
+  function bindTouchActivation(button, handler) {
+    button.addEventListener("touchend", (event) => {
+      event.preventDefault();
+      lastTouchActivation = performance.now();
+      handler();
+    }, { passive: false });
+    button.addEventListener("click", () => {
+      if (performance.now() - lastTouchActivation < 500) return;
+      handler();
+    });
+  }
+
+  bindTouchActivation(playButton, startGame);
+  bindTouchActivation(restartButton, restartGame);
   window.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();
     if (["arrowup", "arrowdown", "w", "s"].includes(key)) {
@@ -278,12 +291,36 @@
       touchButtons.forEach((button) => button.classList.remove("is-held"));
     }
   });
+  document.addEventListener("touchend", () => {
+    if (touchAction !== 1) {
+      touchAction = 1;
+      touchButtons.forEach((button) => button.classList.remove("is-held"));
+    }
+  }, { passive: true });
+  document.addEventListener("touchcancel", () => {
+    touchAction = 1;
+    touchButtons.forEach((button) => button.classList.remove("is-held"));
+  }, { passive: true });
   touchButtons.forEach((button) => {
     const action = button.dataset.action === "up" ? 0 : 2;
-    button.addEventListener("pointerdown", (event) => setTouchAction(action, true, button, event));
-    button.addEventListener("pointerup", (event) => setTouchAction(action, false, button, event));
-    button.addEventListener("pointercancel", (event) => setTouchAction(action, false, button, event));
-    button.addEventListener("lostpointercapture", () => setTouchAction(action, false, button));
+    // Use pointer events for mouse/pen and explicit touch events for phones.
+    // Some mobile browsers release pointer capture before pointerup, which can
+    // make a held paddle appear unresponsive.
+    button.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "touch") setTouchAction(action, true, button, event);
+    });
+    button.addEventListener("pointerup", (event) => {
+      if (event.pointerType !== "touch") setTouchAction(action, false, button, event);
+    });
+    button.addEventListener("pointercancel", (event) => {
+      if (event.pointerType !== "touch") setTouchAction(action, false, button, event);
+    });
+    button.addEventListener("lostpointercapture", (event) => {
+      if (!event.pointerType || event.pointerType !== "touch") setTouchAction(action, false, button);
+    });
+    button.addEventListener("touchstart", (event) => setTouchAction(action, true, button, event), { passive: false });
+    button.addEventListener("touchend", (event) => setTouchAction(action, false, button, event), { passive: false });
+    button.addEventListener("touchcancel", (event) => setTouchAction(action, false, button, event), { passive: false });
   });
 
   setInterval(tick, 20);
