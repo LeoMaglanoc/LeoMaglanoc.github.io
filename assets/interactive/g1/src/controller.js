@@ -1,0 +1,1 @@
+import{G1_POLICY_CONFIG as C}from"./config.js";export function desiredJointPositions(o){const t=new Float32Array(12);for(let n=0;n<12;n+=1)t[n]=o[n]*C.actionScale+C.defaultAngles[n];return t}export function pdControl(o,t,n){const r=new Float32Array(12);for(let e=0;e<12;e+=1)r[e]=C.kp[e]*(o[e]-t[7+e])-C.kd[e]*n[6+e];return r}

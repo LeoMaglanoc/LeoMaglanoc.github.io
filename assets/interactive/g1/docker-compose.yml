@@ -1,0 +1,15 @@
+services:
+  g1-tools:
+    build: .
+    working_dir: /workspace
+    volumes:
+      - ../../..:/workspace
+
+  g1-site:
+    image: python:3.10-slim
+    working_dir: /workspace
+    command: ["python", "-m", "http.server", "8000", "--directory", "/workspace"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../..:/workspace:ro
