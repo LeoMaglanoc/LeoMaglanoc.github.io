@@ -1,0 +1,13 @@
+title: RL Pong
+baseurl: ""
+url: ""
+markdown: kramdown
+exclude:
+  - models
+  - logs
+  - tests
+  - web
+  - Dockerfile
+  - docker-compose.yml
+  - Makefile
+  - requirements.txt

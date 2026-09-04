@@ -1,0 +1,40 @@
+<main class="pong-page">
+  <h1>Play against my RL Pong agent</h1>
+  <p class="pong-lede">Play Pong against a PPO agent trained with reinforcement learning. The model runs locally in your browser; no game state leaves the page.</p>
+
+  <div class="pong-shell">
+    <div class="pong-toolbar">
+      <div class="pong-score"><span>You : Agent</span><strong id="pong-score">0 : 0</strong></div>
+      <label class="pong-policy">Policy
+        <select id="pong-policy" aria-label="Choose RL policy">
+          <option value="{{ '/assets/pong/pong_policy.onnx' | relative_url }}">500k solo checkpoint</option>
+          <option value="{{ '/assets/pong/pong_policy_random_angle.onnx' | relative_url }}">Random-angle warm start</option>
+        </select>
+      </label>
+      <button class="pong-button" id="pong-play" type="button" disabled>Loading RL agent…</button>
+    </div>
+    <p class="pong-status" id="pong-status" role="status" aria-live="polite">Loading RL agent…</p>
+    <div class="pong-canvas-wrap">
+      <canvas id="pong-canvas" data-config-url="{{ '/assets/pong/pong_config.json' | relative_url }}" data-model-url="{{ include.model_url | default: '/assets/pong/pong_policy.onnx' | relative_url }}" width="900" height="540" tabindex="0" aria-label="Pong game"></canvas>
+    </div>
+    <p class="pong-instructions">Controls: <strong>↑ / ↓</strong> or <strong>W / S</strong>. First to 7 points wins.</p>
+  </div>
+
+  <label><input id="pong-debug-toggle" type="checkbox"> Show agent state</label>
+  <pre class="pong-debug" id="pong-debug" hidden></pre>
+
+  <div class="pong-details">
+    <section>
+      <h2>What is happening?</h2>
+      <p>A PPO agent controls the right paddle and chooses up, stay, or down from the current game state.</p>
+    </section>
+    <section>
+      <h2>Observation</h2>
+      <p>Ball position and velocity, plus the agent paddle position. Every value is normalized to approximately −1…1.</p>
+    </section>
+    <section>
+      <h2>Training &amp; deployment</h2>
+      <p>Stable-Baselines3 / PyTorch → ONNX → ONNX Runtime Web. Inference happens entirely inside the browser.</p>
+    </section>
+  </div>
+</main>

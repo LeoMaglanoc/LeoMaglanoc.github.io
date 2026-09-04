@@ -196,6 +196,14 @@ exclude:
   - readme_preview/
   - vendor
   - old_website/
+  # The Pong project keeps its own standalone Jekyll notes, but the main site
+  # should serve its static game entrypoint instead of processing that file.
+  - assets/interactive/pong/pong.md
+  # Training checkpoints and TensorBoard logs stay in the project for local
+  # work, but are not needed by the browser game or the public site.
+  - assets/interactive/pong/models/
+  - assets/interactive/pong/logs/
+  - assets/interactive/pong/.pytest_cache/
 keep_files:
   - CNAME
   - .nojekyll

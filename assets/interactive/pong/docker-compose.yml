@@ -1,0 +1,17 @@
+services:
+  trainer:
+    build:
+      context: .
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    command: python -m pytest -q
+
+  website:
+    image: python:3.11-slim
+    working_dir: /workspace
+    volumes:
+      - .:/workspace:ro
+    command: python web/server.py
+    ports:
+      - "4000:4000"

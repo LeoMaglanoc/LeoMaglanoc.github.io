@@ -1,6 +1,6 @@
 featured_projects:
   - title: SO-101 Robot Learning and Foundation Models
-    description: "End-to-end visuomotor policy learning on an SO-101 manipulator. Collected a teleoperation dataset for a pick-and-place task with LeRobot, then trained and tested ACT and SmolVLA policies."
+    description: "End-to-end visuomotor policy learning on a physical SO-101 manipulator. Built the full imitation-learning pipeline with LeRobot: teleoperation, dataset collection, ACT and SmolVLA training, and real-robot policy deployment."
     links: []
 
   - title: MSc Thesis at a Robotics Startup
