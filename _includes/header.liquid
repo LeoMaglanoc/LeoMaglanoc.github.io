@@ -109,6 +109,8 @@
                   {%- elsif p.permalink contains '://' -%}
                     {%- assign url = p.permalink -%}
                     {%- assign is_external = true -%}
+                  {%- elsif p.title == 'projects' -%}
+                    {%- assign url = '/' | append: '#projects' -%}
                   {%- elsif p.permalink contains '/blog/' -%}
                     {%- assign url = '/blog/' -%}
                   {%- else -%}

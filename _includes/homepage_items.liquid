@@ -1,0 +1,21 @@
+<div class="homepage-items">
+  {% for item in include.items %}
+    <article class="homepage-item">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+
+      {% if item.links and item.links.size > 0 %}
+        <p class="homepage-item-links">
+          {% for link in item.links %}
+            {% if link.url contains '://' %}
+              <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+            {% else %}
+              <a href="{{ link.url | relative_url }}">{{ link.label }}</a>
+            {% endif %}
+            {% unless forloop.last %}<span aria-hidden="true"> · </span>{% endunless %}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>

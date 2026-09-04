@@ -1,0 +1,39 @@
+featured_projects:
+  - title: SO-101 Robot Learning and Foundation Models
+    description: "End-to-end visuomotor policy learning on an SO-101 manipulator. Collected a teleoperation dataset for a pick-and-place task with LeRobot, then trained and tested ACT and SmolVLA policies."
+    links: []
+
+  - title: MSc Thesis at a Robotics Startup
+    description: "Language-guided tool-motion generation for dexterous manipulation. Grounds natural-language instructions in parameterized SE(3) motion primitives, combining LLM-level reasoning with learned low-level policies."
+    links: 
+      - label: startup
+        url: https://foundation.bot/ 
+
+  - title: Neuromorphic Computing at BMW Research
+    description: "Neuro-inspired computing with Oscillatory Neural Networks in collaboration with IBM. Built Python/PyTorch simulators and collected tactile interaction data from 10 participants for a human-machine interaction demonstrator."
+    links:
+      - label: EU project
+        url: https://phastrac.eu/
+
+  - title: Safe Human-Robot Collaboration at TUM
+    description: "Runtime safety for physical human-robot interaction using reachability analysis and verification. Contributed to SaRA-Shield, providing formal safety guarantees for autonomous manipulation; published in IEEE Transactions on Robotics."
+    links:
+      - label: paper
+        url: https://ieeexplore.ieee.org/abstract/document/11575118
+      - label: demo
+        url: https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD
+
+builds:
+  - title: EasyBuy
+    description: "AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
+    links:
+      - label: GitHub
+        url: https://github.com/LeoMaglanoc/hack-nation
+      - label: demo
+        url: https://drive.google.com/file/d/1ksN4v6SETfNaV7lzG06JNd_9oKxR7Hd4/view?usp=sharing
+
+  - title: AI Coding Agent Case Study
+    description: "Experiments with agentic software-engineering workflows."
+    links:
+      - label: article
+        url: /blog/AI-coding-agent-case-study/

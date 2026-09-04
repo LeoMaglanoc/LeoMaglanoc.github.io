@@ -1,0 +1,11 @@
+{% assign homepage_poems = site.poetry | sort: 'date' | reverse %}
+
+{% if homepage_poems.size > 0 %}
+  <div class="homepage-poetry-list">
+    {% for poem in homepage_poems %}
+      <a href="{{ poem.url | relative_url }}">{{ poem.title }}</a>{% unless forloop.last %}<span aria-hidden="true"> · </span>{% endunless %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="homepage-empty">Poetry and other personal work.</p>
+{% endif %}
