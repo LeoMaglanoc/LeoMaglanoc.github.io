@@ -10,6 +10,8 @@ Gemfile.lock
 assets/libs/
 node_modules/
 vendor
+!assets/interactive/g1/vendor/
+!assets/interactive/g1/vendor/**
 .idea
 .venv
 AGENTS.md

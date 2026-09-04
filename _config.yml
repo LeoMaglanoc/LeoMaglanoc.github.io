@@ -260,7 +260,9 @@ sass:
 
 jekyll-minifier:
   compress_javascript: false # set to false since we are using terser as the js minifier
-  exclude: ["robots.txt", "assets/js/search/*.js"]
+  # The G1 playground owns its layout CSS; the production CSS minifier rewrites
+  # custom-property expressions such as var(--edge) into invalid CSS.
+  exclude: ["robots.txt", "assets/js/search/*.js", "assets/interactive/g1/g1.css"]
 
 # -----------------------------------------------------------------------------
 # Terser
