@@ -1,0 +1,9 @@
+gymnasium==1.0.0
+stable-baselines3==2.4.1
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1+cpu
+numpy==1.26.4
+onnx==1.17.0
+onnxruntime==1.20.1
+pytest==8.3.4
+tensorboard==2.18.0

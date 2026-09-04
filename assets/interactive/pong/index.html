@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b1110">
+    <title>RL Pong — Leonardo Maglanoc</title>
+    <link rel="stylesheet" href="./assets/pong/pong.css">
+  </head>
+  <body>
+    <main class="pong-game" aria-label="Pong game">
+      <div class="pong-stage">
+        <canvas
+          id="pong-canvas"
+          width="900"
+          height="540"
+          tabindex="0"
+          aria-label="Pong game board"
+          data-config-url="./assets/pong/pong_config.json"
+          data-model-url="./assets/pong/pong_policy.onnx"
+        ></canvas>
+      </div>
+
+      <div class="pong-topbar">
+        <div class="pong-brand">RL PONG</div>
+        <div class="pong-score" aria-label="Score">
+          <span>You</span>
+          <strong id="pong-score">0 : 0</strong>
+          <span>Agent</span>
+        </div>
+        <button class="pong-restart" id="pong-restart" type="button" aria-label="Restart game">↻</button>
+      </div>
+
+      <p class="pong-status" id="pong-status" role="status" aria-live="polite">Loading RL agent…</p>
+
+      <div class="pong-controls" aria-label="Touch controls">
+        <button class="pong-control" type="button" data-action="up" aria-label="Move paddle up">▲<span>UP</span></button>
+        <button class="pong-control" type="button" data-action="down" aria-label="Move paddle down">▼<span>DOWN</span></button>
+      </div>
+
+      <div class="pong-start" id="pong-start">
+        <div class="pong-card">
+          <p class="pong-kicker">A browser-based RL experiment</p>
+          <h1>Play against my agent.</h1>
+          <p>Move the left paddle with the touch buttons or <strong>W / S</strong>. First to seven points wins.</p>
+          <button class="pong-play" id="pong-play" type="button" disabled>Loading agent…</button>
+        </div>
+      </div>
+
+      <div class="pong-rotate" aria-hidden="true">
+        <div class="pong-card">
+          <span class="pong-rotate-icon">↔</span>
+          <h1>Turn your phone sideways</h1>
+          <p>Pong is designed to be played in landscape.</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
+    <script src="./assets/pong/pong.js"></script>
+  </body>
+</html>
