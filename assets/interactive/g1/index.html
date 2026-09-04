@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#101617">
+    <meta name="description" content="A browser-based Unitree G1 locomotion simulation using MuJoCo and a PPO policy.">
+    <title>G1 Locomotion Playground</title>
+    <link rel="stylesheet" href="./g1.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="g1-app">
+      <section class="g1-stage" aria-label="Interactive Unitree G1 simulation">
+        <canvas id="g1-canvas" aria-label="3D MuJoCo simulation"></canvas>
+        <div class="g1-stage-copy">
+          <span class="eyebrow">UNITREE G1 / RL CONTROL</span>
+          <h1>Locomotion<br><em>in the loop.</em></h1>
+          <p>MuJoCo physics, a PPO policy, and 12 leg joints — running locally in your browser.</p>
+        </div>
+        <div class="g1-loading" id="g1-loading" role="status">Loading MuJoCo and the locomotion policy…</div>
+      </section>
+
+      <aside class="g1-panel">
+        <div class="g1-panel-head">
+          <div>
+            <span class="eyebrow">G1 LOCOMOTION PLAYGROUND</span>
+            <p class="g1-status" id="g1-status" role="status" aria-live="polite">Preparing simulation…</p>
+          </div>
+          <span class="live-dot" aria-label="Browser simulation"></span>
+        </div>
+
+        <section class="g1-section">
+          <div class="section-label"><span>COMMAND VELOCITY</span><span class="muted">m/s · rad/s</span></div>
+          <div class="command-readout"><span id="g1-command">0.00 / 0.00 / 0.00</span><small>vx / vy / yaw</small></div>
+          <div class="g1-key-grid" aria-label="Velocity controls">
+            <button data-command-key="KeyW" type="button"><kbd>W</kbd><span>forward</span></button>
+            <button data-command-key="KeyA" type="button"><kbd>A</kbd><span>strafe left</span></button>
+            <button data-command-key="KeyS" type="button"><kbd>S</kbd><span>backward</span></button>
+            <button data-command-key="KeyD" type="button"><kbd>D</kbd><span>strafe right</span></button>
+            <button data-command-key="KeyQ" type="button"><kbd>Q</kbd><span>turn left</span></button>
+            <button data-command-key="KeyE" type="button"><kbd>E</kbd><span>turn right</span></button>
+          </div>
+          <p class="control-note">WASD or arrow keys move like a game character. Q/E turn. Release to settle.</p>
+        </section>
+
+        <section class="g1-section g1-actions">
+          <div class="section-label"><span>PERTURBATION</span><span class="muted">horizontal force</span></div>
+          <div class="push-row">
+            <button id="g1-push-left" class="outline-button" type="button">← Push left</button>
+            <button id="g1-push-right" class="outline-button" type="button">Push right →</button>
+          </div>
+          <label class="range-label" for="g1-push-strength"><span>Force</span><output id="g1-push-strength-value">120 N</output></label>
+          <input id="g1-push-strength" type="range" min="50" max="300" step="10" value="120">
+        </section>
+
+        <section class="g1-section telemetry" aria-label="Telemetry">
+          <div class="telemetry-item"><span>Speed</span><strong id="g1-speed">0.00 m/s</strong></div>
+          <div class="telemetry-item"><span>Distance</span><strong id="g1-distance">0.00 m</strong></div>
+          <div class="telemetry-item"><span>Walk time</span><strong id="g1-walk-time">0.0 s</strong></div>
+          <div class="telemetry-item"><span>Pushes</span><strong id="g1-pushes">0</strong></div>
+        </section>
+
+        <div class="g1-buttons">
+          <button id="g1-reset" class="primary-button" type="button">Reset</button>
+          <button id="g1-pause" class="secondary-button" type="button" disabled>Pause</button>
+        </div>
+
+        <section class="g1-section pipeline">
+          <div class="section-label"><span>CONTROL PIPELINE</span></div>
+          <div class="pipeline-flow"><span>You</span><b>desired velocity</b><i>↓</i><span>47-D observation</span><i>↓</i><span class="accent">PPO policy</span><i>↓</i><span>12 target joints</span><i>↓</i><span>PD torque → MuJoCo</span></div>
+        </section>
+
+        <footer class="g1-meta">
+          <span>Physics <strong id="g1-physics-hz">500 Hz</strong></span>
+          <span>Policy <strong id="g1-policy-hz">50 Hz</strong></span>
+          <span>Inference <strong>browser / WASM</strong></span>
+        </footer>
+        <p class="g1-error" id="g1-error" hidden></p>
+      </aside>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
