@@ -3,9 +3,11 @@ featured_projects:
     description: "End-to-end visuomotor policy learning on a physical SO-101 manipulator. Built the full imitation-learning pipeline with LeRobot: teleoperation, dataset collection, ACT and SmolVLA training, and real-robot policy deployment."
     links: []
 
-  - title: MSc Thesis at a Robotics Startup
-    description: "Language-guided tool-motion generation for dexterous manipulation. Grounds natural-language instructions in parameterized SE(3) motion primitives, combining LLM-level reasoning with learned low-level policies."
-    links: 
+  - title: MSc Thesis at a Robotics Startup: Lang2Tool
+    description: "Language-guided tool-motion generation for dexterous manipulation. Grounds natural-language instructions in parameterized SE(3) motion primitives, combining LLM-level reasoning with a learned low-level policy."
+    links:
+      - label: Github
+        url: https://github.com/LeoMaglanoc/lang2tool 
       - label: startup
         url: https://foundation.bot/ 
 
@@ -25,7 +27,7 @@ featured_projects:
 
 builds:
   - title: EasyBuy
-    description: "AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
+    description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
     links:
       - label: GitHub
         url: https://github.com/LeoMaglanoc/hack-nation
@@ -33,7 +35,7 @@ builds:
         url: https://drive.google.com/file/d/1ksN4v6SETfNaV7lzG06JNd_9oKxR7Hd4/view?usp=sharing
 
   - title: Interactive AI Demos
-    description: "Hands-on browser experiments: an RL-powered Pong agent and a Unitree G1 locomotion simulator."
+    description: "Hands-on webapp experiments: an RL-powered Pong agent and a Unitree G1 locomotion simulator."
     links:
       - label: RL Pong
         url: /assets/interactive/pong/index.html
