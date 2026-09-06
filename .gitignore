@@ -12,6 +12,13 @@ node_modules/
 vendor
 !assets/interactive/g1/vendor/
 !assets/interactive/g1/vendor/**
+!assets/interactive/slam/app/vendor/
+!assets/interactive/slam/app/vendor/**
+assets/interactive/slam/test-data/**/source.tgz
+assets/interactive/slam/test-data/**/source/
+assets/interactive/slam/test-data/**/*-frames/
+assets/interactive/slam/test-data/**/*.mp4
+assets/interactive/slam/test-data/**/*.json
 .idea
 .venv
 AGENTS.md

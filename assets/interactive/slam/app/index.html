@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#081012">
+    <meta name="description" content="Monocular visual SLAM running locally in your browser with AlvaAR and WebAssembly.">
+    <title>Monocular SLAM — Leonardo Maglanoc</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles/main.css">
+  </head>
+  <body>
+    <main class="slam-app">
+      <section class="slam-stage" aria-label="Monocular visual SLAM viewer">
+        <video id="camera-video" autoplay muted playsinline aria-label="Rear camera feed"></video>
+        <canvas id="sequence-preview" aria-hidden="true"></canvas>
+        <canvas id="feature-overlay" aria-hidden="true"></canvas>
+        <canvas id="map-canvas" aria-label="Three-dimensional sparse SLAM map"></canvas>
+        <div class="stage-scrim"></div>
+
+        <header class="stage-header">
+          <div>
+            <span class="eyebrow">BROWSER ROBOTICS / ALVAAR</span>
+            <h1>Monocular <em>SLAM</em></h1>
+          </div>
+          <span class="local-badge"><i></i> LOCAL</span>
+        </header>
+
+        <div class="stage-message" id="stage-message">
+          <span class="stage-kicker">REAL-TIME WORLD TRACKING</span>
+          <p>Move your phone slowly through a textured scene to build a sparse map.</p>
+        </div>
+
+        <div class="stage-footer">
+          <span id="source-label">CAMERA INPUT</span>
+          <span>30 Hz target</span>
+        </div>
+      </section>
+
+      <aside class="slam-panel" aria-label="SLAM controls and telemetry">
+        <div class="panel-intro">
+          <div>
+            <span class="eyebrow">VISUAL ODOMETRY / MAPPING</span>
+            <p class="panel-copy">Camera pose, tracked features, and a live sparse reconstruction — computed on this device.</p>
+          </div>
+          <span class="status-light" id="status-light"></span>
+        </div>
+
+        <div class="status-card" aria-live="polite">
+          <div class="status-line">
+            <span class="status-dot" id="status-dot"></span>
+            <strong id="tracking-status">READY</strong>
+          </div>
+          <span class="status-detail" id="status-detail">Start the rear camera to initialize AlvaAR.</span>
+        </div>
+
+        <div class="telemetry-grid" aria-label="Tracking telemetry">
+          <div class="telemetry-item"><span>FPS</span><strong id="fps-value">—</strong></div>
+          <div class="telemetry-item"><span>SLAM</span><strong id="slam-ms-value">—</strong></div>
+          <div class="telemetry-item"><span>FEATURES</span><strong id="features-value">—</strong></div>
+          <div class="telemetry-item"><span>MAP POINTS</span><strong id="map-points-value">—</strong></div>
+        </div>
+
+        <div class="view-switch" role="tablist" aria-label="Visualization mode">
+          <button class="view-button is-active" id="camera-view-button" type="button" role="tab" aria-selected="true">CAMERA</button>
+          <button class="view-button" id="map-view-button" type="button" role="tab" aria-selected="false">3D MAP</button>
+        </div>
+
+        <div class="panel-actions">
+          <button class="primary-button" id="start-button" type="button">Start SLAM <span>↗</span></button>
+          <button class="secondary-button" id="reset-button" type="button" disabled>Reset map</button>
+        </div>
+
+        <section class="pose-card" aria-label="Current camera pose">
+          <div class="section-heading"><span>CAMERA POSE</span><span class="muted">map coordinates</span></div>
+          <div class="pose-grid">
+            <span>x</span><strong id="pose-x">—</strong><span>roll</span><strong id="pose-roll">—</strong>
+            <span>y</span><strong id="pose-y">—</strong><span>pitch</span><strong id="pose-pitch">—</strong>
+            <span>z</span><strong id="pose-z">—</strong><span>yaw</span><strong id="pose-yaw">—</strong>
+          </div>
+        </section>
+
+        <details class="debug-details">
+          <summary>Developer inputs</summary>
+          <div class="debug-tools">
+            <label for="video-file">Replay a video file</label>
+            <input id="video-file" type="file" accept="video/*">
+            <label for="sequence-files">Replay ordered image frames</label>
+            <input id="sequence-files" type="file" accept="image/*" multiple>
+            <button class="secondary-button" id="export-trace-button" type="button" disabled>Download pose trace</button>
+          </div>
+        </details>
+
+        <footer class="panel-footer">
+          <p>Processing runs locally in your browser. Camera frames are not uploaded.</p>
+          <span>AlvaAR · WebAssembly · Three.js</span>
+        </footer>
+        <p class="error-message" id="error-message" role="alert" hidden></p>
+      </aside>
+    </main>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

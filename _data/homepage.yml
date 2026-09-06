@@ -41,3 +41,5 @@ builds:
         url: /assets/interactive/pong/index.html
       - label: Unitree G1 Simulator
         url: /g1/
+      - label: Monocular SLAM
+        url: /slam/

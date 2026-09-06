@@ -1,0 +1,11 @@
+{
+  "name": "monocular-slam-browser",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node tests/contract.mjs",
+    "test": "node tests/contract.mjs",
+    "serve": "python3 -m http.server 8080"
+  }
+}

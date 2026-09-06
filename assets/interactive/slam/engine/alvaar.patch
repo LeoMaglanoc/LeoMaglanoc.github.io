@@ -1,0 +1,116 @@
+diff --git a/src/slam/src/embind.cpp b/src/slam/src/embind.cpp
+index 8b8c2ed..65db231 100755
+--- a/src/slam/src/embind.cpp
++++ b/src/slam/src/embind.cpp
+@@ -15,5 +15,6 @@ EMSCRIPTEN_BINDINGS(Module)
+         .function("findCameraPoseWithIMU", &System::findCameraPoseWithIMU, allow_raw_pointers())
+         .function("findCameraPose", &System::findCameraPose, allow_raw_pointers())
+         .function("findPlane", &System::findPlane)
+-        .function("getFramePoints", &System::getFramePoints);
+-}
+\ No newline at end of file
++        .function("getFramePoints", &System::getFramePoints)
++        .function("getMapPoints", &System::getMapPoints);
++}
+diff --git a/src/slam/src/system.cpp b/src/slam/src/system.cpp
+index 13be679..2beeaf5 100755
+--- a/src/slam/src/system.cpp
++++ b/src/slam/src/system.cpp
+@@ -1,6 +1,7 @@
+ #include "system.hpp"
+ #include <memory>
+ #include <iostream>
++#include <algorithm>
+ 
+ System::System()
+ {
+@@ -153,6 +154,38 @@ int System::getFramePoints(int pointsPtr)
+     return numPoints;
+ }
+ 
++int System::getMapPoints(int pointsPtr, int maxPoints)
++{
++    if (!mapManager_ || maxPoints <= 0)
++    {
++        return 0;
++    }
++
++    auto *data = reinterpret_cast<float *>(pointsPtr);
++    int count = 0;
++
++    for (const auto &[id, mapPoint] : mapManager_->mapMapPoints_)
++    {
++        (void) id;
++        if (!mapPoint || !mapPoint->is3d_ || mapPoint->isBad() || count >= maxPoints)
++        {
++            continue;
++        }
++
++        const Eigen::Vector3d point = mapPoint->getPoint();
++        const cv::Scalar color = mapPoint->color_;
++        data[count * 6 + 0] = static_cast<float>(point.x());
++        data[count * 6 + 1] = static_cast<float>(point.y());
++        data[count * 6 + 2] = static_cast<float>(point.z());
++        data[count * 6 + 3] = static_cast<float>(color[2]);
++        data[count * 6 + 4] = static_cast<float>(color[1]);
++        data[count * 6 + 5] = static_cast<float>(color[0]);
++        ++count;
++    }
++
++    return count;
++}
++
+ int System::processCameraPose(cv::Mat &image, double timestamp)
+ {
+     currFrame_->id_++;
+diff --git a/src/slam/src/system.hpp b/src/slam/src/system.hpp
+index 8d4a929..9c33aac 100755
+--- a/src/slam/src/system.hpp
++++ b/src/slam/src/system.hpp
+@@ -37,6 +37,10 @@ public:
+ 
+     int getFramePoints(int pointsPtr);
+ 
++    // Copy persistent initialized map points into a caller-provided float buffer:
++    // x, y, z, r, g, b for each point.
++    int getMapPoints(int pointsPtr, int maxPoints);
++
+ private:
+     cv::Mat processPlane(std::vector<Eigen::Vector3d> mapPoints, Sophus::SE3d Twc, int numIterations = 50);
+ 
+diff --git a/src/system.js b/src/system.js
+index 585ae9b..06f58d0 100644
+--- a/src/system.js
++++ b/src/system.js
+@@ -63,6 +63,7 @@ class AlvaAR
+         this.memCam = new SharedMemory( wasm.module, wasm.module.HEAPF32, 16 );
+         this.memObj = new SharedMemory( wasm.module, wasm.module.HEAPF32, 16 );
+         this.memPts = new SharedMemory( wasm.module, wasm.module.HEAPU32, 4096 );
++        this.memMap = new SharedMemory( wasm.module, wasm.module.HEAPF32, 6 * 8192 );
+         this.memIMU = new SharedMemory( wasm.module, wasm.module.HEAPF64, 256 );
+         this.memImg = new SharedMemory( wasm.module, wasm.module.HEAPU8, width * height * 4 );
+ 
+@@ -230,10 +231,21 @@ class AlvaAR
+         return points;
+     }
+ 
++    getMapPoints( maxPoints = 8192 )
++    {
++        if( typeof this.system.getMapPoints !== 'function' ) return new Float32Array();
++
++        const count = Math.min( maxPoints, this.system.getMapPoints( this.memMap.ptr, maxPoints ) );
++        const data = this.memMap.read( count * 6 );
++        const points = new Float32Array( count * 6 );
++        points.set( data );
++        return points;
++    }
++
+     reset()
+     {
+         this.system.reset();
+     }
+ }
+ 
+-export { AlvaAR };
+\ No newline at end of file
++export { AlvaAR };
