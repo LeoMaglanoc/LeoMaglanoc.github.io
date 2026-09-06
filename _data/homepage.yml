@@ -3,7 +3,7 @@ featured_projects:
     description: "End-to-end visuomotor policy learning on a physical SO-101 manipulator. Built the full imitation-learning pipeline with LeRobot: teleoperation, dataset collection, ACT and SmolVLA training, and real-robot policy deployment."
     links: []
 
-  - title: MSc Thesis at a Robotics Startup: Lang2Tool
+  - title: "MSc Thesis at a Robotics Startup: Lang2Tool"
     description: "Language-guided tool-motion generation for dexterous manipulation. Grounds natural-language instructions in parameterized SE(3) motion primitives, combining LLM-level reasoning with a learned low-level policy."
     links:
       - label: Github
