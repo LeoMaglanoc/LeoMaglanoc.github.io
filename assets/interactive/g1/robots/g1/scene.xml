@@ -13,10 +13,44 @@
     <texture type="skybox" builtin="flat" rgb1="0 0 0" rgb2="0 0 0" width="512" height="3072"/>
     <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
     <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <material name="terrain-cobbles" rgba="0.34 0.40 0.39 1"/>
+    <material name="terrain-ramp" rgba="0.22 0.29 0.29 1"/>
+    <material name="terrain-steps" rgba="0.30 0.36 0.35 1"/>
   </asset>
 
   <worldbody>
     <light pos="1 0 3.5" dir="0 0 -1" directional="true"/>
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+
+    <!--
+      Small optional course. The origin remains a clear 2 m x 2 m spawn area.
+      All terrain is static primitive geometry, visible to the custom renderer
+      through group 1 and left collidable with MuJoCo's default contact masks.
+    -->
+
+    <!-- 3.6 m x 1.8 m uneven-ground patch, with 1.2–3.8 cm top heights. -->
+    <geom name="terrain_cobble_01" type="box" group="1" size="0.45 0.30 0.009" pos="2.00 1.05 0.009" euler="0.018 -0.025 0.052" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_02" type="box" group="1" size="0.45 0.30 0.014" pos="2.90 1.05 0.014" euler="-0.025 0.020 -0.070" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_03" type="box" group="1" size="0.45 0.30 0.006" pos="3.80 1.05 0.006" euler="0.030 0.018 0.035" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_04" type="box" group="1" size="0.45 0.30 0.018" pos="4.70 1.05 0.018" euler="-0.020 -0.030 -0.052" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_05" type="box" group="1" size="0.45 0.30 0.012" pos="2.00 1.65 0.012" euler="-0.028 0.022 -0.035" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_06" type="box" group="1" size="0.45 0.30 0.019" pos="2.90 1.65 0.019" euler="0.020 -0.018 0.070" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_07" type="box" group="1" size="0.45 0.30 0.008" pos="3.80 1.65 0.008" euler="-0.018 0.030 -0.052" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_08" type="box" group="1" size="0.45 0.30 0.015" pos="4.70 1.65 0.015" euler="0.026 0.015 0.035" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_09" type="box" group="1" size="0.45 0.30 0.016" pos="2.00 2.25 0.016" euler="0.022 -0.020 -0.070" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_10" type="box" group="1" size="0.45 0.30 0.007" pos="2.90 2.25 0.007" euler="-0.030 0.025 0.052" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_11" type="box" group="1" size="0.45 0.30 0.020" pos="3.80 2.25 0.020" euler="0.016 -0.028 -0.035" material="terrain-cobbles"/>
+    <geom name="terrain_cobble_12" type="box" group="1" size="0.45 0.30 0.010" pos="4.70 2.25 0.010" euler="-0.024 0.018 0.070" material="terrain-cobbles"/>
+
+    <!-- 6 degree ramp, 1.6 m wide, with a short flat top. -->
+    <geom name="terrain_ramp_up" type="box" group="1" size="0.75 0.80 0.01" pos="2.25 -2.35 0.07" euler="0 -0.10472 0" material="terrain-ramp"/>
+    <geom name="terrain_ramp_top" type="box" group="1" size="0.40 0.80 0.08" pos="3.40 -2.35 0.08" material="terrain-ramp"/>
+    <geom name="terrain_ramp_down" type="box" group="1" size="0.75 0.80 0.01" pos="4.55 -2.35 0.07" euler="0 0.10472 0" material="terrain-ramp"/>
+
+    <!-- Four wide, low steps: 2 cm, 4 cm, 6 cm, then a 6 cm landing. -->
+    <geom name="terrain_step_01" type="box" group="1" size="0.40 0.65 0.01" pos="1.70 -0.65 0.01" material="terrain-steps"/>
+    <geom name="terrain_step_02" type="box" group="1" size="0.40 0.65 0.02" pos="2.50 -0.65 0.02" material="terrain-steps"/>
+    <geom name="terrain_step_03" type="box" group="1" size="0.40 0.65 0.03" pos="3.30 -0.65 0.03" material="terrain-steps"/>
+    <geom name="terrain_step_landing" type="box" group="1" size="0.40 0.65 0.03" pos="4.10 -0.65 0.03" material="terrain-steps"/>
   </worldbody>
 </mujoco>

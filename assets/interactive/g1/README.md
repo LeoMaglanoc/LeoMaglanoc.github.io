@@ -1,6 +1,8 @@
 # G1 Locomotion Playground
 
-This is a fully static browser demo of Unitree's G1 12-DoF locomotion stack. It runs the MuJoCo simulation, ONNX policy, observation builder, and PD controller in the visitor's browser; there is no inference server or WebSocket backend.
+This is a fullscreen, fully static browser demo of Unitree's G1 12-DoF locomotion stack. It runs the MuJoCo simulation, ONNX policy, observation builder, and PD controller in the visitor's browser; there is no inference server or WebSocket backend.
+
+The playground has a large flat locomotion area plus an optional rough-terrain section with low uneven blocks, a shallow ramp, and wide low steps. The existing policy and controller are unchanged, so the obstacles are there to explore and stress-test rather than to guarantee success.
 
 Open `/g1/` on the website, or serve the repository locally with Docker:
 
@@ -39,7 +41,7 @@ PD controller at 500 Hz
 MuJoCo G1 12-DoF model
 ```
 
-Controls are W/A/S/D or the arrow keys for forward, strafe-left, backward, and strafe-right movement; Q/E turn. With no key held, the robot settles in place. Space pauses; Backspace or Reset restores the initial state. Push buttons apply a short horizontal force to the pelvis.
+Controls are W/A/S/D or the arrow keys for forward, strafe-left, backward, and strafe-right movement; Q/E turn. On phones, use the touch controls shown in the simulator. With no key held, the robot settles in place. Space pauses; Backspace or Reset restores the initial state. Push buttons apply a short horizontal force to the pelvis.
 
 ## Scope and limitations
 

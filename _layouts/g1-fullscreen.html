@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#101617">
+    <meta name="description" content="Fullscreen browser-based Unitree G1 locomotion playground.">
+    <title>{{ page.title | escape }}</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #101617;
+      }
+
+      .g1-frame {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        border: 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    {{ content }}
+  </body>
+</html>
