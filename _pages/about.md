@@ -20,6 +20,11 @@ nav_order: 1
     <p>
       Today, I’m focused on foundation models for physical AI and exploring agentic AI through hackathons. Born in Norway and raised in Germany, I’m particularly excited to contribute to Europe’s deep-tech ecosystem and build ambitious robotics and AI systems here.
     </p>
+
+    <p class="homepage-item-links">
+      Contact me via <a href="mailto:leo.maglanoc@gmail.com">email</a> ·
+      <a href="https://www.linkedin.com/in/leonardo-maglanoc/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
   </div>
 </section>
 
