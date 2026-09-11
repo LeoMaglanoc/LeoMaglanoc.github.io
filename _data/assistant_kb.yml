@@ -1,0 +1,295 @@
+metadata:
+  version: 1
+  assistant_name: Ask Leo
+  scope: Public professional portfolio only
+
+# This is the sole manually maintained knowledge base for Ask Leo. Every fact
+# below is intentionally public and has a portfolio source attached to it.
+records:
+  - id: profile
+    type: profile
+    title: Leonardo Maglanoc
+    summary: Robot learning and AI engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM.
+    facts:
+      - Works across robot learning, AI, robotics software, and safety.
+      - Is focused on foundation models for physical AI.
+    tags: [robot learning, robotics, AI, physical AI, background]
+    aliases: [Leo, Leonardo, background, profile, about]
+    sources:
+      - label: About
+        url: /
+
+  - id: tum_msc
+    type: education
+    title: M.Sc. Robotics, Cognition, and Intelligence, TUM
+    organization: Technical University of Munich
+    summary: Interdisciplinary master's programme spanning informatics, electrical engineering, and mechanical engineering.
+    facts:
+      - Coursework and specialization cover robot control, perception, machine learning, robotics, and computer vision.
+    skills: [robot control, perception, machine learning, computer vision]
+    tags: [TUM, education, robotics, perception, control]
+    aliases: [MSc, master's, master, RCI, TUM degree]
+    sources:
+      - label: CV
+        url: /cv/
+
+  - id: tum_bsc
+    type: education
+    title: B.Sc. Informatics, TUM
+    organization: Technical University of Munich
+    summary: Computer science degree with a mathematics minor and a specialization in mathematical modelling, cyber-physical systems, and AI.
+    facts:
+      - Completed a bachelor's thesis on provably safe human-robot interaction for manipulation using power and force limiting.
+    skills: [computer science, mathematical modelling, cyber-physical systems, artificial intelligence]
+    tags: [TUM, education, computer science, safety]
+    aliases: [BSc, bachelor's, bachelor, informatics]
+    sources:
+      - label: CV
+        url: /cv/
+
+  - id: bmw
+    type: experience
+    title: BMW Group Research
+    organization: BMW Group
+    summary: AI/ML research internship on neuro-inspired computing with Oscillatory Neural Networks (ONNs).
+    facts:
+      - Co-developed an ONN simulator using Neural ODEs.
+      - Led a BMW user study with a tactile hardware prototype for human-vehicle interaction.
+      - Collected tactile interaction data and trained ONNs on that dataset.
+      - The work was part of the EU Phastrac research project and involved collaboration with IBM.
+    skills: [Python, PyTorch, Neural ODEs, tactile sensing, neuromorphic computing, ONNs]
+    tags: [BMW, research, AI, neuromorphic computing, tactile interaction]
+    aliases: [BMW Research, ONN, ONNs, oscillatory neural network, tactile AI, Phastrac]
+    sources:
+      - label: BMW Research
+        url: /projects/BMW/
+
+  - id: tum_safety
+    type: experience
+    title: TUM Research Assistant, Safe Robotics
+    organization: Technical University of Munich
+    summary: Research on making physical human-robot interaction provably safe with formal verification.
+    facts:
+      - Implemented kinematics and trajectory-planning algorithms.
+      - Contributed to SaRA-Shield research on runtime safety for autonomous manipulation.
+    skills: [formal verification, kinematics, trajectory planning, human-robot interaction]
+    tags: [TUM, robotics research, safety, pHRI, formal methods]
+    aliases: [TUM robotics research, research assistant, safe robotics, pHRI]
+    sources:
+      - label: TUM Safe Robotics
+        url: /projects/robotics-research-assistant/
+
+  - id: sara_shield
+    type: publication
+    title: "SaRA-Shield: Safe Human-Robot Collaboration"
+    summary: Runtime safety for physical human-robot interaction using reachability analysis and verification.
+    facts:
+      - Uses set-based reachability analysis to verify whether human-robot contact is possible before a robot can stop.
+      - Includes speed and separation monitoring and power and force limiting modes.
+      - The related work, A General Safety Framework for Autonomous Manipulation in Human Environments, is listed as IEEE Transactions on Robotics 2025.
+    skills: [reachability analysis, formal verification, safety, autonomous manipulation]
+    tags: [SaRA-Shield, robot safety, reachability, verification, IEEE T-RO]
+    aliases: [SARA shield, SaRA, T-RO, publication, paper, robot safety]
+    sources:
+      - label: SaRA-Shield project
+        url: /projects/robotics-research-assistant/
+      - label: IEEE T-RO paper
+        url: https://ieeexplore.ieee.org/abstract/document/11575118
+
+  - id: foundation_thesis
+    type: experience
+    title: Master's Thesis at Foundation Robotics
+    organization: Foundation Robotics and TUM MIRMI
+    summary: Master's thesis on language-guided multifingered manipulation with foundation models at a humanoid robotics startup.
+    facts:
+      - The thesis is a collaboration between TUM MIRMI and Foundation Robotics.
+      - The project studies tool-appropriate functional grasps for multifingered manipulation.
+    skills: [foundation models, dexterous manipulation, functional grasping]
+    tags: [master's thesis, humanoid robotics, dexterous manipulation, foundation models]
+    aliases: [Foundation, Foundation Robotics, thesis, humanoid startup, multifingered manipulation]
+    sources:
+      - label: Foundation thesis
+        url: /projects/foundation/
+
+  - id: lang2tool
+    type: project
+    title: Lang2Tool
+    summary: Language-guided tool-motion generation for dexterous manipulation.
+    facts:
+      - Grounds natural-language instructions in parameterized SE(3) motion primitives.
+      - Combines LLM-level reasoning with a learned low-level policy.
+    skills: [language-guided robotics, SE(3), dexterous manipulation, learned policies]
+    tags: [Lang2Tool, language-guided manipulation, LLM, robotics]
+    aliases: [language to tool, language-guided tool motion, tool motion generation, MSc thesis project]
+    sources:
+      - label: Featured Projects
+        url: /#projects
+      - label: Lang2Tool repository
+        url: https://github.com/LeoMaglanoc/lang2tool
+
+  - id: so101
+    type: project
+    title: SO-101 Robot Learning
+    summary: End-to-end visuomotor imitation learning on a physical SO-101 manipulator.
+    facts:
+      - Built the teleoperation and dataset-collection pipeline with LeRobot.
+      - Trained ACT and SmolVLA policies.
+      - Deployed learned policies on the physical robot.
+    skills: [LeRobot, ACT, SmolVLA, imitation learning, visuomotor policy learning, real-robot deployment]
+    tags: [SO-101, robot learning, manipulation, imitation learning, foundation models, engineering]
+    aliases: [SO101, SO-101, robot learning, IL, imitation learning, policy learning, physical robot]
+    sources:
+      - label: Featured Projects
+        url: /#projects
+
+  - id: phone_slam
+    type: project
+    title: Phone SLAM / RGB-D Mapping
+    summary: Offline RGB-D SLAM and dense reconstruction with an Android ARCore recording pipeline and an interactive Three.js viewer.
+    facts:
+      - Uses RTAB-Map for RGB-D odometry and pose-graph optimisation with loop closures.
+      - Uses Open3D to fuse poses into a coloured metric mesh.
+      - The website visualises precomputed assets; it does not run reconstruction in the browser.
+    skills: [SLAM, RGB-D mapping, RTAB-Map, Open3D, ARCore, Three.js]
+    tags: [SLAM, mapping, perception, 3D reconstruction, mobile robotics]
+    aliases: [phone SLAM, RGBD, RGB-D, dense reconstruction, ARCore, mapping]
+    sources:
+      - label: Phone SLAM
+        url: /projects/phone-slam/
+      - label: SLAM demo
+        url: /slam/
+
+  - id: g1_simulator
+    type: build
+    title: Unitree G1 Locomotion Simulator
+    summary: Browser-native simulation of a Unitree G1 locomotion policy.
+    facts:
+      - Runs a PPO actor exported to ONNX in ONNX Runtime Web.
+      - Uses a 47-dimensional proprioceptive observation and a 12-DoF lower-body action space.
+      - Runs policy updates at 50 Hz and PD control and MuJoCo physics at 500 Hz.
+    skills: [MuJoCo, ONNX Runtime Web, Three.js, PPO, JavaScript, browser deployment]
+    tags: [Unitree G1, simulation, locomotion, control, ONNX]
+    aliases: [G1, Unitree, humanoid simulator, locomotion, MuJoCo]
+    sources:
+      - label: G1 playground
+        url: /g1/
+
+  - id: rl_pong
+    type: build
+    title: RL Pong Agent
+    summary: Browser-deployed reinforcement-learning Pong demo.
+    facts:
+      - Trained a PPO actor-critic in Python and exported the policy from PyTorch to ONNX.
+      - Runs inference and game physics in the browser with ONNX Runtime Web.
+    skills: [reinforcement learning, PPO, Stable-Baselines3, PyTorch, ONNX, browser deployment]
+    tags: [RL, reinforcement learning, Pong, PPO, ONNX]
+    aliases: [RL Pong, reinforcement learning Pong, PPO agent]
+    sources:
+      - label: RL Pong demo
+        url: /assets/interactive/pong/index.html
+
+  - id: autonomous_drone
+    type: project
+    title: Vision-Based Autonomous Drone Practical
+    summary: TUM practical combining perception, planning, and control for an AR Drone 2.
+    facts:
+      - Implemented the haptic handler, A-star path planner, and PID controller as part of the project.
+      - Used a visual-inertial EKF localiser, occupancy map, and collision-free waypoints.
+    skills: [A-star planning, PID control, EKF, mobile robotics, Gazebo, RViz]
+    tags: [drone, planning, control, perception, robotics software]
+    aliases: [drone, autonomous drone, A star, path planning, PID, EKF]
+    sources:
+      - label: Autonomous drone practical
+        url: /projects/autonomous-drone-practical/
+
+  - id: siemens_mentoring
+    type: project
+    title: Siemens Mentoring Programme
+    summary: Mentoring programme project on Smart 3D Printing with Machine Learning.
+    facts:
+      - Presented the Smart 3D Printing with Machine Learning hackathon project at the Siemens RIE Munich Conference.
+      - The project framed ML as a way to accelerate physics-based simulation and digital-twin workflows.
+    skills: [machine learning, digital twins, scientific communication]
+    tags: [Siemens, 3D printing, machine learning, digital twins]
+    aliases: [Siemens, smart 3D printing, digital twin]
+    sources:
+      - label: Siemens Mentoring Programme
+        url: /projects/siemens-mentoring-programme/
+
+  - id: easybuy
+    type: build
+    title: EasyBuy
+    summary: Agentic AI product built at Hack-Nation's Global AI Hackathon.
+    facts:
+      - Was invited to Venture Lab.
+    skills: [agentic AI, product prototyping]
+    tags: [EasyBuy, Hack-Nation, hackathon, agentic AI]
+    aliases: [Easy Buy, Hack Nation, Global AI Hackathon, Venture Lab]
+    sources:
+      - label: EasyBuy repository
+        url: https://github.com/LeoMaglanoc/hack-nation
+
+  - id: skills_index
+    type: skills
+    title: Robotics and AI Skills
+    summary: Explicitly evidenced skills across Leo's public portfolio.
+    facts:
+      - Python and PyTorch are evidenced by BMW ONN simulator work and the RL Pong project.
+      - Robot learning experience is evidenced by SO-101 imitation learning and physical-robot deployment.
+      - Robotics software experience is evidenced by SLAM, autonomous-drone planning and control, and the G1 simulator.
+      - Simulation and browser deployment experience is evidenced by MuJoCo, ONNX Runtime Web, Three.js, and browser demos.
+    skills: [Python, PyTorch, robot learning, robotics software, simulation, browser deployment]
+    tags: [skills, software stack, robotics stack, programming, machine learning]
+    aliases: [skills, stack, software stack, robotics stack, technologies, tools]
+    sources:
+      - label: BMW Research
+        url: /projects/BMW/
+      - label: Featured Projects
+        url: /#projects
+
+  - id: ask_leo
+    type: assistant
+    title: Ask Leo
+    summary: A local portfolio assistant that retrieves from this curated public knowledge base and generates answers in the visitor's browser.
+    facts:
+      - Uses deterministic local retrieval over public portfolio records.
+      - Runs a small model through Transformers.js with WebGPU when supported.
+      - Does not send questions to an LLM API or server.
+    skills: [local inference, retrieval, WebGPU, Transformers.js]
+    tags: [Ask Leo, local AI, privacy, WebGPU, Transformers.js]
+    aliases: [how this works, local model, privacy, browser AI, assistant]
+    sources:
+      - label: Ask Leo
+        url: /#ask-leo
+
+skills:
+  - name: Python
+    category: programming
+    evidence: [bmw, rl_pong]
+  - name: PyTorch
+    category: machine_learning
+    evidence: [bmw, rl_pong]
+  - name: Robot learning
+    category: machine_learning
+    evidence: [so101]
+  - name: Imitation learning
+    category: machine_learning
+    evidence: [so101]
+  - name: Reinforcement learning
+    category: machine_learning
+    evidence: [rl_pong, g1_simulator]
+  - name: Formal verification
+    category: robotics
+    evidence: [tum_safety, sara_shield]
+  - name: SLAM and RGB-D mapping
+    category: perception
+    evidence: [phone_slam]
+  - name: Planning and control
+    category: robotics
+    evidence: [autonomous_drone, g1_simulator]
+  - name: MuJoCo
+    category: simulation
+    evidence: [g1_simulator]
+  - name: Browser deployment
+    category: engineering
+    evidence: [g1_simulator, rl_pong, phone_slam]

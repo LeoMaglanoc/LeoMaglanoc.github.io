@@ -1,0 +1,316 @@
+.chat-page {
+  margin: -1.5rem auto 0;
+  max-width: 52rem;
+  min-height: calc(100vh - 10rem);
+}
+
+.ask-leo {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 10rem);
+}
+
+.ask-leo-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+}
+
+.ask-leo-heading h1 {
+  font-size: 1.45rem;
+  margin: 0 0 0.25rem;
+}
+
+.ask-leo-eyebrow {
+  color: var(--global-text-color-light);
+  font-size: 0.76rem;
+  margin: 0 0 0.25rem;
+}
+
+.ask-leo-intro {
+  color: var(--global-text-color-light);
+  margin: 0;
+}
+
+.ask-leo-local-badge {
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin: 0;
+  padding: 0.4rem 0.7rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ask-leo-local-badge span {
+  color: #3a9d5d;
+  font-size: 0.7rem;
+}
+
+.ask-leo-local-badge small,
+.ask-leo-status,
+.ask-leo-composer-note {
+  color: var(--global-text-color-light);
+}
+
+.ask-leo-demo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.ask-leo-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.4rem 0 1rem;
+}
+
+.ask-leo-suggestions button,
+.ask-leo-sources a,
+.ask-leo-fallback a {
+  background: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.65rem;
+  color: var(--global-text-color);
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.7rem;
+  text-decoration: none;
+}
+
+.ask-leo-suggestions button:hover,
+.ask-leo-sources a:hover,
+.ask-leo-fallback a:hover {
+  border-color: var(--global-theme-color);
+  color: var(--global-theme-color);
+}
+
+.ask-leo-conversation {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-height: 20rem;
+  overflow-y: auto;
+  padding: 1.5rem 0.2rem 2rem;
+}
+
+.ask-leo-welcome {
+  margin: auto 0;
+  text-align: center;
+}
+
+.ask-leo-welcome h2 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+.ask-leo-welcome span {
+  color: var(--global-text-color-light);
+  display: block;
+  margin: auto;
+  max-width: 31rem;
+}
+
+.ask-leo-message {
+  max-width: 85%;
+}
+
+.ask-leo-message-user {
+  align-self: flex-end;
+  background: var(--global-code-bg-color);
+  border-radius: 1rem 1rem 0.25rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.ask-leo-message-assistant {
+  align-self: flex-start;
+  padding: 0.25rem 0.15rem;
+}
+
+.ask-leo-message-label {
+  color: var(--global-text-color-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+}
+
+.ask-leo-message-content {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.ask-leo-sources {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.7rem;
+}
+
+.ask-leo-sources > span {
+  color: var(--global-text-color-light);
+  font-size: 0.76rem;
+}
+
+.ask-leo-sources a {
+  font-size: 0.74rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.ask-leo-composer {
+  background: var(--global-bg-color);
+  bottom: 0;
+  padding: 0.75rem 0 1rem;
+  position: sticky;
+}
+
+.ask-leo-form {
+  align-items: center;
+  background: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 1.25rem rgba(0, 0, 0, 0.06);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.35rem 0.4rem 0.35rem 0.85rem;
+}
+
+.ask-leo-form input {
+  background: transparent;
+  border: 0;
+  color: var(--global-text-color);
+  min-width: 0;
+  outline: 0;
+  padding: 0.45rem 0;
+  width: 100%;
+}
+
+.ask-leo-form button {
+  align-items: center;
+  background: var(--global-text-color);
+  border: 0;
+  border-radius: 0.65rem;
+  color: var(--global-bg-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.05rem;
+  height: 2.1rem;
+  justify-content: center;
+  padding: 0;
+  width: 2.1rem;
+}
+
+.ask-leo-form button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.ask-leo-form .ask-leo-stop {
+  background: transparent;
+  border: 1px solid var(--global-divider-color);
+  color: var(--global-text-color);
+  font-size: 0.75rem;
+  padding: 0 0.65rem;
+  width: auto;
+}
+
+.ask-leo-composer-note {
+  font-size: 0.72rem;
+  margin: 0.45rem 0 0;
+  text-align: center;
+}
+
+.ask-leo-status {
+  font-size: 0.78rem;
+  margin: 0 0 0.8rem;
+  text-align: center;
+}
+
+.ask-leo-debug {
+  background: var(--global-code-bg-color);
+  border-radius: 0.4rem;
+  font-size: 0.76rem;
+  margin: 0 0 0.8rem;
+  padding: 0.6rem;
+  white-space: pre-wrap;
+}
+
+.ask-leo-how {
+  color: var(--global-text-color-light);
+  font-size: 0.8rem;
+  margin: 0.6rem 0 1rem;
+  text-align: center;
+}
+
+.ask-leo-how summary {
+  cursor: pointer;
+}
+
+.ask-leo-how ol {
+  margin: 0.6rem auto;
+  max-width: 35rem;
+  text-align: left;
+}
+
+.ask-leo-model-note {
+  font-size: 0.75rem;
+}
+
+.ask-leo-fallback {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+}
+
+.ask-leo-fallback p {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.ask-leo-unsupported .ask-leo-fallback {
+  display: flex;
+}
+
+.ask-leo button:focus-visible,
+.ask-leo input:focus-visible,
+.ask-leo a:focus-visible,
+.ask-leo summary:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+}
+
+@media (max-width: 576px) {
+  .chat-page {
+    margin-top: -1.5rem;
+  }
+
+  .ask-leo-heading {
+    gap: 0.8rem;
+  }
+
+  .ask-leo-local-badge {
+    font-size: 0.7rem;
+  }
+
+  .ask-leo-suggestions {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .ask-leo-suggestions button {
+    flex: 0 0 auto;
+  }
+
+  .ask-leo-message {
+    max-width: 94%;
+  }
+}

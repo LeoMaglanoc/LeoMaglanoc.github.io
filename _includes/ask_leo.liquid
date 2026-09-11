@@ -1,0 +1,64 @@
+<section class="ask-leo" id="ask-leo" aria-labelledby="ask-leo-title">
+  <div class="ask-leo-heading">
+    <div>
+      <p class="ask-leo-eyebrow">Leonardo Maglanoc's portfolio assistant</p>
+      <h1 id="ask-leo-title">Ask Leo</h1>
+      <p class="ask-leo-intro">Ask about Leo's public work, projects, and technical background.</p>
+    </div>
+    <p class="ask-leo-local-badge"><span aria-hidden="true">●</span> Local AI<br><small>Transformers.js · WebGPU</small></p>
+  </div>
+
+  <div class="ask-leo-demo" data-ask-leo data-worker-url="{{ '/assets/js/ask-leo/worker.js' | relative_url | bust_file_cache }}">
+    <script id="ask-leo-kb" type="application/json">{{ site.data.assistant_kb | jsonify }}</script>
+
+    <div class="ask-leo-suggestions" aria-label="Suggested questions">
+      <button type="button" data-question="What robot-learning experience does Leo have?">Robot-learning experience</button>
+      <button type="button" data-question="What did Leo work on at BMW?">BMW research</button>
+      <button type="button" data-question="What is his robotics software stack?">Robotics software stack</button>
+      <button type="button" data-question="Has he deployed models on real robots?">Real-robot deployment</button>
+      <button type="button" data-question="What is Lang2Tool?">What is Lang2Tool?</button>
+      <button type="button" data-question="Which project best demonstrates robot safety?">Robot safety</button>
+    </div>
+
+    <div class="ask-leo-conversation" data-conversation aria-label="Ask Leo conversation">
+      <div class="ask-leo-welcome">
+        <h2>What would you like to know?</h2>
+        <span>I answer only from a curated public portfolio. Choose a prompt or write your own question.</span>
+      </div>
+    </div>
+
+    <div class="ask-leo-composer">
+      <form class="ask-leo-form" data-form>
+        <label class="visually-hidden" for="ask-leo-input">Ask a question about Leo's public portfolio</label>
+        <input id="ask-leo-input" data-input name="question" type="text" maxlength="500" autocomplete="off" placeholder="Message Ask Leo…" />
+        <button type="submit" data-submit aria-label="Send question"><span class="visually-hidden">Send question</span><span aria-hidden="true">↑</span></button>
+        <button type="button" class="ask-leo-stop" data-stop hidden>Stop generating</button>
+      </form>
+      <p class="ask-leo-composer-note">Answers are generated locally from public portfolio records.</p>
+    </div>
+
+    <p class="ask-leo-status" data-status role="status">Checking whether local AI is available…</p>
+    <p class="ask-leo-sr-status visually-hidden" data-sr-status aria-live="polite" aria-atomic="true"></p>
+
+    <div class="ask-leo-fallback" data-fallback>
+      <p>Explore the portfolio directly:</p>
+      <a href="/#projects">SO-101</a>
+      <a href="/projects/BMW/">BMW Research</a>
+      <a href="/projects/foundation/">Foundation thesis</a>
+      <a href="/projects/robotics-research-assistant/">SaRA-Shield</a>
+    </div>
+
+    <details class="ask-leo-how">
+      <summary>How does this work?</summary>
+      <ol>
+        <li>Your question is matched against a curated copy of Leo's public portfolio.</li>
+        <li>Relevant records are selected locally and shown as sources.</li>
+        <li>A small model runs through Transformers.js with WebGPU in your browser.</li>
+        <li>No question is sent to an LLM API or model server.</li>
+      </ol>
+      <p class="ask-leo-model-note">The matching local model downloads when this page opens and is cached when your browser supports Cache Storage. Data Saver defers loading until you ask.</p>
+    </details>
+  </div>
+</section>
+
+<script type="module" src="{{ '/assets/js/ask-leo/ask-leo.js' | relative_url | bust_file_cache }}"></script>
