@@ -3,8 +3,8 @@ layout: default
 title: projects
 permalink: /projects/
 description: Robotics and AI projects I'm working on.
-nav: true
-nav_order: 4
+nav: false
+published: false
 display_categories: [work]
 ---
 

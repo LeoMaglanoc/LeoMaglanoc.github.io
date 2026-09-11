@@ -30,8 +30,8 @@ records:
     tags: [TUM, education, robotics, perception, control]
     aliases: [MSc, master's, master, RCI, TUM degree]
     sources:
-      - label: CV
-        url: /cv/
+      - label: CV (PDF)
+        url: /assets/pdf/leonardo_maglanoc_cv.pdf
 
   - id: tum_bsc
     type: education
@@ -44,8 +44,8 @@ records:
     tags: [TUM, education, computer science, safety]
     aliases: [BSc, bachelor's, bachelor, informatics]
     sources:
-      - label: CV
-        url: /cv/
+      - label: CV (PDF)
+        url: /assets/pdf/leonardo_maglanoc_cv.pdf
 
   - id: bmw
     type: experience
