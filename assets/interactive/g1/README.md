@@ -1,8 +1,79 @@
 # G1 Locomotion Playground
 
-This is a fullscreen, fully static browser demo of Unitree's G1 12-DoF locomotion stack. It runs the MuJoCo simulation, ONNX policy, observation builder, and PD controller in the visitor's browser; there is no inference server or WebSocket backend.
+Browser-native simulation of a Unitree G1 locomotion policy. A PPO actor exported to ONNX maps proprioceptive state and commanded velocity to joint-position targets; a high-rate PD controller converts those targets to torques inside MuJoCo, while Three.js renders the result.
 
-The playground has a large flat locomotion area plus an optional rough-terrain section with low uneven blocks, a shallow ramp, and wide low steps. The existing policy and controller are unchanged, so the obstacles are there to explore and stress-test rather than to guarantee success.
+Everything runs locally in the browser—no inference server or simulation backend.
+
+## Pipeline
+
+```text
+keyboard / touch
+desired [vx, vy, yaw]
+        │
+        ▼
+┌───────────────────────────────┐
+│      47-D observation         │
+│                               │
+│ base angular velocity         │
+│ gravity orientation           │
+│ velocity command              │
+│ joint position errors         │
+│ joint velocities              │
+│ previous action               │
+│ gait phase                    │
+└───────────────────────────────┘
+        │
+        ▼
+ PPO locomotion actor
+ ONNX Runtime Web
+       @ 50 Hz
+        │
+        ▼
+12 normalized actions
+        │
+        ▼
+12 target joint positions
+        │
+        ▼
+ PD controller @ 500 Hz
+τ = Kp(q_target - q) - Kd q̇
+        │
+        ▼
+ MuJoCo WASM physics
+        │
+        ├──────────────► next observation
+        │
+        ▼
+ Three.js renderer
+```
+
+The policy produces position targets; the PD controller produces torques; physics produces the next state.
+
+## Tech stack
+
+Browser runtime
+
+- JavaScript ES modules
+- MuJoCo WebAssembly
+- ONNX Runtime Web
+- Three.js + OrbitControls
+
+Policy / control
+
+- PPO locomotion policy
+- 47-D proprioceptive observation
+- 12-DoF lower-body action space
+- 50 Hz policy
+- 500 Hz PD / physics loop
+
+Offline tooling
+
+- Python
+- PyTorch
+- ONNX
+- Docker
+
+## Running locally
 
 Open `/g1/` on the website, or serve the repository locally with Docker:
 
@@ -27,19 +98,7 @@ The shipped policy is Unitree's `deploy/pre_train/g1/motion.pt`, exported once t
 
 ## Runtime contract
 
-```text
-desired velocity [vx, vy, yaw]
-        ↓
-47-element observation
-        ↓
-Unitree PPO actor (ONNX Runtime Web)
-        ↓
-12 scaled target joint positions
-        ↓
-PD controller at 500 Hz
-        ↓
-MuJoCo G1 12-DoF model
-```
+The browser implementation mirrors Unitree's deployment contract: a 47-element observation is evaluated at 50 Hz, while the 12-DoF MuJoCo model and PD controller step at 500 Hz.
 
 Controls are W/A/S/D or the arrow keys for forward, strafe-left, backward, and strafe-right movement; Q/E turn. On phones, use the touch controls shown in the simulator. With no key held, the robot settles in place. Space pauses; Backspace or Reset restores the initial state. Push buttons apply a short horizontal force to the pelvis.
 

@@ -1,6 +1,80 @@
 # Play against my RL Pong agent
 
-A small end-to-end reinforcement-learning demo: Stable-Baselines3 trains a PPO policy on a state-based Pong environment, the actor is exported to ONNX, and the browser runs that actor locally with ONNX Runtime Web. There is no inference backend.
+End-to-end reinforcement-learning demo in which a PPO policy is trained on a state-based Pong environment, exported from PyTorch to ONNX, and executed entirely in the browser with ONNX Runtime Web.
+
+The browser contains only inference and game physics; training happens offline in Python.
+
+## Pipeline
+
+```text
+                  OFFLINE TRAINING
+────────────────────────────────────────────────
+
+ Gymnasium Pong environment
+          +
+ scripted / perfect opponent
+              │
+              ▼
+       normalized state
+   [ball x, ball y, vx, vy,
+          paddle y]
+              │
+              ▼
+    PPO MLP actor-critic
+   Stable-Baselines3 / PyTorch
+              │
+              ▼
+        trained actor
+              │
+         ONNX export
+              │
+              ▼
+      pong_policy.onnx
+
+
+                 BROWSER RUNTIME
+────────────────────────────────────────────────
+
+       current game state
+              │
+              ▼
+      ONNX Runtime Web
+              │
+              ▼
+        actor logits
+              │
+          argmax
+              │
+              ▼
+       up / stay / down
+              │
+              ▼
+       Canvas Pong physics
+              │
+              └──────────────► next state
+```
+
+## Tech stack
+
+Training
+
+- Python 3.11
+- Gymnasium
+- Stable-Baselines3 PPO
+- PyTorch
+- TensorBoard
+
+Deployment
+
+- ONNX
+- ONNX Runtime Web / WASM
+- JavaScript
+- HTML5 Canvas
+
+Tooling
+
+- Docker
+- pytest
 
 ## Run everything with Docker
 
@@ -63,13 +137,7 @@ The shorter equivalents are available through `make train`, `make evaluate`, `ma
 
 The browser entrypoint is `index.html`. It loads the shipped policy locally and supports keyboard controls plus held UP/DOWN touch buttons in landscape mode.
 
-## Architecture
-
-```text
-PongEnv + perfect scripted player → PPO MlpPolicy → actor logits → ONNX
-                                                        ↓
-                                  Canvas Pong ← ONNX Runtime Web (WASM)
-```
+## Runtime contract
 
 The deployed observation is `[ball_x, ball_y, ball_vx, ball_vy, ai_paddle_y]`, normalized by `rl/constants.py`; the human paddle is intentionally omitted because it is not part of the agent’s control decision. The same constants and transformation are used by Python and JavaScript; the browser reads `assets/pong/pong_config.json`. Actions are `0=up`, `1=stay`, `2=down`.
 

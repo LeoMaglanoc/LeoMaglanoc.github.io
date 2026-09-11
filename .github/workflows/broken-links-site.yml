@@ -14,11 +14,25 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          submodules: recursive
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2.2"
+          ruby-version: "3.3.5"
           bundler-cache: true
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+          cache-dependency-path: vendor/phone-slam/web/package-lock.json
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -31,17 +45,32 @@ jobs:
             }
       - name: Install and Build 🔧
         run: |
-          sudo apt-get update && sudo apt-get install -y imagemagick
-          pip3 install --upgrade jupyter
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+          pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
       - name: Purge unused CSS 🧹
+        run: npx --yes purgecss@6.0.0 -c purgecss.config.js
+      - name: Build phone-slam viewer
+        working-directory: vendor/phone-slam/web
         run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
+          npm ci
+          npm run test
+          npm run build
+          npm run test:assets
+      - name: Publish SLAM viewer at /slam/
+        run: |
+          rm -rf _site/slam
+          mkdir -p _site/slam
+          cp -R vendor/phone-slam/web/dist/. _site/slam/
+          test -f _site/slam/index.html
+      - name: Serve final site locally
+        run: |
+          python3 -m http.server 8000 --directory _site > /tmp/site-http.log 2>&1 &
+          curl --retry 10 --retry-connrefused --fail --silent --show-error http://127.0.0.1:8000/
       - name: Link Checker 🔗
         uses: lycheeverse/lychee-action@v2.0.2
         with:
           fail: true
-          # only check local links
-          args: --offline --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
+          args: --include '^http://127[.]0[.]0[.]1:8000' --remap 'http://127[.]0[.]0[.]1:8000/assets/pong/(.*) http://127.0.0.1:8000/assets/interactive/pong/assets/pong/$1' --verbose --no-progress http://127.0.0.1:8000/ http://127.0.0.1:8000/g1/ http://127.0.0.1:8000/assets/interactive/pong/index.html http://127.0.0.1:8000/slam/
