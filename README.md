@@ -56,6 +56,18 @@ Build the site once:
 docker compose run --rm jekyll bundle exec jekyll build
 ```
 
+Build, test, and serve the deployed SLAM route locally (uses only Docker
+containers and mirrors the GitHub Pages publish layout):
+
+```bash
+./scripts/preview-slam.sh
+```
+
+Open [http://localhost:8080/slam/](http://localhost:8080/slam/). Use
+`./scripts/preview-slam.sh --build-only` when you only need the generated
+`_site/slam/` files. This preview owns port 8080, so stop `jekyll` first if it
+is already running.
+
 Run the G1 browser demo directly, without the Jekyll shell:
 
 ```bash

@@ -26,13 +26,15 @@ featured_projects:
         url: https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD
 
 builds:
-  - title: Interactive AI Demos
-    description: "Hands-on webapp experiments: an RL-powered Pong agent and a Unitree G1 locomotion simulator."
+  - title: Interactive WebApp-AI Demos
+    description: "a Unitree G1 locomotion simulator, 3D reconstruction with SLAM, and an RL-powered Pong agent."
     links:
-      - label: RL Pong
-        url: /assets/interactive/pong/index.html
       - label: Unitree G1 Simulator
         url: /g1/
+      - label: SLAM
+        url: /slam/
+      - label: RL Pong
+        url: /assets/interactive/pong/index.html
 
   - title: EasyBuy
     description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
@@ -41,5 +43,3 @@ builds:
         url: https://github.com/LeoMaglanoc/hack-nation
       - label: demo
         url: https://drive.google.com/file/d/1ksN4v6SETfNaV7lzG06JNd_9oKxR7Hd4/view?usp=sharing
-
-

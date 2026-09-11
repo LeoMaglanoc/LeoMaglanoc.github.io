@@ -19,3 +19,20 @@ services:
       - .:/srv/jekyll
     environment:
       - JEKYLL_ENV=development
+
+  preview:
+    image: nginx:1.27-alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./_site:/usr/share/nginx/html:ro
+
+  site-tools:
+    image: node:22-bookworm-slim
+    working_dir: /site
+    volumes:
+      - .:/site
+      - site_npm_cache:/root/.npm
+
+volumes:
+  site_npm_cache:

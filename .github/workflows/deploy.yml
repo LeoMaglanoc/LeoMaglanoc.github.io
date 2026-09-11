@@ -122,9 +122,7 @@ jobs:
           bundle exec jekyll build
 
       - name: Purge unused CSS
-        run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
+        run: npx --yes purgecss@6.0.0 -c purgecss.config.js
 
       - name: Build phone-slam viewer
         working-directory: vendor/phone-slam/web
@@ -134,13 +132,12 @@ jobs:
           npm run build
           npm run test:assets
 
-      - name: Publish phone-slam at /phone-slam/
+      - name: Publish SLAM viewer at /slam/
         run: |
-          rm -rf _site/phone-slam
-          mkdir -p _site/phone-slam
-          cp -R vendor/phone-slam/web/dist/. _site/phone-slam/
-          test -f _site/phone-slam/index.html
-          test ! -e _site/slam
+          rm -rf _site/slam
+          mkdir -p _site/slam
+          cp -R vendor/phone-slam/web/dist/. _site/slam/
+          test -f _site/slam/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

@@ -18,6 +18,6 @@ into a colored metric mesh. The browser only displays precomputed video,
 trajectory, and GLB assets—no reconstruction runs on the website.
 
 <p>
-  <a class="btn btn-primary" href="/phone-slam/">Live Demo</a>
+  <a class="btn btn-primary" href="/slam/">Live Demo</a>
   <a class="btn btn-outline-primary" href="https://github.com/LeoMaglanoc/phone-slam">GitHub</a>
 </p>
