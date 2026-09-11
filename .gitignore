@@ -9,7 +9,9 @@ _site
 Gemfile.lock
 assets/libs/
 node_modules/
-vendor
+vendor/*
+!vendor/phone-slam
+!vendor/phone-slam/
 !assets/interactive/g1/vendor/
 !assets/interactive/g1/vendor/**
 !assets/interactive/slam/app/vendor/

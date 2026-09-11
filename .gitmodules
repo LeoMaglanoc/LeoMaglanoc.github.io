@@ -1,0 +1,3 @@
+[submodule "vendor/phone-slam"]
+	path = vendor/phone-slam
+	url = https://github.com/LeoMaglanoc/phone-slam.git
