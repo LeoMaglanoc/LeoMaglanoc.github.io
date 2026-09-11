@@ -65,12 +65,13 @@ jobs:
           mkdir -p _site/slam
           cp -R vendor/phone-slam/web/dist/. _site/slam/
           test -f _site/slam/index.html
-      - name: Serve final site locally
-        run: |
-          python3 -m http.server 8000 --directory _site > /tmp/site-http.log 2>&1 &
-          curl --retry 10 --retry-connrefused --fail --silent --show-error http://127.0.0.1:8000/
       - name: Link Checker 🔗
-        uses: lycheeverse/lychee-action@v2.0.2
-        with:
-          fail: true
-          args: --include '^http://127[.]0[.]0[.]1:8000' --remap 'http://127[.]0[.]0[.]1:8000/assets/pong/(.*) http://127.0.0.1:8000/assets/interactive/pong/assets/pong/$1' --verbose --no-progress http://127.0.0.1:8000/ http://127.0.0.1:8000/g1/ http://127.0.0.1:8000/assets/interactive/pong/index.html http://127.0.0.1:8000/slam/
+        run: |
+          task_lychee_dir="$(mktemp -d)"
+          curl -fsSL -o "$task_lychee_dir/lychee.tar.gz" https://github.com/lycheeverse/lychee/releases/download/lychee-v0.16.1/lychee-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf "$task_lychee_dir/lychee.tar.gz" -C "$task_lychee_dir"
+          python3 -m http.server 8000 --directory _site > /tmp/site-http.log 2>&1 &
+          task_server_pid=$!
+          trap 'kill "$task_server_pid"' EXIT
+          curl --retry 10 --retry-connrefused --fail --silent --show-error http://127.0.0.1:8000/
+          "$task_lychee_dir/lychee" --include '^http://127[.]0[.]0[.]1:8000' --remap 'http://127[.]0[.]0[.]1:8000/assets/pong/(.*) http://127.0.0.1:8000/assets/interactive/pong/assets/pong/$1' --verbose --no-progress http://127.0.0.1:8000/ http://127.0.0.1:8000/g1/ http://127.0.0.1:8000/assets/interactive/pong/index.html http://127.0.0.1:8000/slam/
