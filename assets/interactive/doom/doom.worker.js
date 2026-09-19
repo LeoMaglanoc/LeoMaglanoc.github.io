@@ -675,7 +675,9 @@ self.onmessage = (e) => {
     case 'visibility': return handleVisibility(m);
     case 'snapshot-request': return handleSnapshotRequest(m);
     case 'bridge-observation-request': return handleBridgeObservation(m);
-    case 'bridge-console': return handleBridgeConsole(m);
+    case 'bridge-native-state': return handleBridgeNativeState();
+    case 'bridge-spawn-bots': return handleBridgeSpawnBots(m);
+    case 'bridge-reset-match': return handleBridgeResetMatch();
     case 'bridge-key': return handleBridgeKey(m);
     default:
       self.postMessage({ type: 'log', stream: 'stderr', msg: '[worker] unknown message type: ' + m.type });
@@ -735,6 +737,7 @@ function handleBoot(m) {
     }],
     onRuntimeInitialized() {
       self.postMessage({ type: 'ready' });
+      self.postMessage({ type: 'bridge-capabilities', native: bridgeHasNativeApi() });
       startTelemetry();
       // Tell the engine the window has focus right out of the gate. Without
       // this, SDL2 may consider its window inactive and filter input events
@@ -747,7 +750,6 @@ function handleBoot(m) {
     },
     print(...a)    {
       const msg = a.join(' ');
-      bridgeParseState(msg);
       self.postMessage({ type: 'log', stream: 'stdout', msg });
     },
     printErr(...a) { self.postMessage({ type: 'log', stream: 'stderr', msg: a.join(' ') }); },
@@ -918,14 +920,50 @@ function handleSnapshotRequest(m) {
 }
 
 // ---------------------------------------------------------------------------
-// Arnold browser bridge.  This deliberately exposes only pixels, the two
-// native Track-1 scalar inputs, and keyboard actions.  State is emitted by the
-// local GPLv3 bridge.pk3 event handler; it is not inferred from HUD pixels.
+// Arnold browser bridge. This deliberately exposes only pixels, the two
+// native Track-1 scalar inputs, and keyboard actions. State comes from the
+// custom Emscripten exports below; it is never inferred from HUD pixels.
 
-function bridgeParseState(msg) {
-  const state = /^DOOM_BRIDGE_STATE (-?\d+) (-?\d+) (-?\d+) (-?\d+)/.exec(String(msg).trim());
-  if (!state) return;
-  self.postMessage({ type: 'bridge-state', health: Number(state[1]), ammo: Number(state[2]), frags: Number(state[3]), deaths: Number(state[4]) });
+function bridgeNative(name) {
+  const fn = self.Module && self.Module[`_${name}`];
+  return typeof fn === 'function' ? fn : null;
+}
+
+function bridgeHasNativeApi() {
+  return ['doom_is_level_ready', 'doom_spawn_bots', 'doom_bot_count',
+    'doom_get_health', 'doom_get_selected_ammo', 'doom_get_frags',
+    'doom_reset_match'].every((name) => bridgeNative(name));
+}
+
+function bridgeState() {
+  if (!bridgeHasNativeApi()) return null;
+  const call = (name) => bridgeNative(name)();
+  return { ready: Boolean(call('doom_is_level_ready')), health: call('doom_get_health'),
+    ammo: call('doom_get_selected_ammo'), frags: call('doom_get_frags'),
+    bots: call('doom_bot_count') };
+}
+
+function handleBridgeNativeState() {
+  const state = bridgeState();
+  self.postMessage(state ? { type: 'bridge-state', ...state } :
+    { type: 'bridge-error', message: 'Custom GZDoom browser bridge is not present in this engine build.' });
+}
+
+function handleBridgeSpawnBots(m) {
+  const state = bridgeState();
+  if (!state || !state.ready) {
+    self.postMessage({ type: 'bridge-error', message: 'GZDoom level is not ready for local bot spawning.' });
+    return;
+  }
+  const requested = Math.max(0, Math.min(10, Number(m.count) | 0));
+  const scheduled = bridgeNative('doom_spawn_bots')(requested);
+  self.postMessage({ type: 'bridge-bots-scheduled', requested, scheduled });
+}
+
+function handleBridgeResetMatch() {
+  const reset = bridgeNative('doom_reset_match');
+  self.postMessage(reset ? { type: 'bridge-reset-result', reset: reset() } :
+    { type: 'bridge-error', message: 'Custom GZDoom reset API is not present in this engine build.' });
 }
 
 function bridgeKeyCode(key) {
@@ -938,14 +976,6 @@ function bridgeKey(key, down) {
 }
 
 function handleBridgeKey(m) { bridgeKey(String(m.key || ''), Boolean(m.down)); }
-
-function handleBridgeConsole(m) {
-  const command = String(m.command || '');
-  bridgeKey('`', true); bridgeKey('`', false);
-  for (const char of command) { bridgeKey(char, true); bridgeKey(char, false); }
-  bridgeKey('Enter', true); bridgeKey('Enter', false);
-  bridgeKey('`', true); bridgeKey('`', false);
-}
 
 function handleBridgeObservation(m) {
   try {
@@ -963,9 +993,8 @@ function handleBridgeObservation(m) {
         rgb[target] = rgba[source]; rgb[target + 1] = rgba[source + 1]; rgb[target + 2] = rgba[source + 2];
       }
     }
-    // bridge.pk3 writes state into the first two overlay pixels after the
-    // scene renders: (health, ammo-low, ammo-high), then (frags, deaths, 0).
-    self.postMessage({ type: 'bridge-state', health: rgb[0], ammo: rgb[1] | (rgb[2] << 8), frags: rgb[3], deaths: rgb[4] });
+    const state = bridgeState();
+    if (state) self.postMessage({ type: 'bridge-state', ...state });
     self.postMessage({ type: 'bridge-observation', requestId: m.requestId, width, height, rgb: rgb.buffer }, [rgb.buffer]);
   } catch (error) {
     self.postMessage({ type: 'bridge-error', requestId: m.requestId, message: String(error && error.message || error) });

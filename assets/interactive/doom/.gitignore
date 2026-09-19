@@ -1,3 +1,4 @@
 .cache/
 artifacts/
+engine/custom/
 !models/.gitkeep

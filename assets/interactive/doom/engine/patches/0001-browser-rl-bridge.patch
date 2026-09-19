@@ -1,0 +1,99 @@
+From 6ce809efe2902e43ceaa7031b875225d3a0367de Mon Sep 17 00:00:00 2001
+Subject: [PATCH] wasm: expose local Cajun bots and Track-1 state
+
+---
+ src/playsim/bots/b_game.cpp | 72 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 72 insertions(+)
+
+diff --git a/src/playsim/bots/b_game.cpp b/src/playsim/bots/b_game.cpp
+index a43c83c..62d7be7 100644
+--- a/src/playsim/bots/b_game.cpp
++++ b/src/playsim/bots/b_game.cpp
+@@ -94,6 +94,11 @@ Everything that is changed is marked (maybe commented) with "Added by MC"
+ #include "vm.h"
+ #include "g_levellocals.h"
++#include "g_level.h"
+ 
++#ifdef __EMSCRIPTEN__
++#include <emscripten/emscripten.h>
++#endif
++
+ #if !defined _WIN32 && !defined __APPLE__
+ #include "i_system.h"  // for SHARE_DIR
+ #endif // !_WIN32 && !__APPLE__
+@@ -401,6 +405,73 @@ bool FCajunMaster::DoAddBot (FLevelLocals *Level, uint8_t *info, botskill_t skil
+ 	return true;
+ }
+ 
++// Browser RL bridge ---------------------------------------------------------
++// This is deliberately a local-game bridge: SpawnBot follows the same Cajun
++// bot path as the addbot command and does not create a UDP/network session.
++#ifdef __EMSCRIPTEN__
++static player_t *BrowserConsolePlayer()
++{
++	if (consoleplayer < 0 || consoleplayer >= MAXPLAYERS || !playeringame[consoleplayer])
++		return nullptr;
++	return &players[consoleplayer];
++}
++
++extern "C" {
++
++EMSCRIPTEN_KEEPALIVE int doom_is_level_ready()
++{
++	auto player = BrowserConsolePlayer();
++	return gamestate == GS_LEVEL && primaryLevel != nullptr && player != nullptr && player->mo != nullptr;
++}
++
++EMSCRIPTEN_KEEPALIVE int doom_spawn_bots(int count)
++{
++	if (!doom_is_level_ready() || count <= 0)
++		return 0;
++	int scheduled = 0;
++	for (; scheduled < count; ++scheduled)
++		if (!primaryLevel->BotInfo.SpawnBot(nullptr)) break;
++	return scheduled;
++}
++
++EMSCRIPTEN_KEEPALIVE int doom_bot_count()
++{
++	int count = 0;
++	for (int i = 0; i < MAXPLAYERS; ++i)
++		if (playeringame[i] && players[i].Bot != nullptr) ++count;
++	return count;
++}
++
++EMSCRIPTEN_KEEPALIVE int doom_get_health()
++{
++	auto player = BrowserConsolePlayer();
++	return player != nullptr && player->mo != nullptr ? player->mo->health : 0;
++}
++
++EMSCRIPTEN_KEEPALIVE int doom_get_selected_ammo()
++{
++	auto player = BrowserConsolePlayer();
++	if (player == nullptr || player->ReadyWeapon == nullptr) return 0;
++	auto ammo = player->ReadyWeapon->PointerVar<AActor>(NAME_Ammo1);
++	return ammo != nullptr ? ammo->IntVar(NAME_Amount) : 0;
++}
++
++EMSCRIPTEN_KEEPALIVE int doom_get_frags()
++{
++	auto player = BrowserConsolePlayer();
++	return player != nullptr ? player->fragcount : 0;
++}
++
++EMSCRIPTEN_KEEPALIVE int doom_reset_match()
++{
++	if (!doom_is_level_ready()) return 0;
++	G_DeferedInitNew(primaryLevel->MapName.GetChars());
++	return 1;
++}
++
++} // extern "C"
++#endif
++
+ void FCajunMaster::RemoveAllBots (FLevelLocals *Level, bool fromlist)
+ {
+ 	int i, j;
+-- 
+2.39.2

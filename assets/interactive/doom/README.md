@@ -15,7 +15,9 @@ GZDoom Worker / OffscreenCanvas → RGB readback → 108×60 area resize
 
 It includes AI-first control, human takeover/return, reset, desktop pointer lock, landscape touch movement/aim/fire, and live action-score/performance UI. Tomb-engine and FreeDM are pinned/attributed locally.
 
-The prototype is deliberately not linked at `/doom/` yet. Docker Playwright demonstrated that unmodded FreeDM runs and the ONNX/action loop sustains 11.67 Hz, but the pinned Tomb JSPI build aborts if a `-file` ZScript state bridge is mounted or the multiplayer host count is raised beyond its stable one-player configuration. That prevents a truthful Arnold-versus-ten-bot claim. Full evidence is in [docs/FEASIBILITY.md](docs/FEASIBILITY.md).
+The prototype is deliberately not linked at `/doom/` yet. The old `-host 11` and `-file bridge.pk3` experiments took the wrong integration path: browser hosting is not needed for GZDoom's local Cajun bots, and Arnold's two scalar inputs do not need a ZScript mod. The app now launches a single local deathmatch and asks a tiny native WASM bridge to call the same bot machinery as `addbot` and read the console player's live health/ammo. The direct patch is in [engine/patches](engine/patches/0001-browser-rl-bridge.patch).
+
+The pinned Tomb checkout documents, but does not publish, the WebGL/JSPI patch series used to create its bundle. Consequently a compatible custom binary cannot yet be reproduced from public sources, and Tests A–E have not been claimed as passing. The Docker build intentionally stops until that patch series is supplied; details and the exact next verification order are in [docs/FEASIBILITY.md](docs/FEASIBILITY.md).
 
 ## Docker-only workflow
 
