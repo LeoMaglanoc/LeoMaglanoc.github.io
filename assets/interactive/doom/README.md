@@ -1,37 +1,44 @@
-# AI Doom — Arnold browser integration
+# Browser Doom Deathmatch
 
-This directory reproduces Arnold Track-1 in Docker and contains a browser-native GZDoom/FreeDM integration prototype. It uses the public checkpoint under the MVP permission assumption in `plan.md`; Arnold has no explicit upstream licence, which is recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+A browser-native Doom deathmatch built on GZDoom/WebAssembly. The game runs
+entirely client-side: FreeDM plus the original `deathmatch_rockets.wad` map,
+one human player, and local GZDoom bots. It does not use network multiplayer.
 
-The native policy work is complete: exact Track-1 versus ten ViZDoom bots, 512-step PyTorch/ONNX validation (zero greedy mismatches; max error `6.10351562e-05`), and local CPU p95 `1.97 ms` inference.
+Open `/doom/` on the site, or serve the repository locally and visit
+`/assets/interactive/doom/`. Click **START MATCH** to unlock audio and load the
+engine. Desktop defaults to 10 local bots; touch layouts default to 4 to leave
+headroom for mobile controls.
 
-## Browser prototype
+Controls:
 
-`index.html` contains the real adapter path:
+- Desktop: WASD, mouse aim, left-click fire, E/Space use, 1–6 weapons, Esc to release the mouse.
+- Touch: use landscape mode; the left joystick moves, the right half aims, and the buttons fire, use, and cycle weapons.
 
-```text
-GZDoom Worker / OffscreenCanvas → RGB readback → 108×60 area resize
-    → Arnold ONNX + explicit LSTM state → exact 35-action mapping → GZDoom keys
-```
+`RESET MATCH` deliberately creates a fresh worker and map, so it clears the
+match state and bot roster without requiring a page reload. `MUTE` is preserved
+across resets.
 
-It includes AI-first control, human takeover/return, reset, desktop pointer lock, landscape touch movement/aim/fire, and live action-score/performance UI. Tomb-engine and FreeDM are pinned/attributed locally.
+## Runtime contents
 
-The prototype is deliberately not linked at `/doom/` yet. The old `-host 11` and `-file bridge.pk3` experiments took the wrong integration path: browser hosting is not needed for GZDoom's local Cajun bots, and Arnold's two scalar inputs do not need a ZScript mod. The app now launches a single local deathmatch and asks a tiny native WASM bridge to call the same bot machinery as `addbot` and read the console player's live health/ammo. The direct patch is in [engine/patches](engine/patches/0001-browser-rl-bridge.patch).
+The runtime uses the pinned Tomb-engine bundle at
+`6c735315b8ac1b1dd6646ac78c46bbbdbb775a5c`, its GZDoom WASM worker, and the
+included `game/deathmatch_rockets.wad` (`SHA-256`
+`3487f58ceacf3a5b1ae527c39867048ad28464c938b2b7c747501b055b66fa88`).
+`MAP01` is the map used by the upstream Track-1 native reproduction.
 
-The pinned Tomb checkout documents, but does not publish, the WebGL/JSPI patch series used to create its bundle. Consequently a compatible custom binary cannot yet be reproduced from public sources, and Tests A–E have not been claimed as passing. The Docker build intentionally stops until that patch series is supplied; details and the exact next verification order are in [docs/FEASIBILITY.md](docs/FEASIBILITY.md).
+## Archived AI policy experiments
 
-## Docker-only workflow
+This repository also retains experimental Arnold/ViZDoom policy export and
+validation work under `research/` and the adjacent research-only directories.
+That material is not loaded, imported, or required by the released browser
+game. See [research/README.md](research/README.md).
 
-```bash
-make build
-make inspect
-make native
-make export
-make validate
-make benchmark
-make test
-docker compose up doom-site
-```
+## Testing notes
 
-The browser prototype is served at `http://localhost:8000/assets/interactive/doom/`. It requires a current Chromium-family browser with OffscreenCanvas and WebAssembly JSPI support.
+The browser implementation targets current Chromium-family browsers with
+OffscreenCanvas support. Playwright/browser checks cover the start flow,
+rendering, controls, reset, and touch layout. A real Android Chrome soak test
+is still a release follow-up; no iOS support is claimed.
 
-No training, fine-tuning, scripted fallback, or mock telemetry is used.
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and asset
+provenance.

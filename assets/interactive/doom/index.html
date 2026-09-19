@@ -2,42 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
     <meta name="theme-color" content="#07090b">
-    <title>AI Doom — Arnold in GZDoom</title>
+    <title>Doom Deathmatch — Browser GZDoom</title>
+    <link rel="icon" href="../../img/favicon/favicon.ico">
     <link rel="stylesheet" href="./doom.css">
   </head>
   <body>
     <main id="doom-app">
-      <canvas id="doom-canvas" width="320" height="200" aria-label="AI Doom game"></canvas>
-      <div id="loading" class="overlay"><p id="loading-text">Preparing browser-native GZDoom…</p></div>
-      <div id="rotate" class="overlay" hidden><p>Rotate your phone<br><small>AI Doom plays in landscape.</small></p></div>
-      <header class="hud top-hud">
-        <div><strong>AI DOOM</strong><span>RL CONTROL</span></div>
-        <div id="mode-label" class="mode">LOADING</div>
-      </header>
-      <section class="hud stats" aria-live="polite">
-        <div><span>FRAGS</span><strong id="frags">—</strong></div>
-        <div><span>DEATHS</span><strong id="deaths">—</strong></div>
-        <div><span>HEALTH</span><strong id="health">—</strong></div>
-        <div><span>AMMO</span><strong id="ammo">—</strong></div>
+      <canvas id="doom-canvas" width="320" height="200" aria-label="Doom deathmatch game"></canvas>
+      <section id="start-screen" class="overlay start-screen" aria-labelledby="game-title">
+        <div class="start-card">
+          <p class="eyebrow">BROWSER-NATIVE GZDOOM</p>
+          <h1 id="game-title">DOOM<br>DEATHMATCH</h1>
+          <p>Local game <span aria-hidden="true">•</span> No server</p>
+          <button id="start-match" class="primary" type="button">START MATCH</button>
+        </div>
       </section>
-      <footer class="hud bottom-hud">
-        <span id="runtime">Local / WASM</span><span id="perf">Policy —</span><span id="telemetry">Actions —</span>
-      </footer>
-      <nav class="controls">
-        <button id="take-control" type="button" disabled>TAKE CONTROL</button>
-        <button id="return-ai" type="button" hidden>RETURN TO AI</button>
-        <button id="reset-match" type="button" disabled>RESET MATCH</button>
-      </nav>
-      <div id="touch-controls" aria-hidden="true">
-        <div id="joystick"><i></i></div>
-        <button id="fire" type="button">FIRE</button>
-      </div>
-      <details id="scores" class="hud scores"><summary>Q-values / action scores</summary><pre id="q-values"></pre></details>
+      <div id="loading" class="overlay loading" hidden><p id="loading-text">LOADING ENGINE</p></div>
+      <div id="rotate" class="overlay rotate" hidden><p aria-hidden="true">↔</p><strong>ROTATE YOUR PHONE</strong><small>Doom is designed for landscape play.</small></div>
+      <header class="hud top-hud">
+        <div><strong>DOOM DEATHMATCH</strong><span>BROWSER / WASM</span></div>
+        <nav class="controls" aria-label="Game controls">
+          <button id="reset-match" type="button">RESET MATCH</button>
+          <button id="fullscreen" type="button">FULLSCREEN</button>
+          <button id="mute" type="button" aria-pressed="false">MUTE</button>
+        </nav>
+      </header>
+      <p id="status" class="hud status" aria-live="polite">LOCAL GAME</p>
+      <p id="controls-hint" class="hud controls-hint" hidden>WASD MOVE <span>·</span> MOUSE AIM <span>·</span> CLICK FIRE <span>·</span> E USE</p>
       <p id="error" class="error" role="alert" hidden></p>
+      <div id="touch-controls" aria-label="Touch game controls">
+        <div id="joystick" aria-label="Move joystick"><i></i></div>
+        <div class="touch-actions">
+          <button id="weapon" type="button">NEXT</button>
+          <button id="use" type="button">USE</button>
+          <button id="fire" type="button">FIRE</button>
+        </div>
+      </div>
     </main>
-    <script src="./vendor/ort/ort.min.js"></script>
     <script type="module" src="./src/app.js"></script>
   </body>
 </html>

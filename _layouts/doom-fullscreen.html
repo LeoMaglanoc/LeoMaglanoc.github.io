@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#07090b">
+    <meta name="description" content="Fullscreen browser-native Doom deathmatch.">
+    <title>{{ page.title | escape }}</title>
+    <style>
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #07090b; }
+      .doom-frame { position: fixed; inset: 0; display: block; width: 100vw; height: 100vh; height: 100dvh; border: 0; }
+    </style>
+  </head>
+  <body>{{ content }}</body>
+</html>

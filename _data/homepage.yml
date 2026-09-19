@@ -26,11 +26,13 @@ featured_projects:
         url: https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD
 
 builds:
-  - title: Interactive WebApp-AI Demos
-    description: "a Unitree G1 locomotion simulator, 3D reconstruction with SLAM, and an RL-powered Pong agent."
+  - title: Interactive Web Demos
+    description: "Browser-native interactive demos: a Unitree G1 locomotion simulator, Doom deathmatch, 3D reconstruction with SLAM, and an RL-powered Pong agent."
     links:
       - label: Unitree G1 Simulator
         url: /g1/
+      - label: Doom Deathmatch
+        url: /doom/
       - label: SLAM
         url: /slam/
       - label: RL Pong

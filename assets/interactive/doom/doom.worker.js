@@ -6,10 +6,8 @@
 // the main thread lets the compositor pull frames from the OffscreenCanvas at
 // vsync regardless of how busy the engine is. That's the unlock.
 //
-// Audio: emscripten's OpenAL bridge checks `globalThis.AudioContext` in
-// `alcOpenDevice` and returns NULL when absent. Workers have no AudioContext,
-// so audio degrades to silent — acceptable for the MVP (per the 2026-05-15
-// perf handoff; audio re-routing is follow-up work).
+// Audio is relayed to the main thread, where a real AudioContext plays it after
+// the visitor starts a match. The worker only runs the stock Tomb runtime.
 
 'use strict';
 
@@ -674,12 +672,7 @@ self.onmessage = (e) => {
     case 'pointerlock': return handlePointerLock(m);
     case 'visibility': return handleVisibility(m);
     case 'snapshot-request': return handleSnapshotRequest(m);
-    case 'bridge-observation-request': return handleBridgeObservation(m);
-    case 'bridge-native-state': return handleBridgeNativeState();
-    case 'bridge-spawn-bots': return handleBridgeSpawnBots(m);
-    case 'bridge-reset-match': return handleBridgeResetMatch();
-    case 'bridge-console-commands': return handleBridgeConsoleCommands(m);
-    case 'bridge-key': return handleBridgeKey(m);
+    case 'console-commands': return handleConsoleCommands(m);
     default:
       self.postMessage({ type: 'log', stream: 'stderr', msg: '[worker] unknown message type: ' + m.type });
   }
@@ -738,7 +731,6 @@ function handleBoot(m) {
     }],
     onRuntimeInitialized() {
       self.postMessage({ type: 'ready' });
-      self.postMessage({ type: 'bridge-capabilities', native: bridgeHasNativeApi() });
       startTelemetry();
       // Tell the engine the window has focus right out of the gate. Without
       // this, SDL2 may consider its window inactive and filter input events
@@ -764,13 +756,6 @@ function handleBoot(m) {
 
   try {
     importScripts('gzdoom.js');
-    // Stock Tomb's startup does not reliably surface onRuntimeInitialized,
-    // so the local-bot acceptance experiment starts after its normal map-load
-    // window. It uses only the same forwarded keyboard events as a human.
-    if (m.autoBots) setTimeout(() => {
-      self.postMessage({ type: 'log', stream: 'stdout', msg: '[worker] scheduling 10 local addbot commands' });
-      handleBridgeConsoleCommands({ commands: Array(10).fill('addbot'), spacingMs: 450 });
-    }, 12_000);
   } catch (err) {
     self.postMessage({ type: 'error',
       message: 'importScripts(gzdoom.js) failed: ' + (err && err.message),
@@ -927,109 +912,34 @@ function handleSnapshotRequest(m) {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Arnold browser bridge. This deliberately exposes only pixels, the two
-// native Track-1 scalar inputs, and keyboard actions. State comes from the
-// custom Emscripten exports below; it is never inferred from HUD pixels.
-
-function bridgeNative(name) {
-  const fn = self.Module && self.Module[`_${name}`];
-  return typeof fn === 'function' ? fn : null;
-}
-
-function bridgeHasNativeApi() {
-  return ['doom_is_level_ready', 'doom_spawn_bots', 'doom_bot_count',
-    'doom_get_health', 'doom_get_selected_ammo', 'doom_get_frags',
-    'doom_reset_match'].every((name) => bridgeNative(name));
-}
-
-function bridgeState() {
-  if (!bridgeHasNativeApi()) return null;
-  const call = (name) => bridgeNative(name)();
-  return { ready: Boolean(call('doom_is_level_ready')), health: call('doom_get_health'),
-    ammo: call('doom_get_selected_ammo'), frags: call('doom_get_frags'),
-    bots: call('doom_bot_count') };
-}
-
-function handleBridgeNativeState() {
-  const state = bridgeState();
-  self.postMessage(state ? { type: 'bridge-state', ...state } :
-    { type: 'bridge-error', message: 'Custom GZDoom browser bridge is not present in this engine build.' });
-}
-
-function handleBridgeSpawnBots(m) {
-  const state = bridgeState();
-  if (!state || !state.ready) {
-    self.postMessage({ type: 'bridge-error', message: 'GZDoom level is not ready for local bot spawning.' });
-    return;
-  }
-  const requested = Math.max(0, Math.min(10, Number(m.count) | 0));
-  const scheduled = bridgeNative('doom_spawn_bots')(requested);
-  self.postMessage({ type: 'bridge-bots-scheduled', requested, scheduled });
-}
-
-function handleBridgeResetMatch() {
-  const reset = bridgeNative('doom_reset_match');
-  self.postMessage(reset ? { type: 'bridge-reset-result', reset: reset() } :
-    { type: 'bridge-error', message: 'Custom GZDoom reset API is not present in this engine build.' });
-}
-
-function bridgeKeyCode(key) {
+// Local bots are created through GZDoom's normal `addbot` console command.
+// This uses the same keyboard event path as the player; it neither hosts a
+// network game nor calls a custom native API.
+function consoleKeyCode(key) {
   const special = { Control: 'ControlLeft', ArrowLeft: 'ArrowLeft', ArrowRight: 'ArrowRight', Enter: 'Enter', '`': 'Backquote' };
   return special[key] || (key.length === 1 && /[a-z]/i.test(key) ? `Key${key.toUpperCase()}` : key);
 }
-
-function bridgeKey(key, down) {
+function consoleKey(key, down) {
   const code = key === '`' ? 192 : (key.length === 1 ? key.charCodeAt(0) : 0);
-  handleInput({ type: 'input', target: 'window', evType: down ? 'keydown' : 'keyup', init: { key, code: bridgeKeyCode(key), keyCode: code, which: code } });
+  handleInput({ type: 'input', target: 'window', evType: down ? 'keydown' : 'keyup', init: { key, code: consoleKeyCode(key), keyCode: code, which: code } });
 }
-
-function handleBridgeKey(m) { bridgeKey(String(m.key || ''), Boolean(m.down)); }
-
-// Used only for stock-engine startup and low-rate diagnostic commands. This
-// travels through the same SDL keyboard forwarding as human input; it does not
-// mount a mod or call an engine-private API.
 function typeConsoleCommand(command) {
-  bridgeKey('`', true); bridgeKey('`', false);
+  consoleKey('`', true); consoleKey('`', false);
   for (const char of command) {
-    bridgeKey(char, true);
+    consoleKey(char, true);
     const code = char.charCodeAt(0);
-    handleInput({ type: 'input', target: 'window', evType: 'keypress', init: { key: char, code: bridgeKeyCode(char), keyCode: code, which: code, charCode: code } });
-    bridgeKey(char, false);
+    handleInput({ type: 'input', target: 'window', evType: 'keypress', init: { key: char, code: consoleKeyCode(char), keyCode: code, which: code, charCode: code } });
+    consoleKey(char, false);
   }
-  bridgeKey('Enter', true); bridgeKey('Enter', false);
-  bridgeKey('`', true); bridgeKey('`', false);
+  consoleKey('Enter', true); consoleKey('Enter', false);
+  consoleKey('`', true); consoleKey('`', false);
 }
 
-function handleBridgeConsoleCommands(m) {
+function handleConsoleCommands(m) {
   const commands = Array.isArray(m.commands) ? m.commands.map(String) : [];
   const spacing = Math.max(250, Number(m.spacingMs) || 450);
   commands.forEach((command, index) => setTimeout(() => typeConsoleCommand(command), index * spacing));
-  self.postMessage({ type: 'bridge-console-scheduled', commands: commands.length, spacingMs: spacing });
-}
-
-function handleBridgeObservation(m) {
-  try {
-    const cv = self.__moduleCanvas;
-    const gl = cv && (cv.getContext('webgl2') || cv.getContext('webgl'));
-    if (!gl) throw new Error('WebGL context unavailable');
-    const width = cv.width, height = cv.height;
-    const rgba = new Uint8Array(width * height * 4);
-    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, rgba);
-    const rgb = new Uint8Array(width * height * 3);
-    for (let y = 0; y < height; y++) {
-      const sourceY = height - 1 - y;
-      for (let x = 0; x < width; x++) {
-        const source = (sourceY * width + x) * 4, target = (y * width + x) * 3;
-        rgb[target] = rgba[source]; rgb[target + 1] = rgba[source + 1]; rgb[target + 2] = rgba[source + 2];
-      }
-    }
-    const state = bridgeState();
-    if (state) self.postMessage({ type: 'bridge-state', ...state });
-    self.postMessage({ type: 'bridge-observation', requestId: m.requestId, width, height, rgb: rgb.buffer }, [rgb.buffer]);
-  } catch (error) {
-    self.postMessage({ type: 'bridge-error', requestId: m.requestId, message: String(error && error.message || error) });
-  }
+  self.postMessage({ type: 'console-commands-scheduled', commands: commands.length, spacingMs: spacing });
 }
 
 function handleVisibility(m) {
