@@ -58,7 +58,7 @@ def test_exported_onnx_contract_if_a_local_export_exists():
     ]
 
 
-def test_metadata_records_an_unpublished_model_gate():
+def test_metadata_records_the_mvp_permission_assumption():
     metadata = json.loads((ROOT / "models/policy_metadata.json").read_text())
-    assert metadata["redistribution_status"] == "blocked_pending_upstream_permission"
+    assert metadata["redistribution_status"] == "assumed_permitted_for_mvp_by_project_plan"
     assert metadata["checkpoint"]["sha256"] == "08a59e88fb7c69d27f8326f7b724b6ef876758aa74e4d71686db637d37c8d36f"

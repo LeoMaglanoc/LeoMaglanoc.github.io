@@ -1,0 +1,24 @@
+version "4.11.0"
+
+class ArnoldBrowserBridge : EventHandler
+{
+    override void RenderOverlay(RenderEvent e)
+    {
+        let pawn = players[consoleplayer].mo;
+        if (pawn == null || pawn.player == null)
+        {
+            Screen.DrawLine(0, 0, 0, 0, Color(0, 0, 0));
+            Screen.DrawLine(1, 0, 1, 0, Color(0, 0, 0));
+            return;
+        }
+
+        int ammo = 0;
+        let weapon = pawn.player.ReadyWeapon;
+        if (weapon != null && weapon.Ammo1 != null) ammo = weapon.Ammo1.Amount;
+        // Two single-pixel RGB packets are read by the local worker before
+        // the policy resize. They are engine state, not OCR of the HUD.
+        Screen.DrawLine(0, 0, 0, 0, Color(pawn.health, ammo & 255, ammo >> 8));
+        Screen.DrawLine(1, 0, 1, 0, Color(pawn.player.fragcount & 255,
+            pawn.player.deathcount & 255, 0));
+    }
+}

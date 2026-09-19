@@ -1,7 +1,7 @@
 {
   "artifact": "arnold_track1.onnx",
-  "artifact_status": "locally generated only; ignored by git; not deployable",
-  "redistribution_status": "blocked_pending_upstream_permission",
+  "artifact_status": "MVP deployment artifact; browser integration remains subject to engine validation",
+  "redistribution_status": "assumed_permitted_for_mvp_by_project_plan",
   "upstream": {
     "repository": "https://github.com/glample/Arnold",
     "revision": "86af06d2fdb35c4bf552ecacfe8fe6ac1abd8cd4",
@@ -28,6 +28,6 @@
     "pytorch": "2.7.1+cpu",
     "onnx_opset": 17,
     "onnxruntime_python": "1.20.1",
-    "onnxruntime_web": "not selected because deployment is blocked"
+    "onnxruntime_web": "1.21.0, vendored for the browser prototype"
   }
 }

@@ -12,7 +12,7 @@ It started map 1 with one Arnold agent and ten built-in bots. In the bounded nat
 
 The trace is deliberately ignored by git because it contains observations derived from assets whose redistribution status is not verified.
 
-## Policy export and parity: pass locally, not publishable
+## Policy export and parity: pass
 
 `tools/export_arnold_onnx.py` exports a local `arnold_track1.onnx` with explicit LSTM state. On a 512-step native reference trace, ONNX Runtime CPU and PyTorch produced:
 
@@ -22,17 +22,16 @@ The trace is deliberately ignored by git because it contains observations derive
 
 On the same Docker CPU provider, the local ONNX policy measured 1.69 ms median and 1.97 ms p95 across those 512 steps, below the 85.71 ms native control-step budget. This is an exporter sanity measurement—not a browser or mobile-performance claim.
 
-This validates conversion; it does not grant a right to publish the derivative model.
+Per the current project plan, this MVP proceeds under an explicit assumption that use and conversion of the public checkpoint are permitted. The upstream tree still has no explicit licence; see the notice.
 
-## Browser engine gate: fail
+## Browser engine gate: evaluated, not passed
 
-Two browser-engine candidates were evaluated before UI work:
+`mungus43/tomb-engine` at `6c735315b8ac1b1dd6646ac78c46bbbdbb775a5c` is now pinned under `vendor/` and its FreeDM/GZDoom Web Worker bundle is mounted in the browser prototype. A Docker Playwright run verified unmodded FreeDM rendering, local ONNX execution at the required 11.67 Hz cadence, and the concrete action transport.
 
-1. `theMagicalKarp/wasmdoom` has an excellent framebuffer and input API but its own README says it is single-player only. It cannot host the Track-1 ten-bot deathmatch.
-2. `UZDoom/UZDoom` has a modern Doom lineage, but the evaluated revision did not provide a released browser-WASM build or a documented JavaScript framebuffer/state/action interface. It also cannot be assumed to reproduce ViZDoom's custom scenario behavior.
+The closed loop has not passed. The GZDoom browser build reports `player 1 of 1` when launched with the stable `-host 1` configuration. Raising the host count to 11 causes a JSPI `trying to suspend JS frames` abort. Mounting the minimal ZScript bridge with `-file bridge.pk3` also causes the same abort, so exact health/ammo cannot currently be exported without modifying the engine build. These are runtime failures, not a licence decision.
 
-Neither candidate can close the required `framebuffer + variables → Arnold → controls` loop faithfully. No browser frontend, fallback policy, scripted behaviour, mock telemetry, `/doom/` route, homepage link, or project-page claim has been shipped.
+The app contains the engine adapter, RGB readback, exact ONNX/LSTM/action implementation, desktop/touch controls, and UI state machine as an integration prototype. It is not linked from the website because declaring Arnold-vs-ten-bots working would be false.
 
 ## Release decision
 
-The work is blocked at the plan's two mandatory gates: unverified redistribution rights and no validated browser environment. The repository contains reproducible container tooling and exact policy documentation so the effort can continue once those gates clear. This is intentionally not presented as a completed web demo.
+The remaining blocker is browser engine compatibility: a stable GZDoom browser build must support both an 11-player/bot match and a minimal state bridge. No fallback policy was substituted and no retraining was performed.

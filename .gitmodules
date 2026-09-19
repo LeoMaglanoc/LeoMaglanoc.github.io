@@ -1,3 +1,6 @@
 [submodule "vendor/phone-slam"]
 	path = vendor/phone-slam
 	url = https://github.com/LeoMaglanoc/phone-slam.git
+[submodule "vendor/tomb-engine"]
+	path = vendor/tomb-engine
+	url = https://github.com/mungus43/tomb-engine.git

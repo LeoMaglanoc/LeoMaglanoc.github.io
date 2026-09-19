@@ -12,6 +12,8 @@ node_modules/
 vendor/*
 !vendor/phone-slam
 !vendor/phone-slam/
+!vendor/tomb-engine
+!vendor/tomb-engine/
 !assets/interactive/g1/vendor/
 !assets/interactive/g1/vendor/**
 !assets/interactive/slam/app/vendor/
@@ -27,5 +29,4 @@ AGENTS.md
 context/
 assets/interactive/doom/.cache/
 assets/interactive/doom/artifacts/
-assets/interactive/doom/models/*.onnx
-!assets/interactive/doom/models/.gitkeep
+!assets/interactive/doom/models/*.onnx

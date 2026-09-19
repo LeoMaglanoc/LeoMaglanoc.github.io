@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#07090b">
+    <title>AI Doom — Arnold in GZDoom</title>
+    <link rel="stylesheet" href="./doom.css">
+  </head>
+  <body>
+    <main id="doom-app">
+      <canvas id="doom-canvas" width="320" height="200" aria-label="AI Doom game"></canvas>
+      <div id="loading" class="overlay"><p id="loading-text">Preparing browser-native GZDoom…</p></div>
+      <div id="rotate" class="overlay" hidden><p>Rotate your phone<br><small>AI Doom plays in landscape.</small></p></div>
+      <header class="hud top-hud">
+        <div><strong>AI DOOM</strong><span>RL CONTROL</span></div>
+        <div id="mode-label" class="mode">LOADING</div>
+      </header>
+      <section class="hud stats" aria-live="polite">
+        <div><span>FRAGS</span><strong id="frags">—</strong></div>
+        <div><span>DEATHS</span><strong id="deaths">—</strong></div>
+        <div><span>HEALTH</span><strong id="health">—</strong></div>
+        <div><span>AMMO</span><strong id="ammo">—</strong></div>
+      </section>
+      <footer class="hud bottom-hud">
+        <span id="runtime">Local / WASM</span><span id="perf">Policy —</span>
+      </footer>
+      <nav class="controls">
+        <button id="take-control" type="button" disabled>TAKE CONTROL</button>
+        <button id="return-ai" type="button" hidden>RETURN TO AI</button>
+        <button id="reset-match" type="button" disabled>RESET MATCH</button>
+      </nav>
+      <div id="touch-controls" aria-hidden="true">
+        <div id="joystick"><i></i></div>
+        <button id="fire" type="button">FIRE</button>
+      </div>
+      <details id="scores" class="hud scores"><summary>Q-values / action scores</summary><pre id="q-values"></pre></details>
+      <p id="error" class="error" role="alert" hidden></p>
+    </main>
+    <script src="./vendor/ort/ort.min.js"></script>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
