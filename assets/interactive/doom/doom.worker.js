@@ -678,6 +678,7 @@ self.onmessage = (e) => {
     case 'bridge-native-state': return handleBridgeNativeState();
     case 'bridge-spawn-bots': return handleBridgeSpawnBots(m);
     case 'bridge-reset-match': return handleBridgeResetMatch();
+    case 'bridge-console-commands': return handleBridgeConsoleCommands(m);
     case 'bridge-key': return handleBridgeKey(m);
     default:
       self.postMessage({ type: 'log', stream: 'stderr', msg: '[worker] unknown message type: ' + m.type });
@@ -763,6 +764,13 @@ function handleBoot(m) {
 
   try {
     importScripts('gzdoom.js');
+    // Stock Tomb's startup does not reliably surface onRuntimeInitialized,
+    // so the local-bot acceptance experiment starts after its normal map-load
+    // window. It uses only the same forwarded keyboard events as a human.
+    if (m.autoBots) setTimeout(() => {
+      self.postMessage({ type: 'log', stream: 'stdout', msg: '[worker] scheduling 10 local addbot commands' });
+      handleBridgeConsoleCommands({ commands: Array(10).fill('addbot'), spacingMs: 450 });
+    }, 12_000);
   } catch (err) {
     self.postMessage({ type: 'error',
       message: 'importScripts(gzdoom.js) failed: ' + (err && err.message),
@@ -788,9 +796,9 @@ function makeEvent(evType, init) {
   // realm — `new MouseEvent('mousemove', {movementX: 5}).movementX` returns 0.
   // Plain own-properties resolve before prototype lookup, so emscripten's
   // `e.movementX` reads our value as intended.
-  if (evType === 'keydown' || evType === 'keyup' || evType === 'keypress') {
-    try { return new KeyboardEvent(evType, init); } catch (_) {}
-  }
+  // Chrome deliberately exposes legacy keyCode/which as zero on constructed
+  // KeyboardEvents. SDL's console toggle still reads those fields, so keyboard
+  // events use the same own-property path as mouse events below.
   // Plain Event + own-property assignment for everything else.
   const base = (typeof Event !== 'undefined') ? new Event(evType, { bubbles: true, cancelable: true }) : null;
   const evt = base || { type: evType };
@@ -967,15 +975,38 @@ function handleBridgeResetMatch() {
 }
 
 function bridgeKeyCode(key) {
-  const special = { Control: 'ControlLeft', ArrowLeft: 'ArrowLeft', ArrowRight: 'ArrowRight', Enter: 'Enter' };
+  const special = { Control: 'ControlLeft', ArrowLeft: 'ArrowLeft', ArrowRight: 'ArrowRight', Enter: 'Enter', '`': 'Backquote' };
   return special[key] || (key.length === 1 && /[a-z]/i.test(key) ? `Key${key.toUpperCase()}` : key);
 }
 
 function bridgeKey(key, down) {
-  handleInput({ type: 'input', target: 'window', evType: down ? 'keydown' : 'keyup', init: { key, code: bridgeKeyCode(key), keyCode: key.length === 1 ? key.charCodeAt(0) : 0, which: key.length === 1 ? key.charCodeAt(0) : 0 } });
+  const code = key === '`' ? 192 : (key.length === 1 ? key.charCodeAt(0) : 0);
+  handleInput({ type: 'input', target: 'window', evType: down ? 'keydown' : 'keyup', init: { key, code: bridgeKeyCode(key), keyCode: code, which: code } });
 }
 
 function handleBridgeKey(m) { bridgeKey(String(m.key || ''), Boolean(m.down)); }
+
+// Used only for stock-engine startup and low-rate diagnostic commands. This
+// travels through the same SDL keyboard forwarding as human input; it does not
+// mount a mod or call an engine-private API.
+function typeConsoleCommand(command) {
+  bridgeKey('`', true); bridgeKey('`', false);
+  for (const char of command) {
+    bridgeKey(char, true);
+    const code = char.charCodeAt(0);
+    handleInput({ type: 'input', target: 'window', evType: 'keypress', init: { key: char, code: bridgeKeyCode(char), keyCode: code, which: code, charCode: code } });
+    bridgeKey(char, false);
+  }
+  bridgeKey('Enter', true); bridgeKey('Enter', false);
+  bridgeKey('`', true); bridgeKey('`', false);
+}
+
+function handleBridgeConsoleCommands(m) {
+  const commands = Array.isArray(m.commands) ? m.commands.map(String) : [];
+  const spacing = Math.max(250, Number(m.spacingMs) || 450);
+  commands.forEach((command, index) => setTimeout(() => typeConsoleCommand(command), index * spacing));
+  self.postMessage({ type: 'bridge-console-scheduled', commands: commands.length, spacingMs: spacing });
+}
 
 function handleBridgeObservation(m) {
   try {

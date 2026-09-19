@@ -35,10 +35,11 @@ def test_browser_client_has_no_network_or_zscript_bridge_path():
     assert '"-host"' not in app
     assert "bridge.pk3" not in app
     assert "bridgeParseState" not in worker
-    assert "handleBridgeConsole" not in worker
+    assert "function handleBridgeConsole(" not in worker
     assert "doom_get_selected_ammo" in worker
     assert "doom_spawn_bots" in worker
-    assert 'new Worker("./engine/custom/doom.worker.js"' in app
+    assert 'new Worker("./doom.worker.js"' in app
+    assert "bridge-console-commands" in worker
 
 
 def test_builder_keeps_jspi_and_requires_the_compatible_tomb_source():

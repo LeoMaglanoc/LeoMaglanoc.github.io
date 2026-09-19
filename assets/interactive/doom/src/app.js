@@ -27,19 +27,19 @@ class Engine {
     const loaded = await Promise.all(FILES.map(async (name) => [name, new Uint8Array(await (await fetch(`./engine/${name}`)).arrayBuffer())]));
     const files = Object.fromEntries(loaded.map(([name, bytes]) => [`/${name}`, bytes]));
     const offscreen = this.canvas.transferControlToOffscreen();
-    this.worker = new Worker("./engine/custom/doom.worker.js", { name: "ai-doom-engine" });
+    this.worker = new Worker("./doom.worker.js", { name: "ai-doom-engine" });
     this.worker.onmessage = (event) => this.message(event.data);
     this.worker.onerror = (event) => showError(`Engine worker error: ${event.message}`);
     const args = [
       "-iwad", "freedm.wad", "-deathmatch", "-warp", "01",
       "+vid_rendermode", "4", "+vid_preferbackend", "1", "+vid_fullscreen", "0", "+vid_defwidth", "320", "+vid_defheight", "200", "+win_w", "320", "+win_h", "200", "+vid_scalemode", "0", "+vid_vsync", "0", "+vid_maxfps", "120", "+cl_capfps", "0", "+gl_texture_filter", "0", "+set", "uiscale", "0", "+set", "st_scale", "0", "+set", "screenblocks", "12", "+set", "hud_althud", "0", "+set", "snd_mididevice", "0", "+set", "sv_cheats", "1", "+set", "sv_forcerespawn", "1", "+set", "sv_respawnprotect", "0", "+set", "sv_maxplayers", "12"
     ];
-    this.worker.postMessage({ type: "boot", canvas: offscreen, pinW: 320, pinH: 200, args, files, devMode: false }, [offscreen, ...Object.values(files).map((bytes) => bytes.buffer)]);
+    this.worker.postMessage({ type: "boot", canvas: offscreen, pinW: 320, pinH: 200, args, files, devMode: false, autoBots: true }, [offscreen, ...Object.values(files).map((bytes) => bytes.buffer)]);
   }
   message(message) {
     if (message.type === "ready") { this.ready = true; this.onReady(); return; }
     if (message.type === "bridge-capabilities") {
-      if (!message.native) showError("This GZDoom bundle lacks the local-bot/state bridge. Build the patched Tomb-compatible engine before serving the MVP.");
+      this.nativeBridge = message.native;
       return;
     }
     if (message.type === "bridge-state") { this.onState?.(message); return; }
@@ -52,8 +52,11 @@ class Engine {
     }
     if (message.type === "log" && message.stream === "stderr" && /script error|fatal|unknown command/i.test(message.msg)) console.warn("GZDoom:", message.msg);
   }
-  onReady() { ui.loading.hidden = true; ui.take_control.disabled = false; ui.reset_match.disabled = false; ui.mode_label.textContent = "AI CONTROL"; }
-  addBots() { this.worker?.postMessage({ type: "bridge-spawn-bots", count: 10 }); }
+  onReady() { ui.loading.hidden = true; ui.take_control.disabled = false; ui.reset_match.disabled = false; ui.mode_label.textContent = "AI CONTROL"; this.botTimer = setTimeout(() => this.addBots(), 10_000); }
+  addBots() {
+    if (this.nativeBridge) this.worker?.postMessage({ type: "bridge-spawn-bots", count: 10 });
+    else this.worker?.postMessage({ type: "bridge-console-commands", commands: Array(10).fill("addbot"), spacingMs: 450 });
+  }
   resetNative() { this.worker?.postMessage({ type: "bridge-reset-match" }); }
   requestObservation() { this.worker?.postMessage({ type: "bridge-observation-request", requestId: ++observationId }); }
   setKeys(next) {
@@ -64,7 +67,7 @@ class Engine {
   key(control, down) { const key = KEYS[control] || control; this.worker?.postMessage({ type: "bridge-key", key, down }); }
   input(event, target = "window") { this.worker?.postMessage({ type: "input", target, evType: event.type, init: event }); }
   pointerLock(locked) { this.worker?.postMessage({ type: "pointerlock", locked }); }
-  stop() { this.setKeys(new Set()); this.worker?.terminate(); this.worker = null; this.ready = false; }
+  stop() { clearTimeout(this.botTimer); this.setKeys(new Set()); this.worker?.terminate(); this.worker = null; this.ready = false; }
 }
 
 function aiControls(controls) {
@@ -150,7 +153,9 @@ async function bootEngine() {
 async function main() {
   try {
     if (!window.OffscreenCanvas || !HTMLCanvasElement.prototype.transferControlToOffscreen) throw new Error("This demo requires a browser with OffscreenCanvas support (current Chrome or Edge).");
-    setLoading("Loading Arnold Track-1 policy…"); policy = new ArnoldPolicy(new URL("../models/arnold_track1.onnx", import.meta.url)); await policy.load();
+    const policyEnabled = new URLSearchParams(location.search).get("policy") !== "off";
+    if (policyEnabled) { setLoading("Loading Arnold Track-1 policy…"); policy = new ArnoldPolicy(new URL("../models/arnold_track1.onnx", import.meta.url)); await policy.load(); }
+    else setLoading("Launching stock GZDoom local-bot test…");
     ui.take_control.addEventListener("click", () => switchMode("human")); ui.return_ai.addEventListener("click", () => switchMode("ai")); ui.reset_match.addEventListener("click", () => resetMatch().catch(showError));
     forwardHumanInput(); addTouchInput(); await bootEngine();
   } catch (error) { showError(error); }
