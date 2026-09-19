@@ -25,3 +25,7 @@ assets/interactive/slam/test-data/**/*.json
 .venv
 AGENTS.md
 context/
+assets/interactive/doom/.cache/
+assets/interactive/doom/artifacts/
+assets/interactive/doom/models/*.onnx
+!assets/interactive/doom/models/.gitkeep

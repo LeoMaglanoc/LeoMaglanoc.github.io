@@ -1,0 +1,22 @@
+services:
+  doom-tools:
+    build:
+      context: ../../..
+      dockerfile: assets/interactive/doom/Dockerfile
+    working_dir: /workspace
+    environment:
+      ARNOLD_DIR: /opt/arnold
+      SDL_AUDIODRIVER: dummy
+    volumes:
+      - ../../..:/workspace
+    stdin_open: true
+    tty: true
+
+  doom-site:
+    image: python:3.10-slim
+    working_dir: /workspace
+    command: ["python", "-m", "http.server", "8000", "--directory", "/workspace"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../..:/workspace:ro

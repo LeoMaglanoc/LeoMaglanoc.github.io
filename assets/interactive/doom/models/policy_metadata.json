@@ -1,0 +1,33 @@
+{
+  "artifact": "arnold_track1.onnx",
+  "artifact_status": "locally generated only; ignored by git; not deployable",
+  "redistribution_status": "blocked_pending_upstream_permission",
+  "upstream": {
+    "repository": "https://github.com/glample/Arnold",
+    "revision": "86af06d2fdb35c4bf552ecacfe8fe6ac1abd8cd4",
+    "license": "No explicit license file or grant found at the pinned revision."
+  },
+  "checkpoint": {
+    "path_in_upstream": "pretrained/vizdoom_2017_track1.pth",
+    "sha256": "08a59e88fb7c69d27f8326f7b724b6ef876758aa74e4d71686db637d37c8d36f",
+    "bytes": 52196840
+  },
+  "scenario_assets": {
+    "iwad": {
+      "path_in_upstream": "resources/freedoom2.wad",
+      "sha256": "113ea2d9677074f54cbde29b8f739629f438ed20e3b1d3ba69c9478318ea504d",
+      "provenance_status": "not established from the pinned Arnold tree"
+    },
+    "track1_wad": {
+      "path_in_upstream": "resources/scenarios/deathmatch_rockets.wad",
+      "sha256": "3487f58ceacf3a5b1ae527c39867048ad28464c938b2b7c747501b055b66fa88",
+      "provenance_status": "not established from the pinned Arnold tree"
+    }
+  },
+  "export": {
+    "pytorch": "2.7.1+cpu",
+    "onnx_opset": 17,
+    "onnxruntime_python": "1.20.1",
+    "onnxruntime_web": "not selected because deployment is blocked"
+  }
+}

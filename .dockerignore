@@ -1,3 +1,9 @@
 _site/
 .git/
 assets/
+!assets/
+assets/*
+!assets/interactive/
+assets/interactive/*
+!assets/interactive/doom/
+!assets/interactive/doom/**
