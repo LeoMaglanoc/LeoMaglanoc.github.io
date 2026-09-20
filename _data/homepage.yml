@@ -31,8 +31,6 @@ builds:
     links:
       - label: Unitree G1 Simulator
         url: /g1/
-      - label: Doom Deathmatch
-        url: /doom/
       - label: SLAM
         url: /slam/
       - label: RL Pong
