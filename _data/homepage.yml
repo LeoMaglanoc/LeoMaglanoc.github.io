@@ -27,7 +27,7 @@ featured_projects:
 
 builds:
   - title: Interactive Web Demos
-    description: "Browser-native interactive demos: a Unitree G1 locomotion simulator, Doom deathmatch, 3D reconstruction with SLAM, and an RL-powered Pong agent."
+    description: "Browser-native interactive demos: a Unitree G1 locomotion simulator, 3D reconstruction with SLAM, and an RL-powered Pong agent."
     links:
       - label: Unitree G1 Simulator
         url: /g1/
