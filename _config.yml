@@ -152,7 +152,7 @@ collections:
       layout: post
     output: true
   projects:
-    output: true
+    output: false
   poetry:
     output: true
 
@@ -176,6 +176,8 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_scripts"]
 exclude:
+  # Keep project write-ups as source material without publishing or indexing them.
+  - _projects/
   - bin/
   - CONTRIBUTING.md
   - CUSTOMIZE.md

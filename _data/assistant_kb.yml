@@ -62,7 +62,7 @@ records:
     aliases: [BMW Research, ONN, ONNs, oscillatory neural network, tactile AI, Phastrac]
     sources:
       - label: BMW Research
-        url: /projects/BMW/
+        url: /#projects
 
   - id: tum_safety
     type: experience
@@ -77,7 +77,7 @@ records:
     aliases: [TUM robotics research, research assistant, safe robotics, pHRI]
     sources:
       - label: TUM Safe Robotics
-        url: /projects/robotics-research-assistant/
+        url: /#projects
 
   - id: sara_shield
     type: publication
@@ -92,7 +92,7 @@ records:
     aliases: [SARA shield, SaRA, T-RO, publication, paper, robot safety]
     sources:
       - label: SaRA-Shield project
-        url: /projects/robotics-research-assistant/
+        url: /#projects
       - label: IEEE T-RO paper
         url: https://ieeexplore.ieee.org/abstract/document/11575118
 
@@ -109,7 +109,7 @@ records:
     aliases: [Foundation, Foundation Robotics, thesis, humanoid startup, multifingered manipulation]
     sources:
       - label: Foundation thesis
-        url: /projects/foundation/
+        url: /#projects
 
   - id: lang2tool
     type: project
@@ -154,8 +154,6 @@ records:
     tags: [SLAM, mapping, perception, 3D reconstruction, mobile robotics]
     aliases: [phone SLAM, RGBD, RGB-D, dense reconstruction, ARCore, mapping]
     sources:
-      - label: Phone SLAM
-        url: /projects/phone-slam/
       - label: SLAM demo
         url: /slam/
 
@@ -199,8 +197,8 @@ records:
     tags: [drone, planning, control, perception, robotics software]
     aliases: [drone, autonomous drone, A star, path planning, PID, EKF]
     sources:
-      - label: Autonomous drone practical
-        url: /projects/autonomous-drone-practical/
+      - label: CV (PDF)
+        url: /assets/pdf/leonardo_maglanoc_cv.pdf
 
   - id: siemens_mentoring
     type: project
@@ -213,8 +211,8 @@ records:
     tags: [Siemens, 3D printing, machine learning, digital twins]
     aliases: [Siemens, smart 3D printing, digital twin]
     sources:
-      - label: Siemens Mentoring Programme
-        url: /projects/siemens-mentoring-programme/
+      - label: CV (PDF)
+        url: /assets/pdf/leonardo_maglanoc_cv.pdf
 
   - id: easybuy
     type: build
@@ -243,7 +241,7 @@ records:
     aliases: [skills, stack, software stack, robotics stack, technologies, tools]
     sources:
       - label: BMW Research
-        url: /projects/BMW/
+        url: /#projects
       - label: Featured Projects
         url: /#projects
 

@@ -1,5 +1,6 @@
 ---
 title: My Mission
+published: false
 date: 2025-12-17
 permalink: /mission
 categories: [blogpost]
