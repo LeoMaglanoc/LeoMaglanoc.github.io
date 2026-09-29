@@ -11,7 +11,7 @@ featured_projects:
       - label: startup
         url: https://foundation.bot/ 
 
-  - title: Neuromorphic Computing at BMW Research
+  - title: Brain-inspired ML at BMW Research
     description: "Neuro-inspired computing with Oscillatory Neural Networks in collaboration with IBM. Built Python/PyTorch simulators and collected tactile interaction data from 10 participants for a human-machine interaction demonstrator."
     links:
       - label: EU project
