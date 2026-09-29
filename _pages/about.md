@@ -14,7 +14,7 @@ nav_order: 1
     <h1 id="homepage-title">Leonardo Maglanoc</h1>
 
     <p>
-      I’m Leo, a robot learning and AI engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM. I’ve worked across the robotics and AI stack, with experience spanning language-guided dexterous manipulation for my master’s thesis with a robotics startup, brain-inspired ML at BMW Research, safe human-robot collaboration at TUM published in IEEE T-RO, and 3D perception/SLAM.
+      I’m Leo, a robot learning and AI engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM. I’ve worked across the robotics and AI stack, with experience spanning language-guided dexterous manipulation for my master’s thesis with Foundation Robotics, brain-inspired ML at BMW Research, safe human-robot collaboration at TUM published in IEEE T-RO, and 3D perception/SLAM.
     </p>
 
     <p>
@@ -23,7 +23,8 @@ nav_order: 1
 
     <p>
       Contact me via <a href="mailto:leo.maglanoc@gmail.com">email</a> ·
-      <a href="https://www.linkedin.com/in/leonardo-maglanoc/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/leonardo-maglanoc/" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="{{ site.data.socials.cv_pdf | relative_url }}" target="_blank" rel="noopener">CV</a>
     </p>
   </div>
 </section>
