@@ -25,6 +25,9 @@ featured_projects:
       - label: demo
         url: https://youtu.be/IUAeZGau28E?si=0zWlQfw3i6It8nDD
 
+  - title: LiDAR-Visual-Inertial SLAM at TUM
+    description: "Implemented and evaluated LiDAR feature-extraction and voxel-filtering methods in C++ within a dense multi-sensor SLAM system using real HILTI 2022 sensor data."
+
 builds:
   - title: Interactive Web Demos
     description: "Browser-native interactive demos: a Unitree G1 locomotion simulator, 3D reconstruction with SLAM, and an RL-powered Pong agent."
