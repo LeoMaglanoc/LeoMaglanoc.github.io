@@ -51,8 +51,10 @@ test("generated gate frames have MuJoCo collision geometry", async () => {
   const { sceneXml } = await import("../src/course.js");
   const course = JSON.parse(await readFile(new URL("../course.json", import.meta.url), "utf8"));
   const gated = await new Simulation().init(sceneXml(xml, course));
-  const [x, y, z] = course.gates[0];
-  gated.data.qpos.set([x, y - course.opening[0] / 2 - course.frame, z]);
+  const g = course.gates[0], [x,y,z] = g.position;
+  const {gateBasis} = await import("../src/course.js");
+  const axis = gateBasis(g).horizontal;
+  gated.data.qpos.set(g.position.map((v,i)=>v-axis[i]*(g.width/2+course.frame)));
   gated.mj.mj_forward(gated.model, gated.data);
   assert.ok(gated.data.ncon > 0, "drone in frame must collide");
   gated.data.qpos.set([x, y, z]);

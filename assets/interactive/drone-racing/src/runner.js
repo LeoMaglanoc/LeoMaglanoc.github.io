@@ -27,18 +27,18 @@ export class Runner {
     this.maxError = 0;
     this.windUntil = 0;
     this.actual = [];
-    this.manualTarget = [...this.course.start];
-    this.manualYaw = 0;
+    this.manualTarget = [...this.course.spawn.position];
+    this.manualYaw = this.course.spawn.yaw;
     this.acceleration = new Float64Array(3);
-    this.ref.p.splice(0, 3, ...this.course.start);
+    this.ref.p.splice(0, 3, ...this.course.spawn.position);
     this.ref.v.fill(0);
     this.ref.a.fill(0);
-    this.ref.yaw = 0;
+    this.ref.yaw = this.course.spawn.yaw;
   }
   disturb(type) {
     if (type === "impulse") this.sim.impulse();
     if (type === "wind") {
-      this.sim.wind[1] = 0.045;
+      this.sim.wind[1] = 1.0;
       this.windUntil = this.time + 0.7;
     }
     if (type === "mass") this.sim.setMass(this.sim.massScale === 1 ? 1.2 : 1);
@@ -47,8 +47,8 @@ export class Runner {
   step(input = { forward: 0, strafe: 0, vertical: 0, yaw: 0 }) {
     const dt = this.sim.dt;
     if (this.mode === "AUTOPILOT") {
-      this.trajectory.sample(this.time, this.ref);
-      if (this.steps % 10 === 0) this.acceleration.set(this.mpc.solve(this.sim.state, this.trajectory, this.time));
+      this.trajectory.sample(this.time + this.course.referenceOffset, this.ref);
+      if (this.steps % 10 === 0) this.acceleration.set(this.mpc.solve(this.sim.state, this.trajectory, this.time + this.course.referenceOffset));
     } else {
       this.manualYaw += input.yaw * dt * 1.6;
       const c = Math.cos(this.manualYaw),
@@ -79,7 +79,7 @@ export class Runner {
     this.time = this.steps * dt;
     this.race.update(this.sim.state.p, this.time, this.sim.data.ncon > 0);
     if (this.mode === "AUTOPILOT") {
-      const target = this.trajectory.sample(this.time, this.errorRef),
+      const target = this.trajectory.sample(this.time + this.course.referenceOffset, this.errorRef),
         p = this.sim.state.p,
         error = Math.hypot(target.p[0] - p[0], target.p[1] - p[1], target.p[2] - p[2]);
       this.errorSquared += error * error;
@@ -94,6 +94,8 @@ export class Runner {
     return {
       finishTime: this.race.finishTime,
       gates: this.race.gate,
+      lap: this.race.lap,
+      bestLapTime: this.race.bestLapTime,
       collisions: this.race.collisions,
       resets: this.resets,
       maxTrackingError: this.maxError,
