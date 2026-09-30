@@ -480,3 +480,41 @@ output {
     top: 139px;
   }
 }
+
+/* Six concise telemetry cells wrap on phones and short landscapes. */
+.hud {
+  gap: 22px;
+}
+@media (max-width: 800px) {
+  .hud {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 22px;
+  }
+}
+@media (max-height: 550px) {
+  .hud {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 20px;
+  }
+}
+
+@media (max-width: 800px) and (min-height: 551px) {
+  .hud {
+    gap: 7px 20px;
+  }
+  .panel {
+    padding: 10px 12px;
+  }
+  .instructions {
+    display: none;
+  }
+  #status {
+    min-height: 18px;
+    margin: 8px 0;
+  }
+  .disturbances {
+    margin-top: 8px;
+  }
+}

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#10191c" />
     <meta
       name="description"
-      content="Fly a simulated quadrotor or watch a tracking MPC race through eight gates. MuJoCo physics runs locally in your browser."
+      content="Fly a simulated quadrotor or watch a tracking MPC race through a closed ten-gate circuit. MuJoCo physics runs locally in your browser."
     />
     <title>Drone Racing — Control in the Loop</title>
     <link rel="stylesheet" href="./drone.css" />
@@ -21,16 +21,18 @@
       <section class="intro">
         <span class="eyebrow">REFERENCE → FEEDBACK → FLIGHT</span>
         <h1>Control<br />in the <em>loop.</em></h1>
-        <p>Eight gates. Four rotors.<br />A racing line that fights back.</p>
+        <p>Ten gates. Endless laps.<br />An FPV quad with control in the loop.</p>
       </section>
       <section class="hud" aria-label="Flight telemetry">
         <div>
           <span>SPEED</span><strong id="speed">0.0 <small>m/s</small></strong>
         </div>
-        <div><span>GATE</span><strong id="gate">0 / 8</strong></div>
+        <div><span>LAP</span><strong id="lap">1</strong></div>
+        <div><span>GATE</span><strong id="gate">1 / 10</strong></div>
         <div>
-          <span>LAP TIME</span><strong id="time">0.00 <small>s</small></strong>
+          <span>TIME</span><strong id="time">0.00 <small>s</small></strong>
         </div>
+        <div><span>BEST</span><strong id="best">—</strong></div>
         <div><span>MPC SOLVE</span><strong id="solve">—</strong></div>
       </section>
       <aside class="panel">
