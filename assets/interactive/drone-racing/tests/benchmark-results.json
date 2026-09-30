@@ -1,0 +1,67 @@
+{
+  "nominal": {
+    "finishTime": 11.19973675243132,
+    "gates": 8,
+    "collisions": 0,
+    "resets": 0,
+    "maxTrackingError": 0.08818386695430676,
+    "rmsTrackingError": 0.01985632056109737,
+    "mpc": {
+      "last": 0.04840299999995068,
+      "average": 0.09245221445783058,
+      "p95": 0.20606800000001613
+    }
+  },
+  "impulse": {
+    "finishTime": 11.199733612436782,
+    "gates": 8,
+    "collisions": 0,
+    "resets": 0,
+    "maxTrackingError": 0.17842106231984406,
+    "rmsTrackingError": 0.03279509208987323,
+    "mpc": {
+      "last": 0.045923000000016145,
+      "average": 0.05190174939759142,
+      "p95": 0.0877439999999865
+    }
+  },
+  "wind": {
+    "finishTime": 11.19973608978319,
+    "gates": 8,
+    "collisions": 0,
+    "resets": 0,
+    "maxTrackingError": 0.11651197554784354,
+    "rmsTrackingError": 0.02977083600046279,
+    "mpc": {
+      "last": 0.046126000000072054,
+      "average": 0.052182549397589796,
+      "p95": 0.09541400000000522
+    }
+  },
+  "mass": {
+    "finishTime": 11.199750523822383,
+    "gates": 8,
+    "collisions": 0,
+    "resets": 0,
+    "maxTrackingError": 0.20245256282278248,
+    "rmsTrackingError": 0.12580420085127839,
+    "mpc": {
+      "last": 0.048023999999941225,
+      "average": 0.05037702409638506,
+      "p95": 0.061564999999973224
+    }
+  },
+  "motor": {
+    "finishTime": 11.226233000369074,
+    "gates": 8,
+    "collisions": 0,
+    "resets": 0,
+    "maxTrackingError": 0.09430800220046162,
+    "rmsTrackingError": 0.06038494000320183,
+    "mpc": {
+      "last": 0.0477450000000772,
+      "average": 0.051166216867468174,
+      "p95": 0.07125699999994595
+    }
+  }
+}

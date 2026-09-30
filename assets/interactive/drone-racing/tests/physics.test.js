@@ -1,14 +1,58 @@
-import {test} from 'node:test';
-import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {Simulation} from '../src/simulation.js';
-import {PARAMS,mix} from '../src/drone.js';
-const xml=await readFile(new URL('../models/crazyflie.xml',import.meta.url),'utf8');
-const sim=await new Simulation().init(xml);
-test('gravity, hover, differential roll/pitch/yaw, floor and deterministic reset',()=>{
- sim.reset();for(let i=0;i<50;i++)sim.step();assert.ok(sim.state.p[2]<1.35);
- sim.reset();sim.motors.set(mix([PARAMS.mass*9.81,0,0,0]));for(let i=0;i<750;i++)sim.step();assert.ok(Math.abs(sim.state.p[2]-1.5)<.02);
- for(let axis=1;axis<4;axis++){sim.reset();const w=[PARAMS.mass*9.81,0,0,0];w[axis]=.0002;sim.motors.set(mix(w));for(let i=0;i<10;i++)sim.step();assert.ok(sim.state.omega[axis-1]>0);}
- sim.reset();for(let i=0;i<500;i++)sim.step();assert.ok(sim.state.p[2]>.005&&sim.state.p[2]<.1);
- sim.reset();assert.deepEqual([...sim.state.p],[0,0,1.5]);assert.equal(sim.data.time,0);
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { Simulation } from "../src/simulation.js";
+import { PARAMS, mix } from "../src/drone.js";
+const xml = await readFile(new URL("../models/crazyflie.xml", import.meta.url), "utf8");
+const sim = await new Simulation().init(xml);
+test("gravity, hover, differential roll/pitch/yaw, floor and deterministic reset", () => {
+  sim.reset();
+  for (let i = 0; i < 50; i++) sim.step();
+  assert.ok(sim.state.p[2] < 1.35);
+  sim.reset();
+  sim.motors.set(mix([PARAMS.mass * 9.81, 0, 0, 0]));
+  for (let i = 0; i < 750; i++) sim.step();
+  assert.ok(Math.abs(sim.state.p[2] - 1.5) < 0.02);
+  for (let axis = 1; axis < 4; axis++) {
+    sim.reset();
+    const w = [PARAMS.mass * 9.81, 0, 0, 0];
+    w[axis] = 0.0002;
+    sim.motors.set(mix(w));
+    for (let i = 0; i < 10; i++) sim.step();
+    assert.ok(sim.state.omega[axis - 1] > 0);
+  }
+  sim.reset();
+  for (let i = 0; i < 500; i++) sim.step();
+  assert.ok(sim.state.p[2] > 0.005 && sim.state.p[2] < 0.1);
+  sim.reset();
+  assert.deepEqual([...sim.state.p], [0, 0, 1.5]);
+  assert.equal(sim.data.time, 0);
+});
+test("COM wrench creates requested angular acceleration while translating", () => {
+  sim.reset();
+  sim.data.qvel[0] = 3;
+  sim.mj.mj_forward(sim.model, sim.data);
+  sim.motors.set(mix([PARAMS.mass * 9.81, 0, 0.0002, 0]));
+  sim.step();
+  assert.ok(sim.state.omega[1] > 0.04, "forward motion must not cancel rotor pitch torque");
+  const live = [...sim.data.qpos, ...sim.data.qvel, sim.data.time];
+  sim.setMass(1.2);
+  assert.deepEqual([...sim.data.qpos, ...sim.data.qvel, sim.data.time], live);
+  assert.equal(sim.model.body_mass[sim.body], PARAMS.mass * 1.2);
+  sim.reset();
+  assert.equal(sim.model.body_mass[sim.body], PARAMS.mass);
+});
+test("generated gate frames have MuJoCo collision geometry", async () => {
+  const { sceneXml } = await import("../src/course.js");
+  const course = JSON.parse(await readFile(new URL("../course.json", import.meta.url), "utf8"));
+  const gated = await new Simulation().init(sceneXml(xml, course));
+  const [x, y, z] = course.gates[0];
+  gated.data.qpos.set([x, y - course.opening[0] / 2 - course.frame, z]);
+  gated.mj.mj_forward(gated.model, gated.data);
+  assert.ok(gated.data.ncon > 0, "drone in frame must collide");
+  gated.data.qpos.set([x, y, z]);
+  gated.mj.mj_forward(gated.model, gated.data);
+  assert.equal(gated.data.ncon, 0, "gate opening is clear");
+  gated.data.delete();
+  gated.model.delete();
 });
