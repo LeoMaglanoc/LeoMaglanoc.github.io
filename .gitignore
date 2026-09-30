@@ -30,3 +30,7 @@ context/
 assets/interactive/doom/.cache/
 assets/interactive/doom/artifacts/
 !assets/interactive/doom/models/*.onnx
+!assets/interactive/drone-racing/vendor/
+!assets/interactive/drone-racing/vendor/**
+assets/interactive/drone-racing/tools/__pycache__/
+assets/interactive/drone-racing/artifacts/

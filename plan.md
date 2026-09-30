@@ -852,3 +852,30 @@ ghost race before two full simultaneous simulations
 ```
 
 The final demo should prioritize **correct architecture, robust browser execution, and fun interaction** over maximum research complexity.
+# V1 implementation status (September 30, 2026)
+
+Implemented under `assets/interactive/drone-racing/`, linked from the homepage
+and exposed through a standalone `/drone-racing/` Jekyll iframe page.
+
+- Docker-native MuJoCo WASM physics, geometric flight controller and 25 Hz MPC.
+- Shared eight-gate course, offline C² spline, measured physics-rollout ghost.
+- Fly / Autopilot / Race AI, keyboard + dual-touch sticks, FPV / chase cameras.
+- Wind, impulse, actual +20% physics mass, actual motor 3 efficiency loss.
+- Reference / actual / predicted paths, ordered gate intersections, timers,
+  contacts, deterministic reset, pause/blur handling, measured diagnostics.
+- 16 unit/physics tests including three-minute hover stability; complete browser
+  rollouts and disturbance regressions on desktop and mobile emulation; Docker
+  CI workflow; attribution and reproducible tooling documented in README.
+- Nominal 11.20 s finish, 8/8 gates, zero contacts/resets, 0.088 m maximum and
+  0.020 m RMS tracking error over the full rollout. Wind, impulse, mass and
+  motor-loss regressions all complete without contacts or resets.
+- Existing G1 Chromium smoke test passes; no G1 source changes.
+- Docker production Jekyll build and generated-page smoke test pass, including
+  module/WASM loading, an autonomous lap and the homepage link.
+
+Remaining external/research validation: physical Galaxy S24 FE benchmarking,
+public GitHub Pages smoke test after deployment, and an optional full
+Crazyflow/CasADi time-optimal trajectory optimizer. The shipped generator is
+honestly labeled as spline/time-scaling; it does not claim that optimization.
+Docker software-rendered Chromium measurements are documented separately
+from actual phone performance. Nothing has been pushed or deployed.
