@@ -95,6 +95,22 @@ const fs = require("node:fs");
     await page.waitForTimeout(250);
     assert.equal(await page.evaluate(() => window.drone.renderer.ghost.visible), true);
     assert.ok(await page.locator("#ghost-time").isVisible());
+    const ghostSeam = await page.evaluate(() => {
+      const d = window.drone,
+        saved = d.runner.time;
+      const pose = (t) => {
+        d.runner.time = t;
+        d.renderer.render(d.runner, d.ghost);
+        return d.renderer.ghost.position.toArray();
+      };
+      const a = pose(0.5),
+        b = pose(d.ghost.duration * 10 + 0.5),
+        before = pose(d.ghost.duration - 0.001),
+        after = pose(d.ghost.duration + 0.001);
+      d.runner.time = saved;
+      return { periodic: Math.hypot(...a.map((x, i) => x - b[i])), seam: Math.hypot(...before.map((x, i) => x - after[i])) };
+    });
+    assert.ok(ghostSeam.periodic < 1e-8 && ghostSeam.seam < 0.03, "ghost interpolates continuously at lap wrap");
     if (mobile) {
       const left = await page.locator("#left-stick").boundingBox(),
         right = await page.locator("#right-stick").boundingBox();
@@ -163,7 +179,7 @@ const fs = require("node:fs");
     );
     await page.evaluate(() => {
       const r = window.drone.runner;
-      while (r.time < 9.3) r.step();
+      while (r.time < 10.03) r.step();
     });
     await page.waitForTimeout(150);
     await page.evaluate(() => {

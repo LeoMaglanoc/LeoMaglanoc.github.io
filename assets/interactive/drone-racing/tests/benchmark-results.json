@@ -7,11 +7,11 @@
     "collisions": 0,
     "resets": 0,
     "maxTrackingError": 0.7012330221183551,
-    "rmsTrackingError": 0.04635437048385354,
+    "rmsTrackingError": 0.04635437048385353,
     "mpc": {
-      "last": 0.03714799999988827,
-      "average": 0.04219054333333179,
-      "p95": 0.07009399999992638
+      "last": 0.048013000000082684,
+      "average": 0.05420871066667496,
+      "p95": 0.09563900000011927
     },
     "laps": [
       {
@@ -19,147 +19,147 @@
         "time": 13.503721370348725,
         "collisions": 0,
         "maxTrackingError": 0.7012330221183551,
-        "rmsTrackingError": 0.16337263320565978
+        "rmsTrackingError": 0.1633726332056597
       },
       {
         "lap": 2,
         "time": 13.752044607547253,
         "collisions": 0,
-        "maxTrackingError": 0.06098373597983197,
-        "rmsTrackingError": 0.032573648976068105
+        "maxTrackingError": 0.06098373597983189,
+        "rmsTrackingError": 0.03257364897606795
       },
       {
         "lap": 3,
         "time": 13.751357457420685,
         "collisions": 0,
-        "maxTrackingError": 0.057882746861189736,
-        "rmsTrackingError": 0.03089087776150791
+        "maxTrackingError": 0.057882746861189785,
+        "rmsTrackingError": 0.03089087776150796
       },
       {
         "lap": 4,
         "time": 13.750901498628586,
         "collisions": 0,
-        "maxTrackingError": 0.05593263015733147,
-        "rmsTrackingError": 0.030132863501851646
+        "maxTrackingError": 0.05593263015733139,
+        "rmsTrackingError": 0.03013286350185177
       },
       {
         "lap": 5,
         "time": 13.750600370281198,
         "collisions": 0,
-        "maxTrackingError": 0.054690777480107866,
-        "rmsTrackingError": 0.029801286211893402
+        "maxTrackingError": 0.054690777480108296,
+        "rmsTrackingError": 0.029801286211893464
       },
       {
         "lap": 6,
         "time": 13.750398155098068,
         "collisions": 0,
-        "maxTrackingError": 0.053885312449935455,
-        "rmsTrackingError": 0.029663730604210944
+        "maxTrackingError": 0.05388531244993535,
+        "rmsTrackingError": 0.02966373060421105
       },
       {
         "lap": 7,
         "time": 13.750264575128085,
         "collisions": 0,
         "maxTrackingError": 0.0533633821035,
-        "rmsTrackingError": 0.029601112237449607
+        "rmsTrackingError": 0.029601112237449566
       },
       {
         "lap": 8,
         "time": 13.750175411900202,
         "collisions": 0,
         "maxTrackingError": 0.05302748638487149,
-        "rmsTrackingError": 0.02958065832425446
+        "rmsTrackingError": 0.029580658324254407
       },
       {
         "lap": 9,
         "time": 13.750117326229443,
         "collisions": 0,
-        "maxTrackingError": 0.05280643667664844,
-        "rmsTrackingError": 0.029569184649651355
+        "maxTrackingError": 0.05280643667664768,
+        "rmsTrackingError": 0.029569184649651147
       },
       {
         "lap": 10,
         "time": 13.750078116147847,
         "collisions": 0,
-        "maxTrackingError": 0.052654375296311076,
-        "rmsTrackingError": 0.029570851910783392
+        "maxTrackingError": 0.05265437529631119,
+        "rmsTrackingError": 0.029570851910783333
       },
       {
         "lap": 11,
         "time": 13.750051201493221,
         "collisions": 0,
         "maxTrackingError": 0.052555169870837054,
-        "rmsTrackingError": 0.029566336282384562
+        "rmsTrackingError": 0.02956633628238466
       },
       {
         "lap": 12,
         "time": 13.750034042074589,
         "collisions": 0,
-        "maxTrackingError": 0.05249454435673936,
-        "rmsTrackingError": 0.029569688044825335
+        "maxTrackingError": 0.05249454435673932,
+        "rmsTrackingError": 0.029569688044825435
       },
       {
         "lap": 13,
         "time": 13.75002307673003,
         "collisions": 0,
-        "maxTrackingError": 0.05245448962411349,
-        "rmsTrackingError": 0.029567106417823102
+        "maxTrackingError": 0.0524544896241135,
+        "rmsTrackingError": 0.029567106417823324
       },
       {
         "lap": 14,
         "time": 13.750015669728043,
         "collisions": 0,
-        "maxTrackingError": 0.052421084615659426,
-        "rmsTrackingError": 0.029571863935743386
+        "maxTrackingError": 0.05242108461565946,
+        "rmsTrackingError": 0.029571863935743254
       },
       {
         "lap": 15,
         "time": 13.750009566961182,
         "collisions": 0,
-        "maxTrackingError": 0.05240064563971939,
-        "rmsTrackingError": 0.029568012924082766
+        "maxTrackingError": 0.05240064563971941,
+        "rmsTrackingError": 0.029568012924082825
       },
       {
         "lap": 16,
         "time": 13.750006456938735,
         "collisions": 0,
-        "maxTrackingError": 0.05239212887036096,
-        "rmsTrackingError": 0.02957128638677226
+        "maxTrackingError": 0.05239212887036099,
+        "rmsTrackingError": 0.02957128638677217
       },
       {
         "lap": 17,
         "time": 13.750004685910199,
         "collisions": 0,
-        "maxTrackingError": 0.05238640704143178,
-        "rmsTrackingError": 0.029568352847360355
+        "maxTrackingError": 0.052386407041431764,
+        "rmsTrackingError": 0.029568352847360552
       },
       {
         "lap": 18,
         "time": 13.750003484546625,
         "collisions": 0,
-        "maxTrackingError": 0.05237592621199541,
-        "rmsTrackingError": 0.029572791013291945
+        "maxTrackingError": 0.05237592621199457,
+        "rmsTrackingError": 0.029572791013291844
       },
       {
         "lap": 19,
         "time": 13.750001442777233,
         "collisions": 0,
-        "maxTrackingError": 0.052370609534433225,
-        "rmsTrackingError": 0.02956866242007646
+        "maxTrackingError": 0.05237060953443326,
+        "rmsTrackingError": 0.029568662420076285
       },
       {
         "lap": 20,
         "time": 13.750001074212946,
         "collisions": 0,
-        "maxTrackingError": 0.05237219592631338,
-        "rmsTrackingError": 0.02957174063706492
+        "maxTrackingError": 0.05237219592631344,
+        "rmsTrackingError": 0.029571740637064903
       },
       {
         "lap": 21,
         "time": 13.750001097278187,
         "collisions": 0,
-        "maxTrackingError": 0.052373144722508896,
-        "rmsTrackingError": 0.029568658958686163
+        "maxTrackingError": 0.052373144722508945,
+        "rmsTrackingError": 0.02956865895868603
       }
     ]
   },
@@ -171,11 +171,11 @@
     "collisions": 0,
     "resets": 0,
     "maxTrackingError": 0.7012330221183551,
-    "rmsTrackingError": 0.08836987712912268,
+    "rmsTrackingError": 0.08836987712912266,
     "mpc": {
-      "last": 0.038224999999783904,
-      "average": 0.04050827642856656,
-      "p95": 0.05621799999994437
+      "last": 0.04962799999975687,
+      "average": 0.054783284285719804,
+      "p95": 0.08932599999980084
     },
     "laps": [
       {
@@ -183,28 +183,28 @@
         "time": 13.503721370348725,
         "collisions": 0,
         "maxTrackingError": 0.7012330221183551,
-        "rmsTrackingError": 0.16337263320565978
+        "rmsTrackingError": 0.1633726332056597
       },
       {
         "lap": 2,
         "time": 13.751736073194175,
         "collisions": 0,
-        "maxTrackingError": 0.2169737797368524,
-        "rmsTrackingError": 0.049477063247306136
+        "maxTrackingError": 0.21697377973685328,
+        "rmsTrackingError": 0.049477063247306156
       },
       {
         "lap": 3,
         "time": 13.751461076212024,
         "collisions": 0,
-        "maxTrackingError": 0.06000974506378928,
-        "rmsTrackingError": 0.03112396025904432
+        "maxTrackingError": 0.0600097450637893,
+        "rmsTrackingError": 0.031123960259044372
       },
       {
         "lap": 4,
         "time": 13.750970315059163,
         "collisions": 0,
-        "maxTrackingError": 0.0573830556254055,
-        "rmsTrackingError": 0.03021930531368226
+        "maxTrackingError": 0.05738305562540553,
+        "rmsTrackingError": 0.030219305313682172
       }
     ]
   },
@@ -216,11 +216,11 @@
     "collisions": 0,
     "resets": 0,
     "maxTrackingError": 0.7012330221183551,
-    "rmsTrackingError": 0.08779471139006984,
+    "rmsTrackingError": 0.08779471139006975,
     "mpc": {
-      "last": 0.03579199999967386,
-      "average": 0.04120125071428772,
-      "p95": 0.06699399999979505
+      "last": 0.059707000000344124,
+      "average": 0.062037762857149965,
+      "p95": 0.10381999999981417
     },
     "laps": [
       {
@@ -228,28 +228,28 @@
         "time": 13.503721370348725,
         "collisions": 0,
         "maxTrackingError": 0.7012330221183551,
-        "rmsTrackingError": 0.16337263320565978
+        "rmsTrackingError": 0.1633726332056597
       },
       {
         "lap": 2,
         "time": 13.751692225643842,
         "collisions": 0,
-        "maxTrackingError": 0.13783912925832995,
-        "rmsTrackingError": 0.04509254003815419
+        "maxTrackingError": 0.13783912925832972,
+        "rmsTrackingError": 0.04509254003815406
       },
       {
         "lap": 3,
         "time": 13.751475799762932,
         "collisions": 0,
-        "maxTrackingError": 0.06001010668381571,
-        "rmsTrackingError": 0.03114296914202094
+        "maxTrackingError": 0.06001010668381583,
+        "rmsTrackingError": 0.031142969142020922
       },
       {
         "lap": 4,
         "time": 13.750980095656239,
         "collisions": 0,
-        "maxTrackingError": 0.05736866130618773,
-        "rmsTrackingError": 0.03023071595084957
+        "maxTrackingError": 0.0573686613061876,
+        "rmsTrackingError": 0.03023071595084945
       }
     ]
   },
@@ -261,11 +261,11 @@
     "collisions": 0,
     "resets": 0,
     "maxTrackingError": 0.7012330221183551,
-    "rmsTrackingError": 0.11541182856960619,
+    "rmsTrackingError": 0.11541182856960613,
     "mpc": {
-      "last": 0.062189000000216765,
-      "average": 0.03965844999999068,
-      "p95": 0.0634979999999814
+      "last": 0.05098099999986516,
+      "average": 0.054948891428575085,
+      "p95": 0.08823100000017803
     },
     "laps": [
       {
@@ -273,28 +273,28 @@
         "time": 13.503721370348725,
         "collisions": 0,
         "maxTrackingError": 0.7012330221183551,
-        "rmsTrackingError": 0.16337263320565978
+        "rmsTrackingError": 0.1633726332056597
       },
       {
         "lap": 2,
         "time": 13.760709844188506,
         "collisions": 0,
-        "maxTrackingError": 0.20503821292870486,
-        "rmsTrackingError": 0.13844469868793946
+        "maxTrackingError": 0.20503821292870508,
+        "rmsTrackingError": 0.13844469868793943
       },
       {
         "lap": 3,
         "time": 13.751231741867038,
         "collisions": 0,
-        "maxTrackingError": 0.11356704868063626,
-        "rmsTrackingError": 0.07254059317491263
+        "maxTrackingError": 0.11356704868063625,
+        "rmsTrackingError": 0.07254059317491249
       },
       {
         "lap": 4,
         "time": 13.750810616466964,
         "collisions": 0,
-        "maxTrackingError": 0.11207848941267909,
-        "rmsTrackingError": 0.047770230052169696
+        "maxTrackingError": 0.11207848941267824,
+        "rmsTrackingError": 0.047770230052169654
       }
     ]
   },
@@ -306,11 +306,11 @@
     "collisions": 0,
     "resets": 0,
     "maxTrackingError": 0.7012330221183551,
-    "rmsTrackingError": 0.08582289517198982,
+    "rmsTrackingError": 0.08582289517198978,
     "mpc": {
-      "last": 0.08637600000020029,
-      "average": 0.03926335714284895,
-      "p95": 0.06391900000016904
+      "last": 0.047959999999875436,
+      "average": 0.05414114571428659,
+      "p95": 0.09217600000010862
     },
     "laps": [
       {
@@ -318,28 +318,28 @@
         "time": 13.503721370348725,
         "collisions": 0,
         "maxTrackingError": 0.7012330221183551,
-        "rmsTrackingError": 0.16337263320565978
+        "rmsTrackingError": 0.1633726332056597
       },
       {
         "lap": 2,
         "time": 13.763292573070002,
         "collisions": 0,
         "maxTrackingError": 0.07239483672640758,
-        "rmsTrackingError": 0.03379872661139312
+        "rmsTrackingError": 0.03379872661139302
       },
       {
         "lap": 3,
         "time": 13.751163487482703,
         "collisions": 0,
         "maxTrackingError": 0.06686097498490622,
-        "rmsTrackingError": 0.027135893857009912
+        "rmsTrackingError": 0.027135893857009895
       },
       {
         "lap": 4,
         "time": 13.750772864813605,
         "collisions": 0,
         "maxTrackingError": 0.06533866301925463,
-        "rmsTrackingError": 0.02572813138114131
+        "rmsTrackingError": 0.02572813138114132
       }
     ]
   }

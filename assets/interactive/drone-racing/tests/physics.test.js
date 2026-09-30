@@ -51,10 +51,11 @@ test("generated gate frames have MuJoCo collision geometry", async () => {
   const { sceneXml } = await import("../src/course.js");
   const course = JSON.parse(await readFile(new URL("../course.json", import.meta.url), "utf8"));
   const gated = await new Simulation().init(sceneXml(xml, course));
-  const g = course.gates[0], [x,y,z] = g.position;
-  const {gateBasis} = await import("../src/course.js");
+  const g = course.gates[0],
+    [x, y, z] = g.position;
+  const { gateBasis } = await import("../src/course.js");
   const axis = gateBasis(g).horizontal;
-  gated.data.qpos.set(g.position.map((v,i)=>v-axis[i]*(g.width/2+course.frame)));
+  gated.data.qpos.set(g.position.map((v, i) => v - axis[i] * (g.width / 2 + course.frame)));
   gated.mj.mj_forward(gated.model, gated.data);
   assert.ok(gated.data.ncon > 0, "drone in frame must collide");
   gated.data.qpos.set([x, y, z]);
@@ -62,4 +63,13 @@ test("generated gate frames have MuJoCo collision geometry", async () => {
   assert.equal(gated.data.ncon, 0, "gate opening is clear");
   gated.data.delete();
   gated.model.delete();
+});
+
+test("generated plant mass, inertia and motor positions match canonical config", () => {
+  assert.equal(sim.model.body_mass[sim.body], PARAMS.mass);
+  for (let i = 0; i < 3; i++) assert.ok(Math.abs(sim.model.body_inertia[sim.body * 3 + i] - PARAMS.inertia[i]) < 1e-10);
+  for (let i = 0; i < 4; i++) {
+    const id = sim.model.site(`motor${i + 1}`).id;
+    PARAMS.motorPositions[i].forEach((x, j) => assert.ok(Math.abs(sim.model.site_pos[id * 3 + j] - x) < 1e-10));
+  }
 });

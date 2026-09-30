@@ -1,7 +1,8 @@
 """Periodic C2 cubic with sampled feasibility scaling; pure Python, no backend."""
-import json, math
+import json, math, subprocess
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
+VEHICLE = json.loads(subprocess.check_output(["node", "--input-type=module", "-e", "import {VEHICLE} from "+json.dumps((ROOT/"src/vehicle-config.js").as_uri())+"; process.stdout.write(JSON.stringify(VEHICLE));"], text=True))
 
 def solve(matrix, rhs):
     n=len(rhs)
@@ -38,8 +39,8 @@ def feasibility(traj):
     for j in range(math.ceil(traj['duration']/.01)+1):
         _,v,a=evaluate(traj,j*.01)
         speed=max(speed,math.hypot(*v));acc=max(acc,math.hypot(*a))
-        az=a[2]+9.81;tilt=max(tilt,math.degrees(math.atan2(math.hypot(*a[:2]),az)))
-        thrust=max(thrust,.65*math.hypot(a[0],a[1],az))
+        az=a[2]+VEHICLE["gravity"];tilt=max(tilt,math.degrees(math.atan2(math.hypot(*a[:2]),az)))
+        thrust=max(thrust,VEHICLE["mass"]*math.hypot(a[0],a[1],az))
     return {'maxSpeed':speed,'maxAcceleration':acc,'maxTiltDegrees':tilt,'maxCollectiveThrust':thrust}
 
 if __name__=='__main__':

@@ -1,4 +1,4 @@
-import { VEHICLE, motorResponse } from "./vehicle-config.js";
+import { motorResponse } from "./vehicle-config.js";
 import loadMujoco from "../../g1/vendor/mujoco.js";
 import { PARAMS, rotorWrench } from "./drone.js";
 import { rotation, rotate } from "./math.js";
@@ -36,7 +36,7 @@ export class Simulation {
     this.massScale = 1;
     this.efficiency = 1;
     this.wind.fill(0);
-    this.motors.fill(Math.sqrt(PARAMS.mass * PARAMS.gravity / (4 * PARAMS.kf)));
+    this.motors.fill(Math.sqrt((PARAMS.mass * PARAMS.gravity) / (4 * PARAMS.kf)));
     this.motorSpeeds.set(this.motors);
     this.model.body_mass[this.body] = PARAMS.mass;
     this.mj.mj_setConst(this.model, this.data);

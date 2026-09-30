@@ -13,8 +13,12 @@ const sim = await new Simulation().init(xml),
   results = {};
 for (const kind of ["nominal", "impulse", "wind", "mass", "motor"]) {
   runner.reset(false);
-  const samples = [], laps = [];
-  let disturbed = false, lapError = 0, lapSquared = 0, lapSteps = 0;
+  const samples = [],
+    laps = [];
+  let disturbed = false,
+    lapError = 0,
+    lapSquared = 0,
+    lapSteps = 0;
   const horizon = trajectory.duration * (kind === "nominal" ? 21 : 4) + 1;
   while (runner.time < horizon) {
     if (!disturbed && runner.time >= trajectory.duration + 4) {
@@ -24,25 +28,32 @@ for (const kind of ["nominal", "impulse", "wind", "mass", "motor"]) {
     const lap = runner.race.lap;
     runner.step();
     const ref = trajectory.sample(runner.time + course.referenceOffset);
-    const error = Math.hypot(...ref.p.map((x,i)=>x-sim.state.p[i]));
-    lapError = Math.max(lapError,error); lapSquared += error*error; lapSteps++;
+    const error = Math.hypot(...ref.p.map((x, i) => x - sim.state.p[i]));
+    lapError = Math.max(lapError, error);
+    lapSquared += error * error;
+    lapSteps++;
     if (runner.race.lap !== lap) {
-      laps.push({...runner.race.laps.at(-1), maxTrackingError:lapError, rmsTrackingError:Math.sqrt(lapSquared/lapSteps)});
-      lapError=0;lapSquared=0;lapSteps=0;
+      laps.push({ ...runner.race.laps.at(-1), maxTrackingError: lapError, rmsTrackingError: Math.sqrt(lapSquared / lapSteps) });
+      lapError = 0;
+      lapSquared = 0;
+      lapSteps = 0;
     }
-    if (kind === "nominal" && runner.time >= 2*trajectory.duration && runner.time <= 3*trajectory.duration && runner.steps % 5 === 0)
-      samples.push([+(runner.time-2*trajectory.duration).toFixed(5), ...Array.from(sim.state.p), ...Array.from(sim.state.q)]);
+    if (kind === "nominal" && runner.time >= 2 * trajectory.duration && runner.time <= 3 * trajectory.duration && runner.steps % 5 === 0)
+      samples.push([+(runner.time - 2 * trajectory.duration).toFixed(5), ...Array.from(sim.state.p), ...Array.from(sim.state.q)]);
   }
-  results[kind] = {...runner.metrics(), laps};
-  console.log(kind, JSON.stringify({...runner.metrics(), completedLaps:laps.length}));
+  results[kind] = { ...runner.metrics(), laps };
+  console.log(kind, JSON.stringify({ ...runner.metrics(), completedLaps: laps.length }));
   assert.ok(laps.length >= (kind === "nominal" ? 20 : 3), `${kind} missed ordered laps`);
   assert.equal(runner.resets, 0);
   assert.equal(runner.race.collisions, 0, `${kind} collided`);
   assert.ok(runner.maxError < 1.5, `${kind} excessive tracking error`);
   assert.ok(laps.at(-1).maxTrackingError < 0.4, `${kind} did not recover`);
-  if(kind === "nominal") {
-    assert.ok(laps.at(-1).rmsTrackingError <= laps[1].rmsTrackingError + .01, "error grew across laps");
-    await writeFile(new URL("../trajectories/ghost_v1.json", import.meta.url), JSON.stringify({source:"One steady MuJoCo/MPC lap", dt:.02, duration:trajectory.duration, finishTime:laps.at(-1).time, samples})+"\n");
+  if (kind === "nominal") {
+    assert.ok(laps.at(-1).rmsTrackingError <= laps[1].rmsTrackingError + 0.01, "error grew across laps");
+    await writeFile(
+      new URL("../trajectories/ghost_v1.json", import.meta.url),
+      JSON.stringify({ source: "One steady MuJoCo/MPC lap", dt: 0.02, duration: trajectory.duration, finishTime: laps.at(-1).time, samples }) + "\n"
+    );
   }
 }
 await writeFile(new URL("../tests/benchmark-results.json", import.meta.url), JSON.stringify(results, null, 2) + "\n");

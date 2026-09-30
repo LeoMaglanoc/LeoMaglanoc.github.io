@@ -13,7 +13,7 @@ export class Trajectory {
       out.v[axis] = b + s * (2 * c + 3 * s * d);
       out.a[axis] = 2 * c + 6 * s * d;
     }
-    out.yaw = Math.hypot(out.v[0], out.v[1]) > 1e-6 ? Math.atan2(out.v[1], out.v[0]) : (out.yaw || 0);
+    out.yaw = Math.hypot(out.v[0], out.v[1]) > 1e-6 ? Math.atan2(out.v[1], out.v[0]) : out.yaw || 0;
     return out;
   }
 }

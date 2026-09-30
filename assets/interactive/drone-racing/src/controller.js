@@ -38,7 +38,8 @@ export class FlightController {
     const errors = current.map((axis, i) => cross(axis, [x, y, z][i]));
     const e = [0, 1, 2].map((i) => 0.5 * (errors[0][i] + errors[1][i] + errors[2][i]));
     this.wrench[0] = clamp(PARAMS.mass * dot(a, current[2]), 0, 4 * PARAMS.maxForce);
-    for (let i = 0; i < 3; i++) this.wrench[i + 1] = PARAMS.inertia[i] * ((i === 2 ? 100 : 400) * dot(e, current[i]) - (i === 2 ? 20 : 32) * s.omega[i]);
+    for (let i = 0; i < 3; i++)
+      this.wrench[i + 1] = PARAMS.inertia[i] * ((i === 2 ? 100 : 400) * dot(e, current[i]) - (i === 2 ? 20 : 32) * s.omega[i]);
     return mix(this.wrench, out);
   }
 }

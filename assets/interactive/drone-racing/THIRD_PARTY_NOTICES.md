@@ -12,7 +12,9 @@ The runtime imports the repository's existing `../g1/vendor/mujoco.js` and `mujo
 
 Reference: https://github.com/learnsyslab/crazyflow/blob/main/crazyflow/control/mellinger/params.toml and https://learnsyslab.github.io/crazyflow/user-guide/control/mellinger/ (consulted September 30, 2026).
 
-The mass (0.029 kg), rotor XY arm length (0.03253 m), per-motor thrust cap (0.12 N), quadratic RPM thrust fit and thrust-to-reaction-torque ratio are based on the `cf2x_L250` configuration. The rad/s coefficients are rounded conversions of the quadratic RPM fit, and the linear fit term is omitted. The cascaded geometric-control architecture is informed by Crazyflow's documented Mellinger controller, implemented independently in JavaScript with different gains, rotor order, quaternion conventions and simplified dynamics. No Crazyflow/JAX/CasADi code or models are bundled. Inertia, drag, course and drone geometry are independently specified. No UAVSimulator material is used.
+V1 used Crazyflow-inspired Crazyflie parameters. V2 replaces those parameters with an independently specified approximate 650 g FPV quad. The cascaded geometric-control architecture remains informed by Crazyflow's documented Mellinger controller, independently implemented in JavaScript. No Crazyflow/JAX/CasADi code or models are bundled. No UAVSimulator material is used.
+
+The V2 quad visual is original procedural Three.js geometry (frame, motors, battery, camera, antenna and props), with no third-party mesh or texture assets. Physics geometry, vehicle config, circuit and periodic generator are original repository additions under its root MIT license.
 
 Crazyflow is MIT licensed. Its complete notice is retained in `licenses/CRAZYFLOW-MIT.txt`.
 

@@ -1,18 +1,24 @@
 import { clamp } from "./math.js";
 import { VEHICLE } from "./vehicle-config.js";
-export const PARAMS = Object.freeze({ ...VEHICLE, arm: VEHICLE.armLength,
-  kf: VEHICLE.thrustCoefficient, km: VEHICLE.torqueCoefficient, maxForce: VEHICLE.maxRotorThrust });
+export const PARAMS = Object.freeze({
+  ...VEHICLE,
+  arm: VEHICLE.armLength,
+  kf: VEHICLE.thrustCoefficient,
+  km: VEHICLE.torqueCoefficient,
+  maxForce: VEHICLE.maxRotorThrust,
+});
 // Rotor positions (+X,+Y), (-X,+Y), (-X,-Y), (+X,-Y); spins +,-,+,-.
 // f_i=kf*w_i^2, yaw reaction=spin_i*km*w_i^2; tau=r cross [0,0,f].
 export function rotorWrench(speeds, out = new Float64Array(4), efficiency = 1) {
-  const f0 = PARAMS.kf * speeds[0] ** 2,
-    f1 = PARAMS.kf * speeds[1] ** 2,
-    f2 = PARAMS.kf * speeds[2] ** 2 * efficiency,
-    f3 = PARAMS.kf * speeds[3] ** 2;
-  out[0] = f0 + f1 + f2 + f3;
-  out[1] = PARAMS.arm * (f0 + f1 - f2 - f3);
-  out[2] = PARAMS.arm * (-f0 + f1 + f2 - f3);
-  out[3] = (PARAMS.km / PARAMS.kf) * (f0 - f1 + f2 - f3);
+  out.fill(0);
+  for (let i = 0; i < 4; i++) {
+    const f = PARAMS.kf * speeds[i] ** 2 * (i === 2 ? efficiency : 1);
+    const [x, y] = VEHICLE.motorPositions[i];
+    out[0] += f;
+    out[1] += y * f;
+    out[2] -= x * f;
+    out[3] += VEHICLE.rotorDirections[i] * (PARAMS.km / PARAMS.kf) * f;
+  }
   return out;
 }
 export function mix(wrench, out = new Float64Array(4)) {

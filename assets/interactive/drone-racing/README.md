@@ -1,60 +1,72 @@
-# Drone Racing — Control in the Loop
+# FPV Drone Racing — Control in the Loop
 
-A static browser demo: one 29 g quadrotor, eight gates, four rotor commands, MuJoCo WASM physics, a precomputed racing spline and a small online tracking MPC. Everything runs locally. Three.js is vendored; the existing G1 MuJoCo JS/WASM files are shared without modifying G1. No CDN, server-side control, JAX, or WebGPU is required.
+A custom approximate 5-inch FPV quad races a closed ten-gate 3D circuit using MuJoCo WASM, a periodic offline spline, tracking MPC and a geometric flight controller. Autopilot flies continuously: the reference wraps while the physical state, velocity and simulation clock continue. Everything runs locally with vendored Three.js/WebGL and the existing shared G1 MuJoCo runtime. No backend or WebGPU is required; G1 is unmodified.
 
-Open `/drone-racing/` on the built website or use Docker:
+Open `/drone-racing/` on the built site, or:
 
 ```bash
 docker compose -f assets/interactive/drone-racing/docker-compose.yml up -d drone-site
 # http://localhost:8001/assets/interactive/drone-racing/
 ```
 
-Fly with W/S forward/back, A/D left/right, Q/E yaw, R/F or ↑/↓ altitude. Two touch sticks use left altitude/yaw and right forward/strafe. Releasing the controls holds position. Space pauses and Backspace resets. Switching modes starts a fresh race; Reset preserves the mode and camera. Blur or hiding the page pauses and clears input. Fly through the currently lit gate in the +X direction; missing a gate requires returning to its approach side.
+**Autopilot** follows the periodic racing line. **Fly** provides stabilized manual flight; releasing controls holds position. **Race AI** uses manual flight against a continuously looping, recorded steady MuJoCo/MPC lap. Switching modes starts a new race. Reset preserves the selected mode and camera. W/S move forward/back, A/D strafe, Q/E yaw, R/F or arrows change altitude; Space pauses and Backspace resets. Touch uses left altitude/yaw and right forward/strafe sticks. Blur and page hiding pause and clear controls.
 
-- **Fly:** stabilized human flight.
-- **Autopilot:** the tracking MPC follows the offline spline.
-- **Race AI:** human flight against a translucent, recorded MuJoCo/MPC rollout. The ghost's finish time comes from gate intersections in that rollout, not the spline's duration.
+Cross the lit gate from its approach side, in order. The first crossing of gate 1 starts timing; only crossing every other gate and returning to gate 1 completes a lap. Current, last and best lap times use interpolated plane-intersection simulation time. Lap completion never resets the vehicle. Collisions count contact episodes, with both per-lap and total counts. Race AI displays your lap/current/best times beside the recorded AI lap time. Reset count persists for the page session.
 
-The race clock starts on reset/mode selection and stops at the eighth gate. The start pad is at X=0; the last gate is the finish, X=24. The reference continues to X=26 and settles after the finish. Collisions count contact episodes, not every physics step. Reset count persists for the page session. Trails are bounded to the last 3,000 points.
+## Vehicle and physics
 
-## Architecture and conventions
+`src/vehicle-config.js` is the canonical source for mass, inertia, motor positions, thrust limits, response time and visual dimensions. `models/fpv.xml` contains the runtime scene template; `vehicleXml()` inserts the configured plant. The offline generator reads this same config through Node.
 
-`offline C² spline → tracking MPC (25 Hz) → acceleration → geometric attitude/thrust controller (125 Hz) → rotor speeds → MuJoCo (250 Hz)`
+- Mass: **0.65 kg**; opposite-motor wheelbase: **0.22 m**; prop diameter: **0.127 m**.
+- Diagonal inertia: **[0.0023, 0.0023, 0.004] kg m²**, an approximate symmetric demo model.
+- Body: **0.11 × 0.045 m**, approximately **0.07 m** high; simplified body box and four arm capsules handle collisions.
+- Four rotors at XY signs (+,+), (−,+), (−,−), (+,−); reaction signs +,−,+,−. Motor radial distance is half the wheelbase.
+- Thrust `f = 8e-6 ω² N`; reaction torque `±1.2e-7 ω² N m`, speeds in rad/s; maximum **6 N per rotor**.
+- First-order motor response `ω += (1-exp(-dt/0.018)) (ω_command-ω)` uses an **18 ms** time constant. Reset starts with motors already at hover speed. Actual motor speeds drive prop animation, using translucent discs at high RPM.
+- Linear world drag is `−mass × 0.12 × velocity`. Gravity is 9.81 m/s². Collision clearance uses a conservative **0.175 m** radius including the prop sweep.
 
-The world is right-handed with Z up and gravity `[0,0,-9.81]`. Body X points forward and Y left. MuJoCo quaternions are **wxyz**, while Three.js quaternions are xyzw; rendering explicitly reorders them. MuJoCo free-joint translation velocity is world-frame and rotational velocity body-frame. The model has an explicit inertia; visual/collision geometry does not implicitly set its mass.
+This is an original procedural visual model: carbon X frame, motor bells, electronics stack, battery/strap, FPV camera/lens and antenna. There is no borrowed drone mesh. Visual and collision geometry share scale and origin. The model is an illustrative FPV quad, **not a calibrated digital twin**. Battery offset, prop contact geometry, ESC nonlinearities and aerodynamic coupling are omitted.
 
-Rotors 1–4 have body XY signs `(+,+),(-,+),(-,-),(+,-)` and reaction-torque signs `+,-,+,-`. These are our own numbering convention, not Crazyflow's motor order. Each rotor produces `f_i=kf*ω_i²` along body +Z and reaction torque `spin_i*km*ω_i²`. Total roll/pitch torque is `r_i × [0,0,f_i]`. The analytic inverse mixer maps the requested wrench to nonnegative squared speeds and clips to 0.12 N per motor. Commands are rad/s; the quadratic thrust coefficient is approximately the Crazyflow RPM-squared fit converted to rad/s-squared. We omit its small linear RPM term. The model is Crazyflie-inspired, not a calibrated digital twin. Inertia and isotropic drag are simplified demo values; motor response is instantaneous.
+World Z is up; body X is forward and Y left. MuJoCo uses wxyz quaternions; Three.js uses xyzw. Free-joint translation velocity is world-frame, angular velocity body-frame. Rotor thrust and torque are transformed into the world wrench at the COM through `xfrc_applied`; the live vehicle is never kinematically replayed.
 
-Manual position control requests `a = a_ref + 5(p_ref-p) + 3.8(v_ref-v) + integral_bias + 0.12v`. For autonomy, MPC supplies acceleration instead of the position PD term. A bounded position-error integral helps reject unmodeled mass and motor errors. Gravity compensation adds +9.81 to acceleration Z. The desired body Z is the normalized compensated acceleration; desired X/Y use the reference heading. The geometric attitude error is `0.5 Σ(current_axis × desired_axis)`, converted to body coordinates. Body torque is `J(400 e_R - 32 ω)`, and collective thrust is nominal mass times the compensated acceleration projected onto current body Z. `xfrc_applied` applies the world wrench at the COM; no state is kinematically replayed for the live drone.
+## Control and trajectory
 
-The 6-state MPC predicts `p_next=p+dt*v`, `v_next=v+dt*u`, with 18 steps at 0.04 s (0.72 s horizon). Stage cost is `16||p-p_ref||² + 4||v-v_ref||² + 0.08||u-a_ref||² + 0.1||u-u_previous||²`; terminal position/velocity weights are tripled. A 32-iteration projected gradient solve with analytic adjoint gradients and shifted warm start bounds XY acceleration to ±6 m/s² and Z to [-5,6]. There are no hard velocity, gate, or collision constraints in this tracking solver. The offline path and flight-controller bounds provide the feasible nominal course. The UI reports actual `performance.now()` durations, including initial solves, over a rolling 1,500-solve window; timer quantization can produce a measured 0.000 ms individual solve.
+`periodic C² cubic → 25 Hz tracking MPC → 125 Hz geometric controller → mixer → motor dynamics → 250 Hz MuJoCo`
 
-Wind applies 0.045 N laterally for 0.7 simulated seconds; impulse adds 1.2 m/s of lateral velocity (equivalent to a mass-scaled impulse). Mass adds 20% centered payload mass to the physics, leaving nominal controller mass and inertia unchanged. Motor 3 loses 10% thrust and reaction torque. Repeated gusts replace the active gust; repeated impulses accumulate. Reset removes all disturbances and clears solver/controller history.
+The existing six-state tracking MPC is retained: 18 steps at 40 ms (0.72 s horizon), 32 projected-gradient iterations with analytic adjoint gradients and warm start. Stage weights are position 16, velocity 4, acceleration reference 0.08 and command variation 0.1; terminal position/velocity weights are tripled. XY acceleration is bounded to ±6 m/s², Z to [−5,6]. References sample across the lap seam naturally. MPC has no hard gate/collision constraints.
 
-One `course.json` defines gate openings, obstacles, collision MJCF and rendering. Gate clearing uses a directional plane intersection interpolated between positions with a 7 cm drone margin, in order. Gate frame collisions use MuJoCo. Chase follows heading; FPV position, view direction and up vector are rigidly attached to the body.
+Manual position control requests reference acceleration + position PD (5 / 3.8) + bounded integral bias + drag compensation. Autonomy substitutes MPC acceleration for position PD. The compensated acceleration defines desired body Z; reference tangent defines heading. Geometric attitude gains are 400/32 for roll/pitch and 100/20 for yaw. Nominal mass and inertia remain fixed under disturbances.
 
-## Reproduce and validate with Docker
+The pure-Python offline generator solves a cyclic cubic spline through the gate centers. Position, velocity and acceleration match at every knot including the lap seam; jerk is piecewise constant and may jump. Heading uses atan2(vy,vx), with a low-speed fallback; the controller uses heading vectors, so ±π has no attitude discontinuity. A 0.4 s approach phase puts spawn before the start gate, with a transient from stationary launch. The track has height changes, an elevated gate, opposing chicane turns and a faster south straight. Gate yaw/pitch defines rendering, MuJoCo frames, local crossing coordinates and valid direction.
+
+Deterministic time scaling checks sampled speed ≤7 m/s, acceleration ≤5.8 m/s² and tilt ≤34°. The shipped **13.75 s** reference peaks at **4.48 m/s** and **33.26°** tilt: the chicane acceleration limit determines speed. This is sampled feasibility screening, not time-optimal optimization or a proof of rotor feasibility. The full plant rollouts validate flight.
+
+Wind applies **1 N** laterally for 0.7 simulated seconds; side impulse adds **1.2 m/s** lateral velocity. Mass adds 20% centered payload, and motor 3 loses 10% thrust and reaction torque. Mass changes preserve live position, velocity and time. Repeated gusts replace the gust; impulses accumulate. Reset removes all disturbances.
+
+## Validation
 
 ```bash
+cd assets/interactive/drone-racing
+python3 tools/generate_trajectory.py
+python3 tools/validate_trajectory.py
+npm test
+npm run validate
+# Browser tooling is isolated in Docker:
+cd ../../..
 docker compose -f assets/interactive/drone-racing/docker-compose.yml build drone-tools
-docker compose -f assets/interactive/drone-racing/docker-compose.yml run --rm drone-tools python3 tools/generate_trajectory.py
-docker compose -f assets/interactive/drone-racing/docker-compose.yml run --rm drone-tools python3 tools/validate_trajectory.py
-docker compose -f assets/interactive/drone-racing/docker-compose.yml run --rm drone-tools node --test tests/*.test.js
-docker compose -f assets/interactive/drone-racing/docker-compose.yml run --rm drone-tools node tools/benchmark_controller.js
-docker compose -f assets/interactive/drone-racing/docker-compose.yml up -d drone-site
 docker compose -f assets/interactive/drone-racing/docker-compose.yml run --rm drone-tools node tests/browser.cjs
 ```
 
-The benchmark regenerates `trajectories/ghost_v1.json` from the exact shipped physics and controller, plus `tests/benchmark-results.json`. Regenerate the ghost whenever dynamics, course or controller change. The generator uses a clamped cubic spline through the course centers with zero endpoint velocities and deterministic time scaling until sampled speed, acceleration, tilt and collective-thrust checks pass. Crazyflow supplies the parameter/control reference only; **this is not Crazyflow/CasADi time-optimal trajectory optimization**. Checks at 10 ms spacing are a sampled feasibility screen, not a proof of rotor/attitude feasibility; the full physics regressions check the resulting flight.
+The benchmark records **21 consecutive nominal laps**, per-lap time, max/RMS tracking error and collisions, plus four-lap disturbance runs. It regenerates the steady one-lap ghost and `tests/benchmark-results.json`; regenerate after changing course, controller or dynamics. Baseline V1 had 16 passing tests, a nominal 11.20 s one-way run with zero collisions, 0.088 m max error and 0.020 m RMS error. Desktop/mobile baseline browser checks passed.
 
-Unit/physics tests cover wrench/mixer inversion, quaternion transforms, trajectory derivatives, gate bounds/direction/order, MPC gradients against finite differences, cost/bounds/reset, gravity, hover, rotor torque, floor collision, position/altitude/yaw steps, disturbances and three-minute stability. Browser tests execute the real WASM controller on desktop and Android-sized Chrome emulation, repeat complete laps, exercise keyboard flight and simultaneous touch sticks, verify camera switching, reset, ghost mode, portrait/landscape layout and runtime errors. Screenshots and machine-specific measurements are written to ignored `artifacts/`.
+V2 nominal run: **21 laps, zero collisions, zero resets**. Stationary launch peaks at **0.701 m** error; steady final lap is approximately **0.052 m max / 0.030 m RMS**, with no growth across laps. Steady lap time is **13.75 s**. All four disturbance runs complete four ordered laps without collisions or resets. These are deterministic simulated measurements, not real-flight claims; exact metrics are retained in the benchmark JSON.
 
-Measured nominal lap: **11.20 s**, zero collisions; maximum tracking error **0.088 m**, RMS **0.020 m** across the full 16.6 s rollout including settling. Separate side-impulse, wind, mass and motor-loss runs finish all gates with zero collisions; largest tracking error is **0.203 m** (mass). These are deterministic simulated results. Browser solver averages on this development host are approximately 0.04–0.09 ms with p95 0.10–0.20 ms; individual wall times vary by device and browser precision.
+Tests cover canonical vehicle scale, hover/max thrust, mixer inversion, motor response, torque axes, controller steps/recovery, three-minute hover, oriented gate geometry/direction/margin, ordered laps and best timing, periodic spline derivatives, heading quadrants, and MPC gradients/bounds/seam sampling. Browser tests execute real WASM, including 20 continuous laps on desktop and mobile emulation, finite state, reset count, input, touch, ghost and camera controls. Ignored `artifacts/` holds desktop chase/FPV, mobile portrait/landscape, start-line and banked-corner screenshots and timing reports.
 
-## Performance and remaining validation
+## Rendering and limitations
 
-Rendering and physics have independent schedules, with bounded 80 ms catch-up and at most 20 steps per animation frame. Slow frames discard excess wall time; simulation-time lap results remain consistent while real-time playback may slow. Diagnostics display achieved simulation/wall-time ratio, FPS, CPU physics submission, render submission and solver timings. Render time excludes asynchronous GPU completion. Pixel ratio starts at most 1.5 and adapts down to 0.75 when FPS is low; there are no shadow maps. Trails use reusable GPU buffers; physics state views and MPC working buffers are reused.
+The chase camera follows actual horizontal velocity, using body-forward at low speed, with time-based smoothing and turn lag. It sits about 1.05 m behind / 0.38 m above at 55° FOV. FPV position, forward and up are rigidly attached to the quad. The compact arena uses track paint, cones, barriers, gate supports, numbered tubular gates, fog and a cheap ground blob; there are no expensive shadow maps. Reference path is closed, actual trail is bounded to 3,000 samples, and ghost playback interpolates periodically across its seam.
 
-Docker Chromium uses software rendering on this host: roughly 18–21 FPS with near-real-time physics in the measured short run. That is a test environment measurement, not a Galaxy S24 FE benchmark or a guarantee of native GPU performance. Real Android Chrome/device profiling and public GitHub Pages smoke testing still need to be performed. The browser test does not emulate ARM CPU/GPU throughput. Time-optimal CasADi optimization remains a documented future upgrade; a fixed 12.6 s feasible spline is shipped now.
+Physics/render schedules remain independent. Catch-up is capped at 80 ms / 20 steps per frame; excess wall time is discarded, so slow hardware can play below real time without altering simulation-time lap measurements. Pixel ratio starts at ≤1.5 and adapts down to 0.75; path buffers and physics/MPC working buffers are reused. Diagnostics measure CPU submission and solver wall time, excluding asynchronous GPU completion. Software-rendered Docker Chromium is useful for layout/control regressions, not representative of native phone GPU performance. Real Android device profiling and public-site smoke testing remain external validation tasks.
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for references and licenses.
+No RL, vision, SLAM, WebGPU, backend, multiplayer or nonlinear time-optimal solver is included. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
