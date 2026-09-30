@@ -107,6 +107,28 @@ MuJoCo WASM physics
 
 It includes a flat walking area and an optional lightweight terrain course with uneven blocks, a shallow ramp, and low steps. Desktop keyboard controls and mobile touch controls are supported. See [`assets/interactive/g1/README.md`](assets/interactive/g1/README.md) for the runtime contract, model details, controls, and attribution.
 
+### FPV drone racing
+
+The [/drone-racing/](https://leomaglanoc.github.io/drone-racing/) demo flies an approximate 650 g FPV quad around a closed ten-gate circuit:
+
+```text
+periodic racing trajectory
+      ↓
+tracking MPC (25 Hz) → desired acceleration
+      ↓
+geometric flight controller (125 Hz) → thrust and torque
+      ↓
+motor mixer → first-order motor response
+      ↓
+MuJoCo WASM physics (250 Hz)
+      ↓
+Three.js rendering → chase / FPV view
+```
+
+Autopilot continuously wraps the reference trajectory without resetting the vehicle. Manual flight replaces MPC with assisted velocity commands and banked steering, using keyboard or dual touch sticks. Directional push buttons apply brief physical forces so the controller's deviation and recovery are visible. Ordered gate crossings track laps and best times; Race AI replays a looping recorded physics rollout. Everything runs locally in the browser with WebGL and no backend. The vehicle is an illustrative model, not a calibrated digital twin.
+
+See [`assets/interactive/drone-racing/README.md`](assets/interactive/drone-racing/README.md) for parameters, controls, validation and limitations.
+
 Other demos are organized as self-contained projects under [`assets/interactive/`](assets/interactive/). Each demo's local README or Docker configuration is the source of truth for its own commands.
 
 ## Editing the site
