@@ -1,9 +1,11 @@
+import { VEHICLE, motorResponse } from "./vehicle-config.js";
 import loadMujoco from "../../g1/vendor/mujoco.js";
 import { PARAMS, rotorWrench } from "./drone.js";
 import { rotation, rotate } from "./math.js";
 export class Simulation {
   constructor() {
     this.dt = 0.004;
+    this.motorSpeeds = new Float64Array(4);
     this.motors = new Float64Array(4);
     this.wrench = new Float64Array(4);
     this.force = new Float64Array(3);
@@ -34,7 +36,8 @@ export class Simulation {
     this.massScale = 1;
     this.efficiency = 1;
     this.wind.fill(0);
-    this.motors.fill(0);
+    this.motors.fill(Math.sqrt(PARAMS.mass * PARAMS.gravity / (4 * PARAMS.kf)));
+    this.motorSpeeds.set(this.motors);
     this.model.body_mass[this.body] = PARAMS.mass;
     this.mj.mj_setConst(this.model, this.data);
     this.mj.mj_forward(this.model, this.data);
@@ -61,7 +64,7 @@ export class Simulation {
   step() {
     const s = this.state,
       r = rotation(s.q, this.rotation),
-      w = rotorWrench(this.motors, this.wrench, this.efficiency);
+      w = rotorWrench(motorResponse(this.motorSpeeds, this.motors, this.dt), this.wrench, this.efficiency);
     this.bodyThrust[2] = w[0];
     rotate(r, this.bodyThrust, this.force);
     rotate(r, w.subarray(1), this.torque);

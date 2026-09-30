@@ -1,67 +1,67 @@
 {
   "nominal": {
-    "finishTime": 11.19973675243132,
+    "finishTime": 11.199785479534492,
     "gates": 8,
     "collisions": 0,
     "resets": 0,
-    "maxTrackingError": 0.08818386695430676,
-    "rmsTrackingError": 0.01985632056109737,
+    "maxTrackingError": 0.08629159145569039,
+    "rmsTrackingError": 0.019648420631617185,
     "mpc": {
-      "last": 0.04840299999995068,
-      "average": 0.09245221445783058,
-      "p95": 0.20606800000001613
+      "last": 0.04268199999995659,
+      "average": 0.0646544240963847,
+      "p95": 0.0942529999999806
     }
   },
   "impulse": {
-    "finishTime": 11.199733612436782,
+    "finishTime": 11.19977585876265,
     "gates": 8,
     "collisions": 0,
     "resets": 0,
-    "maxTrackingError": 0.17842106231984406,
-    "rmsTrackingError": 0.03279509208987323,
+    "maxTrackingError": 0.17537558420226687,
+    "rmsTrackingError": 0.03238835781096187,
     "mpc": {
-      "last": 0.045923000000016145,
-      "average": 0.05190174939759142,
-      "p95": 0.0877439999999865
+      "last": 0.03842199999996865,
+      "average": 0.04156068915662689,
+      "p95": 0.05969699999997147
     }
   },
   "wind": {
-    "finishTime": 11.19973608978319,
+    "finishTime": 11.199785624556833,
     "gates": 8,
     "collisions": 0,
     "resets": 0,
-    "maxTrackingError": 0.11651197554784354,
-    "rmsTrackingError": 0.02977083600046279,
+    "maxTrackingError": 0.08629159145569039,
+    "rmsTrackingError": 0.019556474284503484,
     "mpc": {
-      "last": 0.046126000000072054,
-      "average": 0.052182549397589796,
-      "p95": 0.09541400000000522
+      "last": 0.050713000000030206,
+      "average": 0.040262703614457704,
+      "p95": 0.06429099999996879
     }
   },
   "mass": {
-    "finishTime": 11.199750523822383,
+    "finishTime": 11.19981243658189,
     "gates": 8,
     "collisions": 0,
     "resets": 0,
-    "maxTrackingError": 0.20245256282278248,
-    "rmsTrackingError": 0.12580420085127839,
+    "maxTrackingError": 0.203677782474398,
+    "rmsTrackingError": 0.12548857318419665,
     "mpc": {
-      "last": 0.048023999999941225,
-      "average": 0.05037702409638506,
-      "p95": 0.061564999999973224
+      "last": 0.03637799999989966,
+      "average": 0.03997799277108421,
+      "p95": 0.05372099999999591
     }
   },
   "motor": {
-    "finishTime": 11.226233000369074,
+    "finishTime": 11.208724006935324,
     "gates": 8,
     "collisions": 0,
     "resets": 0,
-    "maxTrackingError": 0.09430800220046162,
-    "rmsTrackingError": 0.06038494000320183,
+    "maxTrackingError": 0.08629159145569039,
+    "rmsTrackingError": 0.030213981700065874,
     "mpc": {
-      "last": 0.0477450000000772,
-      "average": 0.051166216867468174,
-      "p95": 0.07125699999994595
+      "last": 0.03687000000002172,
+      "average": 0.04091686265059943,
+      "p95": 0.06196999999997388
     }
   }
 }

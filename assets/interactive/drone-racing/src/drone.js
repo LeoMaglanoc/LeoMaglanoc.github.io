@@ -1,13 +1,7 @@
 import { clamp } from "./math.js";
-export const PARAMS = Object.freeze({
-  mass: 0.029,
-  gravity: 9.81,
-  arm: 0.03253,
-  kf: 2.2417e-8,
-  km: 1.64786e-10,
-  maxForce: 0.12,
-  inertia: [1.4e-5, 1.4e-5, 2.17e-5],
-});
+import { VEHICLE } from "./vehicle-config.js";
+export const PARAMS = Object.freeze({ ...VEHICLE, arm: VEHICLE.armLength,
+  kf: VEHICLE.thrustCoefficient, km: VEHICLE.torqueCoefficient, maxForce: VEHICLE.maxRotorThrust });
 // Rotor positions (+X,+Y), (-X,+Y), (-X,-Y), (+X,-Y); spins +,-,+,-.
 // f_i=kf*w_i^2, yaw reaction=spin_i*km*w_i^2; tau=r cross [0,0,f].
 export function rotorWrench(speeds, out = new Float64Array(4), efficiency = 1) {

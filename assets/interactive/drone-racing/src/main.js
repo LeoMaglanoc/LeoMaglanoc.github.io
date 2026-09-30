@@ -17,7 +17,7 @@ async function start() {
     fetchAsset("../course.json"),
     fetchAsset("../trajectories/race_v1.json"),
     fetchAsset("../trajectories/ghost_v1.json"),
-    fetchAsset("../models/crazyflie.xml", false),
+    fetchAsset("../models/fpv.xml", false),
   ]);
   const trajectory = new Trajectory(trajectoryData),
     sim = await new Simulation().init(sceneXml(droneXml, course));

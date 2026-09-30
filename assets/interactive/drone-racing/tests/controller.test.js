@@ -1,10 +1,11 @@
+import { vehicleXml } from "../src/course.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { Simulation } from "../src/simulation.js";
 import { FlightController } from "../src/controller.js";
 import { yawOf, angleDifference } from "../src/math.js";
-const sim = await new Simulation().init(await readFile(new URL("../models/crazyflie.xml", import.meta.url), "utf8"));
+const sim = await new Simulation().init(vehicleXml(await readFile(new URL("../models/fpv.xml", import.meta.url), "utf8")));
 const ctrl = new FlightController();
 function run(ref, seconds) {
   for (let i = 0; i < seconds / sim.dt; i++) {

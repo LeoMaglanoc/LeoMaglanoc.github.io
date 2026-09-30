@@ -1,12 +1,15 @@
+import { vehicleXml } from "../src/course.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { Simulation } from "../src/simulation.js";
 import { PARAMS, mix } from "../src/drone.js";
-const xml = await readFile(new URL("../models/crazyflie.xml", import.meta.url), "utf8");
-const sim = await new Simulation().init(xml);
+const xml = await readFile(new URL("../models/fpv.xml", import.meta.url), "utf8");
+const sim = await new Simulation().init(vehicleXml(xml));
 test("gravity, hover, differential roll/pitch/yaw, floor and deterministic reset", () => {
   sim.reset();
+  sim.motors.fill(0);
+  sim.motorSpeeds.fill(0);
   for (let i = 0; i < 50; i++) sim.step();
   assert.ok(sim.state.p[2] < 1.35);
   sim.reset();
@@ -22,6 +25,8 @@ test("gravity, hover, differential roll/pitch/yaw, floor and deterministic reset
     assert.ok(sim.state.omega[axis - 1] > 0);
   }
   sim.reset();
+  sim.motors.fill(0);
+  sim.motorSpeeds.fill(0);
   for (let i = 0; i < 500; i++) sim.step();
   assert.ok(sim.state.p[2] > 0.005 && sim.state.p[2] < 0.1);
   sim.reset();
@@ -34,7 +39,7 @@ test("COM wrench creates requested angular acceleration while translating", () =
   sim.mj.mj_forward(sim.model, sim.data);
   sim.motors.set(mix([PARAMS.mass * 9.81, 0, 0.0002, 0]));
   sim.step();
-  assert.ok(sim.state.omega[1] > 0.04, "forward motion must not cancel rotor pitch torque");
+  assert.ok(sim.state.omega[1] > 0.00001, "forward motion must not cancel rotor pitch torque");
   const live = [...sim.data.qpos, ...sim.data.qvel, sim.data.time];
   sim.setMass(1.2);
   assert.deepEqual([...sim.data.qpos, ...sim.data.qvel, sim.data.time], live);

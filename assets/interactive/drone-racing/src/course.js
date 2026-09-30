@@ -1,3 +1,9 @@
+import { VEHICLE } from "./vehicle-config.js";
+export function vehicleXml(xml, spawn = {position: [0, 0, 1.5], yaw: 0}) {
+  const v = VEHICLE, a = v.armLength;
+  const arms = v.motorPositions.map((p, i) => `<geom type="capsule" fromto="0 0 0 ${p.join(' ')}" size=".009"/><site name="motor${i+1}" pos="${p.join(' ')}"/>`).join('');
+  return xml.replace('{{VEHICLE_BODY}}', `<body name="drone" pos="${spawn.position.join(' ')}" quat="${Math.cos(spawn.yaw/2)} 0 0 ${Math.sin(spawn.yaw/2)}"><freejoint/><inertial pos="0 0 0" mass="${v.mass}" diaginertia="${v.inertia.join(' ')}"/><geom name="hull" type="box" size="${v.visual.bodyLength/2} ${v.visual.bodyWidth/2} ${v.visual.bodyHeight/2}"/>${arms}</body>`);
+}
 export function sceneXml(droneXml, course) {
   const [width, height] = course.opening,
     f = course.frame;
@@ -15,7 +21,7 @@ export function sceneXml(droneXml, course) {
   const obstacles = course.obstacles
     .map(([x, y, z, r], i) => `<geom name="obstacle${i}" type="box" pos="${x} ${y} ${z}" size="${r} ${r} ${z}"/>`)
     .join("");
-  return droneXml.replace("</worldbody>", gates + obstacles + "</worldbody>");
+  return vehicleXml(droneXml).replace("</worldbody>", gates + obstacles + "</worldbody>");
 }
 // All course gates face +X. Interpolate the crossing, not the current position.
 export function gateCrossing(previous, current, center, opening, margin = 0.07) {

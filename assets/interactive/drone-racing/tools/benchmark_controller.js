@@ -7,7 +7,7 @@ import { Runner } from "../src/runner.js";
 const read = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const course = await read("../course.json"),
   trajectory = new Trajectory(await read("../trajectories/race_v1.json"));
-const xml = sceneXml(await readFile(new URL("../models/crazyflie.xml", import.meta.url), "utf8"), course);
+const xml = sceneXml(await readFile(new URL("../models/fpv.xml", import.meta.url), "utf8"), course);
 const sim = await new Simulation().init(xml),
   runner = new Runner(sim, trajectory, course),
   results = {};
