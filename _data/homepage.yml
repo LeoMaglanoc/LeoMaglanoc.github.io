@@ -30,7 +30,7 @@ featured_projects:
 
 builds:
   - title: Interactive Web Demos
-    description: "Browser-native interactive demos: autonomous drone racing with tracking MPC, a Unitree G1 locomotion simulator, 3D reconstruction with SLAM, and an RL-powered Pong agent."
+    description: "A Unitree G1 locomotion simulator, a Franka drawing demo, autonomous drone racing with tracking MPC, and 3D reconstruction with SLAM."
     links:
       - label: Humanoid Walking
         url: /g1/
