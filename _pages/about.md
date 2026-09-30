@@ -30,7 +30,7 @@ nav_order: 1
 </section>
 
 <section class="homepage-section" id="projects" aria-labelledby="projects-title">
-  <h2 id="projects-title">Featured Projects</h2>
+  <h2 id="projects-title">Selected Work</h2>
   {% include homepage_items.liquid items=site.data.homepage.featured_projects %}
 </section>
 
