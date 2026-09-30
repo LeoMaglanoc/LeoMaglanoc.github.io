@@ -1,0 +1,1 @@
+{"name":"drone-racing","private":true,"type":"module","scripts":{"test":"node --test tests/unit.test.js","validate":"node tools/benchmark_controller.js"}}
