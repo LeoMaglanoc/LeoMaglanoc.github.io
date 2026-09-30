@@ -129,6 +129,28 @@ Autopilot continuously wraps the reference trajectory without resetting the vehi
 
 See [`assets/interactive/drone-racing/README.md`](assets/interactive/drone-racing/README.md) for parameters, controls, validation and limitations.
 
+### Panda drawing & repair
+
+The [/painter/](https://leomaglanoc.github.io/painter/) demo lets you draw ordered strokes, watch a Franka Panda reproduce them, then erase and repair its output:
+
+```text
+reference strokes → resampling → marker-tip IK → joint targets
+      ↓
+Panda actuators → MuJoCo WASM physics → actual marker-tip motion
+      ↓
+CURRENT ink raster + physical board texture
+      ↓
+erase ink → directional missing-stroke detection
+      ↓
+overlapping repair runs → nearest-endpoint ordering → IK → redraw
+      ↓
+observe again → complete or report stalled repair
+```
+
+CURRENT records actual simulated motion. Detection tolerates sideways tracking error while preserving gaps along a stroke. Manual repair and a two-second auto-repair countdown redraw missing regions; erasing during repair cancels the active plan and replans from the current robot pose. Pointer/touch controls, Canvas, Three.js, and MuJoCo run locally in the browser with no backend or WebGPU requirement.
+
+See [`assets/interactive/painter/README.md`](assets/interactive/painter/README.md) for implementation details, validation, limitations, and attribution.
+
 Other demos are organized as self-contained projects under [`assets/interactive/`](assets/interactive/). Each demo's local README or Docker configuration is the source of truth for its own commands.
 
 ## Editing the site
