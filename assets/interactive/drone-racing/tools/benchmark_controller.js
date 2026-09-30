@@ -11,7 +11,7 @@ const xml = sceneXml(await readFile(new URL("../models/fpv.xml", import.meta.url
 const sim = await new Simulation().init(xml),
   runner = new Runner(sim, trajectory, course),
   results = {};
-for (const kind of ["nominal", "impulse", "wind", "mass", "motor"]) {
+for (const kind of ["nominal", "left", "right", "front", "back", "mass", "motor"]) {
   runner.reset(false);
   const samples = [],
     laps = [];

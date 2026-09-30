@@ -27,7 +27,7 @@ const fs = require("node:fs");
     const rollouts = await page.evaluate(() => {
       const { runner: r } = window.drone,
         results = {};
-      for (const disturbance of ["nominal", "impulse", "wind", "mass", "motor"]) {
+      for (const disturbance of ["nominal", "left", "right", "front", "back", "mass", "motor"]) {
         r.reset(false);
         let applied = false;
         while (r.time < r.trajectory.duration * 3 + 1) {
@@ -60,6 +60,14 @@ const fs = require("node:fs");
       window.drone.renderer.render(window.drone.runner, window.drone.ghost);
     });
     await page.screenshot({ path: mobile ? "artifacts/mobile-start.png" : "artifacts/start-line.png" });
+    await page.keyboard.down("KeyA");
+    assert.equal(await page.evaluate(() => window.drone.input.update().turn), 1);
+    await page.keyboard.down("ShiftLeft");
+    const strafe = await page.evaluate(() => window.drone.input.update());
+    assert.equal(strafe.strafe, 1);
+    assert.equal(strafe.turn, 0);
+    await page.keyboard.up("ShiftLeft");
+    await page.keyboard.up("KeyA");
     const before = await page.evaluate(() => [...window.drone.runner.sim.state.p]);
     await page.keyboard.down("KeyW");
     await page.keyboard.down("KeyR");
@@ -122,13 +130,58 @@ const fs = require("node:fs");
         type: "touchMove",
         touchPoints: [
           { ...point(left, 1), y: left.y + left.height * 0.2 },
-          { ...point(right, 2), y: right.y + right.height * 0.2 },
+          { ...point(right, 2), x: right.x + right.width * 0.2, y: right.y + right.height * 0.2 },
         ],
       });
       const command = await page.evaluate(() => window.drone.input.update());
-      assert.ok(command.vertical > 0.5 && command.forward > 0.5, "simultaneous sticks");
-      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      assert.deepEqual(await page.evaluate(() => window.drone.input.update()), { forward: 0, strafe: 0, vertical: 0, yaw: 0 });
+      assert.ok(command.vertical > 0.5 && command.forward > 0.5 && command.turn > 0.5, "simultaneous climb, throttle and banked steering");
+      const touchFlight = await page.evaluate(() => {
+        const d = window.drone,
+          r = d.runner,
+          s = r.sim.state;
+        const p = [...s.p],
+          q = [...s.q],
+          yaw = (q) => Math.atan2(2 * (q[0] * q[3] + q[1] * q[2]), 1 - 2 * (q[2] ** 2 + q[3] ** 2));
+        for (let i = 0; i < 300; i++) r.step(d.input.update());
+        return {
+          climb: s.p[2] - p[2],
+          distance: Math.hypot(s.p[0] - p[0], s.p[1] - p[1]),
+          turn: yaw(s.q) - yaw(q),
+          tilt: Math.acos(1 - 2 * (s.q[1] ** 2 + s.q[2] ** 2)),
+        };
+      });
+      assert.ok(
+        touchFlight.climb > 0.5 && touchFlight.distance > 1 && touchFlight.turn > 0.5 && touchFlight.tilt > 0.15,
+        "touch input actually climbs, moves and banks"
+      );
+      await page.evaluate(() => {
+        window.drone.renderer.reset();
+        window.drone.renderer.render(window.drone.runner, window.drone.ghost);
+      });
+      await page.screenshot({ path: "artifacts/mobile-touch-turn.png" });
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ ...point(left, 1), x: left.x + left.width * 0.2 }, point(right, 2)],
+      });
+      assert.ok(await page.evaluate(() => window.drone.input.update().yaw > 0.5), "left touch stick rotates in place");
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
+      assert.deepEqual(await page.evaluate(() => window.drone.input.update()), { forward: 0, strafe: 0, turn: 0, vertical: 0, yaw: 0 });
+      const releaseSpeed = await page.evaluate(() => {
+        const d = window.drone;
+        for (let i = 0; i < 1000; i++) d.runner.step(d.input.update());
+        return Math.hypot(...d.runner.sim.state.v);
+      });
+      assert.ok(releaseSpeed < 0.3, "releasing both touch sticks brakes to hover");
+      for (const direction of ["left", "right", "front", "back"]) {
+        await page.locator(`[data-disturb="${direction}"]`).click();
+        const force = await page.evaluate(() => Math.hypot(...window.drone.runner.sim.wind));
+        assert.ok(Math.abs(force - 4) < 1e-8, "mobile push button applies force");
+        await page.evaluate(() => {
+          const d = window.drone;
+          for (let i = 0; i < 1000; i++) d.runner.step(d.input.update());
+        });
+        assert.equal(await page.evaluate(() => window.drone.runner.pushUntil), 0, "push expires");
+      }
       await page.setViewportSize({ width: 915, height: 412 });
       await page.waitForTimeout(250);
       assert.ok(await page.locator("#right-stick").isVisible());
