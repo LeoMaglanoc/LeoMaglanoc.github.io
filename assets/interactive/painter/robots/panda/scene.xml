@@ -1,0 +1,9 @@
+<mujoco model="Panda drawing and repair">
+  <include file="panda.xml"/>
+  <option timestep="0.002"/>
+  <worldbody>
+    <geom name="floor" type="plane" size="2 2 0.05" rgba="0.13 0.18 0.19 1"/>
+    <geom name="canvas_support" type="box" pos="0.55 0 0.2" size="0.29 0.24 0.2" rgba="0.30 0.23 0.18 1" group="1"/>
+    <geom name="canvas" type="box" pos="0.55 0 0.405" size="0.25 0.20 0.005" rgba="1 1 1 1" group="1"/>
+  </worldbody>
+</mujoco>
