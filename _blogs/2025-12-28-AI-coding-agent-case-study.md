@@ -12,6 +12,10 @@ I've been experimenting with Codex, OpenAI's coding agent (GPT-5.2-Codex with hi
 
 I 'vibecoded' in less than an hour without writing a single code line and having any previous experience in both areas. I additionally used ChatGPT for brainstorming. I'm amazed by the progress and capabilities of generative, agentic AI, even though they have some limitations too.
 
+Interactive demos and games:
+
+- [SLAM / 3D Reconstruction]({{ '/slam/' | relative_url }})
+- [Panda Robot Drawing & Repair]({{ '/painter/' | relative_url }})
 - [Autonomous Drone Racing]({{ '/drone-racing/' | relative_url }})
 - [Doom]({{ '/doom/' | relative_url }})
 - [Unitree G1 Locomotion Playground]({{ '/g1/' | relative_url }})
