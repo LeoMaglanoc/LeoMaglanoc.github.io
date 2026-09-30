@@ -58,7 +58,9 @@ export class FlightUI {
     this.el["ghost-time"].textContent = `YOU · lap ${race.lap} · ${race.currentLapTime.toFixed(2)} s · best ${
       race.bestLapTime?.toFixed(2) ?? "—"
     } / AI · ${ghost.finishTime.toFixed(2)} s`;
-    document.querySelector("[data-disturb=mass]").setAttribute("aria-pressed", runner.sim.massScale > 1);
-    document.querySelector("[data-disturb=motor]").setAttribute("aria-pressed", runner.sim.efficiency < 1);
+    if (!paused && runner.time < runner.pushFeedbackUntil) {
+      const label = runner.pushLabel === "front" ? "forward" : runner.pushLabel;
+      this.el.status.textContent = runner.pushUntil ? `Pushing ${label} · 4 N` : `Recovering from push ${label}`;
+    }
   }
 }

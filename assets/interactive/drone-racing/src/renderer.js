@@ -127,6 +127,9 @@ export class FlightRenderer {
     );
     this.shadow.position.z = 0.012;
     this.scene.add(this.shadow);
+    this.pushArrow = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(), 0.65, 0xffc18b, 0.15, 0.08);
+    this.pushArrow.visible = false;
+    this.scene.add(this.pushArrow);
     this.drone = this.buildDrone(0xb5f19b);
     this.scene.add(this.drone);
     this.ghost = this.buildDrone(0xc8b2ff, true);
@@ -269,6 +272,13 @@ export class FlightRenderer {
     this.shadow.position.set(s.p[0], s.p[1], 0.012);
     this.shadow.scale.setScalar(1 + s.p[2] * 0.25);
     this.shadow.material.opacity = 0.25 / (1 + s.p[2] * 0.4);
+    this.pushArrow.visible = runner.pushUntil > runner.time;
+    if (this.pushArrow.visible) {
+      this.pushArrow.position.fromArray(s.p);
+      this.pushArrow.position.z += 0.12;
+      this.forward.fromArray(runner.sim.wind).normalize();
+      this.pushArrow.setDirection(this.forward);
+    }
     this.drone.position.fromArray(s.p);
     this.q.set(s.q[1], s.q[2], s.q[3], s.q[0]);
     this.drone.quaternion.copy(this.q);

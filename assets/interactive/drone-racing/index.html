@@ -45,11 +45,12 @@
           <button id="reset" disabled>↺ Reset</button><button id="pause" disabled>Pause</button><button id="camera" disabled>Chase → FPV</button>
         </div>
         <div class="disturbances">
-          <span class="eyebrow">TEST THE FEEDBACK</span>
+          <span class="eyebrow">GIVE IT A PUSH</span>
           <div>
-            <button data-disturb="wind">Wind gust</button><button data-disturb="impulse">Side impulse</button
-            ><button data-disturb="mass" aria-pressed="false">Mass +20%</button
-            ><button data-disturb="motor" aria-pressed="false">Motor 3 −10%</button>
+            <button data-disturb="left" title="Apply a 4 N leftward force for 0.55 seconds">← Push left</button>
+            <button data-disturb="right" title="Apply a 4 N rightward force for 0.55 seconds">Push right →</button>
+            <button data-disturb="back" title="Apply a 4 N backward force for 0.55 seconds">↓ Push back</button>
+            <button data-disturb="front" title="Apply a 4 N forward force for 0.55 seconds">Push forward ↑</button>
           </div>
         </div>
         <div class="legend">
@@ -63,12 +64,14 @@
           <p id="race-stats">Collisions 0 · Resets 0</p>
           <p>Timings measure this device. Lap time uses simulation time; a slow device may run below real time.</p>
         </details>
-        <p class="instructions">W/S forward · A/D strafe · Q/E yaw<br />R/F or ↑/↓ altitude · Space pause · Backspace reset</p>
+        <p class="instructions">
+          W/S forward/back · A/D bank & turn · Q/E rotate<br />Shift+A/D strafe · R/F altitude<br />Space pause · Backspace reset
+        </p>
         <p id="ghost-time" hidden></p>
       </aside>
       <section class="sticks" aria-label="Touch flight controls">
         <div class="stick" id="left-stick" role="group" aria-label="Altitude and yaw stick"><i></i><span>ALTITUDE / YAW</span></div>
-        <div class="stick" id="right-stick" role="group" aria-label="Forward and strafe stick"><i></i><span>FORWARD / STRAFE</span></div>
+        <div class="stick" id="right-stick" role="group" aria-label="Forward and banked steering stick"><i></i><span>FORWARD / TURN</span></div>
       </section>
       <div id="loading" role="status">Starting MuJoCo physics…</div>
       <p id="error" role="alert" hidden></p>

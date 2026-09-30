@@ -518,3 +518,10 @@ output {
     margin-top: 8px;
   }
 }
+
+/* Pushes remain available while flying on touch devices. */
+@media (max-width: 800px), (max-height: 550px) {
+  body.manual .disturbances {
+    display: block;
+  }
+}

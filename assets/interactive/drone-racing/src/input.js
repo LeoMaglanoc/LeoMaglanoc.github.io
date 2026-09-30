@@ -3,8 +3,8 @@ export class FlightInput {
     this.keys = new Set();
     this.sticks = { left: [0, 0], right: [0, 0] };
     this.pointers = new Map();
-    this.current = { forward: 0, strafe: 0, vertical: 0, yaw: 0 };
-    const allowed = new Set(["KeyW", "KeyA", "KeyS", "KeyD", "KeyQ", "KeyE", "KeyR", "KeyF", "ArrowUp", "ArrowDown"]);
+    this.current = { forward: 0, strafe: 0, turn: 0, vertical: 0, yaw: 0 };
+    const allowed = new Set(["KeyW", "KeyA", "KeyS", "KeyD", "KeyQ", "KeyE", "KeyR", "KeyF", "ArrowUp", "ArrowDown", "ShiftLeft", "ShiftRight"]);
     window.addEventListener("keydown", (e) => {
       if (allowed.has(e.code) && !["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) {
         e.preventDefault();
@@ -55,11 +55,15 @@ export class FlightInput {
   }
   update() {
     const k = (code) => (this.keys.has(code) ? 1 : 0),
-      clamp = (x) => Math.max(-1, Math.min(1, x));
-    this.current.forward = clamp(k("KeyW") - k("KeyS") + this.sticks.right[1]);
-    this.current.strafe = clamp(k("KeyA") - k("KeyD") - this.sticks.right[0]);
-    this.current.yaw = clamp(k("KeyQ") - k("KeyE") - this.sticks.left[0]);
-    this.current.vertical = clamp(k("KeyR") + k("ArrowUp") - k("KeyF") - k("ArrowDown") + this.sticks.left[1]);
+      clamp = (x) => Math.max(-1, Math.min(1, x)),
+      axis = (x) => Math.sign(x) * Math.max(0, (Math.abs(x) - 0.08) / 0.92);
+    this.current.forward = clamp(k("KeyW") - k("KeyS") + axis(this.sticks.right[1]));
+    const shifted = this.keys.has("ShiftLeft") || this.keys.has("ShiftRight");
+    const steering = k("KeyA") - k("KeyD");
+    this.current.strafe = shifted ? steering : 0;
+    this.current.turn = clamp((shifted ? 0 : steering) - axis(this.sticks.right[0]));
+    this.current.yaw = clamp(k("KeyQ") - k("KeyE") - axis(this.sticks.left[0]));
+    this.current.vertical = clamp(k("KeyR") + k("ArrowUp") - k("KeyF") - k("ArrowDown") + axis(this.sticks.left[1]));
     return this.current;
   }
 }
