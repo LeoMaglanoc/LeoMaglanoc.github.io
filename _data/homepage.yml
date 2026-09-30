@@ -32,16 +32,14 @@ builds:
   - title: Interactive Web Demos
     description: "Browser-native interactive demos: autonomous drone racing with tracking MPC, a Unitree G1 locomotion simulator, 3D reconstruction with SLAM, and an RL-powered Pong agent."
     links:
+      - label: Humanoid Walking
+        url: /g1/
+      - label: Robo Drawing
+        url: /painter/
       - label: Drone Racing
         url: /drone-racing/
-      - label: Panda Drawing & Repair
-        url: /painter/
-      - label: Unitree G1 Simulator
-        url: /g1/
       - label: SLAM
         url: /slam/
-      - label: RL Pong
-        url: /assets/interactive/pong/index.html
 
   - title: EasyBuy
     description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
