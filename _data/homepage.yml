@@ -34,6 +34,8 @@ builds:
     links:
       - label: Drone Racing
         url: /drone-racing/
+      - label: Panda Drawing & Repair
+        url: /painter/
       - label: Unitree G1 Simulator
         url: /g1/
       - label: SLAM

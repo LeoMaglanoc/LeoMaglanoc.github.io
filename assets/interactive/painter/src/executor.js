@@ -1,10 +1,24 @@
-import { C } from './config.js';
+import { C } from "./config.js";
 export class Executor {
-  constructor(sim, ink) { this.sim = sim; this.ink = ink; this.path = null; this.lastInk = null; }
-  get active() { return !!this.path; }
-  start(path) { this.cancel(); this.path = path; this.index = 0; this.begin(); }
+  constructor(sim, ink) {
+    this.sim = sim;
+    this.ink = ink;
+    this.path = null;
+    this.lastInk = null;
+  }
+  get active() {
+    return !!this.path;
+  }
+  start(path) {
+    this.cancel();
+    this.path = path;
+    this.index = 0;
+    this.begin();
+  }
   cancel() {
-    this.flushInk(); this.path = null; this.lastInk = null;
+    this.flushInk();
+    this.path = null;
+    this.lastInk = null;
     if (this.sim.data) this.sim.data.ctrl.set(this.sim.data.qpos.subarray(0, 7));
   }
   flushInk() {
@@ -19,8 +33,11 @@ export class Executor {
     else if (!this.lastInk) this.lastInk = this.sim.tipPosition();
     this.from = Float64Array.from(this.sim.data.ctrl.slice(0, 7));
     this.elapsed = 0;
-    this.duration = Math.max(0.05, Math.max(...waypoint.q.map((q, i) => Math.abs(q - this.from[i]))) / (waypoint.markerDown ? C.drawSpeed : C.travelSpeed));
-    this.settle = waypoint.markerDown ? 0.08 : 0.25;
+    this.duration = Math.max(
+      0.05,
+      Math.max(...waypoint.q.map((q, i) => Math.abs(q - this.from[i]))) / (waypoint.markerDown ? C.drawSpeed : C.travelSpeed)
+    );
+    this.settle = waypoint.markerDown ? 0.15 : 0.25;
   }
   step() {
     if (this.path) {
@@ -33,11 +50,18 @@ export class Executor {
     if (!this.path) return false;
     if (this.path[this.index].markerDown) {
       const p = this.sim.tipPosition();
-      if (Math.hypot(p[0] - this.lastInk[0], p[1] - this.lastInk[1]) >= 0.002) { this.ink.add(this.lastInk, p); this.lastInk = p; }
+      if (Math.hypot(p[0] - this.lastInk[0], p[1] - this.lastInk[1]) >= 0.002) {
+        this.ink.add(this.lastInk, p);
+        this.lastInk = p;
+      }
     }
     if (this.elapsed >= this.duration + this.settle) {
       this.index++;
-      if (this.index === this.path.length) { this.flushInk(); this.path = null; return true; }
+      if (this.index === this.path.length) {
+        this.flushInk();
+        this.path = null;
+        return true;
+      }
       this.begin();
     }
     return false;
