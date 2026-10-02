@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><title>Physics parity harness</title>
+  <script type="module">
+    import { Simulation, loadJSON } from "../src/simulation.js";
+    const metadata = {
+      physics_timestep: 0.01,
+      action_repeat: 5,
+      policy_timestep: 0.05,
+      action_min: [-1],
+      action_max: [1],
+    };
+    try {
+      window.simulation = new Simulation(metadata);
+      await window.simulation.init();
+      window.ready = true;
+    } catch (error) {
+      window.failure = error.message;
+      console.error(error);
+    }
+  </script>
+</html>

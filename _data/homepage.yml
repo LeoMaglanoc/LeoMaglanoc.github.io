@@ -30,10 +30,12 @@ featured_projects:
 
 builds:
   - title: Interactive Web Demos
-    description: "A Unitree G1 locomotion simulator, a Franka drawing demo, autonomous drone racing with tracking MPC, and 3D reconstruction with SLAM."
+    description: "A Unitree G1 locomotion simulator, a TinyDreamer world-model demo, a Franka drawing demo, autonomous drone racing with tracking MPC, and 3D reconstruction with SLAM."
     links:
       - label: Humanoid Walking
         url: /g1/
+      - label: TinyDreamer
+        url: /tiny-dreamer/
       - label: Robo Drawing
         url: /painter/
       - label: Drone Racing

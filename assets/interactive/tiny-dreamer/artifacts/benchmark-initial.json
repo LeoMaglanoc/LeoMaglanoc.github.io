@@ -1,0 +1,40 @@
+{
+  "updates": 1000,
+  "seconds": 123.35421073600082,
+  "updates_per_second": 8.106735830365544,
+  "torch_threads": 1,
+  "config": {
+    "seed": 7,
+    "obs_dim": 5,
+    "action_dim": 1,
+    "hidden": 64,
+    "stoch": 8,
+    "classes": 8,
+    "embed": 64,
+    "width": 128,
+    "batch": 16,
+    "sequence": 32,
+    "horizon": 15,
+    "imagination_batch": 64,
+    "action_repeat": 5,
+    "discount": 0.99,
+    "lambda_": 0.95,
+    "model_lr": 0.0003,
+    "actor_lr": 0.0001,
+    "critic_lr": 0.0003,
+    "kl_scale": 0.1,
+    "free_nats": 1.0,
+    "exploration": 0.3
+  },
+  "last_metrics": {
+    "loss": 0.23409101366996765,
+    "reconstruction": 0.038718774914741516,
+    "reward": 0.0030825838912278414,
+    "continuation": 1.7797712644096464e-05,
+    "kl": 1.5904617309570312,
+    "prediction": 0.033225689083337784,
+    "actor": -15.927632331848145,
+    "critic": 0.6736695170402527,
+    "imagined_reward": 0.19536517560482025
+  }
+}

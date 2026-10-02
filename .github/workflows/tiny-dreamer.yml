@@ -1,0 +1,30 @@
+name: TinyDreamer regressions
+on:
+  pull_request:
+    paths: ["assets/interactive/tiny-dreamer/**", "assets/interactive/g1/vendor/**", "assets/interactive/doom/vendor/ort/**", "_pages/tiny-dreamer.md", "_layouts/tiny-dreamer-fullscreen.html", ".github/workflows/tiny-dreamer.yml"]
+  push:
+    paths: ["assets/interactive/tiny-dreamer/**", "assets/interactive/g1/vendor/**", "assets/interactive/doom/vendor/ort/**", "_pages/tiny-dreamer.md", "_layouts/tiny-dreamer-fullscreen.html", ".github/workflows/tiny-dreamer.yml"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build CPU Docker environment
+        run: docker compose -f assets/interactive/tiny-dreamer/docker-compose.yml build trainer
+      - name: Environment, learning and export contracts
+        run: docker compose -f assets/interactive/tiny-dreamer/docker-compose.yml run --rm trainer python -m pytest -q
+      - name: Local runtime, physics parity, swing-up and mobile controls
+        run: |
+          docker compose -f assets/interactive/tiny-dreamer/docker-compose.yml up -d website
+          docker compose -f assets/interactive/tiny-dreamer/docker-compose.yml run --rm browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tiny-dreamer-validation
+          path: |
+            assets/interactive/tiny-dreamer/artifacts/browser-results.json
+            assets/interactive/tiny-dreamer/artifacts/*.png
+      - name: Stop preview services
+        if: always()
+        run: docker compose -f assets/interactive/tiny-dreamer/docker-compose.yml down

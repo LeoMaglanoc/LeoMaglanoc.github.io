@@ -1,0 +1,13 @@
+__pycache__/
+.pytest_cache/
+node_modules/
+artifacts/*.pt
+artifacts/*.npz
+artifacts/*.png
+
+artifacts/*.pkl
+
+artifacts/first-run/
+
+artifacts/*.tmp
+artifacts/second-run/

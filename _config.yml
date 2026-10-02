@@ -205,6 +205,17 @@ exclude:
   - assets/interactive/drone-racing/tools/
   - assets/interactive/drone-racing/tests/
   - assets/interactive/drone-racing/artifacts/
+  # TinyDreamer's exported models are public; CPU training/test tooling stays local.
+  - assets/interactive/tiny-dreamer/training/
+  - assets/interactive/tiny-dreamer/tests/
+  - assets/interactive/tiny-dreamer/artifacts/
+  - assets/interactive/tiny-dreamer/node_modules/
+  - assets/interactive/tiny-dreamer/Dockerfile
+  - assets/interactive/tiny-dreamer/docker-compose.yml
+  - assets/interactive/tiny-dreamer/requirements.txt
+  - assets/interactive/tiny-dreamer/package.json
+  - assets/interactive/tiny-dreamer/package-lock.json
+  - assets/interactive/cartpole/plan.md
   # Training checkpoints and TensorBoard logs stay in the project for local
   # work, but are not needed by the browser game or the public site.
   - assets/interactive/pong/models/
@@ -268,7 +279,7 @@ jekyll-minifier:
   compress_javascript: false # set to false since we are using terser as the js minifier
   # The G1 playground owns its layout CSS; the production CSS minifier rewrites
   # custom-property expressions such as var(--edge) into invalid CSS.
-  exclude: ["robots.txt", "assets/js/search/*.js", "assets/interactive/g1/g1.css", "assets/interactive/drone-racing/drone.css"]
+  exclude: ["robots.txt", "assets/js/search/*.js", "assets/interactive/g1/g1.css", "assets/interactive/drone-racing/drone.css", "assets/interactive/tiny-dreamer/tiny-dreamer.css"]
 
 # -----------------------------------------------------------------------------
 # Terser

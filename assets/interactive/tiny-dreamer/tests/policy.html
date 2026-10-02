@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><title>Policy harness</title>
+  <script src="../../doom/vendor/ort/ort.min.js"></script>
+  <script type="module">
+    import { Policy } from "../src/policy.js";
+    import { Simulation } from "../src/simulation.js";
+    import { Runner } from "../src/runner.js";
+    try {
+      const policy = new Policy();
+      await policy.init();
+      const sim = new Simulation(policy.metadata);
+      await sim.init();
+      window.runner = new Runner(sim, policy);
+      window.ready = true;
+    } catch (error) {
+      window.failure = error.message;
+      console.error(error);
+    }
+  </script>
+</html>

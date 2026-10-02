@@ -1,0 +1,94 @@
+{
+  "desktop": {
+    "parity": {
+      "errors": {
+        "qpos": 0,
+        "qvel": 2.220446049250313e-16,
+        "observation": 0,
+        "reward": 6.938893903907228e-17
+      },
+      "version": "3.12.0"
+    },
+    "inferenceParity": {
+      "posterior": 1.7881393432617188e-7,
+      "rssm": 4.76837158203125e-7,
+      "actor": 1.1920928955078125e-7
+    },
+    "control": {
+      "time": 10,
+      "return": 744.1267550103646,
+      "upright_fraction": 0.655,
+      "longest_upright_seconds": 6.4,
+      "max_action": 0.9999592900276184,
+      "error_mean": 0.020578531277280675,
+      "dream_length": 15
+    },
+    "disturbanceDream": {
+      "baseline": 0.016758153684950376,
+      "pushed": [
+        {
+          "pushError": 0.052732411994783956,
+          "changedPrediction": 0,
+          "oldDreamPreserved": true,
+          "reanchored": true,
+          "tailError": 0.023820712065334232
+        },
+        {
+          "pushError": 0.03537103348422934,
+          "changedPrediction": 0,
+          "oldDreamPreserved": true,
+          "reanchored": true,
+          "tailError": 0.014663956629292332
+        }
+      ]
+    },
+    "errors": [],
+    "external_requests": []
+  },
+  "mobile": {
+    "parity": {
+      "errors": {
+        "qpos": 0,
+        "qvel": 2.220446049250313e-16,
+        "observation": 0,
+        "reward": 6.938893903907228e-17
+      },
+      "version": "3.12.0"
+    },
+    "inferenceParity": {
+      "posterior": 1.7881393432617188e-7,
+      "rssm": 4.76837158203125e-7,
+      "actor": 1.1920928955078125e-7
+    },
+    "control": {
+      "time": 10,
+      "return": 744.1267550103646,
+      "upright_fraction": 0.655,
+      "longest_upright_seconds": 6.4,
+      "max_action": 0.9999592900276184,
+      "error_mean": 0.020578531277280675,
+      "dream_length": 15
+    },
+    "disturbanceDream": {
+      "baseline": 0.016758153684950376,
+      "pushed": [
+        {
+          "pushError": 0.052732411994783956,
+          "changedPrediction": 0,
+          "oldDreamPreserved": true,
+          "reanchored": true,
+          "tailError": 0.023820712065334232
+        },
+        {
+          "pushError": 0.03537103348422934,
+          "changedPrediction": 0,
+          "oldDreamPreserved": true,
+          "reanchored": true,
+          "tailError": 0.014663956629292332
+        }
+      ]
+    },
+    "errors": [],
+    "external_requests": []
+  }
+}

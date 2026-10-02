@@ -1,0 +1,196 @@
+{
+  "domain": "cartpole",
+  "task": "swingup",
+  "observation_keys": [
+    "position",
+    "velocity"
+  ],
+  "observation_order": [
+    "cart_position",
+    "pole_cos",
+    "pole_sin",
+    "cart_velocity",
+    "pole_angular_velocity"
+  ],
+  "observation_dim": 5,
+  "action_dim": 1,
+  "qpos_order": [
+    "slider",
+    "hinge_1"
+  ],
+  "qvel_order": [
+    "slider",
+    "hinge_1"
+  ],
+  "angle_units": "radians",
+  "actuator_gear": [
+    [
+      10.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "normalization": {
+    "mean": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0,
+      3.0,
+      8.0
+    ],
+    "method": "fixed physical scales; no fitted statistics"
+  },
+  "action_min": [
+    -1.0
+  ],
+  "action_max": [
+    1.0
+  ],
+  "physics_timestep": 0.01,
+  "native_control_timestep": 0.01,
+  "action_repeat": 5,
+  "policy_timestep": 0.05,
+  "reward_aggregation": "mean over held native controls",
+  "episode_seconds": 10,
+  "reset_distribution": "dm_control native swingup: x~N(0,.01), theta~N(pi,.01), velocities~N(0,.01)",
+  "architecture": {
+    "seed": 7,
+    "obs_dim": 5,
+    "action_dim": 1,
+    "hidden": 64,
+    "stoch": 8,
+    "classes": 8,
+    "embed": 64,
+    "width": 128,
+    "batch": 16,
+    "sequence": 32,
+    "horizon": 30,
+    "imagination_batch": 64,
+    "action_repeat": 5,
+    "discount": 0.99,
+    "lambda_": 0.95,
+    "model_lr": 0.0003,
+    "actor_lr": 0.0001,
+    "critic_lr": 0.0003,
+    "kl_scale": 0.03,
+    "free_nats": 1.0,
+    "exploration": 0.1,
+    "overshoot": 5,
+    "deterministic_imagination": true
+  },
+  "training_updates": 22000,
+  "inference": "categorical probabilities; tanh actor mean",
+  "onnx_opset": 17,
+  "versions": {
+    "dm_control": "1.0.43",
+    "mujoco": "3.10.0",
+    "torch": "2.5.1+cpu"
+  },
+  "graphs": {
+    "posterior": {
+      "inputs": [
+        "h",
+        "z",
+        "action",
+        "observation"
+      ],
+      "outputs": [
+        "next_h",
+        "next_z",
+        "decoded"
+      ],
+      "input_shapes": {
+        "h": [
+          1,
+          64
+        ],
+        "z": [
+          1,
+          8,
+          8
+        ],
+        "action": [
+          1,
+          1
+        ],
+        "observation": [
+          1,
+          5
+        ]
+      }
+    },
+    "rssm": {
+      "inputs": [
+        "h",
+        "z",
+        "action"
+      ],
+      "outputs": [
+        "next_h",
+        "next_z",
+        "decoded",
+        "reward"
+      ],
+      "input_shapes": {
+        "h": [
+          1,
+          64
+        ],
+        "z": [
+          1,
+          8,
+          8
+        ],
+        "action": [
+          1,
+          1
+        ]
+      }
+    },
+    "actor": {
+      "inputs": [
+        "h",
+        "z"
+      ],
+      "outputs": [
+        "action"
+      ],
+      "input_shapes": {
+        "h": [
+          1,
+          64
+        ],
+        "z": [
+          1,
+          8,
+          8
+        ]
+      }
+    }
+  },
+  "parity": {
+    "atol": 1e-05,
+    "rtol": 1e-05,
+    "max_absolute_errors": {
+      "posterior": 9.5367431640625e-07,
+      "rssm": 1.7881393432617188e-07,
+      "actor": 1.1920928955078125e-07
+    }
+  },
+  "sha256": {
+    "posterior.onnx": "c55c08c0bfb60227a6cb83c2c5a6813e0bfed4b91cb29bb0f00705dbe6087a61",
+    "actor.onnx": "6fe120c48fd59f872f87aa0c865506687b0b6e875d6a630f527d2c80b3119cdc",
+    "rssm.onnx": "ef790cea40117cf8869b6b76aaef1a9ea86476813c1c111f28e5d94f8b4f55c4"
+  },
+  "checkpoint_sha256": "08b88d41fa67c013e8d9dce0452ba66bb8978a172f82cefa76e56b5aa17f81e9"
+}

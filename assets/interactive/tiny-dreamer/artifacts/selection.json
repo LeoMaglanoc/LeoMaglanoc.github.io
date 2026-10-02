@@ -1,0 +1,9 @@
+{
+  "step": 10000,
+  "updates": 22000,
+  "return": 768.6396924999708,
+  "upright_fraction": 0.75,
+  "cart_rms_m": 0.5678493201732635,
+  "swingup_success": 1.0,
+  "return_std": 49.80172391748983
+}

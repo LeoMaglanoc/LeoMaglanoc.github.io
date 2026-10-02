@@ -1,0 +1,17 @@
+{
+  "seed": 500,
+  "episodes": 10,
+  "normalized_mse": {
+    "reconstruction": 0.0020052154790118947,
+    "one_step": 0.002814485098639125,
+    "persistence": 0.026453440557086195,
+    "h15": 0.05960863140460692,
+    "persistence_h15": 0.9619565501986806
+  },
+  "imagination_finite": true,
+  "max_abs_action": 0.9999998807907104,
+  "predicted_reward_range": [
+    -0.02448512800037861,
+    0.264798641204834
+  ]
+}
