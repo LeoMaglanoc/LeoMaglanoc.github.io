@@ -10,6 +10,117 @@ reproduction of DreamerV3.
 There is no handcrafted controller, imitation teacher, or model-free fallback.
 The blue future poses are decoded neural predictions, not a MuJoCo rollout.
 
+## Algorithm
+
+TinyDreamer alternates real experience collection, world-model learning, and
+actor–critic learning inside the world model. The recurrent state-space model
+(RSSM) maintains a belief `(h, z)`: a 64-dimensional GRU memory `h` and eight
+categorical variables with eight classes each in `z`. Concatenating them gives
+the 128-dimensional feature used by the decoder, reward head, continuation
+head, actor, and critic.
+
+At decision `t`, the previous action advances the recurrent memory. The prior
+predicts the latent state from that memory alone; the posterior also incorporates
+the encoded current observation:
+
+```text
+h[t] = GRU(h[t−1], MLP(z[t−1], action[t−1]))
+prior z[t]     ← h[t]                         # imagined transition
+posterior z[t] ← h[t] + encoder(observation[t]) # real observation correction
+action[t]     ← actor(h[t], z[t])
+```
+
+The implemented training loop is:
+
+1. **Collect experience.** Prefill replay with 4,000 exploratory decisions, then
+   warm up the world model for 2,000 updates. Online collection uses the actor
+   with sampled actions and additional Gaussian exploration. Each action is
+   held for five native MuJoCo controls; replay stores observations, actions,
+   mean rewards, continuation targets, and episode boundaries.
+2. **Learn the world model.** Sample batches of 16 sequences with 32 transitions
+   each. Unroll the posterior and minimize observation reconstruction MSE,
+   reward MSE, continuation BCE, balanced posterior/prior KL, and one-step prior
+   observation MSE. Categorical samples use straight-through gradients. From
+   stage 2, add five-step open-loop observation/reward supervision using replay
+   actions, so the prior learns to predict without repeated observation input.
+3. **Imagine behavior.** Sample 64 detached posterior states, excluding the first
+   five positions of each sequence to allow recurrent warmup. Roll out the actor
+   through the learned prior, predicting reward and continuation at each step.
+   The horizon starts at 15 decisions and reaches 30 in the final stage. World
+   model parameters are frozen during this update, while gradients still flow
+   through its transitions to the actor. Imagination makes no environment calls.
+4. **Improve actor and critic.** Compute bootstrapped lambda returns with
+   discount `0.99`, lambda `0.95`, and predicted continuation. Train the actor to
+   maximize continuation-weighted returns and the critic to regress their
+   detached values. Move the target critic 2% toward the current critic after
+   each update. Refined imagination uses categorical probabilities; actions
+   remain sampled during actor training.
+5. **Repeat and select.** Run two updates every five online decisions. Validate
+   every 5,000 decisions and save the best checkpoint by return plus sustained
+   swing-up success. Evaluate the selected checkpoint on separate held-out
+   seeds before export. The Docker commands below reproduce the three stages.
+
+The browser executes the trained actor directly. It does not search over action
+sequences at runtime; its imagined trajectories visualize the actor's predicted
+future behavior.
+
+## System pipeline
+
+### Offline training and export (Docker, CPU)
+
+```text
+Native dm_control cartpole/swingup + MuJoCo
+    │ observations, held actions, mean rewards, continuation
+    ▼
+Episode replay → sequence batches → encoder + RSSM posterior
+                                      │
+                                      ├→ decoder / reward / continuation losses
+                                      └→ posterior start states
+                                                │
+                                                ▼
+                              actor → RSSM prior → imagined reward / continuation
+                                ▲                         │
+                                └── actor gradients ─────┤
+                                              lambda returns → critic + target
+    ▲
+    └──────── updated actor collects more real experience
+
+Selected checkpoint → held-out evaluation + world-model diagnostics
+    → ONNX export + native/ONNX numerical parity
+    → posterior.onnx + rssm.onnx + actor.onnx
+      + cartpole.xml + metadata + reference fixtures
+    → static Jekyll assets → browser parity and interaction checks
+```
+
+The export packages observation normalization and explicit recurrent inputs and
+outputs with the networks. Metadata records timing, tensor contracts, software
+versions, and hashes connecting the deployed graphs to the trained checkpoint.
+Replay, optimizers, and the critic remain offline.
+
+### Browser control and dream visualization
+
+```text
+MuJoCo WASM state → five-value observation + previous action + previous belief
+    → posterior.onnx → corrected belief → actor.onnx → action in [−1, 1]
+    → hold action for 5 × 10 ms physics controls → next real observation
+    → repeat at 20 decisions per simulated second
+
+Copy corrected belief every 0.5 simulated seconds
+    → actor.onnx → rssm.onnx (prior + decoder + reward) → repeat 15 times
+    → predicted observations → Canvas ghost poses up to 0.75 seconds ahead
+
+Push button → separate physical cart force for 0.2 seconds → MuJoCo WASM
+    → changed observation → posterior correction → revised neural forecast
+```
+
+All three ONNX graphs run through ONNX Runtime Web's WASM backend. Rendering
+combines the real simulated pose with decoded ghost poses; a one-step prediction
+is also compared with the next real observation to display normalized error.
+The dream branch copies the belief and leaves the controller's recurrent state
+untouched. Push forces are not inputs to the learned model, so an existing dream
+can diverge during a push; subsequent observations reanchor the belief. Both
+physics and inference run locally using static assets.
+
 ## Measured results
 
 CPU training used seed 7, 4,000 exploration decisions, and 50,000 online decisions

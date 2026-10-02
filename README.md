@@ -87,6 +87,53 @@ The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.i
 
 ## Interactive demos
 
+### TinyDreamer CartPole
+
+The [/tiny-dreamer/](https://leomaglanoc.github.io/tiny-dreamer/) demo uses a small
+Dreamer-inspired agent to swing up and balance DeepMind Control Suite's native
+CartPole. It learns from five state observations with no handcrafted controller
+or imitation teacher. The actor and a recurrent world model run locally in the
+browser alongside MuJoCo WASM physics.
+
+**Algorithm.** CPU training in Docker alternates real experience collection and
+neural imagination. Replay sequences train an encoder, recurrent state-space
+model (RSSM), observation decoder, reward head, and continuation head using
+reconstruction, prediction, and balanced KL losses. Posterior beliefs seed
+imagined trajectories through the learned prior. An actor maximizes bootstrapped
+lambda returns through the frozen world model; a critic learns their values.
+The final stage uses 30-decision imagination. Validation selects the checkpoint,
+and separate held-out episodes measure its performance before ONNX export.
+
+**System pipeline:**
+
+```text
+Offline (Docker, CPU)
+native MuJoCo experience → episode replay → encoder + RSSM + prediction heads
+    → imagined actor rollouts → lambda returns → actor + critic updates
+    → more real experience → validation / held-out evaluation
+    → ONNX export + numerical parity → static model assets
+
+Browser control (20 decisions per simulated second)
+MuJoCo WASM observation + previous action + recurrent belief
+    → posterior.onnx → corrected belief → actor.onnx → bounded motor action
+    → 5 × 10 ms physics controls → next observation → repeat
+
+Browser dream visualization (refreshed every 0.5 simulated seconds)
+copied belief → actor.onnx + rssm.onnx prior → 15 decoded future observations
+    → Canvas ghost poses up to 0.75 seconds ahead
+```
+
+Push buttons apply a separate physical force. The world model receives the
+resulting observations and corrects its belief, making forecast divergence and
+recovery visible. The dreams are neural predictions; the actor supplies control
+directly without runtime planning. ONNX Runtime Web, physics, and rendering use
+local static assets with no backend or runtime CDN dependency.
+
+The trained agent succeeded on **20/20 held-out swing-up episodes**, with mean
+return **753.19**, compared with **122.88** for random actions. Strong pushes can
+break sustained balance. See [`assets/interactive/tiny-dreamer/README.md`](assets/interactive/tiny-dreamer/README.md)
+for the detailed algorithm, training commands, contracts, validation, and limits.
+
 ### G1 locomotion playground
 
 The G1 demo runs a Unitree G1 12-DoF locomotion stack in the browser:
