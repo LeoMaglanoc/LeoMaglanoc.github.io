@@ -1,0 +1,19 @@
+services:
+  sorting-site:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: ["python", "-m", "http.server", "8003", "--bind", "0.0.0.0"]
+    ports: ["8003:8003"]
+    volumes: ["../../..:/workspace:ro"]
+  sorting-tools:
+    build: .
+    working_dir: /workspace/assets/interactive/mobile-sorting
+    volumes: ["../../..:/workspace"]
+    environment:
+      SORTING_URL: http://sorting-site:8003/assets/interactive/mobile-sorting/
+  sorting-built-site:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: ["python", "-m", "http.server", "8004", "--bind", "0.0.0.0", "--directory", "/workspace/_site"]
+    ports: ["8004:8004"]
+    volumes: ["../../..:/workspace:ro"]

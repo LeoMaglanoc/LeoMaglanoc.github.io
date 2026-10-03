@@ -87,6 +87,20 @@ The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.i
 
 ## Interactive demos
 
+### Endless mobile manipulation
+
+The [/mobile-sorting/](https://leomaglanoc.github.io/mobile-sorting/) demo runs a
+TIAGo mobile manipulator sorting randomized blue/red boxes into matching bins.
+Analytic top-down grasps, Cartesian inverse kinematics, smooth arm references,
+wheel-driven differential navigation and a recovery state machine execute in
+MuJoCo WASM. The fingers retain objects through contact and friction; there is
+no grasp attachment, learning, camera perception or backend. A fixed five-body
+object pool supports continuous operation. All runtime assets are local.
+
+Desktop and mobile layouts support orbit/pinch, pause, reset and fullscreen.
+See [`assets/interactive/mobile-sorting/README.md`](assets/interactive/mobile-sorting/README.md)
+for Docker commands, controller details, model modifications and validation.
+
 ### TinyDreamer CartPole
 
 The [/tiny-dreamer/](https://leomaglanoc.github.io/tiny-dreamer/) demo uses a small

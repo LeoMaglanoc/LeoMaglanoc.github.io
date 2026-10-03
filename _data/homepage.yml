@@ -7,9 +7,9 @@ featured_projects:
     description: "Language-guided tool-motion generation for dexterous manipulation. Grounds natural-language instructions in parameterized SE(3) motion primitives, combining LLM-level reasoning with a learned low-level policy."
     links:
       - label: Github
-        url: https://github.com/LeoMaglanoc/lang2tool 
+        url: https://github.com/LeoMaglanoc/lang2tool
       - label: startup
-        url: https://foundation.bot/ 
+        url: https://foundation.bot/
 
   - title: Brain-inspired ML at BMW Research
     description: "Neuro-inspired computing with Oscillatory Neural Networks in collaboration with IBM. Built Python/PyTorch simulators and collected tactile interaction data from 10 participants for a human-machine interaction demonstrator."
@@ -30,7 +30,7 @@ featured_projects:
 
 builds:
   - title: Interactive Web Demos
-    description: "A Unitree G1 locomotion simulator, a Franka drawing demo, autonomous drone racing with tracking MPC, a TinyDreamer world-model demo, and 3D reconstruction with SLAM."
+    description: "Unitree G1 locomotion, Franka drawing, autonomous drone racing, a TinyDreamer world model, and 3D reconstruction with SLAM."
     links:
       - label: Humanoid Walking
         url: /g1/

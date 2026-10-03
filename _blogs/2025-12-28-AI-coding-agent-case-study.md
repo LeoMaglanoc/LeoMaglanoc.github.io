@@ -12,18 +12,20 @@ I've been experimenting with Codex, OpenAI's coding agent (GPT-5.2-Codex with hi
 
 I 'vibecoded' in less than an hour without writing a single code line and having any previous experience in both areas. I additionally used ChatGPT for brainstorming. I'm amazed by the progress and capabilities of generative, agentic AI, even though they have some limitations too.
 
-Interactive demos and games:
+Interactive demos and games, newest first by creation date:
 
-- [SLAM / 3D Reconstruction]({{ '/slam/' | relative_url }})
+- [TIAGo Mobile Sorting]({{ '/mobile-sorting/' | relative_url }})
+- [TinyDreamer CartPole]({{ '/tiny-dreamer/' | relative_url }})
 - [Panda Robot Drawing & Repair]({{ '/painter/' | relative_url }})
 - [Autonomous Drone Racing]({{ '/drone-racing/' | relative_url }})
 - [Doom]({{ '/doom/' | relative_url }})
+- [Ask Leo]({{ '/chat/' | relative_url }})
+- [SLAM / 3D Reconstruction]({{ '/slam/' | relative_url }})
 - [Unitree G1 Locomotion Playground]({{ '/g1/' | relative_url }})
 - [Pong RL Agent]({{ '/assets/interactive/pong/index.html' | relative_url }})
-- [Flappy Bird]({{ '/assets/interactive/flappy/index.html' | relative_url }})
 - [Top Down Racing Game]({{ '/assets/interactive/race/index.html' | relative_url }})
 - [Jump and Run Sidescroller]({{ '/assets/interactive/robot-runner/index.html' | relative_url }})
-
+- [Flappy Bird]({{ '/assets/interactive/flappy/index.html' | relative_url }})
 
 everything below here is written by GenAI!
 

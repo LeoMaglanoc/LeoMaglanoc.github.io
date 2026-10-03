@@ -1,0 +1,26 @@
+{
+  "revision": "4d038b3feae26ec82b46a4d586379114012a8ac7",
+  "meshes": [
+    "sensors/sick_tim551.stl",
+    "sensors/srf05.stl",
+    "base/base.stl",
+    "base/base_ring.stl",
+    "objects/antenna.stl",
+    "wheels/wheel.stl",
+    "wheels/caster_1.stl",
+    "wheels/caster_2.stl",
+    "torso/torso_fix.stl",
+    "torso/torso_lift_with_arm.stl",
+    "head/head_1.stl",
+    "head/head_2.stl",
+    "arm/arm_1.stl",
+    "arm/arm_2.stl",
+    "arm/arm_3.stl",
+    "arm/arm_4.stl",
+    "arm/arm_5-wrist-2017.stl",
+    "arm/arm_6-wrist-2017.stl",
+    "gripper/gripper_link.stl",
+    "gripper/gripper_finger_link.stl",
+    "gripper/gripper_finger_link.stl"
+  ]
+}

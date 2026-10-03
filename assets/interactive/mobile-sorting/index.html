@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#182923" />
+    <meta
+      name="description"
+      content="Watch TIAGo sort objects with contact-based grasping, inverse kinematics and wheel-driven navigation. MuJoCo runs locally in your browser."
+    />
+    <title>Endless Mobile Manipulation</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="sorting.css" />
+    <script type="importmap">
+      { "imports": { "three": "./vendor/three.module.js" } }
+    </script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <a class="back" href="/" target="_top" aria-label="Back to Leonardo's website">LM<span> / LAB</span></a>
+        <div class="title">
+          <span class="eyebrow">MUJOCO / MOBILE MANIPULATION</span>
+          <h1>
+            A little robot.<br />
+            <em>An endless shift.</em>
+          </h1>
+        </div>
+        <button id="about" class="quiet" aria-expanded="false" aria-controls="explanation">How it works <span>↗</span></button>
+      </header>
+      <section id="stage" aria-label="Autonomous mobile sorting simulation">
+        <canvas id="simulation" aria-label="TIAGo sorting simulation. Drag to orbit the camera; scroll or pinch to zoom."></canvas>
+        <div class="live"><span class="dot"></span><span id="live-label">STARTING THE SHIFT</span></div>
+        <div id="loading" role="status">
+          <span class="eyebrow">PREPARING THE LAB</span>
+          <h2>One robot. Two destinations.</h2>
+          <p id="load-text">Loading local physics and robot assets…</p>
+          <div class="progress"><i id="progress"></i></div>
+        </div>
+        <div class="task-card">
+          <span class="eyebrow">NOW AT WORK</span><strong id="state">Preparing</strong>
+          <div id="target">Pick → carry → sort → repeat</div>
+          <div class="steps" aria-hidden="true">
+            <i data-phase="pick">PICK</i><span>→</span><i data-phase="carry">CARRY</i><span>→</span><i data-phase="place">SORT</i>
+          </div>
+        </div>
+        <div class="camera-controls">
+          <button id="camera" title="Restore camera view" aria-label="Restore camera view">View</button
+          ><button id="fullscreen" aria-label="Toggle fullscreen">Full screen</button>
+        </div>
+        <span class="camera-hint">DRAG TO ORBIT · PINCH TO ZOOM</span>
+        <pre id="debug-info" hidden></pre>
+      </section>
+      <footer>
+        <div class="counters">
+          <div class="total"><strong id="sorted">0</strong><span>OBJECTS SORTED</span></div>
+          <div class="split blue"><strong id="blue">0</strong><span>BLUE</span></div>
+          <div class="split red"><strong id="red">0</strong><span>RED</span></div>
+          <div class="retry"><strong id="retries">0</strong><span>RETRIES</span></div>
+        </div>
+        <div class="actions">
+          <button id="pause" disabled>Pause <span>Ⅱ</span></button><button id="reset" disabled>Reset <span>↺</span></button
+          ><button id="debug" class="quiet" aria-pressed="false">Debug</button>
+        </div>
+      </footer>
+      <aside id="explanation" hidden>
+        <button id="close-about" aria-label="Close explanation">×</button><span class="eyebrow">SMALL TASK / REAL PHYSICS</span>
+        <h2>Reach. Close. Lift.<br />Carry. Let go.</h2>
+        <p>
+          TIAGo sorts blue and red boxes into matching bins, then returns for the next one. The fingers hold each box through simulated contact and
+          friction.
+        </p>
+        <p>
+          Analytic grasp planning, Cartesian inverse kinematics and a differential-drive controller supply the motion. The controller reads known
+          object poses directly: there is no camera perception, learning or backend.
+        </p>
+        <p>Objects are recycled after settling in a bin. Failed grasps trigger retreat and retries, so the shift can keep going.</p>
+        <p class="small">
+          Adapted from MuJoCo Menagerie's TIAGo. Simplified collision geometry, fixed torso and head, passive caster approximation. Orbit with a mouse
+          or one finger; zoom with a wheel or pinch.
+        </p>
+        <a href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/assets/interactive/mobile-sorting" target="_blank" rel="noopener"
+          >Controller, tests &amp; model notes ↗</a
+        >
+      </aside>
+    </main>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
