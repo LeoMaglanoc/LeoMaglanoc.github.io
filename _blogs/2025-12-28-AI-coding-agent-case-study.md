@@ -34,9 +34,11 @@ everything below here is written by GenAI!
 ### A tiny (but useful) discrete-time barrier lemma — formalized in Lean
 
 Barrier functions show up everywhere in safe AI and robotics: you define a scalar **safety measure**
+
 $$
 B(x) \le 0
 $$
+
 and you want to guarantee the system **stays safe over time**.
 
 In discrete time, we can phrase this in the simplest possible way:
@@ -57,6 +59,7 @@ In discrete time, we can phrase this in the simplest possible way:
   $$
 
 **Claim (forward invariance in discrete time):**
+
 $$
 \forall k,\quad b_k \le 0
 \quad\text{(equivalently, } \forall k,\ B(x_k)\le 0\text{).}
@@ -67,13 +70,17 @@ $$
 #### Proof idea (one paragraph)
 
 From $b_{k+1} \le b_k$, the sequence is **non-increasing**. By repeatedly chaining inequalities,
+
 $$
 b_k \le b_{k-1} \le \cdots \le b_0.
 $$
+
 So $b_k \le b_0$ for all $k$. Combining with $b_0 \le 0$ gives
+
 $$
 b_k \le 0 \quad \forall k.
 $$
+
 That’s it: **non-increasing barrier value + safe start ⇒ always safe**.
 
 ---
