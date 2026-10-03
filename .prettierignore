@@ -16,3 +16,6 @@ _data/citations.yml
 assets/interactive/scrap-orbit/
 games/scrap-orbit/artifacts/
 games/scrap-orbit/godot/.godot/
+assets/interactive/block-world/
+games/block-world/artifacts/
+games/block-world/godot/.godot/

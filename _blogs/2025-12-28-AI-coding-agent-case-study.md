@@ -14,6 +14,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
+- [Robot World]({{ '/block-world/' | relative_url }}) — a sideways-phone voxel sandbox with twelve curious robot friends
 - [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }}) — a one-finger orbital salvage game built with Godot
 - [Dustfall Outpost]({{ '/dustfall-outpost/' | relative_url }})
 - [TIAGo Mobile Sorting]({{ '/mobile-sorting/' | relative_url }})

@@ -204,6 +204,7 @@ exclude:
   - plan.md
   - games/dustfall-outpost/
   - games/scrap-orbit/
+  - games/block-world/
   - assets/interactive/drone-racing/tools/
   - assets/interactive/drone-racing/tests/
   - assets/interactive/drone-racing/artifacts/

@@ -1,0 +1,21 @@
+services:
+  tools:
+    build: .
+    volumes: ["../..:/workspace"]
+  preview:
+    image: python:3.11-slim
+    working_dir: /workspace
+    volumes: ["../..:/workspace:ro"]
+    ports: ["127.0.0.1:8097:8097"]
+    command: ["python", "-m", "http.server", "8097", "--bind", "0.0.0.0"]
+  browser:
+    image: mcr.microsoft.com/playwright:v1.57.0-noble
+    network_mode: host
+    working_dir: /workspace/games/block-world
+    volumes: ["../..:/workspace"]
+    command: ["node", "tests/browser.cjs"]
+  site-preview:
+    image: python:3.11-slim
+    volumes: ["../..:/workspace:ro"]
+    ports: ["127.0.0.1:8098:8098"]
+    command: ["python", "-m", "http.server", "8098", "--bind", "0.0.0.0", "--directory", "/workspace/games/block-world/artifacts/site"]

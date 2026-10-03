@@ -1,0 +1,10 @@
+{
+  "name": "robot-world-validation",
+  "private": true,
+  "scripts": {
+    "test": "node tests/browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.57.0"
+  }
+}
