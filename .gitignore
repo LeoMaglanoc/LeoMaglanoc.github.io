@@ -34,3 +34,9 @@ assets/interactive/doom/artifacts/
 !assets/interactive/drone-racing/vendor/**
 assets/interactive/drone-racing/tools/__pycache__/
 assets/interactive/drone-racing/artifacts/
+games/dustfall-outpost/godot/.godot/
+games/dustfall-outpost/blender/build/
+games/dustfall-outpost/blender/**/__pycache__/
+games/dustfall-outpost/previews/
+games/dustfall-outpost/artifacts/
+games/dustfall-outpost/node_modules/

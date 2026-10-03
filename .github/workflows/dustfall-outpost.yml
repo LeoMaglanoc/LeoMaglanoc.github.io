@@ -1,0 +1,28 @@
+name: Dustfall Outpost
+on:
+  pull_request:
+    paths: ["games/dustfall-outpost/**", "assets/interactive/dustfall-outpost/**", "_pages/dustfall-outpost.md", "_layouts/dustfall-fullscreen.html", ".github/workflows/dustfall-outpost.yml"]
+  push:
+    paths: ["games/dustfall-outpost/**", "assets/interactive/dustfall-outpost/**", "_pages/dustfall-outpost.md", "_layouts/dustfall-fullscreen.html", ".github/workflows/dustfall-outpost.yml"]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build pinned tool image
+        run: docker compose -f games/dustfall-outpost/docker-compose.yml build tools
+      - name: Regenerate, export and validate
+        run: docker compose -f games/dustfall-outpost/docker-compose.yml run --rm tools ./scripts/validate.sh
+      - name: Browser and multi-touch checks
+        run: games/dustfall-outpost/scripts/test_browser.sh
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dustfall-browser
+          path: games/dustfall-outpost/artifacts/
+      - name: Stop preview
+        if: always()
+        run: docker compose -f games/dustfall-outpost/docker-compose.yml down

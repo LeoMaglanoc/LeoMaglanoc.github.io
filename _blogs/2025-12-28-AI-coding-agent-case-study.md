@@ -14,6 +14,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
+- [Dustfall Outpost]({{ '/dustfall-outpost/' | relative_url }})
 - [TIAGo Mobile Sorting]({{ '/mobile-sorting/' | relative_url }})
 - [TinyDreamer CartPole]({{ '/tiny-dreamer/' | relative_url }})
 - [Panda Robot Drawing & Repair]({{ '/painter/' | relative_url }})

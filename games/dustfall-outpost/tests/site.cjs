@@ -1,0 +1,21 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({headless:true,args:['--no-sandbox','--enable-gpu','--ignore-gpu-blocklist','--use-gl=angle','--use-angle=gl-egl']});
+ const page=await browser.newPage({viewport:{width:1280,height:800}}),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.goto('http://127.0.0.1:8094/dustfall-outpost/');
+ const landing=await (await page.locator('.dustfall-frame').elementHandle()).contentFrame();
+ await landing.locator('#enter').waitFor();await page.screenshot({path:'artifacts/site-landing.png'});
+ assert.equal(await landing.locator('#game-frame').getAttribute('src'),null);
+ await landing.locator('#enter').click();
+ const game=await (await landing.locator('#game-frame').elementHandle()).contentFrame();
+ await game.waitForFunction(()=>window.dustfallReady,null,{timeout:90000});
+ await game.locator('#resume').click();await game.waitForFunction(()=>window.dustfallState&&!window.dustfallState.paused,null,{timeout:20000});
+ assert(await game.evaluate(()=>document.pointerLockElement!==null));
+ await page.keyboard.press('Escape');await game.locator('#pause').waitFor({state:'visible'});
+ await game.locator('a[target="_top"]').click();await page.waitForURL('http://127.0.0.1:8094/');
+ assert.equal(errors.length,0,errors.join('\n'));
+ console.log('Rendered /dustfall-outpost/ page: lazy launch, nested iframe startup, mouse capture and back-to-site passed.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

@@ -1,0 +1,5 @@
+services:
+  browser:
+    devices: ["/dev/dri:/dev/dri"]
+    environment:
+      GPU: "1"

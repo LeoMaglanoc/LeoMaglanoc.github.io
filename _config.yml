@@ -202,6 +202,7 @@ exclude:
   # should serve its static game entrypoint instead of processing that file.
   - assets/interactive/pong/pong.md
   - plan.md
+  - games/dustfall-outpost/
   - assets/interactive/drone-racing/tools/
   - assets/interactive/drone-racing/tests/
   - assets/interactive/drone-racing/artifacts/

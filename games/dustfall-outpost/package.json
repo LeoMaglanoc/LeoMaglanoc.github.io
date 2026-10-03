@@ -1,0 +1,1 @@
+{"name":"dustfall-outpost-validation","private":true,"devDependencies":{"playwright":"1.57.0"},"scripts":{"test:browser":"node tests/browser.cjs"}}
