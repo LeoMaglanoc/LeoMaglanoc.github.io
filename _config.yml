@@ -203,6 +203,7 @@ exclude:
   - assets/interactive/pong/pong.md
   - plan.md
   - games/dustfall-outpost/
+  - games/scrap-orbit/
   - assets/interactive/drone-racing/tools/
   - assets/interactive/drone-racing/tests/
   - assets/interactive/drone-racing/artifacts/

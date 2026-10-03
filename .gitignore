@@ -40,3 +40,6 @@ games/dustfall-outpost/blender/**/__pycache__/
 games/dustfall-outpost/previews/
 games/dustfall-outpost/artifacts/
 games/dustfall-outpost/node_modules/
+games/scrap-orbit/godot/.godot/
+games/scrap-orbit/artifacts/
+games/scrap-orbit/node_modules/

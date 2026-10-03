@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#080f1c" />
+    <meta
+      name="description"
+      content="Pull back, release, and let gravity carry your little salvage ship through endless space. A one-finger Godot game."
+    />
+    <title>Scrap Orbit — Leonardo Maglanoc</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #080f1c;
+        color: #e5edf1;
+        font-family: system-ui, sans-serif;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        overscroll-behavior: none;
+      }
+      #stage {
+        position: fixed;
+        inset: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;
+        margin: auto;
+        width: min(100vw, calc((100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 9 / 16));
+        height: min(calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)), calc(100vw * 16 / 9));
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+        outline: none;
+      }
+      #loading {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(ellipse at 50% 40%, #152e3e, #080f1c 70%);
+        padding: 32px;
+        text-align: center;
+        z-index: 2;
+      }
+      #loading h1 {
+        font-size: clamp(32px, 7vw, 48px);
+        letter-spacing: -2px;
+        margin: 15px 0;
+        color: #8bf0dc;
+      }
+      #loading p {
+        font-size: 14px;
+        color: #91a5b6;
+        line-height: 1.6;
+        max-width: 300px;
+      }
+      #loading .eyebrow {
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: #f7c787;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      #start {
+        margin: 20px 0 12px;
+        padding: 17px 24px;
+        border: 1px solid #8bf0dc;
+        border-radius: 12px;
+        background: #8bf0dc;
+        color: #080f1c;
+        font-weight: 600;
+        cursor: pointer;
+        min-height: 48px;
+      }
+      #start:disabled {
+        opacity: 0.45;
+        cursor: wait;
+      }
+      progress {
+        width: 230px;
+        max-width: 100%;
+        height: 5px;
+        accent-color: #8bf0dc;
+      }
+      #home {
+        position: fixed;
+        left: 14px;
+        top: max(12px, env(safe-area-inset-top));
+        font-size: 12px;
+        text-decoration: none;
+        color: #91a5b6;
+        z-index: 3;
+      }
+      #home:hover {
+        color: #8bf0dc;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      @media (max-width: 600px) {
+        #home {
+          font-size: 10px;
+          top: 4px;
+          left: 5px;
+        }
+      }
+      #error {
+        color: #f19689 !important;
+        white-space: pre-wrap;
+      }
+    </style>
+    $GODOT_HEAD_INCLUDE
+  </head>
+  <body>
+    <a id="home" target="_top" href="/blog/AI-coding-agent-case-study/" aria-label="Back to Leonardo's blog">↖ BLOG</a>
+    <main id="stage" aria-label="Scrap Orbit game">
+      <canvas
+        width="450"
+        height="800"
+        id="canvas"
+        tabindex="0"
+        aria-label="Scrap Orbit: touch the ship, pull backward, and release. Escape pauses; M toggles sound."
+        >Your browser needs WebGL 2 to play Scrap Orbit.</canvas
+      >
+      <div id="loading">
+        <span class="eyebrow">AN ORBITAL SALVAGE EXPEDITION</span>
+        <h1>Scrap Orbit</h1>
+        <p>One little ship. Endless gravity.<br />Pull back. Release. Find your next orbit.</p>
+        <button id="start">LOAD GAME →</button><progress id="progress" max="1" value="0" hidden></progress>
+        <p id="status">A Godot game · mouse or one finger</p>
+        <p id="error" hidden></p>
+      </div>
+      <p id="game-state" class="sr-only" aria-live="polite"></p>
+    </main>
+    <script src="$GODOT_URL"></script>
+    <script>
+      const engine = new Engine($GODOT_CONFIG);
+      const start = document.querySelector("#start"),
+        loading = document.querySelector("#loading"),
+        status = document.querySelector("#status"),
+        progress = document.querySelector("#progress"),
+        canvas = document.querySelector("#canvas");
+      let lastStatus = "";
+      window.scrapOrbitReport = (data) => {
+        window.scrapOrbitState = data;
+        document.querySelector("#game-state").dataset.snapshot = JSON.stringify(data);
+        const text = `${data.mode}, ${data.state}, sector ${data.sector}, score ${data.score}, shields ${data.shields}${
+          data.paused ? ", paused" : ""
+        }. ${data.hint}`;
+        if (text !== lastStatus) {
+          document.querySelector("#game-state").textContent = text;
+          lastStatus = text;
+        }
+      };
+      function cancel() {
+        if (window.scrapOrbitEvent) window.scrapOrbitEvent("cancel");
+      }
+      function pause() {
+        if (window.scrapOrbitEvent) window.scrapOrbitEvent("pause");
+      }
+      window.addEventListener("blur", () => {
+        cancel();
+        pause();
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          cancel();
+          pause();
+        }
+      });
+      window.addEventListener("resize", cancel);
+      canvas.addEventListener("pointercancel", cancel);
+      canvas.addEventListener("touchcancel", cancel);
+      canvas.addEventListener("pointerleave", (event) => {
+        if (event.buttons) cancel();
+      });
+      canvas.addEventListener("contextmenu", (event) => event.preventDefault());
+      start.addEventListener("click", async () => {
+        start.disabled = true;
+        start.textContent = "PREPARING YOUR SHIP…";
+        progress.hidden = false;
+        status.textContent = "Loading engine and sector data…";
+        try {
+          const missing = Engine.getMissingFeatures({ threads: false });
+          if (missing.length)
+            throw new Error(
+              "This browser cannot run the game: " + missing.join(", ") + ". Try a current Chrome, Firefox, or Safari with WebGL enabled."
+            );
+          await engine.startGame({
+            canvas,
+            onProgress: (current, total) => {
+              if (total > 0) {
+                progress.value = current / total;
+                status.textContent = `Loading · ${Math.round((current / total) * 100)}%`;
+              }
+            },
+          });
+          loading.remove();
+          canvas.focus();
+        } catch (error) {
+          document.querySelector("#error").hidden = false;
+          document.querySelector("#error").textContent = error.message || String(error);
+          status.textContent = "Your ship could not start.";
+          start.disabled = false;
+          start.textContent = "TRY AGAIN";
+        }
+      });
+    </script>
+  </body>
+</html>

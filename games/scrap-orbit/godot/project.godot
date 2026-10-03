@@ -1,0 +1,24 @@
+config_version=5
+[application]
+config/name="Scrap Orbit"
+boot_splash/show_image=false
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+[display]
+window/size/viewport_width=450
+window/size/viewport_height=800
+window/size/window_width_override=450
+window/size/window_height_override=800
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+[rendering]
+textures/vram_compression/import_etc2_astc=true
+textures/vram_compression/import_s3tc=true
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.022, 0.039, 0.073, 1)
+[physics]
+common/physics_ticks_per_second=120
+[input_devices]
+pointing/emulate_touch_from_mouse=false
+pointing/emulate_mouse_from_touch=false
