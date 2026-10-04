@@ -73,6 +73,12 @@ async function main() {
     await map.load(asset(metadata, "mesh"), trajectory.samples);
     map.setTrajectoryVisible(trajectoryVisible);
     resetView.addEventListener("click", () => map.reset());
+    document.querySelector("#surface-toggle").addEventListener("click", (event) => {
+      const geometry = map.surfaceMode !== "geometry";
+      map.setSurfaceMode(geometry ? "geometry" : "texture");
+      event.currentTarget.textContent = geometry ? "Show texture" : "Show geometry";
+      event.currentTarget.setAttribute("aria-pressed", String(geometry));
+    });
     trajectoryToggle.addEventListener("click", (event) => {
       trajectoryVisible = !trajectoryVisible;
       map.setTrajectoryVisible(trajectoryVisible);

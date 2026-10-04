@@ -22,13 +22,14 @@ rtabmap_textured_mesh:
   # Native RTAB-Map mesh reconstruction. These intentionally favor wall and
   # furniture boundaries before web-size tuning; the UV-textured master stays
   # separate from the browser GLB.
-  poisson_size_m: 0.02
+  poisson_size_m: 0.015
   max_polygons: 350000
   min_cluster: 500
   min_range_m: 0.3
-  max_range_m: 5.0
+  # Restrict distant depth returns and retain finer detail before meshing.
+  max_range_m: 3.5
   decimation: 2
-  voxel_m: 0.01
+  voxel_m: 0.005
   # RTAB-Map's edge-bleeding path clears the compressed RGB handle before its
   # texture-camera collection pass, so leave this at zero for native UV export.
   edge_bleeding_error_m: 0.0
@@ -36,7 +37,8 @@ rtabmap_textured_mesh:
   texture_count: 2
   texture_range_m: 4.0
   texture_angle_deg: 75
-  texture_depth_error_m: 0.03
+  # Allow measured depth / fused surface disagreement on the noisy floor.
+  texture_depth_error_m: 0.08
   texture_blur: 50
   gain: 1
   low_gain: 0

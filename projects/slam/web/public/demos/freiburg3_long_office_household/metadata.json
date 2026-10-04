@@ -20,12 +20,12 @@
     "rpe_rotation_rmse_rad": 0.00806231005998485
   },
   "mesh": {
-    "vertices": 175077,
-    "triangles": 89226,
-    "original_vertices": 175077,
-    "original_triangles": 89226,
-    "uv_count": 267678,
-    "glb_size_bytes": 22810384
+    "vertices": 174839,
+    "triangles": 180504,
+    "original_vertices": 174839,
+    "original_triangles": 180504,
+    "uv_count": 541512,
+    "glb_size_bytes": 32665372
   },
   "reconstruction": {
     "backend": "rtabmap_textured_mesh",
@@ -33,8 +33,8 @@
     "alicevision_multiband_available": false,
     "texture_count": 2,
     "texture_resolution": 4096,
-    "master_triangles": 89226,
-    "web_triangles": 89226
+    "master_triangles": 180504,
+    "web_triangles": 180504
   },
   "video": {
     "duration_s": 86.167,

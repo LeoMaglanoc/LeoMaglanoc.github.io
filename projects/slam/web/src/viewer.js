@@ -19,10 +19,12 @@ export class MapViewer {
     this.renderer = createRenderer(canvas);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
-    this.renderer.toneMapping = THREE.NeutralToneMapping;
+    this.renderer.toneMapping = THREE.NoToneMapping;
     this.renderer.toneMappingExposure = 1.0;
     this.controls = new OrbitControls(this.camera, canvas);
     this.controls.enableDamping = true;
+    this.needsRender = true;
+    this.controls.addEventListener("change", () => { this.needsRender = true; });
     this.scene.add(new THREE.HemisphereLight(0xffffff, 0x22334a, 2.2));
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
     key.position.set(4, 8, 3);
@@ -31,17 +33,40 @@ export class MapViewer {
     this.resizeObserver.observe(canvas.parentElement);
     this.resetPose = null;
     this.trajectory = null;
+    this.meshes = [];
+    this.surfaceMode = "texture";
     this.animate();
   }
 
   async load(meshUrl, samples) {
     const loader = new GLTFLoader();
-    const gltf = await loader.loadAsync(meshUrl);
+    const gltf = await loader.loadAsync(meshUrl, ({ loaded, total }) => {
+      const progress = total ? `${Math.round(100 * loaded / total)}%` : `${(loaded / 1048576).toFixed(1)} MB`;
+      this.loadingElement.textContent = `Loading 3D reconstruction… ${progress}`;
+    });
     gltf.scene.traverse((object) => {
-      if (!object.isMesh || !object.material?.map) return;
-      object.material.map.colorSpace = THREE.SRGBColorSpace;
-      object.material.map.anisotropy = Math.min(8, this.renderer.capabilities.getMaxAnisotropy());
-      object.material.needsUpdate = true;
+      if (!object.isMesh) return;
+      const originals = Array.isArray(object.material) ? object.material : [object.material];
+      const textureMaterials = originals.map((material) => {
+        if (material.map) {
+          material.map.colorSpace = THREE.SRGBColorSpace;
+          material.map.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
+        }
+        // RGB observations already contain the room's illumination. Lighting
+        // them again darkens creases and bleaches the tabletop and floor.
+        return new THREE.MeshBasicMaterial({
+          map: material.map,
+          color: material.map ? 0xffffff : material.color,
+          side: THREE.DoubleSide,
+          toneMapped: false,
+        });
+      });
+      const geometryMaterials = originals.map(() => new THREE.MeshStandardMaterial({
+        color: 0xb8c5cf, roughness: 1, metalness: 0, side: THREE.DoubleSide,
+      }));
+      const materials = (list) => Array.isArray(object.material) ? list : list[0];
+      this.meshes.push({ object, texture: materials(textureMaterials), geometry: materials(geometryMaterials) });
+      object.material = materials(textureMaterials);
     });
     this.scene.add(gltf.scene);
     this.trajectory = trajectoryObject(samples);
@@ -70,6 +95,13 @@ export class MapViewer {
 
   setTrajectoryVisible(visible) {
     if (this.trajectory) this.trajectory.visible = visible;
+    this.needsRender = true;
+  }
+
+  setSurfaceMode(mode) {
+    this.surfaceMode = mode;
+    for (const mesh of this.meshes) mesh.object.material = mesh[mode];
+    this.needsRender = true;
   }
 
   cameraPose() {
@@ -105,12 +137,17 @@ export class MapViewer {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height, false);
+    this.needsRender = true;
   }
 
   animate() {
     this.renderer.setAnimationLoop(() => {
       this.controls.update();
+      // Keep damping responsive, but leave a stationary scan idle instead of
+      // repeatedly drawing its large texture atlases (especially on mobile).
+      if (!this.needsRender) return;
       this.renderer.render(this.scene, this.camera);
+      this.needsRender = false;
     });
   }
 }
