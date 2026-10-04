@@ -1,0 +1,15 @@
+services:
+  tools:
+    build: .
+    volumes: ["../..:/workspace"]
+  preview:
+    image: python:3.11-slim
+    working_dir: /workspace
+    volumes: ["../..:/workspace:ro"]
+    ports: ["127.0.0.1:8099:8099"]
+    command: ["python", "-m", "http.server", "8099", "--bind", "0.0.0.0"]
+  input-tests:
+    image: node:22-slim
+    working_dir: /workspace/projects/block-temple
+    volumes: ["../..:/workspace:ro"]
+    command: ["node", "tests/shell.cjs"]

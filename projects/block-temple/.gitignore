@@ -1,0 +1,5 @@
+godot/.godot/
+artifacts/
+node_modules/
+blender/*.blend1
+__pycache__/

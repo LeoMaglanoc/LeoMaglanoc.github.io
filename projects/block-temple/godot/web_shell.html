@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#203e44" />
+    <title>Coruscant Temple · Explore · Recover · Build</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --cream: #faf1d7;
+        --mint: #b9e5c7;
+        --ink: #203e44;
+        --edge: #ffffff32;
+        --panel: #203e44d9;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #203e44;
+        touch-action: none;
+        overscroll-behavior: none;
+      }
+      button,
+      a {
+        touch-action: none;
+      }
+      button {
+        font: inherit;
+        color: var(--cream);
+        background: var(--panel);
+        border: 1px solid var(--edge);
+        border-radius: 14px;
+        cursor: pointer;
+        min-height: 44px;
+        padding: 10px 16px;
+        font-weight: 650;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #ffce70;
+        outline-offset: 3px;
+      }
+      button:hover {
+        background: #345c60;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: wait;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      #canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: none;
+      }
+      #hud {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom))
+          max(16px, env(safe-area-inset-left));
+      }
+      #hud button {
+        pointer-events: auto;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 12px;
+      }
+      .brand {
+        color: var(--ink);
+        font-weight: 850;
+        letter-spacing: 0.14em;
+        font-size: 12px;
+        text-shadow: 0 1px #ffffff65;
+      }
+      .brand small {
+        display: block;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        margin-top: 5px;
+      }
+      .tools {
+        display: flex;
+        gap: 8px;
+      }
+      .tools button {
+        font-size: 12px;
+        padding: 9px 12px;
+        min-height: 44px;
+      }
+      #crosshair {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 28px;
+        color: #fffdf0;
+        text-shadow: 0 1px 4px #203e44;
+        line-height: 1;
+      }
+      #target {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 25px);
+        transform: translateX(-50%);
+        font-size: 11px;
+        color: var(--cream);
+        background: #203e4499;
+        padding: 4px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+      #toast {
+        position: absolute;
+        top: 19%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--panel);
+        color: var(--cream);
+        border-radius: 10px;
+        padding: 8px 14px;
+        font-size: 12px;
+        text-align: center;
+        max-width: 65%;
+      }
+      #hint {
+        position: absolute;
+        top: 74px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: var(--ink);
+        text-align: center;
+        white-space: nowrap;
+        background: #faf1d7b3;
+        padding: 7px 14px;
+        border-radius: 20px;
+        transition: opacity 1s;
+      }
+      #hotbar {
+        position: absolute;
+        bottom: max(13px, env(safe-area-inset-bottom));
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 5px;
+        padding: 6px;
+        border-radius: 16px;
+        background: #203e447a;
+        pointer-events: auto;
+      }
+      #hotbar button {
+        position: relative;
+        padding: 6px;
+        min-width: 44px;
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background: #203e44a6;
+      }
+      #hotbar button[aria-pressed="true"] {
+        border-color: #ffe09b;
+        background: #f8edce30;
+        transform: translateY(-3px);
+      }
+      .swatch {
+        display: block;
+        width: 27px;
+        height: 27px;
+        margin: auto;
+        border-radius: 3px;
+        box-shadow:
+          inset -6px -6px #0002,
+          inset 3px 3px #fff3;
+        image-rendering: pixelated;
+      }
+      #blockname {
+        position: absolute;
+        bottom: 82px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: var(--cream);
+        text-shadow: 0 1px 3px #203e44;
+        background: #203e447a;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+      #palette {
+        position: absolute;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px;
+        border-radius: 18px;
+        background: var(--panel);
+        display: grid;
+        grid-template-columns: repeat(6, 54px);
+        gap: 8px;
+        pointer-events: auto;
+      }
+      #palette button {
+        padding: 4px;
+        min-width: 54px;
+        font-size: 9px;
+      }
+      #palette .swatch {
+        margin-bottom: 4px;
+      }
+      #movezone {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 30%;
+        height: 65%;
+        pointer-events: auto;
+        touch-action: none;
+      }
+      #stick {
+        position: absolute;
+        left: max(38px, env(safe-area-inset-left));
+        bottom: max(40px, env(safe-area-inset-bottom));
+        width: 106px;
+        height: 106px;
+        border: 1px solid #fff8;
+        border-radius: 50%;
+        background: #203e4429;
+        pointer-events: none;
+        display: grid;
+        place-items: center;
+      }
+      #stick:after {
+        content: "MOVE";
+        position: absolute;
+        bottom: -24px;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: #fff;
+        text-shadow: 0 1px 3px #203e44;
+      }
+      #knob {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #f9f1d6a8;
+        border: 1px solid #fff8;
+      }
+      #actions {
+        position: absolute;
+        right: max(18px, env(safe-area-inset-right));
+        bottom: max(88px, env(safe-area-inset-bottom));
+        display: grid;
+        grid-template-columns: 64px 76px;
+        gap: 8px;
+        pointer-events: auto;
+      }
+      #actions button {
+        min-height: 54px;
+        padding: 8px;
+        font-size: 11px;
+        background: #203e448c;
+        
+      }
+      #actions #break {
+        background: #a26c4faa;
+      }
+      #actions #place {
+        background: #397b70bb;
+      }
+      #actions #wave {
+        grid-column: 1;
+        grid-row: 2;
+        min-height: 44px;
+        font-size: 10px;
+      }
+      #debug {
+        position: absolute;
+        top: 76px;
+        left: 16px;
+        font: 11px monospace;
+        background: #203e44d9;
+        color: #fff;
+        padding: 8px;
+        border-radius: 8px;
+        white-space: pre;
+      }
+      #overlay {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        align-items: safe center;
+        justify-items: center;
+        touch-action: pan-y;
+        background: radial-gradient(ellipse at 30% 25%, #a2dac5db, #244b53e8);
+        padding: 18px;
+        overflow: auto;
+      }
+      .card {
+        width: min(560px, 100%);
+        border: 1px solid #ffffff45;
+        background: #203e44e0;
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: 0 25px 70px #102f4440;
+        color: var(--cream);
+        text-align: center;
+      }
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        color: var(--mint);
+      }
+      h1 {
+        font-size: clamp(34px, 7vw, 65px);
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        margin: 16px 0 12px;
+        font-weight: 850;
+      }
+      .subtitle {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #e0ead6;
+        margin: 0 0 16px;
+      }
+      .primary {
+        background: var(--mint);
+        border: 0;
+        color: var(--ink);
+        min-width: 180px;
+        font-size: 16px;
+        box-shadow: 0 4px #0002;
+      }
+      .primary:hover {
+        background: #d2f1cf;
+      }
+      .menurow {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 12px 0;
+      }
+      .menurow button {
+        font-size: 12px;
+      }
+      .controls {
+        font-size: 11px;
+        color: #c4d6c8;
+        line-height: 1.7;
+        margin-top: 16px;
+      }
+      .back {
+        font-size: 11px;
+        color: #c4d6c8;
+        margin-top: 10px;
+        display: inline-block;
+      }
+      #progress {
+        height: 5px;
+        background: #ffffff20;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 14px 0;
+      }
+      #bar {
+        height: 100%;
+        width: 0;
+        background: var(--mint);
+      }
+      #loadstatus {
+        font-size: 12px;
+        color: #d0e3d6;
+        min-height: 18px;
+      }
+      #rotate {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: none;
+        place-items: center;
+        background: #203e44f5;
+        color: var(--cream);
+        text-align: center;
+        padding: 30px;
+      }
+      #rotate .turn {
+        font-size: 56px;
+        margin-bottom: 12px;
+      }
+      #reset-confirm {
+        border: 1px solid #efbf80;
+        border-radius: 14px;
+        background: #1d3339;
+        padding: 12px;
+        font-size: 12px;
+      }
+      .desktop #movezone,
+      .desktop #stick {
+        opacity: 0.5;
+      }
+      .desktop #hint {
+        font-size: 11px;
+      }
+      @media (max-height: 480px) {
+        .card {
+          padding: 20px;
+          max-width: 580px;
+        }
+        h1 {
+          font-size: 42px;
+          margin: 8px 0;
+        }
+        .subtitle {
+          margin-bottom: 10px;
+          font-size: 12px;
+        }
+        .controls {
+          margin-top: 10px;
+        }
+        #hotbar button {
+          width: 44px;
+          height: 44px;
+        }
+        #hotbar {
+          gap: 3px;
+          padding: 4px;
+        }
+        #blockname {
+          bottom: 68px;
+        }
+        #hint {
+          top: 62px;
+        }
+        #stick {
+          width: 94px;
+          height: 94px;
+          left: 30px;
+          bottom: 35px;
+        }
+        #actions {
+          bottom: 78px;
+          grid-template-columns: 58px 68px;
+          gap: 6px;
+        }
+        #actions button {
+          min-height: 48px;
+        }
+        #actions #wave {
+          min-height: 44px;
+        }
+        .tools button {
+          min-height: 44px;
+        }
+        .brand small {
+          font-size: 10px;
+        }
+      }
+      @media (orientation: portrait) and (pointer: coarse) {
+        #rotate {
+          display: grid;
+        }
+      }
+      @media (max-width: 650px) {
+        #hotbar button {
+          width: 40px;
+          min-width: 40px;
+          height: 44px;
+        }
+        .brand small {
+          display: none;
+        }
+        #hint {
+          font-size: 10px;
+        }
+        #palette {
+          grid-template-columns: repeat(4, 54px);
+        }
+      }
+      @media (max-height: 480px) and (min-width: 600px) {
+        .card {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          padding: 18px;
+          width: 580px;
+        }
+        .intro {
+          text-align: left;
+        }
+        .intro h1 {
+          font-size: 44px;
+          margin: 12px 0;
+        }
+        .intro .subtitle {
+          font-size: 12px;
+          line-height: 1.5;
+        }
+        .launch {
+          align-self: center;
+        }
+        .launch .menurow {
+          gap: 6px;
+          margin: 8px 0;
+        }
+        .launch .menurow button {
+          padding: 8px;
+          font-size: 10px;
+          flex: 1 0 42%;
+        }
+        .launch #progress {
+          margin: 8px 0;
+        }
+        .launch #loadstatus {
+          font-size: 10px;
+          margin-bottom: 8px;
+        }
+        .controls {
+          grid-column: 1/-1;
+          font-size: 10px;
+          line-height: 1.4;
+          margin: 0;
+        }
+        .back {
+          grid-column: 1/-1;
+          margin: 0;
+        }
+        #reset-confirm {
+          font-size: 10px;
+        }
+        #reset-confirm p {
+          margin: 4px 0 8px;
+        }
+        #reset-confirm button {
+          font-size: 10px;
+          padding: 8px;
+        }
+        .card .primary {
+          min-width: 150px;
+        }
+      }
+    
+      :root { --cream:#eee4cf; --mint:#dbc39b; --ink:#131c23; --panel:#151d26e8; --edge:#cab58c45; }
+      html,body { background:#131c23; }
+      button { border-radius:5px; font-weight:500; }
+      button:hover { background:#4c4840; }
+      .brand { color:#e3d1ad; font-size:13px; letter-spacing:.25em; text-shadow:0 1px 5px #000; }
+      .brand small { color:#c5c9cd; font-size:9px; letter-spacing:.16em; }
+      #overlay { background:linear-gradient(90deg,#111a24f0,#111a2470),url('temple-preview.jpg') center/cover; }
+      .card { text-align:left; width:min(680px,95%); border-radius:8px; background:#141d26e8; padding:36px; border-color:#d0b98945; }
+      h1 { font-weight:500; letter-spacing:.045em; font-size:clamp(34px,6vw,58px); line-height:1.06; }
+      .eyebrow { color:#dbc39b; letter-spacing:.19em; }
+      .subtitle { color:#c4cbd0; }
+      .primary { background:#d8bd8c; border-radius:4px; color:#141d26; }
+      .primary:hover { background:#ecd3a7; }
+      .menurow { justify-content:flex-start; }
+      #hotbar,#palette { background:#131c23d9; border-radius:6px; border:1px solid #cab58c55; }
+      #hotbar button { background:#303b43; border-radius:3px; }
+      #hotbar button[aria-pressed="true"] { background:#a5874d44; border-color:#dbc39b; }
+      #blockname { background:#131c23cf; border-radius:4px; }
+      #hint { background:#151d26bd; color:#e5dcc9; border-radius:4px; top:110px; }
+      #location { position:absolute; top:64px; left:18px; color:#fff0d2; font-size:14px; text-shadow:0 2px 5px #000; letter-spacing:.06em; }
+      #objective { position:absolute; top:87px; left:18px; width:min(480px,70%); color:#c7cbd0; font-size:11px; text-shadow:0 2px 4px #000; }
+      #stock { position:absolute; bottom:111px; left:50%; transform:translateX(-50%); color:#e7cca0; font-size:11px; background:#131c23c9; padding:5px 10px; border-radius:4px; }
+      #actions button { background:#16222dd9; }
+      #actions #break { background:#785b3dd9; }
+      #actions #place { background:#42606cd9; }
+      #debug { top:145px; background:#131c23e8; }
+      #map-panel { position:absolute; right:18px; top:75px; width:min(370px,50vw); pointer-events:auto; color:var(--cream); background:#131c23ed; border:1px solid #c6af83; padding:16px; border-radius:6px; }
+      #map-panel svg { display:block; width:100%; max-height:65vh; }
+      .map-head { font-size:11px; letter-spacing:.15em; display:flex; align-items:center; justify-content:space-between; }
+      #map-close { padding:3px 12px; font-size:20px; }
+      #map-panel p { font-size:10px; line-height:1.5; color:#bfc7ca; }
+      .desktop #movezone,.desktop #stick { display:none; }
+      #rotate { background:#131c23f5; }
+      #reset-confirm { background:#131c23; }
+      @media (max-height:480px) { #location{top:53px;font-size:12px} #objective{top:72px;font-size:10px;width:60%} #hint{display:none} #stock{bottom:94px} #debug{top:100px} .card{padding:20px} h1{font-size:36px} .intro h1{font-size:34px!important} }
+      @media (max-width:650px) { #objective{width:65%} #map-panel{width:75vw;max-width:340px} }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" tabindex="0" aria-label="Coruscant Temple: first-person temple exploration and building"></canvas>
+    <div id="hud" hidden>
+      <header>
+        <div class="brand">CORUSCANT<small>JEDI TEMPLE · INTACT RECONSTRUCTION</small></div>
+        <div class="tools"><button id="fullscreen">Fullscreen</button><button id="pause" aria-label="Pause game">Ⅱ Menu</button></div>
+      </header>
+      <div id="hint">Move with your left thumb · drag right to look · aim, break, build</div>
+      <div id="crosshair">+</div>
+      <div id="target" hidden></div>
+      <div id="toast" role="status" hidden></div>
+      <div id="movezone" aria-label="Movement joystick"></div>
+      <div id="stick"><div id="knob"></div></div>
+      <div id="actions">
+        <button id="jump">↑ JUMP</button><button id="break">BREAK</button><button id="map-toggle">⌖ MAP</button
+        ><button id="place" style="grid-column: 2; grid-row: 2">PLACE</button>
+      </div>
+      <div id="blockname">Limestone</div>
+      <div id="hotbar" role="toolbar" aria-label="Blocks"></div>
+      <div id="palette" role="toolbar" aria-label="All blocks" hidden></div>
+      <pre id="debug" hidden></pre>
+      <div id="location">Grand Hall</div>
+      <div id="objective" role="status"></div>
+      <div id="stock">0 recovered blocks</div>
+      <aside id="map-panel" hidden aria-label="Temple map">
+        <div class="map-head">TEMPLE DIRECTORY <button id="map-close" aria-label="Close map">×</button></div>
+        <svg viewBox="0 0 160 160" role="img" aria-label="Map showing the hall, council chamber, archives, rotunda, and service annex">
+          <g fill="#60747a" stroke="#bfad86" stroke-width="0.7">
+            <path d="M50 32H82V108H50Z M50 19H82V32H50Z M40 32H50V118H40Z M82 32H92V118H82Z M40 108H104V118H40Z M62 118H70V126H62Z M92 38H122V58H92Z M108 58H114V64H108Z M92 64H128V100H92Z"/>
+            <circle cx="27" cy="46" r="13"/><circle cx="29" cy="78" r="11"/><circle cx="66" cy="139" r="14"/>
+            <path id="service-map" d="M104 104H128V118H104Z" fill="#92744b"/>
+          </g>
+          <g fill="#18242b">
+            <rect x="52" y="37" width="2" height="66"/><rect x="78" y="37" width="2" height="66"/>
+            <rect x="101" y="68" width="2" height="28"/><rect x="117" y="68" width="2" height="28"/>
+          </g>
+          <g fill="#eee3ca" font-size="4" text-anchor="middle" font-family="system-ui">
+            <text x="66" y="70">GRAND HALL</text><text x="27" y="46">COUNCIL</text><text x="29" y="79">MEDITATION</text>
+            <text x="110" y="82">ARCHIVES</text><text x="107" y="48">ANTECHAMBER</text><text x="66" y="140">ROTUNDA</text>
+            <text x="116" y="112">SERVICE</text>
+          </g>
+          <g id="map-player"><circle r="2" fill="#f9d992"/><path d="M0 -5L-2 -1H2Z" fill="#f9d992"/></g>
+        </svg>
+        <p>Gold dot: you · East end of the transverse hallway: service access.</p>
+      </aside>
+    </div>
+    <div id="overlay">
+      <div class="card">
+        <div class="intro">
+          <div class="eyebrow">A CLASSIC PLACE. A NEW WAY TO EXPLORE.</div>
+          <h1>CORUSCANT<br />TEMPLE.</h1>
+          <p class="subtitle">Walk the great hall, council chamber and archives.<br />Unseal a service passage. Recover blocks. Build up to the city overlook.</p>
+        </div>
+        <div class="launch">
+          <div id="progress"><div id="bar"></div></div>
+          <div id="loadstatus" role="status">Ready when you are.</div>
+          <button id="play" class="primary">Load temple</button>
+          <div class="menurow">
+            <button id="menu-fullscreen">Fullscreen</button><button id="mute" aria-pressed="false">Sound on</button
+            ><button id="quality">Detail: desktop</button><button id="input-mode">Controls: desktop</button><button id="reset" hidden>Reset temple</button>
+          </div>
+          <div id="reset-confirm" hidden>
+            <p>Erase your buildings and return to the intact temple?</p>
+            <button id="cancel-reset">Keep my buildings</button> <button id="confirm-reset">Reset temple</button>
+          </div>
+        </div>
+        <div class="controls">
+          PHONE · turn sideways. Left thumb moves, right thumb looks.<br />DESKTOP · WASD + mouse drag / click to capture · SPACE jump<br />Left click
+          breaks · right click places · 1–9 / wheel picks blocks · E map · R auto-walk
+        </div>
+        <a class="back" href="../../../" target="_top">Back to Leo’s website ↗</a>
+      </div>
+    </div>
+    <div id="rotate">
+      <div>
+        <div class="turn">↻</div>
+        <h2>A little more room to roam.</h2>
+        <p>Turn your phone sideways to play Coruscant Temple.</p>
+        <button id="rotate-fullscreen">Fullscreen</button>
+      </div>
+    </div>
+    <script src="$GODOT_URL"></script>
+    <script>
+      "use strict";
+      const $ = (id) => document.getElementById(id),
+        canvas = $("canvas"),
+        engine = new Engine({ ...$GODOT_CONFIG, canvasResizePolicy: 0 }),
+        names = ["", "Limestone", "Dark stone", "Marble", "Bronze", "Metal", "Archive", "Burgundy", "Glass", "Panel", "Light", "Tech", "Core"],
+        colors = [
+          "",
+          "#a8a99d",
+          "#4d565a",
+          "#9aa9ad",
+          "#ae8853",
+          "#57656c",
+          "#264c63",
+          "#713d3d",
+          "#b9e5ed",
+          "#edf1de",
+          "#ead398",
+          "#51bacc",
+          "#f9cf65",
+        ];
+      const input = { active: false, x: 0, z: 0, lookX: 0, lookY: 0, selected: 1, jump: false, actions: [], reset: false, autoWalk: false, quality: matchMedia("(pointer:coarse)").matches ? 0.55 : 1.0 };
+      let started = false,
+        ready = false,
+        hasPlayed = false,
+        muted = false,
+        stickId = null,
+        lookId = null,
+        stickOrigin = null,
+        lastLook = null,
+        dragging = false,
+        audio = null,
+        saveOK = true,
+        status = {},
+        hintTimer = null,
+        mouseStart = null,
+        holdTimer = null;
+      const keys = new Set();
+      function resizeRender() {
+        const scale = Math.min(input.quality, 1280 / Math.max(1, window.innerWidth));
+        canvas.width = Math.max(320, Math.round(window.innerWidth * scale));
+        canvas.height = Math.max(180, Math.round(window.innerHeight * scale));
+      }
+      resizeRender();
+      window.templeConsume = () => {
+        const v = { ...input, actions: [...input.actions] };
+        v.x = Math.max(-1, Math.min(1, v.x + (keys.has("d") ? 1 : 0) - (keys.has("a") ? 1 : 0)));
+        v.z = Math.max(-1, Math.min(1, (input.autoWalk ? -1 : v.z) + (keys.has("s") ? 1 : 0) - (keys.has("w") ? 1 : 0)));
+        input.lookX = input.lookY = 0;
+        input.jump = false;
+        input.actions = [];
+        input.reset = false;
+        return JSON.stringify(v);
+      };
+      window.templeLoad = () => {
+        try {
+          return localStorage.getItem("coruscant-temple-v2") || "{}";
+        } catch (e) {
+          saveOK = false;
+          return "{}";
+        }
+      };
+      window.templeSave = (data) => {
+        try {
+          localStorage.setItem("coruscant-temple-v2", data);
+          saveOK = true;
+        } catch (e) {
+          saveOK = false;
+        }
+      };
+      window.templeClear = () => {
+        try {
+          localStorage.removeItem("coruscant-temple-v2");
+        } catch (e) {
+          saveOK = false;
+        }
+      };
+      window.templeSound = (kind) => {
+        if (muted) return;
+        try {
+          audio ??= new (window.AudioContext || window.webkitAudioContext)();
+          audio.resume();
+          const t = audio.currentTime;
+          for (let n = 0; n < (kind === "wave" ? 3 : 1); n++) {
+            const o = audio.createOscillator(),
+              g = audio.createGain();
+            o.type = kind === "break" ? "triangle" : "sine";
+            o.frequency.setValueAtTime(kind === "wave" ? 660 + n * 165 : kind === "place" ? 380 : 190, t + n * 0.1);
+            o.frequency.exponentialRampToValueAtTime(kind === "break" ? 70 : 540, t + n * 0.1 + 0.09);
+            g.gain.setValueAtTime(0.035, t + n * 0.1);
+            g.gain.exponentialRampToValueAtTime(0.001, t + n * 0.1 + 0.1);
+            o.connect(g).connect(audio.destination);
+            o.start(t + n * 0.1);
+            o.stop(t + n * 0.1 + 0.11);
+          }
+        } catch (e) {}
+      };
+      function choose(id) {
+        input.selected = id;
+        $("blockname").textContent = names[id];
+        const slots = [1, 3, 5, 7, 8, 10, 11],
+          b = $("hotbar").querySelector("[data-flex]");
+        if (b) {
+          const flex = slots.includes(id) ? 11 : id;
+          b.dataset.block = flex;
+          b.setAttribute("aria-label", names[flex]);
+          b.querySelector(".swatch").style.background = colors[flex];
+        }
+        for (const b of document.querySelectorAll("[data-block]")) b.setAttribute("aria-pressed", String(+b.dataset.block === id));
+      }
+      function blockButton(id) {
+        const b = document.createElement("button");
+        b.dataset.block = id;
+        b.setAttribute("aria-label", names[id]);
+        b.setAttribute("aria-pressed", "false");
+        b.innerHTML = '<span class="swatch" style="background:' + colors[id] + '"></span>';
+        b.addEventListener("click", () => {
+          choose(+b.dataset.block);
+          $("palette").hidden = true;
+          canvas.focus({ preventScroll: true });
+        });
+        return b;
+      }
+      for (const id of [1, 3, 5, 7, 8, 10, 11]) {
+        const b = blockButton(id);
+        if (id === 11) b.dataset.flex = "true";
+        $("hotbar").append(b);
+      }
+      const paletteButton = document.createElement("button");
+      paletteButton.textContent = "▦";
+      paletteButton.setAttribute("aria-label", "Open block palette");
+      paletteButton.onclick = () => {
+        $("palette").hidden = !$("palette").hidden;
+      };
+      $("hotbar").append(paletteButton);
+      for (let id = 1; id <= 12; id++) {
+        const b = blockButton(id);
+        b.append(document.createTextNode(names[id]));
+        $("palette").append(b);
+      }
+      choose(1);
+      let gpuInfo = "";
+      window.templeUpdate = (data) => {
+        if (!gpuInfo && new URLSearchParams(location.search).has("debug")) {
+          try {
+            const gl = canvas.getContext("webgl2"), ext = gl?.getExtension("WEBGL_debug_renderer_info");
+            gpuInfo = ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : "WebGL 2";
+          } catch (e) { gpuInfo = "WebGL 2"; }
+        }
+        if (gpuInfo) data.gpu = gpuInfo;
+        status = { ...status, ...data };
+        window.templeWorldState = Object.freeze({ ...status, active: input.active, saveOK });
+        canvas.dataset.state = JSON.stringify(window.templeWorldState);
+        if (data.loading) {
+          ready = false;
+          $("bar").style.width = Math.round((data.progress || 0) * 100) + "%";
+          $("loadstatus").textContent = "Opening the temple… " + Math.round((data.progress || 0) * 100) + "%";
+          $("play").disabled = true;
+          return;
+        }
+        if (!ready) {
+          ready = true;
+          $("play").disabled = false;
+          $("play").textContent = hasPlayed ? "Return to temple" : "Enter temple";
+          $("loadstatus").textContent = "The intact temple awaits. Buildings and discoveries save on this device.";
+          $("progress").hidden = true;
+          $("reset").hidden = false;
+          choose(data.selected || 1);
+        }
+        $("location").textContent = data.room || "Grand Hall";
+        $("objective").textContent = data.objective || "";
+        $("stock").textContent = `${data.inventory || 0} recovered blocks`;
+        if (data.position) $("map-player").setAttribute("transform", `translate(${data.position[0]},${data.position[2]}) rotate(${-data.yaw*180/Math.PI})`);
+        $("target").textContent = data.target || "";
+        $("target").hidden = !data.target;
+        $("toast").textContent = data.message || (!saveOK ? "Saving is unavailable in this browser session." : "");
+        $("toast").hidden = !$("toast").textContent;
+        $("debug").textContent = `${data.fps || 0} FPS · ${data.drawCalls || 0} draws\n${data.chunks || 0} chunks · ${data.dirty || 0} dirty\n${
+          data.triangles || 0
+        } triangles\n${data.room || "Temple"} · stock ${data.inventory || 0}\n${data.changes || 0} block changes\nCPU ${Math.round(data.processMS || 0)} ms · physics ${Math.round(data.physicsMS || 0)} ms\n${gpuInfo}`;
+      };
+      function clearInput() {
+        keys.clear();
+        input.autoWalk = false;
+        input.x = input.z = input.lookX = input.lookY = 0;
+        input.jump = false;
+        input.actions = [];
+        stickId = lookId = null;
+        dragging = false;
+        lastLook = null;
+        mouseStart = null;
+        $("knob").style.transform = "";
+        $("stick").style.left = "";
+        $("stick").style.top = "";
+        $("stick").style.bottom = "";
+        if (holdTimer) {
+          clearTimeout(holdTimer);
+          holdTimer = null;
+        }
+      }
+      function pause() {
+        if (!ready) return;
+        input.active = false;
+        clearInput();
+        document.exitPointerLock?.();
+        $("overlay").hidden = false;
+        $("hud").hidden = true;
+        $("play").textContent = "Return to temple";
+        $("reset-confirm").hidden = true;
+        $("palette").hidden = true;
+      }
+      function enter() {
+        input.active = true;
+        hasPlayed = true;
+        $("overlay").hidden = true;
+        $("hud").hidden = false;
+        clearInput();
+        canvas.focus({ preventScroll: true });
+        $("hint").style.opacity = "1";
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(() => {
+          $("hint").style.opacity = "0";
+        }, 16000);
+      }
+      $("play").onclick = async () => {
+        if (ready) {
+          enter();
+          return;
+        }
+        if (started) return;
+        started = true;
+        $("play").disabled = true;
+        $("play").textContent = "Loading…";
+        $("loadstatus").textContent = "Loading engine…";
+        try {
+          await engine.startGame({
+            canvas,
+            canvasResizePolicy: 0,
+            onProgress: (current, total) => {
+              if (total) {
+                $("bar").style.width = Math.round((current / total) * 100) + "%";
+                $("loadstatus").textContent = "Loading engine… " + Math.round((current / total) * 100) + "%";
+              }
+            },
+          });
+        } catch (e) {
+          $("loadstatus").textContent = "Could not start WebGL 2. Please reload or try another browser.";
+          $("play").textContent = "Reload game";
+          $("play").disabled = false;
+          $("play").onclick = () => location.reload();
+          console.error(e);
+        }
+      };
+      $("pause").onclick = pause;
+      $("input-mode").textContent = matchMedia("(pointer:coarse)").matches ? "Controls: touch" : "Controls: desktop";
+      $("input-mode").onclick = () => {
+        document.body.classList.toggle("desktop");
+        $("input-mode").textContent = document.body.classList.contains("desktop") ? "Controls: desktop" : "Controls: touch";
+      };
+      function toggleMap() { $("map-panel").hidden = !$("map-panel").hidden; }
+      $("map-toggle").onclick = toggleMap;
+      $("map-close").onclick = toggleMap;
+      $("quality").textContent = input.quality === 1 ? "Detail: desktop" : "Detail: eco";
+      async function fullscreen() {
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+            return;
+          }
+          await document.documentElement.requestFullscreen();
+          try {
+            await screen.orientation.lock("landscape");
+          } catch (e) {}
+        } catch (e) {
+          console.info("Fullscreen request:", e.name, e.message);
+          $("toast").textContent = "Fullscreen unavailable. Turn your phone sideways to play.";
+          $("toast").hidden = false;
+          $("loadstatus").textContent = "Fullscreen unavailable here. Turn your phone sideways to play.";
+        }
+      }
+      for (const id of ["fullscreen", "menu-fullscreen", "rotate-fullscreen"]) $(id).onclick = fullscreen;
+      document.addEventListener("fullscreenchange", () => {
+        $("fullscreen").textContent = document.fullscreenElement ? "Exit fullscreen" : "Fullscreen";
+        clearInput();
+      });
+      $("quality").onclick = () => {
+        input.quality = input.quality === 1.0 ? 0.55 : 1.0;
+        $("quality").textContent = input.quality === 1.0 ? "Detail: desktop" : "Detail: eco";
+        resizeRender();
+      };
+      $("mute").onclick = () => {
+        muted = !muted;
+        $("mute").textContent = muted ? "Sound off" : "Sound on";
+        $("mute").setAttribute("aria-pressed", String(muted));
+      };
+      $("reset").onclick = () => {
+        $("reset-confirm").hidden = false;
+      };
+      $("cancel-reset").onclick = () => {
+        $("reset-confirm").hidden = true;
+      };
+      $("confirm-reset").onclick = () => {
+        input.reset = true;
+        ready = false;
+        clearInput();
+        $("reset-confirm").hidden = true;
+        $("progress").hidden = false;
+        $("bar").style.width = "0%";
+        $("play").disabled = true;
+        $("loadstatus").textContent = "Restoring the temple…";
+      };
+      for (const id of ["break", "place"]) {
+        $(id).addEventListener("pointerdown", (e) => {
+          e.preventDefault();
+          if (!input.active) return;
+          input.actions.push(id);
+          if (id !== "wave") {
+            const repeat = () => {
+              if (input.active) input.actions.push(id);
+              holdTimer = setTimeout(repeat, 230);
+            };
+            holdTimer = setTimeout(repeat, 400);
+          }
+          $(id).setPointerCapture(e.pointerId);
+        });
+        const stop = () => {
+          if (holdTimer) {
+            clearTimeout(holdTimer);
+            holdTimer = null;
+          }
+        };
+        $(id).addEventListener("pointerup", stop);
+        $(id).addEventListener("pointercancel", stop);
+        $(id).addEventListener("lostpointercapture", stop);
+      }
+      $("jump").addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        if (input.active) input.jump = true;
+      });
+      $("movezone").addEventListener("pointerdown", (e) => {
+        if (!input.active || stickId !== null) return;
+        e.preventDefault();
+        stickId = e.pointerId;
+        stickOrigin = { x: e.clientX, y: e.clientY };
+        $("movezone").setPointerCapture(e.pointerId);
+        $("stick").style.left = e.clientX - 47 + "px";
+        $("stick").style.top = e.clientY - 47 + "px";
+        $("stick").style.bottom = "auto";
+      });
+      $("movezone").addEventListener("pointermove", (e) => {
+        if (e.pointerId !== stickId) return;
+        const x = e.clientX - stickOrigin.x,
+          z = e.clientY - stickOrigin.y,
+          m = Math.max(1, Math.hypot(x, z) / 40);
+        input.x = x / m / 40;
+        input.z = z / m / 40;
+        $("knob").style.transform = `translate(${x / m}px,${z / m}px)`;
+      });
+      function stopStick(e) {
+        if (e.pointerId !== stickId) return;
+        stickId = null;
+        input.x = input.z = 0;
+        $("knob").style.transform = "";
+        $("stick").style.left = "";
+        $("stick").style.top = "";
+        $("stick").style.bottom = "";
+      }
+      for (const ev of ["pointerup", "pointercancel", "lostpointercapture"]) $("movezone").addEventListener(ev, stopStick);
+      canvas.addEventListener("pointerdown", (e) => {
+        if (!input.active) return;
+        e.preventDefault();
+        canvas.focus({ preventScroll: true });
+        if (e.pointerType === "touch") {
+          if (lookId !== null) return;
+          lookId = e.pointerId;
+          lastLook = { x: e.clientX, y: e.clientY };
+          canvas.setPointerCapture(e.pointerId);
+        } else if (document.pointerLockElement === canvas) {
+          input.actions.push(e.button === 2 ? "place" : "break");
+        } else {
+          dragging = true;
+          mouseStart = { x: e.clientX, y: e.clientY, button: e.button };
+          lastLook = { x: e.clientX, y: e.clientY };
+          canvas.setPointerCapture(e.pointerId);
+        }
+      });
+      canvas.addEventListener("pointermove", (e) => {
+        if (!input.active) return;
+        if (e.pointerType === "touch" && e.pointerId !== lookId) return;
+        if (document.pointerLockElement === canvas) {
+          input.lookX += e.movementX;
+          input.lookY += e.movementY;
+        } else if (lastLook && (dragging || e.pointerId === lookId)) {
+          input.lookX += e.clientX - lastLook.x;
+          input.lookY += e.clientY - lastLook.y;
+          lastLook = { x: e.clientX, y: e.clientY };
+        }
+      });
+      canvas.addEventListener("pointerup", (e) => {
+        if (e.pointerId === lookId) {
+          lookId = null;
+          lastLook = null;
+        }
+        if (e.pointerType !== "touch" && dragging) {
+          if (mouseStart && Math.hypot(e.clientX - mouseStart.x, e.clientY - mouseStart.y) < 5) {
+            if (mouseStart.button === 2) input.actions.push("place");
+            else if (canvas.requestPointerLock) {
+              try {
+                const p = canvas.requestPointerLock();
+                p?.catch?.(() => {});
+              } catch (e) {}
+            }
+          }
+          dragging = false;
+          mouseStart = null;
+          lastLook = null;
+        }
+      });
+      canvas.addEventListener("pointercancel", clearInput);
+      canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+      canvas.addEventListener(
+        "wheel",
+        (e) => {
+          if (!input.active) return;
+          e.preventDefault();
+          choose(((input.selected - 1 + (e.deltaY > 0 ? 1 : 11)) % 12) + 1);
+        },
+        { passive: false }
+      );
+      document.addEventListener(
+        "keydown",
+        (e) => {
+          const key = e.key.toLowerCase();
+          if (key === "escape") {
+            pause();
+            return;
+          }
+          if (!input.active) return;
+          if (["w", "a", "s", "d", " ", "e"].includes(key)) {
+            e.preventDefault();
+            keys.add(key);
+          }
+          if (key === " " && !e.repeat) input.jump = true;
+          if (key === "e" && !e.repeat) toggleMap();
+          if (key === "r" && !e.repeat) input.autoWalk = !input.autoWalk;
+          if (key >= "1" && key <= "9") choose(+key);
+          if (key === "f3") {
+            e.preventDefault();
+            $("debug").hidden = !$("debug").hidden;
+          }
+        },
+        true
+      );
+      document.addEventListener("keyup", (e) => keys.delete(e.key.toLowerCase()), true);
+      document.addEventListener("pointerlockchange", () => {
+        if (!document.pointerLockElement && input.active && !dragging) pause();
+      });
+      window.addEventListener("blur", pause);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) pause();
+      });
+      window.addEventListener("resize", () => {
+        resizeRender();
+        clearInput();
+        if (matchMedia("(orientation:portrait) and (pointer:coarse)").matches) pause();
+      });
+      if (matchMedia("(pointer:fine)").matches) {
+        document.body.classList.add("desktop");
+        $("hint").textContent = "WASD move · drag / click to capture mouse · aim, break, build · E map · R auto-walk";
+      }
+      if (new URLSearchParams(location.search).has("debug")) $("debug").hidden = false;
+    </script>
+  </body>
+</html>

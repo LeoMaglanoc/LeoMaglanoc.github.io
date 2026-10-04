@@ -1,0 +1,22 @@
+config_version=5
+[application]
+config/name="Coruscant Temple"
+run/main_scene="res://main.tscn"
+boot_splash/show_image=false
+config/features=PackedStringArray("4.7", "GL Compatibility")
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/vram_compression/import_etc2_astc=true
+textures/vram_compression/import_s3tc=true
+[physics]
+common/physics_ticks_per_second=60
+[input_devices]
+pointing/emulate_touch_from_mouse=false
+pointing/emulate_mouse_from_touch=false

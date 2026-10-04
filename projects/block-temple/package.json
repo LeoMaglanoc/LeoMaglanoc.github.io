@@ -1,0 +1,7 @@
+{
+  "name": "coruscant-temple-validation",
+  "private": true,
+  "scripts": {
+    "test": "node tests/shell.cjs"
+  }
+}
