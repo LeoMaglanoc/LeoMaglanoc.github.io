@@ -18,7 +18,8 @@ on:
       - "Gemfile"
       - "Gemfile.lock"
       - ".gitmodules"
-      - "vendor/phone-slam/**"
+      - "projects/**"
+      - "scripts/**"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -49,7 +50,8 @@ on:
       - "Gemfile"
       - "Gemfile.lock"
       - ".gitmodules"
-      - "vendor/phone-slam/**"
+      - "projects/**"
+      - "scripts/**"
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/broken-links.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
@@ -80,9 +82,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
+      - name: Publish browser project assets
+        run: python3 scripts/publish-project-assets.py
       - name: Set Giscus repository
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -111,7 +113,7 @@ jobs:
         with:
           node-version: 22
           cache: "npm"
-          cache-dependency-path: vendor/phone-slam/web/package-lock.json
+          cache-dependency-path: projects/slam/web/package-lock.json
 
       - name: Build Jekyll site
         run: |
@@ -125,7 +127,7 @@ jobs:
         run: npx --yes purgecss@6.0.0 -c purgecss.config.js
 
       - name: Build phone-slam viewer
-        working-directory: vendor/phone-slam/web
+        working-directory: projects/slam/web
         run: |
           npm ci
           npm run test
@@ -136,8 +138,11 @@ jobs:
         run: |
           rm -rf _site/slam
           mkdir -p _site/slam
-          cp -R vendor/phone-slam/web/dist/. _site/slam/
+          cp -R projects/slam/web/dist/. _site/slam/
           test -f _site/slam/index.html
+
+      - name: Verify stable project routes and runtime files
+        run: python3 scripts/check-project-links.py
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

@@ -1,0 +1,527 @@
+:root {
+  color-scheme: dark;
+  --bg: #10191c;
+  --ink: #eaf2ed;
+  --muted: #9caeaa;
+  --accent: #b5f19b;
+  --border: #ffffff20;
+  font-family: Inter, system-ui, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+main {
+  height: 100dvh;
+  min-height: 620px;
+  position: relative;
+  overflow: hidden;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+header {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  left: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.home {
+  font-size: 14px;
+  font-weight: 750;
+  color: var(--ink);
+  text-decoration: none;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.17em;
+  color: var(--muted);
+  font-weight: 650;
+}
+.engine {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted);
+}
+.intro {
+  position: absolute;
+  top: 110px;
+  left: 40px;
+  pointer-events: none;
+}
+h1 {
+  font-weight: 450;
+  font-size: clamp(40px, 5vw, 70px);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  margin: 18px 0;
+}
+h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.intro p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.panel {
+  position: absolute;
+  top: 102px;
+  right: 28px;
+  width: 310px;
+  padding: 18px;
+  background: #10191ce8;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+button {
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  background: #ffffff08;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 11px 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+button:hover {
+  background: #ffffff18;
+}
+button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: wait;
+}
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.modes {
+  display: flex;
+  gap: 4px;
+}
+.modes button {
+  flex: 1;
+  padding: 12px 5px;
+}
+.actions {
+  display: flex;
+  gap: 5px;
+}
+.actions button {
+  flex: 1;
+  padding: 10px 5px;
+}
+#status {
+  font-size: 12px;
+  color: var(--accent);
+  min-height: 30px;
+  line-height: 1.5;
+}
+.disturbances {
+  margin-top: 22px;
+}
+.disturbances > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 10px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 10px;
+  margin: 18px 0;
+  color: var(--muted);
+}
+.legend label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+input {
+  accent-color: var(--accent);
+}
+.reference {
+  color: #b5f19b;
+}
+.actual {
+  color: #68bcff;
+}
+.prediction {
+  color: #ffc18b;
+}
+details {
+  border-top: 1px solid var(--border);
+  padding-top: 13px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+summary {
+  cursor: pointer;
+  color: var(--ink);
+}
+output {
+  display: block;
+  white-space: pre-line;
+  font-family: monospace;
+  font-size: 10px;
+}
+.instructions {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+#ghost-time {
+  font-size: 12px;
+  color: #c8b2ff;
+}
+.hud {
+  position: absolute;
+  left: 40px;
+  bottom: 35px;
+  display: flex;
+  gap: 32px;
+  background: #10191ce0;
+  border: 1px solid var(--border);
+  padding: 18px 24px;
+  border-radius: 12px;
+  pointer-events: none;
+}
+.hud div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hud span {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.hud strong {
+  font-size: 23px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.hud small {
+  font-size: 12px;
+  color: var(--muted);
+}
+#loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #10191cec;
+  font-size: 15px;
+  z-index: 9;
+}
+#error {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  padding: 18px;
+  background: #572322;
+  z-index: 10;
+}
+.sticks {
+  display: none;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.stick {
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  background: #ffffff0c;
+  border: 1px solid #ffffff35;
+  position: relative;
+  touch-action: none;
+  pointer-events: auto;
+  user-select: none;
+}
+.stick i {
+  position: absolute;
+  left: calc(50% - 19px);
+  top: calc(50% - 19px);
+  height: 38px;
+  width: 38px;
+  background: #b5f19b55;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.stick span {
+  position: absolute;
+  bottom: -17px;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+[hidden] {
+  display: none !important;
+}
+@media (pointer: coarse) {
+  body.manual .sticks {
+    display: flex;
+  }
+}
+@media (max-width: 800px) {
+  main {
+    min-height: 0;
+  }
+  .intro {
+    top: 78px;
+    left: 22px;
+  }
+  .intro h1 {
+    font-size: 36px;
+    margin: 10px 0;
+  }
+  .intro p {
+    display: none;
+  }
+  header {
+    top: max(16px, env(safe-area-inset-top));
+    left: 20px;
+    right: 20px;
+    gap: 15px;
+  }
+  .engine {
+    display: none;
+  }
+  header > .eyebrow {
+    font-size: 8px;
+  }
+  .panel {
+    top: auto;
+    bottom: 20px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    padding: 12px;
+  }
+  .modes {
+    max-width: none;
+  }
+  .hud {
+    bottom: auto;
+    top: 207px;
+    left: 20px;
+    padding: 10px 14px;
+    gap: 20px;
+  }
+  .hud strong {
+    font-size: 17px;
+  }
+  .hud div {
+    gap: 5px;
+  }
+  .disturbances {
+    margin-top: 12px;
+  }
+  .disturbances > div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .disturbances button {
+    flex: 1;
+    font-size: 10px;
+    white-space: nowrap;
+    padding: 10px 5px;
+  }
+  .legend {
+    margin: 10px 0;
+    align-items: center;
+  }
+  .legend label {
+    width: auto;
+  }
+  .instructions {
+    font-size: 9px;
+  }
+  details p {
+    margin: 6px 0;
+  }
+  body.manual .panel {
+    bottom: 172px;
+  }
+  body.manual .intro {
+    display: none;
+  }
+  body.manual .hud {
+    top: 65px;
+  }
+  body.manual .instructions {
+    display: none;
+  }
+  body.manual .disturbances,
+  body.manual .legend {
+    display: none;
+  }
+  .sticks {
+    bottom: max(25px, env(safe-area-inset-bottom));
+  }
+  #ghost-time {
+    margin: 8px 0 0;
+  }
+  details[open] {
+    max-height: 155px;
+    overflow: auto;
+  }
+}
+@media (max-height: 550px) {
+  .intro {
+    display: none;
+  }
+  .panel {
+    top: 64px;
+    bottom: auto;
+    left: auto;
+    right: 16px;
+    width: 270px;
+  }
+  .hud {
+    top: auto;
+    bottom: 18px;
+    left: 20px;
+  }
+  .instructions,
+  .disturbances > .eyebrow {
+    display: none;
+  }
+  .disturbances {
+    margin-top: 8px;
+  }
+  .legend {
+    margin: 8px 0;
+  }
+  .sticks {
+    right: 310px;
+  }
+  body.manual .panel {
+    bottom: auto;
+  }
+  body.manual .hud {
+    top: 66px;
+    bottom: auto;
+  }
+  body.manual .sticks .stick {
+    width: 95px;
+    height: 95px;
+  }
+}
+/* Short screens keep the stage and both sticks inside the viewport. */
+@media (max-height: 620px) {
+  main {
+    min-height: 0;
+  }
+  .panel {
+    max-height: calc(100dvh - 92px);
+    overflow: auto;
+  }
+}
+@media (max-height: 550px) {
+  body.manual .disturbances,
+  body.manual .legend,
+  body.manual .instructions {
+    display: none;
+  }
+  body.manual .panel {
+    width: 270px;
+  }
+  .sticks {
+    bottom: 24px;
+  }
+}
+@media (max-width: 800px) and (min-height: 551px) {
+  .intro {
+    top: 72px;
+  }
+  .intro h1 {
+    font-size: 27px;
+    margin: 8px 0;
+  }
+  .intro h1 br {
+    display: none;
+  }
+  .intro .eyebrow {
+    font-size: 8px;
+  }
+  .hud {
+    top: 139px;
+  }
+}
+
+/* Six concise telemetry cells wrap on phones and short landscapes. */
+.hud {
+  gap: 22px;
+}
+@media (max-width: 800px) {
+  .hud {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 22px;
+  }
+}
+@media (max-height: 550px) {
+  .hud {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 20px;
+  }
+}
+
+@media (max-width: 800px) and (min-height: 551px) {
+  .hud {
+    gap: 7px 20px;
+  }
+  .panel {
+    padding: 10px 12px;
+  }
+  .instructions {
+    display: none;
+  }
+  #status {
+    min-height: 18px;
+    margin: 8px 0;
+  }
+  .disturbances {
+    margin-top: 8px;
+  }
+}
+
+/* Pushes remain available while flying on touch devices. */
+@media (max-width: 800px), (max-height: 550px) {
+  body.manual .disturbances {
+    display: block;
+  }
+}

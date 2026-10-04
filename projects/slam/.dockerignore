@@ -1,0 +1,9 @@
+data/*
+!data/.gitkeep
+outputs/*
+!outputs/.gitkeep
+android/.gradle
+android/app/build
+.pytest_cache
+__pycache__
+*.pyc

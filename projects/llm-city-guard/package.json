@@ -1,0 +1,40 @@
+{
+  "name": "gatekeeper",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:model": "npm run model:verify && RUN_MODEL_TEST=1 playwright test tests/e2e/model.spec.ts",
+    "model:download": "node scripts/download-model.mjs",
+    "model:verify": "node scripts/verify-model.mjs",
+    "android:sync": "VITE_SKIP_MODELS=1 npm run build && npx cap sync android",
+    "android:build": "cd android && ./gradlew assembleDebug",
+    "android:install": "adb install -r android/app/build/outputs/apk/debug/app-debug.apk",
+    "android:test": "cd android && ./gradlew connectedDebugAndroidTest",
+    "android:logs": "adb logcat -s GatekeeperLlm:V Capacitor:V AndroidRuntime:E",
+    "test:phone": "node scripts/test-phone.mjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@huggingface/transformers": "^4.2.0",
+    "@pixiv/three-vrm": "^3.5.5",
+    "@pixiv/three-vrm-animation": "^3.5.5",
+    "three": "^0.186.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
+    "@playwright/test": "^1.52.0",
+    "@types/three": "^0.186.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.2"
+  }
+}

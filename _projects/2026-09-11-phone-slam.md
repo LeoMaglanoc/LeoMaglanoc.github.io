@@ -22,5 +22,5 @@ reconstruction runs on the website.
 
 <p>
   <a class="btn btn-primary" href="/slam/">Live Demo</a>
-  <a class="btn btn-outline-primary" href="https://github.com/LeoMaglanoc/phone-slam">GitHub</a>
+  <a class="btn btn-outline-primary" href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/projects/slam">GitHub</a>
 </p>

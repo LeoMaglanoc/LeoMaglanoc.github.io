@@ -1,0 +1,9 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+public/models/*
+!public/models/.gitkeep
+*.tsbuildinfo
+local-models/
+local-toolchains/

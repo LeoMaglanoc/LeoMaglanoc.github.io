@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+      - name: Publish browser project assets
+        run: python3 scripts/publish-project-assets.py
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:

@@ -1,0 +1,61 @@
+{
+  "title": "TUM RGB-D \u2014 freiburg3_long_office_household",
+  "dataset": {
+    "name": "freiburg3_long_office_household",
+    "family": "TUM RGB-D",
+    "url": "https://cvg.cit.tum.de/data/datasets/rgbd-dataset"
+  },
+  "slam": {
+    "input_frames": 2488,
+    "odometry_poses": 798,
+    "graph_nodes": 411,
+    "graph_links": 1206,
+    "global_loop_closures": 44,
+    "local_space_closures": 342,
+    "local_time_closures": 0
+  },
+  "accuracy": {
+    "ate_rmse_m": 0.08896396907810981,
+    "rpe_translation_rmse_m": 0.010189227251088276,
+    "rpe_rotation_rmse_rad": 0.00806231005998485
+  },
+  "mesh": {
+    "vertices": 175077,
+    "triangles": 89226,
+    "original_vertices": 175077,
+    "original_triangles": 89226,
+    "uv_count": 267678,
+    "glb_size_bytes": 22810384
+  },
+  "reconstruction": {
+    "backend": "rtabmap_textured_mesh",
+    "texturing": "standard_gain_compensated_blending",
+    "alicevision_multiband_available": false,
+    "texture_count": 2,
+    "texture_resolution": 4096,
+    "master_triangles": 89226,
+    "web_triangles": 89226
+  },
+  "video": {
+    "duration_s": 86.167,
+    "width": 640,
+    "height": 480,
+    "codec": "h264",
+    "framerate": "30/1"
+  },
+  "depth_video": {
+    "duration_s": 83.634,
+    "width": 640,
+    "height": 480,
+    "codec": "h264",
+    "framerate": "30/1",
+    "visualization": "Turbo colorized metric depth; black pixels are invalid measurements."
+  },
+  "assets": {
+    "video": "demo.mp4",
+    "depth_video": "depth.mp4",
+    "mesh": "scene.glb",
+    "trajectory": "trajectory.json",
+    "thumbnail": "thumbnail.webp"
+  }
+}

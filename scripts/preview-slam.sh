@@ -16,7 +16,7 @@ case "${1:-}" in
 esac
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-slam_root="$repo_root/vendor/phone-slam"
+slam_root="$repo_root/projects/slam"
 web_dist="$slam_root/web/dist"
 published_slam="_site/slam"
 
@@ -29,6 +29,8 @@ if ! "$build_only" && [[ -n "$(cd "$repo_root" && docker compose ps --status run
   printf 'Port 8080 is in use by Jekyll. Stop it with: docker compose stop jekyll\n' >&2
   exit 1
 fi
+
+python3 "$repo_root/scripts/publish-project-assets.py"
 
 (
   cd "$slam_root"
@@ -47,7 +49,7 @@ fi
   docker compose run --rm --no-deps --entrypoint /bin/sh jekyll \
     -lc 'rm -rf _site/slam && \
       mkdir -p _site/slam && \
-      cp -R vendor/phone-slam/web/dist/. _site/slam/ && \
+      cp -R projects/slam/web/dist/. _site/slam/ && \
       test -f _site/slam/index.html'
 )
 

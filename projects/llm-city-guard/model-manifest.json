@@ -1,0 +1,18 @@
+{
+  "modelId": "onnx-community/gemma-4-E2B-it-ONNX",
+  "revision": "9f4bef82ea6e296bc69f8a2f5939f73af81b07a6",
+  "dtype": "q4f16",
+  "files": [
+    "config.json",
+    "generation_config.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "chat_template.jinja",
+    "preprocessor_config.json",
+    "processor_config.json",
+    "onnx/decoder_model_merged_q4f16.onnx",
+    "onnx/decoder_model_merged_q4f16.onnx_data",
+    "onnx/embed_tokens_q4f16.onnx",
+    "onnx/embed_tokens_q4f16.onnx_data"
+  ]
+}

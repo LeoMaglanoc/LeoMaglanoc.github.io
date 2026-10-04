@@ -38,7 +38,8 @@ _news/                  News and announcements
 _poetry/                Poetry
 _bibliography/          Publication records
 _data/                  Site and CV data
-assets/interactive/     Self-contained browser demos
+projects/               Source, tooling and documentation for all side projects
+assets/interactive/     Published browser runtime files (generated)
 assets/json/            Structured source material
 assets/pdf/             PDF documents, including the CV
 docs/                   Technical documentation
@@ -71,7 +72,7 @@ is already running.
 Run the G1 browser demo directly, without the Jekyll shell:
 
 ```bash
-docker compose -f assets/interactive/g1/docker-compose.yml up g1-site
+docker compose -f projects/g1/docker-compose.yml up g1-site
 ```
 
 Open [http://localhost:8000/assets/interactive/g1/](http://localhost:8000/assets/interactive/g1/).
@@ -79,11 +80,11 @@ Open [http://localhost:8000/assets/interactive/g1/](http://localhost:8000/assets
 The G1 policy/model contract tests run in the reproducible tools container:
 
 ```bash
-docker compose -f assets/interactive/g1/docker-compose.yml run --rm g1-tools \
-  python -m unittest discover -s assets/interactive/g1/tests -p 'test_*.py'
+docker compose -f projects/g1/docker-compose.yml run --rm g1-tools \
+  python -m unittest discover -s projects/g1/tests -p 'test_*.py'
 ```
 
-The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.io/g1/). It uses a fullscreen layout and embeds the static simulator from `assets/interactive/g1/`.
+The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.io/g1/). It uses a fullscreen layout and embeds the static simulator from `projects/g1/`.
 
 ## Interactive demos
 
@@ -98,7 +99,7 @@ no grasp attachment, learning, camera perception or backend. A fixed five-body
 object pool supports continuous operation. All runtime assets are local.
 
 Desktop and mobile layouts support orbit/pinch, pause, reset and fullscreen.
-See [`assets/interactive/mobile-sorting/README.md`](assets/interactive/mobile-sorting/README.md)
+See [`projects/mobile-sorting/README.md`](projects/mobile-sorting/README.md)
 for Docker commands, controller details, model modifications and validation.
 
 ### TinyDreamer CartPole
@@ -145,7 +146,7 @@ local static assets with no backend or runtime CDN dependency.
 
 The trained agent succeeded on **20/20 held-out swing-up episodes**, with mean
 return **753.19**, compared with **122.88** for random actions. Strong pushes can
-break sustained balance. See [`assets/interactive/tiny-dreamer/README.md`](assets/interactive/tiny-dreamer/README.md)
+break sustained balance. See [`projects/tiny-dreamer/README.md`](projects/tiny-dreamer/README.md)
 for the detailed algorithm, training commands, contracts, validation, and limits.
 
 ### G1 locomotion playground
@@ -166,7 +167,7 @@ PD controller
 MuJoCo WASM physics
 ```
 
-It includes a flat walking area and an optional lightweight terrain course with uneven blocks, a shallow ramp, and low steps. Desktop keyboard controls and mobile touch controls are supported. See [`assets/interactive/g1/README.md`](assets/interactive/g1/README.md) for the runtime contract, model details, controls, and attribution.
+It includes a flat walking area and an optional lightweight terrain course with uneven blocks, a shallow ramp, and low steps. Desktop keyboard controls and mobile touch controls are supported. See [`projects/g1/README.md`](projects/g1/README.md) for the runtime contract, model details, controls, and attribution.
 
 ### FPV drone racing
 
@@ -188,7 +189,7 @@ Three.js rendering → chase / FPV view
 
 Autopilot continuously wraps the reference trajectory without resetting the vehicle. Manual flight replaces MPC with assisted velocity commands and banked steering, using keyboard or dual touch sticks. Directional push buttons apply brief physical forces so the controller's deviation and recovery are visible. Ordered gate crossings track laps and best times; Race AI replays a looping recorded physics rollout. Everything runs locally in the browser with WebGL and no backend. The vehicle is an illustrative model, not a calibrated digital twin.
 
-See [`assets/interactive/drone-racing/README.md`](assets/interactive/drone-racing/README.md) for parameters, controls, validation and limitations.
+See [`projects/drone-racing/README.md`](projects/drone-racing/README.md) for parameters, controls, validation and limitations.
 
 ### Panda drawing & repair
 
@@ -210,9 +211,9 @@ observe again → complete or report stalled repair
 
 CURRENT records actual simulated motion. Detection tolerates sideways tracking error while preserving gaps along a stroke. Manual repair and a two-second auto-repair countdown redraw missing regions; erasing during repair cancels the active plan and replans from the current robot pose. Pointer/touch controls, Canvas, Three.js, and MuJoCo run locally in the browser with no backend or WebGPU requirement.
 
-See [`assets/interactive/painter/README.md`](assets/interactive/painter/README.md) for implementation details, validation, limitations, and attribution.
+See [`projects/painter/README.md`](projects/painter/README.md) for implementation details, validation, limitations, and attribution.
 
-Other demos are organized as self-contained projects under [`assets/interactive/`](assets/interactive/). Each demo's local README or Docker configuration is the source of truth for its own commands.
+All demos are organized as self-contained projects under [`projects/`](projects/). Each demo's local README or Docker configuration is the source of truth for its own commands.
 
 ## Editing the site
 
@@ -223,7 +224,7 @@ For normal content changes:
 3. Add or update assets under `assets/` when needed.
 4. Build the site locally before pushing.
 
-For browser demos, keep demo-specific code, assets, tests, and documentation inside that demo's directory where possible.
+For browser demos, edit source, assets, tests, and documentation in `projects/<name>/`. Run `python3 scripts/publish-project-assets.py` before previewing or building the website. `assets/interactive/` and `assets/js/ask-leo/` contain generated runtime copies; keep their URLs stable.
 
 ## CI and deployment
 
@@ -231,4 +232,19 @@ GitHub Actions builds the Jekyll site, runs the repository's checks, and publish
 
 ## Attribution
 
-Third-party libraries and assets are documented in the relevant notices files, including [`assets/interactive/g1/THIRD_PARTY_NOTICES.md`](assets/interactive/g1/THIRD_PARTY_NOTICES.md). The repository also retains the project license in [`LICENSE`](LICENSE).
+Third-party libraries and assets are documented in the relevant notices files, including [`projects/g1/THIRD_PARTY_NOTICES.md`](projects/g1/THIRD_PARTY_NOTICES.md). The repository also retains the project license in [`LICENSE`](LICENSE).
+
+## Side-project development
+
+All side-project source lives under `projects/`; `_projects/` contains the
+website write-ups. See [projects/README.md](projects/README.md) for build and
+publication details. Before a local Jekyll build or static preview, run:
+
+```sh
+python3 scripts/publish-project-assets.py
+```
+
+CI performs this step automatically. Godot exports remain checked in at their
+existing public paths and are rebuilt using each game's `scripts/build_web.sh`.
+SLAM is built separately from `projects/slam/web/` and published at `/slam/`.
+LLM city guard is source-only and is excluded from the site.

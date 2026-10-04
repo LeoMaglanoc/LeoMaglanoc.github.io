@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+vendor
+public/models
+artifacts
+test-results
+playwright-report
+local-models
+local-toolchains
+android/.gradle
+android/build
+android/app/.cxx
+android/app/build
+android/app/src/main/assets/public

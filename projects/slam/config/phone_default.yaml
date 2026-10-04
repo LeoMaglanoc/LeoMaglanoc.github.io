@@ -1,0 +1,12 @@
+dataset: phone
+pose_convention: T_world_camera
+depth_unit: millimeters
+depth_trunc_m: 6.0
+confidence_min: 128
+tsdf:
+  voxel_length_m: 0.02
+  sdf_trunc_m: 0.04
+  frame_stride: 1
+association:
+  max_pose_difference_s: 0.01
+depth_registration_strategy: texture_to_cpu_bilinear

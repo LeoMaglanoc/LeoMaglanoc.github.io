@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a1018" />
+    <title>Phone SLAM — RGB-D Mapping</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Offline RGB-D SLAM</p>
+        <h1 id="demo-title">Phone SLAM / RGB-D Mapping</h1>
+        <p id="demo-summary">Loading canonical reconstruction details…</p>
+      </header>
+      <section class="toolbar" aria-label="Viewer controls">
+        <div class="mode-buttons" role="group" aria-label="View mode">
+          <button data-mode="rgb" type="button">RGB Video</button>
+          <button data-mode="depth" type="button">Depth Video</button>
+          <button data-mode="map" type="button" class="active">3D Map</button>
+          <button data-mode="split" type="button">Split</button>
+        </div>
+        <div class="map-controls">
+          <button id="reset-view" data-map-control type="button">Reset view</button>
+          <button id="trajectory-toggle" data-map-control type="button" aria-pressed="false">Optimized trajectory: off</button>
+          <button id="copy-camera-pose" data-map-control type="button">Copy camera pose</button>
+          <button id="fullscreen" type="button">Fullscreen</button>
+        </div>
+      </section>
+      <section id="viewer" class="viewer mode-map" aria-label="RGB-D SLAM viewer">
+        <article id="video-panel" class="panel video-panel">
+          <video id="rgb-video" controls playsinline preload="metadata" aria-label="RGB input video"></video>
+        </article>
+        <article id="depth-panel" class="panel depth-panel">
+          <video id="depth-video" controls playsinline preload="metadata" aria-label="Colorized depth input video"></video>
+        </article>
+        <article id="map-panel" class="panel map-panel">
+          <canvas id="map-canvas" aria-label="Interactive 3D reconstruction"></canvas>
+          <div id="map-fallback" class="map-fallback" hidden>
+            <img id="map-fallback-image" alt="Static preview of the optimized TSDF reconstruction" />
+            <p id="map-fallback-message"></p>
+          </div>
+          <div id="loading" class="loading" role="status">Loading 3D reconstruction…</div>
+          <div class="touch-map-controls" role="group" aria-label="3D map camera controls">
+            <button data-map-control data-camera-action="zoom-in" type="button" aria-label="Zoom in">+</button>
+            <button data-map-control data-camera-action="zoom-out" type="button" aria-label="Zoom out">−</button>
+            <button data-map-control data-camera-action="move-up" type="button" aria-label="Move camera up">↑</button>
+            <button data-map-control data-camera-action="move-left" type="button" aria-label="Move camera left">←</button>
+            <button data-map-control data-camera-action="move-right" type="button" aria-label="Move camera right">→</button>
+            <button data-map-control data-camera-action="move-down" type="button" aria-label="Move camera down">↓</button>
+          </div>
+        </article>
+      </section>
+      <section class="details" aria-label="Demo details">
+        <p id="stats">Loading reconstruction statistics…</p>
+        <p>Canonical example: <a id="dataset-link" href="https://cvg.cit.tum.de/data/datasets/rgbd-dataset" target="_blank" rel="noreferrer">TUM RGB-D Dataset</a> — freiburg3_long_office_household.</p>
+        <pre id="camera-pose-output" class="camera-pose-output" hidden aria-live="polite"></pre>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

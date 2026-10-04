@@ -1,0 +1,11 @@
+{
+  "node_count": 193,
+  "link_count": 492,
+  "database_size_bytes": 84041728,
+  "first_node_stamp": 1305031102.211214,
+  "last_node_stamp": 1305031128.747363,
+  "neighbor_link_count": 192,
+  "global_loop_closure_count": 91,
+  "local_space_closure_count": 209,
+  "local_time_closure_count": 0
+}

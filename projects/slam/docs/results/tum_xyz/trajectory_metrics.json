@@ -1,0 +1,30 @@
+{
+  "raw_odometry": {
+    "associated_poses": 192,
+    "ate_rmse_m": 2.90053511851375e-16,
+    "ate_mean_m": 2.627720271325722e-16,
+    "ate_median_m": 2.482534153247273e-16,
+    "ate_max_m": 4.577566798522237e-16,
+    "rpe_translation_rmse_m": 4.291330575922854e-08,
+    "rpe_rotation_rmse_rad": 1.4499941018778018e-06,
+    "max_timestamp_residual_s": 0.007564067840576172,
+    "mean_timestamp_residual_s": 0.0030558332800865173,
+    "trajectory_plot": "outputs/tum_xyz/evaluation/raw_odometry_comparison.png",
+    "ate_error_plot": "outputs/tum_xyz/evaluation/raw_odometry_ate_error.png",
+    "trajectory_path": "outputs/tum_xyz/evaluation/raw_odom_trajectory.txt"
+  },
+  "optimized": {
+    "associated_poses": 192,
+    "ate_rmse_m": 0.004109787049466327,
+    "ate_mean_m": 0.0036126595913068458,
+    "ate_median_m": 0.003161377585978468,
+    "ate_max_m": 0.01236807280094032,
+    "rpe_translation_rmse_m": 0.0003814139015122018,
+    "rpe_rotation_rmse_rad": 9.147745625020066e-05,
+    "max_timestamp_residual_s": 0.007564067840576172,
+    "mean_timestamp_residual_s": 0.0030558332800865173,
+    "trajectory_plot": "outputs/tum_xyz/evaluation/optimized_comparison.png",
+    "ate_error_plot": "outputs/tum_xyz/evaluation/optimized_ate_error.png",
+    "trajectory_path": "outputs/tum_xyz/evaluation/optimized_trajectory.txt"
+  }
+}

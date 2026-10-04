@@ -1,0 +1,12 @@
+{
+  "evo_ape_rmse_m": 0.00411,
+  "project_ate_rmse_m": 0.004109787049466327,
+  "evo_rpe_translation_rmse_m": 0.000381,
+  "project_rpe_translation_rmse_m": 0.0003814139015122018,
+  "evo_rpe_rotation_rmse_rad": 9.1e-05,
+  "project_rpe_rotation_rmse_rad": 9.147745625020066e-05,
+  "ate_rmse_difference_m": 2.129505336729079e-07,
+  "rpe_translation_rmse_difference_m": 4.139015122018013e-07,
+  "rpe_rotation_rmse_difference_rad": 4.77456250200654e-07,
+  "within_1e-5_tolerance": true
+}

@@ -16,7 +16,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
-          submodules: recursive
+      - name: Publish browser project assets
+        run: python3 scripts/publish-project-assets.py
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -32,7 +33,7 @@ jobs:
         with:
           node-version: 22
           cache: "npm"
-          cache-dependency-path: vendor/phone-slam/web/package-lock.json
+          cache-dependency-path: projects/slam/web/package-lock.json
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -53,7 +54,7 @@ jobs:
       - name: Purge unused CSS 🧹
         run: npx --yes purgecss@6.0.0 -c purgecss.config.js
       - name: Build phone-slam viewer
-        working-directory: vendor/phone-slam/web
+        working-directory: projects/slam/web
         run: |
           npm ci
           npm run test
@@ -63,8 +64,11 @@ jobs:
         run: |
           rm -rf _site/slam
           mkdir -p _site/slam
-          cp -R vendor/phone-slam/web/dist/. _site/slam/
+          cp -R projects/slam/web/dist/. _site/slam/
           test -f _site/slam/index.html
+      - name: Verify stable project routes and runtime files
+        run: python3 scripts/check-project-links.py
+
       - name: Link Checker 🔗
         run: |
           task_lychee_dir="$(mktemp -d)"

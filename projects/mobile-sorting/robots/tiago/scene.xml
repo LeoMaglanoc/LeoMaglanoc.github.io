@@ -1,0 +1,46 @@
+<mujoco model="endless_mobile_sorting">
+  <include file="tiago.xml" />
+  <default>
+    <geom friction="0.9 0.005 0.001" solref="0.008 1" />
+  </default>
+  <worldbody>
+    <geom name="floor" type="plane" size="4 4 0.1" rgba="0.16 0.21 0.24 1" contype="1" conaffinity="3" group="1" />
+    <geom name="input_top" type="box" pos="0.68 0 0.68" size="0.23 0.28 0.025" rgba="0.60 0.65 0.62 1" contype="1" conaffinity="3" group="1" />
+    <geom name="leg_0.5_-0.25" type="box" pos="0.5 -0.25 0.325" size="0.025 0.025 0.325" rgba="0.20 0.28 0.31 1" contype="1" conaffinity="3" group="1" />
+    <geom name="leg_0.5_0.25" type="box" pos="0.5 0.25 0.325" size="0.025 0.025 0.325" rgba="0.20 0.28 0.31 1" contype="1" conaffinity="3" group="1" />
+    <geom name="leg_0.86_-0.25" type="box" pos="0.86 -0.25 0.325" size="0.025 0.025 0.325" rgba="0.20 0.28 0.31 1" contype="1" conaffinity="3" group="1" />
+    <geom name="leg_0.86_0.25" type="box" pos="0.86 0.25 0.325" size="0.025 0.025 0.325" rgba="0.20 0.28 0.31 1" contype="1" conaffinity="3" group="1" />
+    <geom name="blue_pedestal" type="box" pos="0.68 2 0.30" size="0.20 0.24 0.30" rgba="0.25 0.32 0.34 1" contype="1" conaffinity="3" group="1" />
+    <geom name="blue_bottom" type="box" pos="0.68 2 0.62" size="0.23 0.27 0.02" rgba="0.18 0.44 0.68 1" contype="1" conaffinity="3" group="1" />
+    <geom name="blue_wall_x_-1" type="box" pos="0.45000000000000007 2 0.70" size="0.015 0.285 0.08" rgba="0.18 0.44 0.68 1" contype="1" conaffinity="3" group="1" />
+    <geom name="blue_wall_y_-1" type="box" pos="0.68 1.73 0.70" size="0.23 0.015 0.08" rgba="0.18 0.44 0.68 1" contype="1" conaffinity="3" group="1" />
+    <geom name="blue_wall_x_1" type="box" pos="0.91 2 0.70" size="0.015 0.285 0.08" rgba="0.18 0.44 0.68 1" contype="1" conaffinity="3" group="1" />
+    <geom name="blue_wall_y_1" type="box" pos="0.68 2.27 0.70" size="0.23 0.015 0.08" rgba="0.18 0.44 0.68 1" contype="1" conaffinity="3" group="1" />
+    <geom name="red_pedestal" type="box" pos="0.68 -2 0.30" size="0.20 0.24 0.30" rgba="0.25 0.32 0.34 1" contype="1" conaffinity="3" group="1" />
+    <geom name="red_bottom" type="box" pos="0.68 -2 0.62" size="0.23 0.27 0.02" rgba="0.73 0.28 0.22 1" contype="1" conaffinity="3" group="1" />
+    <geom name="red_wall_x_-1" type="box" pos="0.45000000000000007 -2 0.70" size="0.015 0.285 0.08" rgba="0.73 0.28 0.22 1" contype="1" conaffinity="3" group="1" />
+    <geom name="red_wall_y_-1" type="box" pos="0.68 -2.27 0.70" size="0.23 0.015 0.08" rgba="0.73 0.28 0.22 1" contype="1" conaffinity="3" group="1" />
+    <geom name="red_wall_x_1" type="box" pos="0.91 -2 0.70" size="0.015 0.285 0.08" rgba="0.73 0.28 0.22 1" contype="1" conaffinity="3" group="1" />
+    <geom name="red_wall_y_1" type="box" pos="0.68 -1.73 0.70" size="0.23 0.015 0.08" rgba="0.73 0.28 0.22 1" contype="1" conaffinity="3" group="1" />
+    <body name="object_0" pos="0.8 0 0.75">
+      <freejoint name="object_joint_0" />
+      <geom name="object_geom_0" type="box" size="0.032 0.020 0.025" mass="0.065" rgba="0.18 0.51 0.84 1" friction="1.2 0.01 0.001" condim="4" group="1" contype="1" conaffinity="3" solref="0.006 1" solimp="0.95 0.99 0.001" />
+    </body>
+    <body name="object_1" pos="0.8 0 0.85">
+      <freejoint name="object_joint_1" />
+      <geom name="object_geom_1" type="box" size="0.032 0.020 0.025" mass="0.065" rgba="0.18 0.51 0.84 1" friction="1.2 0.01 0.001" condim="4" group="1" contype="1" conaffinity="3" solref="0.006 1" solimp="0.95 0.99 0.001" />
+    </body>
+    <body name="object_2" pos="0.8 0 0.95">
+      <freejoint name="object_joint_2" />
+      <geom name="object_geom_2" type="box" size="0.032 0.020 0.025" mass="0.065" rgba="0.18 0.51 0.84 1" friction="1.2 0.01 0.001" condim="4" group="1" contype="1" conaffinity="3" solref="0.006 1" solimp="0.95 0.99 0.001" />
+    </body>
+    <body name="object_3" pos="0.8 0 1.05">
+      <freejoint name="object_joint_3" />
+      <geom name="object_geom_3" type="box" size="0.032 0.020 0.025" mass="0.065" rgba="0.18 0.51 0.84 1" friction="1.2 0.01 0.001" condim="4" group="1" contype="1" conaffinity="3" solref="0.006 1" solimp="0.95 0.99 0.001" />
+    </body>
+    <body name="object_4" pos="0.8 0 1.15">
+      <freejoint name="object_joint_4" />
+      <geom name="object_geom_4" type="box" size="0.032 0.020 0.025" mass="0.065" rgba="0.18 0.51 0.84 1" friction="1.2 0.01 0.001" condim="4" group="1" contype="1" conaffinity="3" solref="0.006 1" solimp="0.95 0.99 0.001" />
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,16 @@
+export const C = Object.freeze({
+  dt: 0.002,
+  objectCount: 5,
+  inputCount: 4,
+  tableTop: 0.705,
+  objectHalf: [0.032, 0.02, 0.025],
+  wheelRadius: 0.0985,
+  wheelTrack: 0.4044,
+  seed: 731,
+  input: { dock: [0, 0, 0], center: [0.68, 0] },
+  blue: { dock: [0, 2, 0], center: [0.68, 2] },
+  red: { dock: [0, -2, 0], center: [0.68, -2] },
+  home: [0.474584, 1.08883, -1.651144, 2.156559, 1.030253, -1.091965, 0.834703],
+  carry: [0.58, 0, 0.85],
+  spawn: { x: [0.55, 0.75], y: [-0.17, 0.17] },
+});

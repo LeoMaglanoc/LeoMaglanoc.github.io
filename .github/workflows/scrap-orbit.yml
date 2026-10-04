@@ -3,7 +3,7 @@ on:
   push:
     paths:
       [
-        "games/scrap-orbit/**",
+        "projects/scrap-orbit/**",
         "assets/interactive/scrap-orbit/**",
         "_pages/scrap-orbit.md",
         "_layouts/scrap-orbit-fullscreen.html",
@@ -12,7 +12,7 @@ on:
   pull_request:
     paths:
       [
-        "games/scrap-orbit/**",
+        "projects/scrap-orbit/**",
         "assets/interactive/scrap-orbit/**",
         "_pages/scrap-orbit.md",
         "_layouts/scrap-orbit-fullscreen.html",
@@ -25,19 +25,21 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Publish browser project assets
+        run: python3 scripts/publish-project-assets.py
       - name: Build pinned Godot tools
-        run: docker compose -f games/scrap-orbit/docker-compose.yml build tools
+        run: docker compose -f projects/scrap-orbit/docker-compose.yml build tools
       - name: Rebuild web export
-        run: docker compose -f games/scrap-orbit/docker-compose.yml run --rm tools ./scripts/build_web.sh
+        run: docker compose -f projects/scrap-orbit/docker-compose.yml run --rm tools ./scripts/build_web.sh
       - name: Validate physics, layouts, input and progression
-        run: docker compose -f games/scrap-orbit/docker-compose.yml run --rm tools ./scripts/validate.sh
+        run: docker compose -f projects/scrap-orbit/docker-compose.yml run --rm tools ./scripts/validate.sh
       - name: Browser playthroughs
-        run: games/scrap-orbit/scripts/test_browser.sh
+        run: projects/scrap-orbit/scripts/test_browser.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: scrap-orbit-browser
-          path: games/scrap-orbit/artifacts/browser/
+          path: projects/scrap-orbit/artifacts/browser/
       - name: Stop preview containers
         if: always()
-        run: docker compose -f games/scrap-orbit/docker-compose.yml down
+        run: docker compose -f projects/scrap-orbit/docker-compose.yml down

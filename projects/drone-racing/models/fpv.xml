@@ -1,0 +1,8 @@
+<mujoco model="Custom 5-inch FPV racing quad">
+  <option timestep="0.004" gravity="0 0 -9.81" integrator="implicitfast"/>
+  <default><geom friction="0.5 0.01 0.001" solref="0.008 1"/></default>
+  <worldbody>
+    <geom name="floor" type="plane" size="40 20 .1"/>
+    {{VEHICLE_BODY}}
+  </worldbody>
+</mujoco>

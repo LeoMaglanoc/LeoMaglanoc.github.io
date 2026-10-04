@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#10191c" />
+    <meta
+      name="description"
+      content="Fly a simulated quadrotor or watch a tracking MPC race through a closed ten-gate circuit. MuJoCo physics runs locally in your browser."
+    />
+    <title>Drone Racing — Control in the Loop</title>
+    <link rel="stylesheet" href="./drone.css" />
+  </head>
+  <body>
+    <main>
+      <canvas id="world" aria-label="3D quadrotor racing course"></canvas>
+      <header>
+        <a class="home" href="../../../" aria-label="Back to homepage">LM / LAB</a><span class="eyebrow">AUTONOMOUS DRONE RACING</span
+        ><span class="engine">MuJoCo · locally simulated</span>
+      </header>
+      <section class="intro">
+        <span class="eyebrow">REFERENCE → FEEDBACK → FLIGHT</span>
+        <h1>Control<br />in the <em>loop.</em></h1>
+        <p>Ten gates. Endless laps.<br />An FPV quad with control in the loop.</p>
+      </section>
+      <section class="hud" aria-label="Flight telemetry">
+        <div>
+          <span>SPEED</span><strong id="speed">0.0 <small>m/s</small></strong>
+        </div>
+        <div><span>LAP</span><strong id="lap">1</strong></div>
+        <div><span>GATE</span><strong id="gate">1 / 10</strong></div>
+        <div>
+          <span>TIME</span><strong id="time">0.00 <small>s</small></strong>
+        </div>
+        <div><span>BEST</span><strong id="best">—</strong></div>
+        <div><span>MPC SOLVE</span><strong id="solve">—</strong></div>
+      </section>
+      <aside class="panel">
+        <nav class="modes" aria-label="Flight mode">
+          <button data-mode="FLY" aria-pressed="false">Fly</button><button data-mode="AUTOPILOT" aria-pressed="true">Autopilot</button
+          ><button data-mode="RACE AI" aria-pressed="false">Race AI</button>
+        </nav>
+        <p id="status" role="status">Loading physics…</p>
+        <div class="actions">
+          <button id="reset" disabled>↺ Reset</button><button id="pause" disabled>Pause</button><button id="camera" disabled>Chase → FPV</button>
+        </div>
+        <div class="disturbances">
+          <span class="eyebrow">GIVE IT A PUSH</span>
+          <div>
+            <button data-disturb="left" title="Apply a 4 N leftward force for 0.55 seconds">← Push left</button>
+            <button data-disturb="right" title="Apply a 4 N rightward force for 0.55 seconds">Push right →</button>
+            <button data-disturb="back" title="Apply a 4 N backward force for 0.55 seconds">↓ Push back</button>
+            <button data-disturb="front" title="Apply a 4 N forward force for 0.55 seconds">Push forward ↑</button>
+          </div>
+        </div>
+        <div class="legend">
+          <label><input id="paths" type="checkbox" checked /> Flight paths</label><span class="reference">reference</span
+          ><span class="actual">actual</span><span class="prediction">prediction</span>
+        </div>
+        <details id="diagnostics">
+          <summary>Diagnostics & control pipeline</summary>
+          <p>Offline spline → 25 Hz tracking MPC → 125 Hz geometric flight controller → rotor mixer → 250 Hz MuJoCo</p>
+          <output id="perf">Waiting for measurements…</output>
+          <p id="race-stats">Collisions 0 · Resets 0</p>
+          <p>Timings measure this device. Lap time uses simulation time; a slow device may run below real time.</p>
+        </details>
+        <p class="instructions">
+          W/S forward/back · A/D bank & turn · Q/E rotate<br />Shift+A/D strafe · R/F altitude<br />Space pause · Backspace reset
+        </p>
+        <p id="ghost-time" hidden></p>
+      </aside>
+      <section class="sticks" aria-label="Touch flight controls">
+        <div class="stick" id="left-stick" role="group" aria-label="Altitude and yaw stick"><i></i><span>ALTITUDE / YAW</span></div>
+        <div class="stick" id="right-stick" role="group" aria-label="Forward and banked steering stick"><i></i><span>FORWARD / TURN</span></div>
+      </section>
+      <div id="loading" role="status">Starting MuJoCo physics…</div>
+      <p id="error" role="alert" hidden></p>
+    </main>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

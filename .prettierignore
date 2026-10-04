@@ -14,8 +14,8 @@ _scripts/*
 _data/citations.yml
 # Generated Godot export and disposable development artifacts
 assets/interactive/scrap-orbit/
-games/scrap-orbit/artifacts/
-games/scrap-orbit/godot/.godot/
+projects/scrap-orbit/artifacts/
+projects/scrap-orbit/godot/.godot/
 assets/interactive/block-world/
-games/block-world/artifacts/
-games/block-world/godot/.godot/
+projects/block-world/artifacts/
+projects/block-world/godot/.godot/

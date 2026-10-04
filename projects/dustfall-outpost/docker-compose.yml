@@ -1,0 +1,23 @@
+services:
+  tools:
+    build: .
+    volumes: ["../..:/workspace"]
+  preview:
+    image: python:3.11-slim
+    working_dir: /workspace
+    volumes: ["../..:/workspace:ro"]
+    ports: ["127.0.0.1:8093:8093"]
+    command: ["python", "-m", "http.server", "8093", "--directory", "/workspace"]
+  browser:
+    image: mcr.microsoft.com/playwright:v1.57.0-noble
+    network_mode: host
+    working_dir: /workspace/projects/dustfall-outpost
+    volumes: ["../..:/workspace"]
+    environment:
+      GAME_URL: http://127.0.0.1:8093/assets/interactive/dustfall-outpost/
+    command: ["node", "tests/smoke.cjs"]
+  site-preview:
+    image: python:3.11-slim
+    volumes: ["../..:/workspace:ro"]
+    ports: ["127.0.0.1:8094:8094"]
+    command: ["python", "-m", "http.server", "8094", "--directory", "/workspace/projects/dustfall-outpost/artifacts/site"]

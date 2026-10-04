@@ -1,0 +1,30 @@
+services:
+  tools:
+    build: .
+    volumes:
+      - ../..:/workspace
+  preview:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: python -m http.server 8095 --bind 0.0.0.0
+    ports:
+      - "127.0.0.1:8095:8095"
+    volumes:
+      - ../..:/workspace:ro
+  browser:
+    image: mcr.microsoft.com/playwright:v1.57.0-noble
+    network_mode: host
+    working_dir: /workspace/projects/scrap-orbit
+    volumes:
+      - ../..:/workspace
+    environment:
+      GAME_URL: http://127.0.0.1:8095/assets/interactive/scrap-orbit/index.html?seed=1701
+    command: node tests/browser.cjs
+  site-preview:
+    image: python:3.11-slim
+    working_dir: /workspace/projects/scrap-orbit/artifacts/site
+    command: python -m http.server 8096 --bind 0.0.0.0
+    ports:
+      - "127.0.0.1:8096:8096"
+    volumes:
+      - ../..:/workspace:ro

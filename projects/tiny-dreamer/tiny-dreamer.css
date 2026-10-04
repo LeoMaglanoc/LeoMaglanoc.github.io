@@ -1,0 +1,506 @@
+:root {
+  color-scheme: light;
+  --paper: #f5f5ef;
+  --ink: #26392d;
+  --muted: #63705f;
+  --line: #d9ddd5;
+  --dream: #347eae;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+button,
+input,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 46px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--ink);
+  background: transparent;
+  touch-action: manipulation;
+}
+button:hover {
+  background: #e6eade;
+  border-color: #a1a79d;
+}
+button:active {
+  transform: translateY(1px);
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: wait;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--dream);
+  outline-offset: 4px;
+}
+button[aria-pressed="true"] {
+  background: #e4edf0;
+  color: #235a7d;
+  border-color: #a6c8da;
+}
+.app {
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 40px;
+}
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  height: 78px;
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -1px;
+  font-size: 22px;
+  white-space: nowrap;
+}
+.brand span {
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin-left: 6px;
+}
+.eyebrow,
+#status,
+footer,
+.scene-labels,
+.force-control label,
+.belief-flow,
+.keyboard-hint {
+  font:
+    10px ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  letter-spacing: 1px;
+}
+.eyebrow {
+  color: var(--muted);
+}
+#status {
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 0;
+}
+h1 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin: 0;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+h1 span {
+  color: var(--dream);
+}
+.intro p {
+  font-size: 14px;
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+.intro .invitation {
+  margin: 0;
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.experiment {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  overflow: hidden;
+}
+.scene-wrap {
+  min-width: 0;
+  padding: 20px;
+  background: #eff1e9;
+}
+.scene-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  letter-spacing: 0.7px;
+}
+.scene-labels span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  white-space: nowrap;
+}
+.scene-labels small {
+  font:
+    11px system-ui,
+    sans-serif;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.scene-labels i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.solid-key {
+  background: var(--ink);
+}
+.dream-key {
+  background: var(--dream);
+  opacity: 0.6;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: clamp(280px, 43vh, 440px);
+}
+.push-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.push-controls button {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  font-weight: 550;
+  min-height: 52px;
+}
+.push-controls button:hover {
+  background: #3c5342;
+}
+.push-controls button span {
+  font-size: 19px;
+  padding: 0 6px;
+}
+.force-control label {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+  font-size: 9px;
+  gap: 6px;
+}
+.force-control output {
+  color: var(--ink);
+  white-space: nowrap;
+}
+input[type="range"] {
+  accent-color: var(--ink);
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  cursor: pointer;
+}
+.model-panel {
+  border-left: 1px solid var(--line);
+  padding: 26px;
+}
+h2 {
+  font-size: 23px;
+  font-weight: 550;
+  letter-spacing: -0.8px;
+  margin: 17px 0 12px;
+}
+.panel-note,
+.small-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.metrics {
+  margin: 24px 0;
+}
+.metrics > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+}
+dt {
+  font-size: 12px;
+  line-height: 1.8;
+}
+dt small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+}
+dd {
+  font:
+    21px ui-monospace,
+    monospace;
+  margin: 0;
+}
+.belief-flow {
+  color: var(--muted);
+  letter-spacing: 0;
+  line-height: 2;
+  margin-top: 20px;
+}
+.belief-flow b {
+  padding: 0 4px;
+}
+.belief-flow div {
+  color: var(--dream);
+  padding-left: 70px;
+}
+.small-note {
+  font-size: 11px;
+  margin-top: 18px;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+}
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+.keyboard-hint {
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.explanation {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+summary {
+  cursor: pointer;
+  font-size: 13px;
+  padding: 18px 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary span {
+  font-size: 18px;
+  line-height: 1;
+}
+details[open] summary span {
+  transform: rotate(45deg);
+}
+.explanation-content {
+  max-width: 780px;
+  padding: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.explanation-content li {
+  padding-left: 5px;
+  margin: 7px 0;
+}
+.explanation-content a {
+  margin-right: 22px;
+  color: var(--ink);
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+#error {
+  background: #f4e6db;
+  border: 1px solid #c35d32;
+  border-radius: 5px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 850px) {
+  .app {
+    padding: 0 20px;
+  }
+  .experiment {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .model-panel {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 16px 20px;
+  }
+  .model-panel h2,
+  .panel-note,
+  .belief-flow,
+  .small-note,
+  .model-panel > .eyebrow {
+    display: none;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+  }
+  .metrics > div {
+    border: 0;
+    display: block;
+    padding: 0;
+  }
+  dd {
+    font-size: 19px;
+    margin-top: 5px;
+  }
+  dt {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  dt small {
+    font-size: 9px;
+  }
+  canvas {
+    height: clamp(260px, 42vh, 400px);
+  }
+  .keyboard-hint,
+  .masthead > .eyebrow {
+    display: none;
+  }
+  .intro {
+    padding: 24px 0;
+  }
+  .intro .invitation {
+    font-size: 11px;
+  }
+}
+@media (max-width: 520px) {
+  .app {
+    padding: 0 16px;
+  }
+  .masthead {
+    height: 60px;
+    gap: 12px;
+  }
+  #status {
+    font-size: 9px;
+  }
+  .intro {
+    padding: 22px 0;
+  }
+  .intro .invitation {
+    display: none;
+  }
+  .intro p {
+    font-size: 12px;
+    margin-top: 9px;
+  }
+  .scene-wrap {
+    padding: 14px 12px;
+  }
+  .scene-labels {
+    font-size: 9px;
+  }
+  .scene-labels small {
+    display: none;
+  }
+  canvas {
+    height: 290px;
+  }
+  .push-controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .force-control {
+    grid-column: 1/-1;
+    grid-row: 2;
+    padding: 0 7px;
+  }
+  .force-control label {
+    font-size: 9px;
+  }
+  input[type="range"] {
+    min-height: 44px;
+  }
+  .toolbar {
+    padding: 14px 0;
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.35fr;
+    width: 100%;
+    gap: 7px;
+  }
+  .buttons button {
+    font-size: 12px;
+    padding: 9px;
+  }
+  footer {
+    font-size: 8px;
+    line-height: 1.7;
+    padding: 17px 0;
+    gap: 14px;
+  }
+  footer span:last-child {
+    text-align: right;
+  }
+}
+@media (max-height: 500px) and (min-width: 521px) {
+  .masthead {
+    height: 48px;
+  }
+  .intro {
+    padding: 14px 0;
+  }
+  .intro h1 {
+    font-size: 30px;
+  }
+  canvas {
+    height: 240px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  button:active {
+    transform: none;
+  }
+}

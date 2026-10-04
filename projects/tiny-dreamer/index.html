@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f5f5ef" />
+    <meta
+      name="description"
+      content="A tiny Dreamer-inspired agent swings up a real MuJoCo cart-pole. See its learned world model imagine the future, then give it a push."
+    />
+    <title>TinyDreamer · LM / Lab</title>
+    <link rel="stylesheet" href="./tiny-dreamer.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="masthead">
+        <a
+          class="brand"
+          href="../../../"
+          target="_top"
+          aria-label="Back to Leonardo Maglanoc's homepage"
+          >LM <span>/ LAB</span></a
+        >
+        <span class="eyebrow">EXPERIMENT / WORLD MODELS</span>
+        <span id="status" role="status">Loading physics &amp; model…</span>
+      </header>
+      <main>
+        <section class="intro" aria-labelledby="title">
+          <div>
+            <h1 id="title">TinyDreamer<span>.</span></h1>
+            <p>A little agent learns a world, then practices inside it.</p>
+          </div>
+          <p class="invitation">
+            Give the cart a push.<br />Watch reality surprise its imagination.
+          </p>
+        </section>
+        <section class="experiment" aria-label="CartPole swing-up experiment">
+          <div class="scene-wrap">
+            <div class="scene-labels">
+              <span
+                ><i class="solid-key"></i> REALITY
+                <small>MuJoCo physics</small></span
+              ><span
+                ><i class="dream-key"></i> DREAM
+                <small>learned future · 0.75 s</small></span
+              >
+            </div>
+            <canvas
+              id="scene"
+              aria-label="Solid cart and pole show physical reality; translucent blue cart and poles show the learned model's predicted future."
+              role="img"
+            ></canvas>
+            <div class="push-controls">
+              <button type="button" data-push="-1" disabled>
+                <span aria-hidden="true">←</span> Push left
+              </button>
+              <div class="force-control">
+                <label for="strength"
+                  >EXTERNAL FORCE
+                  <output id="force" for="strength">5 N</output></label
+                ><input
+                  id="strength"
+                  type="range"
+                  min="2"
+                  max="10"
+                  value="5"
+                  step="1"
+                  disabled
+                />
+              </div>
+              <button type="button" data-push="1" disabled>
+                Push right <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+          <aside class="model-panel" aria-label="World model diagnostics">
+            <span class="eyebrow">INSIDE THE AGENT</span>
+            <h2>A glimpse ahead.</h2>
+            <p class="panel-note">
+              Blue ghosts come from the neural world model. Every half-second,
+              new observations anchor a fresh dream.
+            </p>
+            <dl class="metrics">
+              <div>
+                <dt>Real reward <small>now · 0–1</small></dt>
+                <dd id="reward">—</dd>
+              </div>
+              <div>
+                <dt>Predicted reward <small>0.75 s ahead</small></dt>
+                <dd id="predicted">—</dd>
+              </div>
+              <div>
+                <dt>One-step model error <small>normalized RMSE</small></dt>
+                <dd id="model-error">—</dd>
+              </div>
+            </dl>
+            <div class="belief-flow" aria-label="Agent pipeline">
+              <span>OBSERVE</span><b>→</b><span>BELIEVE</span><b>→</b
+              ><span>ACT</span>
+              <div>↳ &nbsp; IMAGINE</div>
+            </div>
+            <p class="small-note">
+              A push is a 0.2-second physical force, separate from the agent’s
+              motor action.
+            </p>
+          </aside>
+        </section>
+        <div class="toolbar">
+          <div class="buttons">
+            <button id="dream" type="button" aria-pressed="true" disabled>
+              Dream on</button
+            ><button id="pause" type="button" aria-pressed="false" disabled>
+              Pause</button
+            ><button id="reset" type="button" disabled>Reset swing-up</button>
+          </div>
+          <span class="keyboard-hint"
+            >← → push &nbsp; · &nbsp; space pause</span
+          >
+        </div>
+        <p id="error" role="alert" hidden></p>
+        <details class="explanation">
+          <summary>
+            How does this work? <span aria-hidden="true">+</span>
+          </summary>
+          <div class="explanation-content">
+            <p>
+              This is a small Dreamer-inspired implementation for understanding
+              latent world models and imagination-based reinforcement learning.
+            </p>
+            <ol>
+              <li>
+                The agent collects observations and rewards from real MuJoCo
+                physics.
+              </li>
+              <li>
+                A recurrent state-space model (RSSM) learns a compressed,
+                predictive belief about that world.
+              </li>
+              <li>
+                The actor practices on imagined trajectories generated by the
+                learned model. Its critic estimates future return.
+              </li>
+              <li>
+                Here, the solid pole shows what physics does. Translucent blue
+                poles show decoded neural predictions at several future times.
+              </li>
+              <li>
+                Push the cart to disturb the prediction. New observations update
+                the belief, and a fresh dream follows.
+              </li>
+            </ol>
+            <p>
+              The deployed policy runs locally on your device. Training used
+              vector observations and CPU PyTorch; this is not a reproduction of
+              full DreamerV3. Reward predictions can have small errors outside
+              the real reward’s 0–1 range. The error readout compares a one-step
+              neural prediction with the following physical observation.
+            </p>
+            <p>
+              <a href="./README.md" target="_blank" rel="noopener"
+                >Implementation &amp; measured results ↗</a
+              >
+              <a href="./THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener"
+                >Credits ↗</a
+              >
+            </p>
+          </div>
+        </details>
+      </main>
+      <footer>
+        <span>DEEPMIND CARTPOLE / SWINGUP</span
+        ><span>PHYSICS + POLICY ON YOUR DEVICE</span>
+      </footer>
+    </div>
+    <script src="../doom/vendor/ort/ort.min.js"></script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
