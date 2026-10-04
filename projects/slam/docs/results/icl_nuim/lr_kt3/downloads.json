@@ -1,0 +1,28 @@
+{
+  "reference": {
+    "url": "https://www.doc.ic.ac.uk/~ahanda/VaFRIC/living_room_obj_mtl.tar.gz",
+    "sha256": "a5d00735438d8f06ba424f86ce7e674a0352f3ae1a4d43fddcfc67fd6f82126f"
+  },
+  "clean": {
+    "url": "https://www.doc.ic.ac.uk/~ahanda/living_room_traj3_frei_png.tar.gz",
+    "sha256": "97f2b2ed373263b9ef82990b41d74e612a7a0c87676a60abbc328d2191079b90",
+    "bytes": 559105573,
+    "expanded_bytes": 643241462
+  },
+  "noisy": {
+    "url": "https://www.doc.ic.ac.uk/~ahanda/living_room_traj3n_frei_png.tar.gz",
+    "sha256": "5f115fd7b45c24de4295dd9fb876f0e4e8c6e8fbb7f94818f3e18d669eb9a5c6",
+    "bytes": 757097212,
+    "expanded_bytes": 776497357
+  },
+  "global.gt.sim": {
+    "url": "https://www.doc.ic.ac.uk/~ahanda/VaFRIC/livingRoom3n.gt.sim",
+    "sha256": "8ae9b9c4786490d2b09920c7698a583b777ad72c0703cc87ef7217088ebadb29",
+    "bytes": 140390
+  },
+  "groundtruth.txt": {
+    "url": "https://www.doc.ic.ac.uk/~ahanda/VaFRIC/livingRoom3.gt.freiburg",
+    "sha256": "65ee5aa52e76b23def9692bfb133941bbf2888af31f096e07782cd1d298aaba9",
+    "bytes": 89038
+  }
+}

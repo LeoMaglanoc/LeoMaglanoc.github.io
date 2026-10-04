@@ -202,3 +202,26 @@ build does not include AliceVision, so multi-band texturing is unavailable and
 the production method is standard RTAB-Map gain-compensated blending. Exact
 mesh/texture settings and final counts are emitted to
 `outputs/tum_long_office/rtabmap_textured/master/reconstruction_stats.json`.
+
+## ICL-NUIM tracking and geometry benchmark
+
+The synthetic ICL-NUIM living-room benchmark compares RTAB-Map and Open3D TSDF
+with estimated and frozen GT poses on all four trajectories. Clean-depth GT
+oracles provide a fusion reference alongside measured raw-depth residuals. Surface accuracy, observable
+completeness and F-scores use exact triangle distances and trajectory-derived
+rigid alignment. The public viewer keeps TUM and adds an ICL dataset selector.
+
+```bash
+./scripts/run_icl.sh lr_kt0
+./scripts/sweep_icl.sh
+./scripts/run_icl.sh all --resume
+./scripts/export_icl_web.sh
+./scripts/cleanup_icl.sh
+```
+
+See [benchmark protocol, frame conventions and disk policy](docs/ICL_BENCHMARK.md)
+and [recorded results](docs/results/icl_nuim/report.md).
+
+ICL-NUIM: A. Handa, T. Whelan, J. McDonald and A. Davison, ICRA 2014;
+living-room scene by Jaime Vives Piqueres. Data and derived assets are
+[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).

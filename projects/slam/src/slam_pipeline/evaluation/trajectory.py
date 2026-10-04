@@ -66,7 +66,10 @@ def associate_trajectories(
     return pairs_ref, pairs_est, np.asarray([item.residual_s for item in matches], dtype=np.float64)
 
 
-def _align_positions(reference: np.ndarray, estimate: np.ndarray) -> np.ndarray:
+def rigid_alignment(reference: np.ndarray, estimate: np.ndarray) -> np.ndarray:
+    """Return the proper SE(3) mapping estimate into reference; never fit scale."""
+    if len(reference) < 3 or reference.shape != estimate.shape:
+        raise ValueError("Rigid alignment requires at least three corresponding positions")
     ref_center = reference.mean(axis=0)
     est_center = estimate.mean(axis=0)
     covariance = (estimate - est_center).T @ (reference - ref_center)
@@ -76,7 +79,15 @@ def _align_positions(reference: np.ndarray, estimate: np.ndarray) -> np.ndarray:
         vt[-1, :] *= -1
         rotation = vt.T @ u.T
     translation = ref_center - rotation @ est_center
-    return (rotation @ estimate.T).T + translation
+    transform = np.eye(4)
+    transform[:3, :3] = rotation
+    transform[:3, 3] = translation
+    return transform
+
+
+def _align_positions(reference: np.ndarray, estimate: np.ndarray) -> np.ndarray:
+    transform = rigid_alignment(reference, estimate)
+    return (transform[:3, :3] @ estimate.T).T + transform[:3, 3]
 
 
 def evaluate_trajectories(
@@ -87,13 +98,14 @@ def evaluate_trajectories(
     output_dir: str | Path,
     *,
     artifact_prefix: str = "trajectory",
-) -> dict[str, float | int | str]:
+) -> dict[str, object]:
     ref, est, timestamp_residuals = associate_trajectories(
         reference_timestamps, reference_poses, estimate_timestamps, estimate_poses
     )
     ref_pos = np.array([pose[:3, 3] for pose in ref])
     est_pos = np.array([pose[:3, 3] for pose in est])
-    aligned = _align_positions(ref_pos, est_pos)
+    transform = rigid_alignment(ref_pos, est_pos)
+    aligned = (transform[:3, :3] @ est_pos.T).T + transform[:3, 3]
     errors = np.linalg.norm(aligned - ref_pos, axis=1)
     rpe_trans = []
     rpe_rot = []
@@ -128,6 +140,9 @@ def evaluate_trajectories(
     fig.savefig(error_plot_path, dpi=150)
     plt.close(fig)
     return {
+        "alignment_se3": transform.tolist(),
+        "alignment_source": "trajectory_positions_no_scale",
+        "rpe_delta": "consecutive_associated_poses",
         "associated_poses": int(len(ref)),
         "ate_rmse_m": float(np.sqrt(np.mean(errors**2))),
         "ate_mean_m": float(np.mean(errors)),

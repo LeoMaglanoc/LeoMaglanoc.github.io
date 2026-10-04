@@ -1,0 +1,7 @@
+{
+  "max_translation_m": 0.0,
+  "max_rotation_rad": 1.7114923318064612e-06,
+  "translation_tolerance_m": 1e-05,
+  "rotation_tolerance_rad": 1e-05,
+  "passed": true
+}

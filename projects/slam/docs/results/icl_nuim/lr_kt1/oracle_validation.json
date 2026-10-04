@@ -1,0 +1,19 @@
+{
+  "clean_depth_to_gt": {
+    "mean_m": 0.002706679695508859,
+    "median_m": 0.0021734237670898438,
+    "rmse_m": 0.003461719045966735,
+    "std_m": 0.0021580972589595954,
+    "min_m": 0.0,
+    "max_m": 0.013169467449188232,
+    "p90_m": 0.005848884582519531,
+    "p95_m": 0.007181124389171598
+  },
+  "visible_gt_points": 1423692,
+  "visible_voxel_m": 0.005,
+  "pixel_stride": 4,
+  "clean_points_rejected": 439410,
+  "reference_world_normalization": "fixed_OBJ_X_reflection",
+  "visible_source": "all_clean_frames_and_official_global_GT",
+  "reference_sha256": "fd518fdbdac89a572ceab1333cec7285110878b757ff1f62f4038eb9f9065b59"
+}

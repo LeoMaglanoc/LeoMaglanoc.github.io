@@ -1,0 +1,5 @@
+ICL-NUIM synthetic RGB-D benchmark. A. Handa, T. Whelan, J. McDonald, A. Davison, ICRA 2014.
+Living-room scene: Jaime Vives Piqueres.
+Source: https://www.doc.ic.ac.uk/~ahanda/VaFRIC/iclnuim.html
+License: CC BY 3.0 https://creativecommons.org/licenses/by/3.0/
+Derived simplified meshes, UV textures, error colors and videos. Scores use unsimplified master geometry.

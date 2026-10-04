@@ -77,6 +77,8 @@ def read_color_depth(frame: Frame) -> tuple[np.ndarray, np.ndarray]:
             if confidence.shape != depth.shape:
                 raise ValueError(f"Confidence/depth dimensions differ for frame {frame.frame_id}")
             depth[confidence < frame.intrinsics.confidence_min] = 0
+    if frame.metadata.get("vertical_flip"):
+        color, depth = np.flipud(color).copy(), np.flipud(depth).copy()
     return color, depth
 
 

@@ -40,7 +40,8 @@ def main() -> None:
         "evo_rpe", "tum", str(args.groundtruth), str(args.estimate),
         "-r", "angle_rad", "-d", "1", "-u", "f", *common,
     )
-    project = json.loads(args.metrics.read_text(encoding="utf-8"))["optimized"]
+    document = json.loads(args.metrics.read_text(encoding="utf-8"))
+    project = document.get("optimized", document)
     result = {
         "evo_ape_rmse_m": _metric(ape_output, "rmse"),
         "project_ate_rmse_m": project["ate_rmse_m"],

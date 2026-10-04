@@ -1,0 +1,581 @@
+{
+  "title": "ICL-NUIM · living room",
+  "synthetic": true,
+  "sequence": "lr_kt0",
+  "input_frames": 1508,
+  "shared_frame_count": 212,
+  "variants": {
+    "tsdf_estimated": {
+      "mesh": "tsdf_estimated.glb",
+      "geometry_mesh": "tsdf_estimated.glb",
+      "error_mesh": "tsdf_estimated_error.glb",
+      "trajectory": "trajectory_estimated.json",
+      "master_triangles": 322189,
+      "web_triangles": 99999,
+      "metrics": {
+        "accuracy": {
+          "mean_m": 0.016514723168215423,
+          "median_m": 0.015029668807983398,
+          "rmse_m": 0.02020375843236743,
+          "std_m": 0.011638546879686771,
+          "min_m": 6.078504952711228e-7,
+          "max_m": 0.6566903591156006,
+          "p90_m": 0.031094932556152352,
+          "p95_m": 0.034573566913604734
+        },
+        "completeness": {
+          "mean_m": 0.019060540265980343,
+          "median_m": 0.01574733294546604,
+          "rmse_m": 0.027121609185031977,
+          "std_m": 0.019294493762588134,
+          "min_m": 0,
+          "max_m": 0.3137114644050598,
+          "p90_m": 0.03277563452720642,
+          "p95_m": 0.03707675281912089
+        },
+        "alignment_se3": [
+          [
+            -0.9980167294754072,
+            0.0017991035222115759,
+            0.06292353227313476,
+            1.2501517896871124
+          ],
+          [
+            -0.002530644924885417,
+            0.9976367461063529,
+            -0.06866235252737142,
+            1.465219055094204
+          ],
+          [
+            -0.06289835867076363,
+            -0.06868541362505756,
+            -0.9956536096613513,
+            1.475637675221908
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "alignment_source": "trajectory_se3_no_scale_no_icp",
+        "accuracy_samples": 100000,
+        "visible_gt_samples": 1142980,
+        "seed": 2026,
+        "distance_method": "point_to_triangle",
+        "sampling": "uniform_surface_area",
+        "f_scores": {
+          "0.01": {
+            "precision": 0.30802,
+            "recall": 0.28467339760975696,
+            "f_score": 0.2958868794063781
+          },
+          "0.02": {
+            "precision": 0.65379,
+            "recall": 0.6368816602215261,
+            "f_score": 0.6452250769413571
+          },
+          "0.05": {
+            "precision": 0.99893,
+            "recall": 0.9782857092862517,
+            "f_score": 0.9885000801759617
+          }
+        },
+        "surface_accuracy_icl_mean_m": 0.016514723168215423,
+        "surface_accuracy_icl_median_m": 0.015029668807983398,
+        "surface_accuracy_icl_std_m": 0.011638546879686771,
+        "surface_accuracy_icl_min_m": 6.078504952711228e-7,
+        "surface_accuracy_icl_max_m": 0.6566903591156006
+      },
+      "ate_rmse_m": 0.007715750429928638,
+      "color_representation": "observed_vertex_RGB",
+      "integration_frame_count": 212,
+      "color_web_triangles": 99999
+    },
+    "tsdf_gt": {
+      "mesh": "tsdf_gt.glb",
+      "geometry_mesh": "tsdf_gt.glb",
+      "error_mesh": "tsdf_gt_error.glb",
+      "trajectory": "trajectory_gt.json",
+      "master_triangles": 323564,
+      "web_triangles": 100000,
+      "metrics": {
+        "accuracy": {
+          "mean_m": 0.01022752179754395,
+          "median_m": 0.008600950241088867,
+          "rmse_m": 0.014800851925649169,
+          "std_m": 0.010698738972690011,
+          "min_m": 2.6656007889869215e-7,
+          "max_m": 0.7991649508476257,
+          "p90_m": 0.021158266067504886,
+          "p95_m": 0.023423442244529722
+        },
+        "completeness": {
+          "mean_m": 0.01274853241329385,
+          "median_m": 0.010188516229391098,
+          "rmse_m": 0.02298581084207523,
+          "std_m": 0.01912648481490677,
+          "min_m": 0,
+          "max_m": 0.34318089485168457,
+          "p90_m": 0.021499395556747913,
+          "p95_m": 0.024191106576472523
+        },
+        "alignment_se3": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "alignment_source": "trajectory_se3_no_scale_no_icp",
+        "accuracy_samples": 100000,
+        "visible_gt_samples": 1142980,
+        "seed": 2026,
+        "distance_method": "point_to_triangle",
+        "sampling": "uniform_surface_area",
+        "f_scores": {
+          "0.01": {
+            "precision": 0.54853,
+            "recall": 0.492036606064848,
+            "f_score": 0.5187497618156913
+          },
+          "0.02": {
+            "precision": 0.86727,
+            "recall": 0.854954592381319,
+            "f_score": 0.8610682632388932
+          },
+          "0.05": {
+            "precision": 0.99956,
+            "recall": 0.9799156590666503,
+            "f_score": 0.9896403541920805
+          }
+        },
+        "surface_accuracy_icl_mean_m": 0.01022752179754395,
+        "surface_accuracy_icl_median_m": 0.008600950241088867,
+        "surface_accuracy_icl_std_m": 0.010698738972690011,
+        "surface_accuracy_icl_min_m": 2.6656007889869215e-7,
+        "surface_accuracy_icl_max_m": 0.7991649508476257
+      },
+      "ate_rmse_m": 0,
+      "color_representation": "observed_vertex_RGB",
+      "integration_frame_count": 212,
+      "color_web_triangles": 100000
+    },
+    "rtab_estimated": {
+      "mesh": "rtab_estimated_textured.glb",
+      "geometry_mesh": "rtab_estimated.glb",
+      "error_mesh": "rtab_estimated_error.glb",
+      "trajectory": "trajectory_estimated.json",
+      "master_triangles": 2614094,
+      "web_triangles": 99999,
+      "metrics": {
+        "accuracy": {
+          "mean_m": 0.21272108351215208,
+          "median_m": 0.13657402992248535,
+          "rmse_m": 0.3087973147188663,
+          "std_m": 0.2238426282167867,
+          "min_m": 0.0000025955409910238814,
+          "max_m": 1.043100118637085,
+          "p90_m": 0.5528077602386477,
+          "p95_m": 0.652396136522293
+        },
+        "completeness": {
+          "mean_m": 0.01809275955659667,
+          "median_m": 0.01609958428889513,
+          "rmse_m": 0.02343928398981102,
+          "std_m": 0.014901412200935573,
+          "min_m": 1.043081283569336e-7,
+          "max_m": 0.3231990933418274,
+          "p90_m": 0.032534190267324445,
+          "p95_m": 0.03619306702166797
+        },
+        "alignment_se3": [
+          [
+            -0.9980167294754072,
+            0.0017991035222115759,
+            0.06292353227313476,
+            1.2501517896871124
+          ],
+          [
+            -0.002530644924885417,
+            0.9976367461063529,
+            -0.06866235252737142,
+            1.465219055094204
+          ],
+          [
+            -0.06289835867076363,
+            -0.06868541362505756,
+            -0.9956536096613513,
+            1.475637675221908
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "alignment_source": "trajectory_se3_no_scale_no_icp",
+        "accuracy_samples": 100000,
+        "visible_gt_samples": 1142980,
+        "seed": 2026,
+        "distance_method": "point_to_triangle",
+        "sampling": "uniform_surface_area",
+        "f_scores": {
+          "0.01": {
+            "precision": 0.12588,
+            "recall": 0.27289103921328456,
+            "f_score": 0.17228695485980455
+          },
+          "0.02": {
+            "precision": 0.26311,
+            "recall": 0.6320005599398064,
+            "f_score": 0.3715421865583726
+          },
+          "0.05": {
+            "precision": 0.42567,
+            "recall": 0.9896848588776707,
+            "f_score": 0.5952982762393856
+          }
+        },
+        "surface_accuracy_icl_mean_m": 0.21272108351215208,
+        "surface_accuracy_icl_median_m": 0.13657402992248535,
+        "surface_accuracy_icl_std_m": 0.2238426282167867,
+        "surface_accuracy_icl_min_m": 0.0000025955409910238814,
+        "surface_accuracy_icl_max_m": 1.043100118637085
+      },
+      "ate_rmse_m": 0.007715750429928638,
+      "color_representation": "native_UV_texture",
+      "integration_frame_count": 212,
+      "color_web_triangles": 4539
+    },
+    "rtab_gt": {
+      "mesh": "rtab_gt_textured.glb",
+      "geometry_mesh": "rtab_gt.glb",
+      "error_mesh": "rtab_gt_error.glb",
+      "trajectory": "trajectory_gt.json",
+      "master_triangles": 681537,
+      "web_triangles": 99999,
+      "metrics": {
+        "accuracy": {
+          "mean_m": 0.21671793554553348,
+          "median_m": 0.12971067428588867,
+          "rmse_m": 0.32069977789577975,
+          "std_m": 0.23639307086986386,
+          "min_m": 0.000002185955054301303,
+          "max_m": 1.064430832862854,
+          "p90_m": 0.577840340137482,
+          "p95_m": 0.6839052349328992
+        },
+        "completeness": {
+          "mean_m": 0.016117549158221563,
+          "median_m": 0.014811830595135689,
+          "rmse_m": 0.022048966403568626,
+          "std_m": 0.01504598047978294,
+          "min_m": 1.794337407545754e-7,
+          "max_m": 0.3331417441368103,
+          "p90_m": 0.02644044104963541,
+          "p95_m": 0.029002415575087072
+        },
+        "alignment_se3": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "alignment_source": "trajectory_se3_no_scale_no_icp",
+        "accuracy_samples": 100000,
+        "visible_gt_samples": 1142980,
+        "seed": 2026,
+        "distance_method": "point_to_triangle",
+        "sampling": "uniform_surface_area",
+        "f_scores": {
+          "0.01": {
+            "precision": 0.17755,
+            "recall": 0.37434600780416105,
+            "f_score": 0.24086107797762432
+          },
+          "0.02": {
+            "precision": 0.3303,
+            "recall": 0.6900531942816147,
+            "f_score": 0.446756223920461
+          },
+          "0.05": {
+            "precision": 0.46291,
+            "recall": 0.9869455283557017,
+            "f_score": 0.6302241093625046
+          }
+        },
+        "surface_accuracy_icl_mean_m": 0.21671793554553348,
+        "surface_accuracy_icl_median_m": 0.12971067428588867,
+        "surface_accuracy_icl_std_m": 0.23639307086986386,
+        "surface_accuracy_icl_min_m": 0.000002185955054301303,
+        "surface_accuracy_icl_max_m": 1.064430832862854
+      },
+      "ate_rmse_m": 0,
+      "color_representation": "native_UV_texture",
+      "integration_frame_count": 212,
+      "color_web_triangles": 612
+    },
+    "tsdf_tuned_estimated": {
+      "mesh": "tsdf_tuned_estimated.glb",
+      "geometry_mesh": "tsdf_tuned_estimated.glb",
+      "error_mesh": "tsdf_tuned_estimated_error.glb",
+      "trajectory": "trajectory_estimated.json",
+      "master_triangles": 1739022,
+      "web_triangles": 100000,
+      "metrics": {
+        "accuracy": {
+          "mean_m": 0.014368545526589175,
+          "median_m": 0.012062788009643555,
+          "rmse_m": 0.01955279404990752,
+          "std_m": 0.013261095528214596,
+          "min_m": 6.508925594062021e-7,
+          "max_m": 0.6365931034088135,
+          "p90_m": 0.028983414173126224,
+          "p95_m": 0.03354146480560302
+        },
+        "completeness": {
+          "mean_m": 0.013514789641484573,
+          "median_m": 0.010214069858193398,
+          "rmse_m": 0.02249823752370154,
+          "std_m": 0.017986693765651138,
+          "min_m": 0,
+          "max_m": 0.3459720015525818,
+          "p90_m": 0.024157676286995406,
+          "p95_m": 0.02747546453028918
+        },
+        "alignment_se3": [
+          [
+            -0.9980167294754072,
+            0.0017991035222115759,
+            0.06292353227313476,
+            1.2501517896871124
+          ],
+          [
+            -0.002530644924885417,
+            0.9976367461063529,
+            -0.06866235252737142,
+            1.465219055094204
+          ],
+          [
+            -0.06289835867076363,
+            -0.06868541362505756,
+            -0.9956536096613513,
+            1.475637675221908
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "alignment_source": "trajectory_se3_no_scale_no_icp",
+        "accuracy_samples": 100000,
+        "visible_gt_samples": 1142980,
+        "seed": 2026,
+        "distance_method": "point_to_triangle",
+        "sampling": "uniform_surface_area",
+        "f_scores": {
+          "0.01": {
+            "precision": 0.42684,
+            "recall": 0.48932002309751704,
+            "f_score": 0.4559495140440389
+          },
+          "0.02": {
+            "precision": 0.72045,
+            "recall": 0.8151297485520307,
+            "f_score": 0.7648710239869538
+          },
+          "0.05": {
+            "precision": 0.99697,
+            "recall": 0.9776059073649582,
+            "f_score": 0.9871930046652801
+          }
+        },
+        "surface_accuracy_icl_mean_m": 0.014368545526589175,
+        "surface_accuracy_icl_median_m": 0.012062788009643555,
+        "surface_accuracy_icl_std_m": 0.013261095528214596,
+        "surface_accuracy_icl_min_m": 6.508925594062021e-7,
+        "surface_accuracy_icl_max_m": 0.6365931034088135
+      },
+      "ate_rmse_m": 0.007715750429928638,
+      "color_representation": "observed_vertex_RGB",
+      "integration_frame_count": 106,
+      "color_web_triangles": 100000
+    },
+    "tsdf_tuned_gt": {
+      "mesh": "tsdf_tuned_gt.glb",
+      "geometry_mesh": "tsdf_tuned_gt.glb",
+      "error_mesh": "tsdf_tuned_gt_error.glb",
+      "trajectory": "trajectory_gt.json",
+      "master_triangles": 1614272,
+      "web_triangles": 100000,
+      "metrics": {
+        "accuracy": {
+          "mean_m": 0.008767638769498093,
+          "median_m": 0.00702482764609158,
+          "rmse_m": 0.01570122290486708,
+          "std_m": 0.013025241307396828,
+          "min_m": 3.295145063475502e-7,
+          "max_m": 0.9901018738746643,
+          "p90_m": 0.018275770358741287,
+          "p95_m": 0.021769214235246158
+        },
+        "completeness": {
+          "mean_m": 0.009289897922008555,
+          "median_m": 0.006425244966521859,
+          "rmse_m": 0.02022105403195198,
+          "std_m": 0.01796075785599769,
+          "min_m": 0,
+          "max_m": 0.3475726246833801,
+          "p90_m": 0.014502641372382639,
+          "p95_m": 0.017595548648387194
+        },
+        "alignment_se3": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "alignment_source": "trajectory_se3_no_scale_no_icp",
+        "accuracy_samples": 100000,
+        "visible_gt_samples": 1142980,
+        "seed": 2026,
+        "distance_method": "point_to_triangle",
+        "sampling": "uniform_surface_area",
+        "f_scores": {
+          "0.01": {
+            "precision": 0.63212,
+            "recall": 0.7049475931337381,
+            "f_score": 0.6665504045719952
+          },
+          "0.02": {
+            "precision": 0.92919,
+            "recall": 0.9612407916149014,
+            "f_score": 0.9449436976189483
+          },
+          "0.05": {
+            "precision": 0.99935,
+            "recall": 0.9777905125199041,
+            "f_score": 0.9884527098596174
+          }
+        },
+        "surface_accuracy_icl_mean_m": 0.008767638769498093,
+        "surface_accuracy_icl_median_m": 0.00702482764609158,
+        "surface_accuracy_icl_std_m": 0.013025241307396828,
+        "surface_accuracy_icl_min_m": 3.295145063475502e-7,
+        "surface_accuracy_icl_max_m": 0.9901018738746643
+      },
+      "ate_rmse_m": 0,
+      "color_representation": "observed_vertex_RGB",
+      "integration_frame_count": 106,
+      "color_web_triangles": 100000
+    }
+  },
+  "gt_mesh": "gt.glb",
+  "coordinate_convention": "official_global_GT_world_Y_up",
+  "heatmap_cap_m": 0.1,
+  "default_mapper": "tsdf_tuned",
+  "tuning_selection": {
+    "selected": "tsdf_v10_t2_s2",
+    "settings": {
+      "voxel_length": 0.01,
+      "sdf_trunc": 0.02,
+      "frame_stride": 2
+    },
+    "candidate_mean_f2": {
+      "tsdf_v10_t2_s2": 0.6356090511890256,
+      "tsdf_v10_t2_s1": 0.6259231820370262
+    },
+    "heldout_mean_f2": 0.5925217269230495,
+    "baseline_heldout_mean_f2": 0.5373123564214324,
+    "validated_improvement": true,
+    "selection_protocol": "kt0 finalists, compare kt1-kt3 validation, equal sequence weighting",
+    "all_finalist_mean_f2": {
+      "tsdf_v10_t2_s2": 0.6356090511890256,
+      "tsdf_v10_t2_s1": 0.6259231820370262,
+      "rtab_p10": 0.42910774051102707
+    },
+    "best_finalist": "tsdf_v10_t2_s2"
+  },
+  "camera": {
+    "position": [
+      1.3705,
+      1.51739,
+      1.44963
+    ],
+    "target": [
+      1.3269019822616703,
+      1.51739,
+      -0.549894746745909
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ]
+  },
+  "tuning_summary": "The table preserves the frozen baseline; the validated TSDF setting is also available in the viewer. Twelve TSDF settings and three native meshing resolutions were tested on kt0. Three finalists were validated on kt1–kt3; full parameters and scores are downloadable."
+}

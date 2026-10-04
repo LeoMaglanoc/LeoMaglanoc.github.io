@@ -38,7 +38,9 @@ export class MapViewer {
     this.animate();
   }
 
-  async load(meshUrl, samples) {
+  async load(meshUrl, samples, options = {}) {
+    this.clear();
+    this.loadingElement.hidden = false;
     const loader = new GLTFLoader();
     const gltf = await loader.loadAsync(meshUrl, ({ loaded, total }) => {
       const progress = total ? `${Math.round(100 * loaded / total)}%` : `${(loaded / 1048576).toFixed(1)} MB`;
@@ -59,21 +61,25 @@ export class MapViewer {
           color: material.map ? 0xffffff : material.color,
           side: THREE.DoubleSide,
           toneMapped: false,
+          vertexColors: !!object.geometry.attributes.color,
         });
       });
       const geometryMaterials = originals.map(() => new THREE.MeshStandardMaterial({
         color: 0xb8c5cf, roughness: 1, metalness: 0, side: THREE.DoubleSide,
       }));
+      originals.forEach((material) => material.dispose());
       const materials = (list) => Array.isArray(object.material) ? list : list[0];
       this.meshes.push({ object, texture: materials(textureMaterials), geometry: materials(geometryMaterials) });
       object.material = materials(textureMaterials);
     });
+    this.model = gltf.scene;
     this.scene.add(gltf.scene);
     this.trajectory = trajectoryObject(samples);
     this.scene.add(this.trajectory);
-    this.camera.position.fromArray(INITIAL_CAMERA_POSE.position);
-    this.camera.up.fromArray(INITIAL_CAMERA_POSE.up);
-    this.controls.target.fromArray(INITIAL_CAMERA_POSE.target);
+    let pose = options.camera || INITIAL_CAMERA_POSE;
+    this.camera.position.fromArray(pose.position);
+    this.camera.up.fromArray(pose.up || [0, 1, 0]);
+    this.controls.target.fromArray(pose.target);
     this.camera.lookAt(this.controls.target);
     this.controls.update();
     this.resetPose = {
@@ -83,6 +89,46 @@ export class MapViewer {
     };
     this.loadingElement.hidden = true;
     this.resize();
+  }
+
+  clear() {
+    const materials = new Set(), geometries = new Set(), textures = new Set();
+    const dispose = (root) => {
+      if (!root) return;
+      this.scene.remove(root);
+      root.traverse((object) => {
+        if (object.geometry) geometries.add(object.geometry);
+        for (const material of (Array.isArray(object.material) ? object.material : [object.material])) if (material) materials.add(material);
+      });
+    };
+    for (const mesh of this.meshes) {
+      for (const mode of ['geometry', 'texture']) {
+        for (const material of (Array.isArray(mesh[mode]) ? mesh[mode] : [mesh[mode]])) materials.add(material);
+      }
+    }
+    dispose(this.model); dispose(this.trajectory); dispose(this.overlay);
+    for (const geometry of geometries) geometry.dispose();
+    for (const material of materials) {
+      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+      material.dispose();
+    }
+    for (const texture of textures) texture.dispose();
+    this.model = this.trajectory = this.overlay = null;
+    this.meshes = [];
+  }
+
+  async setOverlay(url, visible) {
+    if (this.overlay) { this.overlay.visible = visible; this.needsRender = true; return; }
+    if (!visible) return;
+    const gltf = await new GLTFLoader().loadAsync(url);
+    this.overlay = gltf.scene;
+    this.overlay.traverse((object) => {
+      if (object.isMesh) {
+        object.material.dispose();
+        object.material = new THREE.MeshBasicMaterial({ color: 0x62d6ff, wireframe: true, transparent: true, opacity: 0.16, depthWrite: false });
+      }
+    });
+    this.scene.add(this.overlay); this.needsRender = true;
   }
 
   reset() {

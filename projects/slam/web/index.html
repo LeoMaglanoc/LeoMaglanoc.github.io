@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a1018" />
-    <title>Phone SLAM — RGB-D Mapping</title>
+    <title>RGB-D SLAM · Tracking &amp; Reconstruction</title>
   </head>
   <body>
     <main class="app-shell">
@@ -13,6 +13,14 @@
         <h1 id="demo-title">Phone SLAM / RGB-D Mapping</h1>
         <p id="demo-summary">Loading canonical reconstruction details…</p>
       </header>
+      <section class="dataset-controls" aria-label="Dataset selection">
+        <label>Dataset <select id="dataset-select"><option value="tum">TUM Freiburg3 · real RGB-D</option><option value="icl">ICL-NUIM · synthetic benchmark</option></select></label>
+        <div id="icl-controls" hidden>
+          <label>Reconstruction <select id="mapper-select"><option value="rtab">RTAB native</option><option value="tsdf">TSDF · baseline</option><option value="tsdf_tuned">TSDF · validated tuning</option></select></label>
+          <label>Poses <select id="pose-select"><option value="estimated">Estimated</option><option value="gt">Ground truth</option></select></label>
+          <label>Display <select id="display-select"><option value="geometry">Geometry</option><option value="color">RGB color</option><option value="error">Error heatmap</option><option value="overlay">GT overlay</option></select></label>
+        </div>
+      </section>
       <section class="toolbar" aria-label="Viewer controls">
         <div class="mode-buttons" role="group" aria-label="View mode">
           <button data-mode="rgb" type="button">RGB Video</button>
@@ -23,12 +31,13 @@
         <div class="map-controls">
           <button id="reset-view" data-map-control type="button">Reset view</button>
           <button id="surface-toggle" data-map-control type="button" aria-pressed="false">Show geometry</button>
-          <button id="trajectory-toggle" data-map-control type="button" aria-pressed="false">Optimized trajectory: off</button>
+        <button id="trajectory-toggle" data-map-control type="button" aria-pressed="false">Trajectory: off</button>
           <button id="copy-camera-pose" data-map-control type="button">Copy camera pose</button>
           <button id="fullscreen" type="button">Fullscreen</button>
         </div>
       </section>
       <section id="viewer" class="viewer mode-map" aria-label="RGB-D SLAM viewer">
+        <button id="exit-fullscreen" type="button">Exit fullscreen</button>
         <article id="video-panel" class="panel video-panel">
           <video id="rgb-video" controls playsinline preload="metadata" aria-label="RGB input video"></video>
         </article>
@@ -38,7 +47,7 @@
         <article id="map-panel" class="panel map-panel">
           <canvas id="map-canvas" aria-label="Interactive 3D reconstruction"></canvas>
           <div id="map-fallback" class="map-fallback" hidden>
-            <img id="map-fallback-image" alt="Static preview of the optimized TSDF reconstruction" />
+            <img id="map-fallback-image" alt="Static preview of the RGB-D reconstruction" />
             <p id="map-fallback-message"></p>
           </div>
           <div id="loading" class="loading" role="status">Loading 3D reconstruction…</div>
@@ -54,9 +63,24 @@
       </section>
       <section class="details" aria-label="Demo details">
         <p id="stats">Loading reconstruction statistics…</p>
-        <p>Canonical example: <a id="dataset-link" href="https://cvg.cit.tum.de/data/datasets/rgbd-dataset" target="_blank" rel="noreferrer">TUM RGB-D Dataset</a> — freiburg3_long_office_household.</p>
-        <p>Drag to orbit · Scroll to zoom · Right-drag to pan. Texture view preserves the captured RGB colors; geometry view reveals surface detail and gaps.</p>
+        <p id="dataset-attribution">Canonical example: <a id="dataset-link" href="https://cvg.cit.tum.de/data/datasets/rgbd-dataset" target="_blank" rel="noreferrer">TUM RGB-D Dataset</a> — freiburg3_long_office_household.</p>
+        <p>Drag to orbit · Scroll to zoom · Right-drag to pan. RGB color preserves captured appearance; geometry reveals surface detail and gaps.</p>
         <pre id="camera-pose-output" class="camera-pose-output" hidden aria-live="polite"></pre>
+      </section>
+      <section id="benchmark" class="benchmark" hidden aria-label="ICL benchmark results">
+        <div id="metric-panel" class="metric-panel" aria-live="polite"></div>
+        <p id="heatmap-legend" hidden>Surface error: 0 cm <span class="error-gradient"></span> 10+ cm. Colors show distance to the GT surface after trajectory alignment.</p>
+        <h2>Tracking accuracy and mapping accuracy</h2>
+        <p>Synthetic living-room benchmark · noisy RGB-D · four trajectories. The viewer shows kt0; the table includes every sequence and the equal-weight mean. All reconstruction and evaluation run offline.</p>
+        <p>Accuracy measures reconstructed surface → full GT triangles. Completeness measures the fixed clean-depth visible GT → reconstruction. Both mappers use the same graph frames. Estimated maps use the trajectory's rigid alignment, with no scale fit or independent ICP. Scores use unsimplified master meshes.</p>
+        <p>RTAB's RGB view uses projected UV textures; TSDF uses fused RGB vertex colors. Geometry and error views share the same simplified surface. UV texturing may omit triangles without RGB coverage.</p>
+        <div class="table-scroll"><table id="benchmark-table"></table></div>
+        <h3>Clean depth and known poses</h3>
+        <p>Clean depth with known poses measures fusion plus the small depth/reference residual. Noisy depth adds sensor noise; estimated poses add tracking error. These differences are diagnostic and need not add linearly.</p>
+        <div class="table-scroll"><table id="diagnostic-table"></table></div>
+        <p id="tuning-summary"></p>
+        <p><a href="demos/icl_nuim/summary.json" download>Download benchmark JSON</a> · <a href="demos/icl_nuim/report.md" download>Full report</a> · <a href="demos/icl_nuim/sweep.json" download>Parameter sweep</a> · <a href="demos/icl_nuim/selection.json" download>Validated setting</a></p>
+        <p>ICL-NUIM: A. Handa, T. Whelan, J. McDonald and A. Davison, ICRA 2014. Living-room scene by Jaime Vives Piqueres. <a href="https://www.doc.ic.ac.uk/~ahanda/VaFRIC/iclnuim.html">Dataset and source</a> · <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
       </section>
     </main>
     <script type="module" src="/src/main.js"></script>

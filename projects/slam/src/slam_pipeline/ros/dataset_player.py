@@ -17,12 +17,14 @@ from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from rclpy.qos import QoSProfile
 from sensor_msgs.msg import CameraInfo, Image
+from rtabmap_msgs.msg import Info
 from scipy.spatial.transform import Rotation
 from tf2_ros import TransformBroadcaster
 
 from ..dataset.schema import Dataset, Frame
 from ..dataset.phone_dataset import load_phone_dataset
 from ..dataset.tum_rgbd import load_tum_dataset
+from ..dataset.icl_nuim import load_icl_dataset
 from ..reconstruction.tsdf import read_color_depth
 from .depth import raw_depth_to_meters
 
@@ -52,6 +54,7 @@ class DatasetPlayer(Node):
         odom_topic: str,
         publish_odometry: bool,
         summary_path: Path | None = None,
+        wait_for_map: bool = False,
     ) -> None:
         super().__init__("dataset_player")
         # A replay can legitimately run faster than RTAB-Map's image callback.
@@ -68,6 +71,11 @@ class DatasetPlayer(Node):
         self._publish_odometry = publish_odometry
         self._odom_pub = self.create_publisher(Odometry, odom_topic, qos) if publish_odometry else None
         self._tf_broadcaster = TransformBroadcaster(self) if publish_odometry else None
+        self._wait_for_map = wait_for_map
+        self._ack_event = threading.Event()
+        self._expected_ack_ns = None
+        if wait_for_map:
+            self.create_subscription(Info, "/info", self._on_map_info, 100)
         self._summary_path = summary_path
         self._published_rgb_frames = 0
         self._published_depth_frames = 0
@@ -78,6 +86,11 @@ class DatasetPlayer(Node):
         self._start_monotonic_s = time.monotonic()
         self._thread = threading.Thread(target=self._publish_all, daemon=True)
         self._thread.start()
+
+    def _on_map_info(self, message: Info) -> None:
+        stamp_ns = message.header.stamp.sec * 1_000_000_000 + message.header.stamp.nanosec
+        if self._expected_ack_ns is not None and abs(stamp_ns - self._expected_ack_ns) <= 1000:
+            self._ack_event.set()
 
     def _camera_info(self, frame: Frame) -> CameraInfo:
         camera = frame.intrinsics
@@ -175,11 +188,22 @@ class DatasetPlayer(Node):
         frames = self._dataset.frames[: self._max_frames]
         previous_timestamp_ns: int | None = None
         try:
+            if self._wait_for_map:
+                deadline = time.monotonic() + 30
+                while any(pub.get_subscription_count() == 0 for pub in (self._rgb_pub,self._depth_pub,self._camera_info_pub,self._odom_pub)):
+                    if time.monotonic() > deadline:
+                        raise TimeoutError("Map replay publishers have no subscribers")
+                    time.sleep(.1)
             for frame in frames:
                 if previous_timestamp_ns is not None:
                     delay_s = max(0.0, (frame.timestamp_ns - previous_timestamp_ns) / 1e9 / self._rate)
                     time.sleep(delay_s)
+                if self._wait_for_map:
+                    self._expected_ack_ns = frame.timestamp_ns
+                    self._ack_event.clear()
                 self._publish_frame(frame)
+                if self._wait_for_map and not self._ack_event.wait(30):
+                    raise TimeoutError(f"RTAB-Map did not acknowledge frame {frame.frame_id}")
                 previous_timestamp_ns = frame.timestamp_ns
             self.get_logger().info(f"Published {len(frames)} frames from {self._dataset.name}")
         except Exception as error:  # pragma: no cover - exercised by live replay
@@ -196,6 +220,8 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--rate", type=float, default=4.0, help="Playback multiplier; default is 4x real time.")
     parser.add_argument("--max-frames", type=int)
+    parser.add_argument("--wait-for-map", action="store_true", help="Wait for RTAB-Map /info acknowledgement after every oracle frame")
+    parser.add_argument("--frame-ids", type=Path, help="Replay only this fixed list of source frame IDs")
     parser.add_argument("--rgb-topic", default="/camera/rgb/image_rect_color")
     parser.add_argument("--depth-topic", default="/camera/depth_registered/image_raw")
     parser.add_argument("--camera-info-topic", default="/camera/rgb/camera_info")
@@ -210,7 +236,10 @@ def main() -> None:
     args = _arguments()
     config = __import__("yaml").safe_load(args.config.read_text(encoding="utf-8"))
     association = config.get("association", {})
-    if (args.dataset / "manifest.json").exists():
+    if config.get("dataset") == "icl_nuim":
+        dataset = load_icl_dataset(args.dataset, condition="noisy",
+                                   require_groundtruth=args.publish_odometry == "true")
+    elif (args.dataset / "manifest.json").exists():
         dataset = load_phone_dataset(
             args.dataset,
             max_pose_difference_s=float(association.get("max_pose_difference_s", 0.01)),
@@ -233,12 +262,18 @@ def main() -> None:
             max_pose_difference_s=float(association.get("max_pose_difference_s", 0.02)),
             require_groundtruth=args.publish_odometry == "true",
         )
+    if args.frame_ids is not None:
+        wanted = set(json.loads(args.frame_ids.read_text()))
+        dataset.frames = [frame for frame in dataset.frames if frame.frame_id in wanted]
+        if len(dataset.frames) != len(wanted):
+            raise ValueError("Requested frame IDs are absent from dataset")
     rclpy.init()
     node = DatasetPlayer(
         dataset, rate=max(args.rate, 1e-6), max_frames=args.max_frames, rgb_topic=args.rgb_topic,
         depth_topic=args.depth_topic, camera_info_topic=args.camera_info_topic, odom_topic=args.odom_topic,
         publish_odometry=args.publish_odometry == "true",
         summary_path=args.summary,
+        wait_for_map=args.wait_for_map,
     )
     try:
         while rclpy.ok() and not getattr(node, "_done", False):

@@ -15,7 +15,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 
-_OPTIMIZATION = {"full": "0", "raw": "3"}
+_OPTIMIZATION = {"full": "0", "raw": "3", "stored": "2"}
 
 
 def resolve_rtabmap_executable(executable: str = "rtabmap-export") -> tuple[str, Path | None]:
@@ -63,6 +63,7 @@ def export_rtabmap_trajectory(
     *,
     optimization: str = "full",
     executable: str = "rtabmap-export",
+    save_in_database: bool = False,
 ) -> tuple[np.ndarray, list[np.ndarray], list[int]]:
     """Export and parse a trajectory using the supported RTAB-Map CLI.
 
@@ -99,6 +100,10 @@ def export_rtabmap_trajectory(
         environment["LD_LIBRARY_PATH"] = ":".join(
             [*(str(path) for path in library_paths), existing_library_path]
         ).rstrip(":")
+    if save_in_database:
+        # RTAB-Map stores instead of writing files when --save_in_db is set.
+        subprocess.run([command[0], "--save_in_db", *command[1:]], check=True, text=True, env=environment)
+        command[command.index("--opt") + 1] = _OPTIMIZATION["stored"]
     subprocess.run(command, check=True, text=True, env=environment)
     if not generated.is_file():
         raise RuntimeError(f"rtabmap-export did not create expected pose file: {generated}")
