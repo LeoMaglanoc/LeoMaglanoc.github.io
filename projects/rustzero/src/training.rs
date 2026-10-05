@@ -1,6 +1,6 @@
 use crate::{
     game::{Position, mirror_action},
-    mcts::{Evaluator, Search, heuristic_action},
+    mcts::{Evaluator, HeuristicEvaluator, Search, heuristic_action},
     model::{Cpu, Network, Weights},
 };
 use burn::{
@@ -29,12 +29,19 @@ pub struct Config {
     pub noise_fraction: f32,
     pub arena_games: usize,
     pub arena_simulations: usize,
+    #[serde(default = "five")]
+    pub checkpoint_interval: usize,
+}
+fn five() -> usize {
+    5
 }
 impl Config {
     pub fn load(path: &str) -> Self {
         let c: Self = toml::from_str(&fs::read_to_string(path).unwrap()).unwrap();
         assert!(
-            c.simulations > 0
+            c.checkpoint_interval > 0
+                && c.generations > 0
+                && c.simulations > 0
                 && c.steps > 0
                 && c.batch > 0
                 && c.games > 0
@@ -157,11 +164,27 @@ pub struct ArenaResult {
     pub wins_as_black: usize,
     pub average_moves: f32,
     pub seed: u64,
+    pub opening_protocol: String,
 }
 pub enum Opponent<'a> {
     Random,
     Heuristic,
+    HeuristicMcts(usize),
     Checkpoint(&'a Network<Cpu>),
+}
+/// Separate, deterministic opening RNG: paired games receive exactly the same position.
+pub fn openings(seed: u64, count: usize) -> Vec<Position> {
+    let mut rng = SmallRng::seed_from_u64(seed);
+    (0..count)
+        .map(|_| {
+            let mut p = Position::default();
+            for _ in 0..rng.gen_range(2..=4) {
+                let legal = p.legal();
+                p = p.play(legal[rng.gen_range(0..legal.len())]).unwrap();
+            }
+            p
+        })
+        .collect()
 }
 #[allow(
     clippy::too_many_arguments,
@@ -177,18 +200,14 @@ pub fn arena(
     seed: u64,
     c: f32,
 ) -> ArenaResult {
-    let mut rng = SmallRng::seed_from_u64(seed);
+    assert!(games > 0 && games.is_multiple_of(2));
+    let suite = openings(seed, games / 2);
+    let mut rng = SmallRng::seed_from_u64(seed ^ 0xabad1dea);
     let (mut wins, mut white, mut black, mut total_moves) = (0, 0, 0, 0);
     for game in 0..games {
         let net_side = game % 2 != 0;
-        let mut p = Position::default();
+        let mut p = suite[game / 2];
         let mut moves = 0;
-        // Two random legal opening plies diversify both sides without adding evaluator noise.
-        for _ in 0..2 {
-            let legal = p.legal();
-            p = p.play(legal[rng.gen_range(0..legal.len())]).unwrap();
-            moves += 1;
-        }
         while p.terminal().is_none() {
             let a = if p.side == net_side {
                 let mut s = Search::new(p, net, c);
@@ -201,6 +220,11 @@ pub fn arena(
                         legal[rng.gen_range(0..legal.len())]
                     }
                     Opponent::Heuristic => heuristic_action(&p),
+                    Opponent::HeuristicMcts(budget) => {
+                        let mut s = Search::new(p, &HeuristicEvaluator, c);
+                        s.run(&HeuristicEvaluator, budget);
+                        s.best().unwrap()
+                    }
                     Opponent::Checkpoint(other) => {
                         let mut s = Search::new(p, other, c);
                         s.run(other, sims);
@@ -235,6 +259,7 @@ pub fn arena(
         wins_as_black: black,
         average_moves: total_moves as f32 / games as f32,
         seed,
+        opening_protocol: "paired identical positions, 2–4 legal plies, both colors".into(),
     }
 }
 #[derive(Serialize, Deserialize)]
@@ -265,7 +290,9 @@ pub fn train(cfg: Config, out: &str) {
     let mut rng = SmallRng::seed_from_u64(cfg.seed);
     let mut model = Network::<TrainBackend>::new(&device);
     let initial = model.valid();
-    let mut previous = initial.clone();
+    let mut champion = initial.clone();
+    let mut champion_generation = 0;
+    let mut promotions = vec![];
     let mut optimizer = AdamConfig::new().init();
     let mut replay = VecDeque::new();
     let mut metrics = vec![];
@@ -274,6 +301,14 @@ pub fn train(cfg: Config, out: &str) {
     save_json(
         format!("{out}/checkpoints/gen-0.json"),
         &initial.weights(0, 0, cfg.seed),
+    );
+    save_json(
+        format!("{out}/evaluation/openings.json"),
+        &openings(90210, cfg.arena_games / 2),
+    );
+    save_json(
+        format!("{out}/evaluation/holdout-openings.json"),
+        &openings(78123, 200),
     );
     for generation in 0..=cfg.generations {
         if generation > 0 {
@@ -322,6 +357,10 @@ pub fn train(cfg: Config, out: &str) {
             );
             metrics.push(m);
         }
+        save_json(format!("{out}/metrics/training.json"), &metrics);
+        if generation % cfg.checkpoint_interval != 0 && generation != cfg.generations {
+            continue;
+        }
         let net = model.valid();
         save_json(
             format!("{out}/checkpoints/gen-{generation}.json"),
@@ -331,7 +370,7 @@ pub fn train(cfg: Config, out: &str) {
             (Opponent::Random, "random"),
             (Opponent::Heuristic, "heuristic"),
             (Opponent::Checkpoint(&initial), "gen-0"),
-            (Opponent::Checkpoint(&previous), "previous"),
+            (Opponent::HeuristicMcts(256), "heuristic-mcts-256"),
         ] {
             let r = arena(
                 &net,
@@ -346,7 +385,32 @@ pub fn train(cfg: Config, out: &str) {
             println!("arena gen {generation} vs {name}: {}/{}", r.wins, r.games);
             arenas.push(r);
         }
-        previous = net;
+        if generation > 0 {
+            let r = arena(
+                &net,
+                generation,
+                Opponent::Checkpoint(&champion),
+                "champion",
+                cfg.arena_games,
+                cfg.arena_simulations,
+                90210,
+                cfg.c_puct,
+            );
+            if r.win_rate > 0.55 {
+                champion = net.clone();
+                champion_generation = generation;
+            }
+            promotions.push(serde_json::json!({"candidate": generation, "champion": champion_generation, "match": r}));
+            save_json(format!("{out}/metrics/promotions.json"), &promotions);
+        }
+        save_json(
+            format!("{out}/champion.json"),
+            &champion.weights(
+                champion_generation,
+                champion_generation * cfg.steps,
+                cfg.seed,
+            ),
+        );
         save_json(format!("{out}/metrics/training.json"), &metrics);
         save_json(format!("{out}/metrics/arena.json"), &arenas);
     }
@@ -356,6 +420,23 @@ pub fn train(cfg: Config, out: &str) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn opening_suite_is_reproducible_and_paired() {
+        assert_eq!(openings(90210, 100), openings(90210, 100));
+        assert_ne!(openings(90210, 100), openings(78123, 100));
+        let net = Network::<Cpu>::new(&Default::default());
+        let r = arena(
+            &net,
+            0,
+            Opponent::Checkpoint(&net),
+            "self",
+            20,
+            8,
+            90210,
+            1.5,
+        );
+        assert_eq!(r.wins, 10);
+    }
     #[test]
     fn optimizer_overfits_and_changes_weights() {
         let d = Default::default();
@@ -400,6 +481,7 @@ mod tests {
             noise_fraction: 0.25,
             arena_games: 2,
             arena_simulations: 8,
+            checkpoint_interval: 1,
         };
         let net = Network::<Cpu>::new(&Default::default());
         let (e, m) = selfplay(&net, &cfg, &mut SmallRng::seed_from_u64(2));

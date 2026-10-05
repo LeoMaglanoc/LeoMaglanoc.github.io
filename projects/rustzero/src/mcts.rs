@@ -61,10 +61,24 @@ fn simulate(node: &mut Node, eval: &impl Evaluator, c: f32) -> f32 {
     if let Some(v) = node.position.terminal() {
         return v;
     }
-    let index=node.edges.iter().enumerate().max_by(|(_,a),(_,b)|{
-        let score=|e:&Edge|if e.visits==0{0.}else{e.sum/e.visits as f32}+c*e.prior*((node.visits+1) as f32).sqrt()/(1+e.visits) as f32;
-        score(a).total_cmp(&score(b))
-    }).unwrap().0;
+    let index = node
+        .edges
+        .iter()
+        .enumerate()
+        .max_by(|(_, a), (_, b)| {
+            let score = |e: &Edge| {
+                let q = if e.visits == 0 {
+                    0.
+                } else {
+                    e.sum / e.visits as f32
+                };
+                let u = c * e.prior * ((node.visits + 1) as f32).sqrt() / (1 + e.visits) as f32;
+                q + u
+            };
+            score(a).total_cmp(&score(b))
+        })
+        .unwrap()
+        .0;
     let e = &mut node.edges[index];
     let child_value = if let Some(child) = &mut e.child {
         simulate(child, eval, c)
@@ -162,6 +176,41 @@ impl Search {
         self.root.edges.iter().map(|e| e.sum).sum::<f32>() / self.root.visits.max(1) as f32
     }
 }
+/// Evaluation baseline only: never used to generate training labels.
+pub struct HeuristicEvaluator;
+impl Evaluator for HeuristicEvaluator {
+    fn evaluate(&self, p: &Position) -> ([f32; 108], f32) {
+        let (own, opp) = p.canonical();
+        let strength = |pieces: u64| {
+            let mut score = pieces.count_ones() as f32 * 2.;
+            for i in 0..36 {
+                if pieces >> i & 1 == 0 {
+                    continue;
+                }
+                let rank = i / 6;
+                score += (rank * rank) as f32 * 0.22;
+                if rank == 4 {
+                    score += 3.;
+                }
+                for d in [-7i32, -5] {
+                    let j = i as i32 + d;
+                    if (0..36).contains(&j)
+                        && (j % 6 - i as i32 % 6).abs() == 1
+                        && pieces >> j & 1 != 0
+                    {
+                        score += 0.4;
+                    }
+                }
+            }
+            score
+        };
+        let rotated_opp = (0..36).fold(0, |b, i| b | ((opp >> i & 1) << (35 - i)));
+        (
+            [0.; 108],
+            ((strength(own) - strength(rotated_opp)) / 10.).tanh(),
+        )
+    }
+}
 pub fn heuristic_action(p: &Position) -> usize {
     p.legal()
         .into_iter()
@@ -202,6 +251,52 @@ pub fn heuristic_action(p: &Position) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
+    struct StrongPriorEvaluator;
+    impl Evaluator for StrongPriorEvaluator {
+        fn evaluate(&self, p: &Position) -> ([f32; 108], f32) {
+            let legal = p.legal();
+            let mut logits = [0.; 108];
+            if let Some(&a) = legal.first() {
+                logits[a] = (0.9 * (legal.len() - 1) as f32 / 0.1).ln();
+            }
+            (logits, 0.)
+        }
+    }
+    #[test]
+    fn unvisited_edges_retain_prior() {
+        let p = Position::default();
+        let mut s = Search::new(p, &StrongPriorEvaluator, 1.5);
+        s.run(&StrongPriorEvaluator, 1);
+        assert_eq!(s.best(), Some(p.legal()[0]));
+        s.run(&StrongPriorEvaluator, 15);
+        let stats = s.stats();
+        assert!(stats[0].visits > stats.iter().skip(1).map(|e| e.visits).max().unwrap());
+        assert_eq!(stats.iter().map(|e| e.visits).sum::<u32>(), 16);
+    }
+    #[test]
+    fn tactical_value_overrides_prior() {
+        // One pawn can win immediately; the high-prior pawn is still on its home rank.
+        let p = Position {
+            white: (1 << 0) | (1 << 24),
+            black: 1 << 6,
+            side: false,
+        };
+        let mut s = Search::new(p, &StrongPriorEvaluator, 1.5);
+        s.run(&StrongPriorEvaluator, 512);
+        assert_eq!(p.apply(s.best().unwrap()).terminal(), Some(-1.));
+    }
+    #[test]
+    fn three_ply_forced_win_sign() {
+        let p = Position {
+            white: 1 << 18,
+            black: 1 << 23,
+            side: false,
+        };
+        let mut s = Search::new(p, &Uniform, 1.5);
+        s.run(&Uniform, 1024);
+        assert!(s.value() > 0.9, "{}", s.value());
+        assert_eq!(p.apply(s.best().unwrap()).terminal(), None);
+    }
     #[test]
     fn visits_and_determinism() {
         let p = Position::default();
