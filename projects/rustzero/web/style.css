@@ -802,3 +802,14 @@ body.local .meter {
 .local .value-note {
   display: none;
 }
+#chart {
+  overflow-x: auto;
+}
+#chart text {
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  #chart svg {
+    min-width: 650px;
+  }
+}

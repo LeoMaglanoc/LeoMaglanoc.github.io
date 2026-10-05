@@ -105,6 +105,7 @@ function render(animateMove = false) {
   document.body.classList.toggle("local", local());
   $("opponent-heading").textContent = local() ? "Local players" : "Your opponent";
   $("search-heading").textContent = local() ? "Two players" : "Inside the search";
+  const wasFinished = !$("game-result").hidden;
   const finished = state?.terminal !== null && state?.terminal !== undefined;
   $("game-result").hidden = !finished;
   document.body.classList.toggle("game-over", finished);
@@ -115,6 +116,11 @@ function render(animateMove = false) {
     $("result-icon").textContent = local() || won ? "★" : "⚑";
     $("result-title").textContent = local() ? `${winner ? "Black" : "White"} wins!` : won ? "You win!" : "AI wins — you lost";
     $("result-detail").textContent = `${winner ? "Black" : "White"} wins after ${ply} plies. Play again or undo to explore another move.`;
+    if (!wasFinished)
+      $("game-result").scrollIntoView({
+        block: "nearest",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      });
   }
   if (state?.terminal !== null && state?.terminal !== undefined) {
     const winner = state.terminal === 1 ? state.side : !state.side;
@@ -190,6 +196,7 @@ function start() {
   $("new-game").disabled = true;
   $("checkpoint").disabled = true;
   status("Loading Rust engine…");
+  $("timing").textContent = "Initializing Rust/WASM…";
   clearStats();
   render();
   updateEvidence();
@@ -250,7 +257,10 @@ function updateEvidence() {
     $("checkpoint-note").textContent = "Local two-player game. Both players share this device; no model is loaded and no AI runs.";
     return;
   }
-  if (!evidence) return;
+  if (!evidence) {
+    $("checkpoint-note").textContent = "Checkpoint evidence is unavailable. Reload to try again.";
+    return;
+  }
   const matchups = ["random", "heuristic", "heuristic-mcts-256"].map((opponent) =>
     evidence.find((r) => r.generation === generation() && r.opponent === opponent && r.simulations === 256)
   );
@@ -327,13 +337,8 @@ async function learning() {
     const final = evidence.find(
       (r) => r.generation === runInfo.checkpoint_generation && r.opponent === "heuristic-mcts-256" && r.simulations === 256
     );
-    $("evidence").textContent = `${
-      final.games
-    } games per matchup, identical paired openings with both colors; 2–4 seeded opening plies, no search noise. Champion Gen ${generation()}: ${
-      final.wins
-    }/${final.games} vs heuristic MCTS-256. Holdout seed ${runInfo.holdout_seed}; training seed ${
-      runInfo.training_seed
-    }. Champion selected using development matches only.`;
+    $("evidence").textContent =
+      `${final.games} games per matchup, identical paired openings with both colors; 2–4 seeded opening plies, no search noise. Champion Gen ${runInfo.checkpoint_generation}: ${final.wins}/${final.games} vs heuristic MCTS-256. Holdout seed ${runInfo.holdout_seed}; training seed ${runInfo.training_seed}. Champion selected using development matches only.`;
   } catch (error) {
     $("evidence").textContent = "Evaluation data could not be loaded. Reload to try again.";
   }

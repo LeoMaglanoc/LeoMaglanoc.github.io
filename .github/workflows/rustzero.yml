@@ -33,13 +33,13 @@ jobs:
         working-directory: projects/rustzero
         run: |
           docker compose run --rm rustzero cargo run --locked --release --features training --bin train -- configs/smoke.toml artifacts/ci-smoke
-          docker compose run --rm rustzero cargo run --locked --release --features training --bin arena -- artifacts/ci-smoke/champion.json 2 8 artifacts/ci-smoke/arena.json
-          docker compose run --rm rustzero cargo run --locked --release --features training --bin fixture -- artifacts/ci-smoke/champion.json artifacts/ci-smoke/inference-fixture.json
+          docker compose run --rm rustzero cargo run --locked --release --features training --bin arena -- artifacts/ci-smoke/checkpoints/gen-2.json 2 8 artifacts/ci-smoke/arena.json
+          docker compose run --rm rustzero cargo run --locked --release --features training --bin fixture -- artifacts/ci-smoke/checkpoints/gen-2.json artifacts/ci-smoke/inference-fixture.json
       - name: Rebuild shared Rust core for WebAssembly
         working-directory: projects/rustzero
         run: docker compose run --rm rustzero sh scripts/build-web.sh
       - name: Native checkpoint inference fixture
         working-directory: projects/rustzero
-        run: docker compose run --rm rustzero cargo run --locked --release --features training --bin fixture -- web/models/final.json web/metrics/inference-fixture.json
+        run: docker compose run --rm rustzero cargo run --locked --release --features training --bin fixture -- web/models/final.json artifacts/ci-native-fixture.json
       - name: Verify native/WASM agreement and complete WASM game
-        run: docker run --rm -v "$PWD/projects/rustzero:/work" -w /work node:22-bookworm-slim sh -c 'node scripts/check-wasm.mjs && node scripts/check-worker.mjs && node scripts/check-wasm.mjs artifacts/ci-smoke/champion.json artifacts/ci-smoke/inference-fixture.json'
+        run: docker run --rm -v "$PWD/projects/rustzero:/work" -w /work node:22-bookworm-slim sh -c 'node scripts/check-wasm.mjs && node scripts/check-wasm.mjs web/models/final.json artifacts/ci-native-fixture.json && node scripts/check-worker.mjs && node scripts/check-wasm.mjs artifacts/ci-smoke/checkpoints/gen-2.json artifacts/ci-smoke/inference-fixture.json'

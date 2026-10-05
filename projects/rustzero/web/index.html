@@ -31,8 +31,8 @@
             </select>
           </div>
           <div class="players">
-            <span><i class="pawn small white"></i><b id="white-player">YOU</b></span
-            ><span class="versus">6 × 6 BREAKTHROUGH</span><span><b id="black-player">CHAMPION</b><i class="pawn small black"></i></span>
+            <span><i class="pawn small white"></i><b id="white-player">CHAMPION</b></span
+            ><span class="versus">6 × 6 BREAKTHROUGH</span><span><b id="black-player">YOU</b><i class="pawn small black"></i></span>
           </div>
           <div id="game-result" class="game-result" role="status" aria-live="polite" aria-atomic="true" hidden>
             <span class="result-icon" id="result-icon" aria-hidden="true">★</span>
@@ -57,7 +57,7 @@
             ><label
               >Play as<select id="side" aria-label="Play as">
                 <option value="white">White · first</option>
-                <option value="black">Black · second</option>
+                <option value="black" selected>Black · second</option>
               </select></label
             >
           </div>
@@ -85,11 +85,11 @@
               <label for="simulations">Difficulty / search budget</label
               ><select id="simulations">
                 <option value="64">Fast · 64 simulations</option>
-                <option value="256" selected>Strong · 256 simulations</option>
-                <option value="1024">Nightmare · 1,024 simulations</option>
+                <option value="256">Strong · 256 simulations</option>
+                <option value="1024" selected>Nightmare · 1,024 simulations</option>
               </select>
             </div>
-            <p class="checkpoint-note" id="difficulty-note">Strong · 256 MCTS simulations.</p>
+            <p class="checkpoint-note" id="difficulty-note">NIGHTMARE · AI moves first by default. 1,024 MCTS simulations. Good luck.</p>
             <p class="checkpoint-note" id="training-note"></p>
           </section>
           <section class="panel search-panel">

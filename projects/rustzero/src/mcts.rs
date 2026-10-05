@@ -183,7 +183,7 @@ impl Evaluator for HeuristicEvaluator {
         let (own, opp) = p.canonical();
         let strength = |pieces: u64| {
             let mut score = pieces.count_ones() as f32 * 2.;
-            for i in 0..36 {
+            for i in 0usize..36 {
                 if pieces >> i & 1 == 0 {
                     continue;
                 }

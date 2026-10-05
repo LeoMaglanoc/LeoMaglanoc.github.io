@@ -24,3 +24,8 @@ projects/rustzero/web/pkg/
 projects/rustzero/web/models/
 assets/interactive/rustzero/pkg/
 assets/interactive/rustzero/models/
+# Recorded experiment evidence is hashed verbatim for provenance.
+projects/rustzero/web/metrics/
+projects/rustzero/web/evaluation/
+assets/interactive/rustzero/metrics/
+assets/interactive/rustzero/evaluation/
