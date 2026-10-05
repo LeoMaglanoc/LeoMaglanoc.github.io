@@ -10,6 +10,17 @@ from teacher_common import balanced_subset,atomic_json,fingerprint,manifest_fing
 from cache_teacher import load_cache
 
 class Contracts(unittest.TestCase):
+ def test_embedding_only_ignores_soft_geographic_targets(self):
+  torch.manual_seed(42)
+  source_logits=torch.randn(3,4);source_z=torch.nn.functional.normalize(torch.randn(3,512),dim=1)
+  teacher_z=torch.nn.functional.normalize(torch.randn(3,512),dim=1);prob=torch.softmax(torch.randn(3,4),dim=1)
+  results=[]
+  for targets in [prob,prob.flip(1)]:
+   logits=source_logits.clone().requires_grad_();z=source_z.clone().requires_grad_()
+   total,geo,kd,embed=loss_terms(logits,z,torch.tensor([0,1,2]),torch.ones(4),targets,teacher_z,torch.tensor([True,False,True]),2,.7,0,.3)
+   self.assertTrue(torch.equal(total,.7*geo+.3*embed))
+   total.backward();results.append((total.detach(),logits.grad,z.grad))
+  for a,b in zip(*results):self.assertTrue(torch.equal(a,b),'Zero-weight KL changed the embedding-only objective or gradients')
  def test_partial_targets_and_all_supervision(self):
   torch.manual_seed(42)
   logits=torch.randn(3,4,requires_grad=True);z=torch.nn.functional.normalize(torch.randn(3,512),dim=1).requires_grad_()
