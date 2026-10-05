@@ -10,7 +10,8 @@ from train import ROOT,tensor,distance,nearest
 from teacher_common import atomic_json
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--match',type=Path,required=True);p.add_argument('--models',type=Path,required=True);p.add_argument('--output',type=Path,required=True);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--match',type=Path,required=True);p.add_argument('--models',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--maximum-coordinate-difference-km',type=float,default=1.,help='Fail actual-match backend parity above this tolerance, including JPEG decoding');args=p.parse_args()
+    if args.maximum_coordinate_difference_km<=0:raise ValueError('Parity tolerance must be positive')
     match=json.loads(args.match.read_text());meta=json.loads((args.models/'metadata.json').read_text());pack={r['id']:r for r in json.loads((ROOT/'rounds.json').read_text())}
     assert match['modelVersion']==meta['version'] and match['method']==meta['method']
     if meta.get('model_sha256'):assert match['modelSha256']==meta['model_sha256']
@@ -40,4 +41,5 @@ def main():
         checks.append({'round':r['round'],'id':r['imageId'],'native_browser_coordinate_difference_km':float(distance(pred,observed)),'browser_inference_ms':r['inferenceMs']})
     report={'model':meta['version'],'method':meta['method'],'checks':checks,'score_contract':'passed','human_total':sum(r['humanScore'] for r in match['rounds']),'ai_total':sum(r['aiScore'] for r in match['rounds']),'maximum_native_browser_coordinate_difference_km':max(r['native_browser_coordinate_difference_km'] for r in checks),'scope':'actual UI JSON; native CPU vs browser WASM, includes JPEG decoder differences; synthetic guesses, not human evaluation'}
     atomic_json(report,args.output);print(json.dumps(report,indent=2),flush=True)
+    if report['maximum_native_browser_coordinate_difference_km']>args.maximum_coordinate_difference_km:raise AssertionError('Actual-match native/browser coordinate parity exceeds the declared tolerance')
 if __name__=='__main__':main()
