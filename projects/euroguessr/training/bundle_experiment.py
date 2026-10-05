@@ -1,4 +1,4 @@
-"""Tracked continuation bundle for both students and immutable teacher-cache archives."""
+"""Tracked continuation bundle for all student controls and immutable teacher-cache archives."""
 import argparse,json,hashlib,shutil,zipfile
 from pathlib import Path
 from teacher_common import atomic_json
@@ -9,7 +9,8 @@ def main():
     source=args.run_root;dest=args.destination
     if dest.exists():raise ValueError('Bundle exists; choose a new destination to preserve checkpoints')
     dest.mkdir(parents=True)
-    for run in ['supervised','distilled']:
+    runs=['supervised','distilled']+(['embedding-only'] if (source/'embedding-only').exists() else [])
+    for run in runs:
         (dest/run).mkdir()
         # Preserve exact inference bytes for BOTH controls. Re-exporting from
         # identical weights can introduce tiny CPU rounding changes in galleries;
@@ -33,7 +34,7 @@ def main():
             for path in sorted((source/directory).rglob('*')):
                 if path.is_file() and not path.name.endswith('.tmp'):archive.write(path,path.relative_to(source).as_posix())
     files={p.relative_to(dest).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in dest.rglob('*') if p.is_file()}
-    code={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in list((ROOT/'training').glob('*.py'))+[ROOT/'Dockerfile',ROOT/'requirements.txt',ROOT/'training/teacher-requirements.txt',ROOT/'training/research-lock.txt',ROOT/'training/geoclip_overnight.sh',ROOT/'compose.yaml',ROOT/'nginx-preview.conf']}
-    atomic_json({'format_version':2,'sha256':files,'source_sha256':code,'runtime_source_sha256':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'src').glob('*.js')},'local_run_root':str(source),'includes':['both best and last student checkpoints','exact ONNX/gallery/runtime metadata for both selected students','optimizer and Python/NumPy/PyTorch RNG states','teacher embeddings/probabilities and atomic resume indexes','manifest and exact training image hashes','cell definitions, configuration, training histories, validation and locked test reports'],'restore':'docker compose run --rm research python training/restore_experiment.py --bundle checkpoints/geoclip-v2 --run-root artifacts/geoclip-overnight-restored'},dest/'bundle.json')
+    code={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in list((ROOT/'training').glob('*.py'))+[ROOT/'Dockerfile',ROOT/'requirements.txt',ROOT/'training/teacher-requirements.txt',ROOT/'training/research-lock.txt',ROOT/'training/geoclip_overnight.sh',ROOT/'training/embedding_only.sh',ROOT/'compose.yaml',ROOT/'nginx-preview.conf']}
+    atomic_json({'format_version':2,'runs':runs,'sha256':files,'source_sha256':code,'runtime_source_sha256':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'src').glob('*.js')},'local_run_root':str(source),'includes':['both best and last student checkpoints','exact ONNX/gallery/runtime metadata for all selected student controls','optimizer and Python/NumPy/PyTorch RNG states','teacher embeddings/probabilities and atomic resume indexes','manifest and exact training image hashes','cell definitions, configuration, training histories, validation and locked test reports'],'restore':'docker compose run --rm research python training/restore_experiment.py --bundle checkpoints/geoclip-v2 --run-root artifacts/geoclip-overnight-restored'},dest/'bundle.json')
     print('Saved tracked continuation bundle',dest,flush=True)
 if __name__=='__main__':main()

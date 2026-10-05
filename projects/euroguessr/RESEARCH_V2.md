@@ -313,3 +313,25 @@ python3 scripts/publish-project-assets.py
 ```
 
 Commit that explicit revert and push normally; never force-push shared history.
+
+## Single embedding-only ablation
+
+With the main teacher cache complete and time remaining, C uses the same V1
+encoder initialization, 8,500 training examples, 96 cells and 5,000 teacher images,
+but the loss is 0.7 geographic CE + 0.3 embedding cosine; soft-target KL has zero
+weight. Component KL can still appear in diagnostic logs because it is computed,
+but it contributes zero loss and gradient to C. This is the plan's one scoped
+ablation, not a hyperparameter sweep. Both head-best and last checkpoints are
+compared by deployment validation median exactly as for A/B.
+
+From the project directory:
+
+```bash
+bash training/embedding_only.sh
+```
+
+The script skips completed stages and sealed checkpoint choices. The deployment
+lock includes C whenever its run directory exists, preventing a decision while
+C is incomplete. Final test evaluates C once with its validation-selected
+predictor. The checkpoint bundle records all included run names; restore
+preserves C's best/last weights, optimizer/RNG state and exact runtime files too.

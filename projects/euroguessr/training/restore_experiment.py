@@ -20,7 +20,7 @@ def main():
                     target=(dest/member).resolve()
                     if not target.is_relative_to(dest.resolve()):raise ValueError('Unsafe cache archive path')
                 archive.extractall(dest)
-    for name in ['supervised','distilled']:
+    for name in bundle.get('runs',['supervised','distilled']):
         shutil.copytree(source/name,dest/name)
         shutil.copy2(dest/'manifest.json',dest/name/'manifest.json')
         for checkpoint in ['best.pt','last.pt']:
