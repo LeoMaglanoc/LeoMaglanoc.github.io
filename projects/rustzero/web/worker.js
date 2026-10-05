@@ -32,12 +32,12 @@ self.onmessage = async ({ data }) => {
       if (root.terminal !== null) throw new Error("Game is already finished.");
       game.start_search();
       let result;
-      const budget = Math.max(1, Math.min(256, Number(data.simulations) || 64));
-      for (let done = 0; done < budget; done += 8) {
+      const budget = Math.max(1, Math.min(1024, Number(data.simulations) || 256));
+      for (let done = 0; done < budget; done += 32) {
         if (epoch !== token) return;
-        result = JSON.parse(game.search_chunk(Math.min(8, budget - done)));
-        send({ type: "search", ...result, root, done: Math.min(done + 8, budget), budget });
-        await new Promise((resolve) => setTimeout(resolve, 8));
+        result = JSON.parse(game.search_chunk(Math.min(32, budget - done)));
+        send({ type: "search", ...result, root, done: Math.min(done + 32, budget), budget });
+        await new Promise((resolve) => setTimeout(resolve, 0));
       }
       if (epoch !== token) return;
       const action = game.finish_search();

@@ -18,7 +18,7 @@ await new Promise((resolve, reject) => {
         worker.postMessage({ type: "play", id: 2, action: data.state.legal[0].action });
       } else if (stage === "play" && data.type === "state") {
         stage = "search";
-        worker.postMessage({ type: "search", id: 3, simulations: 256 });
+        worker.postMessage({ type: "search", id: 3, simulations: 1024 });
       } else if (stage === "search" && data.type === "search") {
         stage = "back";
         worker.postMessage({ type: "back", id: 4, human: 0 });

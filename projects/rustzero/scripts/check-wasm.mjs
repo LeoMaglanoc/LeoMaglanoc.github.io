@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import init, { Game } from "../web/pkg/rustzero.js";
 await init({ module_or_path: readFileSync(new URL("../web/pkg/rustzero_bg.wasm", import.meta.url)) });
-const game = new Game(readFileSync(new URL("../web/models/final.json", import.meta.url), "utf8"));
-const fixture = JSON.parse(readFileSync(new URL("../web/metrics/inference-fixture.json", import.meta.url), "utf8"));
+const game = new Game(readFileSync(process.argv[2] || new URL("../web/models/final.json", import.meta.url), "utf8"));
+const fixture = JSON.parse(readFileSync(process.argv[3] || new URL("../web/metrics/inference-fixture.json", import.meta.url), "utf8"));
 let maxError = 0;
 for (const expected of fixture) {
   const state = JSON.parse(game.state());

@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Build Docker toolchain
         working-directory: projects/rustzero
         run: docker compose build
@@ -21,6 +23,18 @@ jobs:
       - name: Check formatting
         working-directory: projects/rustzero
         run: docker compose run --rm rustzero cargo fmt --check
+      - name: Strict Clippy
+        working-directory: projects/rustzero
+        run: docker compose run --rm rustzero cargo clippy --locked --release --features training --all-targets -- -D warnings
+      - name: Validate published provenance
+        working-directory: projects/rustzero
+        run: sh scripts/validate-published-run.sh
+      - name: Tiny self-play, checkpoint and arena smoke
+        working-directory: projects/rustzero
+        run: |
+          docker compose run --rm rustzero cargo run --locked --release --features training --bin train -- configs/smoke.toml artifacts/ci-smoke
+          docker compose run --rm rustzero cargo run --locked --release --features training --bin arena -- artifacts/ci-smoke/champion.json 2 8 artifacts/ci-smoke/arena.json
+          docker compose run --rm rustzero cargo run --locked --release --features training --bin fixture -- artifacts/ci-smoke/champion.json artifacts/ci-smoke/inference-fixture.json
       - name: Rebuild shared Rust core for WebAssembly
         working-directory: projects/rustzero
         run: docker compose run --rm rustzero sh scripts/build-web.sh
@@ -28,4 +42,4 @@ jobs:
         working-directory: projects/rustzero
         run: docker compose run --rm rustzero cargo run --locked --release --features training --bin fixture -- web/models/final.json web/metrics/inference-fixture.json
       - name: Verify native/WASM agreement and complete WASM game
-        run: docker run --rm -v "$PWD/projects/rustzero:/work" -w /work node:22-bookworm-slim sh -c 'node scripts/check-wasm.mjs && node scripts/check-worker.mjs'
+        run: docker run --rm -v "$PWD/projects/rustzero:/work" -w /work node:22-bookworm-slim sh -c 'node scripts/check-wasm.mjs && node scripts/check-worker.mjs && node scripts/check-wasm.mjs artifacts/ci-smoke/champion.json artifacts/ci-smoke/inference-fixture.json'

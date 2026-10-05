@@ -32,7 +32,16 @@
           </div>
           <div class="players">
             <span><i class="pawn small white"></i><b id="white-player">YOU</b></span
-            ><span class="versus">6 × 6 BREAKTHROUGH</span><span><b id="black-player">GEN 15</b><i class="pawn small black"></i></span>
+            ><span class="versus">6 × 6 BREAKTHROUGH</span><span><b id="black-player">CHAMPION</b><i class="pawn small black"></i></span>
+          </div>
+          <div id="game-result" class="game-result" role="status" aria-live="polite" aria-atomic="true" hidden>
+            <span class="result-icon" id="result-icon" aria-hidden="true">★</span>
+            <div>
+              <span class="result-kicker">GAME OVER</span>
+              <h2 id="result-title"></h2>
+              <p id="result-detail"></p>
+            </div>
+            <button id="play-again" class="primary">Play again ↻</button>
           </div>
           <div class="board-wrap">
             <div id="board" class="board" aria-label="Game board"></div>
@@ -69,22 +78,19 @@
             </div>
             <label class="sr-only" for="checkpoint">Opponent checkpoint</label
             ><select id="checkpoint" disabled>
-              <option value="final">Gen 15 · trained</option>
-              <option value="gen-8">Gen 8 · intermediate</option>
-              <option value="gen-4">Gen 4 · developing</option>
-              <option value="gen-2">Gen 2 · early</option>
-              <option value="gen-0">Gen 0 · untrained</option>
+              <option value="final">Champion · self-play trained</option>
             </select>
             <div class="checkpoint-note" id="checkpoint-note">Loading checkpoint evidence…</div>
             <div class="budget">
-              <label for="simulations">Search budget</label
+              <label for="simulations">Difficulty / search budget</label
               ><select id="simulations">
-                <option value="32">32 simulations</option>
-                <option value="64" selected>64 simulations</option>
-                <option value="128">128 simulations</option>
-                <option value="256">256 simulations</option>
+                <option value="64">Fast · 64 simulations</option>
+                <option value="256" selected>Strong · 256 simulations</option>
+                <option value="1024">Nightmare · 1,024 simulations</option>
               </select>
             </div>
+            <p class="checkpoint-note" id="difficulty-note">Strong · 256 MCTS simulations.</p>
+            <p class="checkpoint-note" id="training-note"></p>
           </section>
           <section class="panel search-panel">
             <div class="panel-heading">
@@ -92,10 +98,11 @@
               <span>02 / MCTS</span>
             </div>
             <div class="search-metrics">
-              <div><span>AI position value</span><strong id="value">—</strong></div>
+              <div><span>AI position estimate</span><strong id="value">—</strong></div>
               <div><span>Root visits</span><strong id="visits">0</strong></div>
             </div>
             <div class="meter" aria-hidden="true"><div id="value-meter"></div></div>
+            <p class="value-note">A learned estimate, not an exact win probability.</p>
             <p class="search-caption" id="search-caption">The AI’s candidate moves appear here as it searches.</p>
             <div id="candidates" aria-label="Candidate moves"><div class="empty-search">Search → compare → choose</div></div>
             <div class="timing" id="timing">CPU inference · runs in a Web Worker</div>
@@ -110,7 +117,8 @@
         <div class="learning-head">
           <p>Same game. Same search budget.<br /><strong>A network that gets better with experience.</strong></p>
           <div class="legend">
-            <span><i class="legend-dot rust"></i> vs heuristic</span><span><i class="legend-dot muted"></i> vs random</span>
+            <span><i class="legend-dot rust"></i> vs heuristic</span><span><i class="legend-dot muted"></i> vs random</span
+            ><span><i class="legend-dot search"></i> vs heuristic MCTS</span>
           </div>
         </div>
         <div id="chart" aria-label="Checkpoint win rates" role="img"></div>
@@ -126,8 +134,9 @@
           the cycle repeats.
         </p>
         <p>
-          This small experiment uses a 64-unit network, 48 search simulations per self-play move, 24 games per generation, and 15 generations. It
-          started with random weights. No expert games, heuristic labels, tablebases or solved-game knowledge were used in training.
+          This experiment uses a 64-unit network and starts from random weights. The run configuration, source commit and artifact hashes are recorded
+          in <a href="metrics/run-metadata.json">experiment provenance</a>. No expert games, heuristic labels, tablebases or solved-game knowledge
+          were used in training.
         </p>
         <p>
           <strong>Learned play is not a proof of optimal play.</strong> A
