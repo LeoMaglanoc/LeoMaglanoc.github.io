@@ -11,8 +11,13 @@ def main():
     dest.mkdir(parents=True)
     for run in ['supervised','distilled']:
         (dest/run).mkdir()
-        for name in ['best.pt','last.pt','cells.json','history.json','completion.json','metrics.json','selection.json','test-report.json']:
+        for name in ['best.pt','last.pt','cells.json','history.json','completion.json','metrics.json','selection.json','checkpoint-selection.json','test-report.json']:
             if (source/run/name).exists():shutil.copy2(source/run/name,dest/run/name)
+        for checkpoint in ['best','last']:
+            directory=source/run/f'{checkpoint}-evaluation'
+            if directory.exists():
+                (dest/run/directory.name).mkdir()
+                for name in ['metrics.json','selection.json']:shutil.copy2(directory/name,dest/run/directory.name/name)
     for name in ['manifest.json','data-summary.json','teacher-benchmark.json','teacher-budget.json','grid-search.json','baseline-comparison.json','baseline-test.json','deployment-selection.json','baseline-holdout-isolation.json','promotion.json','leakage-check.json','game-image-report.json','REPORT.md','docker-image-id.txt']:
         if (source/name).exists():shutil.copy2(source/name,dest/name)
     rows=json.loads((source/'manifest.json').read_text())

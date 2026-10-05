@@ -19,9 +19,10 @@ def retrieval_candidates(query,refs,gps):
             w=np.exp((values[:,:k]-values[:,:1])*temperature);w/=w.sum(1,keepdims=True)
             yield k,temperature,(gps[order[:,:k]]*w[:,:,None]).sum(1)
 
-def finalize(run_dir,prefix=None,audit_teacher=None):
+def finalize(run_dir,prefix=None,audit_teacher=None,checkpoint='best',export_dir=None):
     from student_train import Student,cached_prefix,all_features
-    out=Path(run_dir);state=torch.load(out/'best.pt',weights_only=False);torch.set_num_threads(2)
+    out=Path(run_dir);destination=Path(export_dir) if export_dir else out;destination.mkdir(parents=True,exist_ok=True)
+    state=torch.load(out/f'{checkpoint}.pt',weights_only=False);torch.set_num_threads(2)
     rows=json.loads((out/'manifest.json').read_text());gps=np.array([[float(r['latitude']),float(r['longitude'])] for r in rows])
     tr=np.array([i for i,r in enumerate(rows) if r['split']=='train']);va=np.array([i for i,r in enumerate(rows) if r['split']=='val'])
     model=Student(len(state['centers']),state['config'].get('tail_blocks',1));model.load_state_dict(state['model']);model.eval()
@@ -57,7 +58,7 @@ def finalize(run_dir,prefix=None,audit_teacher=None):
         _,audit=load_cache(audit_teacher,rows,centers,role='val')
         cos=[float(projected[i]@audit[r['id']][0]) for i,r in enumerate(rows) if r['id'] in audit]
         cosine={'n':len(cos),'mean_cosine':float(np.mean(cos))} if cos else None
-    models=out/'models';models.mkdir(exist_ok=True)
+    models=destination/'models';models.mkdir(exist_ok=True)
     torch.onnx.export(model,torch.zeros(1,3,224,224),models/'model.onnx',input_names=['image'],output_names=['embedding','logits','projection'],opset_version=17)
     import onnxruntime as ort
     opts=ort.SessionOptions();opts.intra_op_num_threads=2;opts.inter_op_num_threads=1
@@ -82,9 +83,10 @@ def finalize(run_dir,prefix=None,audit_teacher=None):
     atomic_json(reference_meta,models/'references.json')
     model_sha=hashlib.sha256((models/'model.onnx').read_bytes()).hexdigest()
     metadata={'model_sha256':model_sha,'version':f'europe-v2-{out.name}-{state["epoch"]}-{model_sha[:12]}','architecture':'Tiny MobileNetV3-Small student distilled from GeoCLIP' if targets else 'GPS-supervised MobileNetV3-Small baseline','parameters':sum(p.numel() for p in model.parameters()),'method':winner,'embedding_output':selected['embedding_output'],'retrieval_temperature':selected.get('retrieval_temperature',20),'centers':centers.tolist(),'manifest_sha256':state['manifest_sha256'],'splits':{'train':len(tr),'val':len(va),'test':sum(r.get('cohort')=='fresh' for r in rows),'minimum_train_holdout_distance_km':25,'validation_block_degrees':3},'candidates':candidates,'onnx_max_absolute_error':parity,'onnx_bytes':(models/'model.onnx').stat().st_size,'reference_bytes':(models/'references.f32').stat().st_size,'native_cpu_latency_ms':{'median':float(np.median(times)),'p95':float(np.percentile(times,95)),'threads':2,'scope':'encoder + two heads; excludes image decode/retrieval'},'distillation':{'enabled':bool(targets),'teacher_images':len(targets),'teacher_cache_sha256':state['teacher_cache_sha256'],'weights':state['config'],'validation_representation':cosine},'precision':'FP32','human_benchmark':'Not measured','input':{'shape':[1,3,224,224],'resize':'stretch, half-pixel bilinear, no antialiasing','mean':[.485,.456,.406],'std':[.229,.224,.225]},'best_epoch':state['epoch'],'test_status':'not evaluated'}
-    atomic_json(metadata,models/'metadata.json');atomic_json(metadata,out/'metrics.json')
-    np.savez(out/'evaluation-features.npz',native=native,projection=projected,logits=logits)
-    atomic_json({'winner':winner,'validation':selected['val'],'test_status':'not evaluated'},out/'selection.json')
+    metadata['selected_checkpoint']=checkpoint+'.pt'
+    atomic_json(metadata,models/'metadata.json');atomic_json(metadata,destination/'metrics.json')
+    np.savez(destination/'evaluation-features.npz',native=native,projection=projected,logits=logits)
+    atomic_json({'winner':winner,'checkpoint':checkpoint+'.pt','validation':selected['val'],'test_status':'not evaluated'},destination/'selection.json')
     print(json.dumps({'winner':winner,'validation':selected['val'],'onnx_bytes':metadata['onnx_bytes'],'cosine':cosine}),flush=True)
     return metadata
 
@@ -116,7 +118,7 @@ def final_test(out):
     return report
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--run-dir',type=Path,required=True);p.add_argument('--test',action='store_true');p.add_argument('--audit-teacher',type=Path);args=p.parse_args();torch.set_num_threads(2)
+    p=argparse.ArgumentParser();p.add_argument('--run-dir',type=Path,required=True);p.add_argument('--test',action='store_true');p.add_argument('--audit-teacher',type=Path);p.add_argument('--checkpoint',choices=['best','last'],default='best');p.add_argument('--export-dir',type=Path);args=p.parse_args();torch.set_num_threads(2)
     if args.test:final_test(args.run_dir)
-    else:finalize(args.run_dir,audit_teacher=args.audit_teacher)
+    else:finalize(args.run_dir,audit_teacher=args.audit_teacher,checkpoint=args.checkpoint,export_dir=args.export_dir)
 if __name__=='__main__':main()

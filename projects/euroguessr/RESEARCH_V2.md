@@ -160,7 +160,12 @@ training/evaluate_student.py --run-dir artifacts/geoclip-overnight/distilled \
   --audit-teacher artifacts/geoclip-overnight/validation-teacher
 training/fingerprint_runtime.py --models artifacts/geoclip-overnight/distilled/models \
   --metrics-out artifacts/geoclip-overnight/distilled/metrics.json
-# Only after validation has fixed the method:
+# Compare the training head-best and last snapshots using deployed validation retrieval:
+training/select_student_checkpoint.py --run-dir artifacts/geoclip-overnight/supervised \
+  --audit-teacher artifacts/geoclip-overnight/validation-teacher
+training/select_student_checkpoint.py --run-dir artifacts/geoclip-overnight/distilled \
+  --audit-teacher artifacts/geoclip-overnight/validation-teacher
+# Only after validation has fixed the checkpoint and method:
 training/select_deployment.py --run-root artifacts/geoclip-overnight
 training/evaluate_student.py --run-dir artifacts/geoclip-overnight/distilled --test
 training/promote_student.py --run-dir artifacts/geoclip-overnight/distilled \
@@ -168,6 +173,8 @@ training/promote_student.py --run-dir artifacts/geoclip-overnight/distilled \
   --backup artifacts/geoclip-overnight/pre-promotion
 training/bundle_experiment.py --run-root artifacts/geoclip-overnight
 ```
+
+The checkpoint comparison preserves `best.pt` and `last.pt`, writes both `best-evaluation/` and `last-evaluation/` reports, and copies the validation winner’s runtime assets to the run root. `checkpoint-selection.json` records the choice. Both students receive the same comparison. Resume training from the original saved state; `selected_checkpoint` identifies which weights produced the deployed export. Never rerun selection after a fresh test has been opened.
 
 Choose supervised instead if it wins validation. Final test reports describe the
 selected method only, not a test-based sweep.
@@ -215,7 +222,7 @@ making another test-based accuracy claim.
 
 The source is the pinned [Xenova image-only 8-bit conversion](https://huggingface.co/Xenova/clip-vit-large-patch14/tree/c307790166907339eed5a9a53a249af534102536/onnx),
 not the full CLIP model. The exporter adds the exact GeoCLIP MLP and L2
-normalization, freezes the input shape, and shards external weights below 64 MiB.
+normalization, freezes the input shape, and shards external weights at no more than 64 MiB.
 The selected export uses `--weight-only`: per-channel UINT8 linear weights are dequantized for FP32 matrix multiplication, and patch convolution is FP32. This preserves the small download while removing dynamic activation quantization, whose native/WASM predictions failed parity. Runtime memory is substantially larger than download size. The location encoder runs offline over a regular 0.5° Europe GPS grid. The export
 records source checksums and projection provenance. Runtime files are served
 locally with the site; Hugging Face is only a development download source.
