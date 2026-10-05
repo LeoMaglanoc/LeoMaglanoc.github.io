@@ -63,7 +63,9 @@
   },
   "projects/flappy": {
     "destination": "assets/interactive/flappy",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/g1": {
     "destination": "assets/interactive/g1",
@@ -271,11 +273,15 @@
   },
   "projects/race": {
     "destination": "assets/interactive/race",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/robot-runner": {
     "destination": "assets/interactive/robot-runner",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/tiny-dreamer": {
     "destination": "assets/interactive/tiny-dreamer",
@@ -305,7 +311,13 @@
   },
   "projects/ask-leo": {
     "destination": "assets/js/ask-leo",
-    "files": ["ask-leo.js", "model-config.js", "prompt.js", "retrieval.js", "worker.js"]
+    "files": [
+      "ask-leo.js",
+      "model-config.js",
+      "prompt.js",
+      "retrieval.js",
+      "worker.js"
+    ]
   },
   "projects/rustzero/web": {
     "destination": "assets/interactive/rustzero",
@@ -337,6 +349,72 @@
       "pkg/rustzero_bg.wasm",
       "style.css",
       "worker.js"
+    ]
+  },
+  "projects/euroguessr": {
+    "destination": "assets/interactive/euroguessr",
+    "files": [
+      "THIRD_PARTY_NOTICES.md",
+      "countries.geojson",
+      "images/round-000.jpg",
+      "images/round-001.jpg",
+      "images/round-002.jpg",
+      "images/round-003.jpg",
+      "images/round-004.jpg",
+      "images/round-005.jpg",
+      "images/round-006.jpg",
+      "images/round-007.jpg",
+      "images/round-008.jpg",
+      "images/round-009.jpg",
+      "images/round-010.jpg",
+      "images/round-011.jpg",
+      "images/round-012.jpg",
+      "images/round-013.jpg",
+      "images/round-014.jpg",
+      "images/round-015.jpg",
+      "images/round-016.jpg",
+      "images/round-017.jpg",
+      "images/round-018.jpg",
+      "images/round-019.jpg",
+      "images/round-020.jpg",
+      "images/round-021.jpg",
+      "images/round-022.jpg",
+      "images/round-023.jpg",
+      "images/round-024.jpg",
+      "images/round-025.jpg",
+      "images/round-026.jpg",
+      "images/round-027.jpg",
+      "images/round-028.jpg",
+      "images/round-029.jpg",
+      "images/round-030.jpg",
+      "images/round-031.jpg",
+      "images/round-032.jpg",
+      "images/round-033.jpg",
+      "images/round-034.jpg",
+      "images/round-035.jpg",
+      "images/round-036.jpg",
+      "images/round-037.jpg",
+      "images/round-038.jpg",
+      "images/round-039.jpg",
+      "index.html",
+      "licenses/OSV5M-CC-BY-SA-4.0.txt",
+      "licenses/onnxruntime-MIT.txt",
+      "licenses/torchvision-BSD.txt",
+      "models/experiments.json",
+      "models/fixture.json",
+      "models/metadata.json",
+      "models/model.onnx",
+      "models/references.f32",
+      "models/references.json",
+      "rounds.json",
+      "src/app.js",
+      "src/geo.js",
+      "src/inference.worker.js",
+      "src/preprocess.js",
+      "style.css",
+      "vendor/ort-wasm-simd-threaded.mjs",
+      "vendor/ort-wasm-simd-threaded.wasm",
+      "vendor/ort.min.js"
     ]
   }
 }

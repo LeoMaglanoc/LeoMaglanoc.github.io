@@ -88,6 +88,10 @@ The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.i
 
 ## Interactive demos
 
+### EuroGuessr AI
+
+The [/euroguessr/](https://leomaglanoc.github.io/euroguessr/) game offers five timed European street-view rounds against a small geolocation model running in an ONNX Runtime Web CPU worker. It compares a trained geographic classifier with visual retrieval, selects on spatial validation, and publishes measured test error. Human win rate has not been measured. See [`projects/euroguessr/README.md`](projects/euroguessr/README.md) for checkpoints, attribution, Chrome validation and overnight training.
+
 ### Endless mobile manipulation
 
 The [/mobile-sorting/](https://leomaglanoc.github.io/mobile-sorting/) demo runs a

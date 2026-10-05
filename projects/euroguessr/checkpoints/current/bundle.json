@@ -1,0 +1,46 @@
+{
+  "format_version": 1,
+  "last_epoch": 9,
+  "last_stage": "partial_finetuning",
+  "best_validation_head_median_km": 865.2065457726162,
+  "manifest_sha256": "4237cb35830806e3f33b8f627b6c11910a2c6d62a597fe770fcc2e24d94ffdb3",
+  "environment": {
+    "torch": "2.5.1+cpu",
+    "numpy": "2.2.6"
+  },
+  "sha256": {
+    "training/train.py": "be09262ee7d1c3eb9713ebbda96d1a8a764ce83896617c89dbabb2e318e38c17",
+    "training/quantize.py": "013cbbcbe4eb3155a4c5b1ae0aaaf3f12c8adf57cce5ccb3cf4685f81cf6a459",
+    "training/restore_data.py": "ee89f5060428c9fd0701ba9fe22695122837d9c8cb8f0ac7d8287344514c4b13",
+    "training/prepare.py": "8fa3499ebef63919e251af3e6aa0cc299dfe9dc74b3ae23a1e5082b5fa991877",
+    "training/bundle_checkpoint.py": "d4b580b8dd54dec94b960f7292c538a0a53faa4d9cc15452bf046cab0452d2c7",
+    "training/cache_teacher.py": "4b7f8744c55bf82547cdd153cdf98091fedad2151093707e3ccde117ca310e9d",
+    "training/human_benchmark.py": "d4287035064d10fa292e26577df3c8a4b1baf99ae350822025af704a6ee56f30",
+    "training/register_assets.py": "2c97294b3e84d97e02700c44b9c5b659cbbaf0be1dc689bbf5dccfc1ff88bcc8",
+    "src/app.js": "c6c3a0f60d860826776286e101d750737a47fdd4b8c40c1cb94a8e69274bfbb5",
+    "src/geo.js": "d26ca521e79cd79e9200ace273d1b07c454024d7244d9ae74b124861e995a2b8",
+    "src/preprocess.js": "b558d4fd077a46826727af1c60a8cab1ff2017ff681054676796f6c78d4eb1ac",
+    "src/inference.worker.js": "ea17c6a7c2f4ff8805b3d5ce528cc266fd853ed7185883a8d43aeece3531d3c7",
+    "models/experiments.json": "0ecc4b155b87c1a07c331a28199a05359cf2b11da10e3f2c3dd1a98ce5d07695",
+    "models/metadata.json": "6303866d3d551e58cb4ea19a9b14bf624887d618a056853e881e52646bf2fd70",
+    "models/fixture.json": "e054264ff4b041374a20d88efe851e087dda20fedfa0d4721bc1afda42ebd745",
+    "models/references.f32": "357676f2659b8e932a54cd2b81b039440c403775ea1ba351fc03621ee51e7ff8",
+    "models/model.onnx": "8ff9166e861478a55f1b4b68a005a7b24a87e2fb9685cbe05549286d5c9c3cc1",
+    "models/references.json": "c427d38f34c4359f41c264d9abd0707ee44514a25f318bc23c735ce1ad3c901e",
+    "checkpoints/current/image-sha256.json": "6cbb0ff74afc8c2bd4a31d527115bd352927f28fc3ac2769e1c62bba2c6da6d5",
+    "checkpoints/current/last.pt": "545f527c25f9b36625fcaaf45824238d2e4c951cf919e9fd83f5206d56ec055e",
+    "checkpoints/current/manifest.json": "30d3d44c6d20fc3801c1309e77152ed850aae9ead206831948f5c54d2c53581f",
+    "checkpoints/current/best.pt": "2e4716eb60ea112a49a0a48471e8084af12dac28675a22077bc9c1553a490fa1",
+    "checkpoints/current/dataset-revision.json": "a1486515de74bf7a15410a66b9b3481b9362ee11494beade6e1f4493335531fe"
+  },
+  "includes": [
+    "best and latest model states",
+    "optimizer state",
+    "Python, NumPy and PyTorch RNG states",
+    "stable train/val/test IDs",
+    "geocell centers",
+    "data manifest and upstream revision",
+    "training history and arguments"
+  ],
+  "local_dependencies": "Image files remain in data/images; reconstruct selected images using restore_data.py on a fresh clone."
+}

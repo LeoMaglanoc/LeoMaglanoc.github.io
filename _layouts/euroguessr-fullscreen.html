@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f5ef" />
+    <meta name="description" content="Five European streets. Challenge a small geolocation AI running locally on your browser CPU." />
+    <title>{{ page.title | escape }}</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: #f6f5ef;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        border: 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    {{ content }}
+  </body>
+</html>

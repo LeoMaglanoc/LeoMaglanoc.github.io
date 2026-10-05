@@ -30,3 +30,5 @@ weights, local toolchains, datasets, caches and intermediate outputs stay
 untracked. The original standalone repositories are retained locally.
 
 - `rustzero`: Rust/Burn self-play Breakthrough, CPU WASM inference and live MCTS statistics; public route `/rustzero/`.
+
+- `euroguessr`: Europe street-view guessing game with CPU/WASM inference, spatial evaluation and resumable CPU training; public route `/euroguessr/`.

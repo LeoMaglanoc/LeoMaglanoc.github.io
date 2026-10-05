@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f6f5ef" />
+    <meta name="description" content="Guess a European street-view location and challenge a small AI running on your browser CPU." />
+    <title>EuroGuessr AI — A sense of place</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./index.html" aria-label="EuroGuessr AI home"><span class="brand-icon">◎</span> EuroGuessr <b>AI</b></a>
+      <div class="mode">EUROPE <span>·</span> NO MOVE</div>
+      <button id="about" class="quiet">Inside the AI ↗</button>
+    </header>
+    <main>
+      <section class="topline">
+        <div>
+          <div class="eyebrow">A SENSE OF PLACE</div>
+          <h1>You. A street. A tiny AI.</h1>
+        </div>
+        <div class="match-stats">
+          <div><span>YOUR SCORE</span><strong id="human-total">0</strong></div>
+          <i>vs</i>
+          <div><span>AI SCORE</span><strong id="ai-total">0</strong></div>
+        </div>
+      </section>
+      <section class="game">
+        <div class="scene-panel">
+          <div class="scene-top"><span id="round-label">Five rounds. All of Europe.</span><span class="clock" id="timer">01:00</span></div>
+          <div class="photo-wrap" id="photo-wrap">
+            <img id="street" alt="Street-view photograph to geolocate" draggable="false" />
+            <div id="photo-loading" class="photo-loading">Preparing your journey…</div>
+            <button id="zoom-photo" class="photo-zoom" aria-label="Toggle photo zoom">＋</button
+            ><span class="photo-caption">Look for the little things.</span>
+          </div>
+          <div class="scene-bottom">
+            <div id="ai-status"><span class="status-dot"></span> Loading browser CPU model…</div>
+            <span id="latency"></span>
+          </div>
+          <div id="credit" class="credit">Street imagery: OpenStreetView-5M / Mapillary · CC BY-SA 4.0</div>
+        </div>
+        <div class="map-panel">
+          <div class="map-heading">
+            <div>
+              <div class="eyebrow" id="map-eyebrow">TRUST YOUR INSTINCT</div>
+              <h2 id="map-title">Where are we?</h2>
+            </div>
+            <span class="map-icon">↗</span>
+          </div>
+          <p id="map-hint">Place your pin on the map. You have 60 seconds.</p>
+          <div class="map-wrap">
+            <svg
+              id="map"
+              viewBox="0 0 700 630"
+              role="application"
+              tabindex="0"
+              aria-label="Europe guess map. Use arrow keys to move and Enter to place a pin."
+            >
+              <rect x="-1000" y="-1000" width="3000" height="3000" fill="#e6eef0" />
+              <g id="graticule"></g>
+              <g id="countries"></g>
+              <g id="labels"></g>
+              <g id="routes"></g>
+              <g id="pins"></g>
+            </svg>
+            <div class="map-tools">
+              <button id="zoom-in" aria-label="Zoom map in">＋</button><button id="zoom-out" aria-label="Zoom map out">−</button
+              ><button id="map-reset" aria-label="Reset map view">⌂</button>
+            </div>
+            <span class="map-attribution">Natural Earth · public domain</span>
+          </div>
+          <div id="selection" class="selection">Click the map to drop a pin <span>↓</span></div>
+          <div id="round-result" class="round-result" hidden></div>
+          <button id="guess" class="primary" disabled>Lock in your guess <span>→</span></button
+          ><button id="next" class="primary" hidden>Next location <span>→</span></button>
+          <div class="legend">
+            <span><i class="pin-dot human"></i>You</span><span><i class="pin-dot ai"></i>AI</span
+            ><span><i class="pin-dot truth"></i>Actual location</span>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <span id="progress">01 — 02 — 03 — 04 — 05</span><span>Small model. Big world. <a href="#" id="footer-about">How it works</a></span>
+      </footer>
+      <section id="summary" hidden aria-live="polite">
+        <div class="eyebrow">JOURNEY COMPLETE</div>
+        <h2 id="winner"></h2>
+        <p id="summary-note"></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Round</th>
+                <th>You</th>
+                <th>AI</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+        <div class="summary-actions">
+          <button id="play-again" class="primary">Another journey →</button><button id="download" class="quiet">Download match results ↓</button>
+        </div>
+        <p class="small">
+          Results stay on this device. A 70% win rate against casual players is a research target; human performance has not yet been measured.
+        </p>
+      </section>
+    </main>
+    <dialog id="welcome">
+      <div class="eyebrow">WELCOME TO EUROGUESSR AI</div>
+      <h2>Can you read<br />a place better<br />than a machine?</h2>
+      <p>Five European streets. One minute each. Follow the architecture, road markings, and landscape, then place your pin.</p>
+      <div class="welcome-tags"><span>5 rounds</span><span>No movement</span><span>Browser CPU AI</span></div>
+      <p class="small">An early research baseline, trained on a small street-view sample. Let’s find out how it does.</p>
+      <button id="start" class="primary" disabled>Loading the AI…</button>
+      <p id="load-status" class="small" role="status">The model runs locally. No image uploads or inference server.</p>
+    </dialog>
+    <dialog id="about-dialog">
+      <button class="close" aria-label="Close model information">×</button>
+      <div class="eyebrow">INSIDE THE AI</div>
+      <h2>A little geographic intuition.</h2>
+      <p>
+        ImageNet MobileNetV3-Small turns the same photograph you see into a visual embedding. We compare a trained geographic head against image
+        retrieval, and select the method using spatial validation.
+      </p>
+      <div id="model-details"></div>
+      <p class="small">
+        The AI receives normalized pixels only. Ground-truth coordinates are used after you submit. This is a casual static game, so its downloadable
+        answer pack is inspectable; it is not a secure competition.
+      </p>
+      <p class="small">
+        Map data: Natural Earth. Images: OSV-5M / Mapillary, CC BY-SA 4.0. Each image’s contributor and source are shown after reveal.
+      </p>
+      <p>
+        <a href="THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener">Credits & licenses ↗</a> ·
+        <a href="../../../blog/AI-coding-agent-case-study/" id="blog-link" target="_top">More demos ↗</a>
+      </p>
+    </dialog>
+    <div id="live" class="sr-only" aria-live="polite"></div>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
