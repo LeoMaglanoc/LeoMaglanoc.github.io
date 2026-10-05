@@ -1,0 +1,8 @@
+*
+!Dockerfile
+!requirements.txt
+!training/
+training/*
+!training/teacher-requirements.txt
+
+!training/research-lock.txt

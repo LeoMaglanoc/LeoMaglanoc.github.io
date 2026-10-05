@@ -110,12 +110,15 @@ def metrics(pred, gps):
         "n": len(d),
         "median_km": float(np.median(d)),
         "mean_km": float(d.mean()),
+        "within_25km": float((d <= 25).mean()),
+        "within_100km": float((d <= 100).mean()),
         "within_200km": float((d <= 200).mean()),
+        "within_500km": float((d <= 500).mean()),
         "within_750km": float((d <= 750).mean()),
     }
 
 
-def nearest(z, refs, gps, k):
+def nearest(z, refs, gps, k, temperature=20):
     z = z / (np.linalg.norm(z, axis=1, keepdims=True) + 1e-8)
     refs = refs / (np.linalg.norm(refs, axis=1, keepdims=True) + 1e-8)
     sim = z @ refs.T
@@ -123,7 +126,7 @@ def nearest(z, refs, gps, k):
     if k == 1:
         return gps[idx[:, 0]]
     weights = np.exp(
-        (np.take_along_axis(sim, idx, 1) - np.take_along_axis(sim, idx[:, :1], 1)) * 20
+        (np.take_along_axis(sim, idx, 1) - np.take_along_axis(sim, idx[:, :1], 1)) * temperature
     )
     weights /= weights.sum(1, keepdims=True)
     return (gps[idx] * weights[:, :, None]).sum(1)

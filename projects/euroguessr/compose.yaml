@@ -1,0 +1,18 @@
+services:
+  research:
+    build: .
+    image: euroguessr-research:2026-10-05
+    init: true
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /workspace/projects/euroguessr
+    volumes:
+      - ../..:/workspace
+      - ./data/model-cache:/cache
+    environment:
+      HOME: /tmp
+      OPENBLAS_NUM_THREADS: 2
+    cpus: 2
+    mem_limit: 6g
+    memswap_limit: 6g
+    shm_size: 256m
+    stop_grace_period: 15m

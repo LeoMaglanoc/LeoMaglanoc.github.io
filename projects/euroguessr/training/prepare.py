@@ -101,11 +101,7 @@ def metadata(split):
     return rows
 
 
-def fetch(pair):
-    row, entry = pair
-    path = DATA / "images" / f"{row['id']}.jpg"
-    if path.exists():
-        return row
+def source_bytes(row, entry):
     off = entry["offset"]
     header = request(
         entry["url"] + f"?image={row['id']}&part=h", f"{off}-{off+29}"
@@ -119,6 +115,15 @@ def fetch(pair):
         b = zlib.decompress(b, -15)
     if zlib.crc32(b) != entry["crc"]:
         raise ValueError("ZIP checksum mismatch")
+    return b
+
+
+def fetch(pair):
+    row, entry = pair
+    path = DATA / "images" / f"{row['id']}.jpg"
+    if path.exists():
+        return row
+    b = source_bytes(row, entry)
     image = Image.open(io.BytesIO(b)).convert("RGB")
     image.thumbnail((640, 640))
     tmp = path.with_suffix(".tmp")

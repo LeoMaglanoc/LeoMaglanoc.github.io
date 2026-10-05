@@ -9,6 +9,7 @@ paths = [
     "index.html",
     "style.css",
     "countries.geojson",
+    "cities.json",
     "rounds.json",
     "THIRD_PARTY_NOTICES.md",
 ]
