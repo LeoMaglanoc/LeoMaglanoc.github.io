@@ -41,3 +41,7 @@ projects/euroguessr/vendor/
 assets/interactive/euroguessr/vendor/
 projects/euroguessr/data/
 projects/euroguessr/artifacts/
+# Generated city data and recorded Chrome/ML evidence retain their exact bytes.
+projects/euroguessr/cities.json
+assets/interactive/euroguessr/cities.json
+projects/euroguessr/docs/*.json

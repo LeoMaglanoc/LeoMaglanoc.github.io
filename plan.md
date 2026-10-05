@@ -179,7 +179,7 @@ Preserve:
 - country balancing;
 - sequence deduplication;
 - geographic-block validation;
-- >=25 km training/holdout separation;
+- ≥25 km training/holdout separation;
 - test isolation;
 - deterministic sampling;
 - provenance.
@@ -706,7 +706,7 @@ Add tests for:
 
 - train/val/test IDs disjoint;
 - sequences disjoint;
-- >=25 km training-to-holdout buffer;
+- ≥25 km training-to-holdout buffer;
 - public game images remain test only.
 
 ## Gestures

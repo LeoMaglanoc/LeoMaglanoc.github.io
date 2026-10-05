@@ -36,7 +36,8 @@
               <button id="zoom-photo" aria-label="Zoom photo in">＋</button>
               <button id="photo-out" aria-label="Zoom photo out">−</button>
               <button id="photo-reset" aria-label="Reset photo view">⌂</button>
-            </div><span id="photo-hint" class="photo-caption">Pinch to zoom · drag to pan</span>
+            </div>
+            <span id="photo-hint" class="photo-caption">Pinch to zoom · drag to pan</span>
           </div>
           <div class="scene-bottom">
             <div id="ai-status"><span class="status-dot"></span> Loading browser CPU model…</div>
@@ -106,7 +107,8 @@
           </table>
         </div>
         <div class="summary-actions">
-          <button id="play-again" class="primary">Another journey →</button><button id="choose-ai" class="quiet">Play with another AI →</button><button id="download" class="quiet">Download match results ↓</button>
+          <button id="play-again" class="primary">Another journey →</button><button id="choose-ai" class="quiet">Play with another AI →</button
+          ><button id="download" class="quiet">Download match results ↓</button>
         </div>
         <p class="small">
           Results stay on this device. A 70% win rate against casual players is a research target; human performance has not yet been measured.
@@ -120,9 +122,12 @@
       <div class="welcome-tags"><span>5 rounds</span><span>No movement</span><span>Browser CPU AI</span></div>
       <p class="small">Choose a compact AI or the larger GeoCLIP model, then test your sense of place.</p>
       <label class="ai-mode-label" for="ai-mode">AI mode</label>
-        <select id="ai-mode"><option value="tiny">Tiny AI · quick download · browser CPU</option><option value="geoclip">GeoCLIP 8-bit · about 320 MiB · browser CPU</option></select>
-        <p class="small">Tiny AI loads by default. GeoCLIP downloads only when selected; its verified model files can be cached on this device.</p>
-        <button id="start" class="primary" disabled>Loading the AI…</button>
+      <select id="ai-mode">
+        <option value="tiny">Tiny AI · quick download · browser CPU</option>
+        <option value="geoclip">GeoCLIP 8-bit · about 320 MiB · browser CPU</option>
+      </select>
+      <p class="small">Tiny AI loads by default. GeoCLIP downloads only when selected; its verified model files can be cached on this device.</p>
+      <button id="start" class="primary" disabled>Loading the AI…</button>
       <p id="load-status" class="small" role="status">The model runs locally. No image uploads or inference server.</p>
     </dialog>
     <dialog id="about-dialog">

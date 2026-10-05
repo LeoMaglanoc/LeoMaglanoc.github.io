@@ -1,35 +1,116 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EuroGuessr synthetic pointer tests</title>
-<style>body{font:14px system-ui;margin:8px} iframe{width:100%;height:950px;border:1px solid #aaa}pre{white-space:pre-wrap}</style>
-<button id="run">Run emulated two-pointer gestures and coordinate test</button><pre id="report">Click after the game loads. Synthetic Pointer Events; physical-phone testing is not claimed.</pre>
+<!doctype html><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>
+  EuroGuessr synthetic pointer tests
+</title>
+<style>
+  body {
+    font: 14px system-ui;
+    margin: 8px;
+  }
+  iframe {
+    width: 100%;
+    height: 950px;
+    border: 1px solid #aaa;
+  }
+  pre {
+    white-space: pre-wrap;
+  }
+</style>
+<button id="run">Run emulated two-pointer gestures and coordinate test</button>
+<pre id="report">Click after the game loads. Synthetic Pointer Events; physical-phone testing is not claimed.</pre>
 <iframe id="game" src="../index.html"></iframe>
 <script type="module">
-const frame=document.getElementById('game'),report=document.getElementById('report');
-document.getElementById('run').onclick=async()=>{
- const d=frame.contentDocument,w=frame.contentWindow,results=[];
- const check=(ok,msg)=>{results.push((ok?'PASS ':'FAIL ')+msg);if(!ok)throw Error(msg)};
- try{
-  if(d.getElementById('welcome').open)d.getElementById('start').click();
-  for(let i=0;i<100&&!d.getElementById('ai-status').textContent.includes('locked');i++)await new Promise(r=>setTimeout(r,100));
-  check(d.getElementById('ai-status').textContent.includes('locked'),'Real worker prediction ready');
-  const map=d.getElementById('map'),photo=d.getElementById('photo-wrap'),image=d.getElementById('street');
-  const simulate=(el,action)=>{const capture=el.setPointerCapture;el.setPointerCapture=()=>{};try{action((type,id,x,y)=>el.dispatchEvent(new w.PointerEvent(type,{pointerId:id,pointerType:'touch',clientX:x,clientY:y,button:0,bubbles:true})));}finally{el.setPointerCapture=capture;}};
-  const pinch=el=>simulate(el,emit=>{const b=el.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2;emit('pointerdown',101,x-30,y);emit('pointerdown',102,x+30,y);emit('pointermove',101,x-60,y);emit('pointermove',102,x+60,y);emit('pointerup',102,x+60,y);emit('pointermove',101,x-59,y);emit('pointerup',101,x-59,y);});
-  d.getElementById('photo-reset').click();pinch(photo);check(image.style.transform.includes('scale(2)'),'Photo pinch doubles scale');
-  d.getElementById('photo-reset').click();check(image.style.transform.includes('scale(1)'),'Photo reset fits image');
-  d.getElementById('map-reset').click();pinch(map);let view=map.getAttribute('viewBox').split(' ').map(Number);
-  check(Math.abs(view[2]-350)<1e-7,'Map pinch doubles scale');check(!d.getElementById('pins').children.length,'Pinch never creates guess after one finger remains');
-  const b=map.getBoundingClientRect(),x=Math.round(b.left+b.width*.55),y=Math.round(b.top+b.height*.55);
-  let p=map.createSVGPoint();p.x=x;p.y=y;p=p.matrixTransform(map.getScreenCTM().inverse());
-  const lon=Math.max(-25,Math.min(45,p.x/10-25)),lat=Math.max(34,Math.min(72,72-p.y/(630/38)));
-  simulate(map,emit=>{emit('pointerdown',103,x,y);emit('pointerup',103,x,y)});
-  const expected=`${lat.toFixed(2)}° N, ${Math.abs(lon).toFixed(2)}° ${lon<0?'W':'E'}`;
-  check(d.getElementById('selection').textContent.includes(expected),'Tap unprojects correctly after arbitrary zoom/pan: '+expected+' / '+d.getElementById('selection').textContent);
-  check(d.getElementById('cities').children.length>0,'Tiered city labels visible');
-  const inv=(el,control)=>{control.click();const b=el.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2;simulate(el,emit=>{emit('pointerdown',201,x-60,y);emit('pointerdown',202,x+60,y);emit('pointermove',201,x-30,y);emit('pointermove',202,x+30,y);emit('pointerup',201,x-30,y);emit('pointerup',202,x+30,y)});};
-  inv(photo,d.getElementById('zoom-photo'));check(image.style.transform.includes('scale(1)'),'Photo pinch inward clamps at fitted size');
-  inv(map,d.getElementById('zoom-out'));check(map.getAttribute('viewBox')==='0 0 700 630','Map pinch inward restores full Europe');
-  check(d.documentElement.scrollWidth<=frame.clientWidth,'No horizontal game overflow');
-  report.textContent=results.join('\n')+'\nSynthetic Pointer Events with capture stubbed; not physical touchscreen testing.';
- }catch(e){report.textContent=results.join('\n')+'\nERROR '+e.message;}
-};
+  const frame = document.getElementById("game"),
+    report = document.getElementById("report");
+  document.getElementById("run").onclick = async () => {
+    const d = frame.contentDocument,
+      w = frame.contentWindow,
+      results = [];
+    const check = (ok, msg) => {
+      results.push((ok ? "PASS " : "FAIL ") + msg);
+      if (!ok) throw Error(msg);
+    };
+    try {
+      if (d.getElementById("welcome").open) d.getElementById("start").click();
+      for (let i = 0; i < 100 && !d.getElementById("ai-status").textContent.includes("locked"); i++) await new Promise((r) => setTimeout(r, 100));
+      check(d.getElementById("ai-status").textContent.includes("locked"), "Real worker prediction ready");
+      const map = d.getElementById("map"),
+        photo = d.getElementById("photo-wrap"),
+        image = d.getElementById("street");
+      const simulate = (el, action) => {
+        const capture = el.setPointerCapture;
+        el.setPointerCapture = () => {};
+        try {
+          action((type, id, x, y) =>
+            el.dispatchEvent(new w.PointerEvent(type, { pointerId: id, pointerType: "touch", clientX: x, clientY: y, button: 0, bubbles: true }))
+          );
+        } finally {
+          el.setPointerCapture = capture;
+        }
+      };
+      const pinch = (el) =>
+        simulate(el, (emit) => {
+          const b = el.getBoundingClientRect(),
+            x = b.left + b.width / 2,
+            y = b.top + b.height / 2;
+          emit("pointerdown", 101, x - 30, y);
+          emit("pointerdown", 102, x + 30, y);
+          emit("pointermove", 101, x - 60, y);
+          emit("pointermove", 102, x + 60, y);
+          emit("pointerup", 102, x + 60, y);
+          emit("pointermove", 101, x - 59, y);
+          emit("pointerup", 101, x - 59, y);
+        });
+      d.getElementById("photo-reset").click();
+      pinch(photo);
+      check(image.style.transform.includes("scale(2)"), "Photo pinch doubles scale");
+      d.getElementById("photo-reset").click();
+      check(image.style.transform.includes("scale(1)"), "Photo reset fits image");
+      d.getElementById("map-reset").click();
+      pinch(map);
+      let view = map.getAttribute("viewBox").split(" ").map(Number);
+      check(Math.abs(view[2] - 350) < 1e-7, "Map pinch doubles scale");
+      check(!d.getElementById("pins").children.length, "Pinch never creates guess after one finger remains");
+      const b = map.getBoundingClientRect(),
+        x = Math.round(b.left + b.width * 0.55),
+        y = Math.round(b.top + b.height * 0.55);
+      let p = map.createSVGPoint();
+      p.x = x;
+      p.y = y;
+      p = p.matrixTransform(map.getScreenCTM().inverse());
+      const lon = Math.max(-25, Math.min(45, p.x / 10 - 25)),
+        lat = Math.max(34, Math.min(72, 72 - p.y / (630 / 38)));
+      simulate(map, (emit) => {
+        emit("pointerdown", 103, x, y);
+        emit("pointerup", 103, x, y);
+      });
+      const expected = `${lat.toFixed(2)}° N, ${Math.abs(lon).toFixed(2)}° ${lon < 0 ? "W" : "E"}`;
+      check(
+        d.getElementById("selection").textContent.includes(expected),
+        "Tap unprojects correctly after arbitrary zoom/pan: " + expected + " / " + d.getElementById("selection").textContent
+      );
+      check(d.getElementById("cities").children.length > 0, "Tiered city labels visible");
+      const inv = (el, control) => {
+        control.click();
+        const b = el.getBoundingClientRect(),
+          x = b.left + b.width / 2,
+          y = b.top + b.height / 2;
+        simulate(el, (emit) => {
+          emit("pointerdown", 201, x - 60, y);
+          emit("pointerdown", 202, x + 60, y);
+          emit("pointermove", 201, x - 30, y);
+          emit("pointermove", 202, x + 30, y);
+          emit("pointerup", 201, x - 30, y);
+          emit("pointerup", 202, x + 30, y);
+        });
+      };
+      inv(photo, d.getElementById("zoom-photo"));
+      check(image.style.transform.includes("scale(1)"), "Photo pinch inward clamps at fitted size");
+      inv(map, d.getElementById("zoom-out"));
+      check(map.getAttribute("viewBox") === "0 0 700 630", "Map pinch inward restores full Europe");
+      check(d.documentElement.scrollWidth <= frame.clientWidth, "No horizontal game overflow");
+      report.textContent = results.join("\n") + "\nSynthetic Pointer Events with capture stubbed; not physical touchscreen testing.";
+    } catch (e) {
+      report.textContent = results.join("\n") + "\nERROR " + e.message;
+    }
+  };
 </script>

@@ -1,0 +1,32 @@
+[
+  {
+    "width": 47,
+    "height": 31,
+    "max_error": 0.0
+  },
+  {
+    "width": 31,
+    "height": 47,
+    "max_error": 0.0
+  },
+  {
+    "width": 640,
+    "height": 427,
+    "max_error": 0.0
+  },
+  {
+    "width": 427,
+    "height": 640,
+    "max_error": 0.0
+  },
+  {
+    "width": 224,
+    "height": 224,
+    "max_error": 0.0
+  },
+  {
+    "width": 1600,
+    "height": 900,
+    "max_error": 0.0
+  }
+]
