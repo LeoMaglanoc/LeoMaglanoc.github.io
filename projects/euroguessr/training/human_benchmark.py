@@ -20,7 +20,7 @@ for path in args.files:
     }:
         raise ValueError("Mixed rules")
     matches.append(data)
-if len({(m["modelVersion"], m["modelManifest"], m["method"]) for m in matches}) != 1:
+if len({(m["modelVersion"], m.get("modelManifest"), m["method"], m.get("modelFingerprint")) for m in matches}) != 1:
     raise ValueError("Mixed models")
 win = sum(
     sum(r["aiScore"] for r in m["rounds"]) > sum(r["humanScore"] for r in m["rounds"])

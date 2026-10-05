@@ -25,7 +25,9 @@ def main():
         shutil.copy2(dest/'manifest.json',dest/name/'manifest.json')
         for checkpoint in ['best.pt','last.pt']:
             path=dest/name/checkpoint;state=torch.load(path,weights_only=False)
-            state['arguments']['run_dir']=str(dest/name);state['arguments']['manifest']=str(dest/'manifest.json');state['arguments']['prefix_cache']=str(dest/'prefix.npy')
+            tail=state['config'].get('tail_blocks',1)
+            state['arguments']['run_dir']=str(dest/name);state['arguments']['manifest']=str(dest/'manifest.json');state['arguments']['prefix_cache']=str(dest/f'prefix-tail{tail}.npy')
+            state['arguments']['cell_definition']=str(dest/name/'cells.json');state['arguments']['warm_start']=None
             if state['arguments'].get('teacher_cache'):state['arguments']['teacher_cache']=str(dest/'teacher-cache')
             atomic_save(state,path)
     print('Restored. Resume with the SAME objective weights and stage documented in the checkpoint arguments.',flush=True)

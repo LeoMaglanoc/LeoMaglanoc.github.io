@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "modelVersion": "geoclip-direct-int8-europe-v1",
+  "method": "retrieval-1",
+  "createdAt": "2026-10-05T19:08:59.086Z",
+  "rules": {
+    "region": "Europe",
+    "rounds": 5,
+    "seconds": 60,
+    "movement": false,
+    "score": "round(5000 * exp(-distance_km / 1500))"
+  },
+  "participantSkill": "unverified",
+  "rounds": [
+    {
+      "round": 1,
+      "imageId": "1763341640534709",
+      "actual": {
+        "lat": 42.452038887796,
+        "lon": 19.890027779201,
+        "country": "AL"
+      },
+      "human": null,
+      "ai": {
+        "lat": 40.5,
+        "lon": 20.5
+      },
+      "humanKm": null,
+      "aiKm": 222.92424574491554,
+      "humanScore": 0,
+      "aiScore": 4309,
+      "timedOut": true,
+      "inferenceMs": 10026.89999999851
+    },
+    {
+      "round": 2,
+      "imageId": "1472740243067710",
+      "actual": {
+        "lat": 41.418234166356,
+        "lon": 23.154378489185,
+        "country": "BG"
+      },
+      "human": {
+        "lat": 52,
+        "lon": 16
+      },
+      "ai": {
+        "lat": 53.5,
+        "lon": -8.5
+      },
+      "humanKm": 1311.706213035006,
+      "aiKm": 2700.7012089133927,
+      "humanScore": 2085,
+      "aiScore": 826,
+      "timedOut": false,
+      "inferenceMs": 12704.39999999851
+    },
+    {
+      "round": 3,
+      "imageId": "1088998524916642",
+      "actual": {
+        "lat": 62.069954868661,
+        "lon": 29.925960035387,
+        "country": "FI"
+      },
+      "human": null,
+      "ai": {
+        "lat": 68.5,
+        "lon": 24
+      },
+      "humanKm": null,
+      "aiKm": 765.4065822560191,
+      "humanScore": 0,
+      "aiScore": 3002,
+      "timedOut": true,
+      "inferenceMs": 11627.60000000149
+    },
+    {
+      "round": 4,
+      "imageId": "1790807331106095",
+      "actual": {
+        "lat": 46.867091847467,
+        "lon": 29.461267691877,
+        "country": "MD"
+      },
+      "human": null,
+      "ai": {
+        "lat": 54,
+        "lon": 40.5
+      },
+      "humanKm": null,
+      "aiKm": 1111.2990194535148,
+      "humanScore": 0,
+      "aiScore": 2384,
+      "timedOut": true,
+      "inferenceMs": 5892.10000000149
+    },
+    {
+      "round": 5,
+      "imageId": "164095439050762",
+      "actual": {
+        "lat": 35.828680828222,
+        "lon": 14.471313585831,
+        "country": "MT"
+      },
+      "human": {
+        "lat": 52,
+        "lon": 17.5
+      },
+      "ai": {
+        "lat": 36,
+        "lon": 13.5
+      },
+      "humanKm": 1814.0495980756527,
+      "aiKm": 89.52268096857756,
+      "humanScore": 1492,
+      "aiScore": 4710,
+      "timedOut": false,
+      "inferenceMs": 6761.79999999702
+    }
+  ]
+}

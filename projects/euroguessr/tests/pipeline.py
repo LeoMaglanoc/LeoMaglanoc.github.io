@@ -60,7 +60,7 @@ z = outputs[meta.get("embedding_output", "embedding")]
 # Verify the real exported retrieval pack has identical JS/Python predictions.
 meta = json.loads((ROOT / "models/metadata.json").read_text())
 ref = json.loads((ROOT / "models/references.json").read_text())
-if meta["method"].startswith(("retrieval", "distilled")):
+if meta["method"].startswith(("retrieval", "distilled", "gallery")):
     matrix = np.fromfile(ROOT / "models" / ref["feature_file"], dtype="<f4").reshape(
         ref["count"], ref["dimensions"]
     )
@@ -80,7 +80,11 @@ if meta["method"].startswith(("retrieval", "distilled")):
     )
     prediction = json.loads(raw)
     expected = nearest(z, matrix, gps, int(meta["method"].split("-")[1]), meta.get("retrieval_temperature",20))[0]
-    assert set(ref["ids"]).issubset(sets["train"])
+    if "ids" in ref: assert set(ref["ids"]).issubset(sets["train"])
+    elif ref.get("kind","").startswith("regular offline location grid"): pass
+    else:
+        assert ref["count"] == len(sets["train"])
+        assert np.allclose(sorted(map(tuple,gps)),sorted(map(tuple,coords(sets["train"]))),atol=1e-9)
     assert np.allclose([prediction["lat"], prediction["lon"]], expected, atol=1e-5)
 # Use a PNG to separate interpolation math from JPEG decoder differences.
 from PIL import Image

@@ -18,7 +18,7 @@
       <section class="topline">
         <div>
           <div class="eyebrow">A SENSE OF PLACE</div>
-          <h1>You. A street. A tiny AI.</h1>
+          <h1 id="game-title">You. A street. A tiny AI.</h1>
         </div>
         <div class="match-stats">
           <div><span>YOUR SCORE</span><strong id="human-total">0</strong></div>
@@ -32,8 +32,11 @@
           <div class="photo-wrap" id="photo-wrap">
             <img id="street" alt="Street-view photograph to geolocate" draggable="false" />
             <div id="photo-loading" class="photo-loading">Preparing your journey…</div>
-            <button id="zoom-photo" class="photo-zoom" aria-label="Toggle photo zoom">＋</button
-            ><span class="photo-caption">Look for the little things.</span>
+            <div class="photo-tools" aria-label="Photo zoom controls">
+              <button id="zoom-photo" aria-label="Zoom photo in">＋</button>
+              <button id="photo-out" aria-label="Zoom photo out">−</button>
+              <button id="photo-reset" aria-label="Reset photo view">⌂</button>
+            </div><span id="photo-hint" class="photo-caption">Pinch to zoom · drag to pan</span>
           </div>
           <div class="scene-bottom">
             <div id="ai-status"><span class="status-dot"></span> Loading browser CPU model…</div>
@@ -62,6 +65,7 @@
               <g id="graticule"></g>
               <g id="countries"></g>
               <g id="labels"></g>
+              <g id="cities" pointer-events="none"></g>
               <g id="routes"></g>
               <g id="pins"></g>
             </svg>
@@ -102,7 +106,7 @@
           </table>
         </div>
         <div class="summary-actions">
-          <button id="play-again" class="primary">Another journey →</button><button id="download" class="quiet">Download match results ↓</button>
+          <button id="play-again" class="primary">Another journey →</button><button id="choose-ai" class="quiet">Play with another AI →</button><button id="download" class="quiet">Download match results ↓</button>
         </div>
         <p class="small">
           Results stay on this device. A 70% win rate against casual players is a research target; human performance has not yet been measured.
@@ -114,15 +118,18 @@
       <h2>Can you read<br />a place better<br />than a machine?</h2>
       <p>Five European streets. One minute each. Follow the architecture, road markings, and landscape, then place your pin.</p>
       <div class="welcome-tags"><span>5 rounds</span><span>No movement</span><span>Browser CPU AI</span></div>
-      <p class="small">An early research baseline, trained on a small street-view sample. Let’s find out how it does.</p>
-      <button id="start" class="primary" disabled>Loading the AI…</button>
+      <p class="small">Choose a compact AI or the larger GeoCLIP model, then test your sense of place.</p>
+      <label class="ai-mode-label" for="ai-mode">AI mode</label>
+        <select id="ai-mode"><option value="tiny">Tiny AI · quick download · browser CPU</option><option value="geoclip">GeoCLIP 8-bit · about 318 MiB · browser CPU</option></select>
+        <p class="small">Tiny AI loads by default. GeoCLIP downloads only when selected; its verified model files can be cached on this device.</p>
+        <button id="start" class="primary" disabled>Loading the AI…</button>
       <p id="load-status" class="small" role="status">The model runs locally. No image uploads or inference server.</p>
     </dialog>
     <dialog id="about-dialog">
       <button class="close" aria-label="Close model information">×</button>
       <div class="eyebrow">INSIDE THE AI</div>
       <h2>A little geographic intuition.</h2>
-      <p>
+      <p id="model-description">
         ImageNet MobileNetV3-Small turns the same photograph you see into a visual embedding. We compare a trained geographic head against image
         retrieval, and select the method using spatial validation.
       </p>

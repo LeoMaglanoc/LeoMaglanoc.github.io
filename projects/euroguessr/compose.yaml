@@ -16,3 +16,11 @@ services:
     memswap_limit: 6g
     shm_size: 256m
     stop_grace_period: 15m
+  preview:
+    profiles: [preview]
+    image: nginx:1.27-alpine
+    ports:
+      - "127.0.0.1:8800:80"
+    volumes:
+      - ../../_site:/usr/share/nginx/html:ro
+      - ./nginx-preview.conf:/etc/nginx/conf.d/default.conf:ro

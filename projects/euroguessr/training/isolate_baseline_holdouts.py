@@ -6,6 +6,7 @@ are discarded, never reassigned to training. Legacy game tests stay intact.
 import argparse,json
 from pathlib import Path
 import numpy as np
+import torch
 from train import ROOT,distance
 from teacher_common import atomic_json,manifest_fingerprint
 
@@ -16,7 +17,13 @@ def main():
         if manifest_fingerprint(json.loads((root/'manifest.json').read_text()))!=report['manifest_after']:raise ValueError('Isolated manifest changed')
         print('Reusing isolated holdouts',flush=True);return
     if any((root/f'grid-{n}/last.pt').exists() for n in [64,96,128]):raise ValueError('Holdouts must be isolated before model selection')
-    rows=json.loads((root/'manifest.json').read_text());ref=json.loads((root/'baseline/models/references.json').read_text());gps=np.asarray(ref['gps']);old=json.loads((ROOT/'checkpoints/current/manifest.json').read_text());ids=set(ref['ids']);sequences={r['sequence'] for r in old if r['id'] in ids}
+    rows=json.loads((root/'manifest.json').read_text());meta=json.loads((root/'baseline/models/metadata.json').read_text())
+    checkpoint=ROOT/meta.get('checkpoint_bundle','checkpoints/current');manifest=checkpoint/'manifest.json'
+    if not manifest.exists():manifest=checkpoint.parent/'manifest.json'
+    old=json.loads(manifest.read_text());state=torch.load(checkpoint/'best.pt',weights_only=False);ids=set(state['train_ids'])
+    training=[r for r in old if r['id'] in ids]
+    if len(training)!=len(ids):raise ValueError('Baseline training manifest incomplete')
+    gps=np.asarray([[float(r['latitude']),float(r['longitude'])] for r in training]);sequences={r['sequence'] for r in training}
     kept=[];removed=[];minimum=float('inf')
     for r in rows:
         if r['split']=='val' or r.get('cohort')=='fresh':

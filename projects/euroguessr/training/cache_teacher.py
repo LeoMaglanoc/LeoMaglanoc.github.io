@@ -87,7 +87,11 @@ def main():
     start=time.monotonic(); previous=meta['elapsed_seconds']
     with torch.inference_mode():
         location=torch.nn.functional.normalize(teacher.location_encoder(torch.tensor(centers,dtype=torch.float32)),dim=1)
-        meta['location_embeddings_sha256']=hashlib.sha256(location.numpy().tobytes()).hexdigest()
+        location_sha=hashlib.sha256(location.numpy().tobytes()).hexdigest()
+        if meta.get('location_embeddings_sha256') not in [None,location_sha]:raise ValueError('Location encoder changed on resume')
+        scale=float(teacher.logit_scale.exp())
+        if meta.get('logit_scale') not in [None,scale]:raise ValueError('Teacher similarity scale changed on resume')
+        meta['location_embeddings_sha256']=location_sha;meta['logit_scale']=scale
         np.save(path/'location-embeddings.npy',location.numpy())
         atomic_json(meta,path/'index.json')
         for i in range(0,len(pending),args.batch_size):

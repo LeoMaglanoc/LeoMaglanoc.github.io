@@ -17,15 +17,16 @@ def interrupt(*_):
     stop=True
 
 class Student(Model):
-    def __init__(self,n):
+    def __init__(self,n,tail_blocks=1):
         super().__init__(n)
+        self.tail_blocks=tail_blocks
         self.projection=nn.Linear(576,512)
     def project(self,z):return nn.functional.normalize(self.projection(z),dim=1)
     def forward(self,x):
         z=self.encoder(x)
         return z,self.head(z),self.project(z)
     def from_prefix(self,x):
-        return self.encoder[2](self.encoder[1](self.encoder[0][-1](x)))
+        return self.encoder[2](self.encoder[1](self.encoder[0][-self.tail_blocks:](x)))
 
 def loss_terms(logits,z,labels,weights,teacher_prob,teacher_z,mask,temperature,geo_weight,kd_weight,embed_weight):
     geo=nn.functional.cross_entropy(logits,labels,weight=weights,label_smoothing=.1)
@@ -38,7 +39,7 @@ def loss_terms(logits,z,labels,weights,teacher_prob,teacher_z,mask,temperature,g
 
 def prefix_identity(model,rows):
     h=hashlib.sha256()
-    for k,v in model.encoder[0][:-1].state_dict().items():
+    for k,v in model.encoder[0][:-model.tail_blocks].state_dict().items():
         h.update(k.encode());h.update(v.cpu().numpy().tobytes())
     return fingerprint({'manifest':manifest_fingerprint(rows),'prefix_weights':h.hexdigest(),'preprocess':'half-pixel-224-rgb-v1'})
 
@@ -56,7 +57,7 @@ def cached_prefix(model,rows,path):
     with torch.inference_mode():
         for start in range(0,len(rows),32):
             x=torch.stack([tensor(DATA/'images'/f"{r['id']}.jpg") for r in rows[start:start+32]])
-            f=model.encoder[0][:-1](x).numpy()
+            f=model.encoder[0][:-model.tail_blocks](x).numpy()
             if start==0:store=np.lib.format.open_memmap(tmp,mode='w+',dtype='float32',shape=(len(rows),*f.shape[1:]))
             store[start:start+len(f)]=f
             print('prefix',start+len(f),'/',len(rows),flush=True)
@@ -87,10 +88,11 @@ def main():
     p.add_argument('--epochs',type=int,default=50);p.add_argument('--patience',type=int,default=15)
     p.add_argument('--threads',type=int,default=2);p.add_argument('--seed',type=int,default=42)
     p.add_argument('--warm-start',type=Path);p.add_argument('--resume',action='store_true');p.add_argument('--finetune',action='store_true')
-    p.add_argument('--teacher-cache',type=Path);p.add_argument('--geo-weight',type=float,default=.5);p.add_argument('--kd-weight',type=float,default=.2);p.add_argument('--embed-weight',type=float,default=.3)
+    p.add_argument('--tail-blocks',type=int,choices=[1,2],default=1,help='2 includes the final spatial residual/SE block plus output convolution');p.add_argument('--teacher-cache',type=Path);p.add_argument('--geo-weight',type=float,default=.5);p.add_argument('--kd-weight',type=float,default=.2);p.add_argument('--embed-weight',type=float,default=.3)
     p.add_argument('--learning-rate',type=float);p.add_argument('--prefix-cache',type=Path)
     p.add_argument('--stop-at');p.add_argument('--export',action='store_true',help='Validation selection + private ONNX; no public mutation')
     args=p.parse_args()
+    if args.learning_rate is not None and args.learning_rate<=0:raise ValueError('Learning rate must be positive')
     if args.epochs<1 or args.patience<1 or min(args.geo_weight,args.kd_weight,args.embed_weight)<0 or args.geo_weight<=0:raise ValueError('Invalid training settings')
     deadline=None
     if args.stop_at:
@@ -122,25 +124,30 @@ def main():
     else:centers=cells(gps[tr],min(args.cells,len(tr)),args.seed)
     if centers.ndim!=2 or centers.shape[1]!=2 or not np.isfinite(centers).all():raise ValueError('Invalid centers')
     atomic_json({'centers':centers.tolist(),'training_ids_sha256':fingerprint(sorted(sets['train']))},out/'cells.json')
-    model=Student(len(centers));teacher_hash=None;teacher_meta=None;targets={};temperature=2.
+    model=Student(len(centers),args.tail_blocks);teacher_hash=None;teacher_meta=None;targets={};temperature=2.
     if args.teacher_cache:
         teacher_meta,targets=load_cache(args.teacher_cache,rows,centers)
         teacher_hash=fingerprint(teacher_meta);temperature=teacher_meta['identity']['temperature']
         if not targets:raise ValueError('Empty training teacher cache')
-    config={'geo_weight':args.geo_weight if targets else 1.,'kd_weight':args.kd_weight if targets else 0.,'embed_weight':args.embed_weight if targets else 0.,'teacher_hash':teacher_hash,'seed':args.seed,'cells_sha256':fingerprint(centers.tolist())}
+    config={'tail_blocks':args.tail_blocks,'geo_weight':args.geo_weight if targets else 1.,'kd_weight':args.kd_weight if targets else 0.,'embed_weight':args.embed_weight if targets else 0.,'teacher_hash':teacher_hash,'seed':args.seed,'cells_sha256':fingerprint(centers.tolist())}
     if resume:
-        if resume['config']!=config:raise ValueError('Resume objective/cache/grid configuration changed')
+        previous_config={**resume['config'],'tail_blocks':resume['config'].get('tail_blocks',1)}
+        transition=args.finetune and not resume['finetune']
+        if transition:previous_config['tail_blocks']=args.tail_blocks
+        if previous_config!=config:raise ValueError('Resume objective/cache/grid/tail configuration changed')
         stage_state = torch.load(out/'best.pt',weights_only=False) if args.finetune and not resume['finetune'] else resume
         model.load_state_dict(stage_state['model'])
     elif args.warm_start:print('Warm-start encoder tensors',warm_start(model,torch.load(args.warm_start,weights_only=False)),flush=True)
     atomic_json(rows,out/'manifest.json')
     for param in model.encoder.parameters():param.requires_grad=False
     if args.finetune:
-        for param in model.encoder[0][-1].parameters():param.requires_grad=True
+        for param in model.encoder[0][-args.tail_blocks:].parameters():param.requires_grad=True
     optimizer=torch.optim.AdamW([v for v in model.parameters() if v.requires_grad],lr=args.learning_rate or (1e-4 if args.finetune else 1e-3),weight_decay=.01)
     same_stage=resume and resume['finetune']==args.finetune
     if same_stage:
         optimizer.load_state_dict(resume['optimizer'])
+        if args.learning_rate is not None:
+            for group in optimizer.param_groups:group['lr']=args.learning_rate
         torch.set_rng_state(resume['torch_rng']);np.random.set_state(resume['numpy_rng']);random.setstate(resume['python_rng'])
     prefix=cached_prefix(model,rows,args.prefix_cache or out/'prefix.npy')
     all_ids=np.arange(len(rows));features=all_features(model,prefix,all_ids) if not args.finetune else None
@@ -184,5 +191,5 @@ def main():
     atomic_json({'reason':reason,'training_seconds':time.monotonic()-started,'last_epoch':history[-1]['epoch'] if history else -1,'best_val_km':best,'teacher_images':len(targets)},out/'completion.json')
     if args.export:
         from evaluate_student import finalize
-        finalize(out,prefix=prefix)
+        finalize(out)
 if __name__=='__main__':main()

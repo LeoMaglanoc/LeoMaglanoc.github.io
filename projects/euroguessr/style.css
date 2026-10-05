@@ -194,15 +194,14 @@ h2 {
   max-height: 600px;
   object-fit: contain;
   display: block;
-  transition: transform 0.2s;
+  transform-origin: center;
+  pointer-events: none;
+  user-select: none;
 }
-.photo-wrap.zoomed img {
-  transform: scale(1.8);
-}
-.photo-zoom {
-  position: absolute;
-  right: 15px;
-  bottom: 18px;
+.photo-wrap { touch-action: none; }
+.photo-wrap.pannable { cursor: grab; }
+.photo-tools { position: absolute; right: 15px; bottom: 18px; display: flex; gap: 5px; }
+.photo-tools button {
   color: white;
   background: #182c32cc;
   border: 1px solid #ffffff40;
@@ -659,3 +658,11 @@ th {
     min-height: 0;
   }
 }
+
+#cities circle { fill: #46656b; }
+#cities text { fill: #34545b; stroke: #f8f7ee; paint-order: stroke; stroke-linejoin: round; }
+#cities { pointer-events: none; }
+@media(max-width:480px) { .photo-caption { left: 8px; font-size: 9px; max-width: 190px; } .photo-tools { right: 8px; } }
+
+.ai-mode-label { display:block; text-align:left; font-size:12px; margin-top:18px; }
+#ai-mode { width:100%; padding:10px; background:var(--paper); color:var(--ink); border:1px solid var(--line); border-radius:8px; margin-top:5px; font:inherit; font-size:12px; }

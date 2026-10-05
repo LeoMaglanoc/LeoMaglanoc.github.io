@@ -13,7 +13,9 @@ supervised baseline, enforce spatial holdouts, select only on validation, and
 preserve the existing static app. Distillation success is an experiment, not a
 promise. The original 180-image test set was already inspected in V1, so V2 labels
 it **legacy-inspected** and samples a separate fresh final test cohort. All 40
-public game images remain legacy test-only.
+public game images remain legacy test-only. V2 validation/fresh-test neighbors of
+V1 training are discarded before selection, so comparisons share the same
+spatial isolation policy.
 
 The user's later request adds a direct, quantized image-only GeoCLIP browser
 candidate. This explicitly supersedes the plan's prohibition on deploying
@@ -26,7 +28,9 @@ The important implementation choices are:
 
 - Recompute 64/96/128 adaptive cells using training GPS only; choose the count by
   validation head median. The teacher and both students share the selected grid.
-- Cache the frozen MobileNet prefix to disk. Final-block fine-tuning remains real
+- Cache the frozen MobileNet prefix to disk. Fine-tuning unfreezes the final spatial residual/SE block plus output
+  convolution (`--tail-blocks 2`). This changes training scope without adding
+  parameters or browser operators. Final-block fine-tuning remains real
   gradient training, but avoids decoding and forwarding every image through the
   frozen layers on every epoch. Frozen batch-normalization statistics remain fixed.
 - Use a native 576 → 256 → N geographic head and a normalized 576 → 512 projection.
@@ -45,9 +49,9 @@ The important implementation choices are:
   a valid initial checkpoint. Interrupting preparation requires rerunning it;
   already downloaded images are reused.
 - Choose geographic head, native retrieval or distilled-to-teacher retrieval
-  on validation. Retune K = 1/3/5/10/20/50 and similarity weights = 10/20/50.
+  or the offline GeoCLIP location gallery on validation. Retune K = 1/3/5/10/20/50 and similarity weights = 10/20/50.
   Evaluate each final selected configuration on the fresh test once, with a
-  selection lock. Never use those test results to decide deployment.
+  selection lock over model, references, method and data. Never use those test results to decide deployment.
 - Require at least 2% median validation improvement over the preserved deployed
   model evaluated on the **same new validation cohort** before tiny-model promotion.
   Exports stay under the run directory until this explicit gate passes.
@@ -58,7 +62,11 @@ All measured teacher, dataset, student and ONNX work runs in Docker. The initial
 host virtual-environment setup was stopped before the actual Docker benchmark.
 `Dockerfile` pins a Python base digest and `training/research-lock.txt` locks the
 complete Python environment. The runtime includes Node for Python/JS parity tests.
-Only CPU PyTorch wheels are installed. Compose limits a research container to
+Only CPU PyTorch wheels are installed. A runtime identity hashes the graph, external weights, both reference files,
+preprocessing and selected strategy. Graph-only hashes cannot identify external
+weight changes. Match exports include this identity; human aggregation refuses
+mixed identities/methods and supports pretrained models without a local
+training-manifest field. Compose limits a research container to
 2 CPUs, 6 GiB RAM and no container swap. The repository and model-download cache
 are bind-mounted, so experiments survive container removal.
 
@@ -75,10 +83,13 @@ docker compose run --rm research python tests/clip_preprocess.py
 `UID`/`GID` default to 1000 in Compose; set them if your local account differs.
 The full workflow is `bash training/geoclip_overnight.sh`. Its default deadlines
 are specific to the original overnight run: **6 October 2026 08:25 +02:00** for
-training and **01:15 +02:00** for teacher caching. Set `STOP_AT` and
+training and **01:15 +02:00** for teacher caching. Set `RUN_ROOT` to a new
+experiment directory and optionally `WARM_START` to another saved encoder. Set `STOP_AT` and
 `TEACHER_STOP_AT` to new timezone-aware dates for a future run. Reusing an existing
 run intentionally preserves its fixed dataset plan; use a new run root and a
-fresh final test cohort for new model-selection experiments.
+fresh final test cohort for new model-selection experiments. The sampler excludes
+previously inspected test IDs/sequences from tracked checkpoint manifests; pass
+`--exclude-test-manifest` for additional externally archived tests.
 
 ## Exact experiment commands
 
@@ -97,6 +108,12 @@ training/cache_teacher.py \
   --stop-at 2026-10-06T01:15:00+02:00
 ```
 
+To replay the saved run, restore its immutable manifest first. Calling the
+sampler after publication intentionally selects a new final test cohort, rather
+than reproducing an already inspected test. V2 teacher chunks belong to
+`student_train.py`; the historical `train.py`/`quantize.py` workflows use V1
+contracts and should not be used for V2 projection/gallery exports.
+
 Use the measured batch/count in `teacher-budget.json` rather than assuming these
 example values. Rerun the **same cache command** to resume; changing a deadline
 is allowed, changing the cache identity is not.
@@ -114,8 +131,8 @@ training/student_train.py \
 
 training/student_train.py \
   --manifest artifacts/geoclip-overnight/manifest.json \
-  --run-dir artifacts/geoclip-overnight/distilled --resume --finetune \
-  --prefix-cache artifacts/geoclip-overnight/prefix.npy \
+  --run-dir artifacts/geoclip-overnight/distilled --resume --finetune --tail-blocks 2 \
+  --prefix-cache artifacts/geoclip-overnight/prefix-tail2.npy \
   --teacher-cache artifacts/geoclip-overnight/teacher-cache \
   --geo-weight 0.5 --kd-weight 0.2 --embed-weight 0.3 \
   --epochs 100 --patience 25 --stop-at 2026-10-06T08:25:00+02:00 --export
@@ -124,8 +141,11 @@ training/student_train.py \
 `--epochs` means additional epochs. For supervised training, use the `supervised`
 run directory and omit teacher/cache objective options. For a new experiment,
 warm-start only the compatible encoder; old cells and classifier are never
-silently retained. For continuation, keep the same objective weights/cache and
-use `--resume`. Prefix caches have manifest and encoder fingerprints plus a file
+silently retained. For continuation, keep the same objective weights/cache/tail scope and
+use `--resume`. Changing tail scope is allowed only at the frozen-to-fine-tuned
+stage transition, which starts a new optimizer. Private export always rebuilds
+features from the validation-selected best checkpoint’s own prefix scope. An explicit `--learning-rate` overrides the restored rate while
+retaining optimizer moments; otherwise the saved rate is preserved. Prefix caches have manifest and encoder fingerprints plus a file
 checksum. They are rebuildable and remain ignored; raw images also remain ignored.
 
 ```bash
@@ -173,6 +193,8 @@ docker compose run --rm research python training/evaluate_geoclip_direct.py \
   --manifest checkpoints/current/manifest.json --count 100 --compare-fp32
 docker compose run --rm research python training/evaluate_geoclip_direct.py \
   --manifest artifacts/geoclip-overnight/manifest.json
+docker compose run --rm research python training/fingerprint_runtime.py \
+  --models artifacts/geoclip-direct/models
 # After the validation-selected gallery retrieval method is fixed:
 docker compose run --rm research python training/evaluate_geoclip_direct.py \
   --manifest artifacts/geoclip-overnight/manifest.json --test
@@ -182,7 +204,9 @@ The browser implements Pillow's bicubic RGB resize and CLIP center crop explicit
 using MobileNet's stretched bilinear input for GeoCLIP would be incorrect.
 `tests/clip_preprocess.py` compares it with GeoCLIP's actual `AutoProcessor`.
 JPEG decoder differences may still exist across browsers. Large-model files are
-SHA-256 checked and opportunistically cached with Cache API; quota failure falls
+SHA-256 checked and opportunistically cached with Cache API. Network/cache URLs
+include the file digest so an updated deployment does not reuse old HTTP bytes.
+Switching models replaces the worker to release the large WASM heap; quota failure falls
 back to ordinary loading. The user chooses this download explicitly. Mobile
 performance is not inferred from desktop Python timing.
 
@@ -212,6 +236,16 @@ with synthetic two-pointer events; pointer capture is stubbed for synthetic IDs.
 These are emulated touch checks, **not a physical-phone test**. The harness is not
 published. Unit tests separately check midpoint anchoring, clamping, rebasing,
 cancellation and accidental-guess prevention.
+
+## Compiled Docker preview
+
+From repository root, publish assets and run
+`docker compose run --rm --no-deps --entrypoint /bin/sh jekyll -lc 'bundle exec jekyll build'`.
+Then from this project, run `docker compose --profile preview up -d preview` and
+open `http://localhost:8800/euroguessr/`. Stop it with
+`docker compose --profile preview stop preview`. The preview binds localhost
+only and explicitly serves `.mjs` as JavaScript and `.wasm` as WebAssembly;
+plain Nginx 1.27 otherwise serves `.mjs` as octet-stream and Chrome rejects it.
 
 ## Publish and revert
 

@@ -2,24 +2,26 @@
 # Reproducible CPU workflow. Exports remain private; promotion requires a separate gate.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-ROOT_RUN="artifacts/geoclip-overnight"
+ROOT_RUN="${RUN_ROOT:-artifacts/geoclip-overnight}"
+WARM_START="${WARM_START:-checkpoints/current/best.pt}"
 STOP_AT="${STOP_AT:-2026-10-06T08:25:00+02:00}"
 TEACHER_STOP_AT="${TEACHER_STOP_AT:-2026-10-06T01:15:00+02:00}"
 mkdir -p "$ROOT_RUN" data/model-cache
 research() { docker compose run --rm research python "$@"; }
 docker compose build
+research training/snapshot_baseline.py --run-root "$ROOT_RUN"
 if [[ ! -f "$ROOT_RUN/teacher-benchmark.json" ]]; then
- research training/benchmark_teacher.py 2>&1 | tee "$ROOT_RUN/benchmark.log"
+ research training/benchmark_teacher.py --output "$ROOT_RUN/teacher-benchmark.json" 2>&1 | tee "$ROOT_RUN/benchmark.log"
 fi
 if [[ ! -f "$ROOT_RUN/manifest.json" ]]; then
- research training/prepare_experiment.py --train 8500 --val 1000 --test 600 --shards 3 2>&1 | tee -a "$ROOT_RUN/prepare.log"
+ research training/prepare_experiment.py --train 8500 --val 1000 --test 600 --shards 3 --run-dir "$ROOT_RUN" 2>&1 | tee -a "$ROOT_RUN/prepare.log"
 fi
 research training/isolate_baseline_holdouts.py --run-root "$ROOT_RUN"
 research training/validate_manifest.py --manifest "$ROOT_RUN/manifest.json" --output "$ROOT_RUN/leakage-check.json"
 # Head-only grid comparison shares the frozen prefix cache and ImageNet/baseline encoder.
 for count in 64 96 128; do
  if [[ ! -f "$ROOT_RUN/grid-$count/completion.json" ]]; then
-  START=(--warm-start checkpoints/current/best.pt)
+  START=(--warm-start "$WARM_START")
   if [[ -f "$ROOT_RUN/grid-$count/last.pt" ]]; then START=(--resume); fi
   research training/student_train.py --manifest "$ROOT_RUN/manifest.json" --run-dir "$ROOT_RUN/grid-$count" --cells "$count" "${START[@]}" --prefix-cache "$ROOT_RUN/prefix.npy" --epochs 50 --patience 12 --stop-at "$STOP_AT" 2>&1 | tee "$ROOT_RUN/grid-$count.log"
  fi
@@ -34,13 +36,19 @@ for run in supervised distilled; do
  TEACHER=()
  if [[ "$run" == distilled ]]; then TEACHER=(--teacher-cache "$ROOT_RUN/teacher-cache" --geo-weight 0.5 --kd-weight 0.2 --embed-weight 0.3); fi
  if [[ ! -f "$ROOT_RUN/$run/last.pt" ]]; then
-  research training/student_train.py --manifest "$ROOT_RUN/manifest.json" --run-dir "$ROOT_RUN/$run" --cell-definition "$ROOT_RUN/cells.json" --warm-start checkpoints/current/best.pt --prefix-cache "$ROOT_RUN/prefix.npy" --epochs 80 --patience 20 --stop-at "$STOP_AT" "${TEACHER[@]}" 2>&1 | tee "$ROOT_RUN/$run-bootstrap.log"
+  research training/student_train.py --manifest "$ROOT_RUN/manifest.json" --run-dir "$ROOT_RUN/$run" --cell-definition "$ROOT_RUN/cells.json" --warm-start "$WARM_START" --prefix-cache "$ROOT_RUN/prefix.npy" --epochs 80 --patience 20 --stop-at "$STOP_AT" "${TEACHER[@]}" 2>&1 | tee "$ROOT_RUN/$run-bootstrap.log"
  fi
- research training/student_train.py --manifest "$ROOT_RUN/manifest.json" --run-dir "$ROOT_RUN/$run" --resume --finetune --prefix-cache "$ROOT_RUN/prefix.npy" --epochs 100 --patience 25 --stop-at "$STOP_AT" --export "${TEACHER[@]}" 2>&1 | tee -a "$ROOT_RUN/$run-finetune.log"
+ if [[ ! -f "$ROOT_RUN/$run-finetune.done" ]]; then
+  research training/student_train.py --manifest "$ROOT_RUN/manifest.json" --run-dir "$ROOT_RUN/$run" --resume --finetune --tail-blocks 2 --prefix-cache "$ROOT_RUN/prefix-tail2.npy" --epochs 100 --patience 25 --stop-at "$STOP_AT" --export "${TEACHER[@]}" 2>&1 | tee -a "$ROOT_RUN/$run-finetune.log"
+  touch "$ROOT_RUN/$run-finetune.done"
+ fi
 done
 research training/cache_teacher.py --manifest "$ROOT_RUN/manifest.json" --cells "$ROOT_RUN/cells.json" --output "$ROOT_RUN/validation-teacher" --role val --count 100 --batch-size "$BATCH" 2>&1 | tee -a "$ROOT_RUN/validation-teacher.log"
 for run in supervised distilled; do
  research training/evaluate_student.py --run-dir "$ROOT_RUN/$run" --audit-teacher "$ROOT_RUN/validation-teacher" 2>&1 | tee "$ROOT_RUN/$run-evaluate.log"
+done
+for run in supervised distilled; do
+ research training/fingerprint_runtime.py --models "$ROOT_RUN/$run/models" --metrics-out "$ROOT_RUN/$run/metrics.json"
 done
 research training/compare_baseline.py --manifest "$ROOT_RUN/manifest.json" --output "$ROOT_RUN/baseline-comparison.json" 2>&1 | tee "$ROOT_RUN/baseline-evaluate.log"
 printf 'Validation comparisons ready. Lock the deployment selection before final test, promotion, browser checks and checkpoint bundling.\n'

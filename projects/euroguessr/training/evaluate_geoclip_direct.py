@@ -13,10 +13,16 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--manifest',type=Path,required=True);p.add_argument('--models',type=Path,default=ROOT/'artifacts/geoclip-direct/models');p.add_argument('--run-dir',type=Path,default=ROOT/'artifacts/geoclip-direct');p.add_argument('--count',type=int);p.add_argument('--compare-fp32',action='store_true');p.add_argument('--test',action='store_true');args=p.parse_args();torch.set_num_threads(2)
     rows=json.loads(args.manifest.read_text());meta=json.loads((args.models/'metadata.json').read_text());ref=json.loads((args.models/'references.json').read_text());refs=np.fromfile(args.models/ref['feature_file'],dtype='<f4').reshape(ref['count'],ref['dimensions']);gps=np.asarray(ref['gps'])
     if args.test:
+        if args.count or args.compare_fp32:raise ValueError('Final test evaluates the full fresh cohort only')
         if not meta.get('validation_selection'):raise ValueError('Select on validation before test')
+        if meta['validation_selection']['manifest_sha256']!=manifest_fingerprint(rows):raise ValueError('Test manifest differs from validation selection')
         selected=[r for r in rows if r.get('cohort')=='fresh']
         if (args.run_dir/'test-report.json').exists():raise ValueError('Direct model test already evaluated; preserve the report')
-    else:selected=sorted([r for r in rows if r['split']=='val'],key=lambda r:fingerprint(r['id']))
+        from fingerprint_runtime import seal
+        meta=seal(args.models)
+    else:
+        if (args.run_dir/'test-report.json').exists():raise ValueError('Test already inspected: use a new experiment and fresh test cohort')
+        selected=sorted([r for r in rows if r['split']=='val'],key=lambda r:fingerprint(r['id']))
     if args.count:selected=selected[:args.count]
     opts=ort.SessionOptions();opts.intra_op_num_threads=2;opts.inter_op_num_threads=1
     sess=ort.InferenceSession(str(args.models/'model.onnx'),sess_options=opts,providers=['CPUExecutionProvider'])
@@ -41,7 +47,7 @@ def main():
     z=np.asarray(embeddings);actual=np.array([[float(r['latitude']),float(r['longitude'])] for r in selected]);candidates={}
     if args.test:
         k=int(meta['method'].split('-')[1]);t=meta['retrieval_temperature'];pred=next(p for kk,tt,p in retrieval_candidates(z,refs,gps) if kk==k and tt==t)
-        report={'test':metrics(pred,actual),'method':meta['method'],'test_ids':[r['id'] for r in selected],'manifest_sha256':manifest_fingerprint(rows)}
+        report={'test':metrics(pred,actual),'method':meta['method'],'test_ids':[r['id'] for r in selected],'manifest_sha256':manifest_fingerprint(rows),'prediction_sha256':meta['prediction_sha256'],'runtime_sha256':meta['runtime_sha256']}
         atomic_json(report,args.run_dir/'test-report.json');meta['candidates'][meta['method']]['test']=report['test'];meta['test_status']='locked fresh cohort evaluated once'
     else:
         for k,t,pred in retrieval_candidates(z,refs,gps):candidates[f'retrieval-{k}-t{t}']={'val':metrics(pred,actual)}

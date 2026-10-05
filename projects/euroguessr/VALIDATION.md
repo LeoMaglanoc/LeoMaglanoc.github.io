@@ -44,3 +44,24 @@ Desktop screenshot photograph: Mapillary contributor **richlv**, image `16409543
 ![Mobile layout](docs/chrome-mobile.jpg)
 
 Mobile screenshot photograph: Mapillary contributor **proxym**, image `133526505475291`, [original source](https://www.mapillary.com/app/?pKey=133526505475291&focus=photo), CC BY-SA 4.0. Screenshot is a resized rendering of the adapted game photograph.
+
+## V2 research and UX checks — 5–6 October 2026
+
+The sections above describe the preserved V1 implementation. V2 uses a real pinned GeoCLIP teacher in Docker, replacing the earlier synthetic-only distillation check. The complete comparison and continuation instructions are in [the measured report](artifacts/geoclip-overnight/REPORT.md) and [RESEARCH_V2.md](RESEARCH_V2.md).
+
+- Eight Node tests pass: original scoring/projection/retrieval/preprocessing plus midpoint anchoring, clamping, pointer-count rebasing, cancellation and no accidental pinch guesses.
+- Five Docker distillation contract checks pass, including partial coverage, cache checksum/resume identity, normalized projection, compatible encoder warm-start and grid/deadline contracts.
+- Docker integration checks pass: uninterrupted two-epoch training equals one epoch plus optimizer/RNG resume; an expired deadline still creates resumable state and exports; frozen-to-two-tail-block fine-tuning changes the spatial weights and exported reference vectors agree with the complete CNN.
+- Six differently shaped image fixtures compare the exact JavaScript CLIP bicubic resize/center crop with the pinned AutoProcessor; maximum absolute difference is 2.384e-7. JPEG decoder differences are a separate browser concern.
+- Final research manifest has 8,500 train / 961 validation / 363 fresh test plus 180 legacy inspected test examples. Minimum new training-to-holdout distance is 25.002794 km. Validation/fresh-test holdouts also have a 25.015260 km minimum distance from V1's actual training IDs. No public game photograph enters training or fresh test.
+- Both original V1 and all V2 candidate measurements use the identical new validation cohort. Fresh test remains separate from inference-method selection and deployment gating.
+
+Chrome computer-agent testing uses the real Chrome browser through `cua_repl`. Source and compiled Jekyll routes have run real WASM CPU predictions. Tiny and the image-only 8-bit GeoCLIP have each completed five-round matches, with reveal pins, keyboard guesses, no-guess timeouts, totals and actual JSON downloads. Model switching replaces the worker to release the larger WASM heap; Tiny → GeoCLIP → Tiny was exercised in the UI.
+
+The synthetic Pointer Event harness passed all ten checks at desktop size and at a **390×844** viewport: real worker ready, photo pinch/reset, map pinch, no guess with one remaining pointer, coordinate placement after arbitrary transforms, visible city tiers, inward clamping and no horizontal game overflow. Pointer capture is stubbed for synthetic IDs. These are desktop responsive/emulated touch checks; no physical phone has been tested. Evidence: [mobile gesture checks](docs/chrome-v2-mobile-gesture-checks.txt), [mobile screenshot](docs/chrome-v2-mobile-gesture-checks.png), and [desktop gesture checks](docs/chrome-v2-gesture-checks.txt).
+
+The optional model is an explicit approximately 318 MiB download. It uses single-thread WASM and opportunistic SHA-verified caching. Observed early Chrome inference ranged from roughly 6–19 seconds under concurrent research load. These measurements do not establish phone performance. The initial Tiny smoke timings ranged from 80–346 ms. Final deployed-model evidence is recorded below.
+
+The first compiled preview failed because plain nginx returned `.mjs` as `application/octet-stream`. The committed Docker preview config serves `.mjs` as JavaScript and `.wasm` as WebAssembly. Chrome then initialized both modes on `http://127.0.0.1:8800/euroguessr/`; production GitHub Pages already serves the vendor module as JavaScript. The first full V2 Docker Jekyll build succeeded in 246.91 seconds under concurrent teacher inference, including JavaScript minification.
+
+Higher-resolution player imagery was recovered without upscaling: 40 photographs total **2,275,521 bytes**, with a highest available source long edge of **910 px**. Source and exported dimensions/checksums are preserved in `game-image-report.json` and `rounds.json`. City data contains 100 offline-ranked Natural Earth Populated Places records. Synthetic guesses and the inspected public photo pack are UI evidence only, not human evaluation or a fresh model benchmark.

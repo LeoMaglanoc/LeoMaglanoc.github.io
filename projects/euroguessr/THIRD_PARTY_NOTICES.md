@@ -21,3 +21,29 @@ Training uses metadata and images from the dataset's train archives. The game pa
 ## Model artifact
 
 Version, preprocessing, data fingerprint, parameter count and evaluation results are saved in `models/metadata.json`. Training reference coordinates and feature vectors derive from OSV-5M. This project conservatively distributes its OSV-derived reference pack and geographic model artifacts under CC BY-SA 4.0, while retaining upstream notices. This notice is not a claim that an ImageNet code license covers every upstream data right.
+
+## Optional direct GeoCLIP 8-bit mode (V2)
+
+This explicitly selected mode ships the image side of CLIP ViT-L/14 and GeoCLIP's
+trained 768 → 768 → 512 projection. It excludes the CLIP text tower, tokenizer,
+and location encoder. The regular Europe GPS gallery is encoded offline.
+
+- GeoCLIP: https://github.com/VicenteVivan/geo-clip (MIT, Vicente Vivanco; package 1.2.1).
+  License: `licenses/geoclip-MIT.txt`.
+- CLIP: https://github.com/openai/CLIP (MIT, OpenAI). License: `licenses/clip-MIT.txt`.
+- Image-only quantized ONNX conversion: https://huggingface.co/Xenova/clip-vit-large-patch14,
+  pinned revision `c307790166907339eed5a9a53a249af534102536`.
+  The exported metadata records the source and projection SHA-256 checksums.
+- Modifications: append the GeoCLIP projection and L2 normalization; freeze the
+  input at 1 × 3 × 224 × 224; split weights into files smaller than 64 MiB.
+
+This mode downloads hundreds of MB only after selection. Its files can be cached
+locally. All image inference and gallery lookup still occur in the browser CPU.
+No runtime request is sent to Hugging Face or an inference API.
+
+## City labels
+
+`cities.json` is an offline subset of Natural Earth's Populated Places 5.1.2,
+public domain: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/.
+The source ZIP checksum and dataset-derived ranking rule are embedded in that file.
+No city service or map tiles are requested at runtime.

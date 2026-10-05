@@ -33,7 +33,7 @@ def spatial_safe(train,held):
     return safe
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--train',type=int,default=8500);p.add_argument('--val',type=int,default=1000);p.add_argument('--test',type=int,default=600);p.add_argument('--shards',type=int,default=3);p.add_argument('--workers',type=int,default=6);p.add_argument('--run-dir',type=Path,default=ROOT/'artifacts/geoclip-overnight');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--train',type=int,default=8500);p.add_argument('--val',type=int,default=1000);p.add_argument('--test',type=int,default=600);p.add_argument('--shards',type=int,default=3);p.add_argument('--workers',type=int,default=6);p.add_argument('--exclude-test-manifest',type=Path,action='append',default=[]);p.add_argument('--run-dir',type=Path,default=ROOT/'artifacts/geoclip-overnight');args=p.parse_args()
     out=args.run_dir;out.mkdir(parents=True,exist_ok=True);(DATA/'images').mkdir(parents=True,exist_ok=True)
     start=time.time();entries={};candidates={}
     for source in ['train','test']:
@@ -49,7 +49,14 @@ def main():
         old=json.loads((ROOT/'checkpoints/current/manifest.json').read_text())
         legacy=[{**r,'cohort':'legacy-inspected'} for r in old if r['split']=='test']
         old_ids={r['id'] for r in old};held_seq={r['sequence'] for r in legacy}
-        fresh=balanced([r for r in candidates['test'] if r['id'] not in old_ids and r['sequence'] not in held_seq],args.test)
+        # A new run must not silently call previously inspected V2 tests 'fresh'.
+        excluded_ids=set(old_ids);excluded_sequences=set(held_seq)
+        previous=list((ROOT/'checkpoints').glob('*/manifest.json'))+args.exclude_test_manifest
+        for path in previous:
+            for row in json.loads(path.read_text()):
+                if row['split']=='test':excluded_ids.add(row['id']);excluded_sequences.add(row['sequence'])
+        held_seq.update(excluded_sequences)
+        fresh=balanced([r for r in candidates['test'] if r['id'] not in excluded_ids and r['sequence'] not in held_seq],args.test)
         for r in fresh:r.update(split='test',cohort='fresh')
         held_seq.update(r['sequence'] for r in fresh)
         pool=[r for r in candidates['train'] if r['sequence'] not in held_seq]

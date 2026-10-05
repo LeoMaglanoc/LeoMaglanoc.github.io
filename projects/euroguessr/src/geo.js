@@ -26,7 +26,7 @@ export function selectPrediction(embedding, logits, metadata, references) {
     lon = 0,
     total = 0;
   for (const { i, sim } of sims) {
-    const w = Math.exp((sim - sims[0].sim) * 20);
+    const w = Math.exp((sim - sims[0].sim) * (metadata.retrieval_temperature ?? 20));
     lat += references.gps[i][0] * w;
     lon += references.gps[i][1] * w;
     total += w;

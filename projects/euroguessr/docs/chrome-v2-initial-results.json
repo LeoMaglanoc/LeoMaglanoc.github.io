@@ -1,0 +1,34 @@
+{
+  "tiny-initial": {
+    "model_version": "europe-v1-refined",
+    "method": "retrieval-10",
+    "rounds": 5,
+    "human_total": 10375,
+    "ai_total": 13928,
+    "inference_ms": [
+      346.30000000447035,
+      79.89999999850988,
+      122.39999999850988,
+      147,
+      112.5
+    ],
+    "export_bytes": 3000,
+    "scope": "real Chrome UI smoke test under concurrent Docker load; synthetic guesses; pre-final runtime configuration"
+  },
+  "geoclip-initial": {
+    "model_version": "geoclip-direct-int8-europe-v1",
+    "method": "retrieval-1",
+    "rounds": 5,
+    "human_total": 3577,
+    "ai_total": 15231,
+    "inference_ms": [
+      10026.89999999851,
+      12704.39999999851,
+      11627.60000000149,
+      5892.10000000149,
+      6761.79999999702
+    ],
+    "export_bytes": 2633,
+    "scope": "real Chrome UI smoke test under concurrent Docker load; synthetic guesses; pre-final runtime configuration"
+  }
+}
