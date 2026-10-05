@@ -29,3 +29,15 @@ projects/rustzero/web/metrics/
 projects/rustzero/web/evaluation/
 assets/interactive/rustzero/metrics/
 assets/interactive/rustzero/evaluation/
+# EuroGuessr: generated model/data contracts and upstream runtime files.
+projects/euroguessr/checkpoints/
+projects/euroguessr/models/
+assets/interactive/euroguessr/models/
+projects/euroguessr/rounds.json
+assets/interactive/euroguessr/rounds.json
+projects/euroguessr/countries.geojson
+assets/interactive/euroguessr/countries.geojson
+projects/euroguessr/vendor/
+assets/interactive/euroguessr/vendor/
+projects/euroguessr/data/
+projects/euroguessr/artifacts/

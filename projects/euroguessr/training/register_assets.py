@@ -19,9 +19,20 @@ for directory in ["src", "models", "images", "vendor", "licenses"]:
         if p.is_file()
     )
 manifest = root / "scripts/project-assets.json"
-data = json.loads(manifest.read_text())
-data["projects/euroguessr"] = {
+entry = {
     "destination": "assets/interactive/euroguessr",
     "files": sorted(paths),
 }
-manifest.write_text(json.dumps(data, indent=2) + "\n")
+# Preserve unrelated entries and their formatter layout.
+document = manifest.read_text()
+block = json.dumps({"projects/euroguessr": entry}, indent=2)[2:-2]
+key = '  "projects/euroguessr": {'
+if key in document:
+    start = document.index(key)
+    end = document.index("\n  }", start) + len("\n  }")
+    document = document[:start] + block + document[end:]
+else:
+    document = document.rstrip()[:-1].rstrip() + ",\n" + block + "\n}\n"
+# Confirm this remains valid JSON before updating the manifest.
+json.loads(document)
+manifest.write_text(document)

@@ -16,7 +16,7 @@
     "training/bundle_checkpoint.py": "d4b580b8dd54dec94b960f7292c538a0a53faa4d9cc15452bf046cab0452d2c7",
     "training/cache_teacher.py": "4b7f8744c55bf82547cdd153cdf98091fedad2151093707e3ccde117ca310e9d",
     "training/human_benchmark.py": "d4287035064d10fa292e26577df3c8a4b1baf99ae350822025af704a6ee56f30",
-    "training/register_assets.py": "2c97294b3e84d97e02700c44b9c5b659cbbaf0be1dc689bbf5dccfc1ff88bcc8",
+    "training/register_assets.py": "8b2a220c0853ac598674341e41bd1a05b6ad8e328d2f443bb7eebdb4a7dba686",
     "src/app.js": "c6c3a0f60d860826776286e101d750737a47fdd4b8c40c1cb94a8e69274bfbb5",
     "src/geo.js": "d26ca521e79cd79e9200ace273d1b07c454024d7244d9ae74b124861e995a2b8",
     "src/preprocess.js": "b558d4fd077a46826727af1c60a8cab1ff2017ff681054676796f6c78d4eb1ac",
