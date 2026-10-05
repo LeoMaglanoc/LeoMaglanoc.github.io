@@ -1,0 +1,1 @@
+{"winner":"retrieval-20-t50","checkpoint":"last.pt","validation":{"n":961,"median_km":754.2337414011812,"mean_km":872.5500971256088,"within_25km":0.001040582726326743,"within_100km":0.007284079084287201,"within_200km":0.044745057232049947,"within_500km":0.24245577523413112,"within_750km":0.4953173777315297},"test_status":"not evaluated"}

@@ -1,0 +1,92 @@
+Browser tab: 1918402487, Title: "EuroGuessr AI — A sense of place", URL: "http://127.0.0.1:8800/euroguessr/".
+0 AXWebArea EuroGuessr AI — A sense of place, URL: 127.0.0.1:8800/euroguessr/
+	1 container EuroGuessr AI — challenge a browser CPU geolocation model
+		2 AXWebArea EuroGuessr AI — A sense of place, URL: 127.0.0.1:8800/assets/interactive/euroguessr/index.html
+			3 container
+				4 link Description: EuroGuessr AI home, Value: 127.0.0.1:8800/assets/interactive/euroguessr/index.html
+				5 text EUROPE  ·  NO MOVE
+				6 button Inside the AI ↗, ID: about
+			7 container
+				8 text A SENSE OF PLACE
+				9 heading You. A street. A tiny AI., Value: 1, ID: game-title
+					10 text You. A street. A tiny AI.
+				11 text YOUR SCORE
+				12 text 0
+				13 text vs
+				14 text AI SCORE
+				15 text 4,806
+				16 text ROUND 1 / 5 · EUROPE
+				17 text 00:00
+				18 container photo-wrap
+					19 image Description: Street-view photograph to geolocate, ID: street
+					20 container Photo zoom controls
+						21 button Description: Zoom photo in, ID: zoom-photo
+						22 button (disabled) Description: Zoom photo out, ID: photo-out
+						23 button Description: Reset photo view, ID: photo-reset
+				24 text ● Independent prediction · pixels only
+				25 text 155 ms · CPU
+				26 container credit
+					27 link Description: Photo by zoegglmeyr · Mapillary ↗, Value: mapillary.com/app/?pKey=1178331802596625&focus=photo
+					28 text  · CC BY-SA 4.0 · resized/recompressed
+				29 text LOCATION REVEALED
+				30 heading The AI found its bearings., Value: 2, ID: map-title
+					31 text The AI found its bearings.
+				32 text ↗
+				33 text Germany · 51.293° N, 13.391° E
+				34 container
+					35 container Description: Europe guess map. Use arrow keys to move and Enter to place a pin., ID: map
+						36 text ICELAND
+						37 text NORWAY
+						38 text SWEDEN
+						39 text FINLAND
+						40 text UK
+						41 text IRELAND
+						42 text FRANCE
+						43 text SPAIN
+						44 text PORTUGAL
+						45 text ITALY
+						46 text GERMANY
+						47 text POLAND
+						48 text ROMANIA
+						49 text GREECE
+						50 text UKRAINE
+						51 text Paris
+						52 text London
+						53 text Rome
+						54 text Madrid
+						55 text Berlin
+						56 text Athens
+						57 text Kyiv
+						58 text Vienna
+						59 text Stockholm
+						60 text Bucharest
+						61 text København
+						62 text Zagreb
+						63 text Chișinău
+						64 text Vilnius
+						65 text Nicosia
+						66 text Reykjavík
+						67 text A
+						68 text ✓
+					69 button Description: Zoom map in, ID: zoom-in
+					70 button Description: Zoom map out, ID: zoom-out
+					71 button Description: Reset map view, ID: map-reset
+					72 text Natural Earth · public domain
+				73 text Time is up.
+				74 container round-result
+					75 text You · no guess
+					76 text 0 pts
+					77 text AI · 59 km away
+					78 text 4,806 pts
+				79 button Next location →, ID: next
+				80 text You AI Actual location
+				81 text ◉ — ○ — ○ — ○ — ○
+				82 text Small model. Big world.
+				83 link Description: How it works, Value: 127.0.0.1:8800/assets/interactive/euroguessr/index.html#, ID: footer-about
+			84 text The AI found its bearings. You scored 0; AI scored 4806.
+			85 container grammarly-integration
+				86 text {"mode":"full","isActive":true,"isUserDisabled":false}
+	87 container grammarly-integration
+		88 text {"mode":"full","isActive":true,"isUserDisabled":false}
+
+The focused UI element is 2 AXWebArea EuroGuessr AI — A sense of place, URL: 127.0.0.1:8800/assets/interactive/euroguessr/index.html

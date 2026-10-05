@@ -1,0 +1,10 @@
+PASS supervised/best.pt: exact model, optimizer, RNG, history and configuration; only paths rebound
+PASS supervised/last.pt: exact model, optimizer, RNG, history and configuration; only paths rebound
+PASS supervised: exact locked inference assets
+PASS distilled/best.pt: exact model, optimizer, RNG, history and configuration; only paths rebound
+PASS distilled/last.pt: exact model, optimizer, RNG, history and configuration; only paths rebound
+PASS distilled: exact locked inference assets
+PASS embedding-only/best.pt: exact model, optimizer, RNG, history and configuration; only paths rebound
+PASS embedding-only/last.pt: exact model, optimizer, RNG, history and configuration; only paths rebound
+PASS embedding-only: exact locked inference assets
+Reusing locked test report

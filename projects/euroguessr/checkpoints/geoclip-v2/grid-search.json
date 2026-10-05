@@ -1,0 +1,1 @@
+{"candidates":{"64":{"validation_head_median_km":825.5367056198947,"best_epoch":24},"96":{"validation_head_median_km":825.2029596675305,"best_epoch":13},"128":{"validation_head_median_km":861.301709909544,"best_epoch":19}},"selected_cells":96,"selection":"validation head median only"}

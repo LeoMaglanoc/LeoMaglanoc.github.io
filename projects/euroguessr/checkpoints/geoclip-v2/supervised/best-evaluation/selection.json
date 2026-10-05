@@ -1,0 +1,1 @@
+{"winner":"retrieval-20-t10","checkpoint":"best.pt","validation":{"n":961,"median_km":776.9499360133628,"mean_km":873.3926824580298,"within_25km":0.001040582726326743,"within_100km":0.009365244536940686,"within_200km":0.05202913631633715,"within_500km":0.2570239334027055,"within_750km":0.4755463059313215},"test_status":"not evaluated"}

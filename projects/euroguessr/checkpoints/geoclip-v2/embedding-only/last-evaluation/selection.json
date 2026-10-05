@@ -1,0 +1,1 @@
+{"winner":"distilled-50-t10","checkpoint":"last.pt","validation":{"n":961,"median_km":745.1662599754743,"mean_km":865.8518123247125,"within_25km":0.0,"within_100km":0.008324661810613945,"within_200km":0.031217481789802288,"within_500km":0.25494276795005205,"within_750km":0.5036420395421436},"test_status":"not evaluated"}

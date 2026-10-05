@@ -2,7 +2,7 @@
 
 ## Street imagery and metadata
 
-[OpenStreetView-5M](https://huggingface.co/datasets/osv5m/osv5m), Astruc et al., CVPR 2024. Dataset license: **CC BY-SA 4.0**. Original imagery comes from Mapillary contributors. Each published image is accompanied by its original image ID, creator username, source link, license and modification notice in `rounds.json`. Images are resized to a maximum of 640 pixels and JPEG recompressed; these adapted images are distributed under CC BY-SA 4.0. Contributor attribution is displayed on each round's reveal. Full license: `licenses/OSV5M-CC-BY-SA-4.0.txt`.
+[OpenStreetView-5M](https://huggingface.co/datasets/osv5m/osv5m), Astruc et al., CVPR 2024. Dataset license: **CC BY-SA 4.0**. Original imagery comes from Mapillary contributors. Each published image is accompanied by its original image ID, creator username, source link, license and modification notice in `rounds.json`. V2 photographs preserve the highest available archive resolution, capped at 1600 pixels without upscaling, and are JPEG recompressed. The current archive's largest source long edge is 910 pixels. These adapted images are distributed under CC BY-SA 4.0. Contributor attribution is displayed on each round's reveal. Full license: `licenses/OSV5M-CC-BY-SA-4.0.txt`.
 
 Training uses metadata and images from the dataset's train archives. The game pack is an uncurated prefix of the selected test sample. Image IDs are stable; third-party source links may become unavailable. Attribution is retained locally.
 
@@ -25,7 +25,7 @@ Version, preprocessing, data fingerprint, parameter count and evaluation results
 ## Optional direct GeoCLIP 8-bit mode (V2)
 
 This explicitly selected mode ships the image side of CLIP ViT-L/14 and GeoCLIP's
-trained 768 → 768 → 512 projection. It excludes the CLIP text tower, tokenizer,
+trained 768 → 512 → 512 projection. It excludes the CLIP text tower, tokenizer,
 and location encoder. The regular Europe GPS gallery is encoded offline.
 
 - GeoCLIP: https://github.com/VicenteVivan/geo-clip (MIT, Vicente Vivanco; package 1.2.1).
@@ -35,7 +35,10 @@ and location encoder. The regular Europe GPS gallery is encoded offline.
   pinned revision `c307790166907339eed5a9a53a249af534102536`.
   The exported metadata records the source and projection SHA-256 checksums.
 - Modifications: append the GeoCLIP projection and L2 normalization; freeze the
-  input at 1 × 3 × 224 × 224; split weights into files smaller than 64 MiB.
+  input at 1 × 3 × 224 × 224; retain UINT8 linear-weight storage with constant
+  dequantization and FP32 arithmetic; use FP32 patch convolution; split weights
+  into files of at most 64 MiB. Dynamic activation quantization was rejected
+  after Chrome/native parity checks.
 
 This mode downloads hundreds of MB only after selection. Its files can be cached
 locally. All image inference and gallery lookup still occur in the browser CPU.

@@ -1,0 +1,1 @@
+{"batch_size":2,"seconds_per_image":1.883782169220067,"available_seconds":13588.016952991486,"teacher_count":5000,"teacher_stop_at":"2026-10-06T01:15:00+02:00","safety_fraction":0.85,"selected_cells":96}

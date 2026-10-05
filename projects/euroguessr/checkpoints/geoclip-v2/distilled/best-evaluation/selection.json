@@ -1,0 +1,1 @@
+{"winner":"distilled-50-t10","checkpoint":"best.pt","validation":{"n":961,"median_km":724.0547651121086,"mean_km":863.0165393119438,"within_25km":0.0,"within_100km":0.005202913631633715,"within_200km":0.027055150884495317,"within_500km":0.25286160249739853,"within_750km":0.5130072840790842},"test_status":"not evaluated"}

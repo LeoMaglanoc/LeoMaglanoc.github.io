@@ -8,6 +8,14 @@ This is a working research game. Human win rate has **not been measured**. Autom
 
 ## Research results and checkpoints
 
+**GeoCLIP distillation improved Tiny.** On the same 961-image spatial validation
+cohort, median error fell from 833 km for V1 to 754 km for supervised A and
+724 km for distilled B. Validation selected B before inspecting the separate
+363-image fresh test: V1 861 km, A 807 km, B 771 km, and embedding-only C
+787 km. The optional image-only GeoCLIP achieved 333 km validation and 372 km
+fresh-test median error. These are geographic accuracy measurements, not human
+win rates.
+
 The measured V2 comparison, teacher throughput, dataset, accuracy, latency, failed experiments and deployment decision are in **[the run report](artifacts/geoclip-overnight/REPORT.md)**. Full implementation rationale and exact reproduce/resume/publish/revert commands are in **[RESEARCH_V2.md](RESEARCH_V2.md)**.
 
 - `checkpoints/geoclip-v2/`: immutable V2 continuation bundle, supervised, distilled and embedding-only `best.pt`/`last.pt`, optimizer and RNG states, exact inference assets, manifest/image hashes, cells, teacher-cache archives, validation/test reports and source fingerprints.

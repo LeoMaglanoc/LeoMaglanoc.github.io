@@ -1,0 +1,1 @@
+Checked all 17 public project URLs, 77 HTML dependencies and manifest runtime files

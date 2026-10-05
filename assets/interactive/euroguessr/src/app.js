@@ -1,4 +1,4 @@
-import { preprocessCLIP } from "./clip-preprocess.js";
+import { preprocessCLIP } from "./clip-preprocess.js?v=f32-2";
 import { preprocess } from "./preprocess.js";
 import { distance, score, project, unproject, shuffled } from "./geo.js";
 import { pointerGestures, photoStep, clampPhoto, mapStep } from "./gestures.js";
@@ -6,7 +6,7 @@ const $ = (id) => document.getElementById(id);
 const svgNS = "http://www.w3.org/2000/svg";
 let pack = [],
   metadata,
-  activeMode="tiny",
+  activeMode = "tiny",
   rounds = [],
   results = [],
   index = 0,
@@ -29,32 +29,36 @@ const ready = new Promise((resolve, reject) => {
 function createWorker() {
   worker = new Worker(new URL("./inference.worker.js", import.meta.url));
   const instance = worker;
-worker.onmessage = ({ data }) => {
-  if (instance !== worker) return;
-  if (data.type === "ready") {
-    metadata = data.metadata;
-    activeMode=data.mode || "tiny";
-    readyResolve();
-  } else if (data.type === "progress") {
-    $("load-status").textContent=data.initializing ? "Download verified. Preparing GeoCLIP on your browser CPU…" : `${data.mode==="tiny" ? "Tiny AI" : "GeoCLIP"}: ${(data.bytes/1048576).toFixed(0)} / ${(data.total/1048576).toFixed(0)} MiB loaded${data.cached ? " · cached" : ""}`;
-  } else if (data.type === "error") {
-    const task = pending.get(data.token);
-    if (task) {
-      task.reject(Error(data.message));
+  worker.onmessage = ({ data }) => {
+    if (instance !== worker) return;
+    if (data.type === "ready") {
+      metadata = data.metadata;
+      activeMode = data.mode || "tiny";
+      readyResolve();
+    } else if (data.type === "progress") {
+      $("load-status").textContent = data.initializing
+        ? "Download verified. Preparing GeoCLIP on your browser CPU…"
+        : `${data.mode === "tiny" ? "Tiny AI" : "GeoCLIP"}: ${(data.bytes / 1048576).toFixed(0)} / ${(data.total / 1048576).toFixed(0)} MiB loaded${
+            data.cached ? " · cached" : ""
+          }`;
+    } else if (data.type === "error") {
+      const task = pending.get(data.token);
+      if (task) {
+        task.reject(Error(data.message));
+        pending.delete(data.token);
+      } else readyReject(Error(data.message));
+    } else if (data.type === "prediction") {
+      pending.get(data.token)?.resolve(data);
       pending.delete(data.token);
-    } else readyReject(Error(data.message));
-  } else if (data.type === "prediction") {
-    pending.get(data.token)?.resolve(data);
-    pending.delete(data.token);
-  }
-};
-worker.onerror = (event) => {
-  if (instance !== worker) return;
-  const error = Error(event.message || "Browser inference worker failed");
-  readyReject(error);
-  for (const task of pending.values()) task.reject(error);
-  pending.clear();
-};
+    }
+  };
+  worker.onerror = (event) => {
+    if (instance !== worker) return;
+    const error = Error(event.message || "Browser inference worker failed");
+    readyReject(error);
+    for (const task of pending.values()) task.reject(error);
+    pending.clear();
+  };
 }
 createWorker();
 async function getJSON(path) {
@@ -126,8 +130,8 @@ function updateView() {
   $("map").setAttribute("viewBox", view.join(" "));
   drawCities();
 }
-function zoom(factor, anchor = { x: view[0] + view[2]/2, y: view[1] + view[3]/2 }) {
-  view = mapStep(view, 1/factor, anchor);
+function zoom(factor, anchor = { x: view[0] + view[2] / 2, y: view[1] + view[3] / 2 }) {
+  view = mapStep(view, 1 / factor, anchor);
   updateView();
 }
 function resetMap() {
@@ -171,27 +175,35 @@ function renderPins(reveal = false) {
 }
 function setGuess(point) {
   if (phase !== "playing") return;
-  guess = point;
-  keyboard = point;
+  guess = { ...point };
+  keyboard = { ...point };
   renderPins();
   $("selection").textContent = `Your pin: ${point.lat.toFixed(2)}° N, ${Math.abs(point.lon).toFixed(2)}° ${point.lon < 0 ? "W" : "E"}`;
   $("guess").disabled = false;
   $("live").textContent = $("selection").textContent;
 }
 const mapGestures = pointerGestures($("map"), {
-  change({factor, anchor, delta}) {
-    const point = mapPoint({clientX:anchor.x, clientY:anchor.y});
+  change({ factor, anchor, delta }) {
+    const point = mapPoint({ clientX: anchor.x, clientY: anchor.y });
     const matrix = $("map").getScreenCTM();
-    view = mapStep(view, factor, point, {x:delta.x/matrix.a, y:delta.y/matrix.d});
+    view = mapStep(view, factor, point, { x: delta.x / matrix.a, y: delta.y / matrix.d });
     updateView();
   },
-  tap(event) { const p=mapPoint(event); setGuess(unproject(p.x,p.y)); }
+  tap(event) {
+    const p = mapPoint(event);
+    setGuess(unproject(p.x, p.y));
+  },
 });
-$("map").addEventListener("wheel", event => {
-  event.preventDefault();
-  zoom(Math.exp(Math.max(-0.3,Math.min(0.3,event.deltaY*0.002))), mapPoint(event));
-}, {passive:false});
+$("map").addEventListener(
+  "wheel",
+  (event) => {
+    event.preventDefault();
+    zoom(Math.exp(Math.max(-0.3, Math.min(0.3, event.deltaY * 0.002))), mapPoint(event));
+  },
+  { passive: false }
+);
 $("map").addEventListener("keydown", (event) => {
+  if (phase !== "playing") return;
   const delta = (0.5 * view[2]) / 700;
   if (event.key === "Enter" || event.key === " ") {
     event.preventDefault();
@@ -207,83 +219,126 @@ $("map").addEventListener("keydown", (event) => {
 $("zoom-in").onclick = () => zoom(1 / 1.4);
 $("zoom-out").onclick = () => zoom(1.4);
 $("map-reset").onclick = resetMap;
-let photo = {scale:1,x:0,y:0};
+let photo = { scale: 1, x: 0, y: 0 };
 function fitPhoto() {
-  const box=$("photo-wrap").getBoundingClientRect(), image=$("street");
+  const box = $("photo-wrap").getBoundingClientRect(),
+    image = $("street");
   // client dimensions exclude the CSS transform, including during a pinch update.
-  const width=image.clientWidth, height=image.clientHeight;
-  const ratio=Math.min(width/(image.naturalWidth || 1), height/(image.naturalHeight || 1));
-  return {box, fitted:{width:image.naturalWidth*ratio,height:image.naturalHeight*ratio}};
+  const width = image.clientWidth,
+    height = image.clientHeight;
+  const ratio = Math.min(width / (image.naturalWidth || 1), height / (image.naturalHeight || 1));
+  return { box, fitted: { width: image.naturalWidth * ratio, height: image.naturalHeight * ratio } };
 }
 function renderPhoto() {
-  const {box,fitted}=fitPhoto(); photo=clampPhoto(photo,box,fitted);
-  $("street").style.transform=`translate(${photo.x}px, ${photo.y}px) scale(${photo.scale})`;
-  $("photo-wrap").classList.toggle("pannable",photo.scale>1);
-  $("photo-out").disabled=photo.scale<=1;
-  $("zoom-photo").disabled=photo.scale>=4;
+  const { box, fitted } = fitPhoto();
+  photo = clampPhoto(photo, box, fitted);
+  $("street").style.transform = `translate(${photo.x}px, ${photo.y}px) scale(${photo.scale})`;
+  $("photo-wrap").classList.toggle("pannable", photo.scale > 1);
+  $("photo-out").disabled = photo.scale <= 1;
+  $("zoom-photo").disabled = photo.scale >= 4;
 }
-function changePhoto(factor, anchor={x:0,y:0}, delta={x:0,y:0}) {
-  photo=photoStep(photo,factor,anchor,delta); renderPhoto();
-  $("photo-hint").hidden=true; storageSet("euroguessr-photo-hint",true);
+function changePhoto(factor, anchor = { x: 0, y: 0 }, delta = { x: 0, y: 0 }) {
+  photo = photoStep(photo, factor, anchor, delta);
+  renderPhoto();
+  $("photo-hint").hidden = true;
+  storageSet("euroguessr-photo-hint", true);
 }
-const photoGestures=pointerGestures($("photo-wrap"), {
-  change({factor,anchor,delta}) {
-    const box=$("photo-wrap").getBoundingClientRect();
-    changePhoto(factor,{x:anchor.x-box.left-box.width/2,y:anchor.y-box.top-box.height/2},delta);
-  }
+const photoGestures = pointerGestures($("photo-wrap"), {
+  change({ factor, anchor, delta }) {
+    const box = $("photo-wrap").getBoundingClientRect();
+    changePhoto(factor, { x: anchor.x - box.left - box.width / 2, y: anchor.y - box.top - box.height / 2 }, delta);
+  },
 });
-$("zoom-photo").onclick=()=>changePhoto(1.4);
-$("photo-out").onclick=()=>changePhoto(1/1.4);
-$("photo-reset").onclick=()=>{photo={scale:1,x:0,y:0}; renderPhoto();};
-$("photo-wrap").addEventListener("wheel",event=>{
-  event.preventDefault(); const box=$("photo-wrap").getBoundingClientRect();
-  changePhoto(Math.exp(Math.max(-0.3,Math.min(0.3,-event.deltaY*0.002))),{x:event.clientX-box.left-box.width/2,y:event.clientY-box.top-box.height/2});
-},{passive:false});
+$("zoom-photo").onclick = () => changePhoto(1.4);
+$("photo-out").onclick = () => changePhoto(1 / 1.4);
+$("photo-reset").onclick = () => {
+  photo = { scale: 1, x: 0, y: 0 };
+  renderPhoto();
+};
+$("photo-wrap").addEventListener(
+  "wheel",
+  (event) => {
+    event.preventDefault();
+    const box = $("photo-wrap").getBoundingClientRect();
+    changePhoto(Math.exp(Math.max(-0.3, Math.min(0.3, -event.deltaY * 0.002))), {
+      x: event.clientX - box.left - box.width / 2,
+      y: event.clientY - box.top - box.height / 2,
+    });
+  },
+  { passive: false }
+);
 new ResizeObserver(renderPhoto).observe($("photo-wrap"));
-$("photo-hint").hidden=storageGet("euroguessr-photo-hint",false);
-let cities=[];
+$("photo-hint").hidden = storageGet("euroguessr-photo-hint", false);
+let cities = [];
 function drawCities() {
   if (!cities.length) return;
-  const map=$("map"), matrix=map.getScreenCTM();
+  const map = $("map"),
+    matrix = map.getScreenCTM();
   if (!matrix) return;
-  const scale=700/view[2], pixelScale=matrix.a;
-  const tier=scale>=3 ? 3 : scale>=1.6 ? 2 : 1;
+  const scale = 700 / view[2],
+    pixelScale = matrix.a;
+  const tier = scale >= 3 ? 3 : scale >= 1.6 ? 2 : 1;
   $("cities").replaceChildren();
-  $("labels").style.opacity=scale>=3 ? "0.12" : scale>=1.6 ? "0.4" : "1";
-  const occupied=[];
+  $("labels").style.opacity = scale >= 3 ? "0.12" : scale >= 1.6 ? "0.4" : "1";
+  const occupied = [];
   for (const city of cities) {
-    if (city.tier>tier) continue;
-    const [x,y]=project(city);
-    if (x<view[0] || x>view[0]+view[2] || y<view[1] || y>view[1]+view[3]) continue;
-    const px=(x-view[0])*pixelScale, py=(y-view[1])*pixelScale;
-    const width=city.name.length*5.8+9, rect=[px-3,py-12,px+width,py+4];
-    if (occupied.some(r=>rect[0]<r[2]+5 && rect[2]>r[0]-5 && rect[1]<r[3]+3 && rect[3]>r[1]-3)) continue;
+    if (city.tier > tier) continue;
+    const [x, y] = project(city);
+    if (x < view[0] || x > view[0] + view[2] || y < view[1] || y > view[1] + view[3]) continue;
+    const px = (x - view[0]) * pixelScale,
+      py = (y - view[1]) * pixelScale;
+    const width = city.name.length * 5.8 + 9,
+      rect = [px - 3, py - 12, px + width, py + 4];
+    element("circle", { cx: x, cy: y, r: 2 / pixelScale }, $("cities"));
+    if (occupied.some((r) => rect[0] < r[2] + 5 && rect[2] > r[0] - 5 && rect[1] < r[3] + 3 && rect[3] > r[1] - 3)) continue;
     occupied.push(rect);
-    element("circle",{cx:x,cy:y,r:2/pixelScale},$("cities"));
-    element("text",{x:x+5/pixelScale,y:y+3/pixelScale,"font-size":11/pixelScale,"stroke-width":2.5/pixelScale},$("cities")).textContent=city.name;
+    element(
+      "text",
+      { x: x + 5 / pixelScale, y: y + 3 / pixelScale, "font-size": 11 / pixelScale, "stroke-width": 2.5 / pixelScale },
+      $("cities")
+    ).textContent = city.name;
   }
 }
 new ResizeObserver(drawCities).observe($("map"));
 function modelDetails() {
   if (activeMode === "tiny" && metadata.onnx_bytes) {
-    $("ai-mode").querySelector('option[value="tiny"]').textContent = `Tiny AI · about ${Math.ceil((metadata.onnx_bytes + metadata.reference_bytes) / 1048576)} MiB · browser CPU`;
+    $("ai-mode").querySelector('option[value="tiny"]').textContent = `Tiny AI · about ${Math.ceil(
+      (metadata.onnx_bytes + metadata.reference_bytes) / 1048576
+    )} MiB · browser CPU`;
   }
   if (activeMode === "geoclip") {
-    $("ai-mode").querySelector('option[value="geoclip"]').textContent = `GeoCLIP 8-bit · about ${Math.ceil(metadata.download_bytes / 1048576)} MiB · browser CPU`;
+    $("ai-mode").querySelector('option[value="geoclip"]').textContent = `GeoCLIP 8-bit · about ${Math.ceil(
+      metadata.download_bytes / 1048576
+    )} MiB · browser CPU`;
   }
   const chosen = metadata.candidates[metadata.method];
-  $("game-title").textContent=activeMode==="geoclip" ? "You. A street. GeoCLIP." : "You. A street. A tiny AI.";
-  $("model-description").textContent=activeMode==="geoclip" ? "Quantized image-only GeoCLIP analyzes the same photograph you see, then searches a precomputed European location gallery. Every prediction runs on your browser CPU." : `MobileNetV3-Small turns the same photograph you see into a visual embedding. ${metadata.distillation?.enabled ? "This tiny student was trained with GPS labels and geographic knowledge distilled from GeoCLIP." : "It was trained with geographic labels."} Its prediction method was selected using spatial validation.`;
+  $("game-title").textContent = activeMode === "geoclip" ? "You. A street. GeoCLIP." : "You. A street. A tiny AI.";
+  $("model-description").textContent =
+    activeMode === "geoclip"
+      ? "Quantized image-only GeoCLIP analyzes the same photograph you see, then searches a precomputed European location gallery. Every prediction runs on your browser CPU."
+      : `MobileNetV3-Small turns the same photograph you see into a visual embedding. ${
+          metadata.distillation?.enabled
+            ? "This tiny student was trained with GPS labels and geographic knowledge distilled from GeoCLIP."
+            : "It was trained with geographic labels."
+        } Its prediction method was selected using spatial validation.`;
   $("model-details").innerHTML = "";
   const dl = document.createElement("dl");
   for (const [label, value] of [
     ["Model", metadata.version],
     ["Parameters", `${(metadata.parameters / 1e6).toFixed(2)} million`],
     ["Selected method", metadata.method],
-    ["Train / val / test", metadata.splits ? Object.values(metadata.splits).slice(0, 3).join(" / ") : "Pretrained worldwide teacher · offline Europe gallery"],
+    [
+      "Train / val / test",
+      metadata.splits ? Object.values(metadata.splits).slice(0, 3).join(" / ") : "Pretrained worldwide teacher · offline Europe gallery",
+    ],
     ["Validation median error", chosen?.val ? `${Math.round(chosen.val.median_km).toLocaleString()} km` : "Not evaluated"],
     ["Test median error", chosen?.test ? `${Math.round(chosen.test.median_km).toLocaleString()} km` : "Not evaluated"],
-    ["Constant baseline", metadata.candidates["constant-center"]?.test ? `${Math.round(metadata.candidates["constant-center"].test.median_km).toLocaleString()} km` : "Not evaluated"],
+    [
+      "Constant baseline",
+      metadata.candidates["constant-center"]?.test
+        ? `${Math.round(metadata.candidates["constant-center"].test.median_km).toLocaleString()} km`
+        : "Not evaluated",
+    ],
     ["Human win rate", "Not measured"],
     ["Inference", `WASM CPU · ${metadata.precision}`],
   ]) {
@@ -333,8 +388,10 @@ async function startRound() {
   clearInterval(timer);
   resetMap();
   renderPins();
-  photoGestures.cancel(); mapGestures.cancel();
-  photo={scale:1,x:0,y:0}; renderPhoto();
+  photoGestures.cancel();
+  mapGestures.cancel();
+  photo = { scale: 1, x: 0, y: 0 };
+  renderPhoto();
   $("round-result").hidden = true;
   $("next").hidden = true;
   $("guess").hidden = false;
@@ -358,7 +415,10 @@ async function startRound() {
     if (current !== token) return;
     $("photo-loading").hidden = true;
     renderPhoto();
-    if (rounds[index+1]) { const nextImage=new Image(); nextImage.src=rounds[index+1].image; }
+    if (rounds[index + 1]) {
+      const nextImage = new Image();
+      nextImage.src = rounds[index + 1].image;
+    }
     const pixels = metadata.preprocessing === "clip-bicubic-center-crop" ? preprocessCLIP(image) : preprocess(image);
     const output = await new Promise((resolve, reject) => {
       pending.set(current, { resolve, reject });
@@ -402,7 +462,7 @@ function reveal(timedOut = false) {
     round: index + 1,
     imageId: actual.id,
     actual: { lat: actual.lat, lon: actual.lon, country: actual.country },
-    human: guess,
+    human: guess ? { ...guess } : null,
     ai: { ...ai },
     humanKm,
     aiKm,
@@ -508,34 +568,54 @@ $("download").onclick = () => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
 $("play-again").onclick = match;
-$("choose-ai").onclick=()=>{
-  $("ai-mode").disabled=false;$("start").disabled=false;
-  $("ai-mode").value=activeMode==="geoclip" ? "tiny" : "geoclip";
+$("choose-ai").onclick = () => {
+  $("ai-mode").disabled = false;
+  $("start").disabled = false;
+  $("ai-mode").value = activeMode === "geoclip" ? "tiny" : "geoclip";
   $("ai-mode").onchange();
-  $("load-status").textContent="Choose an AI for a new five-round match.";
+  $("load-status").textContent = "Choose an AI for a new five-round match.";
   $("welcome").showModal();
 };
-$("ai-mode").onchange=()=>{
-  $("start").textContent=$("ai-mode").value===activeMode ? "Start your journey →" : $("ai-mode").value==="geoclip" ? "Download GeoCLIP and start →" : "Switch to Tiny AI and start →";
+$("ai-mode").onchange = () => {
+  $("start").textContent =
+    $("ai-mode").value === activeMode
+      ? "Start your journey →"
+      : $("ai-mode").value === "geoclip"
+        ? "Download GeoCLIP and start →"
+        : "Switch to Tiny AI and start →";
 };
 $("start").onclick = async () => {
-  if (phase === "error") { location.reload(); return; }
-  const selected=$("ai-mode").value;
-  if(selected!==activeMode) {
-    $("start").disabled=true;$("ai-mode").disabled=true;
-    $("start").textContent="Preparing selected AI…";
-    phase="loading";
-    $("load-status").textContent=selected === "geoclip" ? "Loading GeoCLIP…" : "Loading Tiny AI…";
+  if (phase === "error") {
+    location.reload();
+    return;
+  }
+  const selected = $("ai-mode").value;
+  if (selected !== activeMode) {
+    $("start").disabled = true;
+    $("ai-mode").disabled = true;
+    $("start").textContent = "Preparing selected AI…";
+    phase = "loading";
+    $("load-status").textContent = selected === "geoclip" ? "Loading GeoCLIP…" : "Loading Tiny AI…";
     try {
-      const loaded=new Promise((resolve,reject)=>{readyResolve=resolve;readyReject=reject;});
-      worker.terminate(); createWorker();
-      worker.postMessage({type:"init",mode:selected});await loaded;modelDetails();
-    } catch(error) {
-      phase="error";$("load-status").textContent=`Could not load the selected AI: ${error.message}`;
-      $("start").disabled=false;$("start").textContent="Reload with Tiny AI →";return;
+      const loaded = new Promise((resolve, reject) => {
+        readyResolve = resolve;
+        readyReject = reject;
+      });
+      worker.terminate();
+      createWorker();
+      worker.postMessage({ type: "init", mode: selected });
+      await loaded;
+      modelDetails();
+    } catch (error) {
+      phase = "error";
+      $("load-status").textContent = `Could not load the selected AI: ${error.message}`;
+      $("start").disabled = false;
+      $("start").textContent = "Reload with Tiny AI →";
+      return;
     }
   }
-  $("welcome").close();match();
+  $("welcome").close();
+  match();
 };
 $("welcome").addEventListener("cancel", (event) => event.preventDefault());
 $("welcome").showModal();
@@ -543,7 +623,7 @@ async function initialize() {
   try {
     worker.postMessage({ type: "init" });
     const [images, mapData, cityData] = await Promise.all([getJSON("rounds.json"), getJSON("countries.geojson"), getJSON("cities.json"), ready]);
-    cities=cityData.cities;
+    cities = cityData.cities;
     pack = images;
     if (pack.length < 5) throw Error("At least five held-out images are required");
     drawMap(mapData);
