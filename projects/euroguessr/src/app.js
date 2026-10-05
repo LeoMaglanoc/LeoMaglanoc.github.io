@@ -1,4 +1,4 @@
-import { preprocessCLIP } from "./clip-preprocess.js";
+import { preprocessCLIP } from "./clip-preprocess.js?v=f32-2";
 import { preprocess } from "./preprocess.js";
 import { distance, score, project, unproject, shuffled } from "./geo.js";
 import { pointerGestures, photoStep, clampPhoto, mapStep } from "./gestures.js";
@@ -257,9 +257,9 @@ function drawCities() {
     if (x<view[0] || x>view[0]+view[2] || y<view[1] || y>view[1]+view[3]) continue;
     const px=(x-view[0])*pixelScale, py=(y-view[1])*pixelScale;
     const width=city.name.length*5.8+9, rect=[px-3,py-12,px+width,py+4];
+    element("circle",{cx:x,cy:y,r:2/pixelScale},$("cities"));
     if (occupied.some(r=>rect[0]<r[2]+5 && rect[2]>r[0]-5 && rect[1]<r[3]+3 && rect[3]>r[1]-3)) continue;
     occupied.push(rect);
-    element("circle",{cx:x,cy:y,r:2/pixelScale},$("cities"));
     element("text",{x:x+5/pixelScale,y:y+3/pixelScale,"font-size":11/pixelScale,"stroke-width":2.5/pixelScale},$("cities")).textContent=city.name;
   }
 }

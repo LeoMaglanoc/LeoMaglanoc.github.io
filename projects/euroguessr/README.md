@@ -2,7 +2,7 @@
 
 Five European street photographs, 60 seconds per round. Place a map pin and compare distance and score against a vision model that runs locally on the browser CPU. Play at **[/euroguessr/](https://leomaglanoc.github.io/euroguessr/)**.
 
-The default is a tiny MobileNet model. An explicit **GeoCLIP 8-bit** option downloads approximately 318 MiB of image-only model/gallery assets. It uses quantized CLIP ViT-L/14 plus GeoCLIP's exact projection, with an offline Europe location gallery. It can take several seconds per photograph on a laptop. The model chooser displays the download size; no large model downloads automatically. Both modes use a worker and single-thread ONNX Runtime Web/WASM. No API key, inference backend, GPU, WebGPU or live map tiles are required.
+The default is a tiny MobileNet model. An explicit **GeoCLIP 8-bit** option downloads approximately 320 MiB of image-only model/gallery assets. It stores CLIP ViT-L/14 linear weights in unsigned 8-bit form and uses FP32 arithmetic plus GeoCLIP's exact projection, with an offline Europe location gallery. It can take several seconds or tens of seconds per photograph on a laptop under load. The model chooser displays the download size; no large model downloads automatically. Both modes use a worker and single-thread ONNX Runtime Web/WASM. No API key, inference backend, GPU, WebGPU or live map tiles are required.
 
 This is a working research game. Human win rate has **not been measured**. Automated smoke-test guesses are not human evaluation.
 

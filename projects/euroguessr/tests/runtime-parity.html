@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GeoCLIP exact-input backend audit</title>
+<style>body{font:16px system-ui;padding:1rem}pre{white-space:pre-wrap}button{padding:12px;margin:10px}</style>
+<h1>GeoCLIP exact-input backend audit</h1><p>Developer-only test. Two real WASM runs: one identical synthetic tensor and one game JPEG. This audit is excluded from publication.</p>
+<label>Audit model <select id="model"><option value="../models/geoclip/">Current 8-bit model</option><option value="../artifacts/geoclip-u8-float-patch/models/">8-bit with FP32 patch convolution</option><option value="../artifacts/geoclip-weight-only/models/">8-bit stored weights, FP32 arithmetic</option></select></label><button id="run">Run exact-input backend audit</button><button id="download" disabled>Download audit inputs and embeddings</button><pre id="status">Ready</pre>
+<script type="module">
+import{preprocessCLIP}from'../src/clip-preprocess.js?v=f32-2';
+let result;const status=document.getElementById('status');
+document.getElementById('run').onclick=async()=>{
+ document.getElementById('run').disabled=true;status.textContent='Loading image and quantized model…';
+ try{
+  const pack=await(await fetch('../rounds.json')).json();const row=pack.find(r=>r.id==='132628668897475');
+  const image=new Image();image.src='../'+row.image;await image.decode();
+  const random=new Float32Array(await(await fetch('../artifacts/geoclip-direct/backend-input.f32')).arrayBuffer());
+  const samples=[{name:'exact deterministic input',pixels:Array.from(random)},{name:row.image,pixels:Array.from(preprocessCLIP(image))}];
+  const worker=new Worker('./runtime-parity.worker.js');
+  result=await new Promise((resolve,reject)=>{worker.onmessage=({data})=>data.error?reject(Error(data.error)):resolve(data);worker.onerror=e=>reject(Error(e.message));worker.postMessage({samples,folder:document.getElementById('model').value});});worker.terminate();
+  status.textContent=result.results.map(r=>`${r.name}: ${r.embedding.length} dimensions, norm ${Math.hypot(...r.embedding).toFixed(7)}`).join('\n')+'\nWASM audit complete. Download for native CPU comparison.';document.getElementById('download').disabled=false;
+ }catch(e){status.textContent='ERROR '+e.message;}
+};
+document.getElementById('download').onclick=()=>{const link=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(result)],{type:'application/json'}));link.href=url;link.download='geoclip-backend-audit.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+</script>

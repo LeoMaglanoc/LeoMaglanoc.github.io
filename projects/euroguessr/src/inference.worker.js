@@ -25,7 +25,7 @@ async function checkedFetch(url) {
 }
 async function json(url,sha) {
   const key=new URL(url,self.location.href);if(sha)key.searchParams.set("sha256",sha);
-  const response = await fetch(key.href);
+  const response = await fetch(key.href,sha ? {} : {cache:"no-store"});
   if (!response.ok) throw Error(`Could not load ${url}: ${response.status}`);
   const bytes=await response.arrayBuffer();
   if(sha) {

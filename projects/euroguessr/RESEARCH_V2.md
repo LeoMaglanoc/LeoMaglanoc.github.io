@@ -148,10 +148,20 @@ features from the validation-selected best checkpoint’s own prefix scope. An e
 retaining optimizer moments; otherwise the saved rate is preserved. Prefix caches have manifest and encoder fingerprints plus a file
 checksum. They are rebuildable and remain ignored; raw images also remain ignored.
 
+The orchestration records successful final training stages with
+`supervised-finetune.done` / `distilled-finetune.done`, so restarting the shell
+workflow does not silently add another hundred fine-tuning epochs. For deliberate
+continuation, invoke the student trainer directly. A stopped cache is a fixed
+training input: extending it changes the objective fingerprint and requires a
+new warm-started student run.
+
 ```bash
 training/evaluate_student.py --run-dir artifacts/geoclip-overnight/distilled \
   --audit-teacher artifacts/geoclip-overnight/validation-teacher
+training/fingerprint_runtime.py --models artifacts/geoclip-overnight/distilled/models \
+  --metrics-out artifacts/geoclip-overnight/distilled/metrics.json
 # Only after validation has fixed the method:
+training/select_deployment.py --run-root artifacts/geoclip-overnight
 training/evaluate_student.py --run-dir artifacts/geoclip-overnight/distilled --test
 training/promote_student.py --run-dir artifacts/geoclip-overnight/distilled \
   --baseline-report artifacts/geoclip-overnight/baseline-comparison.json \
@@ -178,17 +188,40 @@ the objective/stage recorded in `last.pt` arguments. A rebuilt prefix cache is
 expected on the first restored run. To intentionally change a dataset or teacher
 cache, create a new run and warm-start the encoder instead.
 
+For the saved distilled final-block stage, this continues the exact optimizer,
+RNG and cached-teacher objective for up to 30 additional epochs. The larger
+patience allows continuation after the original plateau; validation still
+protects `best.pt`.
+
+```bash
+docker compose run --rm research python training/student_train.py \
+  --manifest artifacts/geoclip-overnight-restored/manifest.json \
+  --run-dir artifacts/geoclip-overnight-restored/distilled \
+  --resume --finetune --tail-blocks 2 \
+  --prefix-cache artifacts/geoclip-overnight-restored/prefix-tail2.npy \
+  --teacher-cache artifacts/geoclip-overnight-restored/teacher-cache \
+  --geo-weight 0.5 --kd-weight 0.2 --embed-weight 0.3 \
+  --epochs 30 --patience 100 --export
+```
+
+For supervised continuation, change the run directory to `supervised` and omit
+the teacher/cache objective options. Add a new timezone-aware `--stop-at` when
+using a wall-clock budget. Restored best and last checkpoints use prefix paths
+for their own tail scope; a frozen best and fine-tuned last can safely coexist.
+Re-export and seal the predictor after training; obtain a new test cohort before
+making another test-based accuracy claim.
+
 ## Direct GeoCLIP export and validation
 
 The source is the pinned [Xenova image-only 8-bit conversion](https://huggingface.co/Xenova/clip-vit-large-patch14/tree/c307790166907339eed5a9a53a249af534102536/onnx),
 not the full CLIP model. The exporter adds the exact GeoCLIP MLP and L2
 normalization, freezes the input shape, and shards external weights below 64 MiB.
-The location encoder runs offline over a regular 0.5° Europe GPS grid. The export
+The selected export uses `--weight-only`: per-channel UINT8 linear weights are dequantized for FP32 matrix multiplication, and patch convolution is FP32. This preserves the small download while removing dynamic activation quantization, whose native/WASM predictions failed parity. Runtime memory is substantially larger than download size. The location encoder runs offline over a regular 0.5° Europe GPS grid. The export
 records source checksums and projection provenance. Runtime files are served
 locally with the site; Hugging Face is only a development download source.
 
 ```bash
-docker compose run --rm research python training/export_geoclip_direct.py
+docker compose run --rm research python training/export_geoclip_direct.py --weight-only
 docker compose run --rm research python training/evaluate_geoclip_direct.py \
   --manifest checkpoints/current/manifest.json --count 100 --compare-fp32
 docker compose run --rm research python training/evaluate_geoclip_direct.py \
@@ -198,6 +231,7 @@ docker compose run --rm research python training/fingerprint_runtime.py \
 # After the validation-selected gallery retrieval method is fixed:
 docker compose run --rm research python training/evaluate_geoclip_direct.py \
   --manifest artifacts/geoclip-overnight/manifest.json --test
+docker compose run --rm research python training/bundle_direct.py
 ```
 
 The browser implements Pillow's bicubic RGB resize and CLIP center crop explicitly;

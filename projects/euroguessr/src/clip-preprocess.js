@@ -32,8 +32,10 @@ export function clipResizeNormalize(rgba,width,height,size=224) {
     resized[(y*w+x)*3+c]=byte(sum);
   }
   const left=Math.floor((w-size)/2),top=Math.floor((h-size)/2),out=new Float32Array(3*size*size);
-  const mean=[.48145466,.4578275,.40821073],std=[.26862954,.26130258,.27577711];
-  for(let y=0;y<size;y++)for(let x=0;x<size;x++)for(let c=0;c<3;c++)out[c*size*size+y*size+x]=(resized[((y+top)*w+x+left)*3+c]/255-mean[c])/std[c];
+  const mean=new Float32Array([.48145466,.4578275,.40821073]),std=new Float32Array([.26862954,.26130258,.27577711]);
+  // Match AutoProcessor's float32 rescale, subtraction and division individually.
+  // Dynamic quantization can amplify even a one-ULP normalization difference.
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++)for(let c=0;c<3;c++)out[c*size*size+y*size+x]=Math.fround(Math.fround(resized[((y+top)*w+x+left)*3+c]/255)-mean[c])/std[c];
   return out;
 }
 export function preprocessCLIP(image) {

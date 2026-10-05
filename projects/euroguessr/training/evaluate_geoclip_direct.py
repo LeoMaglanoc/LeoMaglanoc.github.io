@@ -10,10 +10,10 @@ from teacher_common import atomic_json,fingerprint,manifest_fingerprint
 from evaluate_student import retrieval_candidates
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--manifest',type=Path,required=True);p.add_argument('--models',type=Path,default=ROOT/'artifacts/geoclip-direct/models');p.add_argument('--run-dir',type=Path,default=ROOT/'artifacts/geoclip-direct');p.add_argument('--count',type=int);p.add_argument('--compare-fp32',action='store_true');p.add_argument('--test',action='store_true');args=p.parse_args();torch.set_num_threads(2)
+    p=argparse.ArgumentParser();p.add_argument('--manifest',type=Path,required=True);p.add_argument('--models',type=Path,default=ROOT/'artifacts/geoclip-direct/models');p.add_argument('--run-dir',type=Path,default=ROOT/'artifacts/geoclip-direct');p.add_argument('--count',type=int);p.add_argument('--compare-fp32',action='store_true');p.add_argument('--audit-teacher',type=Path,help='Reuse separately cached validation teacher embeddings');p.add_argument('--test',action='store_true');args=p.parse_args();torch.set_num_threads(2)
     rows=json.loads(args.manifest.read_text());meta=json.loads((args.models/'metadata.json').read_text());ref=json.loads((args.models/'references.json').read_text());refs=np.fromfile(args.models/ref['feature_file'],dtype='<f4').reshape(ref['count'],ref['dimensions']);gps=np.asarray(ref['gps'])
     if args.test:
-        if args.count or args.compare_fp32:raise ValueError('Final test evaluates the full fresh cohort only')
+        if args.count or args.compare_fp32 or args.audit_teacher:raise ValueError('Final test evaluates the full fresh cohort only')
         if not meta.get('validation_selection'):raise ValueError('Select on validation before test')
         if meta['validation_selection']['manifest_sha256']!=manifest_fingerprint(rows):raise ValueError('Test manifest differs from validation selection')
         selected=[r for r in rows if r.get('cohort')=='fresh']
@@ -30,6 +30,13 @@ def main():
     from teacher_common import CLIP_REVISION
     processor=AutoProcessor.from_pretrained('openai/clip-vit-large-patch14',revision=CLIP_REVISION)
     teacher=None
+    audit={}
+    if args.audit_teacher:
+        if args.compare_fp32:raise ValueError('Choose cached or live teacher audit')
+        from cache_teacher import load_cache
+        cache=json.loads((args.audit_teacher/'index.json').read_text())
+        _,audit=load_cache(args.audit_teacher,rows,cache['identity']['centers'],role='val')
+        if any(r['id'] not in audit for r in selected):raise ValueError('Selected validation rows lack teacher embeddings; use --count for the audit subset')
     if args.compare_fp32:
         from teacher_common import load_teacher
         teacher=load_teacher()
@@ -43,6 +50,7 @@ def main():
         embeddings.append(z)
         if teacher:
             with torch.inference_mode():fp.append(torch.nn.functional.normalize(teacher.image_encoder(torch.from_numpy(x)),dim=1).numpy()[0])
+        elif audit:fp.append(audit[r['id']][0])
         if i%20==0:print('Direct validation/test',i,'/',len(selected),flush=True)
     z=np.asarray(embeddings);actual=np.array([[float(r['latitude']),float(r['longitude'])] for r in selected]);candidates={}
     if args.test:
