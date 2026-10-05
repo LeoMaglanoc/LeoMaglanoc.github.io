@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:wasm": "node scripts/check-wasm.mjs",
+    "test:worker": "node scripts/check-worker.mjs"
+  }
+}

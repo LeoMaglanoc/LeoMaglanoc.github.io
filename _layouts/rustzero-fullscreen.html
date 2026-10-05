@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3efe6" />
+    <meta
+      name="description"
+      content="Play RustZero: a Rust AlphaZero-style agent that learns 6×6 Breakthrough through self-play, with live MCTS statistics and measured training progress."
+    />
+    <title>{{ page.title | escape }}</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: #f3efe6;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        border: 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    {{ content }}
+  </body>
+</html>

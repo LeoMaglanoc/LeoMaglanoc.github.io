@@ -28,3 +28,5 @@ Its Android wrapper and third-party submodule pins are retained. Initialize
 those dependencies with `git submodule update --init --recursive`. Model
 weights, local toolchains, datasets, caches and intermediate outputs stay
 untracked. The original standalone repositories are retained locally.
+
+- `rustzero`: Rust/Burn self-play Breakthrough, CPU WASM inference and live MCTS statistics; public route `/rustzero/`.

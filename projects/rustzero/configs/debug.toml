@@ -1,0 +1,14 @@
+seed = 17
+generations = 2
+games = 4
+simulations = 16
+steps = 20
+batch = 32
+replay_capacity = 25000
+learning_rate = 0.002
+c_puct = 1.5
+temperature_moves = 10
+noise_alpha = 0.3
+noise_fraction = 0.25
+arena_games = 12
+arena_simulations = 32
