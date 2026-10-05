@@ -25,6 +25,8 @@ def main():
                 for name in ['metrics.json','selection.json']:shutil.copy2(directory/name,dest/run/directory.name/name)
     for name in ['manifest.json','data-summary.json','teacher-benchmark.json','teacher-budget.json','grid-search.json','baseline-comparison.json','baseline-test.json','deployment-selection.json','baseline-holdout-isolation.json','promotion.json','leakage-check.json','game-image-report.json','REPORT.md','docker-image-id.txt']:
         if (source/name).exists():shutil.copy2(source/name,dest/name)
+    evidence=dest/'browser-evidence';evidence.mkdir()
+    for path in sorted((ROOT/'docs').glob('chrome-v2-final-*.json')):shutil.copy2(path,evidence/path.name)
     rows=json.loads((source/'manifest.json').read_text())
     atomic_json({r['id']:hashlib.sha256((DATA/'images'/f"{r['id']}.jpg").read_bytes()).hexdigest() for r in rows},dest/'image-sha256.json')
     atomic_json({'repo':'osv5m/osv5m','revision':'cff33609b56b54d8743b7ee7a416eb8433e9a681','license':'cc-by-sa-4.0'},dest/'dataset-revision.json')

@@ -16,6 +16,7 @@ def main():
     for name in ['geoclip-exact-input-parity.json','geoclip-u8-float-patch-parity.json','geoclip-weight-only-parity.json','geoclip-sealed-source-parity.json']:
         source=ROOT/'docs'/name
         if source.exists():shutil.copy2(source,evidence/name)
+    for source in sorted((ROOT/'docs').glob('chrome-v2-final-*.json')):shutil.copy2(source,evidence/source.name)
     with zipfile.ZipFile(evidence/'actual-chrome-audits.zip','w',compression=zipfile.ZIP_DEFLATED) as archive:
         for source in sorted((ROOT/'artifacts/geoclip-direct').glob('browser-backend-audit*.json')):archive.write(source,source.name)
     sources=args.destination/'sources';sources.mkdir()

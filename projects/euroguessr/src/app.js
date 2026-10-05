@@ -175,8 +175,8 @@ function renderPins(reveal = false) {
 }
 function setGuess(point) {
   if (phase !== "playing") return;
-  guess = point;
-  keyboard = point;
+  guess = { ...point };
+  keyboard = { ...point };
   renderPins();
   $("selection").textContent = `Your pin: ${point.lat.toFixed(2)}° N, ${Math.abs(point.lon).toFixed(2)}° ${point.lon < 0 ? "W" : "E"}`;
   $("guess").disabled = false;
@@ -203,6 +203,7 @@ $("map").addEventListener(
   { passive: false }
 );
 $("map").addEventListener("keydown", (event) => {
+  if (phase !== "playing") return;
   const delta = (0.5 * view[2]) / 700;
   if (event.key === "Enter" || event.key === " ") {
     event.preventDefault();
@@ -461,7 +462,7 @@ function reveal(timedOut = false) {
     round: index + 1,
     imageId: actual.id,
     actual: { lat: actual.lat, lon: actual.lon, country: actual.country },
-    human: guess,
+    human: guess ? { ...guess } : null,
     ai: { ...ai },
     humanKm,
     aiKm,

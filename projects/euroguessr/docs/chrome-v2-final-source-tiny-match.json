@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "modelVersion": "europe-v2-distilled-42-c4483177ff40-4f2ea6016eb8",
+  "modelSha256": "c4483177ff403822e3ce0912bb3da558bff61aacf8840dbc50829dec0868a6a3",
+  "modelFingerprint": "4f2ea6016eb87ff5e89b08a41a058e2f1e409e6415ce81a5a7c54a44b75a5954",
+  "modelManifest": "876b404955c8fdf51db3f1fdee9ad8dffa87c2abfb07b7c77c40269a57d5e124",
+  "method": "distilled-50-t10",
+  "createdAt": "2026-10-05T23:26:49.593Z",
+  "rules": {
+    "region": "Europe",
+    "rounds": 5,
+    "seconds": 60,
+    "movement": false,
+    "score": "round(5000 * exp(-distance_km / 1500))"
+  },
+  "participantSkill": "unverified",
+  "rounds": [
+    {
+      "round": 1,
+      "imageId": "171289584800242",
+      "actual": {
+        "lat": 59.212460470899,
+        "lon": 23.659338217189,
+        "country": "EE"
+      },
+      "human": {
+        "lat": 52,
+        "lon": 15.5
+      },
+      "ai": {
+        "lat": 53.04252897231681,
+        "lon": 18.38169022258684
+      },
+      "humanKm": 950.2483640392085,
+      "aiKm": 759.4872178022703,
+      "humanScore": 2654,
+      "aiScore": 3014,
+      "timedOut": false,
+      "inferenceMs": 204.40000000596046
+    },
+    {
+      "round": 2,
+      "imageId": "173359481250407",
+      "actual": {
+        "lat": 42.308402395785,
+        "lon": 19.202906850259,
+        "country": "ME"
+      },
+      "human": {
+        "lat": 52.5,
+        "lon": 15.5
+      },
+      "ai": {
+        "lat": 47.18078248451023,
+        "lon": 19.71294189446542
+      },
+      "humanKm": 1166.6094740564313,
+      "aiKm": 543.2757269611752,
+      "humanScore": 2297,
+      "aiScore": 3481,
+      "timedOut": false,
+      "inferenceMs": 245.59999999403954
+    },
+    {
+      "round": 3,
+      "imageId": "127068623545977",
+      "actual": {
+        "lat": 41.672778512108295,
+        "lon": 22.853629172754133,
+        "country": "MK"
+      },
+      "human": {
+        "lat": 52.5,
+        "lon": 15
+      },
+      "ai": {
+        "lat": 45.343751786255524,
+        "lon": 17.379140990562334
+      },
+      "humanKm": 1340.8979587515487,
+      "aiKm": 601.0220075282186,
+      "humanScore": 2045,
+      "aiScore": 3349,
+      "timedOut": false,
+      "inferenceMs": 198.20000000298023
+    },
+    {
+      "round": 4,
+      "imageId": "177833937546324",
+      "actual": {
+        "lat": 48.530022806164,
+        "lon": -4.6196719765348,
+        "country": "FR"
+      },
+      "human": {
+        "lat": 52,
+        "lon": 15
+      },
+      "ai": {
+        "lat": 45.580377445959506,
+        "lon": 9.6627313929171
+      },
+      "humanKm": 1441.9620839333138,
+      "aiKm": 1128.651702281611,
+      "humanScore": 1912,
+      "aiScore": 2356,
+      "timedOut": false,
+      "inferenceMs": 177
+    },
+    {
+      "round": 5,
+      "imageId": "170436142050837",
+      "actual": {
+        "lat": 44.4154073033932,
+        "lon": 12.030542987109708,
+        "country": "IT"
+      },
+      "human": {
+        "lat": 52,
+        "lon": 15.5
+      },
+      "ai": {
+        "lat": 43.94851376397364,
+        "lon": 14.890777422379855
+      },
+      "humanKm": 881.419188023268,
+      "aiKm": 233.89909728312452,
+      "humanScore": 2778,
+      "aiScore": 4278,
+      "timedOut": false,
+      "inferenceMs": 119.8999999910593
+    }
+  ]
+}

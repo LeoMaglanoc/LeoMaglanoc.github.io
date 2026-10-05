@@ -195,6 +195,15 @@ the objective/stage recorded in `last.pt` arguments. A rebuilt prefix cache is
 expected on the first restored run. To intentionally change a dataset or teacher
 cache, create a new run and warm-start the encoder instead.
 
+Verify every restored best/last model, optimizer, RNG, history and locked runtime
+against the bundle with:
+
+```bash
+docker compose run --rm research python tests/restore_bundle.py \
+  --bundle checkpoints/geoclip-v2 \
+  --restored artifacts/geoclip-overnight-restored
+```
+
 For the saved distilled final-block stage, this continues the exact optimizer,
 RNG and cached-teacher objective for up to 30 additional epochs. The larger
 patience allows continuation after the original plateau; validation still

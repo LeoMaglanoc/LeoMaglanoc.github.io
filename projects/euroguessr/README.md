@@ -10,7 +10,7 @@ This is a working research game. Human win rate has **not been measured**. Autom
 
 The measured V2 comparison, teacher throughput, dataset, accuracy, latency, failed experiments and deployment decision are in **[the run report](artifacts/geoclip-overnight/REPORT.md)**. Full implementation rationale and exact reproduce/resume/publish/revert commands are in **[RESEARCH_V2.md](RESEARCH_V2.md)**.
 
-- `checkpoints/geoclip-v2/`: immutable V2 continuation bundle, both supervised and distilled `best.pt`/`last.pt`, optimizer and RNG states, exact manifest/image hashes, cells, teacher-cache archives, validation/test reports and source fingerprints.
+- `checkpoints/geoclip-v2/`: immutable V2 continuation bundle, supervised, distilled and embedding-only `best.pt`/`last.pt`, optimizer and RNG states, exact inference assets, manifest/image hashes, cells, teacher-cache archives, validation/test reports and source fingerprints.
 - `checkpoints/current/`: preserved V1 continuation bundle.
 - Git tag `euroguessr-v1-baseline-2026-10-05`: original model and photo pack.
 - Ignored `artifacts/geoclip-overnight/`: full local logs, prefix features, source snapshots and live runs. Ignored `data/`: raw/transformed research photos and download cache. These are excluded from public assets.
