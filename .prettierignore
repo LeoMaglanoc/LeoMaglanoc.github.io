@@ -19,3 +19,8 @@ projects/scrap-orbit/godot/.godot/
 assets/interactive/block-world/
 projects/block-world/artifacts/
 projects/block-world/godot/.godot/
+# Rust compiler output and machine-generated neural checkpoints
+projects/rustzero/web/pkg/
+projects/rustzero/web/models/
+assets/interactive/rustzero/pkg/
+assets/interactive/rustzero/models/
