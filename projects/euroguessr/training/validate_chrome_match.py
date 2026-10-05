@@ -16,6 +16,7 @@ def main():
     assert match['modelVersion']==meta['version'] and match['method']==meta['method']
     if meta.get('model_sha256'):assert match['modelSha256']==meta['model_sha256']
     if meta.get('prediction_sha256'):assert match['modelFingerprint']==meta['prediction_sha256']
+    if meta.get('manifest_sha256'):assert match['modelManifest']==meta['manifest_sha256']
     assert match['rules']['rounds']==5 and len(match['rounds'])==5
     ref=json.loads((args.models/'references.json').read_text());refs=np.fromfile(args.models/ref['feature_file'],dtype='<f4').reshape(ref['count'],ref['dimensions'])
     opts=ort.SessionOptions();opts.intra_op_num_threads=2;opts.inter_op_num_threads=1;sess=ort.InferenceSession(str(args.models/'model.onnx'),sess_options=opts,providers=['CPUExecutionProvider'])
@@ -27,6 +28,8 @@ def main():
     checks=[]
     from PIL import Image
     for r in match['rounds']:
+        assert np.allclose([r['actual']['lat'],r['actual']['lon']],[pack[r['imageId']]['lat'],pack[r['imageId']]['lon']],atol=1e-10,rtol=0)
+        assert r['actual']['country']==pack[r['imageId']]['country']
         image=ROOT/pack[r['imageId']]['image']
         if processor:
             with Image.open(image) as photo:x=processor(images=photo.convert('RGB'),return_tensors='np')['pixel_values']

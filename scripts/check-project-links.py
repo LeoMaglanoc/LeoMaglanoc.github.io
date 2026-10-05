@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / '_site'
 ROUTES = [f'/{name}/' for name in (
     'block-world', 'scrap-orbit', 'dustfall-outpost', 'mobile-sorting',
-    'rustzero', 'tiny-dreamer', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1'
+    'rustzero', 'tiny-dreamer', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1', 'euroguessr'
 )] + [f'/assets/interactive/{name}/index.html' for name in (
     'pong', 'race', 'robot-runner', 'flappy'
 )]

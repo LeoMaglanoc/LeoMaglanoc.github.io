@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: geodesic scoring uses kilometers, is symmetric and handles antipodes
+ok 1 - geodesic scoring uses kilometers, is symmetric and handles antipodes
+  ---
+  duration_ms: 6.97597
+  ...
+# Subtest: map coordinates round-trip and stay within Europe
+ok 2 - map coordinates round-trip and stay within Europe
+  ---
+  duration_ms: 3.837855
+  ...
+# Subtest: retrieval reads visual features and never needs query GPS
+ok 3 - retrieval reads visual features and never needs query GPS
+  ---
+  duration_ms: 2.857826
+  ...
+# Subtest: classifier selects a learned cell rather than averaging disconnected modes
+ok 4 - classifier selects a learned cell rather than averaging disconnected modes
+  ---
+  duration_ms: 1.05541
+  ...
+# Subtest: pixel preprocessing is NCHW, ignores alpha, and uses half-pixel interpolation
+ok 5 - pixel preprocessing is NCHW, ignores alpha, and uses half-pixel interpolation
+  ---
+  duration_ms: 0.962139
+  ...
+# Subtest: photo pinch keeps the point under its midpoint and clamps at fitted size
+ok 6 - photo pinch keeps the point under its midpoint and clamps at fitted size
+  ---
+  duration_ms: 10.947699
+  ...
+# Subtest: map pinch anchors coordinates and translates in the new scale
+ok 7 - map pinch anchors coordinates and translates in the new scale
+  ---
+  duration_ms: 1.336073
+  ...
+# Subtest: pinch never taps after one pointer remains; rebasing avoids jumps; cancellation never taps
+ok 8 - pinch never taps after one pointer remains; rebasing avoids jumps; cancellation never taps
+  ---
+  duration_ms: 3.806534
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 528.131374

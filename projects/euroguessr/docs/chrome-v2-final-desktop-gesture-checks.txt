@@ -1,0 +1,11 @@
+PASS Real worker prediction ready
+PASS Photo pinch doubles scale
+PASS Photo reset fits image
+PASS Map pinch doubles scale
+PASS Pinch never creates guess after one finger remains
+PASS Tap unprojects correctly after arbitrary zoom/pan: 52.05° N, 11.92° E / Your pin: 52.05° N, 11.92° E
+PASS Tiered city labels visible
+PASS Photo pinch inward clamps at fitted size
+PASS Map pinch inward restores full Europe
+PASS No horizontal game overflow
+Synthetic Pointer Events with capture stubbed; not physical touchscreen testing.
