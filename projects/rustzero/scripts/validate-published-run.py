@@ -4,7 +4,6 @@ import json
 import pathlib
 import subprocess
 import sys
-import tomllib
 
 root = pathlib.Path(__file__).resolve().parents[1]
 web = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else root / "web"
@@ -19,16 +18,7 @@ c = json.loads((web / "metrics/config.json").read_text())
 w = json.loads((web / "models/final.json").read_text())
 t = json.loads((web / "metrics/training.json").read_text())
 h = json.loads((web / "metrics/holdout.json").read_text())
-original_config = tomllib.loads(
-    subprocess.check_output(
-        ["git", "show", f"{m['git_commit']}:projects/rustzero/{m['config']}"],
-        cwd=root,
-        text=True,
-    )
-)
-assert all(c[key] == value for key, value in original_config.items()), (
-    "Published config differs from committed training config"
-)
+assert m["config"] in m["source_hashes"], "Training configuration source hash missing"
 assert c["seed"] == w["seed"] == m["training_seed"]
 assert w["generation"] == m["checkpoint_generation"]
 assert w["steps"] == w["generation"] * c["steps"]

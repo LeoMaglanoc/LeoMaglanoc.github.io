@@ -14,7 +14,7 @@ self-play states and policies. The strong configuration samples root visits for
 
 ## Reproduce an experiment
 
-From `projects/rustzero`, with Docker and Python 3.11+ installed:
+From `projects/rustzero`, with Docker and Python 3 installed:
 
 ```sh
 docker compose build

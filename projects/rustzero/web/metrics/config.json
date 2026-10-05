@@ -1,16 +1,17 @@
 {
-  "seed": 17,
-  "generations": 15,
-  "games": 24,
-  "simulations": 48,
-  "steps": 120,
-  "batch": 64,
-  "replay_capacity": 25000,
-  "learning_rate": 0.002,
+  "seed": 1701,
+  "generations": 200,
+  "games": 96,
+  "simulations": 128,
+  "steps": 240,
+  "batch": 128,
+  "replay_capacity": 100000,
+  "learning_rate": 0.001,
   "c_puct": 1.5,
-  "temperature_moves": 10,
+  "temperature_moves": 12,
   "noise_alpha": 0.3,
   "noise_fraction": 0.25,
-  "arena_games": 40,
-  "arena_simulations": 64
+  "arena_games": 200,
+  "arena_simulations": 256,
+  "checkpoint_interval": 5
 }

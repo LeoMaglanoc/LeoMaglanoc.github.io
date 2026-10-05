@@ -9,6 +9,7 @@ let worker,
   startup,
   inference,
   evidence,
+  runInfo,
   requestId = 0;
 const local = () => $("mode").value === "local";
 const humanBlack = () => !local() && $("side").value === "black";
@@ -37,7 +38,7 @@ function navigate(type) {
   render();
   send(type, { human: local() ? -1 : humanBlack() ? 1 : 0 });
 }
-const generation = () => ($("checkpoint").value === "final" ? 15 : Number($("checkpoint").value.split("-")[1]));
+const generation = () => ($("checkpoint").value === "final" ? runInfo?.checkpoint_generation ?? 0 : Number($("checkpoint").value.split("-")[1]));
 const coordinate = (s) => "abcdef"[s % 6] + (Math.floor(s / 6) + 1);
 const status = (text) => {
   $("status").textContent = text;
@@ -91,8 +92,9 @@ function render(animateMove = false) {
     }
   });
   [...document.querySelectorAll(".files span")].forEach((s, i) => (s.textContent = "abcdef"[humanBlack() ? 5 - i : i]));
-  $("white-player").textContent = local() ? "WHITE" : humanBlack() ? `GEN ${generation()}` : "YOU";
-  $("black-player").textContent = local() ? "BLACK" : humanBlack() ? "YOU" : `GEN ${generation()}`;
+  const opponentLabel = $("checkpoint").value === "final" ? "CHAMPION" : `GEN ${generation()}`;
+  $("white-player").textContent = local() ? "WHITE" : humanBlack() ? opponentLabel : "YOU";
+  $("black-player").textContent = local() ? "BLACK" : humanBlack() ? "YOU" : opponentLabel;
   $("ply").textContent = `${ply} ${ply === 1 ? "ply" : "plies"}`;
   $("undo").disabled = !state || (local() ? state.ply === 0 : state.ply <= (humanBlack() ? 1 : 0));
   $("redo").disabled = !state || state.ply >= state.total_plies || busy;
@@ -103,6 +105,23 @@ function render(animateMove = false) {
   document.body.classList.toggle("local", local());
   $("opponent-heading").textContent = local() ? "Local players" : "Your opponent";
   $("search-heading").textContent = local() ? "Two players" : "Inside the search";
+  const wasFinished = !$("game-result").hidden;
+  const finished = state?.terminal !== null && state?.terminal !== undefined;
+  $("game-result").hidden = !finished;
+  document.body.classList.toggle("game-over", finished);
+  if (finished) {
+    const winner = state.terminal === 1 ? state.side : !state.side;
+    const won = winner === humanBlack();
+    $("game-result").dataset.outcome = local() ? "local" : won ? "win" : "loss";
+    $("result-icon").textContent = local() || won ? "★" : "⚑";
+    $("result-title").textContent = local() ? `${winner ? "Black" : "White"} wins!` : won ? "You win!" : "AI wins — you lost";
+    $("result-detail").textContent = `${winner ? "Black" : "White"} wins after ${ply} plies. Play again or undo to explore another move.`;
+    if (!wasFinished)
+      $("game-result").scrollIntoView({
+        block: "nearest",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      });
+  }
   if (state?.terminal !== null && state?.terminal !== undefined) {
     const winner = state.terminal === 1 ? state.side : !state.side;
     status(
@@ -177,6 +196,7 @@ function start() {
   $("new-game").disabled = true;
   $("checkpoint").disabled = true;
   status("Loading Rust engine…");
+  $("timing").textContent = "Initializing Rust/WASM…";
   clearStats();
   render();
   updateEvidence();
@@ -237,27 +257,54 @@ function updateEvidence() {
     $("checkpoint-note").textContent = "Local two-player game. Both players share this device; no model is loaded and no AI runs.";
     return;
   }
-  if (!evidence) return;
-  const random = evidence.find((r) => r.generation === generation() && r.opponent === "random" && r.simulations === 64);
-  const heuristic = evidence.find((r) => r.generation === generation() && r.opponent === "heuristic" && r.simulations === 64);
-  $("checkpoint-note").textContent = `${generation() === 0 ? "Random initial weights" : "Self-play trained weights"}. ${random.wins}/${
-    random.games
-  } vs random; ${heuristic.wins}/${heuristic.games} vs heuristic at 64 simulations.`;
+  if (!evidence) {
+    $("checkpoint-note").textContent = "Checkpoint evidence is unavailable. Reload to try again.";
+    return;
+  }
+  const matchups = ["random", "heuristic", "heuristic-mcts-256"].map((opponent) =>
+    evidence.find((r) => r.generation === generation() && r.opponent === opponent && r.simulations === 256)
+  );
+  $("checkpoint-note").textContent =
+    `${generation() === 0 ? "Random initial weights" : `Self-play weights · generation ${generation()}`}. ` +
+    matchups
+      .filter(Boolean)
+      .map((r) => `${r.wins}/${r.games} vs ${r.opponent}`)
+      .join("; ") +
+    " at 256 simulations.";
 }
 async function learning() {
   try {
-    const response = await fetch("metrics/holdout.json");
-    if (!response.ok) throw new Error("Metrics unavailable");
+    const [response, metadata, config] = await Promise.all([
+      fetch("metrics/holdout.json"),
+      fetch("metrics/run-metadata.json"),
+      fetch("metrics/config.json"),
+    ]);
+    if (!response.ok || !metadata.ok || !config.ok) throw new Error("Metrics unavailable");
     evidence = await response.json();
+    runInfo = await metadata.json();
+    const cfg = await config.json();
+    const checkpoints = [...new Set(evidence.filter((r) => r.simulations === 256 && r.opponent === "heuristic").map((r) => r.generation))].sort(
+      (a, b) => a - b
+    );
+    const options = [
+      new Option(`Champion · Gen ${runInfo.checkpoint_generation}`, "final"),
+      ...checkpoints
+        .filter((g) => g !== runInfo.checkpoint_generation)
+        .reverse()
+        .map((g) => new Option(`Gen ${g} · ${g === 0 ? "untrained" : "self-play"}`, `gen-${g}`)),
+    ];
+    $("checkpoint").replaceChildren(...options);
+    $("training-note").textContent = `${cfg.generations} generations · ${(cfg.generations * cfg.games).toLocaleString()} self-play games · seed ${
+      cfg.seed
+    }`;
     updateEvidence();
-    const checkpoints = [0, 2, 4, 8, 15];
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
     svg.setAttribute("viewBox", "0 0 860 220");
     svg.setAttribute("role", "img");
     svg.setAttribute(
       "aria-label",
-      "Win rates against random and heuristic across generations 0, 2, 4, 8 and 15, using 64 simulations and 200 games each."
+      "Paired holdout win rates against random, greedy heuristic and heuristic MCTS-256, with 256 simulations per learned agent."
     );
     const element = (tag, attrs, text) => {
       const el = document.createElementNS(svgNS, tag);
@@ -274,19 +321,24 @@ async function learning() {
     for (const [opponent, color] of [
       ["random", "#929d80"],
       ["heuristic", "#af4f2d"],
+      ["heuristic-mcts-256", "#425f88"],
     ]) {
       const points = checkpoints.map((g, i) => {
-        const r = evidence.find((r) => r.generation === g && r.opponent === opponent && r.simulations === 64);
-        return [70 + i * 185, 180 - r.win_rate * 140];
+        const r = evidence.find((r) => r.generation === g && r.opponent === opponent && r.simulations === 256);
+        return [70 + i * (740 / Math.max(1, checkpoints.length - 1)), 180 - r.win_rate * 140];
       });
       element("polyline", { points: points.map((p) => p.join(",")).join(" "), fill: "none", stroke: color, "stroke-width": 2.5 });
       points.forEach(([x, y]) => element("circle", { cx: x, cy: y, r: 4.5, fill: color, stroke: "#f3efe6", "stroke-width": 2 }));
     }
-    checkpoints.forEach((g, i) => element("text", { x: 70 + i * 185, y: 211, "text-anchor": "middle" }, `Gen ${g}`));
+    checkpoints.forEach((g, i) =>
+      element("text", { x: 70 + i * (740 / Math.max(1, checkpoints.length - 1)), y: 211, "text-anchor": "middle" }, `Gen ${g}`)
+    );
     $("chart").replaceChildren(svg);
-    const final = evidence.find((r) => r.generation === 15 && r.opponent === "heuristic" && r.simulations === 64);
+    const final = evidence.find(
+      (r) => r.generation === runInfo.checkpoint_generation && r.opponent === "heuristic-mcts-256" && r.simulations === 256
+    );
     $("evidence").textContent =
-      `200 games per point, both starting sides. Two seeded random opening plies; no search noise. Gen 15: ${final.wins}/${final.games} vs heuristic. Held-out evaluation seed 78123; training seed 17. Results fluctuate between generations.`;
+      `${final.games} games per matchup, identical paired openings with both colors; 2–4 seeded opening plies, no search noise. Champion Gen ${runInfo.checkpoint_generation}: ${final.wins}/${final.games} vs heuristic MCTS-256. Holdout seed ${runInfo.holdout_seed}; training seed ${runInfo.training_seed}. Champion selected using development matches only.`;
   } catch (error) {
     $("evidence").textContent = "Evaluation data could not be loaded. Reload to try again.";
   }
@@ -294,9 +346,22 @@ async function learning() {
 $("new-game").addEventListener("click", start);
 $("checkpoint").addEventListener("change", start);
 $("side").addEventListener("change", start);
-learning();
-start();
+learning().finally(start);
 
 $("mode").addEventListener("change", start);
 $("undo").addEventListener("click", () => navigate("back"));
 $("redo").addEventListener("click", () => navigate("forward"));
+
+$("play-again").addEventListener("click", start);
+function difficultyChanged() {
+  const nightmare = $("simulations").value === "1024";
+  $("difficulty-note").textContent = nightmare
+    ? "NIGHTMARE · AI moves first by default. 1,024 MCTS simulations. Good luck."
+    : `${$("simulations").value === "64" ? "Fast" : "Strong"} · ${Number($("simulations").value).toLocaleString()} MCTS simulations.`;
+  if (nightmare) {
+    $("checkpoint").value = "final";
+    $("side").value = "black";
+  }
+  start();
+}
+$("simulations").addEventListener("change", difficultyChanged);

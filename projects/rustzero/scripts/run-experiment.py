@@ -7,7 +7,6 @@ import pathlib
 import subprocess
 import sys
 import datetime
-import tomllib
 
 root = pathlib.Path(__file__).resolve().parents[1]
 config, output = sys.argv[1:3]
@@ -43,7 +42,7 @@ metadata = dict(
     started_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
     training_started_from="random initialization",
     architecture="72 → 64 ReLU → (108 logits, 1 tanh); Burn Flex f32",
-    training_seed=tomllib.loads((root / config).read_text())["seed"],
+    training_seed=None,
     checkpoint_generation=0,
     config=config,
     development_seed=90210,

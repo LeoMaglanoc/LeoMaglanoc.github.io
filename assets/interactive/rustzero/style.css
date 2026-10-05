@@ -722,3 +722,94 @@ body.local .search-metrics,
 body.local .meter {
   display: none;
 }
+
+/* Keep the final position visible, with an unmistakable result above it. */
+.game-result[hidden] {
+  display: none;
+}
+.game-result {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px 16px;
+  align-items: center;
+  margin: 0 0 18px;
+  padding: 22px;
+  border: 2px solid #af4f2d;
+  background: #f2ded1;
+  border-radius: 8px;
+  animation: result-appear 0.25s ease-out;
+}
+.game-result[data-outcome="win"],
+.game-result[data-outcome="local"] {
+  border-color: #526843;
+  background: #e1ead7;
+}
+.result-icon {
+  font-size: 42px;
+  color: #af4f2d;
+}
+.game-result[data-outcome="win"] .result-icon,
+.game-result[data-outcome="local"] .result-icon {
+  color: #526843;
+}
+.result-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+.game-result h2 {
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.15;
+  margin: 5px 0 8px;
+}
+.game-result p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+.game-result button {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+.value-note {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 10px;
+}
+.legend-dot.search {
+  background: #425f88;
+}
+.legend {
+  flex-wrap: wrap;
+}
+@keyframes result-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-result {
+    animation: none;
+  }
+}
+.local #difficulty-note,
+.local #training-note,
+.local .value-note {
+  display: none;
+}
+#chart {
+  overflow-x: auto;
+}
+#chart text {
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  #chart svg {
+    min-width: 650px;
+  }
+}

@@ -1,0 +1,722 @@
+[
+  {
+    "candidate": 5,
+    "champion": 5,
+    "match": {
+      "average_moves": 19.489999771118164,
+      "games": 200,
+      "generation": 5,
+      "losses": 0,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 1.0,
+      "wins": 200,
+      "wins_as_black": 100,
+      "wins_as_white": 100
+    }
+  },
+  {
+    "candidate": 10,
+    "champion": 10,
+    "match": {
+      "average_moves": 27.875,
+      "games": 200,
+      "generation": 10,
+      "losses": 15,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.925000011920929,
+      "wins": 185,
+      "wins_as_black": 93,
+      "wins_as_white": 92
+    }
+  },
+  {
+    "candidate": 15,
+    "champion": 15,
+    "match": {
+      "average_moves": 31.05500030517578,
+      "games": 200,
+      "generation": 15,
+      "losses": 83,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5849999785423279,
+      "wins": 117,
+      "wins_as_black": 62,
+      "wins_as_white": 55
+    }
+  },
+  {
+    "candidate": 20,
+    "champion": 20,
+    "match": {
+      "average_moves": 30.079999923706055,
+      "games": 200,
+      "generation": 20,
+      "losses": 50,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.75,
+      "wins": 150,
+      "wins_as_black": 70,
+      "wins_as_white": 80
+    }
+  },
+  {
+    "candidate": 25,
+    "champion": 25,
+    "match": {
+      "average_moves": 31.950000762939453,
+      "games": 200,
+      "generation": 25,
+      "losses": 76,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.6200000047683716,
+      "wins": 124,
+      "wins_as_black": 63,
+      "wins_as_white": 61
+    }
+  },
+  {
+    "candidate": 30,
+    "champion": 25,
+    "match": {
+      "average_moves": 31.59000015258789,
+      "games": 200,
+      "generation": 30,
+      "losses": 90,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.550000011920929,
+      "wins": 110,
+      "wins_as_black": 51,
+      "wins_as_white": 59
+    }
+  },
+  {
+    "candidate": 35,
+    "champion": 35,
+    "match": {
+      "average_moves": 31.389999389648438,
+      "games": 200,
+      "generation": 35,
+      "losses": 76,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.6200000047683716,
+      "wins": 124,
+      "wins_as_black": 61,
+      "wins_as_white": 63
+    }
+  },
+  {
+    "candidate": 40,
+    "champion": 40,
+    "match": {
+      "average_moves": 31.770000457763672,
+      "games": 200,
+      "generation": 40,
+      "losses": 88,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5600000023841858,
+      "wins": 112,
+      "wins_as_black": 62,
+      "wins_as_white": 50
+    }
+  },
+  {
+    "candidate": 45,
+    "champion": 45,
+    "match": {
+      "average_moves": 32.71500015258789,
+      "games": 200,
+      "generation": 45,
+      "losses": 87,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5649999976158142,
+      "wins": 113,
+      "wins_as_black": 54,
+      "wins_as_white": 59
+    }
+  },
+  {
+    "candidate": 50,
+    "champion": 45,
+    "match": {
+      "average_moves": 32.71500015258789,
+      "games": 200,
+      "generation": 50,
+      "losses": 101,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.4950000047683716,
+      "wins": 99,
+      "wins_as_black": 46,
+      "wins_as_white": 53
+    }
+  },
+  {
+    "candidate": 55,
+    "champion": 55,
+    "match": {
+      "average_moves": 33.07500076293945,
+      "games": 200,
+      "generation": 55,
+      "losses": 77,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.6150000095367432,
+      "wins": 123,
+      "wins_as_black": 59,
+      "wins_as_white": 64
+    }
+  },
+  {
+    "candidate": 60,
+    "champion": 55,
+    "match": {
+      "average_moves": 31.739999771118164,
+      "games": 200,
+      "generation": 60,
+      "losses": 92,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5400000214576721,
+      "wins": 108,
+      "wins_as_black": 50,
+      "wins_as_white": 58
+    }
+  },
+  {
+    "candidate": 65,
+    "champion": 55,
+    "match": {
+      "average_moves": 31.959999084472656,
+      "games": 200,
+      "generation": 65,
+      "losses": 94,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5299999713897705,
+      "wins": 106,
+      "wins_as_black": 49,
+      "wins_as_white": 57
+    }
+  },
+  {
+    "candidate": 70,
+    "champion": 70,
+    "match": {
+      "average_moves": 31.729999542236328,
+      "games": 200,
+      "generation": 70,
+      "losses": 84,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5799999833106995,
+      "wins": 116,
+      "wins_as_black": 56,
+      "wins_as_white": 60
+    }
+  },
+  {
+    "candidate": 75,
+    "champion": 75,
+    "match": {
+      "average_moves": 30.524999618530273,
+      "games": 200,
+      "generation": 75,
+      "losses": 87,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5649999976158142,
+      "wins": 113,
+      "wins_as_black": 54,
+      "wins_as_white": 59
+    }
+  },
+  {
+    "candidate": 80,
+    "champion": 75,
+    "match": {
+      "average_moves": 30.639999389648438,
+      "games": 200,
+      "generation": 80,
+      "losses": 116,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.41999998688697815,
+      "wins": 84,
+      "wins_as_black": 36,
+      "wins_as_white": 48
+    }
+  },
+  {
+    "candidate": 85,
+    "champion": 75,
+    "match": {
+      "average_moves": 30.844999313354492,
+      "games": 200,
+      "generation": 85,
+      "losses": 99,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5049999952316284,
+      "wins": 101,
+      "wins_as_black": 41,
+      "wins_as_white": 60
+    }
+  },
+  {
+    "candidate": 90,
+    "champion": 75,
+    "match": {
+      "average_moves": 31.190000534057617,
+      "games": 200,
+      "generation": 90,
+      "losses": 90,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.550000011920929,
+      "wins": 110,
+      "wins_as_black": 51,
+      "wins_as_white": 59
+    }
+  },
+  {
+    "candidate": 95,
+    "champion": 95,
+    "match": {
+      "average_moves": 31.1299991607666,
+      "games": 200,
+      "generation": 95,
+      "losses": 76,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.6200000047683716,
+      "wins": 124,
+      "wins_as_black": 59,
+      "wins_as_white": 65
+    }
+  },
+  {
+    "candidate": 100,
+    "champion": 95,
+    "match": {
+      "average_moves": 32.16999816894531,
+      "games": 200,
+      "generation": 100,
+      "losses": 98,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5099999904632568,
+      "wins": 102,
+      "wins_as_black": 52,
+      "wins_as_white": 50
+    }
+  },
+  {
+    "candidate": 105,
+    "champion": 95,
+    "match": {
+      "average_moves": 32.064998626708984,
+      "games": 200,
+      "generation": 105,
+      "losses": 103,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.48500001430511475,
+      "wins": 97,
+      "wins_as_black": 43,
+      "wins_as_white": 54
+    }
+  },
+  {
+    "candidate": 110,
+    "champion": 110,
+    "match": {
+      "average_moves": 32.04499816894531,
+      "games": 200,
+      "generation": 110,
+      "losses": 75,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.625,
+      "wins": 125,
+      "wins_as_black": 63,
+      "wins_as_white": 62
+    }
+  },
+  {
+    "candidate": 115,
+    "champion": 110,
+    "match": {
+      "average_moves": 30.989999771118164,
+      "games": 200,
+      "generation": 115,
+      "losses": 106,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.4699999988079071,
+      "wins": 94,
+      "wins_as_black": 45,
+      "wins_as_white": 49
+    }
+  },
+  {
+    "candidate": 120,
+    "champion": 110,
+    "match": {
+      "average_moves": 31.094999313354492,
+      "games": 200,
+      "generation": 120,
+      "losses": 93,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5350000262260437,
+      "wins": 107,
+      "wins_as_black": 44,
+      "wins_as_white": 63
+    }
+  },
+  {
+    "candidate": 125,
+    "champion": 110,
+    "match": {
+      "average_moves": 31.21500015258789,
+      "games": 200,
+      "generation": 125,
+      "losses": 101,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.4950000047683716,
+      "wins": 99,
+      "wins_as_black": 46,
+      "wins_as_white": 53
+    }
+  },
+  {
+    "candidate": 130,
+    "champion": 110,
+    "match": {
+      "average_moves": 31.559999465942383,
+      "games": 200,
+      "generation": 130,
+      "losses": 102,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.49000000953674316,
+      "wins": 98,
+      "wins_as_black": 50,
+      "wins_as_white": 48
+    }
+  },
+  {
+    "candidate": 135,
+    "champion": 135,
+    "match": {
+      "average_moves": 31.774999618530273,
+      "games": 200,
+      "generation": 135,
+      "losses": 75,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.625,
+      "wins": 125,
+      "wins_as_black": 62,
+      "wins_as_white": 63
+    }
+  },
+  {
+    "candidate": 140,
+    "champion": 135,
+    "match": {
+      "average_moves": 32.630001068115234,
+      "games": 200,
+      "generation": 140,
+      "losses": 100,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5,
+      "wins": 100,
+      "wins_as_black": 49,
+      "wins_as_white": 51
+    }
+  },
+  {
+    "candidate": 145,
+    "champion": 135,
+    "match": {
+      "average_moves": 32.95500183105469,
+      "games": 200,
+      "generation": 145,
+      "losses": 103,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.48500001430511475,
+      "wins": 97,
+      "wins_as_black": 46,
+      "wins_as_white": 51
+    }
+  },
+  {
+    "candidate": 150,
+    "champion": 150,
+    "match": {
+      "average_moves": 32.220001220703125,
+      "games": 200,
+      "generation": 150,
+      "losses": 86,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5699999928474426,
+      "wins": 114,
+      "wins_as_black": 53,
+      "wins_as_white": 61
+    }
+  },
+  {
+    "candidate": 155,
+    "champion": 150,
+    "match": {
+      "average_moves": 32.38999938964844,
+      "games": 200,
+      "generation": 155,
+      "losses": 98,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5099999904632568,
+      "wins": 102,
+      "wins_as_black": 47,
+      "wins_as_white": 55
+    }
+  },
+  {
+    "candidate": 160,
+    "champion": 150,
+    "match": {
+      "average_moves": 32.3849983215332,
+      "games": 200,
+      "generation": 160,
+      "losses": 105,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.4749999940395355,
+      "wins": 95,
+      "wins_as_black": 52,
+      "wins_as_white": 43
+    }
+  },
+  {
+    "candidate": 165,
+    "champion": 165,
+    "match": {
+      "average_moves": 32.35499954223633,
+      "games": 200,
+      "generation": 165,
+      "losses": 77,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.6150000095367432,
+      "wins": 123,
+      "wins_as_black": 61,
+      "wins_as_white": 62
+    }
+  },
+  {
+    "candidate": 170,
+    "champion": 170,
+    "match": {
+      "average_moves": 32.165000915527344,
+      "games": 200,
+      "generation": 170,
+      "losses": 81,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5950000286102295,
+      "wins": 119,
+      "wins_as_black": 57,
+      "wins_as_white": 62
+    }
+  },
+  {
+    "candidate": 175,
+    "champion": 170,
+    "match": {
+      "average_moves": 32.814998626708984,
+      "games": 200,
+      "generation": 175,
+      "losses": 97,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5149999856948853,
+      "wins": 103,
+      "wins_as_black": 52,
+      "wins_as_white": 51
+    }
+  },
+  {
+    "candidate": 180,
+    "champion": 170,
+    "match": {
+      "average_moves": 33.564998626708984,
+      "games": 200,
+      "generation": 180,
+      "losses": 91,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5450000166893005,
+      "wins": 109,
+      "wins_as_black": 56,
+      "wins_as_white": 53
+    }
+  },
+  {
+    "candidate": 185,
+    "champion": 170,
+    "match": {
+      "average_moves": 32.959999084472656,
+      "games": 200,
+      "generation": 185,
+      "losses": 96,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5199999809265137,
+      "wins": 104,
+      "wins_as_black": 51,
+      "wins_as_white": 53
+    }
+  },
+  {
+    "candidate": 190,
+    "champion": 190,
+    "match": {
+      "average_moves": 33.09000015258789,
+      "games": 200,
+      "generation": 190,
+      "losses": 82,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5899999737739563,
+      "wins": 118,
+      "wins_as_black": 61,
+      "wins_as_white": 57
+    }
+  },
+  {
+    "candidate": 195,
+    "champion": 195,
+    "match": {
+      "average_moves": 33.220001220703125,
+      "games": 200,
+      "generation": 195,
+      "losses": 78,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.6100000143051147,
+      "wins": 122,
+      "wins_as_black": 60,
+      "wins_as_white": 62
+    }
+  },
+  {
+    "candidate": 200,
+    "champion": 195,
+    "match": {
+      "average_moves": 32.47999954223633,
+      "games": 200,
+      "generation": 200,
+      "losses": 94,
+      "opening_protocol": "paired identical positions, 2–4 legal plies, both colors",
+      "opponent": "champion",
+      "seed": 90210,
+      "simulations": 256,
+      "win_rate": 0.5299999713897705,
+      "wins": 106,
+      "wins_as_black": 49,
+      "wins_as_white": 57
+    }
+  }
+]
