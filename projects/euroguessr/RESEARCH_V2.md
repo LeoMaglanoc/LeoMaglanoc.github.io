@@ -174,7 +174,7 @@ training/promote_student.py --run-dir artifacts/geoclip-overnight/distilled \
 training/bundle_experiment.py --run-root artifacts/geoclip-overnight
 ```
 
-The checkpoint comparison preserves `best.pt` and `last.pt`, writes both `best-evaluation/` and `last-evaluation/` reports, and copies the validation winner’s runtime assets to the run root. `checkpoint-selection.json` records the choice. Both students receive the same comparison. Resume training from the original saved state; `selected_checkpoint` identifies which weights produced the deployed export. Never rerun selection after a fresh test has been opened.
+The updated orchestration performs this checkpoint comparison automatically when no selection exists. The explicit commands above are the equivalent for a fresh manually trained run; do not rerun them on a sealed selection. The checkpoint comparison preserves `best.pt` and `last.pt`, writes both `best-evaluation/` and `last-evaluation/` reports, and copies the validation winner’s runtime assets to the run root. `checkpoint-selection.json` records the choice. Both students receive the same comparison. Resume training from the original saved state; `selected_checkpoint` identifies which weights produced the deployed export. Never rerun selection after a fresh test has been opened.
 
 Choose supervised instead if it wins validation. Final test reports describe the
 selected method only, not a test-based sweep.

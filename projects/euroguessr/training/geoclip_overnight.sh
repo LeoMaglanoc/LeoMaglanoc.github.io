@@ -45,10 +45,16 @@ for run in supervised distilled; do
 done
 research training/cache_teacher.py --manifest "$ROOT_RUN/manifest.json" --cells "$ROOT_RUN/cells.json" --output "$ROOT_RUN/validation-teacher" --role val --count 100 --batch-size "$BATCH" 2>&1 | tee -a "$ROOT_RUN/validation-teacher.log"
 for run in supervised distilled; do
- research training/evaluate_student.py --run-dir "$ROOT_RUN/$run" --audit-teacher "$ROOT_RUN/validation-teacher" 2>&1 | tee "$ROOT_RUN/$run-evaluate.log"
+ if [[ ! -f "$ROOT_RUN/$run/checkpoint-selection.json" ]]; then
+  research training/evaluate_student.py --run-dir "$ROOT_RUN/$run" --audit-teacher "$ROOT_RUN/validation-teacher" 2>&1 | tee "$ROOT_RUN/$run-evaluate.log"
+ fi
 done
+if [[ ! -f "$ROOT_RUN/baseline-comparison.json" ]]; then
+ research training/compare_baseline.py --manifest "$ROOT_RUN/manifest.json" --output "$ROOT_RUN/baseline-comparison.json" 2>&1 | tee "$ROOT_RUN/baseline-evaluate.log"
+fi
 for run in supervised distilled; do
- research training/fingerprint_runtime.py --models "$ROOT_RUN/$run/models" --metrics-out "$ROOT_RUN/$run/metrics.json"
+ if [[ ! -f "$ROOT_RUN/$run/checkpoint-selection.json" ]]; then
+  research training/select_student_checkpoint.py --run-dir "$ROOT_RUN/$run" --audit-teacher "$ROOT_RUN/validation-teacher" 2>&1 | tee "$ROOT_RUN/$run-checkpoint-comparison.log"
+ fi
 done
-research training/compare_baseline.py --manifest "$ROOT_RUN/manifest.json" --output "$ROOT_RUN/baseline-comparison.json" 2>&1 | tee "$ROOT_RUN/baseline-evaluate.log"
 printf 'Validation comparisons ready. Lock the deployment selection before final test, promotion, browser checks and checkpoint bundling.\n'
