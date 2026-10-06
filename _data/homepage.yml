@@ -32,7 +32,7 @@ builds:
   - title: Interactive Web Demos
     description: "Fun demos created with coding agents"
     links:
-      - label: Robot Locomotion
+      - label: G1 Locomotion
         url: /locomotion/
       - label: Block-World
         url: /block-world/

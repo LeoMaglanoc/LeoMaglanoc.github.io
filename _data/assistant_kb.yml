@@ -159,13 +159,12 @@ records:
 
   - id: g1_simulator
     type: build
-    title: Robot Locomotion Playground
-    summary: Browser-native G1 learned locomotion and B2+Z1 whole-body model predictive control playground.
+    title: G1 Locomotion Playground
+    summary: Browser-native Unitree G1 learned locomotion playground.
     facts:
       - Runs a PPO actor exported to ONNX in ONNX Runtime Web.
       - Uses a 47-dimensional proprioceptive observation and a 12-DoF lower-body action space.
       - Runs policy updates at 50 Hz and PD control and MuJoCo physics at 500 Hz.
-      - B2+Z1 includes genuine native MPC recordings and an live CasADi/IPOPT Web Worker MPC and a browser Fatrop validation experiment.
     skills: [MuJoCo, ONNX Runtime Web, Three.js, PPO, JavaScript, browser deployment]
     tags: [Unitree G1, simulation, locomotion, control, ONNX]
     aliases: [G1, Unitree, humanoid simulator, locomotion, MuJoCo]

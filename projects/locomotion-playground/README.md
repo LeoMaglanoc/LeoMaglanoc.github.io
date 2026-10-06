@@ -1,6 +1,8 @@
 # Robot Locomotion Playground
 
-One browser playground, two different robots and control paradigms. `/locomotion/` is the new public route; `/g1/` remains compatible.
+The public UI currently exposes G1 only on `/locomotion/` and `/g1/`. The B2+Z1 MPC implementation, template, models, solver assets and reproduction tools are retained for future work, but the public app does not import or initialize MPC, including for old `#b2` links.
+
+Retained implementations:
 
 - **G1 live RL:** the existing PPO policy, ONNX runtime, MuJoCo model, keyboard/touch controls and push recovery are reused unchanged inside a disposable iframe.
 - **B2+Z1 native MPC playback (MVP1):** genuine stand/walk/trot trajectories from the pinned upstream whole-body RNEA OCP, rendered with MuJoCo, contact schedules, force arrows and future-state skeletons. These are predicted trajectories, not measured physics rollouts.
