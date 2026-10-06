@@ -1,0 +1,34 @@
+{
+  "s0-fp32": {
+    "meanCosine": 1.0000000048935374,
+    "minCosine": 0.9999998533456882,
+    "modelBytes": 169783957,
+    "medianWarmMs": 157.92264500487363,
+    "p95WarmMs": 208.73353090355516,
+    "threads": 1
+  },
+  "s0-weight8": {
+    "meanCosine": 0.9999016143304488,
+    "minCosine": 0.999857444191879,
+    "modelBytes": 55519555,
+    "medianWarmMs": 140.70966000144836,
+    "p95WarmMs": 203.4411041997372,
+    "threads": 1
+  },
+  "s0-dynamic": {
+    "meanCosine": 0.9480712695905258,
+    "minCosine": 0.8689921143015331,
+    "modelBytes": 55502894,
+    "medianWarmMs": 122.99704600445693,
+    "p95WarmMs": 209.3266769028559,
+    "threads": 1
+  },
+  "mobileclip2-weight8": {
+    "meanCosine": 0.9999562080921535,
+    "minCosine": 0.9999257138213938,
+    "modelBytes": 64468956,
+    "medianWarmMs": 244.48215300071752,
+    "p95WarmMs": 439.3555951988673,
+    "threads": 1
+  }
+}

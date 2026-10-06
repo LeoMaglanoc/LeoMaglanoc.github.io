@@ -1,0 +1,207 @@
+{
+  "model": "MobileCLIP2-S0",
+  "datasetNote": "40 manually inspected prompts. Exploratory view selection on 30 prompts; 10 held out. Region-part masks accepted when they depict the target.",
+  "selectedStrategy": "weighted",
+  "metrics": {
+    "fp32-context": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.6333333333333333,
+        "recallAt3": 0.7666666666666667,
+        "MRR": 0.7297685185185184
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.5,
+        "recallAt3": 0.8,
+        "MRR": 0.651025641025641
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.6,
+        "recallAt3": 0.775,
+        "MRR": 0.7100827991452991
+      }
+    },
+    "fp32-isolated": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.7333333333333333,
+        "recallAt3": 0.8,
+        "MRR": 0.784951404804346
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.3,
+        "recallAt3": 0.7,
+        "MRR": 0.541025641025641
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.625,
+        "recallAt3": 0.775,
+        "MRR": 0.7239699638596697
+      }
+    },
+    "fp32-masked": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.6666666666666666,
+        "recallAt3": 0.8333333333333334,
+        "MRR": 0.7547670847670848
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.5,
+        "recallAt3": 0.7,
+        "MRR": 0.6432539682539682
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.625,
+        "recallAt3": 0.8,
+        "MRR": 0.7268888056388055
+      }
+    },
+    "fp32-max": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.7,
+        "recallAt3": 0.8,
+        "MRR": 0.762996632996633
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.5,
+        "recallAt3": 0.8,
+        "MRR": 0.6493589743589744
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.65,
+        "recallAt3": 0.8,
+        "MRR": 0.7345872183372184
+      }
+    },
+    "fp32-weighted": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.7333333333333333,
+        "recallAt3": 0.8333333333333334,
+        "MRR": 0.7953787878787879
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.5,
+        "recallAt3": 0.7,
+        "MRR": 0.6408333333333334
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.675,
+        "recallAt3": 0.8,
+        "MRR": 0.7567424242424242
+      }
+    },
+    "weight8-context": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.6333333333333333,
+        "recallAt3": 0.7666666666666667,
+        "MRR": 0.7314351851851851
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.6,
+        "recallAt3": 0.8,
+        "MRR": 0.7016666666666665
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.625,
+        "recallAt3": 0.775,
+        "MRR": 0.7239930555555556
+      }
+    },
+    "weight8-isolated": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.7,
+        "recallAt3": 0.8,
+        "MRR": 0.7684072871572872
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.3,
+        "recallAt3": 0.7,
+        "MRR": 0.541025641025641
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.6,
+        "recallAt3": 0.775,
+        "MRR": 0.7115618756243756
+      }
+    },
+    "weight8-masked": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.6666666666666666,
+        "recallAt3": 0.8333333333333334,
+        "MRR": 0.7547670847670848
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.5,
+        "recallAt3": 0.7,
+        "MRR": 0.6432539682539682
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.625,
+        "recallAt3": 0.8,
+        "MRR": 0.7268888056388055
+      }
+    },
+    "weight8-max": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.7,
+        "recallAt3": 0.8,
+        "MRR": 0.762996632996633
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.6,
+        "recallAt3": 0.8,
+        "MRR": 0.6987179487179487
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.675,
+        "recallAt3": 0.8,
+        "MRR": 0.746926961926962
+      }
+    },
+    "weight8-weighted": {
+      "selection": {
+        "queries": 30,
+        "recallAt1": 0.7333333333333333,
+        "recallAt3": 0.8333333333333334,
+        "MRR": 0.7956818181818182
+      },
+      "holdout": {
+        "queries": 10,
+        "recallAt1": 0.5,
+        "recallAt3": 0.7,
+        "MRR": 0.6208333333333333
+      },
+      "all": {
+        "queries": 40,
+        "recallAt1": 0.675,
+        "recallAt3": 0.8,
+        "MRR": 0.7519696969696971
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "sceneId": "tools",
+  "width": 1800,
+  "height": 1111,
+  "maskWidth": 1024,
+  "maskHeight": 632,
+  "model": "MobileCLIP-S0",
+  "checkpoint": "apple/MobileCLIP-S0",
+  "embeddingDim": 512,
+  "numRegions": 17,
+  "views": [
+    "context",
+    "isolated",
+    "masked"
+  ],
+  "embeddingNormalization": "l2",
+  "maskEncoding": "row-major-rle-u32-le",
+  "segmentation": "SAM 2.1 Hiera tiny",
+  "pointsPerSide": 20,
+  "checkpointRevision": "809b408eff74f8058843e86a1f92967097d42ba782450e85b8f4867b7f0ca0b7"
+}

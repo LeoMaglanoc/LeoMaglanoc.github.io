@@ -1,0 +1,7 @@
+{
+  "device":"Intel Core i7-8565U, Linux x86_64, Chrome 154",
+  "provider":"CPU / WASM, one thread in a worker",
+  "note":"Local static server; download timing is not a public-network cold-load benchmark. Same 20 warm prompts; 60 embedding comparisons. No physical phone tested.",
+  "MobileCLIP2-S0":{"modelBytes":64468956,"loadMs":277.80000000447035,"initMs":1482.5,"firstMs":506.1000000014901,"medianWarmMs":275.3999999985099,"p95WarmMs":294.30000000447035,"meanCosine":0.9999562075240488,"minCosine":0.9999257532120375},
+  "MobileCLIP-S0":{"modelBytes":55519555,"loadMs":339.20000000298023,"initMs":1267.3999999985099,"firstMs":196.80000000447035,"medianWarmMs":191,"p95WarmMs":204.60000000149012,"meanCosine":0.999901605002845,"minCosine":0.9998574639838123}
+}

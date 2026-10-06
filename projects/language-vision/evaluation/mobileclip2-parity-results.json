@@ -1,0 +1,36 @@
+{
+  "queries": 60,
+  "fp32MeanCosine": 1.0,
+  "quantizedMeanCosine": 0.9999561905860901,
+  "quantizedMinCosine": 0.9999257326126099,
+  "maxAbsError": 0.0025491863489151,
+  "nativeWarmMedianMs": 1094.045673002256,
+  "nativeWarmP95Ms": 1564.2620919032195,
+  "modelBytes": 64294613,
+  "top1Agreement": 0.9916666666666667,
+  "top3Overlap": 0.9907407407407406,
+  "rankingComparisons": 360,
+  "regressions": [
+    {
+      "scene": "street",
+      "query": "a chair",
+      "reference": 12,
+      "quantized": 19,
+      "referenceGap": 6.824731826782227e-05
+    },
+    {
+      "scene": "street",
+      "query": "something that produces light",
+      "reference": 1,
+      "quantized": 17,
+      "referenceGap": 5.675852298736572e-05
+    },
+    {
+      "scene": "workshop",
+      "query": "a plant",
+      "reference": 25,
+      "quantized": 3,
+      "referenceGap": 0.000372275710105896
+    }
+  ]
+}

@@ -45,3 +45,12 @@ projects/euroguessr/artifacts/
 projects/euroguessr/cities.json
 assets/interactive/euroguessr/cities.json
 projects/euroguessr/docs/*.json
+# Generated ML assets, upstream runtime, and recorded evaluation evidence.
+assets/interactive/language-vision/models/
+assets/interactive/language-vision/data/
+assets/interactive/language-vision/vendor/
+projects/language-vision/artifacts/
+projects/language-vision/.venv/
+projects/language-vision/evaluation/*results.json
+projects/language-vision/evaluation/*details.json
+projects/language-vision/evaluation/chrome-*.json

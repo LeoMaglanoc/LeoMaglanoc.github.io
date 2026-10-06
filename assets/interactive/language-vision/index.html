@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f3ed" />
+    <meta name="description" content="Type a visual concept. MobileCLIP searches real SAM object masks locally on your browser CPU." />
+    <title>Language → Vision · Leo's experiments</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <a href="/blog/AI-coding-agent-case-study/" id="back-link">← Leo's experiments</a><span class="edition">AN INTERACTIVE EXPERIMENT</span
+        ><span class="local-badge"><i></i> LOCAL INFERENCE</span>
+      </header>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">AN OPEN-VOCABULARY VISUAL SEARCH LAB</p>
+          <h1>Language <span>→</span> Vision</h1>
+          <p class="subtitle">Give a picture a question. See which objects resonate.</p>
+        </div>
+        <p class="intro-note">Type any visual concept.<br />A small model finds similar regions.<br />Everything runs in your browser.</p>
+      </section>
+      <form id="search-form" class="query-form">
+        <label for="query">WHAT ARE YOU LOOKING FOR?</label>
+        <div class="input-row">
+          <input
+            id="query"
+            value="something used to tighten screws"
+            placeholder="An object, a material, a purpose…"
+            maxlength="1000"
+            autocomplete="off"
+          /><button id="search" type="submit">Enable local search <span>↗</span></button>
+        </div>
+        <div class="query-footer">
+          <span id="status" role="status" aria-live="polite">Model download on first use. Your queries stay on this device.</span
+          ><span id="download-size"></span>
+        </div>
+        <progress id="progress" max="1" value="0" hidden aria-label="Model download progress"></progress>
+      </form>
+      <div class="suggestions" aria-label="Suggested queries">
+        <span>TRY A CONCEPT</span><button type="button" data-query="the screwdriver">Object <b>the screwdriver</b></button
+        ><button type="button" data-query="something made of metal">Material <b>made of metal</b></button
+        ><button type="button" data-query="something used for cutting">Function <b>used for cutting</b></button
+        ><button type="button" data-query="something a robot could grasp">Affordance <b>a robot could grasp</b></button
+        ><button type="button" data-query="something associated with communication">Abstract <b>communication</b></button>
+      </div>
+      <section class="workspace" aria-label="Visual search">
+        <div class="visual-column">
+          <div class="section-heading">
+            <h2><span class="step">01</span> Choose a scene</h2>
+            <span id="scene-count"></span>
+          </div>
+          <div id="scenes" class="scene-strip" aria-label="Scene selector"></div>
+          <div class="photo-heading">
+            <span id="scene-name">Hand tools</span>
+            <div>
+              <label class="overlay-toggle"><input type="checkbox" id="show-overlays" checked /> Masks</label
+              ><button id="zoom" type="button" aria-pressed="false">Expand ↗</button>
+            </div>
+          </div>
+          <div id="stage" class="stage">
+            <img id="photo" alt="Selected scene" /><canvas id="overlay" aria-label="Stored segmentation masks over the scene"></canvas
+            ><span id="mask-label" class="mask-label" hidden></span>
+          </div>
+          <div class="photo-footer">
+            <span>Tap a match to inspect its exact mask.</span><a id="photo-credit" target="_blank" rel="noopener">Photo source ↗</a>
+          </div>
+        </div>
+        <aside class="matches">
+          <div class="section-heading">
+            <h2><span class="step">02</span> Best matches</h2>
+            <span>SIMILARITY</span>
+          </div>
+          <p id="results-query" class="results-query">A query can describe an object, a property or a purpose.</p>
+          <div id="results" class="results">
+            <div class="empty-state">
+              <span class="empty-icon">⌕</span>
+              <h3>A shared space for words & pictures.</h3>
+              <p>Enable local search to compare your text with the objects in this scene.</p>
+              <small>No fixed labels. No chatbot. No cloud inference.</small>
+            </div>
+          </div>
+          <div class="metrics">
+            <div><span>TEXT ENCODER</span><b>MobileCLIP-S0</b></div>
+            <div><span>EXECUTION</span><b>CPU / WASM · worker</b></div>
+            <div><span>SEARCHABLE REGIONS</span><b id="region-count">—</b></div>
+            <div><span>LOCAL INFERENCE</span><b id="timing">—</b></div>
+            <div><span>WHOLE-SCENE SIMILARITY</span><b id="scene-score">—</b></div>
+          </div>
+          <p class="caveat">Similarity is a ranking, not a probability. A match always exists, even when the concept is absent.</p>
+        </aside>
+      </section>
+      <section id="debug-panel" class="debug-panel" hidden>
+        <h2>Mask inspector</h2>
+        <label><input type="checkbox" id="all-masks" /> Show all retained SAM masks</label>
+        <p id="debug-info"></p>
+        <div id="debug-regions"></div>
+      </section>
+      <section class="explanation">
+        <div>
+          <p class="eyebrow">A LITTLE MODEL. A SHARED EMBEDDING SPACE.</p>
+          <h2>Words in. Regions out.</h2>
+          <p>
+            We segmented each photograph offline with SAM 2.1 and encoded three views of every region with MobileCLIP. Your browser only runs the
+            matching text encoder, then compares vectors.
+          </p>
+        </div>
+        <div class="pipeline">
+          <span>Your words</span><b>↓</b><span>MobileCLIP text encoder</span><b>↓</b><span>Similarity to cached image embeddings</span><b>↓</b
+          ><span class="pipeline-end">Stored SAM masks</span>
+        </div>
+        <div class="limits">
+          <h3>Explore the associations.</h3>
+          <p>“Something a robot could grasp” searches semantic resemblance. It does not measure grasp feasibility, mass, reachability or safety.</p>
+          <a href="benchmark.html">Run a benchmark on this device ↗</a
+          ><a id="source-link" href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/projects/language-vision"
+            >Pipeline, evaluation & limitations ↗</a
+          ><a href="THIRD_PARTY_NOTICES.md">Model & photo credits ↗</a><a id="debug-link" href="?debug=1">Inspect every mask ↗</a>
+        </div>
+      </section>
+      <footer><span>BUILT TO EXPLORE, NOT TO OVERCLAIM.</span><span>MobileCLIP · SAM 2.1 · ONNX Runtime</span></footer>
+    </main>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>

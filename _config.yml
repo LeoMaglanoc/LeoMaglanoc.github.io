@@ -269,6 +269,7 @@ jekyll-minifier:
       "assets/interactive/drone-racing/drone.css",
       "assets/interactive/tiny-dreamer/tiny-dreamer.css",
       "assets/interactive/mobile-sorting/sorting.css",
+      "assets/interactive/language-vision/**",
     ]
 
 # -----------------------------------------------------------------------------

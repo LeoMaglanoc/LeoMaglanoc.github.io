@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Language → Vision · device benchmark</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="benchmark">
+      <a href="index.html">← Back to visual search</a>
+      <h1>Measure this browser.</h1>
+      <p>
+        Run the actual deployed model on CPU / WASM in a worker. The report separates loading, first inference and 20 warm queries, then checks 60
+        embeddings against Python. A narrow desktop viewport is not an Android benchmark.
+      </p>
+      <label for="device">Device description (optional)</label><input id="device" placeholder="e.g. Pixel 8 / Android Chrome" />
+      <p><button id="run">Run benchmark & parity checks</button><button id="download" disabled>Download report</button></p>
+      <p id="status" role="status" aria-live="polite">Ready. The model will download on the first run.</p>
+      <progress id="progress" max="1" value="0" hidden aria-label="Model download"></progress>
+      <pre id="report">No measurements yet.</pre>
+      <script type="module" src="benchmark.mjs"></script>
+    </main>
+  </body>
+</html>

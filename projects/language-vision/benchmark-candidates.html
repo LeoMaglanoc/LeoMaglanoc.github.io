@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <meta name="viewport" content="width=device-width,initial-scale=1" /><title>MobileCLIP candidate browser benchmark</title>
+  <h1>Candidate comparison on this browser</h1>
+  <p>Run after offline jobs finish. CPU / WASM, 1 thread.</p>
+  <button id="s0">Benchmark MobileCLIP-S0</button
+  ><button id="s2">Benchmark MobileCLIP2-S0</button>
+  <p id="status">Ready</p>
+  <pre id="report"></pre>
+  <script type="module">
+    const base = "/assets/interactive/language-vision/";
+    let result = {};
+    async function run(candidate) {
+      const status = document.querySelector("#status");
+      document.querySelectorAll("button").forEach((b) => (b.disabled = true));
+      let request = 0,
+        resolve,
+        reject,
+        pending = new Map();
+      const worker = new Worker(base + "worker.mjs", { type: "module" });
+      const ready = new Promise((res, rej) => {
+        resolve = res;
+        reject = rej;
+      });
+      worker.onmessage = ({ data }) => {
+        if (data.type === "ready") resolve(data);
+        if (data.type === "error") {
+          reject(new Error(data.error));
+          pending.get(data.id)?.reject(new Error(data.error));
+        }
+        if (data.type === "result") pending.get(data.id)?.resolve(data);
+        if (data.type === "progress") status.textContent = "Loading " + (data.received / 1e6).toFixed(1) + "MB";
+      };
+      try {
+        const fixtures = await fetch(candidate === "s0" ? "artifacts/s0-fixtures.json" : "artifacts/mobileclip2-fixtures.json").then((r) => r.json());
+        worker.postMessage({
+          type: "init",
+          ...(candidate === "s0"
+            ? { metadataURL: "/projects/language-vision/artifacts/s0-model.json", modelURL: "/projects/language-vision/artifacts/s0-weight8.onnx" }
+            : {
+                metadataURL: "/projects/language-vision/artifacts/mobileclip2-model.json",
+                modelURL: "/projects/language-vision/artifacts/mobileclip2-weight8.onnx",
+              }),
+        });
+        const loaded = await ready;
+        const times = [],
+          cosines = [];
+        for (let i = 0; i < fixtures.length; i++) {
+          status.textContent = "Query " + (i + 1) + " / " + fixtures.length;
+          const id = ++request;
+          const r = await new Promise((res, rej) => {
+            pending.set(id, { resolve: res, reject: rej });
+            worker.postMessage({ type: "query", id, query: fixtures[i].query, includeVector: true });
+          });
+          times.push(r.inferenceMs);
+          const ref = fixtures[i].reference;
+          cosines.push(r.vector.reduce((s, x, j) => s + x * ref[j], 0));
+        }
+        const warm = times.slice(1, 21).sort((a, b) => a - b);
+        result[candidate] = {
+          model: loaded.metadata.model,
+          modelBytes: loaded.modelBytes,
+          loadMs: loaded.loadMs,
+          initMs: loaded.initMs,
+          firstMs: times[0],
+          medianWarmMs: (warm[9] + warm[10]) / 2,
+          p95WarmMs: warm[18],
+          meanCosine: cosines.reduce((s, x) => s + x, 0) / cosines.length,
+          minCosine: Math.min(...cosines),
+          userAgent: navigator.userAgent,
+        };
+        document.querySelector("#report").textContent = JSON.stringify(result, null, 2);
+        status.textContent = "Complete";
+      } catch (e) {
+        status.textContent = String(e);
+      } finally {
+        worker.terminate();
+        document.querySelectorAll("button").forEach((b) => (b.disabled = false));
+      }
+    }
+    document.querySelector("#s0").onclick = () => run("s0");
+    document.querySelector("#s2").onclick = () => run("s2");
+  </script>
+</html>

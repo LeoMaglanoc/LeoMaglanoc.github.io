@@ -1,0 +1,7992 @@
+{
+  "fp32-context": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        8,
+        1,
+        32
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        7,
+        1,
+        10
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        29,
+        28,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        20,
+        17,
+        8
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        1,
+        7,
+        35,
+        16
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        37,
+        3,
+        2,
+        49
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        15,
+        14,
+        21,
+        45
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        19,
+        51,
+        48,
+        9
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        46,
+        36,
+        34,
+        4,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        38,
+        42,
+        44,
+        37,
+        5
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        15,
+        33,
+        24,
+        18
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        11,
+        5,
+        7,
+        8,
+        1
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        23,
+        26,
+        22,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        15,
+        33,
+        26,
+        18
+      ],
+      "rank": 7
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        26,
+        17,
+        22,
+        23,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        7,
+        29,
+        28,
+        31
+      ],
+      "rank": 18
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        15,
+        32,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        33,
+        28,
+        7,
+        31
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        7,
+        27,
+        33,
+        30
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        14,
+        23,
+        33,
+        29,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        18,
+        17,
+        14,
+        16
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        23,
+        19,
+        18
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        23,
+        11,
+        17,
+        22
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        11,
+        9,
+        23,
+        21,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        11,
+        21,
+        4,
+        22
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        12,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        12,
+        21,
+        20,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        10,
+        6,
+        18,
+        8
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        18,
+        16,
+        19,
+        13
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        18,
+        10,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        23,
+        11,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        17,
+        21,
+        18,
+        23,
+        11
+      ],
+      "rank": 6
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        21,
+        18,
+        14,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        11,
+        9,
+        12,
+        6,
+        20
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        20,
+        23,
+        13,
+        6
+      ],
+      "rank": 22
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        4,
+        14,
+        15,
+        18,
+        10
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        8,
+        23,
+        24,
+        6
+      ],
+      "rank": 12
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        10,
+        24,
+        8,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        6,
+        24,
+        23,
+        4
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        4,
+        6,
+        2,
+        5,
+        16
+      ],
+      "rank": 1
+    }
+  ],
+  "fp32-isolated": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        27,
+        6
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        14,
+        7,
+        27
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        12,
+        19,
+        17
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        26,
+        1,
+        29,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        38,
+        41,
+        35,
+        43
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        40,
+        21,
+        15,
+        45
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        1,
+        19,
+        35,
+        41,
+        31
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        36,
+        34,
+        37,
+        32,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        42,
+        38,
+        41,
+        43,
+        49
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        24,
+        19,
+        15,
+        29,
+        18
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        8,
+        7,
+        5,
+        25,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        12,
+        17,
+        11,
+        23,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        24,
+        29,
+        19,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        22,
+        26,
+        12,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        29,
+        33,
+        10,
+        32,
+        28
+      ],
+      "rank": 35
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        27,
+        22,
+        17,
+        38
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        7,
+        27
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        29,
+        16,
+        24,
+        25
+      ],
+      "rank": 7
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        28,
+        33,
+        29,
+        32,
+        23
+      ],
+      "rank": 7
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        16,
+        24,
+        12,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        6,
+        23,
+        24,
+        12,
+        13
+      ],
+      "rank": 8
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        6,
+        7,
+        24,
+        20,
+        25
+      ],
+      "rank": 9
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        12,
+        7,
+        4,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        1,
+        12,
+        9,
+        24
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        22,
+        20,
+        3,
+        13
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        3,
+        20,
+        21,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        8,
+        1,
+        4
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        5,
+        1,
+        20,
+        21,
+        3
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        12,
+        18,
+        2,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        2,
+        1,
+        25,
+        9
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        12,
+        16,
+        9,
+        1,
+        2
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        16,
+        18,
+        4,
+        22,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        1,
+        11,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        20,
+        7,
+        13,
+        21,
+        24
+      ],
+      "rank": 25
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        20,
+        12,
+        15,
+        8
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        20,
+        23,
+        12,
+        2
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        22,
+        20,
+        24,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        20,
+        8,
+        24,
+        1,
+        23
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        15,
+        14,
+        2,
+        8
+      ],
+      "rank": 2
+    }
+  ],
+  "fp32-masked": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        30,
+        38
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        27,
+        7,
+        5
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        28,
+        33,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        20,
+        7,
+        17,
+        19
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        29,
+        1,
+        16,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        43,
+        37,
+        30,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        45,
+        15,
+        21,
+        40
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        41,
+        19,
+        50,
+        35,
+        27
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        34,
+        36,
+        4,
+        32,
+        37
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        38,
+        42,
+        31,
+        37,
+        43
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        24,
+        19,
+        29,
+        15,
+        14
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        7,
+        8,
+        5,
+        11,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        11,
+        17,
+        23,
+        12,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        19,
+        15,
+        24,
+        32
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        11,
+        26,
+        22,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        28,
+        29,
+        10,
+        7
+      ],
+      "rank": 29
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        20,
+        38,
+        7,
+        27
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        7,
+        8
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        20,
+        22,
+        16,
+        33
+      ],
+      "rank": 8
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        14,
+        25,
+        29,
+        28
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        14,
+        18,
+        16,
+        24
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        13,
+        18,
+        16
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        18,
+        6,
+        14,
+        11
+      ],
+      "rank": 9
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        21,
+        12,
+        11,
+        6
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        3,
+        25,
+        12,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        11,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        12,
+        20,
+        21,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        8,
+        4,
+        10
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        5,
+        20,
+        18,
+        12
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        2,
+        12,
+        18,
+        10
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        5,
+        11,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        7,
+        21,
+        9,
+        16,
+        18
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        7,
+        5,
+        21,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        11,
+        3,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        20,
+        13,
+        1,
+        6
+      ],
+      "rank": 24
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        20,
+        8,
+        15,
+        14
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        23,
+        1,
+        22,
+        17
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        18,
+        1,
+        25,
+        24
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        23,
+        20,
+        8,
+        24,
+        25
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        8,
+        14,
+        15,
+        2
+      ],
+      "rank": 3
+    }
+  ],
+  "fp32-max": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        8,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        7,
+        14,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        28,
+        33,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        20,
+        12,
+        19
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        26,
+        29,
+        1,
+        16
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        38,
+        41,
+        35,
+        43
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        45,
+        40,
+        21,
+        15
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        1,
+        19,
+        41,
+        35,
+        31
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        36,
+        34,
+        4,
+        37,
+        46
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        42,
+        38,
+        41,
+        43,
+        49
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        24,
+        19,
+        15,
+        29,
+        33
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        8,
+        11,
+        5,
+        7,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        11,
+        17,
+        12,
+        23,
+        26
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        24,
+        19,
+        29,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        26,
+        17,
+        22,
+        11,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        29,
+        33,
+        10,
+        32,
+        28
+      ],
+      "rank": 35
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        27,
+        22,
+        17
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        33,
+        28,
+        7,
+        31
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        22,
+        20,
+        16,
+        24
+      ],
+      "rank": 6
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        14,
+        23,
+        33,
+        28,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        18,
+        14,
+        17,
+        16
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        23,
+        13,
+        6
+      ],
+      "rank": 12
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        23,
+        6,
+        7,
+        18
+      ],
+      "rank": 9
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        21,
+        11,
+        12,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        21,
+        3,
+        1,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        11,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        12,
+        21,
+        20,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        10,
+        8,
+        18
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        5,
+        18,
+        16,
+        19
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        12,
+        18,
+        2
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        5,
+        23,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        17,
+        21,
+        7,
+        9,
+        18
+      ],
+      "rank": 6
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        7,
+        17,
+        21,
+        5
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        11,
+        3,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        20,
+        13,
+        7,
+        23
+      ],
+      "rank": 25
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        4,
+        18,
+        20,
+        8
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        10,
+        23,
+        24,
+        6
+      ],
+      "rank": 13
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        10,
+        18,
+        24,
+        8
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        6,
+        24,
+        23,
+        20
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        4,
+        6,
+        2,
+        15
+      ],
+      "rank": 2
+    }
+  ],
+  "fp32-weighted": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        6,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        7,
+        1,
+        15
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        20,
+        17,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        1,
+        7,
+        16,
+        29
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        37,
+        43,
+        38,
+        30
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        15,
+        21,
+        40,
+        45
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        19,
+        41,
+        35,
+        18,
+        50
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        36,
+        34,
+        4,
+        46,
+        37
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        38,
+        42,
+        37,
+        5,
+        30
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        24,
+        15,
+        29,
+        33
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        7,
+        8,
+        5,
+        11,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        23,
+        11,
+        26,
+        22
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        15,
+        29,
+        24,
+        18
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        26,
+        22,
+        23,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        29,
+        7,
+        28,
+        10
+      ],
+      "rank": 32
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        27,
+        17,
+        13
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        29,
+        28,
+        7,
+        3
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        27,
+        22,
+        33,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        28,
+        29,
+        14,
+        23
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        21,
+        16,
+        18,
+        24
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        23,
+        19,
+        13
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        6,
+        23,
+        22,
+        11
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        11,
+        21,
+        12,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        21,
+        11,
+        12,
+        9
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        13,
+        11
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        20,
+        21,
+        1,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        8,
+        10,
+        1
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        5,
+        20,
+        18,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        18,
+        2,
+        12,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        11,
+        21,
+        2
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        21,
+        16,
+        17,
+        9,
+        12
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        16,
+        21,
+        17,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        11,
+        21,
+        3
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        20,
+        21,
+        13,
+        6,
+        23
+      ],
+      "rank": 25
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        15,
+        18,
+        14,
+        8,
+        20
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        23,
+        20,
+        6,
+        24
+      ],
+      "rank": 8
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        8,
+        24,
+        20,
+        17
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        24,
+        20,
+        23,
+        6
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        2,
+        15,
+        14,
+        8
+      ],
+      "rank": 3
+    }
+  ],
+  "weight8-context": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        8,
+        1,
+        32
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        7,
+        1,
+        10
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        29,
+        28,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        20,
+        17,
+        8
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        1,
+        7,
+        35,
+        16
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        37,
+        3,
+        2,
+        49
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        15,
+        14,
+        21,
+        45
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        19,
+        48,
+        51,
+        9
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        46,
+        36,
+        34,
+        4,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        38,
+        42,
+        44,
+        37,
+        5
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        15,
+        33,
+        24,
+        18
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        11,
+        5,
+        7,
+        8,
+        1
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        26,
+        23,
+        22,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        15,
+        33,
+        26,
+        18
+      ],
+      "rank": 7
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        26,
+        17,
+        22,
+        23,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        7,
+        29,
+        28,
+        31
+      ],
+      "rank": 18
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        15,
+        32,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        33,
+        28,
+        7,
+        31
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        7,
+        27,
+        33,
+        30
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        14,
+        23,
+        33,
+        29,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        18,
+        17,
+        14,
+        16
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        23,
+        19,
+        18
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        23,
+        11,
+        17,
+        22
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        11,
+        9,
+        23,
+        21,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        11,
+        21,
+        4,
+        22
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        12,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        12,
+        21,
+        20,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        10,
+        6,
+        18,
+        8
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        18,
+        16,
+        19,
+        13
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        18,
+        10,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        11,
+        23,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        17,
+        21,
+        18,
+        23,
+        11
+      ],
+      "rank": 6
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        21,
+        18,
+        14,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        11,
+        9,
+        12,
+        6,
+        20
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        20,
+        23,
+        13,
+        6
+      ],
+      "rank": 22
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        4,
+        14,
+        15,
+        18,
+        10
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        8,
+        23,
+        24,
+        6
+      ],
+      "rank": 12
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        10,
+        24,
+        8,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        6,
+        24,
+        23,
+        4
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        4,
+        6,
+        2,
+        5,
+        16
+      ],
+      "rank": 1
+    }
+  ],
+  "weight8-isolated": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        27,
+        6
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        14,
+        7,
+        27
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        12,
+        19,
+        17
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        26,
+        1,
+        29,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        38,
+        41,
+        35,
+        43
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        40,
+        21,
+        15,
+        45
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        1,
+        19,
+        35,
+        41,
+        31
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        36,
+        34,
+        37,
+        32,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        42,
+        38,
+        41,
+        43,
+        49
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        24,
+        19,
+        15,
+        29,
+        18
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        8,
+        7,
+        5,
+        25,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        12,
+        17,
+        11,
+        23,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        24,
+        29,
+        19,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        26,
+        22,
+        12,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        29,
+        10,
+        32,
+        28
+      ],
+      "rank": 35
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        27,
+        22,
+        17,
+        38
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        7,
+        27
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        29,
+        16,
+        24,
+        25
+      ],
+      "rank": 7
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        28,
+        33,
+        29,
+        32,
+        23
+      ],
+      "rank": 7
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        16,
+        24,
+        12,
+        13
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        6,
+        23,
+        12,
+        24,
+        13
+      ],
+      "rank": 8
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        6,
+        7,
+        20,
+        24,
+        25
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        12,
+        7,
+        4,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        1,
+        12,
+        9,
+        24
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        22,
+        20,
+        3,
+        13
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        3,
+        20,
+        21,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        8,
+        1,
+        4
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        5,
+        1,
+        20,
+        21,
+        3
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        12,
+        18,
+        2,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        2,
+        1,
+        11,
+        9
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        12,
+        16,
+        9,
+        1,
+        2
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        16,
+        18,
+        4,
+        22,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        1,
+        11,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        20,
+        7,
+        13,
+        21,
+        24
+      ],
+      "rank": 25
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        20,
+        12,
+        15,
+        8
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        20,
+        12,
+        23,
+        2
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        22,
+        20,
+        24,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        20,
+        8,
+        24,
+        1,
+        23
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        15,
+        14,
+        2,
+        8
+      ],
+      "rank": 2
+    }
+  ],
+  "weight8-masked": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        30,
+        38
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        27,
+        7,
+        5
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        28,
+        33,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        20,
+        7,
+        17,
+        19
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        29,
+        1,
+        16,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        43,
+        37,
+        30,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        45,
+        15,
+        21,
+        40
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        41,
+        19,
+        50,
+        35,
+        27
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        34,
+        36,
+        4,
+        32,
+        37
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        38,
+        42,
+        31,
+        37,
+        43
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        24,
+        19,
+        29,
+        15,
+        14
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        7,
+        8,
+        5,
+        11,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        11,
+        17,
+        23,
+        12,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        19,
+        15,
+        24,
+        32
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        11,
+        26,
+        22,
+        28
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        28,
+        29,
+        10,
+        7
+      ],
+      "rank": 29
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        20,
+        38,
+        7,
+        27
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        7,
+        8
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        20,
+        22,
+        16,
+        33
+      ],
+      "rank": 8
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        14,
+        25,
+        29,
+        28
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        14,
+        18,
+        16,
+        24
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        13,
+        18,
+        16
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        18,
+        6,
+        14,
+        11
+      ],
+      "rank": 9
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        21,
+        12,
+        11,
+        6
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        3,
+        25,
+        12,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        11,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        12,
+        20,
+        21,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        8,
+        4,
+        10
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        5,
+        20,
+        18,
+        12
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        2,
+        12,
+        18,
+        10
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        5,
+        11,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        7,
+        21,
+        9,
+        16,
+        18
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        7,
+        21,
+        5,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        11,
+        3,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        20,
+        13,
+        1,
+        6
+      ],
+      "rank": 24
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        20,
+        8,
+        15,
+        14
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        23,
+        1,
+        22,
+        17
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        18,
+        1,
+        25,
+        24
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        23,
+        20,
+        8,
+        24,
+        25
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        8,
+        14,
+        15,
+        2
+      ],
+      "rank": 3
+    }
+  ],
+  "weight8-max": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        8,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        7,
+        14,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        28,
+        33,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        20,
+        12,
+        19
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        29,
+        26,
+        1,
+        16
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        38,
+        41,
+        35,
+        43
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        45,
+        40,
+        21,
+        15
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        1,
+        19,
+        41,
+        35,
+        31
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        36,
+        34,
+        4,
+        46,
+        37
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        42,
+        38,
+        41,
+        43,
+        49
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        24,
+        19,
+        15,
+        29,
+        33
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        8,
+        11,
+        5,
+        7,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        11,
+        17,
+        12,
+        23,
+        26
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        24,
+        19,
+        29,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        26,
+        17,
+        22,
+        11,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        29,
+        10,
+        32,
+        28
+      ],
+      "rank": 35
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        27,
+        22,
+        17
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        33,
+        28,
+        7,
+        31
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        29,
+        22,
+        20,
+        16,
+        24
+      ],
+      "rank": 6
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        14,
+        23,
+        33,
+        28,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        18,
+        14,
+        17,
+        16
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        23,
+        13,
+        6
+      ],
+      "rank": 12
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        23,
+        6,
+        7,
+        18
+      ],
+      "rank": 9
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        21,
+        11,
+        12,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        21,
+        3,
+        1,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        21,
+        20,
+        11,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        12,
+        21,
+        20,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        10,
+        8,
+        18
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        5,
+        18,
+        16,
+        19
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        12,
+        18,
+        2
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        5,
+        11,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        17,
+        21,
+        7,
+        9,
+        18
+      ],
+      "rank": 6
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        7,
+        17,
+        21,
+        5
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        11,
+        3,
+        21
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        20,
+        13,
+        7,
+        23
+      ],
+      "rank": 25
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        4,
+        18,
+        20,
+        8
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        10,
+        23,
+        24,
+        6
+      ],
+      "rank": 13
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        10,
+        18,
+        24,
+        8
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        6,
+        24,
+        23,
+        20
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        4,
+        6,
+        2,
+        8
+      ],
+      "rank": 2
+    }
+  ],
+  "weight8-weighted": [
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a coffee mug",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        17,
+        6,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a smartphone",
+      "acceptableRegions": [
+        11,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        11,
+        7,
+        1,
+        15
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a book",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        28,
+        29,
+        31,
+        23
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a straw hat",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        18,
+        7,
+        20,
+        17,
+        12
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "literal",
+      "query": "a computer screen",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        1,
+        7,
+        16,
+        29
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a cucumber",
+      "acceptableRegions": [
+        1
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        37,
+        43,
+        38,
+        30
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a tomato",
+      "acceptableRegions": [
+        2,
+        3,
+        13,
+        14,
+        15,
+        21,
+        27,
+        40,
+        45
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        15,
+        21,
+        40,
+        45
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a fork",
+      "acceptableRegions": [
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        19,
+        41,
+        35,
+        18,
+        50
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "broccoli",
+      "acceptableRegions": [
+        34,
+        36,
+        39,
+        44,
+        46,
+        47,
+        52,
+        53
+      ],
+      "split": "selection",
+      "top5": [
+        36,
+        34,
+        4,
+        46,
+        37
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "kitchen",
+      "category": "literal",
+      "query": "a slice of lime",
+      "acceptableRegions": [
+        42
+      ],
+      "split": "selection",
+      "top5": [
+        38,
+        42,
+        37,
+        5,
+        30
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something orange",
+      "acceptableRegions": [
+        14,
+        15,
+        18,
+        19,
+        20,
+        24,
+        27,
+        29
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        24,
+        15,
+        29,
+        33
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something purple",
+      "acceptableRegions": [
+        5,
+        7,
+        8,
+        25
+      ],
+      "split": "holdout",
+      "top5": [
+        7,
+        8,
+        5,
+        11,
+        25
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something leafy",
+      "acceptableRegions": [
+        6,
+        11,
+        12,
+        17,
+        22,
+        23,
+        26,
+        28
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        23,
+        11,
+        26,
+        22
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something round",
+      "acceptableRegions": [
+        9,
+        13,
+        21,
+        25,
+        27,
+        29,
+        32
+      ],
+      "split": "selection",
+      "top5": [
+        19,
+        15,
+        29,
+        24,
+        18
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "harvest",
+      "category": "attribute",
+      "query": "something green",
+      "acceptableRegions": [
+        6,
+        9,
+        11,
+        12,
+        17,
+        21,
+        22,
+        23,
+        26,
+        28,
+        30,
+        31,
+        34
+      ],
+      "split": "selection",
+      "top5": [
+        17,
+        26,
+        22,
+        23,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used to communicate",
+      "acceptableRegions": [
+        11,
+        13,
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        29,
+        7,
+        28,
+        10
+      ],
+      "rank": 31
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can drink from",
+      "acceptableRegions": [
+        9
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        7,
+        27,
+        17,
+        13
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something I can read",
+      "acceptableRegions": [
+        23,
+        28,
+        29,
+        31,
+        33
+      ],
+      "split": "selection",
+      "top5": [
+        33,
+        29,
+        28,
+        7,
+        3
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something that protects me from the sun",
+      "acceptableRegions": [
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        27,
+        22,
+        33,
+        7
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "desk",
+      "category": "function",
+      "query": "something used for online research",
+      "acceptableRegions": [
+        14
+      ],
+      "split": "holdout",
+      "top5": [
+        33,
+        28,
+        29,
+        14,
+        23
+      ],
+      "rank": 4
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could sit on",
+      "acceptableRegions": [
+        14,
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        14,
+        21,
+        16,
+        18,
+        24
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could lie down on",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        17,
+        23,
+        19,
+        13
+      ],
+      "rank": 10
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could place a cup on",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        6,
+        23,
+        11,
+        22
+      ],
+      "rank": 5
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could look through",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "holdout",
+      "top5": [
+        9,
+        11,
+        21,
+        12,
+        4
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "affordance",
+      "query": "something I could climb",
+      "acceptableRegions": [
+        3,
+        20,
+        21,
+        25
+      ],
+      "split": "selection",
+      "top5": [
+        25,
+        21,
+        11,
+        12,
+        9
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with transportation",
+      "acceptableRegions": [
+        20,
+        21
+      ],
+      "split": "selection",
+      "top5": [
+        21,
+        22,
+        20,
+        13,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with pedestrian safety",
+      "acceptableRegions": [
+        22
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        20,
+        21,
+        12,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with urban architecture",
+      "acceptableRegions": [
+        1,
+        6,
+        8,
+        10,
+        13,
+        18
+      ],
+      "split": "holdout",
+      "top5": [
+        3,
+        6,
+        8,
+        10,
+        1
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with advertising",
+      "acceptableRegions": [
+        5,
+        7,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        1,
+        5,
+        18,
+        20,
+        13
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "street",
+      "category": "abstract",
+      "query": "something associated with nature",
+      "acceptableRegions": [
+        12,
+        13
+      ],
+      "split": "selection",
+      "top5": [
+        13,
+        18,
+        2,
+        12,
+        11
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that tells me how much time has passed",
+      "acceptableRegions": [
+        10
+      ],
+      "split": "selection",
+      "top5": [
+        10,
+        7,
+        11,
+        21,
+        2
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "somewhere I could rest after a long day",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "holdout",
+      "top5": [
+        21,
+        17,
+        16,
+        12,
+        9
+      ],
+      "rank": 3
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that makes the room feel warmer",
+      "acceptableRegions": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "split": "selection",
+      "top5": [
+        18,
+        16,
+        21,
+        17,
+        1
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something reflecting the world outside",
+      "acceptableRegions": [
+        9,
+        11,
+        12
+      ],
+      "split": "selection",
+      "top5": [
+        9,
+        12,
+        11,
+        21,
+        3
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "living-room",
+      "category": "difficult",
+      "query": "something that would be difficult for a small robot to move",
+      "acceptableRegions": [
+        16
+      ],
+      "split": "selection",
+      "top5": [
+        20,
+        21,
+        13,
+        6,
+        23
+      ],
+      "rank": 25
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to tighten screws",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        15,
+        18,
+        14,
+        8,
+        20
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something used to grip wires",
+      "acceptableRegions": [
+        2,
+        7,
+        9,
+        18
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        23,
+        20,
+        6,
+        24
+      ],
+      "rank": 8
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that connects electrical wires",
+      "acceptableRegions": [
+        6,
+        8,
+        20,
+        22,
+        23
+      ],
+      "split": "selection",
+      "top5": [
+        22,
+        8,
+        24,
+        20,
+        17
+      ],
+      "rank": 1
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "something that carries electricity",
+      "acceptableRegions": [
+        21,
+        24
+      ],
+      "split": "selection",
+      "top5": [
+        8,
+        24,
+        20,
+        23,
+        6
+      ],
+      "rank": 2
+    },
+    {
+      "scene": "electrical",
+      "category": "function",
+      "query": "the screwdriver",
+      "acceptableRegions": [
+        4,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "split": "holdout",
+      "top5": [
+        20,
+        2,
+        15,
+        8,
+        14
+      ],
+      "rank": 3
+    }
+  ]
+}

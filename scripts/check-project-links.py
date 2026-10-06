@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / '_site'
 ROUTES = [f'/{name}/' for name in (
     'block-world', 'scrap-orbit', 'dustfall-outpost', 'mobile-sorting',
-    'rustzero', 'tiny-dreamer', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1', 'locomotion', 'euroguessr'
+    'rustzero', 'tiny-dreamer', 'language-vision', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1', 'locomotion', 'euroguessr'
 )] + [f'/assets/interactive/{name}/index.html' for name in (
     'pong', 'race', 'robot-runner', 'flappy'
 )]
@@ -56,6 +56,14 @@ def check():
             path = SITE / f'assets/interactive/{name}/{basename}.{extension}'
             if not path.is_file():
                 raise SystemExit(f'Missing Godot export: {path.relative_to(SITE)}')
+    language_vision = SITE / 'assets/interactive/language-vision'
+    for filename in ('worker.mjs', 'tokenizer.mjs', 'retrieval.mjs', 'masks.mjs', 'models/text-int8.onnx', 'models/model.json', 'vendor/ort.wasm.min.mjs', 'vendor/ort-wasm-simd-threaded.mjs', 'vendor/ort-wasm-simd-threaded.wasm'):
+        if not (language_vision / filename).is_file():
+            raise SystemExit(f'Missing language-vision runtime: {filename}')
+    for scene in json.loads((language_vision / 'data/scenes.json').read_text()):
+        for filename in ('scene.webp', 'thumb.webp', 'manifest.json', 'regions.json', 'embeddings.bin', 'masks.bin'):
+            if not (language_vision / 'data' / scene['id'] / filename).is_file():
+                raise SystemExit(f'Missing language-vision scene asset: {scene["id"]}/{filename}')
     if (SITE / 'projects').exists():
         raise SystemExit('Project source leaked into the public site')
     print(f'Checked all {len(ROUTES)} public project URLs, {len(visited)} HTML dependencies and manifest runtime files')

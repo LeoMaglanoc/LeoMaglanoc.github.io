@@ -1,0 +1,59 @@
+{
+  "measuredAt": "2026-10-06T20:42:24.926Z",
+  "device": "Intel i7-8565U / Linux x86_64 / Chrome 154 / WASM 1 thread",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "hardwareConcurrency": 8,
+  "deviceMemoryGB": 16,
+  "executionProvider": "CPU / WASM, 1 thread, Web Worker",
+  "model": "MobileCLIP-S0",
+  "precision": "UINT8 linear/embedding weights; FP32 convolution/activations",
+  "modelBytes": 55519555,
+  "downloadMs": 412.20000000298023,
+  "initializationMs": 1732,
+  "firstInferenceMs": 267.3999999985099,
+  "warmQueries": 20,
+  "medianWarmMs": 231.19999999925494,
+  "p95WarmMs": 253.60000000149012,
+  "warmLatenciesMs": [
+    244.39999999850988,
+    235.70000000298023,
+    226.39999999850988,
+    227.69999999552965,
+    221.90000000596046,
+    230.39999999850988,
+    226.90000000596046,
+    228,
+    229.89999999850988,
+    233.40000000596046,
+    243.10000000149012,
+    248.39999999850988,
+    253.60000000149012,
+    257.79999999701977,
+    236.30000000447035,
+    227.39999999850988,
+    227.39999999850988,
+    232,
+    240.30000000447035,
+    229.10000000149012
+  ],
+  "tokenizerParity": {
+    "passed": 60,
+    "total": 60
+  },
+  "embeddingParity": {
+    "queries": 60,
+    "meanCosine": 0.9999016023412369,
+    "minCosine": 0.9998574289800294
+  },
+  "retrievalParity": {
+    "comparisons": 720,
+    "top1Agreement": 0.9875,
+    "top3Overlap": 0.9916666666666665
+  },
+  "peakMemory": null,
+  "memoryNote": "No reliable worker peak-memory measurement exposed by this browser."
+}

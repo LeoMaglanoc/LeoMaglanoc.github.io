@@ -1,0 +1,80 @@
+{
+  "model": "MobileCLIP-S0",
+  "queries": 60,
+  "fp32MeanCosine": 1.0,
+  "quantizedMeanCosine": 0.9999015927314758,
+  "quantizedMinCosine": 0.9998574256896973,
+  "maxAbsError": 0.0029657690320163965,
+  "nativeWarmMedianMs": 47.96662000444485,
+  "nativeWarmP95Ms": 61.454611003864535,
+  "modelBytes": 55519555,
+  "scoringStrategy": "weighted",
+  "top1Agreement": 0.9875,
+  "top3Overlap": 0.9916666666666667,
+  "rankingComparisons": 720,
+  "regressions": [
+    {
+      "scene": "desk",
+      "query": "something a robot should handle carefully",
+      "reference": 34,
+      "quantized": 32,
+      "referenceGap": 0.00020563304424287
+    },
+    {
+      "scene": "desk",
+      "query": "a sofa",
+      "reference": 6,
+      "quantized": 36,
+      "referenceGap": 4.9939751625066586e-05
+    },
+    {
+      "scene": "harvest",
+      "query": "something used for cutting",
+      "reference": 30,
+      "quantized": 4,
+      "referenceGap": 0.00018593668937683105
+    },
+    {
+      "scene": "kitchen",
+      "query": "something associated with communication",
+      "reference": 3,
+      "quantized": 45,
+      "referenceGap": 3.6597251892089844e-05
+    },
+    {
+      "scene": "kitchen",
+      "query": "something electronic",
+      "reference": 3,
+      "quantized": 27,
+      "referenceGap": 0.0001570224761962835
+    },
+    {
+      "scene": "market",
+      "query": "something sharp",
+      "reference": 21,
+      "quantized": 3,
+      "referenceGap": 0.00040643811225893334
+    },
+    {
+      "scene": "market",
+      "query": "a tomato",
+      "reference": 4,
+      "quantized": 30,
+      "referenceGap": 0.00016958117485044166
+    },
+    {
+      "scene": "toolkit",
+      "query": "a cup",
+      "reference": 19,
+      "quantized": 28,
+      "referenceGap": 0.00041468143463135876
+    },
+    {
+      "scene": "tools",
+      "query": "a car",
+      "reference": 15,
+      "quantized": 2,
+      "referenceGap": 0.00014590620994570092
+    }
+  ]
+}
