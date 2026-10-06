@@ -169,14 +169,10 @@ h2 {
   font-size: 12px;
   letter-spacing: 0.3px;
 }
-.clock {
-  font-variant-numeric: tabular-nums;
+.round-pace {
   padding: 7px 10px;
   border: 1px solid #526367;
   border-radius: 7px;
-}
-.clock.urgent {
-  color: #ffb38d;
 }
 .photo-wrap {
   position: relative;

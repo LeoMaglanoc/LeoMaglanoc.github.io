@@ -14,12 +14,16 @@ for path in args.files:
     if data["rules"] != {
         "region": "Europe",
         "rounds": 5,
-        "seconds": 60,
+        "seconds": data["rules"].get("seconds"),
         "movement": False,
         "score": "round(5000 * exp(-distance_km / 1500))",
     }:
         raise ValueError("Mixed rules")
+    if data["rules"]["seconds"] not in (60, None):
+        raise ValueError("Unknown round timing")
     matches.append(data)
+if len({(m["rules"]["seconds"], m.get("photoSelection", "uniform-v1")) for m in matches}) != 1:
+    raise ValueError("Mixed timing or photo selection rules")
 if len({(m["modelVersion"], m.get("modelManifest"), m["method"], m.get("modelFingerprint")) for m in matches}) != 1:
     raise ValueError("Mixed models")
 win = sum(

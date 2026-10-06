@@ -2,7 +2,7 @@
 
 [Play the deployed game](https://leonardo-maglanoc.com/euroguessr/).
 
-Five European street photographs, 60 seconds per round. Place a map pin and compare distance and score against a vision model that runs locally on the browser CPU. Play at **[/euroguessr/](https://leomaglanoc.github.io/euroguessr/)**.
+Five European street photographs with no round time limit. Place a map pin and compare distance and score against a vision model that runs locally on the browser CPU. Play at **[/euroguessr/](https://leomaglanoc.github.io/euroguessr/)**.
 
 The default is a tiny MobileNet model. An explicit **GeoCLIP 8-bit** option downloads approximately 320 MiB of image-only model/gallery assets. It stores CLIP ViT-L/14 linear weights in unsigned 8-bit form and uses FP32 arithmetic plus GeoCLIP's exact projection, with an offline Europe location gallery. It can take several seconds or tens of seconds per photograph on a laptop under load. The model chooser displays the download size; no large model downloads automatically. Both modes use a worker and single-thread ONNX Runtime Web/WASM. No API key, inference backend, GPU, WebGPU or live map tiles are required.
 
@@ -33,13 +33,13 @@ V2 recomputes training-only cells, compares supervised CE with GeoCLIP CE/KL/emb
 
 Photos come from [OSV-5M](https://huggingface.co/datasets/osv5m/osv5m), revision `cff33609b56b54d8743b7ee7a416eb8433e9a681`, under CC BY-SA 4.0. Europe sampling is country-balanced and sequence-deduplicated, with hashed 3° validation blocks and a ≥25 km training/holdout buffer. New evaluation holdouts also exclude neighbors of the preserved V1 training references. This is a custom balanced experiment, not the full OSV-5M benchmark. Pretrained GeoCLIP's upstream training overlap cannot be independently ruled out.
 
-The 40 public game photos remain legacy test-only. They use the highest resolution present in the pinned source archive, capped at 1600 px without upscaling; dimensions and modifications are recorded. Archive resolution limits mean some source photos remain below 1600 px. Contributor links, license and attribution remain visible. Only the next photograph is preloaded.
+The 79 public game photos cover all 39 countries available in the legacy test-only cohort. Each match features five different countries. Selection balances country exposure across matches on this device, regardless of how many photos each country has, and cycles through unseen photos within each country. The original 40 photographs are preserved; deterministic additions give each country at least two photos where available (Vatican City has one). They use the highest resolution present in the pinned source archive, capped at 1600 px without upscaling; dimensions and modifications are recorded. Archive resolution limits mean some source photos remain below 1600 px. Contributor links, license and attribution remain visible. Only the next photograph is preloaded.
 
 Photo and map support midpoint-anchored two-pointer pinch, one-pointer pan, wheel zoom and +/−/reset controls. Map keyboard arrows/Enter remain available. Pinching and pointer cancellation never create a guess. Photo zoom is clamped from fitted size to 4×, map zoom to 8×. The map uses local Natural Earth boundaries and 100 offline-ranked city labels, with display tiers/collision suppression and no runtime tile requests.
 
 The worker receives pixels and a request token only, never photo IDs, country or answer GPS. Tiny retrieval references contain training images only; direct GeoCLIP references are an independent regular GPS grid. Tiny preprocessing uses matched half-pixel bilinear resizing; GeoCLIP uses matched Pillow bicubic short-side resize and center crop. Both reduce the same photograph to 224×224 internally. Digital zoom cannot add source detail.
 
-Score is `round(5000 * exp(-distance_km / 1500))`, maximum 25,000 per match. Answers reveal after submission or timeout; no pin at timeout scores zero. Prediction failures stop the round. The static answer pack is inspectable, so this is a casual game. Results stay in local storage; JSON exports contain no account/name, and nothing is uploaded.
+Score is `round(5000 * exp(-distance_km / 1500))`, maximum 25,000 per match. Answers reveal only after the player places a pin and submits it. There is no countdown or automatic timeout. Map markers and their letters scale inversely with map zoom to retain their visual size. Prediction failures stop the round. The static answer pack is inspectable, so this is a casual game. Results stay in local storage; JSON exports contain no account/name, and nothing is uploaded.
 
 ## Preview and verification
 
@@ -78,3 +78,5 @@ Use the same objective/cache and stage recorded in the checkpoint to resume. `--
 ## Future evaluation
 
 Collect consented independent five-round JSON exports from casual players before claiming a win rate. `training/human_benchmark.py` checks model/rules consistency and reports wins, ties and a Wilson interval; self-reported exports do not independently verify player skill or independence. Use a new game/test cohort for a serious follow-up. Useful next experiments include distance-aware targets, broader final-block fine-tuning, geographic error breakdowns, and a modestly larger CPU encoder. Preserve validation/test separation and compare each change empirically.
+
+Untimed exports use `rules.seconds: null` and `photoSelection: "country-balanced-v2"`. The human benchmark accepts historical timed matches separately and rejects mixed timing or photo selection protocols. The photo pack expansion is reproduced with `docker compose -f projects/euroguessr/compose.yaml run --rm --no-deps research python training/balance_game_images.py`; selection uses only legacy holdouts and no model scores. Evidence and source hashes are in `docs/game-photo-balance.json`. Existing model/checkpoint bytes and locked research measurements are unchanged.

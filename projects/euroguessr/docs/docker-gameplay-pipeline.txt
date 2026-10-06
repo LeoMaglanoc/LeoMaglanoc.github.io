@@ -1,0 +1,7 @@
+{
+  "split_contract": "passed",
+  "minimum_train_holdout_km": 25.002794219907113,
+  "onnx_fixture": "passed",
+  "preprocessing_max_error": 7.152557373046875e-07,
+  "public_test_images": 79
+}

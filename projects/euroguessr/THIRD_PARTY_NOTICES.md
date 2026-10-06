@@ -2,7 +2,7 @@
 
 ## Street imagery and metadata
 
-[OpenStreetView-5M](https://huggingface.co/datasets/osv5m/osv5m), Astruc et al., CVPR 2024. Dataset license: **CC BY-SA 4.0**. Original imagery comes from Mapillary contributors. Each published image is accompanied by its original image ID, creator username, source link, license and modification notice in `rounds.json`. V2 photographs preserve the highest available archive resolution, capped at 1600 pixels without upscaling, and are JPEG recompressed. The current archive's largest source long edge is 910 pixels. These adapted images are distributed under CC BY-SA 4.0. Contributor attribution is displayed on each round's reveal. Full license: `licenses/OSV5M-CC-BY-SA-4.0.txt`.
+[OpenStreetView-5M](https://huggingface.co/datasets/osv5m/osv5m), Astruc et al., CVPR 2024. Dataset license: **CC BY-SA 4.0**. Original imagery comes from Mapillary contributors. Each published image is accompanied by its original image ID, creator username, source link, license and modification notice in `rounds.json`. V2 photographs preserve the highest available archive resolution, capped at 1600 pixels without upscaling, and are JPEG recompressed. The current game pack's largest source long edge is 1213 pixels. These adapted images are distributed under CC BY-SA 4.0. Contributor attribution is displayed on each round's reveal. Full license: `licenses/OSV5M-CC-BY-SA-4.0.txt`.
 
 Training uses metadata and images from the dataset's train archives. The game pack is an uncurated prefix of the selected test sample. Image IDs are stable; third-party source links may become unavailable. Attribution is retained locally.
 

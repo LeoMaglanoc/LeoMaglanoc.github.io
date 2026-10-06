@@ -1,7 +1,8 @@
 import { preprocessCLIP } from "./clip-preprocess.js?v=f32-2";
 import { preprocess } from "./preprocess.js";
-import { distance, score, project, unproject, shuffled } from "./geo.js";
+import { distance, score, project, unproject } from "./geo.js";
 import { pointerGestures, photoStep, clampPhoto, mapStep } from "./gestures.js";
+import { selectRounds } from "./round-selection.js";
 const $ = (id) => document.getElementById(id);
 const svgNS = "http://www.w3.org/2000/svg";
 let pack = [],
@@ -12,8 +13,6 @@ let pack = [],
   index = 0,
   guess = null,
   ai = null,
-  deadline = 0,
-  timer = null,
   phase = "loading",
   token = 0,
   view = [0, 0, 700, 630],
@@ -129,6 +128,7 @@ function drawMap(data) {
 function updateView() {
   $("map").setAttribute("viewBox", view.join(" "));
   drawCities();
+  renderPins(phase === "revealed");
 }
 function zoom(factor, anchor = { x: view[0] + view[2] / 2, y: view[1] + view[3] / 2 }) {
   view = mapStep(view, 1 / factor, anchor);
@@ -146,9 +146,11 @@ function mapPoint(event) {
 }
 function pin(point, color, label) {
   const [x, y] = project(point);
-  const g = element("g", {}, $("pins"));
-  element("circle", { cx: x, cy: y, r: 10, fill: color, stroke: "white", "stroke-width": 2, "vector-effect": "non-scaling-stroke" }, g);
-  element("text", { x, y: y + 3.5, "text-anchor": "middle", fill: "white", "font-size": 10, "font-weight": 700 }, g).textContent = label;
+  // Convert pixel-sized markers back to map units at the current zoom/viewport.
+  const scale = 1 / ($("map").getScreenCTM()?.a || 700 / view[2]);
+  const g = element("g", { transform: `translate(${x} ${y}) scale(${scale})`, "pointer-events": "none" }, $("pins"));
+  element("circle", { cx: 0, cy: 0, r: 10, fill: color, stroke: "white", "stroke-width": 2, "vector-effect": "non-scaling-stroke" }, g);
+  element("text", { x: 0, y: 3.5, "text-anchor": "middle", fill: "white", "font-size": 10, "font-weight": 700 }, g).textContent = label;
 }
 function renderPins(reveal = false) {
   $("pins").replaceChildren();
@@ -299,7 +301,10 @@ function drawCities() {
     ).textContent = city.name;
   }
 }
-new ResizeObserver(drawCities).observe($("map"));
+new ResizeObserver(() => {
+  drawCities();
+  renderPins(phase === "revealed");
+}).observe($("map"));
 function modelDetails() {
   if (activeMode === "tiny" && metadata.onnx_bytes) {
     $("ai-mode").querySelector('option[value="tiny"]').textContent = `Tiny AI · about ${Math.ceil(
@@ -360,17 +365,11 @@ $("footer-about").onclick = (event) => {
 };
 $("about-dialog").querySelector(".close").onclick = () => $("about-dialog").close();
 function match() {
-  clearInterval(timer);
   results = [];
   index = 0;
-  let seen = storageGet("euroguessr-seen-v1", []);
-  let available = pack.filter((r) => !seen.includes(r.id));
-  if (available.length < 5) {
-    seen = [];
-    available = pack;
-  }
-  rounds = shuffled(available).slice(0, 5);
-  storageSet("euroguessr-seen-v1", [...seen, ...rounds.map((r) => r.id)]);
+  const selection = selectRounds(pack, storageGet("euroguessr-balanced-v2", {}));
+  rounds = selection.rounds;
+  storageSet("euroguessr-balanced-v2", selection.history);
   $("summary").hidden = true;
   document.querySelector(".game").hidden = false;
   updateTotals();
@@ -385,7 +384,6 @@ async function startRound() {
   const current = ++token;
   guess = null;
   ai = null;
-  clearInterval(timer);
   resetMap();
   renderPins();
   photoGestures.cancel();
@@ -400,9 +398,7 @@ async function startRound() {
   $("round-label").textContent = `ROUND ${index + 1} / 5 · EUROPE`;
   $("map-title").textContent = "Where are we?";
   $("map-eyebrow").textContent = "TRUST YOUR INSTINCT";
-  $("map-hint").textContent = "Place your pin on the map. You have 60 seconds.";
-  $("timer").textContent = "01:00";
-  $("timer").classList.remove("urgent");
+  $("map-hint").textContent = "Take your time. Place your pin, then lock in your guess.";
   $("credit").textContent = "Street imagery: OpenStreetView-5M / Mapillary · CC BY-SA 4.0";
   $("photo-loading").hidden = false;
   $("ai-status").textContent = "AI is reading the image…";
@@ -428,12 +424,9 @@ async function startRound() {
     ai = output.location;
     lastLatency = output.milliseconds;
     phase = "playing";
-    deadline = performance.now() + 60000;
     $("ai-status").textContent = "● AI guess locked · revealed after yours";
     $("latency").textContent = `${Math.round(lastLatency)} ms · CPU`;
-    $("live").textContent = `Round ${index + 1}. AI is ready. You have 60 seconds.`;
-    timer = setInterval(tick, 200);
-    tick();
+    $("live").textContent = `Round ${index + 1}. AI is ready. Take as long as you need.`;
   } catch (error) {
     phase = "error";
     $("photo-loading").hidden = false;
@@ -442,17 +435,9 @@ async function startRound() {
     $("live").textContent = error.message;
   }
 }
-function tick() {
-  if (phase !== "playing") return;
-  const seconds = Math.max(0, Math.ceil((deadline - performance.now()) / 1000));
-  $("timer").textContent = `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
-  $("timer").classList.toggle("urgent", seconds <= 10);
-  if (seconds === 0) reveal(true);
-}
-function reveal(timedOut = false) {
-  if (phase !== "playing" || (!guess && !timedOut)) return;
+function reveal() {
+  if (phase !== "playing" || !guess) return;
   phase = "revealed";
-  clearInterval(timer);
   const actual = rounds[index],
     humanKm = guess ? distance(guess, actual) : null,
     aiKm = distance(ai, actual),
@@ -468,7 +453,7 @@ function reveal(timedOut = false) {
     aiKm,
     humanScore,
     aiScore,
-    timedOut,
+    timedOut: false,
     inferenceMs: lastLatency,
   });
   updateTotals();
@@ -480,7 +465,7 @@ function reveal(timedOut = false) {
   $("map-hint").textContent = `${new Intl.DisplayNames(["en"], { type: "region" }).of(actual.country)} · ${actual.lat.toFixed(3)}° N, ${Math.abs(
     actual.lon
   ).toFixed(3)}° ${actual.lon < 0 ? "W" : "E"}`;
-  $("selection").textContent = timedOut ? "Time is up." : `Your guess is locked.`;
+  $("selection").textContent = "Your guess is locked.";
   $("round-result").replaceChildren();
   for (const [label, km, points, color] of [
     ["You", humanKm, humanScore, "#2563eb"],
@@ -554,7 +539,8 @@ function report() {
     modelManifest: metadata.manifest_sha256,
     method: metadata.method,
     createdAt: new Date().toISOString(),
-    rules: { region: "Europe", rounds: 5, seconds: 60, movement: false, score: "round(5000 * exp(-distance_km / 1500))" },
+    photoSelection: "country-balanced-v2",
+    rules: { region: "Europe", rounds: 5, seconds: null, movement: false, score: "round(5000 * exp(-distance_km / 1500))" },
     participantSkill: "unverified",
     rounds: results,
   };
@@ -622,7 +608,12 @@ $("welcome").showModal();
 async function initialize() {
   try {
     worker.postMessage({ type: "init" });
-    const [images, mapData, cityData] = await Promise.all([getJSON("rounds.json"), getJSON("countries.geojson"), getJSON("cities.json"), ready]);
+    const [images, mapData, cityData] = await Promise.all([
+      getJSON("rounds.json?v=country-balanced-v2"),
+      getJSON("countries.geojson"),
+      getJSON("cities.json"),
+      ready,
+    ]);
     cities = cityData.cities;
     pack = images;
     if (pack.length < 5) throw Error("At least five held-out images are required");

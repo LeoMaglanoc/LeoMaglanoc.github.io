@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f6f5ef" />
     <meta name="description" content="Guess a European street-view location and challenge a small AI running on your browser CPU." />
     <title>EuroGuessr AI — A sense of place</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=20261006-untimed" />
   </head>
   <body>
     <header>
@@ -28,7 +28,7 @@
       </section>
       <section class="game">
         <div class="scene-panel">
-          <div class="scene-top"><span id="round-label">Five rounds. All of Europe.</span><span class="clock" id="timer">01:00</span></div>
+          <div class="scene-top"><span id="round-label">Five rounds. All of Europe.</span><span class="round-pace">No time limit</span></div>
           <div class="photo-wrap" id="photo-wrap">
             <img id="street" alt="Street-view photograph to geolocate" draggable="false" />
             <div id="photo-loading" class="photo-loading">Preparing your journey…</div>
@@ -53,7 +53,7 @@
             </div>
             <span class="map-icon">↗</span>
           </div>
-          <p id="map-hint">Place your pin on the map. You have 60 seconds.</p>
+          <p id="map-hint">Take your time. Place your pin, then lock in your guess.</p>
           <div class="map-wrap">
             <svg
               id="map"
@@ -118,8 +118,8 @@
     <dialog id="welcome">
       <div class="eyebrow">WELCOME TO EUROGUESSR AI</div>
       <h2>Can you read<br />a place better<br />than a machine?</h2>
-      <p>Five European streets. One minute each. Follow the architecture, road markings, and landscape, then place your pin.</p>
-      <div class="welcome-tags"><span>5 rounds</span><span>No movement</span><span>Browser CPU AI</span></div>
+      <p>Five European streets. Take as long as you need. Follow the architecture, road markings, and landscape, then place your pin.</p>
+      <div class="welcome-tags"><span>5 rounds</span><span>No time limit</span><span>No movement</span><span>Browser CPU AI</span></div>
       <p class="small">Choose a compact AI or the larger GeoCLIP model, then test your sense of place.</p>
       <label class="ai-mode-label" for="ai-mode">AI mode</label>
       <select id="ai-mode">
@@ -152,6 +152,6 @@
       </p>
     </dialog>
     <div id="live" class="sr-only" aria-live="polite"></div>
-    <script type="module" src="src/app.js?v=20261006-snapshot"></script>
+    <script type="module" src="src/app.js?v=20261006-balanced-untimed-3"></script>
   </body>
 </html>

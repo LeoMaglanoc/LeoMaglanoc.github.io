@@ -1,0 +1,90 @@
+{
+  "timerProof": {
+    "elapsedSeconds": 68.075,
+    "round": "ROUND 1 / 5 · EUROPE",
+    "revealed": false,
+    "lockEnabled": false,
+    "timerNodes": 0
+  },
+  "markerBase": [
+    {
+      "label": "Y",
+      "transform": "translate(400 331.57894736842104) scale(1.5750000000000002)",
+      "width": 20
+    }
+  ],
+  "markerMax": [
+    {
+      "label": "Y",
+      "transform": "translate(400 331.57894736842104) scale(0.19687500000000002)",
+      "width": 20
+    }
+  ],
+  "revealBase": [
+    {
+      "label": "Y",
+      "transform": "translate(400 331.57894736842104) scale(1.863905325443787)",
+      "width": 20
+    },
+    {
+      "label": "A",
+      "transform": "translate(387.19321282598634 377.3596154651877) scale(1.863905325443787)",
+      "width": 20
+    },
+    {
+      "label": "✓",
+      "transform": "translate(401.1269621315987 397.58363872559806) scale(1.863905325443787)",
+      "width": 20
+    }
+  ],
+  "revealMax": [
+    {
+      "label": "Y",
+      "transform": "translate(400 331.57894736842104) scale(0.23298816568047337)",
+      "width": 20.0001220703125
+    },
+    {
+      "label": "A",
+      "transform": "translate(387.19321282598634 377.3596154651877) scale(0.23298816568047337)",
+      "width": 20.0001220703125
+    },
+    {
+      "label": "✓",
+      "transform": "translate(401.1269621315987 397.58363872559806) scale(0.23298816568047337)",
+      "width": 20.0001220703125
+    }
+  ],
+  "mobilePins": [
+    {
+      "label": "Y",
+      "width": 20
+    },
+    {
+      "label": "A",
+      "width": 20
+    },
+    {
+      "label": "✓",
+      "width": 20
+    }
+  ],
+  "mobileZoom": [
+    {
+      "label": "Y",
+      "width": 20.000015258789062
+    },
+    {
+      "label": "A",
+      "width": 20.000015258789062
+    },
+    {
+      "label": "✓",
+      "width": 20
+    }
+  ],
+  "mobileLayout": {
+    "clientWidth": 375,
+    "scrollWidth": 375
+  },
+  "appVersion": "src/app.js?v=20261006-balanced-untimed-3"
+}

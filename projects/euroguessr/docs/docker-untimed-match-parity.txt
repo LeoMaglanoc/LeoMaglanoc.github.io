@@ -1,0 +1,41 @@
+{
+  "model": "europe-v2-distilled-42-c4483177ff40-4f2ea6016eb8",
+  "method": "distilled-50-t10",
+  "checks": [
+    {
+      "round": 1,
+      "id": "1005204027077364",
+      "native_browser_coordinate_difference_km": 0.00013359576013631159,
+      "browser_inference_ms": 85.09999999403954
+    },
+    {
+      "round": 2,
+      "id": "119928716798356",
+      "native_browser_coordinate_difference_km": 0.0004403657863995289,
+      "browser_inference_ms": 135.8999999910593
+    },
+    {
+      "round": 3,
+      "id": "132628668897475",
+      "native_browser_coordinate_difference_km": 0.0006636637264240476,
+      "browser_inference_ms": 120.90000000596046
+    },
+    {
+      "round": 4,
+      "id": "1354697734903351",
+      "native_browser_coordinate_difference_km": 0.00012451860337858085,
+      "browser_inference_ms": 96.90000000596046
+    },
+    {
+      "round": 5,
+      "id": "171781491505642",
+      "native_browser_coordinate_difference_km": 0.0004333810180297944,
+      "browser_inference_ms": 97.80000001192093
+    }
+  ],
+  "score_contract": "passed",
+  "human_total": 13568,
+  "ai_total": 14407,
+  "maximum_native_browser_coordinate_difference_km": 0.0006636637264240476,
+  "scope": "actual UI JSON; native CPU vs browser WASM, includes JPEG decoder differences; synthetic guesses, not human evaluation"
+}
