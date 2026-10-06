@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f6f5ef" />
     <meta name="description" content="Guess a European street-view location and challenge a small AI running on your browser CPU." />
     <title>EuroGuessr AI — A sense of place</title>
-    <link rel="stylesheet" href="style.css?v=20261006-untimed" />
+    <link rel="stylesheet" href="style.css?v=20261006-fixed-pins" />
   </head>
   <body>
     <header>
@@ -68,8 +68,8 @@
               <g id="labels"></g>
               <g id="cities" pointer-events="none"></g>
               <g id="routes"></g>
-              <g id="pins"></g>
             </svg>
+            <div id="pins" aria-hidden="true"></div>
             <div class="map-tools">
               <button id="zoom-in" aria-label="Zoom map in">＋</button><button id="zoom-out" aria-label="Zoom map out">−</button
               ><button id="map-reset" aria-label="Reset map view">⌂</button>
@@ -152,6 +152,6 @@
       </p>
     </dialog>
     <div id="live" class="sr-only" aria-live="polite"></div>
-    <script type="module" src="src/app.js?v=20261006-balanced-untimed-3"></script>
+    <script type="module" src="src/app.js?v=20261006-fixed-pins"></script>
   </body>
 </html>

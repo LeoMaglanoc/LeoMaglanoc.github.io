@@ -325,6 +325,28 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  z-index: 2;
+}
+#pins {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.map-pin {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
 }
 .map-tools button {
   background: #fffdf7;

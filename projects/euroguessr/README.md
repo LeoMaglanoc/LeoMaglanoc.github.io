@@ -39,7 +39,7 @@ Photo and map support midpoint-anchored two-pointer pinch, one-pointer pan, whee
 
 The worker receives pixels and a request token only, never photo IDs, country or answer GPS. Tiny retrieval references contain training images only; direct GeoCLIP references are an independent regular GPS grid. Tiny preprocessing uses matched half-pixel bilinear resizing; GeoCLIP uses matched Pillow bicubic short-side resize and center crop. Both reduce the same photograph to 224×224 internally. Digital zoom cannot add source detail.
 
-Score is `round(5000 * exp(-distance_km / 1500))`, maximum 25,000 per match. Answers reveal only after the player places a pin and submits it. There is no countdown or automatic timeout. Map markers and their letters scale inversely with map zoom to retain their visual size. Prediction failures stop the round. The static answer pack is inspectable, so this is a casual game. Results stay in local storage; JSON exports contain no account/name, and nothing is uploaded.
+Score is `round(5000 * exp(-distance_km / 1500))`, maximum 25,000 per match. Answers reveal only after the player places a pin and submits it. There is no countdown or automatic timeout. Map markers use a separate HTML overlay with a fixed 24 px outer diameter (20 px inside the white border) and fixed 10 px lettering. Map zoom and pan update only their geographic screen positions. Prediction failures stop the round. The static answer pack is inspectable, so this is a casual game. Results stay in local storage; JSON exports contain no account/name, and nothing is uploaded.
 
 ## Preview and verification
 

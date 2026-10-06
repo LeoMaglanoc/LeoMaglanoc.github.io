@@ -146,11 +146,16 @@ function mapPoint(event) {
 }
 function pin(point, color, label) {
   const [x, y] = project(point);
-  // Convert pixel-sized markers back to map units at the current zoom/viewport.
-  const scale = 1 / ($("map").getScreenCTM()?.a || 700 / view[2]);
-  const g = element("g", { transform: `translate(${x} ${y}) scale(${scale})`, "pointer-events": "none" }, $("pins"));
-  element("circle", { cx: 0, cy: 0, r: 10, fill: color, stroke: "white", "stroke-width": 2, "vector-effect": "non-scaling-stroke" }, g);
-  element("text", { x: 0, y: 3.5, "text-anchor": "middle", fill: "white", "font-size": 10, "font-weight": 700 }, g).textContent = label;
+  const matrix = $("map").getScreenCTM();
+  if (!matrix) return;
+  const bounds = $("pins").getBoundingClientRect();
+  const marker = document.createElement("span");
+  marker.className = "map-pin";
+  marker.style.left = `${matrix.a * x + matrix.c * y + matrix.e - bounds.left}px`;
+  marker.style.top = `${matrix.b * x + matrix.d * y + matrix.f - bounds.top}px`;
+  marker.style.backgroundColor = color;
+  marker.textContent = label;
+  $("pins").append(marker);
 }
 function renderPins(reveal = false) {
   $("pins").replaceChildren();

@@ -1,0 +1,141 @@
+{
+  "basePins": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    }
+  ],
+  "maxPins": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    }
+  ],
+  "revealedPins": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "A",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "✓",
+      "width": 24
+    }
+  ],
+  "wheelPins": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "A",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "✓",
+      "width": 24
+    }
+  ],
+  "revealedMax": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "A",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "✓",
+      "width": 24
+    }
+  ],
+  "anchorCheck": [
+    {
+      "anchorError": 0.0034181665086697407,
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    },
+    {
+      "anchorError": 0.0070726868637689755,
+      "height": 24,
+      "label": "A",
+      "width": 24
+    },
+    {
+      "anchorError": 0.005579695026838034,
+      "height": 24,
+      "label": "✓",
+      "width": 24
+    }
+  ],
+  "mobilePins": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "A",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "✓",
+      "width": 24
+    }
+  ],
+  "mobileMax": [
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "Y",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "A",
+      "width": 24
+    },
+    {
+      "fontSize": "10px",
+      "height": 24,
+      "label": "✓",
+      "width": 24
+    }
+  ],
+  "firstClick": "Your pin: 53.00° N, 10.00° E",
+  "overlayClick": "Your pin: 53.00° N, 10.00° E",
+  "app": "src/app.js?v=20261006-fixed-pins"
+}

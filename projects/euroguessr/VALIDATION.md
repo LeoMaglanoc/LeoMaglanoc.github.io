@@ -131,6 +131,14 @@ A complete actual Chrome untimed match exported five different countries (NL, DK
 
 Reproduce the photo expansion with `docker compose -f projects/euroguessr/compose.yaml run --rm --no-deps research python training/balance_game_images.py`; run Node checks with `docker compose -f projects/euroguessr/compose.yaml run --rm --no-deps research sh -c 'node --test tests/*.test.mjs'`. Revert the gameplay commit and republish registered assets to restore the prior timed game; no training or checkpoint restore is required.
 
+## Constant-size pin correction — 6 October 2026
+
+Following the reported zoom-size instability, markers now live in a separate HTML overlay outside the zoomed SVG. Their outer diameter is fixed at **24 CSS pixels**, including a 2 px white border, with **10 px lettering**. Only their geographic screen positions change on zoom, pan and viewport resize. This replaces inverse SVG scaling; an immediate live observation of the previous implementation also showed a transient 16.115 px circle after reveal. The new HTML dimensions do not depend on SVG scale or layout timing. The overlay ignores pointer events, and map controls remain above it. Updated iframe, stylesheet and app query versions bypass cached copies of the former implementation.
+
+Actual compiled Chrome checks passed for the player marker before/after zoom, all three markers immediately after reveal, mouse-wheel zoom, 8× button zoom, drag/pan, map reset, and mobile viewport 390 × 844. Every measured marker remained **24 × 24 px** with **10 px text**. After pan, marker centers matched independently reconstructed geographic route endpoints within **0.008 px**. Clicking the map at an existing pin passed through the overlay and correctly left the guess submittable. Temporary viewport overrides were reset. Measurements are in `docs/chrome-fixed-pins-checks.json`; overview, zoomed and mobile screenshots are in `docs/chrome-fixed-pins-*.png`.
+
+All ten Docker Node tests passed, registered runtime assets synchronized (407 files), and the Docker Jekyll build succeeded in **80.137 seconds**. Logs: `docs/docker-fixed-pins-node-tests.txt`, `docs/docker-fixed-pins-jekyll.txt`. Training, model bytes, photos, scoring and saved model checkpoints are unchanged.
+
 ![Live hosted GeoCLIP](docs/chrome-v2-live-geoclip.png)
 
 Screenshot photograph: Mapillary contributor **ottokar**, image `1124709584691906`, [original source](https://www.mapillary.com/app/?pKey=1124709584691906&focus=photo), CC BY-SA 4.0. The screenshot is a resized rendering of the adapted game photograph.
