@@ -106,3 +106,19 @@ Screenshot photograph: Mapillary contributor **yakonovalov**, image `16696960229
 ![Final compiled Tiny mobile reveal](docs/chrome-v2-final-compiled-tiny.png)
 
 Screenshot photograph: Mapillary contributor **sk53**, image `145507850807395`, [original source](https://www.mapillary.com/app/?pKey=145507850807395&focus=photo), CC BY-SA 4.0. The screenshot is a resized rendering of the adapted game photograph.
+
+## Live release verification
+
+Release commit `2839c720fc9653972c67ea2ccfd69bdd19929d01` and both baseline/release tags were pushed. [GitHub Pages build and deployment succeeded](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/37391136714). The published game is [leonardo-maglanoc.com/euroguessr/](https://leonardo-maglanoc.com/euroguessr/).
+
+Both hosted metadata files are byte-identical to the validated release, both downloaded ONNX graph SHA-256 values match, and all five GeoCLIP shards and both reference packs return their expected byte counts. The hosted ORT module uses `text/javascript; charset=utf-8`. Evidence: `docs/live-deployment-proof.json`.
+
+Fresh live-site Chrome testing initialized both hosted models and ran actual predictions: **149 ms Tiny** and **7882 ms GeoCLIP**. Tiny's reveal/scoring and information dialog displayed the selected distilled model, 8500/961/363 split, 724 km validation and 771 km test medians. GeoCLIP displayed the selected W8A32 version, 333/372 km medians and its explicit UINT8-storage/FP32-arithmetic description. Its real no-guess timeout displayed zero human points and an independent 4013-point AI result. These two live predictions are deployment smoke checks, not additional accuracy measurements. Screenshots are `docs/chrome-v2-live-{tiny,geoclip}.png` and their information-dialog companions.
+
+Repository-wide CI is not entirely green. Formatting and public-site link-check failures also occurred at the preserved baseline. A full local formatting scan found **no warning among files changed by this release**. The unrelated [Drone browser check](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/37391137727/job/112036219783) failed at `projects/drone-racing/tests/browser.cjs:168`: expected reset yaw 0, observed 0.8447204968944099. No Drone files changed. That test's failure was inspected through Chrome; its cause was not established or modified in this EuroGuessr task. EuroGuessr's Docker, native/Chrome parity, checkpoint and Pages deployment checks passed.
+
+![Live hosted GeoCLIP](docs/chrome-v2-live-geoclip.png)
+
+Screenshot photograph: Mapillary contributor **ottokar**, image `1124709584691906`, [original source](https://www.mapillary.com/app/?pKey=1124709584691906&focus=photo), CC BY-SA 4.0. The screenshot is a resized rendering of the adapted game photograph.
+
+The live Tiny screenshot uses Mapillary contributor **blazeburovski**, image `127068623545977`, [original source](https://www.mapillary.com/app/?pKey=127068623545977&focus=photo), CC BY-SA 4.0; it likewise renders the adapted photograph.

@@ -1,0 +1,27 @@
+[
+  {
+    "model": "europe-v2-distilled-42-c4483177ff40-4f2ea6016eb8",
+    "metadata": "byte-identical",
+    "graph_sha256": "verified",
+    "remote_files": [
+      "model.onnx",
+      "references.f32",
+      "references.json"
+    ]
+  },
+  {
+    "model": "geoclip-direct-8bit-europe-bde0a279dc05-baf6293dc9e6",
+    "metadata": "byte-identical",
+    "graph_sha256": "verified",
+    "remote_files": [
+      "model.onnx",
+      "weights-00.bin",
+      "weights-01.bin",
+      "weights-02.bin",
+      "weights-03.bin",
+      "weights-04.bin",
+      "references.f32",
+      "references.json"
+    ]
+  }
+]
