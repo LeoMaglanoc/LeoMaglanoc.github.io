@@ -63,7 +63,9 @@
   },
   "projects/flappy": {
     "destination": "assets/interactive/flappy",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/g1": {
     "destination": "assets/interactive/g1",
@@ -271,11 +273,15 @@
   },
   "projects/race": {
     "destination": "assets/interactive/race",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/robot-runner": {
     "destination": "assets/interactive/robot-runner",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/tiny-dreamer": {
     "destination": "assets/interactive/tiny-dreamer",
@@ -305,7 +311,13 @@
   },
   "projects/ask-leo": {
     "destination": "assets/js/ask-leo",
-    "files": ["ask-leo.js", "model-config.js", "prompt.js", "retrieval.js", "worker.js"]
+    "files": [
+      "ask-leo.js",
+      "model-config.js",
+      "prompt.js",
+      "retrieval.js",
+      "worker.js"
+    ]
   },
   "projects/rustzero/web": {
     "destination": "assets/interactive/rustzero",
@@ -457,6 +469,76 @@
       "vendor/ort-wasm-simd-threaded.mjs",
       "vendor/ort-wasm-simd-threaded.wasm",
       "vendor/ort.min.js"
+    ]
+  },
+  "projects/locomotion-playground": {
+    "destination": "assets/interactive/locomotion-playground",
+    "files": [
+      "THIRD_PARTY_NOTICES.md",
+      "index.html",
+      "mpc/bounds.casadi.gz",
+      "mpc/client.js",
+      "mpc/decode.casadi.gz",
+      "mpc/deployment.json",
+      "mpc/finalization-compat.js",
+      "mpc/load-casadi.js",
+      "mpc/native-fixture.json",
+      "mpc/nlp.casadi.gz",
+      "mpc/pack.casadi.gz",
+      "mpc/runtime.js",
+      "mpc/seeds.json",
+      "mpc/vendor/casadi/README.md",
+      "mpc/vendor/casadi/casadi.js",
+      "mpc/vendor/casadi/casadi_wasm.js",
+      "mpc/vendor/casadi/casadi_wasm.wasm",
+      "mpc/vendor/casadi/libcasadi_blas_blasfeo.so",
+      "mpc/vendor/casadi/libcasadi_linsol_mumps.so",
+      "mpc/vendor/casadi/libcasadi_nlpsol_fatrop.so",
+      "mpc/vendor/casadi/libcasadi_nlpsol_ipopt.so",
+      "mpc/vendor/casadi/licenses/FMI-Standard-2.0.2/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/FMI-Standard-3.0/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/blasfeo-external/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/casadi-sundials/LICENSE",
+      "mpc/vendor/casadi/licenses/casadi-sundials/cvodes/LICENSE",
+      "mpc/vendor/casadi/licenses/casadi-sundials/idas/LICENSE",
+      "mpc/vendor/casadi/licenses/casadi-sundials/kinsol/LICENSE",
+      "mpc/vendor/casadi/licenses/casadi-sundials/sundials/LICENSE",
+      "mpc/vendor/casadi/licenses/casadi/LICENSE",
+      "mpc/vendor/casadi/licenses/daqp-external/LICENSE",
+      "mpc/vendor/casadi/licenses/fatrop-external/LICENSE-EPL-2.0.txt",
+      "mpc/vendor/casadi/licenses/fatrop-external/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/highs-external/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/highs-external/extern/metis/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/highs-external/extern/rcm/LICENSE",
+      "mpc/vendor/casadi/licenses/highs-external/extern/zstr/LICENSE",
+      "mpc/vendor/casadi/licenses/highs-external/highs/io/filereaderlp/LICENSE",
+      "mpc/vendor/casadi/licenses/hpipm-external/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/ipopt-external/LICENSE",
+      "mpc/vendor/casadi/licenses/metis-external/LICENSE",
+      "mpc/vendor/casadi/licenses/metis-external/metis-4.0/LICENSE",
+      "mpc/vendor/casadi/licenses/mumps-external/LICENSE",
+      "mpc/vendor/casadi/licenses/mumps-external/MUMPS/LICENSE",
+      "mpc/vendor/casadi/licenses/openblas-external/LAPACKE/LICENSE",
+      "mpc/vendor/casadi/licenses/openblas-external/LICENSE",
+      "mpc/vendor/casadi/licenses/osqp-external-build/_deps/qdldl-src/LICENSE",
+      "mpc/vendor/casadi/licenses/osqp-external/LICENSE",
+      "mpc/vendor/casadi/licenses/osqp-external/algebra/_common/lin_sys/qdldl/amd/LICENSE",
+      "mpc/vendor/casadi/licenses/qpOASES/LICENSE.txt",
+      "mpc/vendor/casadi/licenses/tinyxml2-9.0.0/LICENSE.txt",
+      "mpc/vendor/casadi/package.json",
+      "mpc/vendor/casadi/plugins.json",
+      "mpc/worker.js",
+      "playground.css",
+      "results/stand.json",
+      "results/trot.json",
+      "results/walk.json",
+      "robots/b2z1/joint-map.json",
+      "robots/b2z1/scene.xml",
+      "src/app.js",
+      "src/contract.js",
+      "src/modes/b2z1-mpc-mode.js",
+      "src/modes/g1-rl-mode.js",
+      "src/timing.js"
     ]
   }
 }

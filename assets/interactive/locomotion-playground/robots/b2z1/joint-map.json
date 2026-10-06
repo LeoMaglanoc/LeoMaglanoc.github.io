@@ -1,0 +1,200 @@
+{
+  "pinocchio_joint_order": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4"
+  ],
+  "mujoco_joint_order": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4"
+  ],
+  "mapping": [
+    {
+      "name": "FL_hip_joint",
+      "pin_q": 7,
+      "pin_v": 6,
+      "mj_q": 7,
+      "mj_v": 6,
+      "actuator": 0
+    },
+    {
+      "name": "FL_thigh_joint",
+      "pin_q": 8,
+      "pin_v": 7,
+      "mj_q": 8,
+      "mj_v": 7,
+      "actuator": 1
+    },
+    {
+      "name": "FL_calf_joint",
+      "pin_q": 9,
+      "pin_v": 8,
+      "mj_q": 9,
+      "mj_v": 8,
+      "actuator": 2
+    },
+    {
+      "name": "FR_hip_joint",
+      "pin_q": 10,
+      "pin_v": 9,
+      "mj_q": 10,
+      "mj_v": 9,
+      "actuator": 3
+    },
+    {
+      "name": "FR_thigh_joint",
+      "pin_q": 11,
+      "pin_v": 10,
+      "mj_q": 11,
+      "mj_v": 10,
+      "actuator": 4
+    },
+    {
+      "name": "FR_calf_joint",
+      "pin_q": 12,
+      "pin_v": 11,
+      "mj_q": 12,
+      "mj_v": 11,
+      "actuator": 5
+    },
+    {
+      "name": "RL_hip_joint",
+      "pin_q": 13,
+      "pin_v": 12,
+      "mj_q": 13,
+      "mj_v": 12,
+      "actuator": 6
+    },
+    {
+      "name": "RL_thigh_joint",
+      "pin_q": 14,
+      "pin_v": 13,
+      "mj_q": 14,
+      "mj_v": 13,
+      "actuator": 7
+    },
+    {
+      "name": "RL_calf_joint",
+      "pin_q": 15,
+      "pin_v": 14,
+      "mj_q": 15,
+      "mj_v": 14,
+      "actuator": 8
+    },
+    {
+      "name": "RR_hip_joint",
+      "pin_q": 16,
+      "pin_v": 15,
+      "mj_q": 16,
+      "mj_v": 15,
+      "actuator": 9
+    },
+    {
+      "name": "RR_thigh_joint",
+      "pin_q": 17,
+      "pin_v": 16,
+      "mj_q": 17,
+      "mj_v": 16,
+      "actuator": 10
+    },
+    {
+      "name": "RR_calf_joint",
+      "pin_q": 18,
+      "pin_v": 17,
+      "mj_q": 18,
+      "mj_v": 17,
+      "actuator": 11
+    },
+    {
+      "name": "joint1",
+      "pin_q": 19,
+      "pin_v": 18,
+      "mj_q": 19,
+      "mj_v": 18,
+      "actuator": 12
+    },
+    {
+      "name": "joint2",
+      "pin_q": 20,
+      "pin_v": 19,
+      "mj_q": 20,
+      "mj_v": 19,
+      "actuator": 13
+    },
+    {
+      "name": "joint3",
+      "pin_q": 21,
+      "pin_v": 20,
+      "mj_q": 21,
+      "mj_v": 20,
+      "actuator": 14
+    },
+    {
+      "name": "joint4",
+      "pin_q": 22,
+      "pin_v": 21,
+      "mj_q": 22,
+      "mj_v": 21,
+      "actuator": 15
+    }
+  ],
+  "q0": [
+    0.0,
+    0.0,
+    0.55,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.7,
+    -1.5,
+    0.0,
+    0.7,
+    -1.5,
+    0.0,
+    0.7,
+    -1.5,
+    0.0,
+    0.7,
+    -1.5,
+    0.0,
+    1.0,
+    -0.6,
+    0.0
+  ],
+  "floor_height": 0.006457886178921235,
+  "feet": [
+    "FR_foot",
+    "FL_foot",
+    "RR_foot",
+    "RL_foot"
+  ]
+}

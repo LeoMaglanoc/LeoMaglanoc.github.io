@@ -1,0 +1,12 @@
+{
+  "clock": "0.553 s / 0.74 s",
+  "latency": "958 / 3727 ms · setup 9.8 s",
+  "pose": "0.002, 0.002, 0.536 / 1.000, 0.004, 0.001, 0.003",
+  "solve": "1032.0 ms / 2.3e-13 (browser)",
+  "status": "Live IPOPT · 0.003× simulation speed · 50 solves",
+  "viewport": {
+    "height": 844,
+    "width": 390
+  },
+  "warning": ""
+}

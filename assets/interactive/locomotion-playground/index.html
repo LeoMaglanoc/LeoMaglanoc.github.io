@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101617"><title>Robot Locomotion Playground</title>
+<link rel="stylesheet" href="./playground.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="shell-header">
+<div class="brand"><span class="eyebrow">CONTROL / IN MOTION</span><h1>Robot locomotion playground</h1></div>
+<nav aria-label="Controller and robot"><button id="mode-g1" aria-pressed="true">G1 <span>· live RL</span></button><button id="mode-b2" aria-pressed="false">B2+Z1 <span>· MPC</span></button></nav>
+<button id="about-toggle" aria-expanded="false" aria-controls="about">How it works</button>
+</header>
+<aside id="about" hidden>
+<p>These demonstrations use different robots. Explore two control paradigms; this is not a controlled performance comparison.</p>
+<p id="explanation">G1: state → neural PPO policy → desired joint positions → PD torques → MuJoCo → next state. The learned policy executes live in your browser.</p>
+<a href="./THIRD_PARTY_NOTICES.md">Credits & licenses</a>
+</aside>
+<main id="simulation" aria-label="Locomotion simulation"></main>
+<template id="b2-template">
+<section class="b2-stage" aria-label="B2+Z1 simulation">
+<div class="b2-viewport"><canvas id="b2-canvas" aria-label="3D B2+Z1 MuJoCo simulation"></canvas></div>
+<div class="stage-label"><span class="eyebrow">B2+Z1 / WHOLE-BODY MPC</span><h2>Plan the next step.</h2><p id="runtime-label">Recorded native MPC rollout</p><p id="status" role="status">Loading B2+Z1…</p></div>
+<aside class="controller" aria-label="MPC controller">
+<div class="section-label">NATIVE MPC / FATROP</div>
+<label for="gait">Gait</label><select disabled id="gait" aria-label="Gait"><option value="stand">Stand</option><option value="walk">Walk</option><option value="trot" selected>Trot</option></select>
+<label for="replay">Runtime</label><select disabled id="replay" aria-label="Runtime"><option value="kinematic">Kinematic playback</option><option value="live">Live browser MPC · slow motion</option><option value="physics">Torque physics replay · experimental</option><option value="passive">Passive physics smoke test</option></select>
+<div class="actions"><button disabled id="reset">Reset</button><button disabled id="pause">Pause</button></div>
+<div class="overlay-controls"><label><input id="horizon" type="checkbox" checked> Prediction horizon</label><label><input id="forces" type="checkbox" checked> Foot force arrows</label></div>
+<section id="live-controls" hidden aria-label="Live MPC commands"><div id="live-command">vx 0.00 · vy 0.00 · yaw 0.00</div><div class="live-pad">
+<button data-key="KeyQ" aria-label="Turn left">↶</button><button data-key="KeyW" aria-label="Move forward">↑</button><button data-key="KeyE" aria-label="Turn right">↷</button><button data-key="KeyA" aria-label="Strafe left">←</button><button data-key="KeyS" aria-label="Move backward">↓</button><button data-key="KeyD" aria-label="Strafe right">→</button></div><button id="push">Push robot · 60 N</button><label><input id="servo" type="checkbox" checked> Joint tracking servo</label></section>
+<div id="contacts" class="contacts" aria-label="MPC contact schedule"></div>
+<details id="telemetry"><summary>Telemetry & performance</summary>
+<dl><dt>Desired vx / actual vx</dt><dd id="velocity">—</dd><dt>Desired vy / actual vy</dt><dd id="lateral">—</dd><dt>Desired yaw / actual yaw</dt><dd id="yaw">—</dd><dt id="solve-label">Recorded solve / violation</dt><dd id="solve">—</dd><dt>Horizon / simulated time</dt><dd id="time">—</dd><dt>Render FPS / physics RTF</dt><dd id="performance">—</dd><dt>q / v / actuators / contacts</dt><dd id="dimensions">—</dd><dt>Base position / WXYZ</dt><dd id="pose">—</dd><dt>Solver rate / worker transfer</dt><dd id="worker-performance">n/a · recorded playback</dd><dt>Worker median / p95 / setup</dt><dd id="worker-latency">—</dd><dt>Physics dt</dt><dd>0.002 s</dd></dl>
+<p>Arrows: 1 m = 1,000 N. Horizon skeletons show selected future nodes. Solve metrics identify their native or browser source. Live control is experimental slow motion.</p>
+</details>
+<p class="hint" id="control-hint">Recorded command: vx 0.10 m/s. Space pauses; Backspace resets. Drag to orbit; pinch to zoom.</p>
+<p class="warning" id="warning" hidden></p>
+</aside>
+<div class="receding" aria-label="Receding horizon explanation"><span>solve</span><b>●</b><i>●</i><i>●</i><i>●</i><i>●</i><span>execute first action → repeat</span><div id="horizon-progress"></div></div>
+</section>
+</template>
+<script type="module" src="./src/app.js"></script>
+</body></html>
