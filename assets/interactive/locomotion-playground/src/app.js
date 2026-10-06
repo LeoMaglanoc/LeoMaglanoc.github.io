@@ -12,10 +12,9 @@ async function select() {
   catch (error) {
     if (token !== generation) return;
     next.dispose();
-    const message = document.createElement('p'); message.className = 'error'; message.setAttribute('role','alert'); message.textContent = `Simulation could not load: ${error.message}. Select G1 to retry.`; container.replaceChildren(message);
+    const message = document.createElement('p'); message.className = 'error'; message.setAttribute('role','alert'); message.textContent = `Simulation could not load: ${error.message}. Reload the page to retry.`; container.replaceChildren(message);
   }
 }
-document.getElementById('mode-g1').addEventListener('click', () => select());
 document.getElementById('about-toggle').addEventListener('click', (event) => {
   const panel = document.getElementById('about'); panel.hidden = !panel.hidden;
   event.currentTarget.setAttribute('aria-expanded', String(!panel.hidden));

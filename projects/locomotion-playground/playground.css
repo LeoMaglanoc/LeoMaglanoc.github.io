@@ -6,3 +6,6 @@
 
 #live-controls{margin:12px 0;font-size:11px}#live-command{color:var(--accent);font-variant-numeric:tabular-nums}.live-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0}.live-pad button{font-size:20px;touch-action:none;user-select:none}.live-pad button.active{background:var(--accent);color:#142019}#push{width:100%;margin-bottom:8px;font-size:12px}@media(max-width:700px){#live-controls{grid-column:1/-1;margin:0}.live-pad{grid-template-columns:repeat(6,1fr)}.live-pad button{padding:5px;min-height:44px}#push{width:50%;margin:0;padding:6px}#live-controls>label{font-size:9px}.controller:has(#live-controls:not([hidden])){max-height:46%}}
 @media(max-width:700px){.b2-stage:has(#live-controls:not([hidden])) .receding{display:none}}
+
+/* Single-controller shell: compact header on mobile, with no mode selector. */
+@media(max-width:700px){.shell-header{height:64px;flex-wrap:nowrap}.brand{flex-basis:auto}#about{top:64px}#simulation{height:calc(100dvh - 64px)}}
