@@ -34,12 +34,10 @@ builds:
     links:
       - label: Humanoid Walking
         url: /g1/
-      - label: TinyDreamer
-        url: /tiny-dreamer/
-      - label: SLAM
-        url: /slam/
       - label: Block-World
         url: /block-world/
+      - label: EuroGuesser AI
+        url: /euroguessr/
 
   - title: EasyBuy
     description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
