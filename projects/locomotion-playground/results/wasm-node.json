@@ -1,0 +1,17 @@
+[
+  {
+    "solveMs": 502.4607620000006,
+    "maxNativeDecodedError": 0.00001940123344823519,
+    "constraintViolation": 2.8226940160247516e-7
+  },
+  {
+    "solveMs": 523.4971509999996,
+    "maxNativeDecodedError": 0.000018565059555442076,
+    "constraintViolation": 2.704617827475886e-7
+  },
+  {
+    "solveMs": 533.291091000001,
+    "maxNativeDecodedError": 0.000018588302285849068,
+    "constraintViolation": 2.7096612534305287e-7
+  }
+]

@@ -1,0 +1,7 @@
+# WASM feasibility experiments
+
+The shipped runtime is `../mpc/runtime.js`, using unmodified npm `@casadi/casadi-wasm` 3.8.1. `toy.html` exercises worker/plugin initialization. `full.html` initializes the original serialized whole-body OCP, solves three times, rejects violations above 1e-3 and compares decoded outputs with a native fixture. It prints setup and solve latency and is served by the Docker site service.
+
+The alternate generated-C route was attempted first. Source pins: upstream controller `80e906d35d91783e85e1ef994023ca9082dc40c3`, Fatrop `3c09fcd72b863e760d866410b425da883349c4c4` (v0.0.4, recursive BLASFEO submodule), Emscripten Docker `emscripten/emsdk:4.0.16`. Generate with the native exporter `tools/export_runtime.py --c`, clone Fatrop into this directory with its submodules, then run `build-wasm.sh` inside that Emscripten image with the repository mounted at `/workspace`. `wrapper.c`, `link-wasm.sh` and `tools/make_wrapper.py` record the flat C ABI experiment.
+
+Fatrop/BLASFEO compiled, but generated solver C did not finish compiling on the development laptop: the expanded 53 MB translation unit exhausted clang memory. An unexpanded experiment produced 372 MB and was stopped. No generated-C binary is shipped. Large generated C files, build outputs and the Fatrop checkout are ignored. The engineering report explains the successful symbolic-graph alternative and numerical verification.

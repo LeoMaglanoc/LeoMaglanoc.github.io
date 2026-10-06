@@ -57,3 +57,10 @@ projects/llm-city-guard/local-models/
 projects/llm-city-guard/public/models/*
 !projects/llm-city-guard/public/models/.gitkeep
 projects/**/*.tsbuildinfo
+
+# Reproducible locomotion solver experiments (generated offline).
+projects/locomotion-playground/experiments/fatrop/
+projects/locomotion-playground/experiments/build/
+projects/locomotion-playground/experiments/solver_function.c
+projects/locomotion-playground/experiments/retract_solution.c
+projects/locomotion-playground/experiments/decode_solution.c

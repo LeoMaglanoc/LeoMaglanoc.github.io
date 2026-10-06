@@ -1,0 +1,9 @@
+{
+  "name": "robot-locomotion-playground",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/contract.test.mjs tests/worker.test.mjs tests/timing.test.mjs tests/wasm-fixture.mjs",
+    "test:feedback": "node tests/feedback-check.mjs"
+  }
+}
