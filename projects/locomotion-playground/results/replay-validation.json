@@ -1,0 +1,125 @@
+[
+  {
+    "gait": "stand",
+    "prescribed_force_acceleration_error_max": 1.3298789881890927e-06,
+    "open_loop": {
+      "0.046": {
+        "base_error_m": 0.001346739552410786,
+        "base_height_m": 0.5499577551875788
+      },
+      "0.3": {
+        "base_error_m": 0.025170895324288473,
+        "base_height_m": 0.5711344141822241
+      },
+      "1.0": {
+        "base_error_m": 0.5009556622715614,
+        "base_height_m": 0.4264533888220855
+      },
+      "1.6": {
+        "base_error_m": 0.6713527456720345,
+        "base_height_m": 0.21539971664557697
+      }
+    },
+    "tracking_servo": {
+      "0.046": {
+        "base_error_m": 0.00467587027879833,
+        "base_height_m": 0.5452591140993795
+      },
+      "0.3": {
+        "base_error_m": 0.017322262502632708,
+        "base_height_m": 0.5342194609959094
+      },
+      "1.0": {
+        "base_error_m": 0.01891254775293554,
+        "base_height_m": 0.5350004384972857
+      },
+      "1.6": {
+        "base_error_m": 0.024047253931122906,
+        "base_height_m": 0.5311165645430568
+      }
+    },
+    "finite": true
+  },
+  {
+    "gait": "walk",
+    "prescribed_force_acceleration_error_max": 1.1527013654699658e-06,
+    "open_loop": {
+      "0.046": {
+        "base_error_m": 0.0017922223949699801,
+        "base_height_m": 0.5510944995120012
+      },
+      "0.3": {
+        "base_error_m": 0.043284275837191515,
+        "base_height_m": 0.5870622343350271
+      },
+      "1.0": {
+        "base_error_m": 0.4547741490565181,
+        "base_height_m": 0.21552739715116978
+      },
+      "1.6": {
+        "base_error_m": 0.4691029912798165,
+        "base_height_m": 0.1654654557372608
+      }
+    },
+    "tracking_servo": {
+      "0.046": {
+        "base_error_m": 0.0006434448905182463,
+        "base_height_m": 0.5497413051273042
+      },
+      "0.3": {
+        "base_error_m": 0.03414886395117959,
+        "base_height_m": 0.5238781909698714
+      },
+      "1.0": {
+        "base_error_m": 0.03329019408327753,
+        "base_height_m": 0.5193472777377042
+      },
+      "1.6": {
+        "base_error_m": 0.0354525240212752,
+        "base_height_m": 0.5237999172099723
+      }
+    },
+    "finite": true
+  },
+  {
+    "gait": "trot",
+    "prescribed_force_acceleration_error_max": 1.5289293386899772e-06,
+    "open_loop": {
+      "0.046": {
+        "base_error_m": 0.001677528369610871,
+        "base_height_m": 0.5512636094948078
+      },
+      "0.3": {
+        "base_error_m": 0.07073983479476294,
+        "base_height_m": 0.61399495417193
+      },
+      "1.0": {
+        "base_error_m": 0.6221538460559067,
+        "base_height_m": 0.309134840156586
+      },
+      "1.6": {
+        "base_error_m": 0.62422219659278,
+        "base_height_m": 0.18154328157074373
+      }
+    },
+    "tracking_servo": {
+      "0.046": {
+        "base_error_m": 0.0025341258829842846,
+        "base_height_m": 0.5476646040231555
+      },
+      "0.3": {
+        "base_error_m": 0.051988345197735514,
+        "base_height_m": 0.5076352447707907
+      },
+      "1.0": {
+        "base_error_m": 0.12975999608474711,
+        "base_height_m": 0.4970198763494407
+      },
+      "1.6": {
+        "base_error_m": 0.13079370127625867,
+        "base_height_m": 0.5092634365900631
+      }
+    },
+    "finite": true
+  }
+]

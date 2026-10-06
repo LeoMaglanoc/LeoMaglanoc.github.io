@@ -1,0 +1,15 @@
+services:
+  native:
+    build: .
+    working_dir: /opt/wb-mpc
+    volumes:
+      - ../..:/workspace
+    command: ["python", "/workspace/projects/locomotion-playground/tools/benchmark.py"]
+  site:
+    image: python:3.10-slim
+    working_dir: /workspace
+    volumes:
+      - ../..:/workspace:ro
+    ports:
+      - "8001:8000"
+    command: ["python", "-m", "http.server", "8000"]
