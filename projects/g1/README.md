@@ -100,7 +100,7 @@ The shipped policy is Unitree's `deploy/pre_train/g1/motion.pt`, exported once t
 
 The browser implementation mirrors Unitree's deployment contract: a 47-element observation is evaluated at 50 Hz, while the 12-DoF MuJoCo model and PD controller step at 500 Hz.
 
-Controls are W/A/S/D or the arrow keys for forward, strafe-left, backward, and strafe-right movement; Q/E turn. On phones, use the touch controls shown in the simulator. With no key held, the robot settles in place. Space pauses; Backspace or Reset restores the initial state. Push buttons apply a short horizontal force to the pelvis.
+Controls are W/A/S/D or the arrow keys for forward, strafe-left, backward, and strafe-right movement; Q/E turn. On phones, use the touch controls shown in the simulator. With no key held, the robot settles in place. Space pauses; Backspace or Reset restores the initial state. Push buttons apply a short horizontal force to the pelvis, toward the robot’s left or right at its heading when the push starts. Expand Adjust force to set the magnitude. On mobile, the direction pad uses arrows for movement and curved arrows for turning.
 
 ## Scope and limitations
 

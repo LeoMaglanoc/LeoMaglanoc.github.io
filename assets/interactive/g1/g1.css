@@ -139,25 +139,66 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .pipeline, .g1-meta { display: none; }
 .g1-error { position: absolute; left: 50%; bottom: calc(var(--edge) + var(--safe-bottom)); transform: translateX(-50%); max-width: min(420px, calc(100vw - 32px)); margin: 0; padding: 10px; border: 1px solid #bc6969; border-radius: 6px; background: rgba(30, 12, 12, .88); color: #f3aaaa; font-size: 11px; line-height: 1.45; pointer-events: auto; }
 
-@media (max-width: 700px) {
+
+/* Keep the stage clear; secondary controls expand only when needed. */
+.g1-stage-copy { max-width: 360px; }
+h1 { font-size: clamp(28px, 3.2vw, 44px); }
+.g1-stage-copy p { max-width: 330px; line-height: 1.5; }
+.telemetry { top: calc(205px + var(--safe-top)); gap: 18px; }
+.g1-panel-head { min-width: 210px; }
+.g1-buttons { top: calc(102px + var(--safe-top)); }
+.g1-key-grid button { min-height: 44px; }
+.g1-key-grid { grid-template-rows: repeat(3, 44px); }
+.g1-key-grid .touch-symbol, .touch-note { display: none; }
+.force-settings { margin-top: 10px; }
+.force-settings summary { color: var(--muted); cursor: pointer; font-size: 11px; padding: 8px 0; touch-action: manipulation; }
+.force-settings[open] summary { margin-bottom: 7px; }
+.force-settings input { min-height: 28px; touch-action: pan-x; }
+button:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+.g1-loading { white-space: normal; text-align: center; max-width: calc(100vw - 32px); }
+
+@media (max-width: 700px), (max-width: 1000px) and (max-height: 500px) {
   :root { --edge: 12px; }
   .g1-stage-copy { display: none; }
-  .g1-panel-head { top: calc(var(--edge) + var(--safe-top)); right: calc(var(--edge) + var(--safe-right)); padding: 7px 9px; }
-  .g1-panel-head .eyebrow { font-size: 9px; }
-  .g1-status { font-size: 9px; }
-  .telemetry { top: calc(70px + var(--safe-top)); left: calc(var(--edge) + var(--safe-left)); }
+  .g1-panel-head { left: calc(var(--edge) + var(--safe-left)); right: calc(var(--edge) + var(--safe-right)); min-width: 0; height: 62px; padding: 10px 12px; align-items: flex-start; }
+  .g1-panel-head .eyebrow { font-size: 10px; letter-spacing: .12em; }
+  .live-dot { order: -1; margin-top: 4px; flex-shrink: 0; }
+  .g1-status { margin-top: 5px; font-size: 9px; max-width: calc(100vw - 200px); }
+  .g1-buttons { top: calc(22px + var(--safe-top)); right: calc(22px + var(--safe-right)); gap: 6px; }
+  .primary-button, .secondary-button { min-height: 44px; padding: 9px 11px; font-size: 11px; }
+  .telemetry { top: calc(86px + var(--safe-top)); }
   .telemetry-item:nth-child(n+2) { display: none; }
-  .g1-buttons { top: calc(70px + var(--safe-top)); right: calc(var(--edge) + var(--safe-right)); }
-  .g1-panel > .g1-section:first-of-type { left: calc(var(--edge) + var(--safe-left)); bottom: calc(var(--edge) + var(--safe-bottom)); }
-  .g1-actions { right: calc(var(--edge) + var(--safe-right)); bottom: calc(var(--edge) + var(--safe-bottom)); width: min(176px, 43vw); }
-  .g1-actions .section-label, .g1-actions .range-label, .g1-actions input { display: none; }
-  .push-row { margin: 0; }
-  .control-note { max-width: 145px; }
-  .g1-loading { bottom: calc(180px + var(--safe-bottom)); max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; }
+  .g1-panel > .g1-section:first-of-type { padding: 8px; width: 174px; }
+  .g1-panel > .g1-section:first-of-type > .section-label, .command-readout { display: none; }
+  .g1-key-grid { grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 44px); grid-template-areas: "q w e" "a s d"; gap: 6px; }
+  .g1-key-grid kbd, .keyboard-note { display: none; }
+  .g1-key-grid .touch-symbol { display: block; font-size: 23px; line-height: 1; color: var(--ink); }
+  .touch-note { display: inline; }
+  .control-note { text-align: center; margin: 7px 0 1px; font-size: 9px; }
+  .g1-actions { width: 164px; padding: 9px; }
+  .g1-actions .section-label { display: none; }
+  .push-row { margin: 0; gap: 6px; }
+  .outline-button { min-height: 44px; font-size: 11px; }
+  .force-settings { margin-top: 4px; }
+  .force-settings summary { min-height: 32px; padding: 8px 0; }
+  .g1-loading, .g1-error { bottom: calc(155px + var(--safe-bottom)); }
 }
 
-@media (max-width: 390px) {
-  .g1-panel > .g1-section:first-of-type { transform: scale(.9); transform-origin: bottom left; }
-  .g1-actions { transform: scale(.9); transform-origin: bottom right; }
-  .telemetry { display: none; }
+@media (max-width: 370px) {
+  :root { --edge: 8px; }
+  .g1-actions { width: 122px; }
+  .g1-panel-head { padding-left: 9px; gap: 8px; }
+  .g1-panel-head .eyebrow { font-size: 9px; }
+  .g1-buttons { right: calc(16px + var(--safe-right)); }
+  .g1-status { max-width: calc(100vw - 170px); }
+}
+
+@media (max-width: 1000px) and (max-height: 500px) {
+  :root { --edge: 10px; }
+  .g1-panel-head { right: auto; width: 230px; height: 56px; }
+  .g1-status { max-width: 190px; }
+  .g1-buttons { top: calc(16px + var(--safe-top)); right: calc(var(--edge) + var(--safe-right)); }
+  .telemetry { top: calc(78px + var(--safe-top)); }
+  .control-note { display: none; }
+  .g1-loading, .g1-error { bottom: calc(24px + var(--safe-bottom)); max-width: calc(100vw - 390px); }
 }

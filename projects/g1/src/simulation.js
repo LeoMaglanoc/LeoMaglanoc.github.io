@@ -85,7 +85,13 @@ export class G1Simulation {
   }
 
   applyPush(direction, strength) {
-    this.push = { direction, strength, remaining: 0.18 };
+    // Capture the heading at the start of the impulse. MuJoCo uses w/x/y/z.
+    const [w, x, y, z] = this.data.qpos.slice(3, 7);
+    const yaw = Math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z));
+    // Local +Y is the robot's left; buttons pass -1 for left and +1 for right.
+    const lateral = -direction * strength;
+    const force = [-Math.sin(yaw) * lateral, Math.cos(yaw) * lateral, 0];
+    this.push = { force, remaining: 0.18 };
     this.stats.pushes += 1;
   }
 
@@ -109,7 +115,7 @@ export class G1Simulation {
     for (let i = 0; i < 12; i += 1) this.data.ctrl[i] = torque[i];
     this.data.qfrc_applied.fill(0);
     if (this.push) {
-      const force = [0, this.push.direction * this.push.strength, 0];
+      const force = this.push.force;
       const point = [this.data.xpos[this.pelvisBody * 3], this.data.xpos[this.pelvisBody * 3 + 1], this.data.xpos[this.pelvisBody * 3 + 2]];
       this.mujoco.mj_applyFT(this.model, this.data, force, [0, 0, 0], point, this.pelvisBody, this.data.qfrc_applied);
       this.push.remaining -= C.simulationDt;

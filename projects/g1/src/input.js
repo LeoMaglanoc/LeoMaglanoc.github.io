@@ -27,6 +27,7 @@ export class CommandManager {
 
   bindKeyboard() {
     window.addEventListener("keydown", (event) => {
+      if (event.target.matches("input, textarea, select, [contenteditable]")) return;
       if (!KEY_COMMANDS[event.code]) return;
       event.preventDefault();
       this.manualMode = true;
@@ -34,8 +35,8 @@ export class CommandManager {
     });
     window.addEventListener("keyup", (event) => {
       if (!KEY_COMMANDS[event.code]) return;
-      event.preventDefault();
       this.keys.delete(event.code);
+      if (!event.target.matches("input, textarea, select, [contenteditable]")) event.preventDefault();
     });
     window.addEventListener("blur", () => {
       this.keys.clear();

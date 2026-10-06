@@ -32,7 +32,7 @@ async function start() {
     });
     const pushStrength = document.getElementById("g1-push-strength");
     const pushStrengthValue = document.getElementById("g1-push-strength-value");
-    pushStrength.addEventListener("input", () => { pushStrengthValue.textContent = pushStrength.value; });
+    pushStrength.addEventListener("input", () => { pushStrengthValue.textContent = `${pushStrength.value} N`; });
     ui.pauseButton.addEventListener("click", () => {
       simulation.setPaused(!simulation.paused);
       ui.setPaused(simulation.paused);
@@ -41,6 +41,7 @@ async function start() {
     ui.pushRightButton.addEventListener("click", () => simulation.applyPush(1, Number(document.getElementById("g1-push-strength").value)));
     document.querySelectorAll("[data-command-key]").forEach((button) => commandManager.bindButton(button, button.dataset.commandKey));
     window.addEventListener("keydown", (event) => {
+      if (event.repeat || event.target.matches("button, summary, input, textarea, select, [contenteditable]")) return;
       if (event.code === "Space") {
         event.preventDefault();
         simulation.setPaused(!simulation.paused);
