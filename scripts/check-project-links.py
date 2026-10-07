@@ -74,6 +74,8 @@ def check():
     ort_original = ROOT / 'assets/interactive/language-vision' / ort_name
     if hashlib.sha256(ort_shared.read_bytes()).digest() != hashlib.sha256(ort_original.read_bytes()).digest():
         raise SystemExit('LanguageVision: shared ONNX binary changed; update wasmPaths before deploying')
+    if '../euroguessr/vendor/ort-wasm-simd-threaded.wasm' not in (language_vision / 'worker.mjs').read_text():
+        raise SystemExit('LanguageVision: shared WASM path missing from published worker')
     if not (SITE / 'assets/interactive/euroguessr' / ort_name).is_file():
         raise SystemExit('Missing shared ONNX runtime')
     for scene in json.loads((language_vision / 'data/scenes.json').read_text()):
