@@ -6,6 +6,9 @@ import mujoco
 import numpy as np
 root=Path('/work')
 p=root/'projects/dexterous-rl'
+provenance=json.loads((p/'checkpoints/provenance.json').read_text())
+archive=p/'checkpoints'/provenance['upstream_source_archive']
+assert hashlib.sha256(archive.read_bytes()).hexdigest()==provenance['upstream_source_archive_sha256']
 for line in (p/'checkpoints/released/SHA256SUMS').read_text().splitlines():
     digest,name=line.split('  ',1)
     assert hashlib.sha256((p/'checkpoints/released'/name).read_bytes()).hexdigest()==digest,name

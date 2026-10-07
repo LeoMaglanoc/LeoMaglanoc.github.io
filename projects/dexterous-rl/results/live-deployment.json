@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-07",
+  "commit": "158a232",
+  "deploy_run": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/37670911579",
+  "deployment": "success",
+  "demo": "https://leomaglanoc.github.io/dexterous-rl/",
+  "blog": "https://leomaglanoc.github.io/blog/AI-coding-agent-case-study/",
+  "chrome_blog_link_followed": true,
+  "live_status": "Live \u00b7 goal-conditioned RL",
+  "startup_actor_parity_checks_passed": 10,
+  "maximum_actor_error": 3e-07,
+  "simulation_pace": 1.0,
+  "physical_phone_tested": false
+}

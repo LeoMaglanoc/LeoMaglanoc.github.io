@@ -5,7 +5,7 @@
   "policy_route": "direct reuse",
   "model_checkpoint": "released/model.pt",
   "artifact_hashes": {
-    "THIRD_PARTY_NOTICES.md": "908551aedbdedf040bfb94dfb2570c924651fd3045c68683dc458190be8abb04",
+    "THIRD_PARTY_NOTICES.md": "07d6d6f796d6bf7f79caf52c17cb8ccdeafc68a655a857e32be14dc2ea9b9775",
     "app.js": "13c633907a08eab4d6c0b6a5b164b3d68d13cb4f382ff490b390ea2ad397bb53",
     "config.json": "a7b03001602faa27c04e240f26c03f3ed85c758d0c0356b5169ad898f52c3a1c",
     "control.js": "db0e9eb0c091dc028fb55f90c6b47cb727bcbaa3ff27be70dfd0514e0f97b9e2",

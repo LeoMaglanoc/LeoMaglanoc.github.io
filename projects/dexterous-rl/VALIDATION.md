@@ -94,3 +94,14 @@ archive are preserved. Its original export test still runs in CI and passes.
 See `results/jekyll-build.log`, `results/published-links.txt`, and
 `results/tiny-ego-archive-check.txt`. Upstream credits and license texts are
 visible in the demo and retained with the deployment.
+
+The public GitHub Pages deployment was verified in Chrome on 2026-10-07 after
+[deployment run 37670911579](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/37670911579)
+succeeded for commit `158a232`. The existing blog's new demo link opens the
+live simulation; startup reports all 10 actor parity checks passed (maximum
+error `3.0e-7`), with the policy and physics advancing at 1.00× simulated time.
+See `results/chrome-live.jpg` and `results/live-deployment.json`.
+
+The offline upstream archive was checked against all 380 archived source/model
+files; all upstream Python sources and original model assets are preserved.
+See `results/source-archive-integrity.json` and the recovery instructions in README.

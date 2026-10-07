@@ -8,5 +8,12 @@
   "policy_sha256": "7d5d80d5302b61374a9995515b506f75648aeeb4a3ad69ae8c3de8a7b16fa779",
   "mujoco": "3.11.0",
   "training_performed": false,
-  "distillation_performed": false
+  "distillation_performed": false,
+  "upstream_source_archive": "upstream-source-v2026.9.27.tar.gz",
+  "upstream_source_archive_sha256": "c3243bcd01b3cb294f323b8fe779975501f67dc3cb3629ba19bcf472b4125d93",
+  "upstream_source_archive_omissions": [
+    ".git",
+    "__pycache__",
+    "documentation images and GIFs (*/images and */docs/assets)"
+  ]
 }

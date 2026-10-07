@@ -40,7 +40,7 @@ See [ORT-MIT.txt](licenses/ORT-MIT.txt).
 
 ## Three.js and fonts
 
-[Three.js](https://github.com/mrdoob/three.js), MIT, copyright 2010–2026 Three.js authors;
+[Three.js](https://github.com/mrdoob/three.js), MIT, copyright 2010–2025 Three.js authors;
 shared from `../mobile-sorting/vendor/`. See [THREE-MIT.txt](licenses/THREE-MIT.txt).
 
 DM Sans and Space Grotesk are shared locally from `../language-vision/vendor/fonts/`.

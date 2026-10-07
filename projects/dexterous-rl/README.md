@@ -50,6 +50,11 @@ keyframe after compilation.
   meshes and golden vectors in `web/`.
 - `checkpoints/released/`: **original `model.pt`**, `policy.onnx`, configuration,
   release identity and SHA-256 hashes. These research artifacts are not deployed.
+- `checkpoints/upstream-source-v2026.9.27.tar.gz`: pinned upstream source
+  snapshot, including all training code and original model assets (documentation
+  images and GIFs omitted), with its hash in
+  `checkpoints/provenance.json`. For offline recovery, extract it into
+  `vendor/wuji-mjlab/` and skip the Git fetch step.
 - `checkpoints/reference-source/`: copies of the upstream task/config sources
   needed to audit or resume work, with exact revision in `provenance.json`.
 - `results/`: native visual/collision views, raw native and browser regression
