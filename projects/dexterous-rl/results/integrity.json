@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "nativeMujoco": "3.11.0",
+  "nativeONNXRuntime": "1.23.0",
+  "actorInputs": [
+    1,
+    207
+  ],
+  "actorOutputs": [
+    1,
+    20
+  ],
+  "joints": 20,
+  "unchangedMeshFiles": 35
+}

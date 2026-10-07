@@ -1,0 +1,262 @@
+<mujoco model="MuJoCo Model">
+  <compiler angle="radian" meshdir="meshes" texturedir="textures" />
+
+  <option timestep="0.01" />
+
+  <size nkey="1" />
+
+  <visual>
+    <global azimuth="120" elevation="-20" />
+    <quality shadowsize="8192" />
+    <headlight ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="1 1 1" />
+  </visual>
+
+  <default>
+    <default class="robot/main">
+      <joint armature="0.0002" />
+      <geom group="3" priority="1" friction="0.7" solref="0.02 1.5" />
+    </default>
+    <default class="object/main">
+      <default class="object/cube">
+        <geom conaffinity="2" friction="0.3" solref="0.015" solimp="0.85 0.85" />
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="cube" colorspace="linear" name="object/cube" fileright="fileright.png" fileleft="fileleft.png" fileup="fileup.png" filedown="filedown.png" filefront="filefront.png" fileback="fileback.png" />
+    <texture type="cube" colorspace="linear" name="object/graycube" fileright="grayright.png" fileleft="grayleft.png" fileup="grayup.png" filedown="graydown.png" filefront="grayfront.png" fileback="grayback.png" />
+    <texture type="2d" colorspace="linear" name="object/dexcube" file="dex_cube.png" />
+    <texture type="cube" colorspace="linear" name="object/arucocube" fileright="RIGHT_purple.png" fileleft="LEFT_blue.png" fileup="TOP_red.png" filedown="BOTTOM_cyan.png" filefront="FRONT_green.png" fileback="BACK_black.png" />
+    <texture type="skybox" colorspace="auto" name="skybox" builtin="gradient" rgb1="0.3 0.5 0.9" rgb2="0.9 0.95 1" width="800" height="4800" />
+    <texture type="2d" colorspace="auto" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="object/cube" texture="object/cube" />
+    <material name="object/graycube" texture="object/graycube" />
+    <material name="object/dexcube" texture="object/dexcube" />
+    <material name="object/arucocube" texture="object/arucocube" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+    <mesh name="robot/right_palm_link" content_type="model/stl" file="right_palm_link.STL" />
+    <mesh name="robot/right_palm_link_collision" content_type="model/stl" file="right_palm_link_simplified.STL" />
+    <mesh name="robot/right_finger1_link1" content_type="model/stl" file="right_finger1_link1.STL" />
+    <mesh name="robot/right_finger1_link2" content_type="model/stl" file="right_finger1_link2.STL" />
+    <mesh name="robot/right_finger1_link3" content_type="model/stl" file="right_finger1_link3.STL" />
+    <mesh name="robot/right_finger1_link4" content_type="model/stl" file="right_finger1_link4.STL" />
+    <mesh name="robot/right_finger1_link4_simplified" content_type="model/stl" file="right_finger1_link4_simplified.STL" />
+    <mesh name="robot/right_finger1_tip_link" content_type="model/stl" file="right_finger1_tip_link.STL" />
+    <mesh name="robot/right_finger1_link2_softbody" content_type="model/stl" file="right_finger1_link2_softbody.STL" />
+    <mesh name="robot/right_finger1_link2_softbody_simplified" content_type="model/stl" file="right_finger1_link2_softbody_simplified.STL" />
+    <mesh name="robot/right_finger2_link1" content_type="model/stl" file="right_finger2_link1.STL" />
+    <mesh name="robot/right_finger2_link2" content_type="model/stl" file="right_finger2_link2.STL" />
+    <mesh name="robot/right_finger2_link3" content_type="model/stl" file="right_finger2_link3.STL" />
+    <mesh name="robot/right_finger2_link4" content_type="model/stl" file="right_finger2_link4.STL" />
+    <mesh name="robot/right_finger2_link4_simplified" content_type="model/stl" file="right_finger2_link4_simplified.STL" />
+    <mesh name="robot/right_finger2_tip_link" content_type="model/stl" file="right_finger2_tip_link.STL" />
+    <mesh name="robot/right_finger3_link1" content_type="model/stl" file="right_finger3_link1.STL" />
+    <mesh name="robot/right_finger3_link2" content_type="model/stl" file="right_finger3_link2.STL" />
+    <mesh name="robot/right_finger3_link3" content_type="model/stl" file="right_finger3_link3.STL" />
+    <mesh name="robot/right_finger3_link4" content_type="model/stl" file="right_finger3_link4.STL" />
+    <mesh name="robot/right_finger3_link4_simplified" content_type="model/stl" file="right_finger3_link4_simplified.STL" />
+    <mesh name="robot/right_finger3_tip_link" content_type="model/stl" file="right_finger3_tip_link.STL" />
+    <mesh name="robot/right_finger4_link1" content_type="model/stl" file="right_finger4_link1.STL" />
+    <mesh name="robot/right_finger4_link2" content_type="model/stl" file="right_finger4_link2.STL" />
+    <mesh name="robot/right_finger4_link3" content_type="model/stl" file="right_finger4_link3.STL" />
+    <mesh name="robot/right_finger4_link4" content_type="model/stl" file="right_finger4_link4.STL" />
+    <mesh name="robot/right_finger4_link4_simplified" content_type="model/stl" file="right_finger4_link4_simplified.STL" />
+    <mesh name="robot/right_finger4_tip_link" content_type="model/stl" file="right_finger4_tip_link.STL" />
+    <mesh name="robot/right_finger5_link1" content_type="model/stl" file="right_finger5_link1.STL" />
+    <mesh name="robot/right_finger5_link2" content_type="model/stl" file="right_finger5_link2.STL" />
+    <mesh name="robot/right_finger5_link3" content_type="model/stl" file="right_finger5_link3.STL" />
+    <mesh name="robot/right_finger5_link4" content_type="model/stl" file="right_finger5_link4.STL" />
+    <mesh name="robot/right_finger5_link4_simplified" content_type="model/stl" file="right_finger5_link4_simplified.STL" />
+    <mesh name="robot/right_finger5_tip_link" content_type="model/stl" file="right_finger5_tip_link.STL" />
+    <mesh name="object/cube_mesh" file="dex_cube.obj" scale="0.027 0.027 0.027" />
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="5 5 0.05" type="plane" material="groundplane" />
+    <light pos="0 0 1.5" dir="0 0 -1" type="directional" />
+    <body name="robot/right_palm_link" pos="0 0 0.5" quat="0.707107 0 -0.707107 0">
+      <inertial pos="0.00152445 0.00264235 0.0376699" quat="-0.0177281 -0.0427472 0.093083 0.994582" mass="0.16914" diaginertia="0.000140677 9.58896e-05 5.81329e-05" />
+      <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_palm_link" />
+      <geom name="robot/right_palm_collision" type="mesh" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" mesh="robot/right_palm_link_collision" />
+      <site name="robot/right_wrist_tag" pos="0.0262 0 -0.0563" quat="0.707107 0 0.707107 0" size="0.0252 0.0252 0.0006" group="1" type="box" />
+      <body name="robot/right_finger1_link1" pos="0.0085244 0.020575 0.028712" quat="0.682219 -0.617669 0.0805047 -0.382859">
+        <inertial pos="-0.0099171 -0.0059845 0.00152324" quat="0.904243 0.21652 0.0443878 -0.365368" mass="0.0075" diaginertia="3.37599e-07 3.01198e-07 2.11203e-07" />
+        <joint name="robot/right_finger1_joint1" pos="0 0 0" axis="0 1 0" range="0.0475 1.6033" actuatorfrcrange="-0.4452 0.4452" armature="0.0005" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.7 0.7 0.7 1" mesh="robot/right_finger1_link1" />
+        <geom size="0.00615198 0.00362986" pos="0 0 0.00827912" type="capsule" contype="0" conaffinity="0" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.7 0.7 0.7 1" />
+        <body name="robot/right_finger1_link2" pos="-0.0047549 -0.0060191 0.014132" quat="0.726252 0.290851 -0.0855912 -0.616958">
+          <inertial pos="-0.00136057 -8.49029e-05 0.0150056" quat="0.922053 0.00470413 0.0434721 0.384585" mass="0.0333532" diaginertia="4.2114e-06 4.06368e-06 2.19943e-06" />
+          <joint name="robot/right_finger1_joint2" pos="0 0 0" axis="0 1 0" range="-0.1387 0.9324" actuatorfrcrange="-0.4259 0.4259" armature="0.0005" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger1_link2" />
+          <geom name="robot/right_finger1_link2_col" size="0.00661572 0.0135192" pos="0 0 0.0170004" type="capsule" contype="2" conaffinity="2" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.9 0.8 0.6 1" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger1_link2_softbody" />
+          <geom name="robot/right_finger1_link2_softbody_col" type="mesh" contype="2" conaffinity="2" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger1_link2_softbody_simplified" />
+          <body name="robot/right_finger1_link3" pos="-0.00037714 0.001058 0.034673" quat="0.815725 0.015003 0.0212383 0.577855">
+            <inertial pos="0.000775215 -0.000210057 0.0127726" quat="0.999951 0 0.00989566 0" mass="0.0165" diaginertia="1.4604e-06 1.42e-06 4.49604e-07" />
+            <joint name="robot/right_finger1_joint3" pos="0 0 0" axis="0 1 0" range="-0.4642 1.5623" actuatorfrcrange="-0.1888 0.1888" armature="0.0002" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger1_link3" />
+            <geom name="robot/right_finger1_link3_col" size="0.0110676 0.0081727" pos="0 0 0.0140091" type="capsule" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" />
+            <body name="robot/right_finger1_link4" pos="0 0 0.0295">
+              <inertial pos="3.12489e-05 -0.0001544 0.0148945" quat="0.705239 -0.0513648 -0.0513648 0.705239" mass="0.0206" diaginertia="1.78779e-06 1.75044e-06 7.77343e-07" />
+              <joint name="robot/right_finger1_joint4" pos="0 0 0" axis="0 1 0" range="-0.4699 1.5568" actuatorfrcrange="-0.1468 0.1468" armature="0.0002" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger1_link4" />
+              <geom name="robot/right_finger1_link4_col" type="mesh" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger1_link4_simplified" />
+              <geom pos="0.00026399 -0.00020119 0.032808" type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger1_tip_link" />
+              <site name="robot/right_finger1_tip" pos="0.00026399 -0.00020119 0.032808" group="4" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="robot/right_finger2_link1" pos="-0.0058701 0.029434 0.091917" quat="0.991689 -0.0588295 -0.0292755 -0.110614">
+        <inertial pos="-0.00132914 -2.06891e-08 0.000319815" quat="0.92388 0 0.382683 0" mass="0.0032" diaginertia="1.1e-07 7e-08 5e-08" />
+        <joint name="robot/right_finger2_joint1" pos="0 0 0" axis="0 1 0" range="-0.1585 1.5604" actuatorfrcrange="-0.6188 0.6188" armature="0.0005" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.7 0.7 0.7 1" mesh="robot/right_finger2_link1" />
+        <geom size="0.00936231" pos="0 0 -0.000714564" contype="0" conaffinity="0" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.7 0.7 0.7 1" />
+        <body name="robot/right_finger2_link2" pos="0.0022 0 0.00400001" quat="0.707107 0 0 0.707107">
+          <inertial pos="1.85614e-06 0.00370979 0.0184837" quat="0.70703 0.0104245 0.0104245 0.70703" mass="0.033" diaginertia="6.34e-06 6.31472e-06 8.85281e-07" />
+          <joint name="robot/right_finger2_joint2" pos="0 0 0" axis="0 1 0" range="-0.37 0.37" actuatorfrcrange="-0.1822 0.1822" armature="0.0002" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger2_link2" />
+          <geom name="robot/right_finger2_link2_col" size="0.010221 0.0169968" pos="0 0.003 0.021631" type="capsule" contype="2" conaffinity="2" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.9 0.8 0.6 1" />
+          <body name="robot/right_finger2_link3" pos="0 0.00475028 0.0436177" quat="0.707012 0 0 -0.707202">
+            <inertial pos="0.000342045 1.41767e-05 0.0134814" quat="0.999892 0 -0.0146884 0" mass="0.0165" diaginertia="1.47088e-06 1.44e-06 4.49118e-07" />
+            <joint name="robot/right_finger2_joint3" pos="0 0 0" axis="0 1 0" range="-0.4777 1.5485" actuatorfrcrange="-0.2251 0.2251" armature="0.0002" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger2_link3" />
+            <geom name="robot/right_finger2_link3_col" size="0.010221 0.0108889" pos="0 0 0.0136213" type="capsule" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" />
+            <body name="robot/right_finger2_link4" pos="0 0 0.0295">
+              <inertial pos="-0.000676323 -0.000125288 0.0107855" quat="0.995657 -0.0073755 -0.0927682 -0.00265853" mass="0.01718" diaginertia="1.17777e-06 1.07161e-06 4.06444e-07" />
+              <joint name="robot/right_finger2_joint4" pos="0 0 0" axis="0 1 0" range="-0.4683 1.5753" actuatorfrcrange="-0.217 0.217" armature="0.0002" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger2_link4" />
+              <geom name="robot/right_finger2_link4_col" type="mesh" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger2_link4_simplified" />
+              <geom pos="-0.000749345 0 0.024" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger2_tip_link" />
+              <site name="robot/right_finger2_tip" pos="-0.000749345 0 0.024" group="4" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="robot/right_finger3_link1" pos="-0.01046 0.0074615 0.089544" quat="0.999048 -1.26848e-05 -0.0436192 0.000290547">
+        <inertial pos="-0.00132908 3.41333e-09 0.000319983" quat="0.92388 0 0.382683 0" mass="0.0032" diaginertia="1.1e-07 7e-08 5e-08" />
+        <joint name="robot/right_finger3_joint1" pos="0 0 0" axis="0 1 0" range="-0.1644 1.5516" actuatorfrcrange="-0.6494 0.6494" armature="0.0005" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.7 0.7 0.7 1" mesh="robot/right_finger3_link1" />
+        <geom size="0.00939653" pos="0 0 -0.000715513" contype="0" conaffinity="0" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.7 0.7 0.7 1" />
+        <body name="robot/right_finger3_link2" pos="0.0022 0 0.00400001" quat="0.707107 0 0 0.707107">
+          <inertial pos="1.86459e-06 0.0037098 0.0184837" quat="0.70703 0.0104245 0.0104245 0.70703" mass="0.033" diaginertia="6.34e-06 6.31472e-06 8.85281e-07" />
+          <joint name="robot/right_finger3_joint2" pos="0 0 0" axis="0 1 0" range="-0.37 0.37" actuatorfrcrange="-0.1827 0.1827" armature="0.0002" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger3_link2" />
+          <geom name="robot/right_finger3_link2_col" size="0.010184 0.0170338" pos="0 0.003 0.021631" type="capsule" contype="2" conaffinity="2" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.9 0.8 0.6 1" />
+          <body name="robot/right_finger3_link3" pos="0 0.00475 0.0436177" quat="0.707012 0 0 -0.707202">
+            <inertial pos="0.00033388 1.06802e-05 0.0134865" quat="0.999892 0 -0.0146884 0" mass="0.0165" diaginertia="1.47088e-06 1.44e-06 4.49118e-07" />
+            <joint name="robot/right_finger3_joint3" pos="0 0 0" axis="0 1 0" range="-0.4739 1.5512" actuatorfrcrange="-0.2078 0.2078" armature="0.0002" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger3_link3" />
+            <geom name="robot/right_finger3_link3_col" size="0.010184 0.0109259" pos="0 0 0.0136212" type="capsule" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" />
+            <body name="robot/right_finger3_link4" pos="0 0 0.0295">
+              <inertial pos="-0.000676528 -0.00012547 0.0107852" quat="0.995657 -0.00737867 -0.0927683 -0.00263311" mass="0.01718" diaginertia="1.17777e-06 1.07161e-06 4.06449e-07" />
+              <joint name="robot/right_finger3_joint4" pos="0 0 0" axis="0 1 0" range="-0.4684 1.5745" actuatorfrcrange="-0.2018 0.2018" armature="0.0002" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger3_link4" />
+              <geom name="robot/right_finger3_link4_col" type="mesh" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger3_link4_simplified" />
+              <geom pos="-0.00075 0 0.024" quat="1 0 0 -0.000156524" type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger3_tip_link" />
+              <site name="robot/right_finger3_tip" pos="-0.00075 0 0.024" group="4" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="robot/right_finger4_link1" pos="-0.0076649 -0.013712 0.084429" quat="0.997789 0.0461019 -0.0405884 0.0254002">
+        <inertial pos="-0.00132912 1.24361e-09 0.000319884" quat="0.92388 0 0.382683 0" mass="0.0032" diaginertia="1.1e-07 7e-08 5e-08" />
+        <joint name="robot/right_finger4_joint1" pos="0 0 0" axis="0 1 0" range="-0.1554 1.5585" actuatorfrcrange="-0.6389 0.6389" armature="0.0005" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.7 0.7 0.7 1" mesh="robot/right_finger4_link1" />
+        <geom size="0.00938587" pos="0 0 -0.000693929" contype="0" conaffinity="0" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.7 0.7 0.7 1" />
+        <body name="robot/right_finger4_link2" pos="0.0022 0 0.00400001" quat="0.707107 -0.000213851 -0.000213851 0.707107">
+          <inertial pos="1.84945e-06 0.00370375 0.0185161" quat="0.70703 0.0104245 0.0104245 0.70703" mass="0.033" diaginertia="6.34e-06 6.31472e-06 8.85281e-07" />
+          <joint name="robot/right_finger4_joint2" pos="0 0 0" axis="0 1 0" range="-0.37 0.37" actuatorfrcrange="-0.1832 0.1832" armature="0.0002" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger4_link2" />
+          <geom name="robot/right_finger4_link2_col" size="0.0101786 0.0170048" pos="0 0.003 0.021669" type="capsule" contype="2" conaffinity="2" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.9 0.8 0.6 1" />
+          <body name="robot/right_finger4_link3" pos="0 0.00472362 0.0436206" quat="0.707012 0.00021388 0.000213823 -0.707202">
+            <inertial pos="0.000319082 1.04411e-05 0.0135409" quat="0.999892 0 -0.0146884 0" mass="0.0165" diaginertia="1.47088e-06 1.44e-06 4.49118e-07" />
+            <joint name="robot/right_finger4_joint3" pos="0 0 0" axis="0 1 0" range="-0.4765 1.5487" actuatorfrcrange="-0.2249 0.2249" armature="0.0002" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger4_link3" />
+            <geom name="robot/right_finger4_link3_col" size="0.0101786 0.0108995" pos="0 0 0.0136532" type="capsule" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" />
+            <body name="robot/right_finger4_link4" pos="0 0 0.0295">
+              <inertial pos="-0.000714949 -0.000139909 0.0108406" quat="0.995656 -0.00751973 -0.0927913 -0.00151388" mass="0.01718" diaginertia="1.17803e-06 1.07186e-06 4.06933e-07" />
+              <joint name="robot/right_finger4_joint4" pos="0 0 0" axis="0 1 0" range="-0.4777 1.5634" actuatorfrcrange="-0.2044 0.2044" armature="0.0002" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger4_link4" />
+              <geom name="robot/right_finger4_link4_col" type="mesh" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger4_link4_simplified" />
+              <geom pos="-0.000811164 0 0.0239995" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger4_tip_link" />
+              <site name="robot/right_finger4_tip" pos="-0.000811164 0 0.0239995" group="4" />
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="robot/right_finger5_link1" pos="-0.00226865 -0.0340011 0.0742813" quat="0.990869 0.0993173 -0.0383255 0.0827362">
+        <inertial pos="-0.00132913 1.08611e-08 0.000319899" quat="0.92388 0 0.382683 0" mass="0.0032" diaginertia="1.1e-07 7e-08 5e-08" />
+        <joint name="robot/right_finger5_joint1" pos="0 0 0" axis="0 1 0" range="-0.1626 1.5585" actuatorfrcrange="-0.6441 0.6441" armature="0.0005" />
+        <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.7 0.7 0.7 1" mesh="robot/right_finger5_link1" />
+        <geom size="0.00939158" pos="0 0 -0.000718182" contype="0" conaffinity="0" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.7 0.7 0.7 1" />
+        <body name="robot/right_finger5_link2" pos="0.0022 0 0.00400001" quat="0.707107 -0.00026748 -0.00026748 0.707107">
+          <inertial pos="1.84966e-06 0.0037023 0.0193362" quat="0.70703 0.0104245 0.0104245 0.70703" mass="0.033" diaginertia="6.34e-06 6.31472e-06 8.85281e-07" />
+          <joint name="robot/right_finger5_joint2" pos="0 0 0" axis="0 1 0" range="-0.37 0.37" actuatorfrcrange="-0.1798 0.1798" armature="0.0002" />
+          <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.9 0.8 0.6 1" mesh="robot/right_finger5_link2" />
+          <geom name="robot/right_finger5_link2_col" size="0.0101586 0.016917" pos="0 0.003 0.0217777" type="capsule" contype="2" conaffinity="2" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.9 0.8 0.6 1" />
+          <body name="robot/right_finger5_link3" pos="0 0.004717 0.0436213" quat="0.707012 0.000267516 0.000267444 -0.707202">
+            <inertial pos="0.000328501 5.05492e-06 0.0142853" quat="0.999892 0 -0.0146884 0" mass="0.0165" diaginertia="1.47088e-06 1.44e-06 4.49118e-07" />
+            <joint name="robot/right_finger5_joint3" pos="0 0 0" axis="0 1 0" range="-0.4768 1.549" actuatorfrcrange="-0.2384 0.2384" armature="0.0002" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger5_link3" />
+            <geom name="robot/right_finger5_link3_col" size="0.0101586 0.00992035" pos="0 0 0.0146523" type="capsule" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" />
+            <body name="robot/right_finger5_link4" pos="0 0 0.0295">
+              <inertial pos="-0.000754828 -0.000172322 0.0122784" quat="0.995656 -0.00756106 -0.0927979 -0.00118593" mass="0.01718" diaginertia="1.1781e-06 1.07193e-06 4.07074e-07" />
+              <joint name="robot/right_finger5_joint4" pos="0 0 0" axis="0 1 0" range="-0.4683 1.5735" actuatorfrcrange="-0.1866 0.1866" armature="0.0002" />
+              <geom type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger5_link4" />
+              <geom name="robot/right_finger5_link4_col" type="mesh" group="3" priority="1" friction="0.7" solref="0.02 1.5" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger5_link4_simplified" />
+              <geom pos="-0.000828016 0 0.0259994" quat="1 0 0 0" type="mesh" contype="0" conaffinity="0" group="1" priority="1" friction="0.7" solref="0.02 1.5" density="0" rgba="0.6 0.8 0.9 1" mesh="robot/right_finger5_tip_link" />
+              <site name="robot/right_finger5_tip" pos="-0.000828016 0 0.0259994" group="4" />
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="object/cube" childclass="object/cube" pos="-0.1404 0.0042 0.52" quat="0.389397 -0.379597 -0.597995 -0.588795">
+      <joint name="object/cube_freejoint" type="free" />
+      <geom name="object/cube_visual" size="0.027 0.027 0.027" type="box" contype="0" conaffinity="0" group="2" density="0" material="object/arucocube" />
+      <geom name="object/cube" size="0.027 0.027 0.027" type="box" group="3" mass="0.12" />
+      <site name="object/cube_center" pos="0 0 0" group="4" />
+    </body>
+    <body name="goal" pos="0 0 0.65" mocap="true">
+      <geom size="0.027 0.027 0.027" type="box" contype="0" conaffinity="0" group="2" material="object/arucocube" rgba="1 1 1 0.6" />
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="robot/right_palm_link" body2="robot/right_finger1_link1" />
+    <exclude body1="robot/right_palm_link" body2="robot/right_finger1_link2" />
+    <exclude body1="robot/right_palm_link" body2="robot/right_finger2_link2" />
+    <exclude body1="robot/right_palm_link" body2="robot/right_finger3_link2" />
+    <exclude body1="robot/right_palm_link" body2="robot/right_finger4_link2" />
+    <exclude body1="robot/right_palm_link" body2="robot/right_finger5_link2" />
+  </contact>
+
+  <actuator>
+    <general name="robot/right_finger1_joint1_actuator" joint="robot/right_finger1_joint1" ctrlrange="0.0475 1.6033" forcerange="-0.4452 0.4452" biastype="affine" gainprm="0.408447" biasprm="0 -0.408447 -0.020882" />
+    <general name="robot/right_finger1_joint2_actuator" joint="robot/right_finger1_joint2" ctrlrange="-0.1387 0.9324" forcerange="-0.4259 0.4259" biastype="affine" gainprm="0.68586" biasprm="0 -0.68586 -0.0306109" />
+    <general name="robot/right_finger1_joint3_actuator" joint="robot/right_finger1_joint3" ctrlrange="-0.4642 1.5623" forcerange="-0.1888 0.1888" biastype="affine" gainprm="0.239111" biasprm="0 -0.239111 -0.0101815" />
+    <general name="robot/right_finger1_joint4_actuator" joint="robot/right_finger1_joint4" ctrlrange="-0.4699 1.5568" forcerange="-0.1468 0.1468" biastype="affine" gainprm="0.207361" biasprm="0 -0.207361 -0.00909699" />
+    <general name="robot/right_finger2_joint1_actuator" joint="robot/right_finger2_joint1" ctrlrange="-0.1585 1.5604" forcerange="-0.6188 0.6188" biastype="affine" gainprm="0.373522" biasprm="0 -0.373522 -0.0188227" />
+    <general name="robot/right_finger2_joint2_actuator" joint="robot/right_finger2_joint2" ctrlrange="-0.37 0.37" forcerange="-0.1822 0.1822" biastype="affine" gainprm="0.455924" biasprm="0 -0.455924 -0.0197982" />
+    <general name="robot/right_finger2_joint3_actuator" joint="robot/right_finger2_joint3" ctrlrange="-0.4777 1.5485" forcerange="-0.2251 0.2251" biastype="affine" gainprm="0.243684" biasprm="0 -0.243684 -0.010477" />
+    <general name="robot/right_finger2_joint4_actuator" joint="robot/right_finger2_joint4" ctrlrange="-0.4683 1.5753" forcerange="-0.217 0.217" biastype="affine" gainprm="0.18027" biasprm="0 -0.18027 -0.00824021" />
+    <general name="robot/right_finger3_joint1_actuator" joint="robot/right_finger3_joint1" ctrlrange="-0.1644 1.5516" forcerange="-0.6494 0.6494" biastype="affine" gainprm="0.368709" biasprm="0 -0.368709 -0.0184862" />
+    <general name="robot/right_finger3_joint2_actuator" joint="robot/right_finger3_joint2" ctrlrange="-0.37 0.37" forcerange="-0.1827 0.1827" biastype="affine" gainprm="0.416425" biasprm="0 -0.416425 -0.0180329" />
+    <general name="robot/right_finger3_joint3_actuator" joint="robot/right_finger3_joint3" ctrlrange="-0.4739 1.5512" forcerange="-0.2078 0.2078" biastype="affine" gainprm="0.222186" biasprm="0 -0.222186 -0.0095922" />
+    <general name="robot/right_finger3_joint4_actuator" joint="robot/right_finger3_joint4" ctrlrange="-0.4684 1.5745" forcerange="-0.2018 0.2018" biastype="affine" gainprm="0.194276" biasprm="0 -0.194276 -0.00915299" />
+    <general name="robot/right_finger4_joint1_actuator" joint="robot/right_finger4_joint1" ctrlrange="-0.1554 1.5585" forcerange="-0.6389 0.6389" biastype="affine" gainprm="0.357182" biasprm="0 -0.357182 -0.0183766" />
+    <general name="robot/right_finger4_joint2_actuator" joint="robot/right_finger4_joint2" ctrlrange="-0.37 0.37" forcerange="-0.1832 0.1832" biastype="affine" gainprm="0.429773" biasprm="0 -0.429773 -0.018677" />
+    <general name="robot/right_finger4_joint3_actuator" joint="robot/right_finger4_joint3" ctrlrange="-0.4765 1.5487" forcerange="-0.2249 0.2249" biastype="affine" gainprm="0.249302" biasprm="0 -0.249302 -0.0105951" />
+    <general name="robot/right_finger4_joint4_actuator" joint="robot/right_finger4_joint4" ctrlrange="-0.4777 1.5634" forcerange="-0.2044 0.2044" biastype="affine" gainprm="0.228503" biasprm="0 -0.228503 -0.0099176" />
+    <general name="robot/right_finger5_joint1_actuator" joint="robot/right_finger5_joint1" ctrlrange="-0.1626 1.5585" forcerange="-0.6441 0.6441" biastype="affine" gainprm="0.365533" biasprm="0 -0.365533 -0.018617" />
+    <general name="robot/right_finger5_joint2_actuator" joint="robot/right_finger5_joint2" ctrlrange="-0.37 0.37" forcerange="-0.1798 0.1798" biastype="affine" gainprm="0.413931" biasprm="0 -0.413931 -0.0187322" />
+    <general name="robot/right_finger5_joint3_actuator" joint="robot/right_finger5_joint3" ctrlrange="-0.4768 1.549" forcerange="-0.2384 0.2384" biastype="affine" gainprm="0.227294" biasprm="0 -0.227294 -0.00951005" />
+    <general name="robot/right_finger5_joint4_actuator" joint="robot/right_finger5_joint4" ctrlrange="-0.4683 1.5735" forcerange="-0.1866 0.1866" biastype="affine" gainprm="0.196472" biasprm="0 -0.196472 -0.0090173" />
+  </actuator>
+
+  <keyframe>
+    <key name="init_state" />
+  </keyframe>
+</mujoco>

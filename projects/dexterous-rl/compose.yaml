@@ -1,0 +1,19 @@
+services:
+  research:
+    build: .
+    image: dexterous-rl:2026-10-07
+    working_dir: /work
+    volumes:
+      - ../..:/work
+    environment:
+      MUJOCO_GL: egl
+      OPENBLAS_NUM_THREADS: "1"
+    command: python projects/dexterous-rl/tools/prepare.py
+  preview:
+    image: dexterous-rl:2026-10-07
+    working_dir: /work
+    ports:
+      - "127.0.0.1:8093:8000"
+    volumes:
+      - ../..:/work:ro
+    command: python -m http.server 8000

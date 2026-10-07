@@ -1,0 +1,43 @@
+{
+  "bundle_version": "0.3.0",
+  "license": "Apache-2.0",
+  "source_repo": "https://github.com/wuji-technology/wuji-mjlab",
+  "tasks": [
+    {
+      "id": "reorient",
+      "path": "reorient",
+      "manifest": "reorient/manifest.json"
+    },
+    {
+      "id": "pen_spin",
+      "path": "pen_spin",
+      "manifest": "pen_spin/manifest.json"
+    }
+  ],
+  "release_version": "v2026.9.27",
+  "assembled_on": "2026-09-27",
+  "source_archive_sha256": "193ea7a1307873f60806e9335409aa6559276e81b84de6b2bc5d4d53c50aea53",
+  "updated_on": "2026-09-28",
+  "reorient_source_archive": {
+    "release_tag": "rehearsal-v2026.9.22",
+    "asset_name": "wuji-mjlab-v2026.9.22-assets.zip",
+    "sha256": "066e049947929e6b185148b01fa57a1954b8d59eebfd4c72bacfe94d705de7b8"
+  },
+  "shared_hardware": {
+    "hand_jig": {
+      "hand1": {
+        "path": "hardware/hand1",
+        "tasks": [
+          "reorient"
+        ]
+      },
+      "hand2": {
+        "path": "hardware/hand2",
+        "tasks": [
+          "reorient",
+          "pen_spin"
+        ]
+      }
+    }
+  }
+}

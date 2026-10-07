@@ -1,0 +1,1 @@
+PASS: 180 distinct real rollout records, 18 training runs, exact aggregate metrics, fast-start videos, complete overlays and held-out predictions.

@@ -1,0 +1,71 @@
+{
+  "task": "reorient",
+  "checkpoints": {
+    "hand1": {
+      "task_id": "WujiHand_Reorient",
+      "robot": "Wuji Hand 1",
+      "policy": {
+        "onnx": "checkpoints/hand1/policy.onnx",
+        "sidecar_config": "checkpoints/hand1/config.json",
+        "torch_checkpoint": "checkpoints/hand1/model.pt",
+        "identity_embedded": true
+      },
+      "training": {
+        "framework": "rsl_rl",
+        "iterations": 5000
+      }
+    },
+    "hand2": {
+      "task_id": "WujiHand2_Reorient_50Hz",
+      "robot": "Wuji Hand 2",
+      "policy": {
+        "onnx": "checkpoints/hand2/policy.onnx",
+        "sidecar_config": "checkpoints/hand2/config.json",
+        "torch_checkpoint": "checkpoints/hand2/model.pt",
+        "identity_embedded": true
+      },
+      "training": {
+        "framework": "rsl_rl",
+        "run_name": "RewardContactFix_Full_s42",
+        "code_commit": "a72f60c8dc3d81e02b53ed63f17353c74ed91737",
+        "num_envs": 8192,
+        "num_steps_per_env": 100,
+        "iterations": 5000,
+        "seed": 42
+      }
+    }
+  },
+  "hardware": {
+    "cube": {
+      "edge_mm": 54,
+      "aruco_tags": 24,
+      "print_project": "hardware/cube.3mf",
+      "cad_source": "hardware/cube.step",
+      "mesh": "hardware/cube.obj",
+      "material": "hardware/cube.mtl",
+      "texture": "hardware/cube.png"
+    },
+    "hand_jig": {
+      "hand1": {
+        "robot": "Wuji Hand 1",
+        "tilt_deg": 10,
+        "height_mm": 147,
+        "wrist_tag": "AprilTag36h11 ID 0, tag size 50.4 mm",
+        "print_project": "../hardware/hand1/base.3mf",
+        "mesh": "../hardware/hand1/base.obj",
+        "cad_source": "../hardware/hand1/assembly.step",
+        "drawing": "../hardware/hand1/assembly.pdf"
+      },
+      "hand2": {
+        "robot": "Wuji Hand 2",
+        "tilt_deg": 10,
+        "height_mm": 162.25,
+        "wrist_tag": "AprilTag36h11 ID 0, tag size 50.4 mm",
+        "print_project": "../hardware/hand2/base.3mf",
+        "mesh": "../hardware/hand2/base.obj",
+        "cad_source": "../hardware/hand2/assembly.step",
+        "drawing": "../hardware/hand2/assembly.pdf"
+      }
+    }
+  }
+}

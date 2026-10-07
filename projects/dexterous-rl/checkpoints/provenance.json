@@ -1,0 +1,12 @@
+{
+  "upstream": "https://github.com/wuji-technology/wuji-mjlab",
+  "tag": "v2026.9.27",
+  "commit": "26b99c6338641e8edc17caf87922e6e1767121fa",
+  "description_commit_investigated": "c2cd7f8d1ef8b6dc8cb907c17daa5a88b4442d95",
+  "release_url": "https://github.com/wuji-technology/wuji-mjlab/releases/download/v2026.9.27/wuji-mjlab-v2026.9.27-assets.zip",
+  "release_sha256": "de01b29921b69ea38100a29416c324b384905e1ae4ebbfa40d769be948fc2d39",
+  "policy_sha256": "7d5d80d5302b61374a9995515b506f75648aeeb4a3ad69ae8c3de8a7b16fa779",
+  "mujoco": "3.11.0",
+  "training_performed": false,
+  "distillation_performed": false
+}

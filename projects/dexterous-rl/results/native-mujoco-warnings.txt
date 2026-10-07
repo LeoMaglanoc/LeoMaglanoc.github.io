@@ -1,0 +1,4 @@
+WARNING Wed Oct  7 18:43:52 2026: Attach conflict when attaching 'wujihand-right-mjlab', policy is 'warning'
+iterations: parent has 100 (default), child has 5, keeping parent value
+ls_iterations: parent has 50 (default), child has 8, keeping parent value
+
