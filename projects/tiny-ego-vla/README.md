@@ -46,6 +46,7 @@ $PY projects/tiny-ego-vla/tools/eval_robot.py
 $PY projects/tiny-ego-vla/tools/export_media.py human
 $PY projects/tiny-ego-vla/tools/export_media.py expert
 $PY projects/tiny-ego-vla/tools/audit_rollouts.py
+$PY projects/tiny-ego-vla/tools/audit_goal_timing.py
 $PY projects/tiny-ego-vla/tools/render_rollouts.py
 $PY projects/tiny-ego-vla/tools/export_web.py
 $PY projects/tiny-ego-vla/tools/audit_media.py
@@ -80,3 +81,7 @@ To restore: clone this repository into a separate checkout and extract the archi
 ## Preview the static exhibit
 
 From the repository root, run `npx --yes http-server@14.1.1 . -p 8765 -a 127.0.0.1 -c-1`, then open `http://localhost:8765/assets/interactive/tiny-ego-vla/index.html`. Use a server with byte-range support for video seeking; Python’s basic HTTP server does not provide it. The production Jekyll build exposes the fullscreen iframe at `/tiny-ego-vla/`. `tools/export_web.py --preview` is for local UI QA only; publication checks reject it. After all models finish, `bash projects/tiny-ego-vla/tools/finish_evaluation.sh` resumes missing rollouts, creates presentation replays, exports the full exhibit and runs artifact checks.
+
+## Success-check timing
+
+The reported metric is LIBERO's official immediate per-control-action goal predicate, without a settling test. `audit_rollouts.py` independently replays every saved action sequence, compares every control-step simulator state, and checks the original outcomes. A separate diagnostic restores each final pose and recomputes contacts; it is retained in the exported results. MuJoCo contact geometry immediately after a step precedes its final integration, so a boundary contact can change after a bare pose restore. `audit_goal_timing.py` reproduces the first discovered example. These metrics must not be read as durable placement success. See the ledger and [MuJoCo's documented cache semantics](https://mujoco.readthedocs.io/en/3.2.7/computation/index.html#consistency-in-mjdata).

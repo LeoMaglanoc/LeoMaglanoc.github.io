@@ -13,6 +13,9 @@ assert.deepEqual(robot.budgets, result.config.budgets);
 assert.deepEqual(robot.seeds, result.config.seeds);
 assert.equal(robot.tasks.length, result.config.robot_tasks.length);
 assert.equal(robot.rollouts.length, robot.budgets.length * robot.seeds.length * robot.tasks.length * robot.initializations * 2);
+assert.equal(robot.goal_audit.passed, true);
+assert(robot.goal_audit.maximum_replay_state_error < 1e-8);
+assert.equal(robot.goal_audit.goal_boundary_differences, robot.rollouts.filter((r) => r.success !== r.restored_final_pose_goal).length);
 assert.equal(robot.metrics.length, robot.budgets.length * robot.seeds.length * 2);
 assert.equal(
   new Set(robot.rollouts.map((r) => [r.regime, r.budget_per_task, r.seed, r.task, r.initialization].join(":"))).size,
@@ -24,6 +27,7 @@ for (const summary of robot.summary) {
   assert.equal(summary.episodes, rows.length);
   assert.equal(summary.successes, rows.filter((r) => r.success).length);
   assert.equal(summary.success_rate, summary.successes / summary.episodes);
+  assert.equal(summary.restored_final_pose_successes, rows.filter((r) => r.restored_final_pose_goal).length);
 }
 for (const row of robot.rollouts) {
   assert(["robot", "ego"].includes(row.regime));

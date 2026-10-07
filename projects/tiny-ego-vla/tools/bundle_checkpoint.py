@@ -81,6 +81,7 @@ def bundle():
         "sim-parity-report.json",
         "checkpoint-audit.json",
         "rollout-audit.json",
+        "goal-timing-audit.json",
         "resume-audit.json",
         "human-media-audit.json",
         "human-prediction-audit.json",

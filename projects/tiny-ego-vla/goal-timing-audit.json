@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "run": "robot-robot-4-29",
+  "task": "bowl_plate",
+  "initialization": 1,
+  "raw_sha256": "374623d9e3bc830db173f6b127d5e13648274a13628f556e2597e66de9d54d47",
+  "physics_timestep_seconds": 0.002,
+  "cached_pose_goal": true,
+  "action_replay_goal": true,
+  "restored_final_pose_goal": false,
+  "replay_after_forward_goal": false,
+  "maximum_final_state_error": 0.0,
+  "action_replay_seconds": 3.5261019019999367,
+  "explanation": "Official LIBERO check uses cached contact geometry preceding the last 2ms integration; forwarding the saved post-integration pose changes this boundary contact.",
+  "source": "https://mujoco.readthedocs.io/en/3.2.7/computation/index.html#consistency-in-mjdata"
+}

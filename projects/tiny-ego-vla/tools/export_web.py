@@ -71,6 +71,18 @@ def main():
     ego["prediction_audit"] = json.loads(
         (PROJECT / "human-prediction-audit.json").read_text()
     )
+    audit = (
+        None
+        if args.preview
+        else json.loads((PROJECT / "rollout-audit.json").read_text())
+    )
+    audit_rows = (
+        {}
+        if audit is None
+        else {(r["run"], r["task"], r["initialization"]): r for r in audit["records"]}
+    )
+    if audit is not None:
+        assert audit["passed"] and len(audit_rows) == 180
     metrics = []
     rollouts = []
     for budget in budgets:
@@ -83,6 +95,15 @@ def main():
                         source = ART / "rollouts" / run / task / f"episode-{init}.json"
                         row = json.loads(source.read_text())
                         original = PROJECT / row["video"]
+                        if audit is not None:
+                            verified = audit_rows[(run, task, init)]
+                            assert verified["success"] == row["success"]
+                            assert verified["raw_sha256"] == sha(
+                                original.with_suffix(".npz")
+                            )
+                            row["restored_final_pose_goal"] = verified[
+                                "restored_final_pose_goal"
+                            ]
                         hires = original.with_name(original.stem + "-hi.mp4")
                         presentation = hires if hires.exists() else original
                         if hires.exists():
@@ -168,6 +189,11 @@ def main():
                     "successes": sum(r["success"] for r in rs),
                     "episodes": len(rs),
                     "success_rate": sum(r["success"] for r in rs) / len(rs),
+                    "restored_final_pose_successes": (
+                        None
+                        if args.preview
+                        else sum(r["restored_final_pose_goal"] for r in rs)
+                    ),
                     "mean_validation_mse": float(
                         np.mean([m["best_validation_mse"] for m in ms])
                     ),
@@ -214,6 +240,11 @@ def main():
             "metrics": metrics,
             "rollouts": rollouts,
             "summary": summary,
+            "goal_audit": (
+                None
+                if audit is None
+                else {k: v for k, v in audit.items() if k != "records"}
+            ),
         },
         "benchmarks": {"encoder": encoder_benchmark, "simulator": sim_benchmark},
         "method": [
@@ -247,7 +278,7 @@ def main():
             ],
             [
                 "Evaluation",
-                "Three training seeds × two tasks × five starts from held-out demonstration states 42–46, up to 200 simulator actions. Checkpoints selected only by validation action MSE. Sparse LIBERO task success; repeat starts across seeds are correlated. No significance claim.",
+                "Three training seeds × two tasks × five starts from held-out demonstration states 42–46, up to 200 simulator actions. Checkpoints selected only by validation action MSE. Success uses the official per-step LIBERO goal, with no settling test. Independently replayed saved actions reproduce recorded states and outcomes; restoring a final pose alone can change boundary contacts because MuJoCo caches contacts before its final 2ms integration. Repeat starts across seeds are correlated. No significance claim.",
             ],
             [
                 "Hardware & deployment",
@@ -268,6 +299,7 @@ def main():
             "summary": summary,
             "benchmarks": data["benchmarks"],
             "human_prediction_audit": ego["prediction_audit"],
+            "goal_audit": data["robot"]["goal_audit"],
             "human_run_metrics": [
                 {
                     k: v

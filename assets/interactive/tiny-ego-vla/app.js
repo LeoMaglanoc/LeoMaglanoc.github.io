@@ -472,6 +472,14 @@ function updateComparison() {
     "#evaluation-note",
     `${results.robot.seeds.length} training seeds × ${results.robot.tasks.length} tasks × ${results.robot.initializations} held-out starts per model and budget. Bars pool all starts; the same starts repeat across seeds. No independence or statistical significance is assumed.`
   );
+  const audit = results.robot.goal_audit;
+  setText(
+    "#goal-check-note",
+    "Success uses LIBERO’s immediate goal check, without a settling test." +
+      (audit
+        ? ` Independent saved-action replays reproduce all ${results.robot.rollouts.length} outcomes. Rechecking contacts at the saved final pose changes ${audit.goal_boundary_differences} outcomes; see the method.`
+        : "")
+  );
   $("#policy-time").value = 0;
   setText("#policy-clock", "0.0 s");
 }

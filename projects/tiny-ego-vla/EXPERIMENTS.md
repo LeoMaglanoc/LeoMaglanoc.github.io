@@ -83,3 +83,44 @@ Control frequencies are simulation-time frequencies. Offline CPU encoding/render
 ## Human label/forecast audit
 
 Contact pseudo-labels are positive for 92.66% of eligible training windows and 95.37% of the 367 labeled validation windows. Every candidate’s thresholded contact accuracy is 95.37%, identical to always predicting positive. The selected Transformer’s contact BCE is 0.1911 versus 0.1937 for the train-only constant probability; this small calibration change does not establish discrimination. Combined validation loss and all four motion MAEs still trail the baselines described above. Contact accuracy would therefore be a misleading success headline. `human-prediction-audit.json` retains per-head metrics for all five human runs; it is descriptive validation analysis, not a separate test.
+
+## Goal timing audit
+
+An initial audit assumed that forwarding the saved final qpos/qvel would reproduce LIBERO's immediate per-step goal. It failed for robot-only / budget 4 / seed 29 / bowl-plate / start 2. Replaying the recorded actions reproduced its entire final state exactly and its original success; forwarding that same state changed the goal to false. Undoing only Euler's last 2 ms position integration recovered the goal geometry. This agrees with [MuJoCo's documented ordering](https://mujoco.readthedocs.io/en/3.2.7/computation/index.html#consistency-in-mjdata).
+
+The audit now replays every recorded action sequence and checks every control-step state (maximum allowed absolute error 1e-8), first-success timing, and the official outcome. It also retains the independently restored-final-pose goal as a separate diagnostic. The original evaluation protocol and outcome counts are unchanged. Neither goal check establishes stable placement after release/settling; future studies should predeclare a settling-based metric separately.
+
+## Complete scheduled closed-loop evaluation
+
+All 180 scheduled episodes are retained, including failures. Counts below use the predeclared immediate LIBERO goal and stop at first success, with a maximum of 200 control actions (10 simulation seconds). They are not settled-placement measurements.
+
+| Demos per task |    Robot-only | Ego-pretrained | Difference (ego − robot) |
+| -------------- | ------------: | -------------: | -----------------------: |
+| 4              |  9/30 (30.0%) |   5/30 (16.7%) |                 -13.3 pp |
+| 9              |  7/30 (23.3%) |   4/30 (13.3%) |                 -10.0 pp |
+| 35             | 14/30 (46.7%) |  15/30 (50.0%) |                  +3.3 pp |
+
+| Demos per task | Seed | Robot-only / 10 | Ego-pretrained / 10 |
+| -------------- | ---- | --------------: | ------------------: |
+| 4              | 11   |               2 |                   3 |
+| 4              | 29   |               4 |                   1 |
+| 4              | 47   |               3 |                   1 |
+| 9              | 11   |               2 |                   1 |
+| 9              | 29   |               2 |                   2 |
+| 9              | 47   |               3 |                   1 |
+| 35             | 11   |               6 |                   3 |
+| 35             | 29   |               3 |                   5 |
+| 35             | 47   |               5 |                   7 |
+
+| Demos per task | Task         | Robot-only / 15 | Ego-pretrained / 15 |
+| -------------- | ------------ | --------------: | ------------------: |
+| 4              | bowl_plate   |               7 |                   5 |
+| 4              | bowl_ramekin |               2 |                   0 |
+| 9              | bowl_plate   |               4 |                   1 |
+| 9              | bowl_ramekin |               3 |                   3 |
+| 35             | bowl_plate   |               7 |                   7 |
+| 35             | bowl_ramekin |               7 |                   8 |
+
+Sum of recorded per-episode elapsed times: 4736.45 s (range 9.37–67.82 s). These include episode reset, policy inference, simulation/rendering and original archive/video writing under varying concurrent laptop load. They exclude process/encoder setup and interrupted partial episodes. They are neither isolated CPU-time measurements nor real-time robot performance.
+
+The low-data comparisons favor robot-only training. At full budget, the ego variant leads by only one success across correlated starts; seed variation is much larger. Together with failed human-prediction baselines, this provides no convincing evidence of useful egocentric transfer in this subset. It does not establish that egocentric pretraining is ineffective in general.
