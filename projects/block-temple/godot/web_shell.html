@@ -277,7 +277,6 @@
         padding: 8px;
         font-size: 11px;
         background: #203e448c;
-        
       }
       #actions #break {
         background: #a26c4faa;
@@ -557,43 +556,220 @@
           min-width: 150px;
         }
       }
-    
-      :root { --cream:#eee4cf; --mint:#dbc39b; --ink:#131c23; --panel:#151d26e8; --edge:#cab58c45; }
-      html,body { background:#131c23; }
-      button { border-radius:5px; font-weight:500; }
-      button:hover { background:#4c4840; }
-      .brand { color:#e3d1ad; font-size:13px; letter-spacing:.25em; text-shadow:0 1px 5px #000; }
-      .brand small { color:#c5c9cd; font-size:9px; letter-spacing:.16em; }
-      #overlay { background:linear-gradient(90deg,#111a24f0,#111a2470),url('temple-preview.jpg') center/cover; }
-      .card { text-align:left; width:min(680px,95%); border-radius:8px; background:#141d26e8; padding:36px; border-color:#d0b98945; }
-      h1 { font-weight:500; letter-spacing:.045em; font-size:clamp(34px,6vw,58px); line-height:1.06; }
-      .eyebrow { color:#dbc39b; letter-spacing:.19em; }
-      .subtitle { color:#c4cbd0; }
-      .primary { background:#d8bd8c; border-radius:4px; color:#141d26; }
-      .primary:hover { background:#ecd3a7; }
-      .menurow { justify-content:flex-start; }
-      #hotbar,#palette { background:#131c23d9; border-radius:6px; border:1px solid #cab58c55; }
-      #hotbar button { background:#303b43; border-radius:3px; }
-      #hotbar button[aria-pressed="true"] { background:#a5874d44; border-color:#dbc39b; }
-      #blockname { background:#131c23cf; border-radius:4px; }
-      #hint { background:#151d26bd; color:#e5dcc9; border-radius:4px; top:110px; }
-      #location { position:absolute; top:64px; left:18px; color:#fff0d2; font-size:14px; text-shadow:0 2px 5px #000; letter-spacing:.06em; }
-      #objective { position:absolute; top:87px; left:18px; width:min(480px,70%); color:#c7cbd0; font-size:11px; text-shadow:0 2px 4px #000; }
-      #stock { position:absolute; bottom:111px; left:50%; transform:translateX(-50%); color:#e7cca0; font-size:11px; background:#131c23c9; padding:5px 10px; border-radius:4px; }
-      #actions button { background:#16222dd9; }
-      #actions #break { background:#785b3dd9; }
-      #actions #place { background:#42606cd9; }
-      #debug { top:145px; background:#131c23e8; }
-      #map-panel { position:absolute; right:18px; top:75px; width:min(370px,50vw); pointer-events:auto; color:var(--cream); background:#131c23ed; border:1px solid #c6af83; padding:16px; border-radius:6px; }
-      #map-panel svg { display:block; width:100%; max-height:65vh; }
-      .map-head { font-size:11px; letter-spacing:.15em; display:flex; align-items:center; justify-content:space-between; }
-      #map-close { padding:3px 12px; font-size:20px; }
-      #map-panel p { font-size:10px; line-height:1.5; color:#bfc7ca; }
-      .desktop #movezone,.desktop #stick { display:none; }
-      #rotate { background:#131c23f5; }
-      #reset-confirm { background:#131c23; }
-      @media (max-height:480px) { #location{top:53px;font-size:12px} #objective{top:72px;font-size:10px;width:60%} #hint{display:none} #stock{bottom:94px} #debug{top:100px} .card{padding:20px} h1{font-size:36px} .intro h1{font-size:34px!important} }
-      @media (max-width:650px) { #objective{width:65%} #map-panel{width:75vw;max-width:340px} }
+
+      :root {
+        --cream: #eee4cf;
+        --mint: #dbc39b;
+        --ink: #131c23;
+        --panel: #151d26e8;
+        --edge: #cab58c45;
+      }
+      html,
+      body {
+        background: #131c23;
+      }
+      button {
+        border-radius: 5px;
+        font-weight: 500;
+      }
+      button:hover {
+        background: #4c4840;
+      }
+      .brand {
+        color: #e3d1ad;
+        font-size: 13px;
+        letter-spacing: 0.25em;
+        text-shadow: 0 1px 5px #000;
+      }
+      .brand small {
+        color: #c5c9cd;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+      }
+      #overlay {
+        background:
+          linear-gradient(90deg, #111a24f0, #111a2470),
+          url("temple-preview.jpg") center/cover;
+      }
+      .card {
+        text-align: left;
+        width: min(680px, 95%);
+        border-radius: 8px;
+        background: #141d26e8;
+        padding: 36px;
+        border-color: #d0b98945;
+      }
+      h1 {
+        font-weight: 500;
+        letter-spacing: 0.045em;
+        font-size: clamp(34px, 6vw, 58px);
+        line-height: 1.06;
+      }
+      .eyebrow {
+        color: #dbc39b;
+        letter-spacing: 0.19em;
+      }
+      .subtitle {
+        color: #c4cbd0;
+      }
+      .primary {
+        background: #d8bd8c;
+        border-radius: 4px;
+        color: #141d26;
+      }
+      .primary:hover {
+        background: #ecd3a7;
+      }
+      .menurow {
+        justify-content: flex-start;
+      }
+      #hotbar,
+      #palette {
+        background: #131c23d9;
+        border-radius: 6px;
+        border: 1px solid #cab58c55;
+      }
+      #hotbar button {
+        background: #303b43;
+        border-radius: 3px;
+      }
+      #hotbar button[aria-pressed="true"] {
+        background: #a5874d44;
+        border-color: #dbc39b;
+      }
+      #blockname {
+        background: #131c23cf;
+        border-radius: 4px;
+      }
+      #hint {
+        background: #151d26bd;
+        color: #e5dcc9;
+        border-radius: 4px;
+        top: 110px;
+      }
+      #location {
+        position: absolute;
+        top: 64px;
+        left: 18px;
+        color: #fff0d2;
+        font-size: 14px;
+        text-shadow: 0 2px 5px #000;
+        letter-spacing: 0.06em;
+      }
+      #objective {
+        position: absolute;
+        top: 87px;
+        left: 18px;
+        width: min(480px, 70%);
+        color: #c7cbd0;
+        font-size: 11px;
+        text-shadow: 0 2px 4px #000;
+      }
+      #stock {
+        position: absolute;
+        bottom: 111px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #e7cca0;
+        font-size: 11px;
+        background: #131c23c9;
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+      #actions button {
+        background: #16222dd9;
+      }
+      #actions #break {
+        background: #785b3dd9;
+      }
+      #actions #place {
+        background: #42606cd9;
+      }
+      #debug {
+        top: 145px;
+        background: #131c23e8;
+      }
+      #map-panel {
+        position: absolute;
+        right: 18px;
+        top: 75px;
+        width: min(370px, 50vw);
+        pointer-events: auto;
+        color: var(--cream);
+        background: #131c23ed;
+        border: 1px solid #c6af83;
+        padding: 16px;
+        border-radius: 6px;
+      }
+      #map-panel svg {
+        display: block;
+        width: 100%;
+        max-height: 65vh;
+      }
+      .map-head {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      #map-close {
+        padding: 3px 12px;
+        font-size: 20px;
+      }
+      #map-panel p {
+        font-size: 10px;
+        line-height: 1.5;
+        color: #bfc7ca;
+      }
+      .desktop #movezone,
+      .desktop #stick {
+        display: none;
+      }
+      #rotate {
+        background: #131c23f5;
+      }
+      #reset-confirm {
+        background: #131c23;
+      }
+      @media (max-height: 480px) {
+        #location {
+          top: 53px;
+          font-size: 12px;
+        }
+        #objective {
+          top: 72px;
+          font-size: 10px;
+          width: 60%;
+        }
+        #hint {
+          display: none;
+        }
+        #stock {
+          bottom: 94px;
+        }
+        #debug {
+          top: 100px;
+        }
+        .card {
+          padding: 20px;
+        }
+        h1 {
+          font-size: 36px;
+        }
+        .intro h1 {
+          font-size: 34px !important;
+        }
+      }
+      @media (max-width: 650px) {
+        #objective {
+          width: 65%;
+        }
+        #map-panel {
+          width: 75vw;
+          max-width: 340px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -624,20 +800,33 @@
         <div class="map-head">TEMPLE DIRECTORY <button id="map-close" aria-label="Close map">×</button></div>
         <svg viewBox="0 0 160 160" role="img" aria-label="Map showing the hall, council chamber, archives, rotunda, and service annex">
           <g fill="#60747a" stroke="#bfad86" stroke-width="0.7">
-            <path d="M50 32H82V108H50Z M50 19H82V32H50Z M40 32H50V118H40Z M82 32H92V118H82Z M40 108H104V118H40Z M62 118H70V126H62Z M92 38H122V58H92Z M108 58H114V64H108Z M92 64H128V100H92Z"/>
-            <circle cx="27" cy="46" r="13"/><circle cx="29" cy="78" r="11"/><circle cx="66" cy="139" r="14"/>
-            <path id="service-map" d="M104 104H128V118H104Z" fill="#92744b"/>
+            <path
+              d="M50 32H82V108H50Z M50 19H82V32H50Z M40 32H50V118H40Z M82 32H92V118H82Z M40 108H104V118H40Z M62 118H70V126H62Z M92 38H122V58H92Z M108 58H114V64H108Z M92 64H128V100H92Z"
+            />
+            <circle cx="27" cy="46" r="13" />
+            <circle cx="29" cy="78" r="11" />
+            <circle cx="66" cy="139" r="14" />
+            <path id="service-map" d="M104 104H128V118H104Z" fill="#92744b" />
           </g>
           <g fill="#18242b">
-            <rect x="52" y="37" width="2" height="66"/><rect x="78" y="37" width="2" height="66"/>
-            <rect x="101" y="68" width="2" height="28"/><rect x="117" y="68" width="2" height="28"/>
+            <rect x="52" y="37" width="2" height="66" />
+            <rect x="78" y="37" width="2" height="66" />
+            <rect x="101" y="68" width="2" height="28" />
+            <rect x="117" y="68" width="2" height="28" />
           </g>
           <g fill="#eee3ca" font-size="4" text-anchor="middle" font-family="system-ui">
-            <text x="66" y="70">GRAND HALL</text><text x="27" y="46">COUNCIL</text><text x="29" y="79">MEDITATION</text>
-            <text x="110" y="82">ARCHIVES</text><text x="107" y="48">ANTECHAMBER</text><text x="66" y="140">ROTUNDA</text>
+            <text x="66" y="70">GRAND HALL</text>
+            <text x="27" y="46">COUNCIL</text>
+            <text x="29" y="79">MEDITATION</text>
+            <text x="110" y="82">ARCHIVES</text>
+            <text x="107" y="48">ANTECHAMBER</text>
+            <text x="66" y="140">ROTUNDA</text>
             <text x="116" y="112">SERVICE</text>
           </g>
-          <g id="map-player"><circle r="2" fill="#f9d992"/><path d="M0 -5L-2 -1H2Z" fill="#f9d992"/></g>
+          <g id="map-player">
+            <circle r="2" fill="#f9d992" />
+            <path d="M0 -5L-2 -1H2Z" fill="#f9d992" />
+          </g>
         </svg>
         <p>Gold dot: you · East end of the transverse hallway: service access.</p>
       </aside>
@@ -647,7 +836,9 @@
         <div class="intro">
           <div class="eyebrow">A CLASSIC PLACE. A NEW WAY TO EXPLORE.</div>
           <h1>CORUSCANT<br />TEMPLE.</h1>
-          <p class="subtitle">Walk the great hall, council chamber and archives.<br />Unseal a service passage. Recover blocks. Build up to the city overlook.</p>
+          <p class="subtitle">
+            Walk the great hall, council chamber and archives.<br />Unseal a service passage. Recover blocks. Build up to the city overlook.
+          </p>
         </div>
         <div class="launch">
           <div id="progress"><div id="bar"></div></div>
@@ -655,7 +846,8 @@
           <button id="play" class="primary">Load temple</button>
           <div class="menurow">
             <button id="menu-fullscreen">Fullscreen</button><button id="mute" aria-pressed="false">Sound on</button
-            ><button id="quality">Detail: desktop</button><button id="input-mode">Controls: desktop</button><button id="reset" hidden>Reset temple</button>
+            ><button id="quality">Detail: desktop</button><button id="input-mode">Controls: desktop</button
+            ><button id="reset" hidden>Reset temple</button>
           </div>
           <div id="reset-confirm" hidden>
             <p>Erase your buildings and return to the intact temple?</p>
@@ -699,7 +891,19 @@
           "#51bacc",
           "#f9cf65",
         ];
-      const input = { active: false, x: 0, z: 0, lookX: 0, lookY: 0, selected: 1, jump: false, actions: [], reset: false, autoWalk: false, quality: matchMedia("(pointer:coarse)").matches ? 0.55 : 1.0 };
+      const input = {
+        active: false,
+        x: 0,
+        z: 0,
+        lookX: 0,
+        lookY: 0,
+        selected: 1,
+        jump: false,
+        actions: [],
+        reset: false,
+        autoWalk: false,
+        quality: matchMedia("(pointer:coarse)").matches ? 0.55 : 1.0,
+      };
       let started = false,
         ready = false,
         hasPlayed = false,
@@ -823,9 +1027,12 @@
       window.templeUpdate = (data) => {
         if (!gpuInfo && new URLSearchParams(location.search).has("debug")) {
           try {
-            const gl = canvas.getContext("webgl2"), ext = gl?.getExtension("WEBGL_debug_renderer_info");
+            const gl = canvas.getContext("webgl2"),
+              ext = gl?.getExtension("WEBGL_debug_renderer_info");
             gpuInfo = ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : "WebGL 2";
-          } catch (e) { gpuInfo = "WebGL 2"; }
+          } catch (e) {
+            gpuInfo = "WebGL 2";
+          }
         }
         if (gpuInfo) data.gpu = gpuInfo;
         status = { ...status, ...data };
@@ -850,14 +1057,17 @@
         $("location").textContent = data.room || "Grand Hall";
         $("objective").textContent = data.objective || "";
         $("stock").textContent = `${data.inventory || 0} recovered blocks`;
-        if (data.position) $("map-player").setAttribute("transform", `translate(${data.position[0]},${data.position[2]}) rotate(${-data.yaw*180/Math.PI})`);
+        if (data.position)
+          $("map-player").setAttribute("transform", `translate(${data.position[0]},${data.position[2]}) rotate(${(-data.yaw * 180) / Math.PI})`);
         $("target").textContent = data.target || "";
         $("target").hidden = !data.target;
         $("toast").textContent = data.message || (!saveOK ? "Saving is unavailable in this browser session." : "");
         $("toast").hidden = !$("toast").textContent;
         $("debug").textContent = `${data.fps || 0} FPS · ${data.drawCalls || 0} draws\n${data.chunks || 0} chunks · ${data.dirty || 0} dirty\n${
           data.triangles || 0
-        } triangles\n${data.room || "Temple"} · stock ${data.inventory || 0}\n${data.changes || 0} block changes\nCPU ${Math.round(data.processMS || 0)} ms · physics ${Math.round(data.physicsMS || 0)} ms\n${gpuInfo}`;
+        } triangles\n${data.room || "Temple"} · stock ${data.inventory || 0}\n${data.changes || 0} block changes\nCPU ${Math.round(
+          data.processMS || 0
+        )} ms · physics ${Math.round(data.physicsMS || 0)} ms\n${gpuInfo}`;
       };
       function clearInput() {
         keys.clear();
@@ -939,7 +1149,9 @@
         document.body.classList.toggle("desktop");
         $("input-mode").textContent = document.body.classList.contains("desktop") ? "Controls: desktop" : "Controls: touch";
       };
-      function toggleMap() { $("map-panel").hidden = !$("map-panel").hidden; }
+      function toggleMap() {
+        $("map-panel").hidden = !$("map-panel").hidden;
+      }
       $("map-toggle").onclick = toggleMap;
       $("map-close").onclick = toggleMap;
       $("quality").textContent = input.quality === 1 ? "Detail: desktop" : "Detail: eco";
