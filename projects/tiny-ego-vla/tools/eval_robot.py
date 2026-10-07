@@ -34,7 +34,7 @@ def evaluate(checkpoint, encoder, transform, tokenizer, task_key, env, task):
             d = f[f"data/demo_{42 + init}"]
             t0 = time.perf_counter()
             env.reset()
-            obs = env.set_init_state(d["states"][0])
+            obs = env.set_init_state(d["states"][1])
             history = []
             frames = []
             actions = []
@@ -78,7 +78,7 @@ def evaluate(checkpoint, encoder, transform, tokenizer, task_key, env, task):
                 dest / f"episode-{init}.npz",
                 actions=np.array(actions),
                 states=np.array(states),
-                initial_state=d["states"][0],
+                initial_state=d["states"][1],
                 frames=np.array(frames),
             )
             imageio.mimsave(
@@ -98,6 +98,7 @@ def evaluate(checkpoint, encoder, transform, tokenizer, task_key, env, task):
                 "instruction": task.language,
                 "initialization": init,
                 "held_out_demo": 42 + init,
+                "held_out_state_index": 1,
                 "success": success,
                 "return": total_return,
                 "length": len(actions),

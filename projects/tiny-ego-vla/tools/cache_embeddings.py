@@ -63,7 +63,7 @@ def main(mode):
                         continue
                     d = f[f"data/demo_{i}"]
                     n = len(d["actions"])
-                    idx = np.arange(0, n, 2)
+                    idx = np.arange(0, n - 2, 2)
                     # HDF5 uses OpenGL convention: flip to upright RGB, same as rollout images.
                     frames = d["obs/agentview_rgb"][idx][:, ::-1].copy()
                     visual = encode(frames, model, transform)
@@ -71,13 +71,7 @@ def main(mode):
                         [d["obs/ee_states"][idx], d["obs/gripper_states"][idx]], axis=-1
                     ).astype("float32")
                     actions = (
-                        np.array(
-                            [
-                                d["actions"][min(j, n - 1)]
-                                for k in idx
-                                for j in (k, k + 1)
-                            ]
-                        )
+                        np.array([d["actions"][j] for k in idx for j in (k + 1, k + 2)])
                         .reshape(-1, 2, 7)
                         .astype("float32")
                     )
@@ -88,6 +82,9 @@ def main(mode):
                         proprio=proprio,
                         actions=actions,
                         indices=idx,
+                        action_alignment=np.array(
+                            "post_action_obs_predict_next_two_actions"
+                        ),
                     )
                     print(
                         task,

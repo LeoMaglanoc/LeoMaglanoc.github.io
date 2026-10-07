@@ -121,6 +121,35 @@ def run(kind, seed, resume=False):
                     "mask": m.numpy().tolist(),
                 }
             )
+    # A train-only constant predictor is a sanity baseline for noisy motion targets.
+    ys = np.array([r[2] for r in train.rows])
+    ms = np.array([r[3] for r in train.rows])
+    constant = (ys * ms).sum(0) / np.maximum(ms.sum(0), 1)
+    probability = np.clip(constant[4], 0.001, 0.999)
+    constant[4] = np.log(probability / (1 - probability))
+    baseline_loss = 0
+    absolute_error = np.zeros(4)
+    zero_error = np.zeros(4)
+    label_count = np.zeros(4)
+    with torch.inference_mode():
+        for v, l, y, m in valid:
+            pred = model(v, l)
+            baseline_loss += float(
+                loss_fn(torch.tensor(constant)[None].expand(len(v), -1), y, m)
+            ) * len(v)
+            absolute_error += ((pred[:, :4] - y[:, :4]).abs() * m[:, :4]).sum(0).numpy()
+            zero_error += (y[:, :4].abs() * m[:, :4]).sum(0).numpy()
+            label_count += m[:, :4].sum(0).numpy()
+    sanity = {
+        "constant_validation_loss": baseline_loss / len(val),
+        "motion_mae_normalized_image": (
+            absolute_error / np.maximum(label_count, 1) / 10
+        ).tolist(),
+        "zero_motion_mae_normalized_image": (
+            zero_error / np.maximum(label_count, 1) / 10
+        ).tolist(),
+        "motion_label_counts": label_count.astype(int).tolist(),
+    }
     stats = {
         "provenance": provenance,
         "kind": kind,
@@ -129,6 +158,7 @@ def run(kind, seed, resume=False):
         "train_samples": len(train),
         "validation_samples": len(val),
         "best_validation_loss": best,
+        "sanity_baseline": sanity,
         "selected_epoch": ck["epoch"] + 1,
         "seconds": time.perf_counter() - t0,
         "curve": curve,

@@ -5,6 +5,7 @@ import urllib.request
 
 LIBERO_REV = "8f1084e3132a39270c3a13ebe37270a43ece2a01"
 DATA_REV = "e329580e402fb5f07ae3b1f18475fc3b63783b91"
+EPIC_ANNOTATION_REV = "ea8b40457a400c3fffa1c7f406ef3dc169cc2522"
 
 
 def download(url, path):
@@ -24,6 +25,8 @@ def main():
             [
                 "git",
                 "clone",
+                "--depth",
+                "1",
                 "https://github.com/Lifelong-Robot-Learning/LIBERO.git",
                 str(lib),
             ],
@@ -46,7 +49,7 @@ def main():
             DATA / f"{video}_detections.pkl",
         )
     download(
-        "https://raw.githubusercontent.com/epic-kitchens/epic-kitchens-100-annotations/master/EPIC_100_train.csv",
+        f"https://raw.githubusercontent.com/epic-kitchens/epic-kitchens-100-annotations/{EPIC_ANNOTATION_REV}/EPIC_100_train.csv",
         DATA / "epic_annotations.csv",
     )
     tasks = {
@@ -66,6 +69,7 @@ def main():
     manifest = {
         "libero_revision": LIBERO_REV,
         "robot_dataset_revision": DATA_REV,
+        "epic_annotation_revision": EPIC_ANNOTATION_REV,
         "files": [
             {"path": p.name, "sha256": sha(p), "bytes": p.stat().st_size} for p in files
         ],

@@ -54,3 +54,15 @@ projects/language-vision/.venv/
 projects/language-vision/evaluation/*results.json
 projects/language-vision/evaluation/*details.json
 projects/language-vision/evaluation/chrome-*.json
+# TinyEgoVLA: machine-generated experiment records and local continuation data.
+projects/tiny-ego-vla/.venv/
+projects/tiny-ego-vla/artifacts/
+projects/tiny-ego-vla/data/
+projects/tiny-ego-vla/checkpoints/
+projects/tiny-ego-vla/*-report.json
+projects/tiny-ego-vla/*-audit.json
+projects/tiny-ego-vla/*-record.json
+projects/tiny-ego-vla/data-manifest.json
+projects/tiny-ego-vla/results-summary.json
+assets/interactive/tiny-ego-vla/results.json
+assets/interactive/tiny-ego-vla/media/

@@ -24,3 +24,9 @@ MLP, GRU and 2-layer Transformer trunks are compared on human validation loss. T
 Action observations use four frames at 10 Hz and eight proprioception values. Predict two 7D control actions, execute at 20 Hz. Gripper predictions are thresholded to ±1. Evaluation uses RGB + proprioception only, with no supplied expert actions or object state. Software rendering removes shadows/reflections for throughput; this differs slightly from stored demonstration images and may introduce visual domain shift. Both variants use the same evaluation renderer.
 
 Raw video timestamps triggered an FFmpeg duration warning during conversion, but source durations and fixed-rate decoded frame counts are checked. The human processing delegate reports CPU XNNPACK; MediaPipe also initializes an unused OpenGL context, which is not evidence of GPU neural inference.
+
+## Observation/action timing correction (before training)
+
+The simulator parity audit found a one-step convention in official LIBERO HDF5 generation. `create_dataset.py` executes action j, records the resulting observation, but retains pre-action state j and action j in the same row. Comparing stored proprioception to simulator states confirmed this: next-state errors were 0.000068, 0.000552 and 0.000437 at sampled steps 0/40/80, versus same-index errors 0.00217, 0.01379 and 0.01077.
+
+We therefore pair observation j with future actions j+1 and j+2, dropping observations without both future actions. `align_actions.py` corrects already cached arrays without rerunning MobileCLIP; new caches use this alignment directly. All paired runs use the corrected targets. Rollouts start from held-out demo state index 1, matching the initial post-action observation convention, and receive no reference actions. This is documented as a departure from blindly using same-index targets.

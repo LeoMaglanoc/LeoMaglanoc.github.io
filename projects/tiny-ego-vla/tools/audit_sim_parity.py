@@ -18,7 +18,10 @@ def main():
                 [d["obs/ee_states"][t], d["obs/gripper_states"][t]]
             )
             diff = float(np.max(np.abs(p - reference)))
-            assert diff < 1e-3, (t, p, reference)
+            obs_next = env.set_init_state(d["states"][t + 1])
+            diff_next = float(np.max(np.abs(proprio(obs_next) - reference)))
+            assert diff_next < 0.001, (t, diff_next)
+            env.set_init_state(d["states"][t + 1])
             rendered = upright_frame(env)
             stored = d["obs/agentview_rgb"][t][::-1].copy()
             # Shadow settings can differ. Save actual pairs for inspection instead of
@@ -29,7 +32,8 @@ def main():
             record.append(
                 {
                     "frame": t,
-                    "proprio_max_abs_error": diff,
+                    "proprio_max_abs_error_same_index": diff,
+                    "proprio_max_abs_error_next_state": diff_next,
                     "rgb_mae": float(
                         np.abs(stored.astype(float) - rendered.astype(float)).mean()
                     ),

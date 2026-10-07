@@ -24,6 +24,9 @@ def main():
         assert np.allclose(np.linalg.norm(z, axis=1), 1, atol=1e-5)
         assert z.shape[1] == 512
         if "actions" in d:
+            assert (
+                str(d["action_alignment"]) == "post_action_obs_predict_next_two_actions"
+            )
             assert d["actions"].shape == (len(z), 2, 7)
             assert d["proprio"].shape == (len(z), 8)
             assert np.isfinite(d["actions"]).all() and np.isfinite(d["proprio"]).all()

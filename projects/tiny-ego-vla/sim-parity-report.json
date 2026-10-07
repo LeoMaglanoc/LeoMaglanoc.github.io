@@ -1,0 +1,23 @@
+[
+  {
+    "frame": 0,
+    "proprio_max_abs_error_same_index": 0.0021732345259200536,
+    "proprio_max_abs_error_next_state": 6.763835214204043e-05,
+    "rgb_mae": 3.2502644856770835,
+    "image": "artifacts/sim-parity-0.jpg"
+  },
+  {
+    "frame": 40,
+    "proprio_max_abs_error_same_index": 0.01378542892363599,
+    "proprio_max_abs_error_next_state": 0.0005521331009573638,
+    "rgb_mae": 3.5395100911458335,
+    "image": "artifacts/sim-parity-40.jpg"
+  },
+  {
+    "frame": 80,
+    "proprio_max_abs_error_same_index": 0.01076593477193405,
+    "proprio_max_abs_error_next_state": 0.0004371605449528526,
+    "rgb_mae": 3.82965087890625,
+    "image": "artifacts/sim-parity-80.jpg"
+  }
+]
