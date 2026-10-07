@@ -52,7 +52,36 @@ def main():
                 )
             out = model(*args)
             assert torch.isfinite(out).all()
+        metrics = json.loads((folder / "metrics.json").read_text())
+        key = "validation_loss" if folder.name.startswith("ego-") else "validation_mse"
+        metric_key = (
+            "best_validation_loss"
+            if folder.name.startswith("ego-")
+            else "best_validation_mse"
+        )
+        selected_epoch = (
+            min(range(len(metrics["curve"])), key=lambda i: metrics["curve"][i][key])
+            + 1
+        )
+        assert best["epoch"] + 1 == selected_epoch == metrics["selected_epoch"]
+        assert (
+            best["best_loss"]
+            == metrics[metric_key]
+            == metrics["curve"][selected_epoch - 1][key]
+        )
+        assert last["curve"] == metrics["curve"]
         assert best["optimizer"]["state"] and last["optimizer"]["state"]
+        model.load_state_dict(last["model"])
+        optimizer = torch.optim.AdamW(model.parameters(), lr=CONFIG["learning_rate"])
+        optimizer.load_state_dict(last["optimizer"])
+        for state in optimizer.state.values():
+            for value in state.values():
+                if isinstance(value, torch.Tensor):
+                    assert torch.isfinite(value).all()
+        torch.Generator().set_state(last["loader_rng"])
+        torch.Generator().set_state(last["torch_rng"])
+        with torch.inference_mode():
+            assert torch.isfinite(model(*args)).all()
         records.append(
             {
                 "run": folder.name,
@@ -72,7 +101,7 @@ def main():
         {
             "passed": True,
             "records": records,
-            "checks": "reload finite prediction, optimizer populated, all RNG states present, expected epochs, fixed configuration",
+            "checks": "best and last model reload with finite predictions, optimizer reload and finite states, RNG generators reload, exact validation minimum and first-minimum epoch, full curve equality, expected epochs, fixed configuration",
         },
     )
     print("PASS", len(records), "best + last checkpoint pairs")

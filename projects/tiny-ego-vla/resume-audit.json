@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": "completed human and paired robot resumes preserve checkpoint and metrics SHA-256; modified configuration rejected before training or checkpoint writes",
+  "files": {
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/ego-transformer-11/best.pt": "0cf798b2afcb41e76aae5ebad198069a5ac20f293677fba34322ce2b1556e8a2",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/ego-transformer-11/last.pt": "8ca8b1f2567eb23973c46db9285dc1b6c9d918b2e741355d11f306c0c5677305",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/ego-transformer-11/metrics.json": "4892bf42cf1bdb6b4b8190e10945c66b49edee4a6637ade944594114db7c89d6",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/robot-robot-4-11/best.pt": "1bc4f1c4970d24b4629002a70ae1704d67a0685b2eb3cc6611a7c9baaa4f84ac",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/robot-robot-4-11/last.pt": "fdd99a9c02c3eb4f147677577899725675679a9e6dee49f8a90ca271e351a165",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/robot-robot-4-11/metrics.json": "e5bc4e583d4401fa642220055a7403d77d915bfdb06de08a4a6ca3ed574f4a93",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/robot-ego-4-11/best.pt": "09fb51280e6cc90fbd1992057a6b01cc1dbec0204d1faeeec501d357b59f1dfa",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/robot-ego-4-11/last.pt": "09d510962c76418ca6aa17833c97230d77dc747a702377ba1e0dfee49c5eeb8f",
+    "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/checkpoints/robot-ego-4-11/metrics.json": "e5737a07d79950a224fd36a2e59cd15f3783f271900b0a29668f07ee2f4ef319"
+  }
+}

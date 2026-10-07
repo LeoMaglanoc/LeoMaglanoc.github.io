@@ -210,7 +210,7 @@ def main():
             ],
             [
                 "Robot data",
-                "Two official LIBERO spatial tasks, 50 demonstrations each. Per task: demos 0–34 train pool, 35–41 validation, 42–49 test. Budgets use first 4, 9 or 35 training demonstrations. Normalize using training data only. Stored observations are post-action; targets use the following two actions, dropping incomplete terminal chunks.",
+                "Two official LIBERO spatial tasks, 50 demonstrations each. Per task: demos 0–34 train pool, 35–41 validation, 42–49 test. Budgets use first 4, 9 or 35 training demonstrations. Normalization is fit separately on each training budget and shared across paired regimes; compare normalized MSE within budget. Stored observations are post-action; targets use the following two actions, dropping incomplete terminal chunks.",
             ],
             [
                 "Control",

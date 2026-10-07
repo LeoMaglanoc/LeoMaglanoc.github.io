@@ -41,10 +41,24 @@ All architectures trained for 80 epochs on 884 windows, with 387 validation wind
 | GRU                   |              223,557 |             0.167424 |              2 |           17.03 s |
 | Transformer           |              389,957 |             0.167372 |              3 |           21.10 s |
 
-Transformer is selected by the predeclared lowest-human-validation-loss criterion. Its margin over GRU is tiny; this is not evidence of an architectural advantage. Robot adaptation uses 412,014 trainable parameters. Additional human Transformer seeds 29/47 retain their own checkpoints and metrics.
+Transformer is selected by the predeclared lowest-human-validation-loss criterion. Its margin over GRU is tiny; this is not evidence of an architectural advantage. Robot adaptation uses 412,014 trainable parameters. Additional human Transformer seeds 29/47 also select epoch 3: validation losses 0.164452 / 0.165983, training times 17.13 / 24.73 s. They retain their own checkpoints and metrics; both also trail the constant baseline.
 
 **Negative sanity check:** the train-only constant displacement/contact predictor obtains validation loss 0.163751, better than all seed-11 candidates. For the selected model, wrist x/y normalized-image MAE is 0.0310/0.0446 versus zero-motion 0.0306/0.0424; object x/y MAE is 0.0283/0.0376 versus zero-motion 0.0260/0.0358. Later epochs reduce training loss while validation worsens. The current human pretraining has not demonstrated generalizable motion prediction. Any robot effect must be interpreted cautiously: changing initialization can act as regularization without establishing useful human manipulation knowledge.
 
 Likely limitations to investigate are too few independent clips, camera motion in raw 2D displacement, detector identity switches and contact bias, and semantic frozen features that may not preserve precise geometry. No causal diagnosis is claimed from this one subset. Next experiments should add camera-motion compensation, stronger object identities, more participants and separate human test videos before increasing model size.
 
 Caching took 1,099.14 s for the 100 robot demonstrations and 559.88 s for 3,231 human frames (under concurrent preprocessing/load). Cached embeddings are reused for every training run. Human preprocessing timings excluding initial video conversion: 106.42 s, 122.53 s and 119.99 s for P01_03/P01_08/P01_04 respectively. These are development-laptop timings, not mobile benchmarks.
+
+## Interpretation and deferred work
+
+Robot action/proprioception normalization is fitted separately on each training budget and reused by both paired regimes. Normalized MSE is comparable within a budget; its scale changes between budgets. Data-efficiency charts therefore use closed-loop task success. The larger budgets also produce more optimizer steps at the fixed 100 epochs; paired regimes receive the same steps.
+
+The three temporal architectures were compared on human validation, not swept on robot success. No language-free, temporal-free, shuffled-human-label, or unrelated-pretraining robot ablation was performed. Those controls would help distinguish task-relevant transfer from an initialization/regularization effect. No independent human test split was available: the held-out human video is the validation set used for checkpoint/architecture selection.
+
+RL is a no-go for this version. The primary paired imitation experiment and complete fixed evaluation take priority, and the human predictor has not passed its generalization sanity check. The practice stage explicitly describes a possible future residual policy rather than reporting unperformed reward optimization.
+
+Recommended next studies: expand to independently recorded participants and a separate human test set; compensate camera motion and maintain object identities; establish a human predictor that beats constant/zero-motion baselines; add shuffled-label and unrelated-pretraining controls; then evaluate new robot starts and tasks with more independent seeds. Preserve this version’s frozen evaluation records and use new configuration/run directories.
+
+## Continuation exercised during development
+
+The execution session terminated the final robot training run (ego-pretrained, budget 35, seed 47) after its epoch-59 checkpoint. It was resumed from `last.pt`, restoring model, AdamW optimizer, PyTorch/NumPy/Python RNG and minibatch-generator state for epochs 60–100. No hyperparameters, data, model architecture or checkpoint-selection rule changed. Earlier checkpoints did not store accumulated elapsed time, so this one run explicitly reports only its resumed segment (`seconds_scope`); it must not be compared as a full-run CPU timing. New checkpoints preserve accumulated elapsed seconds. Completed-run `--resume` now returns the original metrics without overwriting timings.

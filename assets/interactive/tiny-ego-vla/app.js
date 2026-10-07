@@ -46,6 +46,7 @@ function escapeHTML(s) {
 }
 function setText(s, value) {
   $(s).textContent = value;
+  if (s === "#play-human") $(s).setAttribute("aria-label", `${value} human video`);
 }
 function safePlay(video) {
   const p = video.play();
@@ -410,6 +411,7 @@ function pausePolicies() {
   setText("#play-policies", "Play comparison");
 }
 function updateComparison() {
+  for (const id of ["#play-policies", "#restart-policies", "#policy-time"]) $(id).disabled = true;
   state.comparisonRequest++;
   pausePolicies();
   const task = $("#task").value;
@@ -477,6 +479,11 @@ function updateComparison() {
   $("#policy-time").value = 0;
   setText("#policy-clock", "0.0 s");
 }
+function updatePlaybackReadiness() {
+  const ready = policies.every((v) => v.readyState >= 1 && Number.isFinite(v.duration));
+  for (const id of ["#play-policies", "#restart-policies", "#policy-time"]) $(id).disabled = !ready;
+}
+policies.forEach((v) => v.addEventListener("loadedmetadata", updatePlaybackReadiness));
 $("#task").addEventListener("change", updateComparison);
 $("#seed").addEventListener("change", updateComparison);
 $("#initialization").addEventListener("change", updateComparison);

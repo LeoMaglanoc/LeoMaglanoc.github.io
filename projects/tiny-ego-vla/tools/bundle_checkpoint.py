@@ -11,7 +11,12 @@ def bundle():
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = ART / f"TinyEgoVLA-continuation-{stamp}.tar.gz"
     entries = []
-    for folder in [PROJECT / "tools", PROJECT / "configs", CKPT]:
+    for folder in [
+        PROJECT / "tools",
+        PROJECT / "configs",
+        PROJECT / "validation",
+        CKPT,
+    ]:
         entries.extend(
             p for p in folder.rglob("*") if p.is_file() and "__pycache__" not in p.parts
         )
@@ -27,6 +32,8 @@ def bundle():
         "integrity-report.json",
         "sim-parity-report.json",
         "checkpoint-audit.json",
+        "rollout-audit.json",
+        "resume-audit.json",
         "results-summary.json",
         "VALIDATION.md",
     ]:

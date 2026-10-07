@@ -44,6 +44,7 @@ $PY projects/tiny-ego-vla/tools/train_robot_bc.py
 $PY projects/tiny-ego-vla/tools/eval_robot.py
 $PY projects/tiny-ego-vla/tools/export_media.py human
 $PY projects/tiny-ego-vla/tools/export_media.py expert
+$PY projects/tiny-ego-vla/tools/audit_rollouts.py
 $PY projects/tiny-ego-vla/tools/render_rollouts.py
 $PY projects/tiny-ego-vla/tools/export_web.py
 $PY projects/tiny-ego-vla/tools/check_checkpoints.py
@@ -72,3 +73,7 @@ The validation-selected architecture for this run is the two-layer Transformer. 
 `checkpoint-record.json` identifies the local continuation archive and its SHA-256. The archive is **not in Git**. It contains code/config, both model checkpoints, the frozen encoder, all cached embeddings/normalized-data inputs, human pseudo-labels, metrics and raw rollout states/actions/frames. It does not include the raw source videos or robot HDF5 files; those are restored with `prepare.py` and verified against `data-manifest.json`.
 
 To restore: clone this repository into a separate checkout and extract the archive into its `projects/tiny-ego-vla/` directory, preserving that layout (the scripts derive repository paths from their location). Verify every `artifacts/continuation-manifest.json` file hash with `verify_bundle.py`, recreate the pinned environment, restore raw inputs if new preprocessing/evaluation is needed, and use the saved configuration. Update the archive path in the local copy of `checkpoint-record.json` after moving it; retain the recorded SHA-256. Existing cached arrays suffice for training continuation. Preserve source artifact licensing when redistributing any derived data.
+
+## Preview the static exhibit
+
+From the repository root, run `npx --yes http-server@14.1.1 . -p 8765 -a 127.0.0.1 -c-1`, then open `http://localhost:8765/assets/interactive/tiny-ego-vla/index.html`. Use a server with byte-range support for video seeking; Python’s basic HTTP server does not provide it. The production Jekyll build exposes the fullscreen iframe at `/tiny-ego-vla/`. `tools/export_web.py --preview` is for local UI QA only; publication checks reject it. After all models finish, `bash projects/tiny-ego-vla/tools/finish_evaluation.sh` resumes missing rollouts, creates presentation replays, exports the full exhibit and runs artifact checks.

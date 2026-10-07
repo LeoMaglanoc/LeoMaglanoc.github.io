@@ -4,18 +4,21 @@ All other seeds/starts retain their original 128px recorded camera footage.
 """
 
 from common import *
-import numpy as np, imageio
+import numpy as np, imageio, argparse
 from PIL import Image
 from simulator import make_env, upright_frame
 from datasets import CONFIG
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--budget", type=int, nargs="+")
+    args = parser.parse_args()
     seed = CONFIG["seeds"][0]
     init = CONFIG["evaluation_initializations"][0]
     for task in CONFIG["robot_tasks"]:
         env, _ = make_env(task, size=384)
-        for budget in CONFIG["budgets"]:
+        for budget in args.budget or CONFIG["budgets"]:
             for regime in ["robot", "ego"]:
                 path = (
                     ART
@@ -24,6 +27,17 @@ def main():
                     / task
                     / f"episode-{init}.npz"
                 )
+                record_path = path.with_name(f"episode-{init}-hi.json")
+                if record_path.exists():
+                    record = json.loads(record_path.read_text())
+                    assert record["source_sha256"] == sha(path), (
+                        "Recorded source states changed"
+                    )
+                    if (
+                        path.with_name(f"episode-{init}-hi.mp4").exists()
+                        and path.with_name(f"episode-{init}-hi.webp").exists()
+                    ):
+                        continue
                 d = np.load(path)
                 frames = []
                 states = [d["initial_state"]] + list(d["states"][1::2])
@@ -43,6 +57,17 @@ def main():
                 )
                 Image.fromarray(frames[0]).save(
                     path.with_name(f"episode-{init}-hi.webp"), quality=85
+                )
+                save_json(
+                    record_path,
+                    {
+                        "source_sha256": sha(path),
+                        "frames": len(frames),
+                        "size": 384,
+                        "fps": 10,
+                        "method": "render initial state, states after every two recorded actions and final state; no policy reexecution",
+                        "video_sha256": sha(path.with_name(f"episode-{init}-hi.mp4")),
+                    },
                 )
                 print("rendered", task, budget, regime, len(frames), flush=True)
         env.close()

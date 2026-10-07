@@ -38,6 +38,8 @@ def run(kind, seed, budget, regime, resume=False):
     curve = []
     start = 0
     t0 = time.perf_counter()
+    prior_seconds = 0.0
+    seconds_scope = "full training run"
     provenance = run_provenance()
     if resume and (run_dir / "last.pt").exists():
         ck = torch.load(run_dir / "last.pt", weights_only=False)
@@ -45,8 +47,18 @@ def run(kind, seed, budget, regime, resume=False):
         assert ck["config"] == CONFIG, (
             "Configuration changed: create a new experiment instead of resuming"
         )
+        if (
+            ck["epoch"] + 1 >= CONFIG["robot_epochs"]
+            and (run_dir / "metrics.json").exists()
+        ):
+            print("COMPLETE (unchanged)", run_dir.name, flush=True)
+            return json.loads((run_dir / "metrics.json").read_text())
         model.load_state_dict(ck["model"])
         opt.load_state_dict(ck["optimizer"])
+        prior_seconds = ck.get("elapsed_seconds", 0.0)
+        seconds_scope = ck.get(
+            "seconds_scope", "resumed segment; earlier elapsed not recorded"
+        )
         start = ck["epoch"] + 1
         best = ck["best_loss"]
         curve = ck["curve"]
@@ -74,6 +86,8 @@ def run(kind, seed, budget, regime, resume=False):
             {"epoch": epoch + 1, "train_mse": total / len(train), "validation_mse": vl}
         )
         ck = {
+            "elapsed_seconds": prior_seconds + time.perf_counter() - t0,
+            "seconds_scope": seconds_scope,
             "model": model.state_dict(),
             "optimizer": opt.state_dict(),
             "epoch": epoch,
@@ -121,7 +135,8 @@ def run(kind, seed, budget, regime, resume=False):
         "best_validation_mse": best,
         "test_mse": test_loss / len(test),
         "selected_epoch": best_ck["epoch"] + 1,
-        "seconds": time.perf_counter() - t0,
+        "seconds": prior_seconds + time.perf_counter() - t0,
+        "seconds_scope": seconds_scope,
         "curve": curve,
         "checkpoint_sha256": sha(run_dir / "best.pt"),
     }

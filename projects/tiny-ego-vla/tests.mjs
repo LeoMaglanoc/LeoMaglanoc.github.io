@@ -26,7 +26,10 @@ for (const summary of robot.summary) {
   assert.equal(summary.success_rate, summary.successes / summary.episodes);
 }
 for (const row of robot.rollouts) {
+  const metric = robot.metrics.find((m) => m.regime === row.regime && m.seed === row.seed && m.budget_per_task === row.budget_per_task);
+  assert.equal(row.checkpoint_sha256, metric.checkpoint_sha256);
   assert.equal(row.held_out_demo, 42 + row.initialization);
+  assert.equal(row.held_out_state_index, 1);
   assert(row.length <= result.config.evaluation_max_steps && row.length > 0);
   assert(row.seconds > 0 && typeof row.success === "boolean");
   for (const name of [row.video, row.poster]) {

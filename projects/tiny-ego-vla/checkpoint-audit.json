@@ -1,0 +1,190 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "run": "ego-gru-11",
+      "best_sha256": "befdf846117659e9d32e2f752aea642fb01c365d4db141fd8738b65b3318e26d",
+      "last_sha256": "d13f1bfca0223ca42f72900779597b5a00712e89f08b10c2cd941a0378ce9ff8",
+      "selected_epoch": 2,
+      "last_epoch": 80,
+      "params": 223557
+    },
+    {
+      "run": "ego-mlp-11",
+      "best_sha256": "b13459a83332c37924049c01ee35e0ba6a48acdc17ed51ba80dc7aa29601db5c",
+      "last_sha256": "6afe03cb4c40e82ac998a272060fb503b55e4fec132cbd82900ff18b93128fba",
+      "selected_epoch": 1,
+      "last_epoch": 80,
+      "params": 190149
+    },
+    {
+      "run": "ego-transformer-11",
+      "best_sha256": "0cf798b2afcb41e76aae5ebad198069a5ac20f293677fba34322ce2b1556e8a2",
+      "last_sha256": "8ca8b1f2567eb23973c46db9285dc1b6c9d918b2e741355d11f306c0c5677305",
+      "selected_epoch": 3,
+      "last_epoch": 80,
+      "params": 389957
+    },
+    {
+      "run": "ego-transformer-29",
+      "best_sha256": "e7ce3da84c26bce3193c3de4c1e084899ac7806f66af2fa5497f5d2a0d83af36",
+      "last_sha256": "883821c5a37704ef7f0907e0d33c7ad87782de36241741dc983cbcfaf89cf421",
+      "selected_epoch": 3,
+      "last_epoch": 80,
+      "params": 389957
+    },
+    {
+      "run": "ego-transformer-47",
+      "best_sha256": "409398dee5e433d1529662d78f79c06608a58dda5a9b1d382aa55af3514c3f9e",
+      "last_sha256": "5dadd9f4089ba49c45d3427bea2fc46267ccdd54be4e7b5037ab36e40549e4c3",
+      "selected_epoch": 3,
+      "last_epoch": 80,
+      "params": 389957
+    },
+    {
+      "run": "robot-ego-35-11",
+      "best_sha256": "ce6a241f04a2fb1cc7d189377f4db0b439ddedbfa114b7d853ac2dc256719887",
+      "last_sha256": "f46eb12fe4e6ab8441a10f076f0d49107c75f644ac479bb96a0d5218f39f8852",
+      "selected_epoch": 7,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-35-29",
+      "best_sha256": "859c92453bedad38d8382cf0ca98629606b26efcc157d07bebfb5b8be14f6857",
+      "last_sha256": "e1c7c615b004ee6614e1fba24c796d26f865605316c24da4746fd60934e1989d",
+      "selected_epoch": 6,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-35-47",
+      "best_sha256": "a22a8e9da9a4b63befe954411ef6a5a8ebfb84304a4a5b3c320d2057bec1a539",
+      "last_sha256": "381fca1997739ec810ba843e24291b29b4286ce2ce3725e179371b1efe4ebed3",
+      "selected_epoch": 8,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-4-11",
+      "best_sha256": "09fb51280e6cc90fbd1992057a6b01cc1dbec0204d1faeeec501d357b59f1dfa",
+      "last_sha256": "09d510962c76418ca6aa17833c97230d77dc747a702377ba1e0dfee49c5eeb8f",
+      "selected_epoch": 19,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-4-29",
+      "best_sha256": "e37ca29a90c5d1981b5e6b222f05fcb1e31fa4c458db0d51ace8a1b5c53b1e9f",
+      "last_sha256": "a536e7e00a89022756e74b0fe3a1c3837ee3770299e52ab84a2535505701c567",
+      "selected_epoch": 17,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-4-47",
+      "best_sha256": "5f85b60f40c884acccbcb41acf5e78badcd60ab09f0b1bf842706a709b44c437",
+      "last_sha256": "e5e0386b4bd9a7b4a057653b8633965f165b479ef13d5f25577804b35e726683",
+      "selected_epoch": 25,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-9-11",
+      "best_sha256": "5339ade90351fa14205ed5bd32e4a7668613aece0d2a60a4f58587ee435407b9",
+      "last_sha256": "c21f251540c96fec143adab2e00123e74f5fb287c41df40f6933c38a1f4d16f4",
+      "selected_epoch": 7,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-9-29",
+      "best_sha256": "d4d5236cdaaf2711fbd6f35add3a6237da83a55a1c94c6f4a6d590d6a6f3c134",
+      "last_sha256": "dd767397f7805fd0ba493adcd1110d104118662e6a25f0cba3ea9ac5efc0cb01",
+      "selected_epoch": 12,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-ego-9-47",
+      "best_sha256": "9308d50eada5ccd9dda325248694d77fba5bfecd186a77b255532062d6b47508",
+      "last_sha256": "ddd6f301fbda98ef3ee290247c96b2b348bfb7a4546645f2b77a31b66767310e",
+      "selected_epoch": 10,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-35-11",
+      "best_sha256": "06d00b932ddb533ea8e2bc99e43fc531af36aa1fc95ffbf810aed8a04e3e4488",
+      "last_sha256": "1b5e6bda607163b9c4cfc82c52e19141cb150f074fa23646987b22bafd7eac7b",
+      "selected_epoch": 8,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-35-29",
+      "best_sha256": "838474cff16deabb29171fa5d9497c67f9cf99a9c43e154c611dd16fce9feaff",
+      "last_sha256": "9f9986ab124b6dbfaf5f3cbb7045cf8036a73b766beac29818110e26dff93d7d",
+      "selected_epoch": 6,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-35-47",
+      "best_sha256": "8aa6e10138a968a4b5224543d4aa05514aa82c9d84d173770d2887ac2e49c278",
+      "last_sha256": "3dc9a82e36b38f9f2806df134f6b79ae97ba8c981a51dca21dbdbec45f37a2b7",
+      "selected_epoch": 5,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-4-11",
+      "best_sha256": "1bc4f1c4970d24b4629002a70ae1704d67a0685b2eb3cc6611a7c9baaa4f84ac",
+      "last_sha256": "fdd99a9c02c3eb4f147677577899725675679a9e6dee49f8a90ca271e351a165",
+      "selected_epoch": 64,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-4-29",
+      "best_sha256": "23f5fa43f8993eb6faef03cc9c7a9974970c1635491d98cf6bf2e2b939ae6e04",
+      "last_sha256": "30139064072e4c5e37247789aa21a0f773ef9499d770ca8452cec732979b281a",
+      "selected_epoch": 96,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-4-47",
+      "best_sha256": "e7f002042bcae788860098a2403854684c332403b0d789ddfeb0a2f3998d1462",
+      "last_sha256": "639d2e32d29290fd9804419cdf2f346d4a021132a2c0549eb5974d114b313b4a",
+      "selected_epoch": 99,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-9-11",
+      "best_sha256": "5525dd22fad512a50f3c785e6d0cb228b737d9de4297e64b4732c38c52b208e8",
+      "last_sha256": "b3bea895a91b34b644d59c237892d70bc4ba11f82cf9e8493b209232aeef2646",
+      "selected_epoch": 14,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-9-29",
+      "best_sha256": "05cbea9635da9fb8e8e0d6bdbfe7b89fbec88147a56a203e34cd2b7effea170d",
+      "last_sha256": "c122d4d30b4b0f1492ef3e11bc45287c1c9005d41ded511097241eb7ea30e20a",
+      "selected_epoch": 9,
+      "last_epoch": 100,
+      "params": 412014
+    },
+    {
+      "run": "robot-robot-9-47",
+      "best_sha256": "5267974e0b374e65ea209cf0c6e694c5d696f9b872cb2e835b3b23d01c70a7a5",
+      "last_sha256": "603d5a009f841ce4c020f495468f83aa783253ad2f2f8c03a7009175d173dbcf",
+      "selected_epoch": 15,
+      "last_epoch": 100,
+      "params": 412014
+    }
+  ],
+  "checks": "best and last model reload with finite predictions, optimizer reload and finite states, RNG generators reload, exact validation minimum and first-minimum epoch, full curve equality, expected epochs, fixed configuration"
+}

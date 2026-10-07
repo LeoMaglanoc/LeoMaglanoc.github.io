@@ -5,6 +5,7 @@ cd "$(dirname "$0")/../../.."
 PY=projects/tiny-ego-vla/.venv/bin/python
 $PY projects/tiny-ego-vla/tools/check_checkpoints.py
 $PY projects/tiny-ego-vla/tools/eval_robot.py
+$PY projects/tiny-ego-vla/tools/audit_rollouts.py
 $PY projects/tiny-ego-vla/tools/render_rollouts.py
 $PY projects/tiny-ego-vla/tools/export_web.py
 node projects/tiny-ego-vla/tests.mjs
