@@ -270,6 +270,7 @@ jekyll-minifier:
       "assets/interactive/tiny-dreamer/tiny-dreamer.css",
       "assets/interactive/mobile-sorting/sorting.css",
       "assets/interactive/language-vision/**",
+      "assets/interactive/tiny-ego-vla/**",
     ]
 
 # -----------------------------------------------------------------------------

@@ -1,0 +1,56 @@
+{
+  "libero_revision": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+  "robot_dataset_revision": "e329580e402fb5f07ae3b1f18475fc3b63783b91",
+  "files": [
+    {
+      "path": "P01_03_detections.pkl",
+      "sha256": "e47537571f281e053a2205956d2c25400f460f0154cbe14035cd5b76db3a81ea",
+      "bytes": 649908
+    },
+    {
+      "path": "bowl_plate.hdf5",
+      "sha256": "3961cb7126eaca47d0f5be29eb297bb62e7591e3c86172c9587c0bf670112f84",
+      "bytes": 597677074
+    },
+    {
+      "path": "P01_04.MP4",
+      "sha256": "7d4ece85b59d70b8c459830135ad7ce03404f4d30624444969b6d4384146f6b8",
+      "bytes": 396790033
+    },
+    {
+      "path": "P01_08.MP4",
+      "sha256": "b98b5d3ffbaa161fc48c0a99e24e63bc521d06cf2b6dc642158461d1874a3ec4",
+      "bytes": 373146988
+    },
+    {
+      "path": "bowl_ramekin.hdf5",
+      "sha256": "bf1090dd4826eacb49eb052f17d04798e2a1eb2f74f8d024bc3b9c5d234c25f9",
+      "bytes": 671583385
+    },
+    {
+      "path": "epic_annotations.csv",
+      "sha256": "a3a7ef2e397bd8af12bd0496b09d61b1f2c1f3f6e1726fa86af50a27f4855e87",
+      "bytes": 8415872
+    },
+    {
+      "path": "P01_03.MP4",
+      "sha256": "5c46244c993e4f8b67e5cd5112d927d86522167e3c171e1f2abcf6c5a2c5bdb7",
+      "bytes": 447468845
+    },
+    {
+      "path": "P01_04_detections.pkl",
+      "sha256": "18d347aab9ee5ab6499dad6d65fb75f1f514d7ae6cc220f8b039226f4046ff41",
+      "bytes": 645042
+    },
+    {
+      "path": "video_info.csv",
+      "sha256": "75fd040f6662cb407b4ca2eed4811ca94df280a1aba00b6bf8a5cd286deff382",
+      "bytes": 27721
+    },
+    {
+      "path": "P01_08_detections.pkl",
+      "sha256": "4ec7a99854dc6a5d3ceb65a09331d344f7f63b26d46da5c9d9e80e10f9bf83ef",
+      "bytes": 859723
+    }
+  ]
+}

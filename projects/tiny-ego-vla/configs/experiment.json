@@ -1,0 +1,22 @@
+{
+  "name": "TinyEgoVLA",
+  "encoder": "MobileCLIP-S0",
+  "context": 4,
+  "hidden": 128,
+  "ego_fps": 10,
+  "future_frames": 5,
+  "robot_stride": 2,
+  "action_chunk": 2,
+  "robot_tasks": ["bowl_plate", "bowl_ramekin"],
+  "robot_split": {"train": [0,35], "validation": [35,42], "test": [42,50]},
+  "budgets": [4,9,35],
+  "seeds": [11,29,47],
+  "ego_sources": {"train":["P01_03","P01_08"],"validation":["P01_04"]},
+  "ego_epochs": 80,
+  "robot_epochs": 100,
+  "batch_size": 128,
+  "learning_rate": 0.0007,
+  "evaluation_initializations": [0,1,2,3,4],
+  "evaluation_max_steps": 200,
+  "cpu_threads": 4
+}

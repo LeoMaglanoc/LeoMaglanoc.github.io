@@ -1,0 +1,23 @@
+# Install CPU torch/torchvision from their official CPU index separately.
+numpy==1.26.4
+pillow==12.3.0
+open_clip_torch==3.3.0
+timm==1.0.30
+mobileclip @ git+https://github.com/apple-aiml-research/ml-mobileclip.git@48faa0fea4b08d74188b3841771aca6ff2c92852
+mediapipe==0.10.21
+opencv-python-headless==4.11.0.86
+opencv-python==4.11.0.86
+opencv-contrib-python==4.11.0.86
+h5py==3.16.0
+mujoco==3.2.7
+robosuite==1.4.1
+gym==0.26.2
+bddl==3.6.0
+easydict==1.13
+imageio==2.38.0
+imageio-ffmpeg==0.6.0
+pyyaml==6.0.3
+psutil==7.2.2
+matplotlib==3.10.9
+scikit-learn==1.7.2
+epic-hand-object-detections @ git+https://github.com/epic-kitchens/epic-kitchens-100-hand-object-bboxes.git@5017f570ce29f97aeae1d6183c3dcbdf0d35251b
