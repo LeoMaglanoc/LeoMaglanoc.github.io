@@ -16,11 +16,11 @@ Interactive demos and games, newest first by creation date:
 
 - [Language → Vision]({{ '/language-vision/' | relative_url }}) — type arbitrary visual concepts to retrieve SAM object masks with MobileCLIP embeddings, locally on your browser CPU
 
-- [EuroGuessr AI]({{ '/euroguessr/' | relative_url }}) — five European street-view rounds against a small geolocation AI running on your browser CPU; an early measured baseline with resumable training
-- [RustZero]({{ '/rustzero/' | relative_url }}) — play a Rust AlphaZero-style Breakthrough agent trained through self-play, with live MCTS visits and measured checkpoint progress
-- [Coruscant Temple]({{ '/block-temple/' | relative_url }}) — explore the intact Jedi Temple, recover blocks and build a route to the city overlook
-- [Robot World]({{ '/block-world/' | relative_url }}) — a sideways-phone voxel sandbox with twelve curious robot friends
-- [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }}) — a one-finger orbital salvage game built with Godot
+- [EuroGuessr AI]({{ '/euroguessr/' | relative_url }}) 
+- [RustZero]({{ '/rustzero/' | relative_url }}) 
+- [Coruscant Temple]({{ '/block-temple/' | relative_url }})
+- [Robot World]({{ '/block-world/' | relative_url }})
+- [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }})
 - [Dustfall Outpost]({{ '/dustfall-outpost/' | relative_url }})
 - [TIAGo Mobile Sorting]({{ '/mobile-sorting/' | relative_url }})
 - [TinyDreamer CartPole]({{ '/tiny-dreamer/' | relative_url }})

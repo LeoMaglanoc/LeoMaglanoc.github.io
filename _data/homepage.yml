@@ -32,12 +32,17 @@ builds:
   - title: Interactive Web Demos
     description: "Fun demos created with coding agents"
     links:
-      - label: G1 Locomotion
+      - label: Humanoid Walking
         url: /locomotion/
-      - label: Block-World
-        url: /block-world/
+      - label: TinyDreamer Cartpole
+        url: /tiny-dreamer/
       - label: EuroGuesser AI
         url: /euroguessr/
+      - label: BlockTemple
+        url: /block-temple/
+
+
+
 
   - title: EasyBuy
     description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
