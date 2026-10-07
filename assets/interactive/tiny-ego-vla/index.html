@@ -1,51 +1,387 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f2eb"><meta name="description" content="TinyEgoVLA: a real CPU-scale experiment in human egocentric pretraining and Panda robot adaptation.">
-<title>TinyEgoVLA · Human experience → robot policy</title>
-<link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script>
-</head>
-<body>
-<header class="masthead"><a href="/" target="_top" class="home" aria-label="Leonardo Maglanoc’s homepage">LM<span> / LAB</span></a><span class="eyebrow">EXPERIMENT  /  EMBODIMENT TRANSFER</span><a href="#method" class="method-link">Read the method ↗</a></header>
-<main>
-<section class="intro" aria-labelledby="title"><div><p class="eyebrow">HUMAN EXPERIENCE → ROBOT POLICY</p><h1 id="title">TinyEgoVLA<span>.</span></h1><p class="lede">The hands are different.<br>The experience might transfer.</p></div><div class="intro-note"><p>Can a little model learn from human video, then use that experience to control a robot?</p><p class="muted">A real, CPU-scale experiment. Explore the data, the embodiment gap, and the result.</p><span class="status"><i></i> Offline training. Static replay.</span></div></section>
-<nav class="pipeline" aria-label="Experiment stages">
-<button disabled data-stage="experience" aria-pressed="true"><span>01</span> Experience</button><b aria-hidden="true">→</b>
-<button disabled data-stage="pretrain" aria-pressed="false"><span>02</span> Pretrain</button><b aria-hidden="true">→</b>
-<button disabled data-stage="adapt" aria-pressed="false"><span>03</span> Adapt</button><b aria-hidden="true">→</b>
-<button disabled data-stage="execute" aria-pressed="false"><span>04</span> Execute</button><b aria-hidden="true">→</b>
-<button disabled data-stage="practice" aria-pressed="false"><span>05</span> Practice <small>future</small></button>
-</nav>
-<div id="loading" role="status">Loading the experiment record…</div>
-<div id="error" role="alert" hidden>Experiment assets could not load. Please refresh to try again.</div>
-<section id="experience" class="stage" aria-labelledby="experience-title" hidden>
-<div class="section-heading"><div><p class="eyebrow">01 / OBSERVE A HUMAN</p><h2 id="experience-title">An interaction, made visible.</h2></div><p>Human video supplies prediction targets.<br>Robot demonstrations supply robot actions.</p></div>
-<div class="experience-grid">
-<article class="media-card human-card"><div class="card-label"><span><i class="dot coral"></i> HUMAN / EGOCENTRIC</span><label class="sr-only" for="clip">Human clip</label><select id="clip"></select></div><div class="human-view"><video id="human" muted playsinline loop preload="metadata" poster="media/ego-poster.webp" aria-label="Egocentric human manipulation video"></video><canvas id="overlay" aria-label="Recorded hand skeletons and object detection boxes"></canvas><span id="instruction" class="instruction"></span></div><div class="overlay-controls" role="group" aria-label="Human video overlays"><button data-overlay="raw" aria-pressed="false">Raw</button><button data-overlay="hands" aria-pressed="false">Hands</button><button data-overlay="object" aria-pressed="false">Object</button><button data-overlay="trajectory" aria-pressed="false">Trails</button><button data-overlay="all" aria-pressed="true">All</button></div><div class="timeline-controls"><button id="play-human" aria-label="Pause human video">Pause</button><input id="human-time" type="range" min="0" max="1000" value="0" step="1" aria-label="Human video timeline"><output id="human-clock">0.0 s</output></div><div class="caption"><span id="contact">Contact: detector estimate</span><span id="human-source">EPIC-KITCHENS · recorded human</span></div></article>
-<article class="media-card robot-card"><div class="card-label"><span><i class="dot teal"></i> ROBOT / PANDA</span><span>LIBERO</span></div><div class="expert-view"><video id="expert" muted playsinline loop preload="metadata" poster="media/expert-poster.webp" aria-label="Official Panda expert demonstration replay"><source src="media/expert.mp4" type="video/mp4"></video><span class="video-tag">Expert demonstration</span></div><div class="expert-description"><p class="serif">Same idea.<br>Different body.</p><p>Pick up the black bowl<br>and place it on the plate.</p><button id="play-expert">Pause robot demonstration</button></div></article>
-</div><div class="under-note"><span class="legend"><i class="dot coral"></i> 21 hand joints <i class="dot gold"></i> Object box <i class="dot teal"></i> Motion trail</span><p>Overlays are recorded pseudo-labels. Missing detections stay missing; boxes can drift or switch objects. The robot video here is an expert replay. See <button class="inline" data-go="execute">Execute ↗</button> for learned policies.</p></div>
-</section>
-<section id="pretrain" class="stage" aria-labelledby="pretrain-title" hidden>
-<div class="section-heading"><div><p class="eyebrow">02 / LEARN A REPRESENTATION</p><h2 id="pretrain-title">Predict what happens next.</h2></div><p>The shared trunk sees images and language.<br>Hand and object labels are training targets.</p></div>
-<div class="flow"><div>Four RGB frames<small>short temporal context</small></div><span>→</span><div>Frozen MobileCLIP<small>cached 512D features</small></div><span>→</span><div id="trunk-name">Tiny temporal trunk<small>trained locally</small></div><span>→</span><div>Future interaction<small>motion + contact estimate</small></div></div>
-<div class="stat-grid" id="ego-stats"></div>
-<div class="two-col"><article class="paper"><p class="eyebrow">HELD-OUT HUMAN VIDEO</p><h3>Future motion, half a second ahead.</h3><canvas id="prediction" width="640" height="360" aria-label="Held-out human frame with actual pseudo-labeled and model-predicted future motion"></canvas><div class="prediction-controls"><button id="prev-pred" aria-label="Previous prediction">← Previous</button><output id="prediction-count"></output><button id="next-pred" aria-label="Next prediction">Next →</button></div><p class="fine">Solid: tracked displacement. Dashed: model prediction. Wrist in coral; object in gold. These are image-plane motions, including camera motion, and noisy targets.</p></article><article class="paper"><p class="eyebrow">ACTUAL OPTIMIZATION</p><h3>Learn on one set. Select on another.</h3><div id="ego-chart" class="chart"></div><p class="fine">Pretraining uses two source videos; the third selects the checkpoint. Nearby windows are correlated. This tiny subset cannot establish general human-to-robot transfer.</p><details><summary>Compare the three architectures</summary><div class="table-wrap"><table id="architecture-table"><thead><tr><th>Trunk</th><th>Parameters</th><th>Validation loss ↓</th><th>CPU time</th></tr></thead><tbody></tbody></table></div></details></article></div>
-</section>
-<section id="adapt" class="stage" aria-labelledby="adapt-title" hidden>
-<div class="section-heading"><div><p class="eyebrow">03 / CROSS THE EMBODIMENT GAP</p><h2 id="adapt-title">Transfer experience. Learn control.</h2></div><p>The robot does not copy human joint angles.<br>Its action head learns from Panda demonstrations.</p></div>
-<div class="adapt-diagram"><article class="body-card"><p class="eyebrow coral-text">HUMAN PRETRAINING</p><div class="hand-symbol" aria-hidden="true">✋</div><h3>Human interaction head</h3><p>2D wrist displacement<br>2D object displacement<br>Estimated future contact</p><span class="badge">Discard this head</span></article><div class="shared"><p class="eyebrow">KEEP THESE WEIGHTS</p><h3>Shared<br><em>representation</em></h3><div>Vision projection</div><div>Language projection</div><div>Temporal trunk</div><p>Pretrained on human video.<br>Then fine-tuned with robot data.</p></div><article class="body-card"><p class="eyebrow teal-text">PANDA ADAPTATION</p><div class="robot-symbol" aria-hidden="true">⌁</div><h3>Panda action head</h3><p>3 translation controls<br>3 rotation controls<br>1 gripper control</p><span class="badge teal-badge">Add robot proprioception</span></article></div><div class="callout"><strong>Same trunk. New output space.</strong><p>Human trajectories never become Panda actions. Robot imitation learns the mapping from the shared latent representation and the robot’s own state to two-step, seven-dimensional action chunks.</p></div><div class="two-col"><article class="paper"><h3>Robot-only baseline</h3><p>Randomly initialized trunk → Panda behavioral cloning.</p></article><article class="paper"><h3>Ego-pretrained variant</h3><p>Human-pretrained trunk → the same Panda data, action-head initialization, optimizer, and training budget.</p></article></div>
-</section>
-<section id="execute" class="stage" aria-labelledby="execute-title" hidden>
-<div class="section-heading"><div><p class="eyebrow">04 / TEST THE POLICIES</p><h2 id="execute-title">Does the experience help?</h2></div><p>Closed-loop robot rollouts.<br>Held-out initial states. No reference actions.</p></div>
-<div class="experiment-controls"><label>Task<select id="task"></select></label><fieldset id="budgets"><legend>Robot demonstrations per task</legend></fieldset><label>Training seed<select id="seed"></select></label><label>Held-out start<select id="initialization"></select></label></div>
-<div id="result-headline" class="result-headline"></div>
-<div class="comparison-grid"><article class="media-card"><div class="card-label"><span><i class="dot gray"></i> ROBOT-ONLY</span><span id="robot-status"></span></div><video id="robot-only" muted playsinline preload="none" aria-label="Learned robot-only policy rollout"></video><div id="robot-metrics" class="policy-metrics"></div></article><article class="media-card"><div class="card-label"><span><i class="dot teal"></i> EGO-PRETRAINED</span><span id="ego-status"></span></div><video id="ego-policy" muted playsinline preload="none" aria-label="Learned ego-pretrained policy rollout"></video><div id="ego-policy-metrics" class="policy-metrics"></div></article></div>
-<div class="comparison-playback"><button id="play-policies">Play comparison</button><button id="restart-policies">Restart</button><input id="policy-time" type="range" min="0" max="1000" value="0" aria-label="Comparison timeline"><output id="policy-clock">0.0 s</output><label>Speed<select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
-<div class="two-col"><article class="paper"><p class="eyebrow">DATA EFFICIENCY</p><h3>Every seed. Every held-out start.</h3><div id="success-chart" class="chart"></div><p class="fine" id="evaluation-note"></p><details><summary>Show exact results</summary><div class="table-wrap"><table id="results-table"><thead><tr><th>Demonstrations / task</th><th>Robot-only</th><th>Ego-pretrained</th></tr></thead><tbody></tbody></table></div></details></article><article class="paper"><p class="eyebrow">IMITATION ≠ EXECUTION</p><h3>Action fit is only part of the story.</h3><div id="bc-chart" class="chart"></div><p class="fine">Normalized action MSE on held-out demonstrations. A lower imitation loss does not guarantee a successful closed-loop rollout: small errors compound, and the robot sees states absent from the demonstrations.</p></article></div>
-<p class="under-note">Selections change prerecorded artifacts. Both policies replay at the same simulation clock; shorter episodes hold their final frame. The result counts every scheduled rollout, including failures.</p>
-</section>
-<section id="practice" class="stage" aria-labelledby="practice-title" hidden><div class="section-heading"><div><p class="eyebrow">05 / A NEXT EXPERIMENT</p><h2 id="practice-title">Practice comes next.</h2></div><span class="badge">Not performed</span></div><div class="practice-panel"><span class="practice-glyph" aria-hidden="true">↻</span><div><h3>Imitation first.<br>Reward-driven refinement later.</h3><p>Reinforcement learning would require a genuine interaction loop, a defined reward, and a before/after evaluation. This version reports imitation and transfer experiments only.</p><p>A possible next step is a bounded residual action head: <code>a = a<sub>BC</sub> + α Δa<sub>RL</sub></code>. It would need a separate experimental record, including any privileged simulator state used in the reward.</p><button data-go="execute">Explore the measured result →</button></div></div></section>
-<section id="method" class="method"><div><p class="eyebrow">THE EXPERIMENT RECORD</p><h2>Small enough to inspect.<br>Real enough to question.</h2><p>All model training and robot rollouts were performed offline on a CPU laptop. The browser only replays exported experiment artifacts.</p></div><div><details open><summary>Data, model & evaluation</summary><div id="method-data"></div></details><details><summary>What this experiment cannot tell us</summary><p>Three short human videos from one participant are a feasibility subset. Detector boxes, contact estimates and wrist matching are noisy. Camera motion is included in image-space displacement. The two robot scenes also differ, so this does not isolate language grounding.</p><p>Five held-out starts per task and three training seeds provide an exploratory comparison, not a large benchmark. No real robot, large VLA training, or RL improvement is claimed.</p></details><details><summary>Reproduce & continue training</summary><p>Scripts, fixed configuration, splits, training logs and restoration instructions live with the source. Local checkpoints include model and optimizer state, normalization, epoch, RNG and data-loader state. Both validation-selected and last-epoch checkpoints are retained.</p><a href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/projects/tiny-ego-vla" target="_blank" rel="noopener">Open source & experiment notes ↗</a> · <a href="results.json" download>Download results JSON ↓</a></details><details><summary>Sources & licenses</summary><p>Human footage: <a href="https://epic-kitchens.github.io/" target="_blank" rel="noopener">EPIC-KITCHENS, Damen et al.</a>, <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>. Clips are trimmed, resized and overlaid. Hand-object predictions: Shan et al. / EPIC-KITCHENS. Skeletons: Google MediaPipe.</p><p>Robot environment and demonstrations: <a href="https://github.com/Lifelong-Robot-Learning/LIBERO" target="_blank" rel="noopener">LIBERO, Liu et al.</a> Frozen features: <a href="https://github.com/apple-aiml-research/ml-mobileclip" target="_blank" rel="noopener">Apple MobileCLIP, Vasu et al.</a> See <a href="THIRD_PARTY_NOTICES.md">full notices</a>.</p></details></div></section>
-</main><footer><span>LEONARDO MAGLANOC / TINYEGOVLA</span><span>Human experience → shared representation → robot policy</span><a href="/blog/AI-coding-agent-case-study/" target="_top">More experiments ↗</a></footer>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f2eb" />
+    <meta name="description" content="TinyEgoVLA: a real CPU-scale experiment in human egocentric pretraining and Panda robot adaptation." />
+    <title>TinyEgoVLA · Human experience → robot policy</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <a href="/" target="_top" class="home" aria-label="Leonardo Maglanoc’s homepage">LM<span> / LAB</span></a
+      ><span class="eyebrow">EXPERIMENT / EMBODIMENT TRANSFER</span><a href="#method" class="method-link">Read the method ↗</a>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <div>
+          <p class="eyebrow">HUMAN EXPERIENCE → ROBOT POLICY</p>
+          <h1 id="title">TinyEgoVLA<span>.</span></h1>
+          <p class="lede">The hands are different.<br />The experience might transfer.</p>
+        </div>
+        <div class="intro-note">
+          <p>Can a little model learn from human video, then use that experience to control a robot?</p>
+          <p class="muted">A real, CPU-scale experiment. Explore the data, the embodiment gap, and the result.</p>
+          <span class="status"><i></i> Offline training. Static replay.</span>
+        </div>
+      </section>
+      <nav class="pipeline" aria-label="Experiment stages">
+        <button disabled data-stage="experience" aria-pressed="true"><span>01</span> Experience</button><b aria-hidden="true">→</b>
+        <button disabled data-stage="pretrain" aria-pressed="false"><span>02</span> Pretrain</button><b aria-hidden="true">→</b>
+        <button disabled data-stage="adapt" aria-pressed="false"><span>03</span> Adapt</button><b aria-hidden="true">→</b>
+        <button disabled data-stage="execute" aria-pressed="false"><span>04</span> Execute</button><b aria-hidden="true">→</b>
+        <button disabled data-stage="practice" aria-pressed="false"><span>05</span> Practice <small>future</small></button>
+      </nav>
+      <div id="loading" role="status">Loading the experiment record…</div>
+      <div id="error" role="alert" hidden>Experiment assets could not load. Please refresh to try again.</div>
+      <section id="experience" class="stage" aria-labelledby="experience-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / OBSERVE A HUMAN</p>
+            <h2 id="experience-title">An interaction, made visible.</h2>
+          </div>
+          <p>Human video supplies prediction targets.<br />Robot demonstrations supply robot actions.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="media-card human-card">
+            <div class="card-label">
+              <span><i class="dot coral"></i> HUMAN / EGOCENTRIC</span><label class="sr-only" for="clip">Human clip</label
+              ><select id="clip"></select>
+            </div>
+            <div class="human-view">
+              <video
+                id="human"
+                muted
+                playsinline
+                loop
+                preload="metadata"
+                poster="media/ego-poster.webp"
+                aria-label="Egocentric human manipulation video"
+              ></video
+              ><canvas id="overlay" aria-label="Recorded hand skeletons and object detection boxes"></canvas
+              ><span id="instruction" class="instruction"></span>
+            </div>
+            <div class="overlay-controls" role="group" aria-label="Human video overlays">
+              <button data-overlay="raw" aria-pressed="false">Raw</button><button data-overlay="hands" aria-pressed="false">Hands</button
+              ><button data-overlay="object" aria-pressed="false">Object</button><button data-overlay="trajectory" aria-pressed="false">Trails</button
+              ><button data-overlay="all" aria-pressed="true">All</button>
+            </div>
+            <div class="timeline-controls">
+              <button id="play-human" aria-label="Pause human video">Pause</button
+              ><input id="human-time" type="range" min="0" max="1000" value="0" step="1" aria-label="Human video timeline" /><output id="human-clock"
+                >0.0 s</output
+              >
+            </div>
+            <div class="caption">
+              <span id="contact">Contact: detector estimate</span><span id="human-source">EPIC-KITCHENS · recorded human</span>
+            </div>
+          </article>
+          <article class="media-card robot-card">
+            <div class="card-label">
+              <span><i class="dot teal"></i> ROBOT / PANDA</span><span>LIBERO</span>
+            </div>
+            <div class="expert-view">
+              <video
+                id="expert"
+                muted
+                playsinline
+                loop
+                preload="metadata"
+                poster="media/expert-poster.webp"
+                aria-label="Official Panda expert demonstration replay"
+              >
+                <source src="media/expert.mp4" type="video/mp4" /></video
+              ><span class="video-tag">Expert demonstration</span>
+            </div>
+            <div class="expert-description">
+              <p class="serif">Same idea.<br />Different body.</p>
+              <p>Pick up the black bowl<br />and place it on the plate.</p>
+              <button id="play-expert">Pause robot demonstration</button>
+            </div>
+          </article>
+        </div>
+        <div class="under-note">
+          <span class="legend"
+            ><i class="dot coral"></i> 21 hand joints <i class="dot gold"></i> Object box <i class="dot teal"></i> Motion trail</span
+          >
+          <p>
+            Overlays are recorded pseudo-labels. Missing detections stay missing; boxes can drift or switch objects. The robot video here is an expert
+            replay. See <button class="inline" data-go="execute">Execute ↗</button> for learned policies.
+          </p>
+        </div>
+      </section>
+      <section id="pretrain" class="stage" aria-labelledby="pretrain-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / LEARN A REPRESENTATION</p>
+            <h2 id="pretrain-title">Predict what happens next.</h2>
+          </div>
+          <p>The shared trunk sees images and language.<br />Hand and object labels are training targets.</p>
+        </div>
+        <div class="flow">
+          <div>Four RGB frames<small>short temporal context</small></div>
+          <span>→</span>
+          <div>Frozen MobileCLIP<small>cached 512D features</small></div>
+          <span>→</span>
+          <div id="trunk-name">Tiny temporal trunk<small>trained locally</small></div>
+          <span>→</span>
+          <div>Future interaction<small>motion + contact estimate</small></div>
+        </div>
+        <div class="stat-grid" id="ego-stats"></div>
+        <div class="two-col">
+          <article class="paper">
+            <p class="eyebrow">HELD-OUT HUMAN VIDEO</p>
+            <h3>Future motion, half a second ahead.</h3>
+            <canvas
+              id="prediction"
+              width="640"
+              height="360"
+              aria-label="Held-out human frame with actual pseudo-labeled and model-predicted future motion"
+            ></canvas>
+            <div class="prediction-controls">
+              <button id="prev-pred" aria-label="Previous prediction">← Previous</button><output id="prediction-count"></output
+              ><button id="next-pred" aria-label="Next prediction">Next →</button>
+            </div>
+            <p class="fine">
+              Solid: tracked displacement. Dashed: model prediction. Wrist in coral; object in gold. These are image-plane motions, including camera
+              motion, and noisy targets.
+            </p>
+          </article>
+          <article class="paper">
+            <p class="eyebrow">ACTUAL OPTIMIZATION</p>
+            <h3>Learn on one set. Select on another.</h3>
+            <div id="ego-chart" class="chart"></div>
+            <p class="fine">
+              Pretraining uses two source videos; the third selects the checkpoint. Nearby windows are correlated. This tiny subset cannot establish
+              general human-to-robot transfer.
+            </p>
+            <details>
+              <summary>Compare the three architectures</summary>
+              <div class="table-wrap">
+                <table id="architecture-table">
+                  <thead>
+                    <tr>
+                      <th>Trunk</th>
+                      <th>Parameters</th>
+                      <th>Validation loss ↓</th>
+                      <th>CPU time</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+      <section id="adapt" class="stage" aria-labelledby="adapt-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / CROSS THE EMBODIMENT GAP</p>
+            <h2 id="adapt-title">Transfer experience. Learn control.</h2>
+          </div>
+          <p>The robot does not copy human joint angles.<br />Its action head learns from Panda demonstrations.</p>
+        </div>
+        <div class="adapt-diagram">
+          <article class="body-card">
+            <p class="eyebrow coral-text">HUMAN PRETRAINING</p>
+            <div class="hand-symbol" aria-hidden="true">✋</div>
+            <h3>Human interaction head</h3>
+            <p>2D wrist displacement<br />2D object displacement<br />Estimated future contact</p>
+            <span class="badge">Discard this head</span>
+          </article>
+          <div class="shared">
+            <p class="eyebrow">KEEP THESE WEIGHTS</p>
+            <h3>Shared<br /><em>representation</em></h3>
+            <div>Vision projection</div>
+            <div>Language projection</div>
+            <div>Temporal trunk</div>
+            <p>Pretrained on human video.<br />Then fine-tuned with robot data.</p>
+          </div>
+          <article class="body-card">
+            <p class="eyebrow teal-text">PANDA ADAPTATION</p>
+            <div class="robot-symbol" aria-hidden="true">⌁</div>
+            <h3>Panda action head</h3>
+            <p>3 translation controls<br />3 rotation controls<br />1 gripper control</p>
+            <span class="badge teal-badge">Add robot proprioception</span>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Same trunk. New output space.</strong>
+          <p>
+            Human trajectories never become Panda actions. Robot imitation learns the mapping from the shared latent representation and the robot’s
+            own state to two-step, seven-dimensional action chunks.
+          </p>
+        </div>
+        <div class="two-col">
+          <article class="paper">
+            <h3>Robot-only baseline</h3>
+            <p>Randomly initialized trunk → Panda behavioral cloning.</p>
+          </article>
+          <article class="paper">
+            <h3>Ego-pretrained variant</h3>
+            <p>Human-pretrained trunk → the same Panda data, action-head initialization, optimizer, and training budget.</p>
+          </article>
+        </div>
+      </section>
+      <section id="execute" class="stage" aria-labelledby="execute-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 / TEST THE POLICIES</p>
+            <h2 id="execute-title">Does the experience help?</h2>
+          </div>
+          <p>Closed-loop robot rollouts.<br />Held-out initial states. No reference actions.</p>
+        </div>
+        <div class="experiment-controls">
+          <label>Task<select id="task"></select></label>
+          <fieldset id="budgets"><legend>Robot demonstrations per task</legend></fieldset>
+          <label>Training seed<select id="seed"></select></label><label>Held-out start<select id="initialization"></select></label>
+        </div>
+        <div id="result-headline" class="result-headline"></div>
+        <div class="comparison-grid">
+          <article class="media-card">
+            <div class="card-label">
+              <span><i class="dot gray"></i> ROBOT-ONLY</span><span id="robot-status"></span>
+            </div>
+            <video id="robot-only" muted playsinline preload="none" aria-label="Learned robot-only policy rollout"></video>
+            <div id="robot-metrics" class="policy-metrics"></div>
+          </article>
+          <article class="media-card">
+            <div class="card-label">
+              <span><i class="dot teal"></i> EGO-PRETRAINED</span><span id="ego-status"></span>
+            </div>
+            <video id="ego-policy" muted playsinline preload="none" aria-label="Learned ego-pretrained policy rollout"></video>
+            <div id="ego-policy-metrics" class="policy-metrics"></div>
+          </article>
+        </div>
+        <div class="comparison-playback">
+          <button id="play-policies">Play comparison</button><button id="restart-policies">Restart</button
+          ><input id="policy-time" type="range" min="0" max="1000" value="0" aria-label="Comparison timeline" /><output id="policy-clock"
+            >0.0 s</output
+          ><label
+            >Speed<select id="speed">
+              <option value=".5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+            </select></label
+          >
+        </div>
+        <div class="two-col">
+          <article class="paper">
+            <p class="eyebrow">DATA EFFICIENCY</p>
+            <h3>Every seed. Every held-out start.</h3>
+            <div id="success-chart" class="chart"></div>
+            <p class="fine" id="evaluation-note"></p>
+            <details>
+              <summary>Show exact results</summary>
+              <div class="table-wrap">
+                <table id="results-table">
+                  <thead>
+                    <tr>
+                      <th>Demonstrations / task</th>
+                      <th>Robot-only</th>
+                      <th>Ego-pretrained</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </details>
+          </article>
+          <article class="paper">
+            <p class="eyebrow">IMITATION ≠ EXECUTION</p>
+            <h3>Action fit is only part of the story.</h3>
+            <div id="bc-chart" class="chart"></div>
+            <p class="fine">
+              Normalized action MSE on held-out demonstrations. A lower imitation loss does not guarantee a successful closed-loop rollout: small
+              errors compound, and the robot sees states absent from the demonstrations.
+            </p>
+          </article>
+        </div>
+        <p class="under-note">
+          Selections change prerecorded artifacts. Both policies replay at the same simulation clock; shorter episodes hold their final frame. The
+          result counts every scheduled rollout, including failures.
+        </p>
+      </section>
+      <section id="practice" class="stage" aria-labelledby="practice-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">05 / A NEXT EXPERIMENT</p>
+            <h2 id="practice-title">Practice comes next.</h2>
+          </div>
+          <span class="badge">Not performed</span>
+        </div>
+        <div class="practice-panel">
+          <span class="practice-glyph" aria-hidden="true">↻</span>
+          <div>
+            <h3>Imitation first.<br />Reward-driven refinement later.</h3>
+            <p>
+              Reinforcement learning would require a genuine interaction loop, a defined reward, and a before/after evaluation. This version reports
+              imitation and transfer experiments only.
+            </p>
+            <p>
+              A possible next step is a bounded residual action head: <code>a = a<sub>BC</sub> + α Δa<sub>RL</sub></code
+              >. It would need a separate experimental record, including any privileged simulator state used in the reward.
+            </p>
+            <button data-go="execute">Explore the measured result →</button>
+          </div>
+        </div>
+      </section>
+      <section id="method" class="method">
+        <div>
+          <p class="eyebrow">THE EXPERIMENT RECORD</p>
+          <h2>Small enough to inspect.<br />Real enough to question.</h2>
+          <p>All model training and robot rollouts were performed offline on a CPU laptop. The browser only replays exported experiment artifacts.</p>
+        </div>
+        <div>
+          <details open>
+            <summary>Data, model & evaluation</summary>
+            <div id="method-data"></div>
+          </details>
+          <details>
+            <summary>What this experiment cannot tell us</summary>
+            <p>
+              Three short human videos from one participant are a feasibility subset. Detector boxes, contact estimates and wrist matching are noisy.
+              Camera motion is included in image-space displacement. The two robot scenes also differ, so this does not isolate language grounding.
+            </p>
+            <p>
+              Five held-out starts per task and three training seeds provide an exploratory comparison, not a large benchmark. No real robot, large
+              VLA training, or RL improvement is claimed.
+            </p>
+          </details>
+          <details>
+            <summary>Reproduce & continue training</summary>
+            <p>
+              Scripts, fixed configuration, splits, training logs and restoration instructions live with the source. Local checkpoints include model
+              and optimizer state, normalization, epoch, RNG and data-loader state. Both validation-selected and last-epoch checkpoints are retained.
+            </p>
+            <a href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/projects/tiny-ego-vla" target="_blank" rel="noopener"
+              >Open source & experiment notes ↗</a
+            >
+            · <a href="results.json" download>Download results JSON ↓</a>
+          </details>
+          <details>
+            <summary>Sources & licenses</summary>
+            <p>
+              Human footage: <a href="https://epic-kitchens.github.io/" target="_blank" rel="noopener">EPIC-KITCHENS, Damen et al.</a>,
+              <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>. Clips are trimmed, resized
+              and overlaid. Hand-object predictions: Shan et al. / EPIC-KITCHENS. Skeletons: Google MediaPipe.
+            </p>
+            <p>
+              Robot environment and demonstrations:
+              <a href="https://github.com/Lifelong-Robot-Learning/LIBERO" target="_blank" rel="noopener">LIBERO, Liu et al.</a> Frozen features:
+              <a href="https://github.com/apple-aiml-research/ml-mobileclip" target="_blank" rel="noopener">Apple MobileCLIP, Vasu et al.</a> See
+              <a href="THIRD_PARTY_NOTICES.md">full notices</a>.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>LEONARDO MAGLANOC / TINYEGOVLA</span><span>Human experience → shared representation → robot policy</span
+      ><a href="/blog/AI-coding-agent-case-study/" target="_top">More experiments ↗</a>
+    </footer>
+  </body>
+</html>
