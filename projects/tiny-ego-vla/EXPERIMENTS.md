@@ -30,3 +30,21 @@ Raw video timestamps triggered an FFmpeg duration warning during conversion, but
 The simulator parity audit found a one-step convention in official LIBERO HDF5 generation. `create_dataset.py` executes action j, records the resulting observation, but retains pre-action state j and action j in the same row. Comparing stored proprioception to simulator states confirmed this: next-state errors were 0.000068, 0.000552 and 0.000437 at sampled steps 0/40/80, versus same-index errors 0.00217, 0.01379 and 0.01077.
 
 We therefore pair observation j with future actions j+1 and j+2, dropping observations without both future actions. `align_actions.py` corrects already cached arrays without rerunning MobileCLIP; new caches use this alignment directly. All paired runs use the corrected targets. Rollouts start from held-out demo state index 1, matching the initial post-action observation convention, and receive no reference actions. This is documented as a departure from blindly using same-index targets.
+
+## Human pretraining results
+
+All architectures trained for 80 epochs on 884 windows, with 387 validation windows from the held-out P01_04 source. Among training windows: 682 have wrist targets, 754 object targets, and 845 contact labels. Validation: 294 wrist, 333 object, 367 contact labels.
+
+| Architecture, seed 11 | Trainable parameters | Best validation loss | Selected epoch | CPU training time |
+| --------------------- | -------------------: | -------------------: | -------------: | ----------------: |
+| MLP                   |              190,149 |             0.168298 |              1 |           10.01 s |
+| GRU                   |              223,557 |             0.167424 |              2 |           17.03 s |
+| Transformer           |              389,957 |             0.167372 |              3 |           21.10 s |
+
+Transformer is selected by the predeclared lowest-human-validation-loss criterion. Its margin over GRU is tiny; this is not evidence of an architectural advantage. Robot adaptation uses 412,014 trainable parameters. Additional human Transformer seeds 29/47 retain their own checkpoints and metrics.
+
+**Negative sanity check:** the train-only constant displacement/contact predictor obtains validation loss 0.163751, better than all seed-11 candidates. For the selected model, wrist x/y normalized-image MAE is 0.0310/0.0446 versus zero-motion 0.0306/0.0424; object x/y MAE is 0.0283/0.0376 versus zero-motion 0.0260/0.0358. Later epochs reduce training loss while validation worsens. The current human pretraining has not demonstrated generalizable motion prediction. Any robot effect must be interpreted cautiously: changing initialization can act as regularization without establishing useful human manipulation knowledge.
+
+Likely limitations to investigate are too few independent clips, camera motion in raw 2D displacement, detector identity switches and contact bias, and semantic frozen features that may not preserve precise geometry. No causal diagnosis is claimed from this one subset. Next experiments should add camera-motion compensation, stronger object identities, more participants and separate human test videos before increasing model size.
+
+Caching took 1,099.14 s for the 100 robot demonstrations and 559.88 s for 3,231 human frames (under concurrent preprocessing/load). Cached embeddings are reused for every training run. Human preprocessing timings excluding initial video conversion: 106.42 s, 122.53 s and 119.99 s for P01_03/P01_08/P01_04 respectively. These are development-laptop timings, not mobile benchmarks.

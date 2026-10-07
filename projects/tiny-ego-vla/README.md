@@ -18,7 +18,7 @@ Changes based on feasibility evidence:
 
 `tools/` contains offline scripts; `configs/experiment.json` fixes splits and budgets. `data/`, `artifacts/`, `.venv/`, and `checkpoints/` are local and ignored. Public static assets live in `assets/interactive/tiny-ego-vla/`.
 
-Full environment, run instructions, checkpoint restoration, measured results and validation records will be finalized after experiments complete. The source brief remains in the user's `plan.md` without modification by this implementation.
+The pinned environment, reproduction commands and checkpoint restoration instructions are below; `EXPERIMENTS.md` records measured results and `VALIDATION.md` records browser and deployment checks. The source brief remains in the user's `plan.md` without modification by this implementation.
 
 ## Reproduce the experiment
 
@@ -44,10 +44,12 @@ $PY projects/tiny-ego-vla/tools/train_robot_bc.py
 $PY projects/tiny-ego-vla/tools/eval_robot.py
 $PY projects/tiny-ego-vla/tools/export_media.py human
 $PY projects/tiny-ego-vla/tools/export_media.py expert
+$PY projects/tiny-ego-vla/tools/render_rollouts.py
 $PY projects/tiny-ego-vla/tools/export_web.py
 $PY projects/tiny-ego-vla/tools/check_checkpoints.py
 node projects/tiny-ego-vla/tests.mjs
 $PY projects/tiny-ego-vla/tools/bundle_checkpoint.py
+$PY projects/tiny-ego-vla/tools/verify_bundle.py
 ```
 
 The LIBERO source is pinned and loaded explicitly by `setup_libero()`; no editable package installation is needed. No vendor source patch is required. `environment-lock.txt` records the complete actual environment; recreate from that lock for closer dependency parity. Do not install CUDA wheels. On this laptop the necessary OSMesa library was already installed.
@@ -61,12 +63,12 @@ Human embeddings are paired normalized image/text vectors. Robot images use the 
 Each ignored `checkpoints/ego-{kind}-{seed}/` and `checkpoints/robot-{regime}-{budget}-{seed}/` holds `best.pt`, `last.pt`, and `metrics.json`. `best.pt` is the validation-selected artifact for evaluation. `last.pt` is the continuation state. Checkpoints include optimizer state, exact fixed configuration, normalization (robot), PyTorch/NumPy/Python RNG, data-loader RNG, epoch, full curve, source/config/environment/data-manifest fingerprints, and starting Git revision.
 
 ```sh
-$PY projects/tiny-ego-vla/tools/train_ego.py --kind gru --seed 11 --resume
+$PY projects/tiny-ego-vla/tools/train_ego.py --kind transformer --seed 11 --resume
 $PY projects/tiny-ego-vla/tools/train_robot_bc.py --budget 4 --seed 11 --resume
 ```
 
-Replace `gru` with the recorded selected architecture. A completed run has no remaining epochs, so resuming it does not silently train longer. A changed configuration is deliberately rejected by `--resume`; use a new experiment directory/configuration and explicitly warm-start model weights for a new study. Preserve the original splits and records when investigating improvements. No checkpoint is selected using rollout outcomes.
+The validation-selected architecture for this run is the two-layer Transformer. A completed run has no remaining epochs, so resuming it does not silently train longer. A changed configuration is deliberately rejected by `--resume`; use a new experiment directory/configuration and explicitly warm-start model weights for a new study. Preserve the original splits and records when investigating improvements. No checkpoint is selected using rollout outcomes.
 
 `checkpoint-record.json` identifies the local continuation archive and its SHA-256. The archive is **not in Git**. It contains code/config, both model checkpoints, the frozen encoder, all cached embeddings/normalized-data inputs, human pseudo-labels, metrics and raw rollout states/actions/frames. It does not include the raw source videos or robot HDF5 files; those are restored with `prepare.py` and verified against `data-manifest.json`.
 
-To restore: extract the archive into a separate project folder, verify every `artifacts/continuation-manifest.json` file hash, recreate the pinned environment, restore raw inputs if new preprocessing/evaluation is needed, and use the saved configuration. Existing cached arrays suffice for training continuation. Preserve source artifact licensing when redistributing any derived data.
+To restore: clone this repository into a separate checkout and extract the archive into its `projects/tiny-ego-vla/` directory, preserving that layout (the scripts derive repository paths from their location). Verify every `artifacts/continuation-manifest.json` file hash with `verify_bundle.py`, recreate the pinned environment, restore raw inputs if new preprocessing/evaluation is needed, and use the saved configuration. Update the archive path in the local copy of `checkpoint-record.json` after moving it; retain the recorded SHA-256. Existing cached arrays suffice for training continuation. Preserve source artifact licensing when redistributing any derived data.

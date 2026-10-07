@@ -3,3 +3,4 @@ artifacts/
 data/
 checkpoints/
 __pycache__/
+preview-summary.json

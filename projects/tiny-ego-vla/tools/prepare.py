@@ -32,6 +32,9 @@ def main():
             ],
             check=True,
         )
+        subprocess.run(
+            ["git", "fetch", "--depth", "1", "origin", LIBERO_REV], cwd=lib, check=True
+        )
         subprocess.run(["git", "checkout", LIBERO_REV], cwd=lib, check=True)
     assert (
         subprocess.check_output(

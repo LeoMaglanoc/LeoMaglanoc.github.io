@@ -4,7 +4,17 @@ const human = $("#human"),
   expert = $("#expert");
 const policies = [$("#robot-only"), $("#ego-policy")];
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const state = { stage: "experience", overlay: "all", clip: null, annotations: null, budget: 4, prediction: 0, playing: false, loadingClip: 0 };
+const state = {
+  stage: "experience",
+  overlay: "all",
+  clip: null,
+  annotations: null,
+  budget: 4,
+  prediction: 0,
+  playing: false,
+  loadingClip: 0,
+  comparisonRequest: 0,
+};
 let results;
 const colors = { human: "#ef8b69", object: "#f6cf63", trail: "#9fe6c0", teal: "#17695f", robot: "#7b827e" };
 const edges = [
@@ -64,7 +74,7 @@ function changeStage(id, scroll = false) {
   if (id === "execute" && !policies[0].getAttribute("src")) updateComparison();
   if (scroll) $(".pipeline").scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth", block: "start" });
 }
-$$("[data-stage]").forEach((b) => b.addEventListener("click", () => changeStage(b.dataset.stage)));
+$$("[data-stage]").forEach((b) => b.addEventListener("click", () => changeStage(b.dataset.stage, true)));
 $$("[data-go]").forEach((b) => b.addEventListener("click", () => changeStage(b.dataset.go, true)));
 $$("[data-overlay]").forEach((b) =>
   b.addEventListener("click", () => {
@@ -78,6 +88,8 @@ async function selectClip(id) {
   const clip = results.clips.find((c) => c.id === id);
   human.pause();
   state.annotations = null;
+  const canvas = $("#overlay");
+  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
   state.clip = clip;
   human.src = clip.video;
   human.poster = clip.poster;
@@ -297,6 +309,15 @@ function setupPretrain() {
     { label: "Train", color: colors.robot, points: e.curve.map((r) => [r.epoch, r.train_loss]) },
     { label: "Validation", color: colors.teal, points: e.curve.map((r) => [r.epoch, r.validation_loss]) },
   ]);
+  const baseline = e.sanity_baseline.constant_validation_loss;
+  $("#pretraining-verdict").innerHTML = `<strong>A useful sanity check.</strong><p>Selected model: ${fmt(
+    e.best_validation_loss,
+    4
+  )}. Train-only constant predictor: ${fmt(baseline, 4)} (lower is better). ${
+    e.best_validation_loss >= baseline
+      ? "The learned predictor does not beat this baseline. This subset has not demonstrated generalizable interaction prediction; any robot-transfer effect needs cautious interpretation."
+      : "The model beats the constant predictor on this small held-out video; broader generalization remains untested."
+  }</p>`;
   $("#architecture-table tbody").innerHTML = e.architectures
     .map(
       (a) =>
@@ -389,6 +410,7 @@ function pausePolicies() {
   setText("#play-policies", "Play comparison");
 }
 function updateComparison() {
+  state.comparisonRequest++;
   pausePolicies();
   const task = $("#task").value;
   ["robot", "ego"].forEach((regime, i) => {
@@ -401,8 +423,9 @@ function updateComparison() {
     }
     video.src = row.video;
     video.poster = row.poster;
-    video.playbackRate = Number($("#speed").value);
+    video.defaultPlaybackRate = Number($("#speed").value);
     video.load();
+    video.playbackRate = Number($("#speed").value);
     setText(i ? "#ego-status" : "#robot-status", row.success ? "Success" : "Did not complete");
     const metric = results.robot.metrics.find(
       (m) => m.regime === regime && m.budget_per_task === state.budget && m.seed === Number($("#seed").value)
@@ -463,7 +486,9 @@ $("#play-policies").addEventListener("click", async () => {
     return;
   }
   if (policies.every((v) => v.ended)) policies.forEach((v) => (v.currentTime = 0));
+  const request = state.comparisonRequest;
   const outcomes = await Promise.allSettled(policies.filter((v) => !v.ended).map((v) => v.play()));
+  if (request !== state.comparisonRequest || state.stage !== "execute") return;
   state.playing = outcomes.some((r) => r.status === "fulfilled");
   setText("#play-policies", state.playing ? "Pause comparison" : "Play comparison");
 });
@@ -483,7 +508,12 @@ $("#policy-time").addEventListener("input", (e) => {
   });
   setText("#policy-clock", `${fmt(time, 1)} s`);
 });
-$("#speed").addEventListener("change", (e) => policies.forEach((v) => (v.playbackRate = Number(e.target.value))));
+$("#speed").addEventListener("change", (e) =>
+  policies.forEach((v) => {
+    v.defaultPlaybackRate = Number(e.target.value);
+    v.playbackRate = Number(e.target.value);
+  })
+);
 async function init() {
   try {
     const response = await fetch("results.json");
@@ -510,7 +540,8 @@ async function init() {
     );
     setupPretrain();
     $("#method-data").innerHTML = results.method.map(([key, value]) => `<p><strong>${escapeHTML(key)}</strong><br>${escapeHTML(value)}</p>`).join("");
-    $("#loading").hidden = true;
+    $("#loading").hidden = !results.preview;
+    if (results.preview) setText("#loading", "Local UI preview — evaluation is incomplete. Do not publish these partial results.");
     $$("[data-stage]").forEach((b) => (b.disabled = false));
     changeStage("experience");
     await selectClip(results.clips[0].id);

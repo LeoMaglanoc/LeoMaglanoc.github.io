@@ -781,6 +781,10 @@ main {
   margin-top: 55px;
   border-top: 1px solid var(--line);
 }
+.method > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .method h2 {
   font-size: 35px;
   margin: 0 0 24px;
@@ -967,7 +971,7 @@ input[type="range"] {
     gap: 22px;
   }
   .intro h1 {
-    font-size: 57px;
+    font-size: clamp(46px, 14.6vw, 57px);
     letter-spacing: -3.5px;
   }
   .lede {

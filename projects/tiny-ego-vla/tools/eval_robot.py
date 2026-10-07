@@ -29,7 +29,10 @@ def evaluate(checkpoint, encoder, transform, tokenizer, task_key, env, task):
             # One-based index in UI maps to test demonstrations 42+init.
             out = dest / f"episode-{init}.json"
             if out.exists():
-                rows.append(json.loads(out.read_text()))
+                row = json.loads(out.read_text())
+                if row["checkpoint_sha256"] != sha(checkpoint):
+                    raise ValueError(f"Existing rollout checkpoint changed: {out}")
+                rows.append(row)
                 continue
             d = f[f"data/demo_{42 + init}"]
             t0 = time.perf_counter()

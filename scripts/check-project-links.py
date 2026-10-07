@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / '_site'
 ROUTES = [f'/{name}/' for name in (
     'block-world', 'scrap-orbit', 'dustfall-outpost', 'mobile-sorting',
-    'rustzero', 'tiny-dreamer', 'language-vision', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1', 'locomotion', 'euroguessr'
+    'rustzero', 'tiny-dreamer', 'tiny-ego-vla', 'language-vision', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1', 'locomotion', 'euroguessr'
 )] + [f'/assets/interactive/{name}/index.html' for name in (
     'pong', 'race', 'robot-runner', 'flappy'
 )]
@@ -64,6 +64,22 @@ def check():
         for filename in ('scene.webp', 'thumb.webp', 'manifest.json', 'regions.json', 'embeddings.bin', 'masks.bin'):
             if not (language_vision / 'data' / scene['id'] / filename).is_file():
                 raise SystemExit(f'Missing language-vision scene asset: {scene["id"]}/{filename}')
+    tiny_ego = SITE / 'assets/interactive/tiny-ego-vla'
+    results = json.loads((tiny_ego / 'results.json').read_text())
+    if results.get('preview') is not False:
+        raise SystemExit('Incomplete TinyEgoVLA preview must not be published')
+    robot = results['robot']
+    expected = len(results['config']['budgets']) * len(results['config']['seeds']) * len(results['config']['robot_tasks']) * len(results['config']['evaluation_initializations']) * 2
+    if len(robot['rollouts']) != expected:
+        raise SystemExit('Incomplete TinyEgoVLA evaluation export')
+    for item in results['clips']:
+        for key in ('video', 'poster', 'annotations'):
+            if not (tiny_ego / item[key]).is_file():
+                raise SystemExit(f'Missing TinyEgoVLA clip asset: {item[key]}')
+    for item in results['robot']['rollouts']:
+        for key in ('video', 'poster'):
+            if not (tiny_ego / item[key]).is_file():
+                raise SystemExit(f'Missing TinyEgoVLA rollout asset: {item[key]}')
     if (SITE / 'projects').exists():
         raise SystemExit('Project source leaked into the public site')
     print(f'Checked all {len(ROUTES)} public project URLs, {len(visited)} HTML dependencies and manifest runtime files')

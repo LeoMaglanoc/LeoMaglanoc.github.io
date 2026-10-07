@@ -3,12 +3,22 @@ Refuses to publish an incomplete scheduled evaluation.
 """
 
 from common import *
-import numpy as np, shutil, platform
+import numpy as np, shutil, argparse
 from PIL import Image
 from datasets import CONFIG
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--preview",
+        action="store_true",
+        help="Local UI QA with budget 4, seed 11 and plate task only; never publish",
+    )
+    args = parser.parse_args()
+    budgets = [4] if args.preview else CONFIG["budgets"]
+    seeds = [11] if args.preview else CONFIG["seeds"]
+    task_keys = ["bowl_plate"] if args.preview else CONFIG["robot_tasks"]
     selected = json.loads((ART / "architecture-selection.json").read_text())
     kind = selected["selected"]
     ego = json.loads((CKPT / f"ego-{kind}-11/metrics.json").read_text())
@@ -60,16 +70,18 @@ def main():
     ego["predictions"] = out_predictions
     metrics = []
     rollouts = []
-    for budget in CONFIG["budgets"]:
-        for seed in CONFIG["seeds"]:
+    for budget in budgets:
+        for seed in seeds:
             for regime in ["robot", "ego"]:
                 run = f"robot-{regime}-{budget}-{seed}"
                 metrics.append(json.loads((CKPT / run / "metrics.json").read_text()))
-                for task in CONFIG["robot_tasks"]:
+                for task in task_keys:
                     for init in CONFIG["evaluation_initializations"]:
                         source = ART / "rollouts" / run / task / f"episode-{init}.json"
                         row = json.loads(source.read_text())
                         original = PROJECT / row["video"]
+                        hires = original.with_name(original.stem + "-hi.mp4")
+                        presentation = hires if hires.exists() else original
                         stem = f"{regime}-{budget}-{seed}-{task}-{init}"
                         target = WEB / f"media/{stem}.mp4"
                         # Enforce fast-start MP4 for static hosting and mobile playback.
@@ -79,7 +91,9 @@ def main():
                                 "-v",
                                 "error",
                                 "-i",
-                                str(original),
+                                str(presentation),
+                                "-map_metadata",
+                                "-1",
                                 "-c",
                                 "copy",
                                 "-movflags",
@@ -90,14 +104,23 @@ def main():
                             check=True,
                         )
                         frames = np.load(original.with_suffix(".npz"))["frames"]
-                        Image.fromarray(frames[0]).save(
-                            WEB / f"media/{stem}.webp", quality=82
+                        poster = original.with_name(original.stem + "-hi.webp")
+                        if hires.exists() and poster.exists():
+                            shutil.copy2(poster, WEB / f"media/{stem}.webp")
+                        else:
+                            Image.fromarray(frames[0]).save(
+                                WEB / f"media/{stem}.webp", quality=82
+                            )
+                        row["presentation"] = (
+                            "384px replay of recorded simulator states"
+                            if hires.exists()
+                            else "128px recorded policy camera"
                         )
                         row["video"] = f"media/{stem}.mp4"
                         row["poster"] = f"media/{stem}.webp"
                         rollouts.append(row)
     summary = []
-    for budget in CONFIG["budgets"]:
+    for budget in budgets:
         for regime in ["robot", "ego"]:
             rs = [
                 r
@@ -128,7 +151,7 @@ def main():
                             ),
                             "episodes": sum(r["seed"] == seed for r in rs),
                         }
-                        for seed in CONFIG["seeds"]
+                        for seed in seeds
                     ],
                 }
             )
@@ -148,15 +171,16 @@ def main():
     ]
     data = {
         "name": "TinyEgoVLA",
+        "preview": args.preview,
         "date": "2026-10-07",
         "git_commit": revision(),
         "config": CONFIG,
         "clips": json.loads((ART / "web-clips.json").read_text()),
         "ego": ego,
         "robot": {
-            "tasks": tasks,
-            "budgets": CONFIG["budgets"],
-            "seeds": CONFIG["seeds"],
+            "tasks": [task for task in tasks if task["id"] in task_keys],
+            "budgets": budgets,
+            "seeds": seeds,
             "initializations": len(CONFIG["evaluation_initializations"]),
             "metrics": metrics,
             "rollouts": rollouts,
@@ -186,7 +210,7 @@ def main():
             ],
             [
                 "Robot data",
-                "Two official LIBERO spatial tasks, 50 demonstrations each. Per task: demos 0–34 train pool, 35–41 validation, 42–49 test. Budgets use first 4, 9 or 35 training demonstrations. Normalize using training data only.",
+                "Two official LIBERO spatial tasks, 50 demonstrations each. Per task: demos 0–34 train pool, 35–41 validation, 42–49 test. Budgets use first 4, 9 or 35 training demonstrations. Normalize using training data only. Stored observations are post-action; targets use the following two actions, dropping incomplete terminal chunks.",
             ],
             [
                 "Control",
@@ -208,7 +232,7 @@ def main():
     }
     save_json(WEB / "results.json", data)
     save_json(
-        PROJECT / "results-summary.json",
+        PROJECT / ("preview-summary.json" if args.preview else "results-summary.json"),
         {
             "config": CONFIG,
             "architecture_selection": selected,

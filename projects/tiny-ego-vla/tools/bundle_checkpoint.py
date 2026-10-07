@@ -23,6 +23,10 @@ def bundle():
         "EXPERIMENTS.md",
         "requirements.txt",
         "environment-lock.txt",
+        "data-manifest.json",
+        "integrity-report.json",
+        "sim-parity-report.json",
+        "checkpoint-audit.json",
         "results-summary.json",
         "VALIDATION.md",
     ]:

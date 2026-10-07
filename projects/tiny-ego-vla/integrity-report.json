@@ -1,0 +1,552 @@
+{
+  "passed": true,
+  "split_checks": "episode/source disjoint; rollout starts in test only",
+  "ego": {
+    "train": {
+      "windows": 884,
+      "wrist_labels": 682,
+      "object_labels": 754,
+      "contact_labels": 845
+    },
+    "validation": {
+      "windows": 387,
+      "wrist_labels": 294,
+      "object_labels": 333,
+      "contact_labels": 367
+    }
+  },
+  "architecture_params": {
+    "mlp": {
+      "ego": 190149,
+      "robot": 212206
+    },
+    "gru": {
+      "ego": 223557,
+      "robot": 245614
+    },
+    "transformer": {
+      "ego": 389957,
+      "robot": 412014
+    }
+  },
+  "cached_arrays": [
+    {
+      "file": "bowl_plate_demo_00.npz",
+      "frames": 57,
+      "sha256": "ec4d72365740c39f31c1015b9314fec4c14b38d579d661ae1bec6143d7a439e5"
+    },
+    {
+      "file": "bowl_plate_demo_01.npz",
+      "frames": 53,
+      "sha256": "9278655922d54244125c0286d475746ed8f5940095d5c5d8aa033270ad8ceb0c"
+    },
+    {
+      "file": "bowl_plate_demo_02.npz",
+      "frames": 68,
+      "sha256": "862d6f6371f5998ad0c51a7384cdfed1c6597f2269224d98814281c1c3fa6b51"
+    },
+    {
+      "file": "bowl_plate_demo_03.npz",
+      "frames": 78,
+      "sha256": "2d3325ab9bf13947be202ae140486a6f5d9051991ab6171330ff286edc42ff7c"
+    },
+    {
+      "file": "bowl_plate_demo_04.npz",
+      "frames": 68,
+      "sha256": "046ca9ef2c735d80d6b78c372304d1067212bca69333e0ad086b155c28266c19"
+    },
+    {
+      "file": "bowl_plate_demo_05.npz",
+      "frames": 56,
+      "sha256": "a6a2f1e77d7e823060af06a09c5c6df9a5726cbb316b5b56282bef80e7b2157b"
+    },
+    {
+      "file": "bowl_plate_demo_06.npz",
+      "frames": 54,
+      "sha256": "65c58caf86c9524728819c73ee15db04d9dc2ac73c8c1e2fc92e0e3394c4599b"
+    },
+    {
+      "file": "bowl_plate_demo_07.npz",
+      "frames": 53,
+      "sha256": "83f29a2db122763c8b418b14c080819bc24d926942e522b11500f3eda053ca15"
+    },
+    {
+      "file": "bowl_plate_demo_08.npz",
+      "frames": 51,
+      "sha256": "a2dcf6d5f2e08a0f9375dc437952699fb5c950b60f67c0432c97235e5ec2b003"
+    },
+    {
+      "file": "bowl_plate_demo_09.npz",
+      "frames": 62,
+      "sha256": "d4863071697b3b0c4b0b999688f5fc5c9fc0394880ddb908fc96508718e0b782"
+    },
+    {
+      "file": "bowl_plate_demo_10.npz",
+      "frames": 57,
+      "sha256": "df1903b7f0d26c6562944e9a7d97290e1f47378a496d364f1012d80a414fe54a"
+    },
+    {
+      "file": "bowl_plate_demo_11.npz",
+      "frames": 62,
+      "sha256": "22eaa43e491a7fb4cbae6d285b087b18fd7d08ec14d8795e8d859fca54f7888b"
+    },
+    {
+      "file": "bowl_plate_demo_12.npz",
+      "frames": 52,
+      "sha256": "011dc2a27876ca29ddf5e8c5643e8b51c7034e25889b763e726ff5c1472c6450"
+    },
+    {
+      "file": "bowl_plate_demo_13.npz",
+      "frames": 68,
+      "sha256": "69e245197c092f60f765638db6b9b9c99a1b5d17adc5cb8736be2c39b9b465e2"
+    },
+    {
+      "file": "bowl_plate_demo_14.npz",
+      "frames": 48,
+      "sha256": "842daf26a5d60952de385f424d53074de2a30a6cb360d9614d2b72951b1ec0ca"
+    },
+    {
+      "file": "bowl_plate_demo_15.npz",
+      "frames": 75,
+      "sha256": "120d4c33c521b416c14530be43e5697b8c78a84a194a9ef1f98907d2e3dc12a4"
+    },
+    {
+      "file": "bowl_plate_demo_16.npz",
+      "frames": 56,
+      "sha256": "9282f5562e427b84235ea3cbe9c93f851722003ddf156606c2d6c3815e7b413b"
+    },
+    {
+      "file": "bowl_plate_demo_17.npz",
+      "frames": 82,
+      "sha256": "32efd4ad6e6423943e1f20a4287419d80da63134adb08ffd0680256d843e56a7"
+    },
+    {
+      "file": "bowl_plate_demo_18.npz",
+      "frames": 49,
+      "sha256": "e831e1ef7b35dd85bf11db0b51e60639da9d362447c544f987be9a0ba553c460"
+    },
+    {
+      "file": "bowl_plate_demo_19.npz",
+      "frames": 51,
+      "sha256": "802f128ad52e57a3a9bbe3421b5cea7ef9fb469bcd916e5f0bd657435322fdd4"
+    },
+    {
+      "file": "bowl_plate_demo_20.npz",
+      "frames": 62,
+      "sha256": "a5b10db9bc2c0d45b34bd30b38e666ebde6438e843a69d2ff03de150c0e257e1"
+    },
+    {
+      "file": "bowl_plate_demo_21.npz",
+      "frames": 63,
+      "sha256": "c525f219b060a92a2db2963ff4d346cc0a455961540eeb68f2bdaa078e3478b4"
+    },
+    {
+      "file": "bowl_plate_demo_22.npz",
+      "frames": 49,
+      "sha256": "d028f5dbd58caec6813e6df7eac972b39ca2852c7ff1487c2ba82ff6755858fa"
+    },
+    {
+      "file": "bowl_plate_demo_23.npz",
+      "frames": 54,
+      "sha256": "385b374e99f0aa9e44b3c97dd6f08161d12ae0af7daa7af2168a7977a0ad3c43"
+    },
+    {
+      "file": "bowl_plate_demo_24.npz",
+      "frames": 55,
+      "sha256": "621c4150fee0a25f77ef548dd285d1e525a9fda30d1a99aec89bd3f938f19d9c"
+    },
+    {
+      "file": "bowl_plate_demo_25.npz",
+      "frames": 69,
+      "sha256": "320d999afaac6fbe311f8cc1b65df28a947ef49b4a7c4bd78df859d245650a25"
+    },
+    {
+      "file": "bowl_plate_demo_26.npz",
+      "frames": 54,
+      "sha256": "def93b03bfb9ead6d8f95547cc8cb491638b67f36340f3c56d5c8580fdc4b345"
+    },
+    {
+      "file": "bowl_plate_demo_27.npz",
+      "frames": 57,
+      "sha256": "2e31edf2f12fed680459818272193ca2b07dfa67ad20a2f330b3c5b25465c199"
+    },
+    {
+      "file": "bowl_plate_demo_28.npz",
+      "frames": 61,
+      "sha256": "641c901b25d87a8a93457d0b7f0d8fc7bf373f54392367c7eba702c03a5edc2a"
+    },
+    {
+      "file": "bowl_plate_demo_29.npz",
+      "frames": 86,
+      "sha256": "eca77868aea13322ec232fc97edf61f2567ffe786a78de6e3beed8a551024158"
+    },
+    {
+      "file": "bowl_plate_demo_30.npz",
+      "frames": 47,
+      "sha256": "62a00e732e7e8700c43cde162fab79149686222d37cf26abe4abddb3d12ea025"
+    },
+    {
+      "file": "bowl_plate_demo_31.npz",
+      "frames": 57,
+      "sha256": "f619944a409a2fce15bf85623c55a9a18a1d1032d895576a1b5409e8b6ab717b"
+    },
+    {
+      "file": "bowl_plate_demo_32.npz",
+      "frames": 47,
+      "sha256": "17ac38aa07354f0c070bf8735577cb2b771d5e21aa7c547679a5608f759aff54"
+    },
+    {
+      "file": "bowl_plate_demo_33.npz",
+      "frames": 54,
+      "sha256": "ebca35af8c36ab1d2f1ddc8c5af335117d17c832393e508cd074a49910800b2a"
+    },
+    {
+      "file": "bowl_plate_demo_34.npz",
+      "frames": 60,
+      "sha256": "40a6e9b99ec3336591aa935c7b5ca2ce3f2c57f081791023eb6c548c058194e5"
+    },
+    {
+      "file": "bowl_plate_demo_35.npz",
+      "frames": 55,
+      "sha256": "7a83ad37f39213ebf677d2a27420fc2266162cc2c2397f2e5f65cb0674172de0"
+    },
+    {
+      "file": "bowl_plate_demo_36.npz",
+      "frames": 60,
+      "sha256": "20b0621381fbfb7be70e0dac1f56f19000df3b87d3356cc796963b54e110b930"
+    },
+    {
+      "file": "bowl_plate_demo_37.npz",
+      "frames": 54,
+      "sha256": "7c9b5aaef236fa982c7cb5ea4d95c48b6399eea6eeeb29ec50eebb275ff6cc62"
+    },
+    {
+      "file": "bowl_plate_demo_38.npz",
+      "frames": 52,
+      "sha256": "b9f230e16c7b6cc28d7b3e82eaf5cc04c84c29200c3c75d537bfe64b2bf35819"
+    },
+    {
+      "file": "bowl_plate_demo_39.npz",
+      "frames": 61,
+      "sha256": "9876c0de38a4d75b1cb231927cc0ba4e53924895e22e71a8477a36e472dee74c"
+    },
+    {
+      "file": "bowl_plate_demo_40.npz",
+      "frames": 56,
+      "sha256": "083fffb5e6e81cdcb590cafd67e721cb6cca34e668134afdd90c82b332da1c90"
+    },
+    {
+      "file": "bowl_plate_demo_41.npz",
+      "frames": 59,
+      "sha256": "45220caa411feb01578f7784057f18f5c977d33574f2c4819f06bd023dbe3046"
+    },
+    {
+      "file": "bowl_plate_demo_42.npz",
+      "frames": 48,
+      "sha256": "516e3ba9d7aba7ea08828f6b2727e1eec77bd11ca186f59921b5f05d3d9f96e0"
+    },
+    {
+      "file": "bowl_plate_demo_43.npz",
+      "frames": 49,
+      "sha256": "16cfa03e83a9a439d67c519a816eadbf03dbffe91528c8508680d9a0fc1b7ff4"
+    },
+    {
+      "file": "bowl_plate_demo_44.npz",
+      "frames": 58,
+      "sha256": "d5cb800f4e0cc0868f2c924a81f27cca11df8b8eec2a9ff4063f2e20c62a860b"
+    },
+    {
+      "file": "bowl_plate_demo_45.npz",
+      "frames": 56,
+      "sha256": "5f81714fb3950829b728e731b3d4a21c98006dfd6a8b74a2e6f38e17fccc66c1"
+    },
+    {
+      "file": "bowl_plate_demo_46.npz",
+      "frames": 66,
+      "sha256": "12e2fe46fe06e17e545f5a81e24c24fe87ca954c495fbc51fab4b4faf4096b1f"
+    },
+    {
+      "file": "bowl_plate_demo_47.npz",
+      "frames": 56,
+      "sha256": "5d644cfd0143dd9b8d3c05d578a784594bdd93627cc99d3948c88e90eb56ffc8"
+    },
+    {
+      "file": "bowl_plate_demo_48.npz",
+      "frames": 84,
+      "sha256": "c04b85f30acd03f25efe9791ccd98abfc4386c0d2044cab87bccf596ebce603c"
+    },
+    {
+      "file": "bowl_plate_demo_49.npz",
+      "frames": 57,
+      "sha256": "86441d4c998a90619d7edfc999248ccee4ce20fa9b53d929c5e8e6c5496e11d0"
+    },
+    {
+      "file": "bowl_ramekin_demo_00.npz",
+      "frames": 75,
+      "sha256": "12aca5f23b5e82d3c576e9612c7dc18ba794bcb8915f4c815d9ab087016785f4"
+    },
+    {
+      "file": "bowl_ramekin_demo_01.npz",
+      "frames": 61,
+      "sha256": "9ef1766db3443df93231038b71149d9c95235410562f2f535591b99879bf4b17"
+    },
+    {
+      "file": "bowl_ramekin_demo_02.npz",
+      "frames": 69,
+      "sha256": "16019be30a5366da73ac36d5919ca1d0f02cbaa88fd19c082a065eb082631513"
+    },
+    {
+      "file": "bowl_ramekin_demo_03.npz",
+      "frames": 87,
+      "sha256": "4ec1584d88d0d68da06b2fe4e917b3b93e12e8382a5f759aea5c400f9efb359f"
+    },
+    {
+      "file": "bowl_ramekin_demo_04.npz",
+      "frames": 70,
+      "sha256": "44f9ae2dd6dacd19a3fc720a7cce174085d814ddd25f11ef34a5c426ae72e309"
+    },
+    {
+      "file": "bowl_ramekin_demo_05.npz",
+      "frames": 77,
+      "sha256": "2076b5be195f89306c5a2ed891fb7f24e02440f9a92c6150b45fbd485355680c"
+    },
+    {
+      "file": "bowl_ramekin_demo_06.npz",
+      "frames": 72,
+      "sha256": "5365c34e98f3f9b7d7c985a76501aa7ae921a2a86559df7a7b906ed738147338"
+    },
+    {
+      "file": "bowl_ramekin_demo_07.npz",
+      "frames": 65,
+      "sha256": "27dc8b15a80338f9b6d2fffbba45bf2a1f537c48288b7e1cac91477a09841a6f"
+    },
+    {
+      "file": "bowl_ramekin_demo_08.npz",
+      "frames": 75,
+      "sha256": "9d21bfbe70ce2f522e2beb3c5dea488476fc3caebb3b344978247e48f6945350"
+    },
+    {
+      "file": "bowl_ramekin_demo_09.npz",
+      "frames": 63,
+      "sha256": "4d14bab9d16c920e40e4fbd088d2215e24d2d8fabd74335511c00442a9d90d75"
+    },
+    {
+      "file": "bowl_ramekin_demo_10.npz",
+      "frames": 55,
+      "sha256": "43333bb45e5abe1a10aa3dcf9dbfe5e1b9dbd0ae9ea7195ddc815aa76642ebb5"
+    },
+    {
+      "file": "bowl_ramekin_demo_11.npz",
+      "frames": 58,
+      "sha256": "43c8af48ee8721ce9cb1b63bd52e0516508e27ad129ceb840829b9c0556b502f"
+    },
+    {
+      "file": "bowl_ramekin_demo_12.npz",
+      "frames": 56,
+      "sha256": "56e7c51dfedfe64002938a2030ea4f5cc68c374087b68f14ec572ba20bdc329f"
+    },
+    {
+      "file": "bowl_ramekin_demo_13.npz",
+      "frames": 62,
+      "sha256": "02e20d629eef721d6b83a251f0e50115195a03412988787cf3cac3bdc4388efa"
+    },
+    {
+      "file": "bowl_ramekin_demo_14.npz",
+      "frames": 74,
+      "sha256": "11f1b4607f4b4e24684199820b43664b0250bfff62fbdff8a8cae211be060112"
+    },
+    {
+      "file": "bowl_ramekin_demo_15.npz",
+      "frames": 63,
+      "sha256": "9e2864a42ee10b7e970be92f6d4039f15cd56ef2119b7ef8cb23cc399027480e"
+    },
+    {
+      "file": "bowl_ramekin_demo_16.npz",
+      "frames": 67,
+      "sha256": "f7718dd5d1870ec869345f789c8d7eb52497fd3ac4515f27c46326f123083dda"
+    },
+    {
+      "file": "bowl_ramekin_demo_17.npz",
+      "frames": 56,
+      "sha256": "c397bcb70a2b36b6047085f522c4da4471e4acbaefa6e6adebcc06271f0121b8"
+    },
+    {
+      "file": "bowl_ramekin_demo_18.npz",
+      "frames": 55,
+      "sha256": "3fbb3cc0108121553d2697aa1fa19ecedae12d9c06b7fd8fffc9c1c974faa310"
+    },
+    {
+      "file": "bowl_ramekin_demo_19.npz",
+      "frames": 62,
+      "sha256": "2e468c29195888b1a64d2b97c5fa20f8a9841e75099db16a0477d71f008a7548"
+    },
+    {
+      "file": "bowl_ramekin_demo_20.npz",
+      "frames": 80,
+      "sha256": "b14c28ddec60286d04c883420f95d8d13ed3fa87a8eadd641b29f651037b7992"
+    },
+    {
+      "file": "bowl_ramekin_demo_21.npz",
+      "frames": 66,
+      "sha256": "9ac256486e2334906ec556a7803d2d47a6d2496d2ccf1a58885565030fd89790"
+    },
+    {
+      "file": "bowl_ramekin_demo_22.npz",
+      "frames": 65,
+      "sha256": "92149a3fc854c64683346d5cc06ba58e89279134001b9a5df98b7b30eae32fdc"
+    },
+    {
+      "file": "bowl_ramekin_demo_23.npz",
+      "frames": 54,
+      "sha256": "f60525b030fb35b59e7268f7c96083a71cdd2fe2a18c9f204404b637fbe1b29a"
+    },
+    {
+      "file": "bowl_ramekin_demo_24.npz",
+      "frames": 94,
+      "sha256": "f4bcaabf0509a5479a0dd3e9304596d8bf246aa74ad6d468a1d59a52fded846e"
+    },
+    {
+      "file": "bowl_ramekin_demo_25.npz",
+      "frames": 71,
+      "sha256": "980ecacab88a84230c55e56d242d6f3668c46101fe2cee1d95405c5f5e289fb3"
+    },
+    {
+      "file": "bowl_ramekin_demo_26.npz",
+      "frames": 72,
+      "sha256": "32da32f7c033c5e04abd7ffacbb7ba7ce607f8694b8ec3c1e42e0083f934ed13"
+    },
+    {
+      "file": "bowl_ramekin_demo_27.npz",
+      "frames": 57,
+      "sha256": "a0b5065b955e223fda99d78bcf5d5253fc37ff7f0429158324c929e82f66df11"
+    },
+    {
+      "file": "bowl_ramekin_demo_28.npz",
+      "frames": 83,
+      "sha256": "693907edd3fff495f1faa26210967f149f049d933d689e51bd87ed15a7062a14"
+    },
+    {
+      "file": "bowl_ramekin_demo_29.npz",
+      "frames": 59,
+      "sha256": "4ddf9557a74c8a435a90e5469e04349a704514cd7160b6d091cea9e2f1012e58"
+    },
+    {
+      "file": "bowl_ramekin_demo_30.npz",
+      "frames": 76,
+      "sha256": "3426c7f0bd366362cad42b944c34ed051768abcdd5c7aba77f6fe36095f0113a"
+    },
+    {
+      "file": "bowl_ramekin_demo_31.npz",
+      "frames": 59,
+      "sha256": "2e1028c488aad1fcbc4bc619559e7d2bcd5c04a3322cf3610a60343fb3b9932b"
+    },
+    {
+      "file": "bowl_ramekin_demo_32.npz",
+      "frames": 74,
+      "sha256": "e235d608ff12598c3449e7aa4ec8aae18c74ed1c3eed41436997671e767c35ec"
+    },
+    {
+      "file": "bowl_ramekin_demo_33.npz",
+      "frames": 58,
+      "sha256": "f07f31d2bcb1fff6ae05133105d47fa64f6c28a5dee41c384f90d5033c0fd157"
+    },
+    {
+      "file": "bowl_ramekin_demo_34.npz",
+      "frames": 59,
+      "sha256": "a705d648befdd93e20070488e2e28e2dff35742f1090def4f3386ce578fdd6d0"
+    },
+    {
+      "file": "bowl_ramekin_demo_35.npz",
+      "frames": 68,
+      "sha256": "19b014b9509bf4e41ef2f882acefafc9be6f6788b7fa7f720d88fe347f4f0c35"
+    },
+    {
+      "file": "bowl_ramekin_demo_36.npz",
+      "frames": 59,
+      "sha256": "b198c7a8abb10d74c9231d95dc8ddbbea369f871e03c3c68d42e8c1a81487521"
+    },
+    {
+      "file": "bowl_ramekin_demo_37.npz",
+      "frames": 64,
+      "sha256": "6ba4ccac57386373fc2906a7eacdf4e629e903cb2551e4cf697abc0ebd9962db"
+    },
+    {
+      "file": "bowl_ramekin_demo_38.npz",
+      "frames": 71,
+      "sha256": "eec65a12bc4104c5e00ceac36b9cd3e44a57519629fbeb9664650c0dd41799e6"
+    },
+    {
+      "file": "bowl_ramekin_demo_39.npz",
+      "frames": 61,
+      "sha256": "1f20c14c6d2496c40a3a80c2f689e74fbf2a8540c2d30e3614d5c2f024aea140"
+    },
+    {
+      "file": "bowl_ramekin_demo_40.npz",
+      "frames": 62,
+      "sha256": "96c348743cacdf68ddc90d97917243b0a8267d61e3c33446e322d173d62f5bff"
+    },
+    {
+      "file": "bowl_ramekin_demo_41.npz",
+      "frames": 55,
+      "sha256": "fc5bb8be3da1ec25d81ccf204af356afa5c1ae6d5b2279bf8c43c7f196fc7c53"
+    },
+    {
+      "file": "bowl_ramekin_demo_42.npz",
+      "frames": 68,
+      "sha256": "08683305ea77f684f4770645d6af8a4d528c7153f5077c31b2cf7769e18d297b"
+    },
+    {
+      "file": "bowl_ramekin_demo_43.npz",
+      "frames": 67,
+      "sha256": "e61c6caadb7ffab1d96fee8a882a868a540f9e98356eb873cd63b975dbc4b9e3"
+    },
+    {
+      "file": "bowl_ramekin_demo_44.npz",
+      "frames": 62,
+      "sha256": "e6511c16b5e25d5d31a788fb99cef8ad52e2665eaaf46b807bfa727951b06867"
+    },
+    {
+      "file": "bowl_ramekin_demo_45.npz",
+      "frames": 66,
+      "sha256": "40b3a3ccea9b0bf30d28f36bd4bafb73a0bbc8631d1d5fa9e75c1b6f5cdb6498"
+    },
+    {
+      "file": "bowl_ramekin_demo_46.npz",
+      "frames": 66,
+      "sha256": "e50cf229b5fc798e462bcf58796e4e3547beb1f6261b21f76cb18f334b463784"
+    },
+    {
+      "file": "bowl_ramekin_demo_47.npz",
+      "frames": 66,
+      "sha256": "dc5acc313d6a72b5d83e4640a79169d5c4c20faebe38b1daf8da6f50053abd08"
+    },
+    {
+      "file": "bowl_ramekin_demo_48.npz",
+      "frames": 70,
+      "sha256": "b6249b98e01c6c3050e2cbe44ff16c3fa283487a1e7f5e1fac65bbe9c3490a65"
+    },
+    {
+      "file": "bowl_ramekin_demo_49.npz",
+      "frames": 63,
+      "sha256": "70eb02c9cc9f23d3bf7a5590cd26fa75a2ae59dea06b5280cb806221532f9eb6"
+    },
+    {
+      "file": "P01_03_embeddings.npz",
+      "frames": 1189,
+      "sha256": "467bbf22a96a63a2d4f5d59c834e00410191af895a922b0d758504e604142d7c"
+    },
+    {
+      "file": "P01_04_embeddings.npz",
+      "frames": 1052,
+      "sha256": "60906e6bc302414c8970b07f9e73f0781ae423ed25a56e9b53eadccde98f73cc"
+    },
+    {
+      "file": "P01_08_embeddings.npz",
+      "frames": 990,
+      "sha256": "6e22f185363429b448616bba518b8768764c66be890908bc82a8bfe99b481923"
+    }
+  ],
+  "paired_action_head_initialization": "exact tensor match",
+  "normalization": "training-budget-only; validation/test reuse identical statistics",
+  "timestamp_utc": "2026-10-07T14:59:24Z"
+}

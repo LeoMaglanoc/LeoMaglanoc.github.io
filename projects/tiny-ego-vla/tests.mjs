@@ -8,6 +8,10 @@ const web = path.join(root, "assets/interactive/tiny-ego-vla");
 const result = JSON.parse(fs.readFileSync(path.join(web, "results.json"), "utf8"));
 const { robot, ego } = result;
 assert.equal(result.name, "TinyEgoVLA");
+assert.equal(result.preview, false, "Local UI previews must never be published");
+assert.deepEqual(robot.budgets, result.config.budgets);
+assert.deepEqual(robot.seeds, result.config.seeds);
+assert.equal(robot.tasks.length, result.config.robot_tasks.length);
 assert.equal(robot.rollouts.length, robot.budgets.length * robot.seeds.length * robot.tasks.length * robot.initializations * 2);
 assert.equal(robot.metrics.length, robot.budgets.length * robot.seeds.length * 2);
 assert.equal(
