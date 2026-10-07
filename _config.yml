@@ -202,6 +202,10 @@ exclude:
   - projects/
   - plan.md
   - assets/interactive/cartpole/plan.md
+  # Byte-identical Godot engines share block-world/index.wasm. Guarded by check-project-links.py.
+  - assets/interactive/scrap-orbit/index.wasm
+  - assets/interactive/block-temple/index.wasm
+  - assets/interactive/language-vision/vendor/ort-wasm-simd-threaded.wasm
 keep_files:
   - CNAME
   - .nojekyll

@@ -914,6 +914,8 @@
         $("loadstatus").textContent = "Loading engine…";
         try {
           await engine.startGame({
+            executable: "../block-world/index",
+            mainPack: "index.pck",
             canvas,
             canvasResizePolicy: 0,
             onProgress: (current, total) => {

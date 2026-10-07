@@ -95,6 +95,25 @@ def main():
                             assert render_record["video_sha256"] == sha(hires)
                         stem = f"{regime}-{budget}-{seed}-{task}-{init}"
                         target = WEB / f"media/{stem}.mp4"
+                        # Keep high-resolution state replays intact; compress the tiny policy
+                        # cameras for mobile bandwidth and the Pages size budget. Raw frames
+                        # and original videos remain in the local continuation archive.
+                        codec = (
+                            ["-c", "copy"]
+                            if hires.exists()
+                            else [
+                                "-c:v",
+                                "libx264",
+                                "-crf",
+                                "28",
+                                "-preset",
+                                "fast",
+                                "-pix_fmt",
+                                "yuv420p",
+                                "-threads",
+                                "2",
+                            ]
+                        )
                         # Enforce fast-start MP4 for static hosting and mobile playback.
                         subprocess.run(
                             [
@@ -105,8 +124,7 @@ def main():
                                 str(presentation),
                                 "-map_metadata",
                                 "-1",
-                                "-c",
-                                "copy",
+                                *codec,
                                 "-movflags",
                                 "+faststart",
                                 "-y",

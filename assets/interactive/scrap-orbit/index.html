@@ -209,6 +209,8 @@
               "This browser cannot run the game: " + missing.join(", ") + ". Try a current Chrome, Firefox, or Safari with WebGL enabled."
             );
           await engine.startGame({
+            executable: "../block-world/index",
+            mainPack: "index.pck",
             canvas,
             onProgress: (current, total) => {
               if (total > 0) {

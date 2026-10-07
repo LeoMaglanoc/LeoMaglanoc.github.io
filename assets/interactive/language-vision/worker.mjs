@@ -36,7 +36,10 @@ async function initialize(config = {}) {
   const downloaded = performance.now();
   postMessage({ type: "initializing" });
   ort.env.wasm.numThreads = 1;
-  ort.env.wasm.wasmPaths = new URL("./vendor/", import.meta.url).href;
+  ort.env.wasm.wasmPaths = {
+    mjs: new URL("./vendor/ort-wasm-simd-threaded.mjs", import.meta.url).href,
+    wasm: new URL("../euroguessr/vendor/ort-wasm-simd-threaded.wasm", import.meta.url).href,
+  };
   session = await ort.InferenceSession.create(bytes, { executionProviders: ["wasm"], graphOptimizationLevel: "all" });
   postMessage({ type: "ready", metadata, loadMs: downloaded - started, initMs: performance.now() - downloaded, modelBytes: received });
 }

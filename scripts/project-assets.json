@@ -7,13 +7,10 @@
       "doom.worker.js",
       "engine/LICENSE-tomb-engine-GPL-3.0.txt",
       "engine/brightmaps.pk3",
-      "engine/engine.worker.js",
       "engine/freedm.wad",
       "engine/game_support.pk3",
       "engine/game_widescreen_gfx.pk3",
-      "engine/gzdoom.js",
       "engine/gzdoom.pk3",
-      "engine/gzdoom.wasm",
       "engine/lights.pk3",
       "game/deathmatch_rockets.wad",
       "gzdoom.js",
@@ -63,9 +60,7 @@
   },
   "projects/flappy": {
     "destination": "assets/interactive/flappy",
-    "files": [
-      "index.html"
-    ]
+    "files": ["index.html"]
   },
   "projects/g1": {
     "destination": "assets/interactive/g1",
@@ -273,15 +268,11 @@
   },
   "projects/race": {
     "destination": "assets/interactive/race",
-    "files": [
-      "index.html"
-    ]
+    "files": ["index.html"]
   },
   "projects/robot-runner": {
     "destination": "assets/interactive/robot-runner",
-    "files": [
-      "index.html"
-    ]
+    "files": ["index.html"]
   },
   "projects/tiny-dreamer": {
     "destination": "assets/interactive/tiny-dreamer",
@@ -311,13 +302,7 @@
   },
   "projects/ask-leo": {
     "destination": "assets/js/ask-leo",
-    "files": [
-      "ask-leo.js",
-      "model-config.js",
-      "prompt.js",
-      "retrieval.js",
-      "worker.js"
-    ]
+    "files": ["ask-leo.js", "model-config.js", "prompt.js", "retrieval.js", "worker.js"]
   },
   "projects/rustzero/web": {
     "destination": "assets/interactive/rustzero",

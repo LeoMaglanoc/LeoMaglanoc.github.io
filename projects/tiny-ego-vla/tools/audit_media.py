@@ -60,11 +60,41 @@ def main():
             stream = probe(WEB / row["video"])
             assert int(stream["nb_frames"]) == 1 + (row["length"] + 1) // 2
             assert stream["width"] in [128, 384] and stream["height"] == stream["width"]
+            raw = (
+                ART
+                / "rollouts"
+                / row["run"]
+                / row["task"]
+                / f"episode-{row['initialization']}.mp4"
+            )
+            reference_path = (
+                raw.with_name(raw.stem + "-hi.mp4") if stream["width"] == 384 else raw
+            )
+            public, reference = cv2.VideoCapture(
+                str(WEB / row["video"])
+            ), cv2.VideoCapture(str(reference_path))
+            errors = []
+            for index in [
+                0,
+                int(stream["nb_frames"]) // 2,
+                int(stream["nb_frames"]) - 1,
+            ]:
+                public.set(cv2.CAP_PROP_POS_FRAMES, index)
+                reference.set(cv2.CAP_PROP_POS_FRAMES, index)
+                ok_a, frame_a = public.read()
+                ok_b, frame_b = reference.read()
+                assert ok_a and ok_b and frame_a.shape == frame_b.shape
+                error = float(np.abs(frame_a.astype(float) - frame_b).mean())
+                assert error < 10, (row["video"], index, error)
+                errors.append({"frame": index, "rgb_mae": error})
+            public.release()
+            reference.release()
             rollouts.append(
                 {
                     "video": row["video"],
                     "frames": int(stream["nb_frames"]),
                     "size": stream["width"],
+                    "alignment_samples": errors,
                     "sha256": sha(WEB / row["video"]),
                 }
             )
@@ -72,7 +102,7 @@ def main():
     report = {
         "passed": True,
         "scope": "human only" if args.human_only else "complete exhibit",
-        "checks": "human first/middle/last frames align with labeled source (RGB MAE <10 including recompression); exact frame counts; 10fps H264 yuv420p video-only fast-start MP4",
+        "checks": "human first/middle/last frames align with labeled source (RGB MAE <10 including recompression); rollout first/middle/last frames align with retained source replay (RGB MAE <10); exact frame counts; 10fps H264 yuv420p video-only fast-start MP4",
         "human": records,
         "rollouts": rollouts,
     }
