@@ -30,14 +30,14 @@ featured_projects:
 
 builds:
   - title: Interactive Web Demos
-    description: "Fun demos created with coding agents."
+    description: "Small interactive experiments built with coding agents."
     links:
       - label: Humanoid Walking
         url: /locomotion/
-      - label: TinyDreamer Cartpole
-        url: /tiny-dreamer/
       - label: EuroGuesser AI
         url: /euroguessr/
+      - label: RustZero
+        url: /rustzero/
       - label: BlockTemple
         url: /block-temple/
 

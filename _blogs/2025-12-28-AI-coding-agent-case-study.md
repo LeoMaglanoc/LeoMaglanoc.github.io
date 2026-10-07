@@ -28,7 +28,7 @@ Interactive demos and games, newest first by creation date:
 - [Doom]({{ '/doom/' | relative_url }})
 - [Ask Leo]({{ '/chat/' | relative_url }})
 - [SLAM / 3D Reconstruction]({{ '/slam/' | relative_url }})
-- [Unitree G1 Locomotion Playground]({{ '/g1/' | relative_url }})
+- [Unitree G1 Locomotion Playground]({{ '/locomotion/' | relative_url }})
 - [Pong RL Agent]({{ '/assets/interactive/pong/index.html' | relative_url }})
 - [Top Down Racing Game]({{ '/assets/interactive/race/index.html' | relative_url }})
 - [Jump and Run Sidescroller]({{ '/assets/interactive/robot-runner/index.html' | relative_url }})
