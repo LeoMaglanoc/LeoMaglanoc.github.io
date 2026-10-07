@@ -223,7 +223,7 @@ document.addEventListener("visibilitychange", () => {
 function svgLineChart(series, { ylabel = "Loss", xlabel = "Epoch", percentage = false } = {}) {
   const w = 560,
     h = 270,
-    l = 53,
+    l = 60,
     r = 20,
     t = 23,
     b = 47;
@@ -249,16 +249,16 @@ function svgLineChart(series, { ylabel = "Loss", xlabel = "Epoch", percentage = 
     h - 7
   }" text-anchor="middle" font-size="10" fill="#5c6864">${xlabel}</text>`;
   series.forEach((s, i) => {
-    svg += `<rect x="${l + i * 145}" y="5" width="12" height="3" fill="${s.color}"/><text x="${
+    svg += `<rect x="${l + i * 145}" y="9" width="12" height="3" fill="${s.color}"/><text x="${
       l + 17 + i * 145
-    }" y="10" font-size="10" fill="#5c6864">${escapeHTML(s.label)}</text>`;
+    }" y="14" font-size="10" fill="#5c6864">${escapeHTML(s.label)}</text>`;
   });
   return svg + "</svg>";
 }
 function successChart(rows) {
   const w = 560,
     h = 270,
-    l = 48,
+    l = 60,
     t = 30,
     b = 45,
     inner = w - l - 20;
@@ -284,11 +284,11 @@ function successChart(rows) {
   });
   svg += `<text x="${w / 2}" y="${
     h - 6
-  }" text-anchor="middle" font-size="10" fill="#5c6864">Robot demonstrations per task</text><rect x="48" y="7" width="12" height="3" fill="${
+  }" text-anchor="middle" font-size="10" fill="#5c6864">Robot demonstrations per task</text><rect x="60" y="11" width="12" height="3" fill="${
     colors.robot
-  }"/><text x="65" y="12" font-size="10" fill="#5c6864">Robot-only</text><rect x="185" y="7" width="12" height="3" fill="${
+  }"/><text x="77" y="16" font-size="10" fill="#5c6864">Robot-only</text><rect x="205" y="11" width="12" height="3" fill="${
     colors.teal
-  }"/><text x="202" y="12" font-size="10" fill="#5c6864">Ego-pretrained</text>`;
+  }"/><text x="222" y="16" font-size="10" fill="#5c6864">Ego-pretrained</text>`;
   return svg + "</svg>";
 }
 function setupPretrain() {

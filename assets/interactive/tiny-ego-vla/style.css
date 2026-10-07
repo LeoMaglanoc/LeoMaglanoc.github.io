@@ -952,6 +952,9 @@ input[type="range"] {
   }
 }
 @media (max-width: 650px) {
+  .chart svg text {
+    font-size: 16px;
+  }
   main {
     padding: 0 18px;
   }

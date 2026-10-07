@@ -22,7 +22,8 @@ Issues found and fixed through Chrome:
 5. Stage switching during asynchronous playback could leave stale control state: invalidate stale playback requests.
 6. Pipeline navigation now scrolls the selected stage into view.
 7. Landscape policy frames and metrics are compact enough to inspect alongside playback controls without cropping the actual square robot camera.
-8. Seeking against Python’s basic HTTP server was unsupported (Chrome reported zero seekable range). Rechecked using `http-server@14.1.1`, which supports byte ranges: both videos seek exactly to their own final frame and restart at zero. Playback controls remain disabled until both video metadata records load.
+8. Portrait chart labels were too small after SVG scaling: larger mobile labels and wider axis margins improve readability.
+9. Seeking against Python’s basic HTTP server was unsupported (Chrome reported zero seekable range). Rechecked using `http-server@14.1.1`, which supports byte ranges: both videos seek exactly to their own final frame and restart at zero. Playback controls remain disabled until both video metadata records load.
 
 The local UI preview uses only completed, real records and is prominently labeled incomplete. Both the experiment tests and production route checker reject preview exports. Final full-export, built-route and live deployment checks are recorded below when complete.
 
