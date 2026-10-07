@@ -26,6 +26,10 @@ for (const summary of robot.summary) {
   assert.equal(summary.success_rate, summary.successes / summary.episodes);
 }
 for (const row of robot.rollouts) {
+  assert(["robot", "ego"].includes(row.regime));
+  assert(robot.budgets.includes(row.budget_per_task) && robot.seeds.includes(row.seed));
+  assert(robot.tasks.some((t) => t.id === row.task));
+  assert(Number.isInteger(row.initialization) && row.initialization >= 0 && row.initialization < robot.initializations);
   const metric = robot.metrics.find((m) => m.regime === row.regime && m.seed === row.seed && m.budget_per_task === row.budget_per_task);
   assert.equal(row.checkpoint_sha256, metric.checkpoint_sha256);
   assert.equal(row.held_out_demo, 42 + row.initialization);

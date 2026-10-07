@@ -7,10 +7,58 @@ from common import *
 import tarfile, datetime
 
 
+def snapshot_training_sources():
+    core = {
+        "common.py",
+        "models.py",
+        "datasets.py",
+        "train_ego.py",
+        "train_robot_bc.py",
+    }
+    needed = {
+        (name, digest)
+        for metric in CKPT.glob("*/metrics.json")
+        for name, digest in json.loads(metric.read_text())["provenance"][
+            "source_sha256"
+        ].items()
+        if name in core
+    }
+    entries, records = [], []
+    for name, digest in sorted(needed):
+        relative = str((PROJECT / "tools" / name).relative_to(ROOT))
+        revisions = subprocess.check_output(
+            ["git", "log", "--format=%H", "--", relative], cwd=ROOT, text=True
+        ).splitlines()
+        for revision in revisions:
+            blob = subprocess.check_output(
+                ["git", "show", f"{revision}:{relative}"], cwd=ROOT
+            )
+            if hashlib.sha256(blob).hexdigest() == digest:
+                path = ART / "training-sources" / digest / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(blob)
+                entries.append(path)
+                records.append(
+                    {
+                        "file": name,
+                        "sha256": digest,
+                        "git_commit": revision,
+                        "snapshot": str(path.relative_to(PROJECT)),
+                    }
+                )
+                break
+        else:
+            raise ValueError(
+                f"Exact original training source missing from Git: {name} {digest}"
+            )
+    save_json(ART / "training-source-manifest.json", records)
+    return entries
+
+
 def bundle():
     stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = ART / f"TinyEgoVLA-continuation-{stamp}.tar.gz"
-    entries = []
+    entries = snapshot_training_sources()
     for folder in [
         PROJECT / "tools",
         PROJECT / "configs",
@@ -34,6 +82,9 @@ def bundle():
         "checkpoint-audit.json",
         "rollout-audit.json",
         "resume-audit.json",
+        "human-media-audit.json",
+        "human-prediction-audit.json",
+        "media-audit.json",
         "results-summary.json",
         "VALIDATION.md",
     ]:
@@ -41,7 +92,17 @@ def bundle():
         if p.exists():
             entries.append(p)
     entries.extend(p for p in (ART / "rollouts").rglob("*") if p.is_file())
-    entries.extend(p for p in ART.glob("*.json") if "bundle" not in p.name)
+    entries.extend(
+        p
+        for p in ART.glob("*.json")
+        if "bundle" not in p.name and p.name != "continuation-manifest.json"
+    )
+    entries.extend(
+        p for p in ART.glob("*.log") if p.stat().st_size and "bundle" not in p.name
+    )
+    entries.extend(ART.glob("*.jpg"))
+    if (ART / "demonstration.mp4").exists():
+        entries.append(ART / "demonstration.mp4")
     manifest = {
         "created_utc": stamp,
         "git_commit": revision(),

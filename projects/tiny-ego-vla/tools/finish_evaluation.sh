@@ -8,4 +8,5 @@ $PY projects/tiny-ego-vla/tools/eval_robot.py
 $PY projects/tiny-ego-vla/tools/audit_rollouts.py
 $PY projects/tiny-ego-vla/tools/render_rollouts.py
 $PY projects/tiny-ego-vla/tools/export_web.py
+$PY projects/tiny-ego-vla/tools/audit_media.py
 node projects/tiny-ego-vla/tests.mjs

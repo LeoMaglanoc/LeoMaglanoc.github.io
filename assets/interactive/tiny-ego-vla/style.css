@@ -1303,6 +1303,21 @@ input[type="range"] {
   .expert-view {
     aspect-ratio: 1.45;
   }
+  .comparison-grid video {
+    height: 45vh;
+    aspect-ratio: auto;
+  }
+  .comparison-grid .card-label {
+    min-height: 38px;
+    padding: 8px 12px;
+  }
+  .policy-metrics {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+  .policy-metrics strong {
+    font-size: 22px;
+  }
   .pipeline {
     position: static;
   }

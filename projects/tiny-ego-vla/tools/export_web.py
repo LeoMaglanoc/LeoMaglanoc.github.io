@@ -13,12 +13,12 @@ def main():
     parser.add_argument(
         "--preview",
         action="store_true",
-        help="Local UI QA with budget 4, seed 11 and plate task only; never publish",
+        help="Local UI QA with budget 4 and seed 11 across both tasks; never publish",
     )
     args = parser.parse_args()
     budgets = [4] if args.preview else CONFIG["budgets"]
     seeds = [11] if args.preview else CONFIG["seeds"]
-    task_keys = ["bowl_plate"] if args.preview else CONFIG["robot_tasks"]
+    task_keys = CONFIG["robot_tasks"]
     selected = json.loads((ART / "architecture-selection.json").read_text())
     kind = selected["selected"]
     ego = json.loads((CKPT / f"ego-{kind}-11/metrics.json").read_text())
@@ -68,6 +68,9 @@ def main():
             }
         )
     ego["predictions"] = out_predictions
+    ego["prediction_audit"] = json.loads(
+        (PROJECT / "human-prediction-audit.json").read_text()
+    )
     metrics = []
     rollouts = []
     for budget in budgets:
@@ -82,6 +85,14 @@ def main():
                         original = PROJECT / row["video"]
                         hires = original.with_name(original.stem + "-hi.mp4")
                         presentation = hires if hires.exists() else original
+                        if hires.exists():
+                            render_record = json.loads(
+                                hires.with_suffix(".json").read_text()
+                            )
+                            assert render_record["source_sha256"] == sha(
+                                original.with_suffix(".npz")
+                            )
+                            assert render_record["video_sha256"] == sha(hires)
                         stem = f"{regime}-{budget}-{seed}-{task}-{init}"
                         target = WEB / f"media/{stem}.mp4"
                         # Enforce fast-start MP4 for static hosting and mobile playback.
@@ -194,7 +205,7 @@ def main():
             ],
             [
                 "Preprocessing",
-                "MediaPipe 21-joint skeletons; supplied EPIC hand-object detector boxes and contact estimates. Match nearby wrists and object centers within an annotated action; missing/large-jump labels are masked. These are noisy image-plane pseudo-labels.",
+                "MediaPipe 21-joint skeletons; supplied EPIC hand-object detector boxes and contact estimates. Match nearby wrists and object centers within an annotated action; missing/large-jump labels are masked. These are noisy image-plane pseudo-labels. Contact labels are strongly positive-biased (92.7% train, 95.4% validation), so contact accuracy alone is uninformative.",
             ],
             [
                 "Frozen features",
@@ -214,7 +225,7 @@ def main():
             ],
             [
                 "Control",
-                "One upright agentview RGB camera, eight proprioception values (end-effector pose and gripper position); no privileged object state. Camera encoding and history update at 10 Hz, executing two predicted actions at 20 Hz. Gripper prediction is thresholded to ±1.",
+                "One upright agentview RGB camera, eight proprioception values (end-effector pose and gripper position); no privileged object state. Camera encoding and history update at simulation-time 10 Hz, executing two predicted actions at 20 Hz; offline CPU execution is slower than real time. Gripper prediction is thresholded to ±1.",
             ],
             [
                 "Evaluation",
@@ -238,6 +249,15 @@ def main():
             "architecture_selection": selected,
             "summary": summary,
             "benchmarks": data["benchmarks"],
+            "human_prediction_audit": ego["prediction_audit"],
+            "human_run_metrics": [
+                {
+                    k: v
+                    for k, v in json.loads(path.read_text()).items()
+                    if k not in ("curve", "examples")
+                }
+                for path in sorted(CKPT.glob("ego-*/metrics.json"))
+            ],
             "run_metrics": [
                 {k: v for k, v in m.items() if k != "curve"} for m in metrics
             ],

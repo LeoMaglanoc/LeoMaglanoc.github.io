@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "scope": "human only",
+  "checks": "human first/middle/last frames align with labeled source (RGB MAE <10 including recompression); exact frame counts; 10fps H264 yuv420p video-only fast-start MP4",
+  "human": [
+    {
+      "clip": "pour",
+      "frames": 90,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.5467780671296296
+        },
+        {
+          "frame": 45,
+          "rgb_mae": 1.7768605324074074
+        },
+        {
+          "frame": 89,
+          "rgb_mae": 2.014681712962963
+        }
+      ],
+      "sha256": "c2e11e1560a30e7c6e547a48415f757b6ee9ef3793cdccf970374b9255d7df18"
+    },
+    {
+      "clip": "cup",
+      "frames": 52,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.4998712384259258
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 1.5309172453703703
+        },
+        {
+          "frame": 51,
+          "rgb_mae": 1.9006741898148147
+        }
+      ],
+      "sha256": "4c981ba1d1abddb8753092cfa83491c07116148b8b97ed105710d861d3ce7df4"
+    },
+    {
+      "clip": "milk",
+      "frames": 120,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.466490162037037
+        },
+        {
+          "frame": 60,
+          "rgb_mae": 1.6746903935185184
+        },
+        {
+          "frame": 119,
+          "rgb_mae": 1.6651070601851852
+        }
+      ],
+      "sha256": "535aaf89ec8fbd9ccee4b73bd49e349b174b9cc57463d32e8ffb6eb4652e370d"
+    }
+  ],
+  "rollouts": []
+}

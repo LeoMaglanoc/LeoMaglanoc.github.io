@@ -29,6 +29,12 @@ def main():
                 "provenance",
             ]:
                 assert key in ck, (folder, key)
+            assert ck["provenance"]["data_manifest_sha256"] == sha(
+                PROJECT / "data-manifest.json"
+            )
+            assert ck["provenance"]["environment_lock_sha256"] == sha(
+                PROJECT / "environment-lock.txt"
+            )
             assert ck["config"] == CONFIG
         assert (
             last["epoch"] + 1

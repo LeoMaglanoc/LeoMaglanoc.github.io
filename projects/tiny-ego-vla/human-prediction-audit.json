@@ -1,0 +1,107 @@
+{
+  "scope": "validation video already used for model selection; descriptive, not an independent test",
+  "contact_train_positive_fraction": 0.9266272187232971,
+  "contact_validation_positive_fraction": 0.9536784887313843,
+  "contact_validation_count": 367,
+  "constant_train_predictor": {
+    "motion_mae_image_fraction": [
+      0.030724240466952324,
+      0.04240728169679642,
+      0.025951923802495003,
+      0.03565622866153717
+    ],
+    "contact_bce": 0.1936752200126648,
+    "contact_brier": 0.04490761458873749,
+    "contact_accuracy": 0.9536784887313843,
+    "contact_mean_probability": 0.9266272783279419
+  },
+  "zero_motion_with_constant_contact": {
+    "motion_mae_image_fraction": [
+      0.030626066029071808,
+      0.042399074882268906,
+      0.02603919804096222,
+      0.035789694637060165
+    ],
+    "contact_bce": 0.1936752200126648,
+    "contact_brier": 0.04490761458873749,
+    "contact_accuracy": 0.9536784887313843,
+    "contact_mean_probability": 0.9266272783279419
+  },
+  "runs": [
+    {
+      "run": "ego-gru-11",
+      "selected_epoch": 2,
+      "checkpoint_sha256": "befdf846117659e9d32e2f752aea642fb01c365d4db141fd8738b65b3318e26d",
+      "motion_mae_image_fraction": [
+        0.03392481803894043,
+        0.044330209493637085,
+        0.02993665263056755,
+        0.03651948645710945
+      ],
+      "contact_bce": 0.18818169832229614,
+      "contact_brier": 0.044277992099523544,
+      "contact_accuracy": 0.9536784887313843,
+      "contact_mean_probability": 0.9361236095428467
+    },
+    {
+      "run": "ego-mlp-11",
+      "selected_epoch": 1,
+      "checkpoint_sha256": "b13459a83332c37924049c01ee35e0ba6a48acdc17ed51ba80dc7aa29601db5c",
+      "motion_mae_image_fraction": [
+        0.031534597277641296,
+        0.04309869930148125,
+        0.02741384319961071,
+        0.03637650981545448
+      ],
+      "contact_bce": 0.19683320820331573,
+      "contact_brier": 0.04539133608341217,
+      "contact_accuracy": 0.9536784887313843,
+      "contact_mean_probability": 0.9165251851081848
+    },
+    {
+      "run": "ego-transformer-11",
+      "selected_epoch": 3,
+      "checkpoint_sha256": "0cf798b2afcb41e76aae5ebad198069a5ac20f293677fba34322ce2b1556e8a2",
+      "motion_mae_image_fraction": [
+        0.03100057877600193,
+        0.04459783434867859,
+        0.028347382321953773,
+        0.03759206458926201
+      ],
+      "contact_bce": 0.19111433625221252,
+      "contact_brier": 0.04464009031653404,
+      "contact_accuracy": 0.9536784887313843,
+      "contact_mean_probability": 0.9289836883544922
+    },
+    {
+      "run": "ego-transformer-29",
+      "selected_epoch": 3,
+      "checkpoint_sha256": "e7ce3da84c26bce3193c3de4c1e084899ac7806f66af2fa5497f5d2a0d83af36",
+      "motion_mae_image_fraction": [
+        0.03169390559196472,
+        0.04229215905070305,
+        0.027143346145749092,
+        0.03589532896876335
+      ],
+      "contact_bce": 0.19029612839221954,
+      "contact_brier": 0.044528380036354065,
+      "contact_accuracy": 0.9536784887313843,
+      "contact_mean_probability": 0.9303780198097229
+    },
+    {
+      "run": "ego-transformer-47",
+      "selected_epoch": 3,
+      "checkpoint_sha256": "409398dee5e433d1529662d78f79c06608a58dda5a9b1d382aa55af3514c3f9e",
+      "motion_mae_image_fraction": [
+        0.030711699277162552,
+        0.04252452775835991,
+        0.02727535553276539,
+        0.037234071642160416
+      ],
+      "contact_bce": 0.19256579875946045,
+      "contact_brier": 0.044833164662122726,
+      "contact_accuracy": 0.9536784887313843,
+      "contact_mean_probability": 0.9251845479011536
+    }
+  ]
+}

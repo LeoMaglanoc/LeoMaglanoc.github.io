@@ -19,6 +19,8 @@ def download(url, path):
 
 
 def main():
+    manifest_path = PROJECT / "data-manifest.json"
+    expected = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
     lib = ART / "LIBERO"
     if not lib.exists():
         subprocess.run(
@@ -77,7 +79,26 @@ def main():
             {"path": p.name, "sha256": sha(p), "bytes": p.stat().st_size} for p in files
         ],
     }
-    save_json(PROJECT / "data-manifest.json", manifest)
+    if expected is not None:
+        expected_files = {
+            f["path"]: (f["sha256"], f["bytes"]) for f in expected["files"]
+        }
+        actual_files = {f["path"]: (f["sha256"], f["bytes"]) for f in manifest["files"]}
+        assert actual_files == expected_files, (
+            "Source data differs from recorded manifest; preserve the original experiment and investigate"
+        )
+        for key in [
+            "libero_revision",
+            "robot_dataset_revision",
+            "epic_annotation_revision",
+        ]:
+            assert expected[key] == manifest[key]
+        print(
+            "PASS: all source files match the recorded manifest; original manifest preserved",
+            flush=True,
+        )
+    else:
+        save_json(manifest_path, manifest)
     load_encoder("MobileCLIP-S0")
 
 

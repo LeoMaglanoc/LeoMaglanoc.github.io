@@ -40,6 +40,7 @@ $PY projects/tiny-ego-vla/tools/align_actions.py
 $PY projects/tiny-ego-vla/tools/audit_sim_parity.py
 $PY projects/tiny-ego-vla/tools/audit_data.py
 $PY projects/tiny-ego-vla/tools/train_ego.py
+$PY projects/tiny-ego-vla/tools/audit_human_predictions.py
 $PY projects/tiny-ego-vla/tools/train_robot_bc.py
 $PY projects/tiny-ego-vla/tools/eval_robot.py
 $PY projects/tiny-ego-vla/tools/export_media.py human
@@ -47,7 +48,9 @@ $PY projects/tiny-ego-vla/tools/export_media.py expert
 $PY projects/tiny-ego-vla/tools/audit_rollouts.py
 $PY projects/tiny-ego-vla/tools/render_rollouts.py
 $PY projects/tiny-ego-vla/tools/export_web.py
+$PY projects/tiny-ego-vla/tools/audit_media.py
 $PY projects/tiny-ego-vla/tools/check_checkpoints.py
+$PY projects/tiny-ego-vla/tools/check_resume.py
 node projects/tiny-ego-vla/tests.mjs
 $PY projects/tiny-ego-vla/tools/bundle_checkpoint.py
 $PY projects/tiny-ego-vla/tools/verify_bundle.py
@@ -55,7 +58,7 @@ $PY projects/tiny-ego-vla/tools/verify_bundle.py
 
 The LIBERO source is pinned and loaded explicitly by `setup_libero()`; no editable package installation is needed. No vendor source patch is required. `environment-lock.txt` records the complete actual environment; recreate from that lock for closer dependency parity. Do not install CUDA wheels. On this laptop the necessary OSMesa library was already installed.
 
-Dataset download URLs and SHA-256 hashes are recorded in `data-manifest.json`. Official EPIC footage totals about 1.2 GB, the two robot HDF5 files about 1.2 GB. Only three short processed clips, recorded overlays, predictions, compressed robot replays and JSON measurements are published. No datasets, models or training are required in the browser.
+Dataset filenames, SHA-256 hashes and pinned revisions are recorded in `data-manifest.json`; exact download URLs live in `tools/prepare.py`. Preparation verifies restored/existing inputs against that manifest and preserves its original bytes. Official EPIC footage totals about 1.2 GB, the two robot HDF5 files about 1.2 GB. Only three short processed clips, recorded overlays, predictions, compressed robot replays and JSON measurements are published. No datasets, models or training are required in the browser.
 
 Human embeddings are paired normalized image/text vectors. Robot images use the upright flip of the stored OpenGL image. Robot proprioception matches LIBERO's end-effector position, axis-angle orientation and gripper qpos. Official stored observations are **post-action**; future targets are actions j+1/j+2, with incomplete terminal chunks dropped. See the timing audit in `EXPERIMENTS.md`.
 
@@ -70,7 +73,7 @@ $PY projects/tiny-ego-vla/tools/train_robot_bc.py --budget 4 --seed 11 --resume
 
 The validation-selected architecture for this run is the two-layer Transformer. A completed run has no remaining epochs, so resuming it does not silently train longer. A changed configuration is deliberately rejected by `--resume`; use a new experiment directory/configuration and explicitly warm-start model weights for a new study. Preserve the original splits and records when investigating improvements. No checkpoint is selected using rollout outcomes.
 
-`checkpoint-record.json` identifies the local continuation archive and its SHA-256. The archive is **not in Git**. It contains code/config, both model checkpoints, the frozen encoder, all cached embeddings/normalized-data inputs, human pseudo-labels, metrics and raw rollout states/actions/frames. It does not include the raw source videos or robot HDF5 files; those are restored with `prepare.py` and verified against `data-manifest.json`.
+`checkpoint-record.json` identifies the local continuation archive and its SHA-256. The archive is **not in Git**. It contains code/config, both model checkpoints, the frozen encoder, all cached embeddings/normalized-data inputs, human pseudo-labels, metrics, experiment logs, validation screenshots and raw rollout states/actions/frames. `artifacts/training-sources/` retains the exact original versions of the five training-core files, matched by SHA-256 to run provenance; `artifacts/training-source-manifest.json` records their Git origins. Current tools also include the documented continuation fixes. It does not include the raw source videos or robot HDF5 files; those are restored with `prepare.py` and verified against `data-manifest.json`.
 
 To restore: clone this repository into a separate checkout and extract the archive into its `projects/tiny-ego-vla/` directory, preserving that layout (the scripts derive repository paths from their location). Verify every `artifacts/continuation-manifest.json` file hash with `verify_bundle.py`, recreate the pinned environment, restore raw inputs if new preprocessing/evaluation is needed, and use the saved configuration. Update the archive path in the local copy of `checkpoint-record.json` after moving it; retain the recorded SHA-256. Existing cached arrays suffice for training continuation. Preserve source artifact licensing when redistributing any derived data.
 

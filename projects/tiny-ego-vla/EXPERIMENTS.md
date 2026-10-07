@@ -62,3 +62,24 @@ Recommended next studies: expand to independently recorded participants and a se
 ## Continuation exercised during development
 
 The execution session terminated the final robot training run (ego-pretrained, budget 35, seed 47) after its epoch-59 checkpoint. It was resumed from `last.pt`, restoring model, AdamW optimizer, PyTorch/NumPy/Python RNG and minibatch-generator state for epochs 60–100. No hyperparameters, data, model architecture or checkpoint-selection rule changed. Earlier checkpoints did not store accumulated elapsed time, so this one run explicitly reports only its resumed segment (`seconds_scope`); it must not be compared as a full-run CPU timing. New checkpoints preserve accumulated elapsed seconds. Completed-run `--resume` now returns the original metrics without overwriting timings.
+
+## Completed robot imitation fits
+
+All 18 paired robot runs completed 100 epochs. Values below average training seeds 11/29/47; these describe action fit, not task success.
+
+| Demonstrations per task | Initialization | Mean validation MSE | Mean test MSE |
+| ----------------------- | -------------- | ------------------: | ------------: |
+| 4                       | Robot-only     |            0.549155 |      0.600029 |
+| 4                       | Ego-pretrained |            0.544150 |      0.587936 |
+| 9                       | Robot-only     |            0.409934 |      0.475543 |
+| 9                       | Ego-pretrained |            0.412874 |      0.478766 |
+| 35                      | Robot-only     |            0.308863 |      0.359601 |
+| 35                      | Ego-pretrained |            0.309527 |      0.369380 |
+
+The 17 uninterrupted robot fits took 1323.45 s in total (range 21.20–199.01 s per run), under varying concurrent laptop load. The resumed ego/35/47 run reports 63.39 s for its final segment only. Full per-run provenance and curves are retained in checkpoint metrics and the continuation bundle.
+
+Control frequencies are simulation-time frequencies. Offline CPU encoding/rendering is slower than real time; no real-time robot capability is claimed. Replays include one final frame (0.1 s) after the last simulated control step.
+
+## Human label/forecast audit
+
+Contact pseudo-labels are positive for 92.66% of eligible training windows and 95.37% of the 367 labeled validation windows. Every candidate’s thresholded contact accuracy is 95.37%, identical to always predicting positive. The selected Transformer’s contact BCE is 0.1911 versus 0.1937 for the train-only constant probability; this small calibration change does not establish discrimination. Combined validation loss and all four motion MAEs still trail the baselines described above. Contact accuracy would therefore be a misleading success headline. `human-prediction-audit.json` retains per-head metrics for all five human runs; it is descriptive validation analysis, not a separate test.

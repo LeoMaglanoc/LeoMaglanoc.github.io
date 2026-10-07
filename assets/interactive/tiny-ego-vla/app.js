@@ -183,11 +183,7 @@ function drawOverlay() {
   const contact = a.contact[index];
   setText(
     "#contact",
-    contact === null
-      ? "Contact: no confident hand detection"
-      : contact
-        ? "Contact estimate: object interaction"
-        : "Contact estimate: no object contact"
+    contact === null ? "Contact estimate unavailable" : contact ? "Contact estimate: object interaction" : "Contact estimate: no object contact"
   );
   setText("#instruction", a.instructions[index] || state.clip.label);
   setText("#human-clock", `${fmt(human.currentTime, 1)} s`);

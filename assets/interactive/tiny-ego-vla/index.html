@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#f5f2eb" />
     <meta name="description" content="TinyEgoVLA: a real CPU-scale experiment in human egocentric pretraining and Panda robot adaptation." />
     <title>TinyEgoVLA · Human experience → robot policy</title>
-    <link rel="stylesheet" href="style.css?v=20261007c" />
-    <script type="module" src="app.js?v=20261007c"></script>
+    <link rel="stylesheet" href="style.css?v=20261007d" />
+    <script type="module" src="app.js?v=20261007d"></script>
   </head>
   <body>
     <header class="masthead">
@@ -303,7 +303,8 @@
         </div>
         <p class="under-note">
           Selections change prerecorded artifacts. Both policies replay at the same simulation clock; shorter episodes hold their final frame. The
-          result counts every scheduled rollout, including failures.
+          result counts every scheduled rollout, including failures. Seed 11 / Start 1 uses a 384px rerender of the saved simulator states; other
+          selections replay the original 128px policy-camera recording.
         </p>
       </section>
       <section id="practice" class="stage" aria-labelledby="practice-title" hidden>
@@ -355,8 +356,9 @@
           <details>
             <summary>Reproduce & continue training</summary>
             <p>
-              Scripts, fixed configuration, splits, training logs and restoration instructions live with the source. Local checkpoints include model
-              and optimizer state, normalization, epoch, RNG and data-loader state. Both validation-selected and last-epoch checkpoints are retained.
+              Scripts, fixed configuration, splits, training records and restoration instructions live with the source. Local checkpoints include
+              model and optimizer state, normalization, epoch, RNG and data-loader state. Both validation-selected and last-epoch checkpoints are
+              retained.
             </p>
             <a href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/projects/tiny-ego-vla" target="_blank" rel="noopener"
               >Open source & experiment notes ↗</a
