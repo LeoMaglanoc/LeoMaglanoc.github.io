@@ -30,7 +30,7 @@ featured_projects:
 
 builds:
   - title: Interactive Web Demos
-    description: "Fun demos created with coding agents"
+    description: "Fun demos created with coding agents."
     links:
       - label: Humanoid Walking
         url: /locomotion/

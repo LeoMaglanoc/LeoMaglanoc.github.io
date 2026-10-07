@@ -14,8 +14,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
-- [Language → Vision]({{ '/language-vision/' | relative_url }}) — type arbitrary visual concepts to retrieve SAM object masks with MobileCLIP embeddings, locally on your browser CPU
-
+- [Language → Vision]({{ '/language-vision/' | relative_url }})
 - [EuroGuessr AI]({{ '/euroguessr/' | relative_url }}) 
 - [RustZero]({{ '/rustzero/' | relative_url }}) 
 - [Coruscant Temple]({{ '/block-temple/' | relative_url }})
