@@ -1,0 +1,95 @@
+{
+  "url": "https://leonardo-maglanoc.com/tiny-ego-vla/",
+  "deploymentRun": 37655625548,
+  "blogLink": "/tiny-ego-vla/",
+  "viewports": {
+    "desktop": {
+      "clientWidth": 1309,
+      "height": 1000,
+      "scrollWidth": 1309,
+      "width": 1440
+    },
+    "portrait": {
+      "clientWidth": 355,
+      "height": 844,
+      "scrollWidth": 355,
+      "width": 390
+    },
+    "landscape": {
+      "clientWidth": 767,
+      "height": 390,
+      "scrollWidth": 767,
+      "width": 844
+    }
+  },
+  "checks": [
+    {
+      "human": {
+        "ready": 4,
+        "time": 2.7
+      }
+    },
+    {
+      "desktopPlayback": [
+        {
+          "id": "robot-only",
+          "ready": 4,
+          "time": 4.635105
+        },
+        {
+          "id": "ego-policy",
+          "ready": 4,
+          "time": 4.634577
+        }
+      ]
+    },
+    {
+      "portraitPlayback": [
+        {
+          "id": "robot-only",
+          "ready": 4,
+          "src": "https://leonardo-maglanoc.com/assets/interactive/tiny-ego-vla/media/robot-35-47-bowl_ramekin-4.mp4",
+          "time": 4.9
+        },
+        {
+          "id": "ego-policy",
+          "ready": 4,
+          "src": "https://leonardo-maglanoc.com/assets/interactive/tiny-ego-vla/media/ego-35-47-bowl_ramekin-4.mp4",
+          "time": 4.9
+        }
+      ]
+    },
+    {
+      "landscapePlayback": [
+        {
+          "id": "robot-only",
+          "ready": 4,
+          "time": 5.5
+        },
+        {
+          "id": "ego-policy",
+          "ready": 4,
+          "time": 5.89585
+        }
+      ]
+    }
+  ],
+  "consoleErrors": [],
+  "additionalScaledViewportChecks": {
+    "desktop": {
+      "dpr": 1.100000023841858,
+      "height": 1000,
+      "width": 1440
+    },
+    "portrait": {
+      "dpr": 1.100000023841858,
+      "height": 844,
+      "width": 390
+    },
+    "landscape": {
+      "dpr": 1.100000023841858,
+      "height": 390,
+      "width": 844
+    }
+  }
+}
