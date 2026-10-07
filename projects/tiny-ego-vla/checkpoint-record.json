@@ -1,0 +1,9 @@
+{
+  "path": "/home/leo/Desktop/LeoMaglanoc.github.io/projects/tiny-ego-vla/artifacts/TinyEgoVLA-continuation-20261007T171016Z.tar.gz",
+  "bytes": 837293053,
+  "sha256": "b12bddfacce4fb2438fd051c2eb68cc197f37a79b0d7a15f39bcd74990c472b3",
+  "created_utc": "20261007T171016Z",
+  "git_commit": "ab0d264e573e9e67ab1f94857e51e832f6dbd360",
+  "files": 866,
+  "restore": "Extract into a separate TinyEgoVLA project folder, verify continuation-manifest.json, recreate the pinned environment, then use --resume. Raw source datasets can be restored with tools/prepare.py."
+}
