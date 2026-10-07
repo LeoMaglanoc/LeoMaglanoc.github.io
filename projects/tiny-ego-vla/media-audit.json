@@ -1,0 +1,3666 @@
+{
+  "passed": true,
+  "scope": "complete exhibit",
+  "checks": "human first/middle/last frames align with labeled source (RGB MAE <10 including recompression); rollout first/middle/last frames align with retained source replay (RGB MAE <10); exact frame counts; 10fps H264 yuv420p video-only fast-start MP4",
+  "human": [
+    {
+      "clip": "pour",
+      "frames": 90,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.5467780671296296
+        },
+        {
+          "frame": 45,
+          "rgb_mae": 1.7768605324074074
+        },
+        {
+          "frame": 89,
+          "rgb_mae": 2.014681712962963
+        }
+      ],
+      "sha256": "c2e11e1560a30e7c6e547a48415f757b6ee9ef3793cdccf970374b9255d7df18"
+    },
+    {
+      "clip": "cup",
+      "frames": 52,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.4998712384259258
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 1.5309172453703703
+        },
+        {
+          "frame": 51,
+          "rgb_mae": 1.9006741898148147
+        }
+      ],
+      "sha256": "4c981ba1d1abddb8753092cfa83491c07116148b8b97ed105710d861d3ce7df4"
+    },
+    {
+      "clip": "milk",
+      "frames": 120,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.466490162037037
+        },
+        {
+          "frame": 60,
+          "rgb_mae": 1.6746903935185184
+        },
+        {
+          "frame": 119,
+          "rgb_mae": 1.6651070601851852
+        }
+      ],
+      "sha256": "535aaf89ec8fbd9ccee4b73bd49e349b174b9cc57463d32e8ffb6eb4652e370d"
+    }
+  ],
+  "rollouts": [
+    {
+      "video": "media/robot-4-11-bowl_plate-0.mp4",
+      "frames": 55,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 54,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "4ac83484fa67faf4eb2d78b4a031d51a47ed1e7fc71322282618dae48f47fdf9"
+    },
+    {
+      "video": "media/robot-4-11-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8766276041666667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2556559244791665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6414388020833335
+        }
+      ],
+      "sha256": "3b4c108ba5dfeec3cbb1b81b734d2e639030361e1667031e465f8507d6653bbb"
+    },
+    {
+      "video": "media/robot-4-11-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8372395833333333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.13043212890625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.4162394205729165
+        }
+      ],
+      "sha256": "ee3c1a03d301fb2c0125b978d9144ede83d52dcafc43c6d2c874248dee5092ce"
+    },
+    {
+      "video": "media/robot-4-11-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.88055419921875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3230997721354165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7519327799479165
+        }
+      ],
+      "sha256": "ce8db7ebaa044e0110a82b8a4981a34bae04bd833b947d72e66398a29fc2c041"
+    },
+    {
+      "video": "media/robot-4-11-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9169514973958333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5013224283854165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.4417724609375
+        }
+      ],
+      "sha256": "f3b79384a47fc04991f5007eea50e70f1e75cf7c7e1ecbfe07351f43f7c9d7c8"
+    },
+    {
+      "video": "media/robot-4-11-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "85e5cea858c571b535496c6dce70b5a67c66d67e4418d1122e179d6869eb6525"
+    },
+    {
+      "video": "media/robot-4-11-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9163818359375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.78814697265625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.1051025390625
+        }
+      ],
+      "sha256": "9f806adae753f20ee341a7bda50fcd4b67acffc5b57e3ee17288bb25b0154409"
+    },
+    {
+      "video": "media/robot-4-11-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.81292724609375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4345296223958335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9458821614583335
+        }
+      ],
+      "sha256": "1a282c49c181e147ce27e661442da5603abe79999fcd0ca7bc09499f5019935a"
+    },
+    {
+      "video": "media/robot-4-11-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8380330403645833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5721435546875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9490152994791665
+        }
+      ],
+      "sha256": "4df0d61ab65a64b1758a3c42d20459c0c8cd833698ab4f71db8ee013baeb5636"
+    },
+    {
+      "video": "media/robot-4-11-bowl_ramekin-4.mp4",
+      "frames": 96,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9196980794270833
+        },
+        {
+          "frame": 48,
+          "rgb_mae": 2.39398193359375
+        },
+        {
+          "frame": 95,
+          "rgb_mae": 2.7480061848958335
+        }
+      ],
+      "sha256": "1f71f5a2fe629124d632bae2133a99d42f8981cf76fa0c740308434f2270aa5a"
+    },
+    {
+      "video": "media/ego-4-11-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "0b41673eae98d1126337566ab2338b66dfbd656a11be1817e3880716c632b0ee"
+    },
+    {
+      "video": "media/ego-4-11-bowl_plate-1.mp4",
+      "frames": 41,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9225260416666667
+        },
+        {
+          "frame": 20,
+          "rgb_mae": 2.3968098958333335
+        },
+        {
+          "frame": 40,
+          "rgb_mae": 2.8154703776041665
+        }
+      ],
+      "sha256": "e134f1ad753d4ff9e8ad0f19039285b961debade4ef513e23d20a80b8345d925"
+    },
+    {
+      "video": "media/ego-4-11-bowl_plate-2.mp4",
+      "frames": 48,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8877360026041667
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.5094197591145835
+        },
+        {
+          "frame": 47,
+          "rgb_mae": 2.899658203125
+        }
+      ],
+      "sha256": "a83d57be7e4c879ef9d807c81208ecf6eea534435320a3f17ddda69250fe8792"
+    },
+    {
+      "video": "media/ego-4-11-bowl_plate-3.mp4",
+      "frames": 50,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9115804036458333
+        },
+        {
+          "frame": 25,
+          "rgb_mae": 2.4015706380208335
+        },
+        {
+          "frame": 49,
+          "rgb_mae": 3.0204874674479165
+        }
+      ],
+      "sha256": "286ba7fb28db10f177bc105ab795499a685c1b32a457e69deee5187c84e21b45"
+    },
+    {
+      "video": "media/ego-4-11-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9048055013020833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.43658447265625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7247517903645835
+        }
+      ],
+      "sha256": "a22c5f344e3a37d46953d60d31e72a478bed4708710c46ed82d6552a19898255"
+    },
+    {
+      "video": "media/ego-4-11-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "271d0032e9e6c7a7aa208a85a49da1b10ff5ee4dd1a0ffe8e54563dbb981babd"
+    },
+    {
+      "video": "media/ego-4-11-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8848063151041667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.44549560546875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7057291666666665
+        }
+      ],
+      "sha256": "e40e31e80bb0b81c4e5b772abf3b4b4a10e05f84d8a1bacd60b23457c35bd438"
+    },
+    {
+      "video": "media/ego-4-11-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.85498046875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2157999674479165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.788818359375
+        }
+      ],
+      "sha256": "3efbc38e109ca0ffc7f7a3ff98ce34ea1b1807cce14c58ccb16f673a337ed379"
+    },
+    {
+      "video": "media/ego-4-11-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.826416015625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6720987955729165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8969930013020835
+        }
+      ],
+      "sha256": "211d7e44adfd0921aab13d9549612fe4cdcf2aaca3bf6ee2cf450ecd04befdd7"
+    },
+    {
+      "video": "media/ego-4-11-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9412841796875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3442586263020835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.3257242838541665
+        }
+      ],
+      "sha256": "6c938108f6b412069a08dac884c2c48b980f15d37254ab8489c258c361e85d66"
+    },
+    {
+      "video": "media/robot-4-29-bowl_plate-0.mp4",
+      "frames": 43,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.89520263671875
+        },
+        {
+          "frame": 21,
+          "rgb_mae": 2.4525146484375
+        },
+        {
+          "frame": 42,
+          "rgb_mae": 2.8183390299479165
+        }
+      ],
+      "sha256": "31057f2701bd4e7ca0fce7ac59a19253cc6a645894cc5ea9f7dc652627883e54"
+    },
+    {
+      "video": "media/robot-4-29-bowl_plate-1.mp4",
+      "frames": 45,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9237874348958333
+        },
+        {
+          "frame": 22,
+          "rgb_mae": 2.3308512369791665
+        },
+        {
+          "frame": 44,
+          "rgb_mae": 2.851806640625
+        }
+      ],
+      "sha256": "28a19ad0ce2799f377277f88aa36530eeace30179987b01b11985d35d14b7c77"
+    },
+    {
+      "video": "media/robot-4-29-bowl_plate-2.mp4",
+      "frames": 55,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.7979532877604167
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.4412638346354165
+        },
+        {
+          "frame": 54,
+          "rgb_mae": 2.8911946614583335
+        }
+      ],
+      "sha256": "4df1c0b26b673d8df2bacbaa83e034e625b7a5dfbb6e40da4a93d1260ea1146a"
+    },
+    {
+      "video": "media/robot-4-29-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9090372721354167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.65362548828125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6820068359375
+        }
+      ],
+      "sha256": "9ac2b7b5625602845418db03d1ead5d2cdf8b6e8d693ddc7d4cac37ad9b6bda1"
+    },
+    {
+      "video": "media/robot-4-29-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9783732096354167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5942586263020835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.51666259765625
+        }
+      ],
+      "sha256": "e2030df524418fa0d9082f0ea18e3fd58d348aab2bc4999e87bd73bb66c0913c"
+    },
+    {
+      "video": "media/robot-4-29-bowl_ramekin-0.mp4",
+      "frames": 67,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8243815104166667
+        },
+        {
+          "frame": 33,
+          "rgb_mae": 2.18109130859375
+        },
+        {
+          "frame": 66,
+          "rgb_mae": 2.9638671875
+        }
+      ],
+      "sha256": "10b16b4a3cd333693565d0e9695009b42d6bd673f765f183e2d4479541424452"
+    },
+    {
+      "video": "media/robot-4-29-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8938395182291667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6443888346354165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.91778564453125
+        }
+      ],
+      "sha256": "8ef6213e3c2e78260105081faa02641cf4a94ceac399ffaee10e1e4e322a23b3"
+    },
+    {
+      "video": "media/robot-4-29-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8436075846354167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6419270833333335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7651163736979165
+        }
+      ],
+      "sha256": "1a70932e4d032cdc980a4e046381f17ee207981c562013488ac72a61c99b30fe"
+    },
+    {
+      "video": "media/robot-4-29-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8372802734375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6778971354166665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7627360026041665
+        }
+      ],
+      "sha256": "ad2ad07609347ad82bfd2802568fb4dbfece26e68137bc26222fddc35869dcfc"
+    },
+    {
+      "video": "media/robot-4-29-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8855997721354167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4405314127604165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.58355712890625
+        }
+      ],
+      "sha256": "68d09f4da0b21b082803cf0d1424ca4757a56c3b02bda13d2aa536bb53155102"
+    },
+    {
+      "video": "media/ego-4-29-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8835652669270833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5408121744791665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.1133219401041665
+        }
+      ],
+      "sha256": "16b846f3e17b28544795c1722a04ccc74ac25670f1517484f02553242cd47e81"
+    },
+    {
+      "video": "media/ego-4-29-bowl_plate-1.mp4",
+      "frames": 51,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9144694010416667
+        },
+        {
+          "frame": 25,
+          "rgb_mae": 2.4628092447916665
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.9112955729166665
+        }
+      ],
+      "sha256": "3d2e082871e80b209092a40e18cba378fbc786dfb8259a7d6c08b43845b9755d"
+    },
+    {
+      "video": "media/ego-4-29-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8905843098958333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3538411458333335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6848958333333335
+        }
+      ],
+      "sha256": "d247220db5440bf725667a24ec310aca7d0fc5850376225dd9722b5711843a58"
+    },
+    {
+      "video": "media/ego-4-29-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9127604166666667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.9523722330729165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.12640380859375
+        }
+      ],
+      "sha256": "972994bf912b93e1513949ab2ae19829b9b48b8100d3823cf9ce294af5284174"
+    },
+    {
+      "video": "media/ego-4-29-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.93182373046875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5700887044270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9106648763020835
+        }
+      ],
+      "sha256": "73bd03951d993570c77382c80de3a70770468f6a0df2914014e00cdbf4683a97"
+    },
+    {
+      "video": "media/ego-4-29-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8433634440104167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5074462890625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8144327799479165
+        }
+      ],
+      "sha256": "a8ab39211b0b432e3058317700c97935310ff2a9e0f9d96830fd9c8ad7ab296b"
+    },
+    {
+      "video": "media/ego-4-29-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9008382161458333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3848063151041665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.0976969401041665
+        }
+      ],
+      "sha256": "c3d4bc223089ba6fe069ddb3c510903a726e06fc10d5d8b2c6f4d75c63eacc7d"
+    },
+    {
+      "video": "media/ego-4-29-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8518473307291667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5050862630208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.71307373046875
+        }
+      ],
+      "sha256": "02e348c917d64d39365eb65c58fcebe043f25ec22885478f17f560922bf5b331"
+    },
+    {
+      "video": "media/ego-4-29-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.85009765625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5568033854166665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6833699544270835
+        }
+      ],
+      "sha256": "e9f122c4709a2b7a752ba8571b1b0cd9dcbb9cd2287e4018b3eaf6e700d42d9a"
+    },
+    {
+      "video": "media/ego-4-29-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9277547200520833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3677775065104165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8398640950520835
+        }
+      ],
+      "sha256": "65b2e74a836653e30310d87202289a5bbc4a075ae406185788d05b0814eb9243"
+    },
+    {
+      "video": "media/robot-4-47-bowl_plate-0.mp4",
+      "frames": 54,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9149373372395833
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.6362101236979165
+        },
+        {
+          "frame": 53,
+          "rgb_mae": 2.7939046223958335
+        }
+      ],
+      "sha256": "ab9646ba06527884f6e47467f9e91a42174d322cb8559082d016b2463651704f"
+    },
+    {
+      "video": "media/robot-4-47-bowl_plate-1.mp4",
+      "frames": 47,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.87701416015625
+        },
+        {
+          "frame": 23,
+          "rgb_mae": 2.4452311197916665
+        },
+        {
+          "frame": 46,
+          "rgb_mae": 2.8435262044270835
+        }
+      ],
+      "sha256": "f135315bd1c2266a101236e1b516e56363528bf4ce3f637251cddcca4368daeb"
+    },
+    {
+      "video": "media/robot-4-47-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8052571614583333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.45770263671875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7943929036458335
+        }
+      ],
+      "sha256": "3b2420c1a5bfdfced0c03cadab7f5fad0ac1317a0110e1a457b1dad313473f75"
+    },
+    {
+      "video": "media/robot-4-47-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9198404947916667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3729654947916665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7594807942708335
+        }
+      ],
+      "sha256": "7dd6a9b71df77e2911e0e84e78749241865176b7243de425f3d699039f828c0d"
+    },
+    {
+      "video": "media/robot-4-47-bowl_plate-4.mp4",
+      "frames": 47,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8978068033854167
+        },
+        {
+          "frame": 23,
+          "rgb_mae": 2.6543782552083335
+        },
+        {
+          "frame": 46,
+          "rgb_mae": 2.8356119791666665
+        }
+      ],
+      "sha256": "dab295c3b0fa93a51082c28b90bcc1778c2fffedfe9c83bd2c00abeabd6c584b"
+    },
+    {
+      "video": "media/robot-4-47-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8228759765625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.35797119140625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9559326171875
+        }
+      ],
+      "sha256": "daf9e6f6134161e69b02c198d07b5d93ef5130b25886f8242c299b1ab0220a21"
+    },
+    {
+      "video": "media/robot-4-47-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8022664388020833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.26739501953125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6639404296875
+        }
+      ],
+      "sha256": "434166d25b0a5d5bc73ab14230bd6246b300916b750c3c4f4966642156c7ae4f"
+    },
+    {
+      "video": "media/robot-4-47-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8237508138020833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4103800455729165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9141438802083335
+        }
+      ],
+      "sha256": "a68973c0a659f4346942e8e823496539f45a981737a55e91ce5b01ea4a4a842d"
+    },
+    {
+      "video": "media/robot-4-47-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8707478841145833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2840576171875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6443888346354165
+        }
+      ],
+      "sha256": "375ad4751229928001c140d5a8e5cff06c5047f2aba1606da68d5b9f00408243"
+    },
+    {
+      "video": "media/robot-4-47-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9212646484375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3716837565104165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7596232096354165
+        }
+      ],
+      "sha256": "a8b4137664c3598c6f1672727ca71a8eca90dc98fd1ee8cfe3d33ef5b6b6034d"
+    },
+    {
+      "video": "media/ego-4-47-bowl_plate-0.mp4",
+      "frames": 53,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9489542643229167
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 2.5379842122395835
+        },
+        {
+          "frame": 52,
+          "rgb_mae": 2.9125162760416665
+        }
+      ],
+      "sha256": "6d136026d2811a4f9b4da7eea1621581a7cc9cdd21e7eb93ef2e05ac8fcae871"
+    },
+    {
+      "video": "media/ego-4-47-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.956298828125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.1911824544270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.5775349934895835
+        }
+      ],
+      "sha256": "599327b386869acbaabb3fbcafeb753bb5df56328eaa8ee6e35880bde57cf42f"
+    },
+    {
+      "video": "media/ego-4-47-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8831990559895833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2522786458333335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.57080078125
+        }
+      ],
+      "sha256": "ab5551eaf43a6d882e41f840c10b209818c011c78edc4b1f8733f1eda8cfa995"
+    },
+    {
+      "video": "media/ego-4-47-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9256184895833333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4470011393229165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9259847005208335
+        }
+      ],
+      "sha256": "2f5cba91b0dee466ab3548019981302fa75297b67d1acc5f24953fc33efafa26"
+    },
+    {
+      "video": "media/ego-4-47-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8844401041666667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2287801106770835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6859944661458335
+        }
+      ],
+      "sha256": "a2eb3556ec7f8386895c7186886ed87d70c150d6f373129cc979cf8db654bba5"
+    },
+    {
+      "video": "media/ego-4-47-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8116455078125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3323974609375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.0004679361979165
+        }
+      ],
+      "sha256": "1f157f669d60483b65facefa67d76b5b4975bda6e94256b63aea5163d3ee71c7"
+    },
+    {
+      "video": "media/ego-4-47-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.92523193359375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2555135091145835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8114013671875
+        }
+      ],
+      "sha256": "0d7cf1e04bc8844da01d20df4cb84f6c87cb47f4df8c1ef89d27f10ccb0a4875"
+    },
+    {
+      "video": "media/ego-4-47-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8268636067708333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.63641357421875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8329671223958335
+        }
+      ],
+      "sha256": "376a04a7b666a8d98e619750b12d92bd1018cd9f4c32b942a31ccdd3d6a8f401"
+    },
+    {
+      "video": "media/ego-4-47-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8789469401041667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3924560546875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7452799479166665
+        }
+      ],
+      "sha256": "610cb073a5e7f21edf6e44975e498a813e98dc829dd228179afbcee3244f3c67"
+    },
+    {
+      "video": "media/ego-4-47-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9159952799479167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.591064453125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.3697713216145835
+        }
+      ],
+      "sha256": "3fe95bb0402685cf94f6a9536950a909a6b8de597e52f319e053f7b59681834a"
+    },
+    {
+      "video": "media/robot-9-11-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "f17bf65fca4c1e351587955be433b0e01a633daf0ea9d34226683ca9f5c34bcf"
+    },
+    {
+      "video": "media/robot-9-11-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.89111328125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.1786702473958335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6824747721354165
+        }
+      ],
+      "sha256": "8e6994d6f280a9f308cef553ac1ec439c45ff3d18cd1b6def803978c527a74de"
+    },
+    {
+      "video": "media/robot-9-11-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8476969401041667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.611083984375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.76446533203125
+        }
+      ],
+      "sha256": "0a3f3404cc505aea9cf7def4327299933c1c65bd9610b9abf5cad5a040852e00"
+    },
+    {
+      "video": "media/robot-9-11-bowl_plate-3.mp4",
+      "frames": 80,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9138590494791667
+        },
+        {
+          "frame": 40,
+          "rgb_mae": 2.4259440104166665
+        },
+        {
+          "frame": 79,
+          "rgb_mae": 2.7482503255208335
+        }
+      ],
+      "sha256": "cf6c3b7b53d5604a31efc801b3426b4e57cde7bb76b32760efde3acf0d791f46"
+    },
+    {
+      "video": "media/robot-9-11-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9235026041666667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5573527018229165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.01385498046875
+        }
+      ],
+      "sha256": "3017ba73390517f65b4a28fe02a23edf5f2a6a6b7b0253bb5813047848fac522"
+    },
+    {
+      "video": "media/robot-9-11-bowl_ramekin-0.mp4",
+      "frames": 54,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 53,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "5ef730b2559036932b7504998064c47e8eb6e4d7d457d7833e0e164f67f40acf"
+    },
+    {
+      "video": "media/robot-9-11-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.87396240234375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5177205403645835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8614908854166665
+        }
+      ],
+      "sha256": "afa9bd26cb7fd9dc88393d738c515904dfa77ee05f2a84c5bbf347badeef4f6a"
+    },
+    {
+      "video": "media/robot-9-11-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8332926432291667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5755208333333335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8777872721354165
+        }
+      ],
+      "sha256": "7a52004b415a34dc8fed60fca5c1044316f5319061cec5399889faf11659c91f"
+    },
+    {
+      "video": "media/robot-9-11-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8820597330729167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6272379557291665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9484456380208335
+        }
+      ],
+      "sha256": "bd6d6ba2e4f700e3216c84ff490d0ed5c1e7eddd14e1ae5ecce4e1a422cbf133"
+    },
+    {
+      "video": "media/robot-9-11-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9688720703125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.28021240234375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.87255859375
+        }
+      ],
+      "sha256": "da243e6086cfda7c51755d72aec8385d81481e25d0a421057e2afb101b127d8b"
+    },
+    {
+      "video": "media/ego-9-11-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "5f53d64236da672d7c63f543e5ebb4d94d0ca15211533de588133f48cdd2b948"
+    },
+    {
+      "video": "media/ego-9-11-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9411214192708333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5262451171875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7418416341145835
+        }
+      ],
+      "sha256": "8464240b3c5d77416af1710d59fc86b3fded540119f4235126052cd429bbc17a"
+    },
+    {
+      "video": "media/ego-9-11-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9075113932291667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3102823893229165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7811482747395835
+        }
+      ],
+      "sha256": "516524482dfa7b5fe2498b883123a9adf32279ffb14648bf225ce8128fbff4a5"
+    },
+    {
+      "video": "media/ego-9-11-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8531087239583333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.1410929361979165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.30059814453125
+        }
+      ],
+      "sha256": "af44150366760356bfb839373d44af585b8afa8c9a9a25a32f5b47db3dc1bb74"
+    },
+    {
+      "video": "media/ego-9-11-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.86431884765625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.60894775390625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8072916666666665
+        }
+      ],
+      "sha256": "3ba587f9b8af7fb14b11f27e2dafaf92bccfc613db2b25cef30f415a4f73471a"
+    },
+    {
+      "video": "media/ego-9-11-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "6b56caf31d836f5cc3a394165b952a0972de4fb59a5fa12b23ea4703ccb03549"
+    },
+    {
+      "video": "media/ego-9-11-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.84661865234375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.62213134765625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7439982096354165
+        }
+      ],
+      "sha256": "aa17d05955834b22103b2b47eef6d78313e6b129d1f18278b8c79b6e78637cf3"
+    },
+    {
+      "video": "media/ego-9-11-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8582560221354167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.1292724609375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6678873697916665
+        }
+      ],
+      "sha256": "2064a6112f7bc9da0453ee4606ef945a35226bd971b1908d70f1909128363d0f"
+    },
+    {
+      "video": "media/ego-9-11-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8617757161458333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4421793619791665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9061279296875
+        }
+      ],
+      "sha256": "11f1c543be1225d280a8b9988347e01a66a98cc2e1e2695976d480f10fb7a844"
+    },
+    {
+      "video": "media/ego-9-11-bowl_ramekin-4.mp4",
+      "frames": 48,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.90673828125
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.2379150390625
+        },
+        {
+          "frame": 47,
+          "rgb_mae": 2.95489501953125
+        }
+      ],
+      "sha256": "3a7908aeb097a0b9015dcbd01fba98a6adafcc5b51bb108248b2b1896f078429"
+    },
+    {
+      "video": "media/robot-9-29-bowl_plate-0.mp4",
+      "frames": 69,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9047648111979167
+        },
+        {
+          "frame": 34,
+          "rgb_mae": 2.6094767252604165
+        },
+        {
+          "frame": 68,
+          "rgb_mae": 2.6953328450520835
+        }
+      ],
+      "sha256": "31adf7a6da1402a7922d4e55b15cb18e7dc609cdd78cd3a23960e903841b560c"
+    },
+    {
+      "video": "media/robot-9-29-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9184773763020833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.7011922200520835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7734578450520835
+        }
+      ],
+      "sha256": "8a7f6254eeaa0cb70d3a46c68736399cb02441a77138f59cf8e9cf942a5d2ba6"
+    },
+    {
+      "video": "media/robot-9-29-bowl_plate-2.mp4",
+      "frames": 48,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.861572265625
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.2768147786458335
+        },
+        {
+          "frame": 47,
+          "rgb_mae": 2.6402384440104165
+        }
+      ],
+      "sha256": "9a2bfaedb0e35e049646e8dbd5064edbe145d35e4a5c484824a7b336aef0e840"
+    },
+    {
+      "video": "media/robot-9-29-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8627522786458333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.27349853515625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.4560750325520835
+        }
+      ],
+      "sha256": "4844b1bd1671172a3314fac01fc595c66a76a2d3c53c7e4ca31bbf81faea9eb4"
+    },
+    {
+      "video": "media/robot-9-29-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8857014973958333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.48944091796875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7616780598958335
+        }
+      ],
+      "sha256": "105fdc3a138447fe157011585c1a24e2b27f81f04c57985c5bdf960c31dd0ffb"
+    },
+    {
+      "video": "media/robot-9-29-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.86810302734375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6965738932291665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7535603841145835
+        }
+      ],
+      "sha256": "b4a2f4e9bd6e8fad8e6c1146a5e7324e040dd58618c0aa043ee21a5343f5f910"
+    },
+    {
+      "video": "media/robot-9-29-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8716227213541667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.37213134765625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.4275105794270835
+        }
+      ],
+      "sha256": "e5cc327f81765433999f6301d5c614f0bf8ea387a482ac4a352fcc369a7320fa"
+    },
+    {
+      "video": "media/robot-9-29-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.85430908203125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.1924235026041665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.4778645833333335
+        }
+      ],
+      "sha256": "0aa8f0be8ecb38799c173127a50cffc6f0bdc646e702061b44d935868afc8abb"
+    },
+    {
+      "video": "media/robot-9-29-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8699544270833333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6783650716145835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6636149088541665
+        }
+      ],
+      "sha256": "0cba2a7899e77d3bc0591962bbd379884551d06b2bad9a42b7e076f0af6ca2c6"
+    },
+    {
+      "video": "media/robot-9-29-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9225667317708333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5951131184895835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.801025390625
+        }
+      ],
+      "sha256": "7fd14b0c26735fa0e4833165e52e5a419185411d1de121a27c6111576fb07b7f"
+    },
+    {
+      "video": "media/ego-9-29-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9195353190104167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5728759765625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.776123046875
+        }
+      ],
+      "sha256": "cc5489b62d8a372476169cf9d6447b09af64ce95aadec58898363161b76c72fa"
+    },
+    {
+      "video": "media/ego-9-29-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.942626953125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.47967529296875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9977213541666665
+        }
+      ],
+      "sha256": "5fda3aa56cc3cb23483b2b8b91858e567e1bbf5a9c63beb317e2588c8340dd05"
+    },
+    {
+      "video": "media/ego-9-29-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9051717122395833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3761393229166665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8271280924479165
+        }
+      ],
+      "sha256": "4e407891988a2ead050d1361a33923266176ad4151a0927f3dae08b3eb620d1b"
+    },
+    {
+      "video": "media/ego-9-29-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8690185546875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3000081380208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8478190104166665
+        }
+      ],
+      "sha256": "1542a6fc9d15f44918252f0919843815cef1bda5c2e55c6879f4156bb2a60604"
+    },
+    {
+      "video": "media/ego-9-29-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9628092447916667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5943806966145835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.85272216796875
+        }
+      ],
+      "sha256": "3ddb5c96f57e2b856db940be29128f36fd400387027c2db1c1f86836abe30981"
+    },
+    {
+      "video": "media/ego-9-29-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8602294921875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3644816080729165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8120320638020835
+        }
+      ],
+      "sha256": "824d36a48088556b47518b8034fe5d4b7b111a9510dfd0783ee9720f59f7cbee"
+    },
+    {
+      "video": "media/ego-9-29-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9034627278645833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.48516845703125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.54974365234375
+        }
+      ],
+      "sha256": "1620986fa3e7b02aa60686f1e72f8ec03f5cfc777c116802c211e369fd908341"
+    },
+    {
+      "video": "media/ego-9-29-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.88726806640625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6023152669270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9053141276041665
+        }
+      ],
+      "sha256": "8510ba29c128a951ab3dbc6d5f747a8eec0ee52f3164b92c92a273b18761164f"
+    },
+    {
+      "video": "media/ego-9-29-bowl_ramekin-3.mp4",
+      "frames": 55,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.847412109375
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.19976806640625
+        },
+        {
+          "frame": 54,
+          "rgb_mae": 3.00079345703125
+        }
+      ],
+      "sha256": "9cc8ce618c31215673a667c7fb875923346ce2efe9f450d292f118b1f0d7acc5"
+    },
+    {
+      "video": "media/ego-9-29-bowl_ramekin-4.mp4",
+      "frames": 49,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9594523111979167
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.1662394205729165
+        },
+        {
+          "frame": 48,
+          "rgb_mae": 2.91778564453125
+        }
+      ],
+      "sha256": "1d9546dd39d7514b0dc02907ac68b1596df6aaf4c2cdd036f6ca8a81734513b9"
+    },
+    {
+      "video": "media/robot-9-47-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8465576171875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.39739990234375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.0967000325520835
+        }
+      ],
+      "sha256": "321e32fda6b99cbcd1dea8481c87f8f470cddafd60959b9a9fa053d62a9f1b6a"
+    },
+    {
+      "video": "media/robot-9-47-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.90863037109375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3171590169270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8529459635416665
+        }
+      ],
+      "sha256": "d2a44ced4964fca198207a42f7f6fe7bb89bdec62184880c4a17d2e040de7d31"
+    },
+    {
+      "video": "media/robot-9-47-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8300984700520833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3439127604166665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9264322916666665
+        }
+      ],
+      "sha256": "0e0eb9e4c0e68b305a3fdcca81a6cb6bbf41f85e61549857bc7f661312685b85"
+    },
+    {
+      "video": "media/robot-9-47-bowl_plate-3.mp4",
+      "frames": 50,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.88525390625
+        },
+        {
+          "frame": 25,
+          "rgb_mae": 2.239013671875
+        },
+        {
+          "frame": 49,
+          "rgb_mae": 2.96392822265625
+        }
+      ],
+      "sha256": "48cdae649ebdfc1e639329f911d6343f9c214f97bc55344e55e9c68b7a9d262a"
+    },
+    {
+      "video": "media/robot-9-47-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8800862630208333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.35528564453125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7072550455729165
+        }
+      ],
+      "sha256": "16ce5ddcbb41523f6e4e64de03afe9de16b98cb8e1e9bbe8de136f94a8275c1a"
+    },
+    {
+      "video": "media/robot-9-47-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8006795247395833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3646240234375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7633463541666665
+        }
+      ],
+      "sha256": "5733c9b62255ab1147689359ee513cc600411f85917a5ae0f279e47fd77c7da1"
+    },
+    {
+      "video": "media/robot-9-47-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.83477783203125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.45660400390625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8567708333333335
+        }
+      ],
+      "sha256": "2a26d9c23663d6aee0ba673e24011b5034a4b4eeb1370c603a5a736a04ea9148"
+    },
+    {
+      "video": "media/robot-9-47-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8435262044270833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6053873697916665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.967529296875
+        }
+      ],
+      "sha256": "ef82b32ae5071ac4d240259fba5ca4f87a31a09931c3fd0e8c0969ac6232c3d4"
+    },
+    {
+      "video": "media/robot-9-47-bowl_ramekin-3.mp4",
+      "frames": 56,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8617146809895833
+        },
+        {
+          "frame": 28,
+          "rgb_mae": 2.1672770182291665
+        },
+        {
+          "frame": 55,
+          "rgb_mae": 2.931640625
+        }
+      ],
+      "sha256": "f9c8889eb0167d231581c543e32feb6ff3f9dc48bf8c6a024e85d11d29f14a4d"
+    },
+    {
+      "video": "media/robot-9-47-bowl_ramekin-4.mp4",
+      "frames": 55,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9449869791666667
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.3757731119791665
+        },
+        {
+          "frame": 54,
+          "rgb_mae": 3.0248819986979165
+        }
+      ],
+      "sha256": "00396a28b4f7a02237c7fac91097d9282cf13414b01b4ae1686ca630d489c91f"
+    },
+    {
+      "video": "media/ego-9-47-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.864990234375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3033854166666665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7058308919270835
+        }
+      ],
+      "sha256": "73ee5a95609e03971017f4d78b749f6a64d42a2600ec455f927577834db5ea3f"
+    },
+    {
+      "video": "media/ego-9-47-bowl_plate-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9646402994791667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.27703857421875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.5273234049479165
+        }
+      ],
+      "sha256": "e71a8e2f1e3031cdf5a4093cab0bd8e2e764883e7dd69f32e40ff492e8f09a35"
+    },
+    {
+      "video": "media/ego-9-47-bowl_plate-2.mp4",
+      "frames": 53,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8483479817708333
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 2.5202840169270835
+        },
+        {
+          "frame": 52,
+          "rgb_mae": 2.80242919921875
+        }
+      ],
+      "sha256": "13147fa4f600fdff2e8a95fa7b4bbdc2ebb72842ae0786c5edb0c1c7fe9ba8ee"
+    },
+    {
+      "video": "media/ego-9-47-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8883056640625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3204549153645835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.5821126302083335
+        }
+      ],
+      "sha256": "f3f7a63bd3099c7623929555ed065d8e9005b5c50ebeb5bb5557a9be4a2b8c2b"
+    },
+    {
+      "video": "media/ego-9-47-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8910725911458333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.2585652669270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6597493489583335
+        }
+      ],
+      "sha256": "0897d1c87646f98120750175478658058cef691ce4dbd5d4ec4dd5c60d656791"
+    },
+    {
+      "video": "media/ego-9-47-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8139444986979167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.614501953125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.83221435546875
+        }
+      ],
+      "sha256": "47812a700ec4fb537f48bdeb465c3d94b540f4106a69d057b83365bbeb0bdab8"
+    },
+    {
+      "video": "media/ego-9-47-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8441975911458333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6866658528645835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6880900065104165
+        }
+      ],
+      "sha256": "52dc744c603aff3aa1cf55f92d46408a7f06297c8985e98b2698153d498417cc"
+    },
+    {
+      "video": "media/ego-9-47-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8295694986979167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4661458333333335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6964518229166665
+        }
+      ],
+      "sha256": "b9a84894d7a73c5f0771b45b18b53308ba2aeb8ca59c935a3188af41b886d5c9"
+    },
+    {
+      "video": "media/ego-9-47-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.86822509765625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5583699544270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8960978190104165
+        }
+      ],
+      "sha256": "8428d10348c197aa4a69e16a03a12180fa2be6c18624bfca3e316a294f17338c"
+    },
+    {
+      "video": "media/ego-9-47-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9860432942708333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5444539388020835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7105509440104165
+        }
+      ],
+      "sha256": "0740df6ad0784e3512e11cac6f8c08b7eba13fbe9840def6ee34823140384fd6"
+    },
+    {
+      "video": "media/robot-35-11-bowl_plate-0.mp4",
+      "frames": 57,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 28,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 56,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "373131a5765525b97f3fabbf9b03fad93bd6ed0553f23a584bf7360409358d64"
+    },
+    {
+      "video": "media/robot-35-11-bowl_plate-1.mp4",
+      "frames": 52,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9320271809895833
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 2.4825642903645835
+        },
+        {
+          "frame": 51,
+          "rgb_mae": 2.9540201822916665
+        }
+      ],
+      "sha256": "7aa107ea84c48700a45d2451e03ca57c9ca645f6e88c9202d5656bf7a4ace47e"
+    },
+    {
+      "video": "media/robot-35-11-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.86279296875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.55255126953125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9730631510416665
+        }
+      ],
+      "sha256": "a12003597be6ea8b4207b02dad79ced5014515f9d4f66e2925c0eb7abf00815c"
+    },
+    {
+      "video": "media/robot-35-11-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.93096923828125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.16644287109375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9490763346354165
+        }
+      ],
+      "sha256": "c9fcf4b25422e4cfb88a6501b9628c4393deea3d213b4b27e98ed2126494a07c"
+    },
+    {
+      "video": "media/robot-35-11-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.87548828125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.7178548177083335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8577473958333335
+        }
+      ],
+      "sha256": "cc1061674d6d7b6fe6d1e3f9e1a2d5d3c950ed9d3c81e56210e8076732ec1660"
+    },
+    {
+      "video": "media/robot-35-11-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "feb3490eece122097995ee351802676ec6c65f98e45cdf4b637fdc842127f6d5"
+    },
+    {
+      "video": "media/robot-35-11-bowl_ramekin-1.mp4",
+      "frames": 59,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8689982096354167
+        },
+        {
+          "frame": 29,
+          "rgb_mae": 2.3054606119791665
+        },
+        {
+          "frame": 58,
+          "rgb_mae": 3.1414388020833335
+        }
+      ],
+      "sha256": "a4af810c1be621c77e65474b911815cff5f05d4fdeab7699b7f271d1c8dacc00"
+    },
+    {
+      "video": "media/robot-35-11-bowl_ramekin-2.mp4",
+      "frames": 55,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.83221435546875
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.2432657877604165
+        },
+        {
+          "frame": 54,
+          "rgb_mae": 3.0688273111979165
+        }
+      ],
+      "sha256": "602047d5a081dce216a9aea2b5be68e3e845fcfe15df7c52f37330b148973d33"
+    },
+    {
+      "video": "media/robot-35-11-bowl_ramekin-3.mp4",
+      "frames": 65,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.86181640625
+        },
+        {
+          "frame": 32,
+          "rgb_mae": 2.1345621744791665
+        },
+        {
+          "frame": 64,
+          "rgb_mae": 3.1415608723958335
+        }
+      ],
+      "sha256": "28b847b71b5b761f479d5f9f88a1d25a4744fe4bdf79d709aee850ae9dfa54e5"
+    },
+    {
+      "video": "media/robot-35-11-bowl_ramekin-4.mp4",
+      "frames": 54,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8979695638020833
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.2073567708333335
+        },
+        {
+          "frame": 53,
+          "rgb_mae": 2.9115804036458335
+        }
+      ],
+      "sha256": "4ccba5ef2984f4dffb881126b9e93f2f25970e3e01cefb8f5d22b173c866d0cf"
+    },
+    {
+      "video": "media/ego-35-11-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "dab9aa57b64c695b2b8d8b5b877e89ce9e627bf0f20ae0347c49d28a486b2875"
+    },
+    {
+      "video": "media/ego-35-11-bowl_plate-1.mp4",
+      "frames": 69,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9342447916666667
+        },
+        {
+          "frame": 34,
+          "rgb_mae": 2.6166178385416665
+        },
+        {
+          "frame": 68,
+          "rgb_mae": 2.81298828125
+        }
+      ],
+      "sha256": "36255185fb2abec405cf7357148a370611bfabc7bec6eea281482afa5167cce2"
+    },
+    {
+      "video": "media/ego-35-11-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9112955729166667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.8234456380208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.0312093098958335
+        }
+      ],
+      "sha256": "24c7600195bdfd8be56659de883543d44c360a3c196ece7b7e4bd4155b9d610e"
+    },
+    {
+      "video": "media/ego-35-11-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9047037760416667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4962972005208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8073933919270835
+        }
+      ],
+      "sha256": "75cfdd85d42ee516b212530e2d4feac651161b7f0aa74adccfa9555e102f16d9"
+    },
+    {
+      "video": "media/ego-35-11-bowl_plate-4.mp4",
+      "frames": 50,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.91156005859375
+        },
+        {
+          "frame": 25,
+          "rgb_mae": 2.4743245442708335
+        },
+        {
+          "frame": 49,
+          "rgb_mae": 2.8542073567708335
+        }
+      ],
+      "sha256": "8fbe43fe293f5d23ed835ba851dc09d88c5f5e6c973cd9f337f52ba16ca6b30e"
+    },
+    {
+      "video": "media/ego-35-11-bowl_ramekin-0.mp4",
+      "frames": 48,
+      "size": 384,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 0.0
+        },
+        {
+          "frame": 47,
+          "rgb_mae": 0.0
+        }
+      ],
+      "sha256": "9eff2a05ea5f67e0698e206381d3d4a89e1b7c11ab81ed763fc37fcd9886c84f"
+    },
+    {
+      "video": "media/ego-35-11-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9210611979166667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.7206217447916665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7187296549479165
+        }
+      ],
+      "sha256": "10c2fa9322e62e386ac02430d7b8b9849dfd8bd779c11153635a5a52d1339e09"
+    },
+    {
+      "video": "media/ego-35-11-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8531697591145833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.7031046549479165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8638509114583335
+        }
+      ],
+      "sha256": "fa90fbd1e5808b31371be3bce0b4bd4e7f1111cd6cabc6cf4799f2b52d0514fa"
+    },
+    {
+      "video": "media/ego-35-11-bowl_ramekin-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8412679036458333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6990763346354165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6604207356770835
+        }
+      ],
+      "sha256": "f0de508256bb64e3e950f1ba4073ecb820cd9c8c25a3b1c1d2e2111d6cfab568"
+    },
+    {
+      "video": "media/ego-35-11-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9567464192708333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6465047200520835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8319091796875
+        }
+      ],
+      "sha256": "e1d641bacbb2fd452088be169ca94722b3367cc7cbb584390e66a30eb99cf52f"
+    },
+    {
+      "video": "media/robot-35-29-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.90899658203125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3250935872395835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.5254720052083335
+        }
+      ],
+      "sha256": "3f794b7bfbfad281722298ef26775380feb6a8e5014001fc52b914f49df64b10"
+    },
+    {
+      "video": "media/robot-35-29-bowl_plate-1.mp4",
+      "frames": 76,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9657185872395833
+        },
+        {
+          "frame": 38,
+          "rgb_mae": 2.5354207356770835
+        },
+        {
+          "frame": 75,
+          "rgb_mae": 2.7665812174479165
+        }
+      ],
+      "sha256": "908b932256318f374b9ebfc7d5fce102cf5d6b95b4c9eedfe7d5f8b521fa5625"
+    },
+    {
+      "video": "media/robot-35-29-bowl_plate-2.mp4",
+      "frames": 61,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8515625
+        },
+        {
+          "frame": 30,
+          "rgb_mae": 2.6190388997395835
+        },
+        {
+          "frame": 60,
+          "rgb_mae": 2.8431396484375
+        }
+      ],
+      "sha256": "0e3d5e9eef1a4000c6d5681e219ea091d303d4b5e514b5fbb0542cd602fbc4c4"
+    },
+    {
+      "video": "media/robot-35-29-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9296671549479167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.74041748046875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9321695963541665
+        }
+      ],
+      "sha256": "9588133f011babc07c6f6e28dc82e7e745979eaa1fce905d351d1fbd205df765"
+    },
+    {
+      "video": "media/robot-35-29-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9360148111979167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6789143880208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9001668294270835
+        }
+      ],
+      "sha256": "4560ea664d7da148b4ac79ccf6474019fc32106ec713b5c88e83fdd9ff4c6f02"
+    },
+    {
+      "video": "media/robot-35-29-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.822021484375
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4630533854166665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.9436442057291665
+        }
+      ],
+      "sha256": "ca96cc572363fb0f35c483a826f839dcfa6db57df86506fc6dbe795bd412e930"
+    },
+    {
+      "video": "media/robot-35-29-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8204345703125
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5764973958333335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.00482177734375
+        }
+      ],
+      "sha256": "3968a4222c2b74c02552b865412ab82bef6063f19e10edee86c370c51d5b2268"
+    },
+    {
+      "video": "media/robot-35-29-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9014689127604167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.7690633138020835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8930257161458335
+        }
+      ],
+      "sha256": "28302f111c5fe3066e658faac485d4ff0e2957fa03a519fe8886989d8d477d95"
+    },
+    {
+      "video": "media/robot-35-29-bowl_ramekin-3.mp4",
+      "frames": 60,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8379313151041667
+        },
+        {
+          "frame": 30,
+          "rgb_mae": 2.2898152669270835
+        },
+        {
+          "frame": 59,
+          "rgb_mae": 3.09027099609375
+        }
+      ],
+      "sha256": "daa4e680a5695a6bc2e15051c3cca91662d051e67d5afff30dfdad7c8a7e0037"
+    },
+    {
+      "video": "media/robot-35-29-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9558308919270833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.6190185546875
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8126220703125
+        }
+      ],
+      "sha256": "a22f938cff55f926b94caa6b7c29566917cf3b9c1e9ad1eb952d519729716af2"
+    },
+    {
+      "video": "media/ego-35-29-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9525349934895833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4926961263020835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8352864583333335
+        }
+      ],
+      "sha256": "331619ea809fbbf7a587b603017069cfdc05d4e53183e229bab0fb30b1c10617"
+    },
+    {
+      "video": "media/ego-35-29-bowl_plate-1.mp4",
+      "frames": 78,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9402669270833333
+        },
+        {
+          "frame": 39,
+          "rgb_mae": 2.4692179361979165
+        },
+        {
+          "frame": 77,
+          "rgb_mae": 2.5863850911458335
+        }
+      ],
+      "sha256": "37ba75ec42569300e7d9c722013b7402a8a35efca951926c6a68390992b04cb0"
+    },
+    {
+      "video": "media/ego-35-29-bowl_plate-2.mp4",
+      "frames": 67,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.92327880859375
+        },
+        {
+          "frame": 33,
+          "rgb_mae": 2.6417439778645835
+        },
+        {
+          "frame": 66,
+          "rgb_mae": 2.7830607096354165
+        }
+      ],
+      "sha256": "55f0279b1f77d4cff5cf3be16f927dc94c25ff34c328de85c5575bafd7b5200b"
+    },
+    {
+      "video": "media/ego-35-29-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9321695963541667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5251668294270835
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6693318684895835
+        }
+      ],
+      "sha256": "d733e5721dc505a64ba876b42fb5eabe0596057ff95ee85e60c7cecf4d6e7e2f"
+    },
+    {
+      "video": "media/ego-35-29-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.92730712890625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.53350830078125
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.708740234375
+        }
+      ],
+      "sha256": "f017ea5fe6cddb32503b5c74c54fd8459d34cd5c8fd9279ebb5765208c1bcb5e"
+    },
+    {
+      "video": "media/ego-35-29-bowl_ramekin-0.mp4",
+      "frames": 50,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.847412109375
+        },
+        {
+          "frame": 25,
+          "rgb_mae": 2.0901692708333335
+        },
+        {
+          "frame": 49,
+          "rgb_mae": 2.96148681640625
+        }
+      ],
+      "sha256": "1c24485de6dea890e5d205111675b920a84084af8af903e8fe72367dfb11b05a"
+    },
+    {
+      "video": "media/ego-35-29-bowl_ramekin-1.mp4",
+      "frames": 61,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8582356770833333
+        },
+        {
+          "frame": 30,
+          "rgb_mae": 2.2255045572916665
+        },
+        {
+          "frame": 60,
+          "rgb_mae": 3.04803466796875
+        }
+      ],
+      "sha256": "984b1d1f0a8bf0905412332875ceacff890d133f6f2288eca098af0ca7ac4c35"
+    },
+    {
+      "video": "media/ego-35-29-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8594156901041667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.8231608072916665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 3.0103556315104165
+        }
+      ],
+      "sha256": "7eda714c121da055501d0db0b4caa6086fcbed03ebe8a33fbec030c2399b5d15"
+    },
+    {
+      "video": "media/ego-35-29-bowl_ramekin-3.mp4",
+      "frames": 50,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8709513346354167
+        },
+        {
+          "frame": 25,
+          "rgb_mae": 2.29345703125
+        },
+        {
+          "frame": 49,
+          "rgb_mae": 3.1015828450520835
+        }
+      ],
+      "sha256": "a357a1aa87e8f57f462c0c99b17058c3e3e57df83ce62635825cacc6e639433b"
+    },
+    {
+      "video": "media/ego-35-29-bowl_ramekin-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9101765950520833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.4435628255208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8791707356770835
+        }
+      ],
+      "sha256": "7aba9e38db42bbe1f1a0acf6d5844c846dadfb04eef7c06b83bbbd77fe93b0ca"
+    },
+    {
+      "video": "media/robot-35-47-bowl_plate-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9751790364583333
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.27301025390625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7464396158854165
+        }
+      ],
+      "sha256": "9717d63d1b49d50bf785d0a0d805eafe375cc8da8a590e25ce27a88ddb05f771"
+    },
+    {
+      "video": "media/robot-35-47-bowl_plate-1.mp4",
+      "frames": 49,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9403889973958333
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.3755696614583335
+        },
+        {
+          "frame": 48,
+          "rgb_mae": 2.8460693359375
+        }
+      ],
+      "sha256": "7be6a7e211c3bbc52901eaba4ff615125d9f372512bf341601b446e5c3336876"
+    },
+    {
+      "video": "media/robot-35-47-bowl_plate-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8654988606770833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.63970947265625
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6955769856770835
+        }
+      ],
+      "sha256": "cc95f9677e9b5bd037bd0b6d8da36fb81eb6980b7f0695fe9c086fcd32427a4a"
+    },
+    {
+      "video": "media/robot-35-47-bowl_plate-3.mp4",
+      "frames": 47,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9117635091145833
+        },
+        {
+          "frame": 23,
+          "rgb_mae": 2.47711181640625
+        },
+        {
+          "frame": 46,
+          "rgb_mae": 2.9785359700520835
+        }
+      ],
+      "sha256": "aa968d3e4566e44573124f3be112f56daf2a399ea446938d205ef807168c374a"
+    },
+    {
+      "video": "media/robot-35-47-bowl_plate-4.mp4",
+      "frames": 47,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.94122314453125
+        },
+        {
+          "frame": 23,
+          "rgb_mae": 2.3534952799479165
+        },
+        {
+          "frame": 46,
+          "rgb_mae": 2.8286946614583335
+        }
+      ],
+      "sha256": "c54c51ab612f61b076069dce81b773030fd2019fd2690722dfa29a804edea6b0"
+    },
+    {
+      "video": "media/robot-35-47-bowl_ramekin-0.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.818603515625
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.679443359375
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7831013997395835
+        }
+      ],
+      "sha256": "1979795d264ecb873fab93f8e73ef0d3aff4d54e1fd4ceda65e2911e3ddb9725"
+    },
+    {
+      "video": "media/robot-35-47-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9461669921875
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3940836588541665
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6210734049479165
+        }
+      ],
+      "sha256": "8ca589c64ea2db2c2ec99e58bde7bf49b8aa69b5a03fa2c2ef2754a453c3492b"
+    },
+    {
+      "video": "media/robot-35-47-bowl_ramekin-2.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8314412434895833
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5568644205729165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.6307576497395835
+        }
+      ],
+      "sha256": "66902dfaa7c983d85d152436647a4465c92b0c3c98bd98405f8714b0d82c7350"
+    },
+    {
+      "video": "media/robot-35-47-bowl_ramekin-3.mp4",
+      "frames": 64,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8974609375
+        },
+        {
+          "frame": 32,
+          "rgb_mae": 2.15020751953125
+        },
+        {
+          "frame": 63,
+          "rgb_mae": 2.86090087890625
+        }
+      ],
+      "sha256": "550c10b1b93ec5834fb3d7ff1c59f7a1c85d1bf90382a2c7806d4671c2682f7e"
+    },
+    {
+      "video": "media/robot-35-47-bowl_ramekin-4.mp4",
+      "frames": 49,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.93792724609375
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.3353068033854165
+        },
+        {
+          "frame": 48,
+          "rgb_mae": 2.85418701171875
+        }
+      ],
+      "sha256": "b8b1abc0dd49a81969191064615fda00601e7286ce21d7c78eb33063c385fe10"
+    },
+    {
+      "video": "media/ego-35-47-bowl_plate-0.mp4",
+      "frames": 47,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.99664306640625
+        },
+        {
+          "frame": 23,
+          "rgb_mae": 2.7105305989583335
+        },
+        {
+          "frame": 46,
+          "rgb_mae": 2.7738444010416665
+        }
+      ],
+      "sha256": "4d6c2e808c24fc1c81cb3513d1d65810e881cf495909469c510e30c6c0251af1"
+    },
+    {
+      "video": "media/ego-35-47-bowl_plate-1.mp4",
+      "frames": 49,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.953125
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.6132405598958335
+        },
+        {
+          "frame": 48,
+          "rgb_mae": 2.8103230794270835
+        }
+      ],
+      "sha256": "73502089bb9a13d989515aa86ce846a78e7e89d105aa7a23afb3d5922e86d1d9"
+    },
+    {
+      "video": "media/ego-35-47-bowl_plate-2.mp4",
+      "frames": 52,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8635457356770833
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 2.3234659830729165
+        },
+        {
+          "frame": 51,
+          "rgb_mae": 2.7830810546875
+        }
+      ],
+      "sha256": "2c79e292eb38d8a09cd3b18893dd902c22511b3cc74f963b1b8c63f135b94f13"
+    },
+    {
+      "video": "media/ego-35-47-bowl_plate-3.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9110514322916667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5890909830729165
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.7376708984375
+        }
+      ],
+      "sha256": "60239496ad5555a65cb522251da04b2de4211624e5eed6bb83b07e76bd456abd"
+    },
+    {
+      "video": "media/ego-35-47-bowl_plate-4.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9089762369791667
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.3009847005208335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.67596435546875
+        }
+      ],
+      "sha256": "b7987ac5fa2c5d5bd730f3198b831d985437f678fb5f0f5ae0ef4ceb0a83cf98"
+    },
+    {
+      "video": "media/ego-35-47-bowl_ramekin-0.mp4",
+      "frames": 55,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.81793212890625
+        },
+        {
+          "frame": 27,
+          "rgb_mae": 2.1076253255208335
+        },
+        {
+          "frame": 54,
+          "rgb_mae": 2.9591064453125
+        }
+      ],
+      "sha256": "20cbdb68f8515e8a3244d9057bc90aad15e2bdb79be138790e47a1cb5e88c0ac"
+    },
+    {
+      "video": "media/ego-35-47-bowl_ramekin-1.mp4",
+      "frames": 101,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8957316080729167
+        },
+        {
+          "frame": 50,
+          "rgb_mae": 2.5414632161458335
+        },
+        {
+          "frame": 100,
+          "rgb_mae": 2.8523966471354165
+        }
+      ],
+      "sha256": "d3a061fb2236d54cbc95b6a0113efd07064d7bbf9a52ccb65d6e0ac8d060dd4a"
+    },
+    {
+      "video": "media/ego-35-47-bowl_ramekin-2.mp4",
+      "frames": 52,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8233846028645833
+        },
+        {
+          "frame": 26,
+          "rgb_mae": 2.210693359375
+        },
+        {
+          "frame": 51,
+          "rgb_mae": 2.9544474283854165
+        }
+      ],
+      "sha256": "8f264ecd7947bd5e7becf98a0ad00020524619d952562f91f6732d25fbdafb56"
+    },
+    {
+      "video": "media/ego-35-47-bowl_ramekin-3.mp4",
+      "frames": 60,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.8432413736979167
+        },
+        {
+          "frame": 30,
+          "rgb_mae": 2.3213704427083335
+        },
+        {
+          "frame": 59,
+          "rgb_mae": 2.8711140950520835
+        }
+      ],
+      "sha256": "443cec91d5213acbabb0049e4b448739448f5f06a6cec3a21276f58d973fe22f"
+    },
+    {
+      "video": "media/ego-35-47-bowl_ramekin-4.mp4",
+      "frames": 49,
+      "size": 128,
+      "alignment_samples": [
+        {
+          "frame": 0,
+          "rgb_mae": 1.9397176106770833
+        },
+        {
+          "frame": 24,
+          "rgb_mae": 2.2416585286458335
+        },
+        {
+          "frame": 48,
+          "rgb_mae": 2.9989217122395835
+        }
+      ],
+      "sha256": "d21932800c068d7e6a007d5229b3f4221802d53eff8acb795994f317a6139d90"
+    }
+  ]
+}

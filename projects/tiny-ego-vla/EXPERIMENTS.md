@@ -124,3 +124,13 @@ All 180 scheduled episodes are retained, including failures. Counts below use th
 Sum of recorded per-episode elapsed times: 4736.45 s (range 9.37–67.82 s). These include episode reset, policy inference, simulation/rendering and original archive/video writing under varying concurrent laptop load. They exclude process/encoder setup and interrupted partial episodes. They are neither isolated CPU-time measurements nor real-time robot performance.
 
 The low-data comparisons favor robot-only training. At full budget, the ego variant leads by only one success across correlated starts; seed variation is much larger. Together with failed human-prediction baselines, this provides no convincing evidence of useful egocentric transfer in this subset. It does not establish that egocentric pretraining is ineffective in general.
+
+Independent action-sequence audit completed: **180/180 trajectories reproduced with maximum state error exactly 0.0**, and all original outcomes/first-success timings matched. The separate restored-final-pose check differs in 3 cases.
+
+| Demos per task | Official robot / ego | Restored-final-pose robot / ego |
+| -------------- | -------------------- | ------------------------------- |
+| 4              | 9 / 5                | 7 / 5                           |
+| 9              | 7 / 4                | 7 / 4                           |
+| 35             | 14 / 15              | 14 / 14                         |
+
+These alternate final-pose counts are a diagnostic computed after evaluation, not a replacement metric or a settling test.

@@ -16,8 +16,8 @@ Interactive demos and games, newest first by creation date:
 
 - [TinyEgoVLA]({{ '/tiny-ego-vla/' | relative_url }})
 - [Language → Vision]({{ '/language-vision/' | relative_url }})
-- [EuroGuessr AI]({{ '/euroguessr/' | relative_url }}) 
-- [RustZero]({{ '/rustzero/' | relative_url }}) 
+- [EuroGuessr AI]({{ '/euroguessr/' | relative_url }})
+- [RustZero]({{ '/rustzero/' | relative_url }})
 - [BlockTemple]({{ '/block-temple/' | relative_url }})
 - [Block World]({{ '/block-world/' | relative_url }})
 - [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }})

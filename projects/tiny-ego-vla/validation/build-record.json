@@ -1,0 +1,11 @@
+{
+  "source_commit": "4cde63ad17ce7c31942be4c678b00e1fcea7bf62",
+  "built_bytes": 990271388,
+  "route_checker": "21 routes / 92 HTML dependencies passed",
+  "full_export": true,
+  "rollout_count": 180,
+  "files": {
+    "assets/interactive/tiny-ego-vla/results.json": "da591d0383d174997116d2d2211260aa2193f6cee25433bd39fc57bed3b6d1a9",
+    "_site/assets/interactive/tiny-ego-vla/app.js": "19ef2abe7022faab19a2b4cfa24ba93134a532376a770a603a372448a4aa09a0"
+  }
+}

@@ -1,0 +1,1809 @@
+{
+  "passed": true,
+  "checks": "all raw action/state/frame lengths; finite bounded controls and binary gripper; exact held-out start; checkpoint hashes; independent saved-action replay; every control-step state matches within 1e-8; no earlier omitted success; official per-step LIBERO goal predicate; separate restored-final-pose diagnostic",
+  "maximum_replay_state_error": 0.0,
+  "goal_boundary_differences": 3,
+  "success_semantics": "Official goal evaluated immediately after each control action. MuJoCo position/contact caches precede its final 2ms integration; restoring qpos/qvel and forwarding can change boundary contacts. This is not a durable-placement or settling test.",
+  "records": [
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "0988e66c62a6d569847fe404cad50f090de1d678c439b52a861bd381089e78d8"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d1c75d18016ced20eb446f552cfc5a59f44460f5dc4bdf73fd52846ae9fa0ba5"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7f0d0e1f1b0d773d32881c7c3fe5ba8f985d786e816f961401ae728801a56ee0"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7896317505b9fe9fa650d7dbfa31511241489374f79dbe742e5ef5409cf85747"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "145c296aa5a08d8b5798c8b8a59d230fb2d66421daf25566c9c61da4244a5aad"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4c0f8ef7663abc84c56fd64d1d54d7a24fba5c915a834b62e15002464af4edbf"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "2d05324d738e9c0010494003370635e3df9eaa67cb1c93eef189922793218603"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ab48b9681f678bf713a45b8fc0dbd5ed61951a3f92e8473d5a7a58b3ad8bd384"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6a2f82e3a324c5c737d174f12f82fbe0269262a23130af7f0b9d9cc788dd86f9"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "bdf84df7d8551e8f53b333795e62fea669561b32dc28e9b90089f1090c39d0df"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "91cb6affcceb094bd00e9fbd0fb7c1eaab5392181618726057e4e66aecc10fc7"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "374623d9e3bc830db173f6b127d5e13648274a13628f556e2597e66de9d54d47"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "77f9b392a2c513a9aaf9600190d264691858c3932fe812efb15fa9c81cad4b17"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c431bdaa40f906e82634a36e3c0f12f3f5d99aa3202ea0e2e210235f4ae085b4"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8ab8682ace2f7c71f035402cd0b900158f2984c6c89d84fcc394453ae8f6c6e5"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "3f0c8f5c88c5742582c720aefeac8c7c34b832bfe5b99c5fecabc6b64d31a0db"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "cda4eded1f07c9cbf6b1ce716d6abb1f759f81e2536d649670bed93106bab1b2"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "71ef21267f01824701e00c796caebe3c9a0d7362afbaad4227b5905440fae076"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ed7871925171e3a167a73fdbb0bf9e989fd8544bd736bb18da3fe2110b64d403"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "19d9d0bfa348c3d0de7d1f95e7809b6d8ac889bdc0c7b3286f12c11c0035fca0"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "e64a29421a810ab7c810681e991531efa85e6ee40c361f0cc6be46901a62d19b"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "5f26b0434b7a8935b5f2f8a08cfb6e18e557edb963293b0419371db323aceaf4"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "2792c5594357e0ed664216308d1c500b0c7d2edce5db3e635d607aed7297ea55"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "daf46b0dafb109c91933750312fdeefcbaf4e8370f3271ef472c2f2adfaa8ed8"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "328ce0e9368e6d8cc3eea94edcf57221441932448680fe7b8d36980764123811"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "62c9c9f470074f9431bf2cba4f9abb3068095962fd4b1536aacebf882e5034a9"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4a1255b97268f5a651ab29b4e024c8dd7fb013fd579078bf33c6ddd8bc265e72"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "670efb449d19fe1626d36b6952bfd9fc39851c1accf6725dd3a9e0ab40b97ac3"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d341f1cf44011b2be53da867fb5e3220783867fd418aa9ad7fad29e9db1f9af4"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4b51826145bd53dc2d85f003fa32d1868f6a27597eb86bb9ec6dcdf6a2b5b3c6"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "bfd41b2a24c777deab19c757036f202e970fe00912a39f65c33d045c3eced2f1"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "951a8139dca669328d954d5603d3685a1754d9bb3e47024ade0604291e35a3af"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "eebe2dc38906c7c68bc9cee2fcd00958a102c5b85c0e6a6a65ca7c2ba0f58bd9"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9bd979fd6af01ff90d614a116ab345f637d635bf0a860fe705cde504da5626ae"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b03cc12e12d34fc9b67ce131123998a0a5af57c2074c355eaafe3df42ed2800b"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6db009b199d1bcc825444cf3e23ae09087a54d76c8680663216b77b8170238f0"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "676a84526f5546ff04e9fc159dcf2cb248c7a027f267bc33d03ae4eab77d16bc"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "1a903b69d866c921eab5212b0a962e11b225e2bbe49ea4088074e93f1be97ea4"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "54d5198b9d89bf9a85eb244dd0c91338a7910789cbe44808fdf963eb31acca71"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "76ca8f6432956139bcba017679dd9f8f3b2b7ecada90bdabf09647aa333b9fdf"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "fc446fc976cdb3e283742efe96814ca85e4b40844dadbff313957b37e52580ab"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ce3e554495f6e76c0f1ba593be2f662cb85da20f455e02baf388db108bc1cb92"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ec73ae20febd15cf02b43332c0c5a3d0d90ed9bd3f6a91b3a7d7448746a73549"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ec39b197cad03d4b2c075a72717079f4017f0a63f7a8142e9b734bc72938f6c1"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "33b769322d25d6f2737e5fb8879b41ac6b73b59a45bc766394c6fdd3ea7338f8"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "082b3a3a31da15e30fdf916b41e40dfbc5245815c59e514b99896cff3b0457d8"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "cd8e936040944fd96a86e71c9738a0f525508717f2502421ef40b9f0cb065297"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "41313670079bf584c35cf0057e9d824f0c223e3dbf8d0c2f81bd016b933e7929"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d54a36449fd152461e49eb848e3a8fe3193fe143036e27f502e259242b6f0fdd"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "f54d2449c9ea7dc5699040e7616bd642abfd1e242f6f3cb774760e59b22e5471"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c1ac61edb43158445e700f2848659236ce82e09b5b54a6c1c6968065a127e41c"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "42fa1c39b1348fc974d1291abe716804fd77c7cc0d2dbd03f8003e60237434fc"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "892aee1c71112c8f00e5cac8a62befc74ec1b8eef8bf13a1e178aa2e04638ca4"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "0d41cc0bacd4d1e5f595c9977f115d5d3eb1562ec974ef046f27a2b7ce374533"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "52bff58b9a1a724e69499558bb28a8ddb451a9033a7d2c5ba9668ec8db9e2fde"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b7f2a0e1f7b0c276d5328bd7474eab2f7c29b3d4292887b785af4a38f98af7d6"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "dad36c619520ac0685afbabde25cf90e18ea645281d7d4f7f51ed748490ad25d"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b8244c1a0a8dc9c835c28875ec7926d4ab004dfbc0d6fc5df130ab82350a4a24"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9b77d1bfcb231470fb12d93c90d5f1b598dad5880ba33ab18476a85b36b72944"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "990c1783bfaf39ac98496779ef103893a404ebeb2a035c6447332264b3bc8ed5"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "30ea3717a0fe71e0c4bdc49ceed95f144da2a5e30fa377954b22fe4726474a86"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ea552ba76c6c6c2c0b81a8bb3b62fef9e66a80718d7a9ac60d8ec37b5bb2b7a2"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6373952600ecc1ee409308ec8cecc52187c71b42c187f651412e4ff03eae695d"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "3d67a9218dced91525b782dec198b6c1ef185308d8a787b23afbd74c461e75b1"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "558c23cfeaa7a6351c9611eb61b673f11d871bf3f8b3078497e264eaeca2107a"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "68a876a2d5add7f546e7a2e382c60b119e1b07277414f103c81f04d3e3d21260"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "eb8838b72699a351af9197d7cd71abc13ca31d24ddb639e0c2f89c187fcc96a3"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4408fdcab1a0d38d195aff1d9c26dd9629b67d4d76c3c0afe34dbfd7696c81e6"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b6d21b6a842542b258e4850cb7e616fa51b91e2f149a069a6ef7b52999eab650"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "89c5b2f937f5ceb8bc99001d859a1e003d23c0244ced9f424b7897f2ba1fdaa6"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ae4aa5ad0ce4316bc158831ed9772fb1530abbac745ce5283621a13a09a969c5"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6b9d69b7137afc135e6e5cd098bc94146592061ffd7079c20c8527d817289cba"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "da90203d9f6a53f030db46d06a589d7ec11d5ac40eaa3dbe17b875e5dc6f5b09"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "0bc7daa6c0fb33daf4af295e7d12b8c970c8a751f5da7553e3dba1602707d861"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "89632caae9cb1f19002d96d8dbb2fe4662898080104c42b40f87d09c322d3bba"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "2f23d9f426d04d94c000d046b31b1c4b125fe455ada3863a85750f63cad4c90c"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6ca9431136c4a51fc2aee11e974bd91bde8ef2a6174c39363c552227769af5e4"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8c2e258b3df1f090a0a92f750bb2da7eff3473b1078e84409af7b731a6d41a32"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "1e58de05f6d4ca0102ef9a50361a2cb4f6c0ecc2a58689e1ae04c8022487f223"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4f966c34b0072f04d8d61dd500365eeef37796850acf198b8fa9973669d2cbc3"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6e0ef916fe509a8c4a42d58180cc0cce6db6bb8be103b0081e3117fe11500a68"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "dfaffa6862007457ca9824e2fdf46d793bd4ae02c0d48a9a1ed90f797bb49c6c"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9edae4ada4a60050f189eb147b796000668170cd7959abd54cbdf7d0e998676a"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7f04a9e85c8aa6fbb21929ff61d004e3542f88c28e7454329b1794420e986b27"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "67be2a7bbf31cae3ee3a4da9734b30a251594e52b2e03fe863c058d71d146b3a"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_plate",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c1fa6d0a1292efa0a1364de16c44dc04f32624133a6511e41b601504e04a8f57"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_plate",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "122d33026a5c4a28e18fd7d018c46972e58655153792a0a6041fee79efd81cf3"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_plate",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c7ada57199e6ee3d88bc4222da2835cca44dad40e841f4408d2a53b70f8a59a2"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_plate",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "41121ea0fd8093f17a8f274b5d29132c21df2b2bfc6001592a950c6ad695d8da"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_plate",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9fcd1dd955b462907bbebf8766e3f4e9fe770b4a5363246c7e0d20143a6b293a"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "f51d99c44e525e38d06c3e45245ca3b77d2c0a6a83fdbcda18013a923c1a548c"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "db44944d61066f6ce350a85f0f2c6a13fefbe68851abe609a57209f5fb9216ac"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7f7273d7a6c38d079f249b0299ce1692e4de84c4e287ad7114e4e5f21aa544f8"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b14ba8f0387f8c1f9c8f6ca19b9b3979996af06f2eafb1c7c1033c17f7002c16"
+    },
+    {
+      "run": "robot-robot-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "181842536b4b497fd6dca398f1a0123ba47d49c1897c374721d79f1dee4cd814"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "93515d1a56fd871a679d97afdf4a34c456ab26b85111e60712e7cebce5f17e3e"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ba5d1fd50ec8d1e2e4f0d14ac5d40df936ad732c00c4508902aca248168b2186"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7f93015d4811a21ce745eff9f4458dfef7a2280e25f3ecbb62380bf04f2382c1"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c54bdb9a3afd7e842c495835551a9386081ee1d84c89f9c91d3c0ccae73efd15"
+    },
+    {
+      "run": "robot-ego-4-11",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7514288ae8946f575b5b2c438a7bced8b413841a24e5e18245ff0c64d76e2cbc"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6dbfa89803ad835cb6a873eec95a7a6d93ead12271c843513da3e5123a3a340e"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "5c3fee225c88ecfedc881561eadf5b643d062d67faac8bcdbff4ee2d2906bb03"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "2365f7b414f646f7d062e53f7973e93e0f4fc99a424bede758a2fbfda4f7a8d2"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8ab7d0a7f19c6588be0072583cd6c6718832a97be3f7981902baaf86754f0cda"
+    },
+    {
+      "run": "robot-robot-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "03d2adfcf500e84d6118fc84d5c4cb2edb0038d6c7cf0b4ed25fcf2cb572ba0d"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d18445a8ce5681f6848f40aa62c97151c89dd00d7dfd47c85f5f3ec66e04cc4a"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d8ffb894dac124e1349d946b5f22a14fc52d899333fa1f20156ea6ce77b14416"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4c82ef50dee43e038eaac5be5df4b40c81ec6e5083b51b555543dbfeca0ff4d7"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d243bd663e4fbf5ae624aa9bf5abe5e5671b6798a2ed2723963b3b353c333191"
+    },
+    {
+      "run": "robot-ego-4-29",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b70305df812229c8fd5104f39cdcf56dcd99edc7453404a16750434f61e6f19f"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4710a7ed6316e8089d5e9e6d24bb1e9cb583e528425745a5a5432a8387e62977"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "52ba1061c1a229b1d5227c0273d805bf99858d723a6dc7dcd2a75540706a1852"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "914c92020c8bb9cdabe0a1b6f6d2f88c755341d4871e7263462148078d446f20"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "11ba8d181c9a6fe69f3ce48c78929fdfa495eb0304185fe4c7f669ed381bb18e"
+    },
+    {
+      "run": "robot-robot-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "83e1c033d6e5036cfd864ed599d02fe923c8344d01a03a7561b527158bae9b3f"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9479a3f48ea5f218ca1deaa657c2264004d4c0344ff0cbbabb4a1be6c55d7902"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "0b4b6d29542e66f5d4fcad789c2ebed90e1c049c390fb58009028cbd8c0b9852"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c8db006a027b7f79f2789d043325534fc05c265b02adf279f09bded910c24775"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "320a19f5bb059d28e4ccf028c63377f400d990bc1932638ec89c64cad7da98b9"
+    },
+    {
+      "run": "robot-ego-4-47",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "20acee3982eca7a700f52c7de097547255ca590cbb7ce35b1e0c2e30cd2abfb1"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "7035bee2ab4cf6f5be4cb7afde616c028329cb9b02f12863a4835cb89562ad33"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b003442fce853f970a58db4e10c27e74e121729fd32431267a64c1d38b3ecae8"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8cc6fd76d2cd593474617e98921599e27856497a6dd63c35dff89a527724ce45"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "f5ae6586566713dc8d6a6efa564d3300271eae7cfd44bb917b11412243936b53"
+    },
+    {
+      "run": "robot-robot-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c8bf908bd097199ecbb6ecdb2a1cb85dfca6d9237f5002a4574d4177de73186d"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c8e3ede4364f9c9b5f00c1ba98304df7b74c15df48b4d0226b36ce6d464a6c49"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "bf72e3afa4eae2d12b967c631c1e557142a550e815295bd187f69e021060c9f5"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "e61a6cc9469a4a98d1746471b95d7adb6f217d6bea965beabec93e4b13635c26"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "58a663849794b5117cc025963ccd0a248a6c2edf20085abca50e52842de40e10"
+    },
+    {
+      "run": "robot-ego-9-11",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "a6d68dae4e16cffd6c051a79a2a97530d956073aef436a3de1a82381a0e63980"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "09b1ce73f8c5456474ae7fa924e8d4cfde3b687513d5ab2fa90dd93718b6085d"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8af71390dbe9247283d7596c0cda4081940873e5258f25bac7adc9217e508a9b"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "4a50669a62422f8684f30277bc2383d150d1fd1d15c18af6ae9bd3112c8a3d8b"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "f4cde1d18d41606f4a716d6bea69a231354cb22558f4010f8a45fc3bb01dec25"
+    },
+    {
+      "run": "robot-robot-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "cf65cca5fb9bbc2f5e4a0322a6102b14f050a75a6b96f34f3293cb39b185c307"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "f814c889216cdf4743bf245803d787e099f6b44210c02a9e3b4c3b5d51182535"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c965fad898c3bc43ac65f4e9fbad55d71ec2abd3d2136229a21fc75c246bbae7"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "6f972f7d6cc174796967444c45a5f6d69713f31fbc3a342942d4303a8a15e8f8"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "e94ad9d09c4ae446a46cf6133b031d226d9beda465c60838c16089873e6c59cc"
+    },
+    {
+      "run": "robot-ego-9-29",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "42784472183212e4f4bf00dfbf2f31295258804241c2cd5b392293a54de4e0db"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9c4bcd327dcfe96c65704ee48883b2354e26da4780bd0f7f58ae06c89c40f562"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "a153544d8cf6c0c53e99be176f7dc56a0e790cc671cf9e058d6a8c5488148003"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ef89f6c360afe228a9bcfd80cde100ef50f2425bf247c0183f38c1a657e781a5"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "de856f9c8aec42f1fc6c43ce0ed90800fd4900779dd70f47a00dcda0deb2db95"
+    },
+    {
+      "run": "robot-robot-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "30a74862e03f89466836a71b2b29aa11dabe7fc64bbc5b5c656ed5b0aa298729"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c18d26e17e7a5d233595a1bfe20a12a93b20110c32abd03ecadc92c1c5914693"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "378a45b412fb8efd375a7edcf22c8a1e47243074a2f02c86a4e395a831030087"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "bc7c1fca123a65451980bd75600e08af83673edaaf45a1e4f475f32f5c66fcfb"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "5fe78da36e4ba2f0cc830644823d5ebee5f82f5111ee8d8d3c250f18b632d023"
+    },
+    {
+      "run": "robot-ego-9-47",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "e246a3b17a7e7578278b24deedc16d608549a4235fef268e6a1cb9c3c2a11636"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "ef5464cf6c0d0af4503bd0cc634b2a8979841bbff9ce537454620f63df6cf4fe"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "22003a8351f62fcb3b07cf5fd45216c2e14cbac7e705290f085e82bd0bddfaec"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "13259d9d185ad4efcce83da98cb551a62c2db45077ddf633cbdf3e4e2513b2dd"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "0bc02b85642cdd0aba24a224b7bcccdd9d5e95dfe1ab1cf1dd5e965289c586d5"
+    },
+    {
+      "run": "robot-robot-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "eed7c1b79cf17f6d0a958555f3060d50a580ae4f5a25d8727e72eb4771bc11da"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8f67eea8a7cc79cfde4edde3226f75c055da40d6753e9199facb00d7fd136b15"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "cdd285f10ee691408377c90f01a081022589140c1ff4580890b9d8bfd51d7af5"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "202f5a1ad8e3d790fdb319253250f3608e19adc430f3708bc2770026ca7b70fa"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "d113e6d724ed5bc65dd57838f3313060ba25e50355796949ba393a488a556eba"
+    },
+    {
+      "run": "robot-ego-35-11",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c6f5f449e2a833056d5c131f4ce1d0ddffbf8ac9fb8f66a0a403228b2780de56"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "bb2ed67d5578447a34ebbc9183b66026bd37854a2199313df96fc6907ab88582"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "90d540f585e9af2b1a667b92c0506c199c5258c2cd09acb3fc9e895cab18e64c"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "64c9bd7febd592fbf904102e4fb90d0efe539b68c8d568034086c92d5e5e0691"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "dceb74f90b16468dcb2f82229daf1180a9ae8fde0a28f634b832f9235fcae072"
+    },
+    {
+      "run": "robot-robot-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "e2e7ab7ca1d358714550cd85ce87046600e2c9847646250e7c38f3160f9f47e2"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "f4b29fef69fa5ed1cd21c34e675df02da6052bab76a205ebb6497372b8f99c26"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "75d2cbb6fe68ad6b21e1cf9b33c0a7881013e217a81380dad60f3251e286bef1"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "dfec9324e45c18994759612fbcafc75ade8bfe2eb8833701f1e01e4c06de1553"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "357e8d13954afa1ff617e0cb414d8f7564fb18e2fb7a3260362e57087c682521"
+    },
+    {
+      "run": "robot-ego-35-29",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "c25648df468db071cf7cb4d91d73d7ed2f082f6f835b26e14b96b458e7d80080"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "009184f82660cb9a0f98b48d7c53b7367bd5b52c6f272b80833a0c6d6f764387"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "367ba3e0efb6a6f80763279c7a179e562cf944a488b8deffbdb4f6a307c388eb"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "9cf5a7bbea67b81fbbb74750364cf5aa492da8e6f59ce1774f60a2aaac8775e4"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "53e355f2b30862aadebfdcf4e254f7ed92ee8d6f8032734f492f6b86c8f8ff89"
+    },
+    {
+      "run": "robot-robot-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "52ec3ffdf38ac8d762eece685b4bee1976401001e9e76be177a9dc013e2ff5c1"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 0,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b8d9ba47cb3a53be1bb7dcd4fb7583446de43743c405ba796c14798a855fe210"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 1,
+      "success": false,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": false,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b584bdcaccd8f05270c8ea6bc447580b9a322f412f145606542312fd2fbbc22f"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 2,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "b3c3372336243e42942f4cdc83d74df9408557efc0b12441213d88225c2fbd6a"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 3,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "170beb22260b9a1ed41c85df2f9b9b842457ef56fd6fbd85f9ac46ad16b4285f"
+    },
+    {
+      "run": "robot-ego-35-47",
+      "task": "bowl_ramekin",
+      "initialization": 4,
+      "success": true,
+      "maximum_replay_state_error": 0.0,
+      "restored_final_pose_goal": true,
+      "physics_timestep_seconds": 0.002,
+      "raw_sha256": "8ec3d31dc7276a3f7893683ab4d5d15a60536cb1d3915de14db7deb942ca5b1f"
+    }
+  ]
+}

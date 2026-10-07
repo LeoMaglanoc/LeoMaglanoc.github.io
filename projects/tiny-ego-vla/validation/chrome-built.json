@@ -1,0 +1,132 @@
+{
+  "url": "http://localhost:8766/tiny-ego-vla/",
+  "browser": "Google Chrome via computer-use agent",
+  "viewports": {
+    "desktop": {
+      "clientWidth": 1440,
+      "scrollWidth": 1440
+    },
+    "portrait": {
+      "clientWidth": 390,
+      "scrollWidth": 390,
+      "viewportHeight": 844,
+      "viewportWidth": 390
+    },
+    "landscape": {
+      "clientWidth": 844,
+      "scrollWidth": 844,
+      "viewportHeight": 390,
+      "viewportWidth": 844
+    }
+  },
+  "checks": [
+    {
+      "overlay": "Raw",
+      "pressed": "true"
+    },
+    {
+      "overlay": "Hands",
+      "pressed": "true"
+    },
+    {
+      "overlay": "Object",
+      "pressed": "true"
+    },
+    {
+      "overlay": "Trails",
+      "pressed": "true"
+    },
+    {
+      "overlay": "All",
+      "pressed": "true"
+    },
+    {
+      "budget9": "Robot-only leads by 10.0 percentage points at this budget.\nAll tasks and seeds: robot-only 7/30, ego-pretrained 4/30. 9 demonstrations per task. Small exploratory evaluation; seed and initialization variation matter."
+    },
+    {
+      "budget35": "Ego-pretraining leads by 3.3 percentage points at this budget.\nAll tasks and seeds: robot-only 14/30, ego-pretrained 15/30. 35 demonstrations per task. Small exploratory evaluation; seed and initialization variation matter."
+    },
+    {
+      "playback": [
+        {
+          "id": "robot-only",
+          "paused": false,
+          "rate": 2,
+          "ready": 4,
+          "time": 0.79818
+        },
+        {
+          "id": "ego-policy",
+          "paused": false,
+          "rate": 2,
+          "ready": 4,
+          "time": 0.796758
+        }
+      ]
+    },
+    {
+      "speedAfterSelection": [
+        {
+          "id": "robot-only",
+          "rate": 2,
+          "ready": 4,
+          "src": "http://localhost:8766/assets/interactive/tiny-ego-vla/media/robot-35-47-bowl_ramekin-3.mp4"
+        },
+        {
+          "id": "ego-policy",
+          "rate": 2,
+          "ready": 4,
+          "src": "http://localhost:8766/assets/interactive/tiny-ego-vla/media/ego-35-47-bowl_ramekin-3.mp4"
+        }
+      ]
+    },
+    {
+      "seekEnd": [
+        {
+          "duration": 6.4,
+          "id": "robot-only",
+          "time": 6.4
+        },
+        {
+          "duration": 6,
+          "id": "ego-policy",
+          "time": 6
+        }
+      ]
+    },
+    {
+      "restart": [
+        {
+          "id": "robot-only",
+          "time": 0
+        },
+        {
+          "id": "ego-policy",
+          "time": 0
+        }
+      ]
+    },
+    {
+      "pretrainingBaseline": "A useful sanity check.\n\nSelected model: 0.1674. Train-only constant predictor: 0.1638 (lower is better). The learned predictor does not beat this baseline. This subset has not demonstrated generalizable interaction prediction; any robot-transfer effect needs cautious interpretation.",
+      "prediction": "02 / LEARN A REPRESENTATION\n\nPredict what happens next.\n\nThe shared trunk sees images and language.\nHand and object labels are training targets.\n\nFour RGB frames\nshort temporal context\n→\nFrozen MobileCLIP\ncached 512D features\n→\nTiny TRANSFORMER\nshared temporal trunk\n→\nFuture interaction\nmotion + contact estimate\n389,957\nTrainable parameters\n884\nTraining windows\n0.4 min\nCPU pretraining\n0.167\nHeld-out loss\nA useful sanity check.\n\nSelected model: 0.1674. Train-only constant predictor: 0.1638 (lower is better). The learned predictor does not beat this baseline. This subset has not demonstrated generalizable interaction prediction; any robot-transfer effect needs cautious interpretation.\n\nHELD-OUT HUMAN VIDEO\n\nFuture motion, half a second ahead.\n← Previous\n2 / 12\nNext →\n\nSolid: tracked displacement. Dashed: model prediction. Wrist in coral; object in gold. These are image-plane motions, including camera motion, and noisy targets.\n\nACTUAL OPTIMIZATION\n\nLearn on one set. Select on another.\n0.00\n0.08\n0.16\n0.24\n0.32\n1\n80\nEpoch\nTrain\nValidation\n\nPretraining uses two source videos; the third selects the checkpoint. Nearby windows are correlated. This tiny subset cannot establish general human-to-robot transfer.\n\nCompare the three architectures\nTrunk\tParameters\tValidation loss ↓\tCPU time\nMLP\t190,149\t0.1683\t10.0 s\nGRU\t223,557\t0.1674\t17.0 s\nTRANSFORMER · selected\t389,957\t0.1674\t21.1 s"
+    },
+    {
+      "practice": "05 / A NEXT EXPERIMENT\n\nPractice comes next.\nNot performed\n↻\nImitation first.\nReward-driven refinement later.\n\nReinforcement learning would require a genuine interaction loop, a defined reward, and a before/after evaluation. This version reports imitation and transfer experiments only.\n\nA possible next step is a bounded residual action head: a = aBC + α ΔaRL. It would need a separate experimental record, including any privileged simulator state used in the reward.\n\nExplore the measured result →"
+    },
+    {
+      "landscapePlayback": [
+        {
+          "id": "robot-only",
+          "ready": 4,
+          "time": 4.679563
+        },
+        {
+          "id": "ego-policy",
+          "ready": 4,
+          "time": 4.679362
+        }
+      ]
+    }
+  ],
+  "consoleErrors": []
+}

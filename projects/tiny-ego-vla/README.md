@@ -22,7 +22,7 @@ The pinned environment, reproduction commands and checkpoint restoration instruc
 
 ## Reproduce the experiment
 
-From the repository root (Linux; FFmpeg and the system OSMesa library are required):
+From the repository root (Linux; FFmpeg, Node 18+ and the system OSMesa library are required):
 
 ```sh
 uv venv projects/tiny-ego-vla/.venv --python 3.10
@@ -80,7 +80,7 @@ To restore: clone this repository into a separate checkout and extract the archi
 
 ## Preview the static exhibit
 
-From the repository root, run `npx --yes http-server@14.1.1 . -p 8765 -a 127.0.0.1 -c-1`, then open `http://localhost:8765/assets/interactive/tiny-ego-vla/index.html`. Use a server with byte-range support for video seeking; Python’s basic HTTP server does not provide it. The production Jekyll build exposes the fullscreen iframe at `/tiny-ego-vla/`. `tools/export_web.py --preview` is for local UI QA only; publication checks reject it. CI runs the static experiment tests before building Pages; the route checker also enforces complete media and a conservative 1,000,000,000-byte site budget. Model-dependent audits run locally before export. After all models finish, `bash projects/tiny-ego-vla/tools/finish_evaluation.sh` resumes missing rollouts, creates presentation replays, exports the full exhibit and runs artifact checks.
+From the repository root, run `npx --yes http-server@14.1.1 . -p 8765 -a 127.0.0.1 -c-1`, then open `http://localhost:8765/assets/interactive/tiny-ego-vla/index.html`. Use a server with byte-range support for video seeking; Python’s basic HTTP server does not provide it. The production Jekyll build exposes the fullscreen iframe at `/tiny-ego-vla/`. `tools/export_web.py --preview` is for local UI QA only; publication checks reject it. CI runs the static experiment tests before building Pages; the route checker also enforces complete media and a conservative 1,000,000,000-byte site budget. Model-dependent audits run locally before export. If a background service has an older Node on its PATH, set `TINYEGO_NODE` to the full Node 18+ executable path; the script checks this before starting work. After all models finish, `bash projects/tiny-ego-vla/tools/finish_evaluation.sh` resumes missing rollouts, creates presentation replays, exports the full exhibit and runs artifact checks.
 
 ## Success-check timing
 
