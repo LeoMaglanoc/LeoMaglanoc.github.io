@@ -115,6 +115,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: projects/slam/web/package-lock.json
 
+      - name: Verify TinyEgoVLA experiment export
+        run: node projects/tiny-ego-vla/tests.mjs
+
       - name: Build Jekyll site
         run: |
           sudo apt-get update
