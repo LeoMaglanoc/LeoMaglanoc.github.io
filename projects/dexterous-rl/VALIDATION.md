@@ -25,18 +25,18 @@ Chrome computer-agent run of `tests/dexterous-rl/index.html` against the Docker
 preview. Raw report: `results/browser-regression.txt`; structured report:
 `results/browser-regression.json`.
 
-| Check | Result |
-|---|---:|
-| Frozen observation/action vectors | 10 passed |
-| Maximum observation error | 0 |
-| Maximum action error | 2.980232238769531e-7 |
-| Maximum filtered target error | 0 |
-| Maximum qpos error after five physics steps | 3.0307036380516905e-7 |
-| Browser engine | MuJoCo 3.11.0 |
-| Fixed-goal browser trials | 12/12 reached and held |
-| Dropped cubes in fixed-goal trials | 0 |
-| Mean actor inference in batch | 0.255 ms |
-| Mean five-step physics cost in batch | 0.863 ms |
+| Check                                       |                 Result |
+| ------------------------------------------- | ---------------------: |
+| Frozen observation/action vectors           |              10 passed |
+| Maximum observation error                   |                      0 |
+| Maximum action error                        |   2.980232238769531e-7 |
+| Maximum filtered target error               |                      0 |
+| Maximum qpos error after five physics steps |  3.0307036380516905e-7 |
+| Browser engine                              |          MuJoCo 3.11.0 |
+| Fixed-goal browser trials                   | 12/12 reached and held |
+| Dropped cubes in fixed-goal trials          |                      0 |
+| Mean actor inference in batch               |               0.255 ms |
+| Mean five-step physics cost in batch        |               0.863 ms |
 
 Success uses error below 0.2 rad for five consecutive policy steps. Each fixed-goal
 trial lasts 14 simulated seconds. Minimum error ranges from approximately 0.42°
@@ -60,10 +60,10 @@ was rejected; final artifacts are regenerated using matched 3.11 engines.
 
 Used the Chrome computer agent, not a headless screenshot substitute.
 
-| Viewport | Inspection |
-|---|---|
-| Desktop 1440 × 900 | Hand, target, error and buttons fit; orbit, keyboard goal rotation and controls exercised |
-| Phone portrait 390 × 844 | Hand and complete primary controls visible; target drag changes goal; no horizontal overflow |
+| Viewport                  | Inspection                                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Desktop 1440 × 900        | Hand, target, error and buttons fit; orbit, keyboard goal rotation and controls exercised                                             |
+| Phone portrait 390 × 844  | Hand and complete primary controls visible; target drag changes goal; no horizontal overflow                                          |
 | Phone landscape 844 × 390 | Side-by-side simulation and controls; all primary buttons at least 44 px high; target drag and push exercised; no horizontal overflow |
 
 Saved `results/chrome-desktop.jpg`, `chrome-portrait.jpg`, and
@@ -86,7 +86,8 @@ above do not measure phone performance or GPU completion time.
 Production Jekyll build runs in Docker. The project-assets publisher checks
 byte-identical source and deployed runtime files. The route checker includes
 `/dexterous-rl/`, shared dependencies, manifest files and the 1,000,000,000-byte
-budget. TinyEgoVLA's 12.8 MB exhibit assets are excluded from production to meet
+budget. Final local production output: **999,295,349 bytes**, with all 22 public
+project routes, 90 HTML dependencies, and 547 manifest runtime files checked. TinyEgoVLA's 12.8 MB exhibit assets are excluded from production to meet
 that limit; its archive URL, source, media, records and local model continuation
 archive are preserved. Its original export test still runs in CI and passes.
 

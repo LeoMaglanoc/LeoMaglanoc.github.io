@@ -1,1 +1,2 @@
-Published site exceeds the 1 GB Pages budget: 1,012,117,751 bytes
+Published site: 999,295,349 bytes
+Checked all 22 public project URLs, 90 HTML dependencies and manifest runtime files

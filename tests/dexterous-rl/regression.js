@@ -102,30 +102,42 @@ document.querySelector("#run").onclick = async () => {
     }
     // Change a goal before the previous turn has converged, without resetting.
     mj.mj_resetData(m, d);
-    d.qpos.set(c.initial_qpos); d.ctrl.set(c.initial_ctrl); mj.mj_forward(m, d);
+    d.qpos.set(c.initial_qpos);
+    d.ctrl.set(c.initial_ctrl);
+    mj.mj_forward(m, d);
     obs.reset();
-    let dynamicPrev = c.default_joint_pos.slice(), dynamicAction = new Float32Array(20);
-    let dynamicGoal = native[0].goal, dynamicMinZ = 1, recoveryHeld = 0;
+    let dynamicPrev = c.default_joint_pos.slice(),
+      dynamicAction = new Float32Array(20);
+    let dynamicGoal = native[0].goal,
+      dynamicMinZ = 1,
+      recoveryHeld = 0;
     const phaseErrors = [];
     for (let step = 0; step < 880; step++) {
       if (step === 280) dynamicGoal = native[1].goal;
       if (step === 300) dynamicGoal = native[2].goal;
       if (step === 600) {
         const adr = m.body_dofadr[c.cube_body];
-        [0.03, 0.02, -0.02, 1, 0.3, -0.5].forEach((v, i) => d.qvel[adr+i] += v);
+        [0.03, 0.02, -0.02, 1, 0.3, -0.5].forEach((v, i) => (d.qvel[adr + i] += v));
       }
-      const o = obs.build(d.qpos, d.site_xpos.subarray(c.tag_site*3,c.tag_site*3+3), d.site_xmat.subarray(c.tag_site*9,c.tag_site*9+9), dynamicPrev, dynamicGoal, dynamicAction);
+      const o = obs.build(
+        d.qpos,
+        d.site_xpos.subarray(c.tag_site * 3, c.tag_site * 3 + 3),
+        d.site_xmat.subarray(c.tag_site * 9, c.tag_site * 9 + 9),
+        dynamicPrev,
+        dynamicGoal,
+        dynamicAction
+      );
       dynamicAction = await actor(o);
       dynamicPrev = applyAction(c, dynamicAction, dynamicPrev, step);
-      c.ctrl_ids.forEach((id,i) => d.ctrl[id] = dynamicPrev[i]);
-      for (let j=0;j<c.n_substeps;j++) mj.mj_step(m,d);
-      dynamicMinZ = Math.min(dynamicMinZ,d.qpos[c.cube_qadr+2]);
-      const e = angle(Array.from(d.qpos.slice(c.cube_qadr+3,c.cube_qadr+7)),dynamicGoal);
-      if ([279,299,599,600,879].includes(step)) phaseErrors.push({step,error:e});
-      if(step>=600) recoveryHeld = e < 11.46 ? recoveryHeld+1 : 0;
+      c.ctrl_ids.forEach((id, i) => (d.ctrl[id] = dynamicPrev[i]));
+      for (let j = 0; j < c.n_substeps; j++) mj.mj_step(m, d);
+      dynamicMinZ = Math.min(dynamicMinZ, d.qpos[c.cube_qadr + 2]);
+      const e = angle(Array.from(d.qpos.slice(c.cube_qadr + 3, c.cube_qadr + 7)), dynamicGoal);
+      if ([279, 299, 599, 600, 879].includes(step)) phaseErrors.push({ step, error: e });
+      if (step >= 600) recoveryHeld = e < 11.46 ? recoveryHeld + 1 : 0;
     }
-    const dynamic = {minZ:dynamicMinZ, recoveryHeld, phaseErrors, passed:dynamicMinZ>.4099 && recoveryHeld>=5};
-    print({dynamic});
+    const dynamic = { minZ: dynamicMinZ, recoveryHeld, phaseErrors, passed: dynamicMinZ > 0.4099 && recoveryHeld >= 5 };
+    print({ dynamic });
     const result = {
       passed: trials.every((t) => t.reached && t.minZ > 0.4099) && dynamic.passed,
       dynamic,

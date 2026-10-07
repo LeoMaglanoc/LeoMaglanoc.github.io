@@ -324,3 +324,5 @@ Run in verbose mode to see all warnings.
 [NbConvertApp] Converting notebook /tmp/jekyll-jupyter-notebook20261007-1-434so1.ipynb to html
 /usr/local/lib/python3.13/dist-packages/nbconvert/filters/highlight.py:71: UserWarning: IPython3 lexer unavailable, falling back on Python 3
   return _pygments_highlight(
+                    done in 125.866 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.

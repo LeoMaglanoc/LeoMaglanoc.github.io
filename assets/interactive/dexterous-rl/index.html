@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#101819" />
+    <meta
+      name="description"
+      content="Rotate a target cube and watch a real reinforcement learning policy control a detailed Wuji robotic hand in live browser MuJoCo physics."
+    />
+    <title>Dexterous RL — In hand, in the loop</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../mobile-sorting/vendor/three.module.js",
+          "three/addons/controls/OrbitControls.js": "../mobile-sorting/vendor/OrbitControls.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <a href="/" class="home" aria-label="Leo Maglanoc home">LM<span> / LAB</span></a
+        ><span class="tag">DEXTEROUS MANIPULATION</span><span id="status" role="status">Loading…</span>
+      </header>
+      <section class="experience" aria-label="Live dexterous hand playground">
+        <div class="stage">
+          <canvas id="scene" aria-label="Live Wuji robotic hand physics. Drag the background to orbit, pinch or scroll to zoom."></canvas>
+          <div class="heading">
+            <span class="eyebrow">20 JOINTS. ONE LEARNED POLICY.</span>
+            <h1>In hand.<br /><em>In the loop.</em></h1>
+            <p>Rotate the target.<br />The hand figures out how.</p>
+          </div>
+          <div id="loading" role="status">Preparing the hand &amp; policy…</div>
+          <div class="stage-foot"><span>WUJI HAND 01</span><span>Drag background to orbit · pinch to zoom</span></div>
+          <div id="drop" hidden>Cube dropped.<br /><small>Press Reset to try another grasp.</small></div>
+        </div>
+        <aside class="panel">
+          <section class="target-section">
+            <div class="label">
+              <h2>YOUR TARGET</h2>
+              <span>DRAG TO ROTATE ↗</span>
+            </div>
+            <canvas
+              id="target"
+              tabindex="0"
+              role="slider"
+              aria-label="Target cube orientation. Drag to rotate, or use arrow keys."
+              aria-valuemin="0"
+              aria-valuemax="180"
+              aria-valuenow="0"
+              aria-valuetext="0 degrees orientation error"
+            ></canvas>
+            <p class="hint">Ghost = desired · solid = current</p>
+          </section>
+          <section class="error-section">
+            <span class="eyebrow">ORIENTATION ERROR</span>
+            <div class="error-line"><strong id="error">—</strong><span id="tracking">Preparing</span></div>
+            <div class="meter"><div id="error-bar"></div></div>
+            <svg id="history" viewBox="0 0 260 32" aria-label="Recent orientation error history"><path id="trace" d="" /></svg>
+          </section>
+          <div class="buttons">
+            <button id="random" disabled>Random target <span>↗</span></button><button id="push" disabled>Push cube <span>↝</span></button
+            ><button id="reset" disabled>Reset <span>↺</span></button><button id="pause" disabled>Pause <span>Ⅱ</span></button>
+          </div>
+          <details class="technical">
+            <summary>Inside the control loop <span>+</span></summary>
+            <p>207 observations → RL actor → 20 finger targets → MuJoCo → repeat.</p>
+            <dl>
+              <div>
+                <dt>Policy / physics</dt>
+                <dd>20 / 100 Hz sim time</dd>
+              </div>
+              <div>
+                <dt>Inference</dt>
+                <dd id="latency">—</dd>
+              </div>
+              <div>
+                <dt>Physics / render cost</dt>
+                <dd id="cost">—</dd>
+              </div>
+              <div>
+                <dt>Simulated time</dt>
+                <dd id="time">—</dd>
+              </div>
+              <div>
+                <dt>Render</dt>
+                <dd id="fps">—</dd>
+              </div>
+              <div>
+                <dt>Simulation pace</dt>
+                <dd id="pace">—</dd>
+              </div>
+              <div>
+                <dt>Actor parity</dt>
+                <dd id="parity">Checking…</dd>
+              </div>
+            </dl>
+          </details>
+          <div class="panel-foot"><span class="dot"></span> LIVE PHYSICS · RUNS ON YOUR DEVICE</div>
+        </aside>
+      </section>
+      <section class="about">
+        <div>
+          <span class="eyebrow">LEARNED DEXTERITY</span>
+          <h2>A goal. A grasp.<br />A thousand tiny adjustments.</h2>
+        </div>
+        <div>
+          <p>
+            The hand observes its joints, the cube, and your desired orientation, then issues new finger targets 20 times per simulated second. Every
+            movement comes from contact physics and a goal-conditioned reinforcement learning policy.
+          </p>
+          <p>
+            The original PPO behavior was trained by <a href="https://github.com/wuji-technology/wuji-mjlab">Wuji Technology</a>. This demo ports
+            their released Hand 1 actor and matching model to the browser, with interactive goals, live diagnostics, and touch controls. No
+            distillation or retraining was needed.
+          </p>
+          <p class="credits">
+            <a href="https://github.com/wuji-technology/wuji-mjlab/tree/v2026.9.27">Policy &amp; model: Wuji v2026.9.27</a> ·
+            <a href="https://github.com/wuji-technology/wuji-description">Hand design</a> · <a href="https://mujoco.org">MuJoCo</a> · ONNX Runtime Web
+            · Three.js<br /><a href="./THIRD_PARTY_NOTICES.md">Licenses &amp; attribution</a> ·
+            <a href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/projects/dexterous-rl">Reproduction &amp; checkpoints</a>
+          </p>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

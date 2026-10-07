@@ -67,3 +67,14 @@ projects/tiny-ego-vla/data-manifest.json
 projects/tiny-ego-vla/results-summary.json
 assets/interactive/tiny-ego-vla/results.json
 assets/interactive/tiny-ego-vla/media/
+# Dexterous RL: preserve upstream/generated model, runtime and evidence bytes.
+projects/dexterous-rl/vendor/
+projects/dexterous-rl/artifacts/
+projects/dexterous-rl/checkpoints/
+projects/dexterous-rl/results/
+projects/dexterous-rl/web/runtime/
+projects/dexterous-rl/web/licenses/
+projects/dexterous-rl/web/*.json
+assets/interactive/dexterous-rl/runtime/
+assets/interactive/dexterous-rl/licenses/
+assets/interactive/dexterous-rl/*.json

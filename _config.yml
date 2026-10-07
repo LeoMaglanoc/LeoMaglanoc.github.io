@@ -200,6 +200,9 @@ exclude:
   - old_website/
   # Side-project source and tooling are never part of the public site.
   - projects/
+  # Archived exhibit retained in Git, omitted to stay within the Pages size budget.
+  - assets/interactive/tiny-ego-vla/
+  - tests/dexterous-rl/
   - plan.md
   - assets/interactive/cartpole/plan.md
   # Byte-identical Godot engines share block-world/index.wasm. Guarded by check-project-links.py.
