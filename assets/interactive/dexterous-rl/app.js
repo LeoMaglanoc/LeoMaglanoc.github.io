@@ -1,7 +1,9 @@
 import loadMujoco from "./runtime/mujoco.js";
 import { Observation, applyAction, randomGoal, angle } from "./control.js";
 import { loadPolicy } from "./policy.js";
-import { HandRenderer } from "./renderer.js";
+import { createDexterousView } from "./scene-overlay.js";
+const debug = new URLSearchParams(location.search).get("debug") === "1";
+document.getElementById("debug").hidden = !debug;
 const $ = (id) => document.getElementById(id);
 let goal = [1, 0, 0, 0],
   paused = false,
@@ -17,7 +19,7 @@ let goal = [1, 0, 0, 0],
   epoch = 0,
   latency = 0;
 let m, d, mj, c, actor, obs, prev, action, renderer;
-const history = [];
+
 let hold = 0,
   metricTime = 0,
   renderMs = 0,
@@ -44,11 +46,10 @@ function reset() {
   acc = 0;
   dropped = false;
   hold = 0;
-  history.length = 0;
   simStart = performance.now();
   $("drop").hidden = true;
   $("time").textContent = "0.00 s";
-  status(paused ? "Paused" : "Live · goal-conditioned RL");
+  status(paused ? "Paused" : "Tracking");
 }
 function changeGoal(q) {
   goal = q;
@@ -69,12 +70,12 @@ function controls() {
     acc = 0;
     simStart = performance.now() - steps * c.ctrl_dt * 1000;
     $("pause").innerHTML = paused ? "Resume <span>▶</span>" : "Pause <span>Ⅱ</span>";
-    status(paused ? "Paused" : dropped ? "Cube dropped" : "Live · goal-conditioned RL");
+    status(paused ? "Paused" : dropped ? "Cube dropped" : "Tracking");
   };
   let drag = null;
   const t = $("target");
   t.addEventListener("pointerdown", (e) => {
-    if (!ready) return;
+    if (!ready || !renderer.hitTarget(e.clientX, e.clientY)) return;
     drag = { id: e.pointerId, x: e.clientX, y: e.clientY };
     t.setPointerCapture(e.pointerId);
   });
@@ -148,7 +149,7 @@ async function tick() {
     if (d.qpos[c.cube_qadr + 2] < c.initial_qpos[c.cube_qadr + 2] - 0.15) {
       dropped = true;
       $("drop").hidden = false;
-      status("Cube dropped · reset to retry");
+      status("Dropped");
     }
   } catch (e) {
     paused = true;
@@ -184,13 +185,9 @@ function frame(now) {
   if (now - metricTime > 100) {
     metricTime = now;
     $("error").textContent = `${error.toFixed(0)}°`;
-    $("error-bar").style.width = `${Math.max(0, 100 - error / 1.8)}%`;
     $("target").setAttribute("aria-valuenow", error.toFixed(0));
     $("target").setAttribute("aria-valuetext", `${error.toFixed(0)} degrees orientation error`);
-    $("tracking").textContent = dropped ? "Dropped" : paused ? "Paused" : hold >= 5 ? "Target reached" : "Tracking";
-    history.push(error);
-    if (history.length > 100) history.shift();
-    $("trace").setAttribute("d", history.map((e, i) => `${i ? "L" : "M"}${(i * 260) / 99},${31 - (e / 180) * 30}`).join(" "));
+    status(dropped ? "Dropped" : paused ? "Paused" : hold >= 5 ? "Target reached" : "Tracking");
     $("latency").textContent = `${latency.toFixed(2)} ms`;
     $("cost").textContent = `${physicsMs.toFixed(1)} / ${renderMs.toFixed(1)} ms`;
     $("time").textContent = `${(steps * c.ctrl_dt).toFixed(2)} s`;
@@ -203,6 +200,9 @@ function frame(now) {
     renderStart = now;
   }
 }
+$("drop-reset").onclick = () => ready && reset();
+$("about-open").onclick = () => $("about").showModal();
+$("about-close").onclick = () => $("about").close();
 controls();
 (async () => {
   try {
@@ -227,8 +227,7 @@ controls();
     obs = new Observation(c);
     const parity = await regression();
     console.info("Wuji policy golden regression", parity);
-    renderer = new HandRenderer($("scene"), $("target"));
-    renderer.build(m, c);
+    renderer = createDexterousView({ canvas: $("scene"), target: $("target"), mujoco: mj, model: m, data: d });
     reset();
     ready = true;
     for (const id of ["random", "push", "reset", "pause"]) $(id).disabled = false;

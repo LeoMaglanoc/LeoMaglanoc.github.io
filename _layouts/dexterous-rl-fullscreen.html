@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#101819" />
+    <meta name="theme-color" content="#101617" />
     <meta
       name="description"
       content="Interactive dexterous reinforcement learning: rotate a target cube and watch a Wuji robotic hand follow in live browser physics."
@@ -16,7 +16,7 @@
         height: 100%;
         margin: 0;
         overflow: hidden;
-        background: #101819;
+        background: #101617;
       }
       .demo-frame {
         position: fixed;
@@ -30,5 +30,13 @@
   </head>
   <body>
     {{ content }}
+    <script>
+      if (new URLSearchParams(location.search).get("debug") === "1") {
+        const frame = document.querySelector(".demo-frame");
+        const url = new URL(frame.src);
+        url.searchParams.set("debug", "1");
+        frame.src = url.href;
+      }
+    </script>
   </body>
 </html>

@@ -63,8 +63,10 @@ keyframe after compilation.
 - `../../_pages/dexterous-rl.md`, `../../_layouts/dexterous-rl-fullscreen.html`:
   public route. Blog demo list lives in `_blogs/2025-12-28-AI-coding-agent-case-study.md`.
 
-The original STL mesh topology and physics are retained. Only their renderer
-materials and the cube's face artwork change. No rendered mesh decimation was
+The original STL mesh topology, authored RGBA, cube face textures, and physics
+are retained. The hand and physical cube use the shared `mjv_updateScene` renderer;
+only the translucent target is an application overlay in a second viewport of
+the same WebGL canvas. No rendered mesh decimation was
 needed. Shared Three.js, ORT WASM, and fonts avoid duplicating large libraries.
 
 ## Exact control contract
@@ -102,7 +104,7 @@ inference results using an epoch token. Rendering and physics remain local.
 
 ## Interactions
 
-- Drag the large ghost cube to rotate the goal continuously; arrow keys also work.
+- Drag the translucent target cube to rotate the goal continuously; arrow keys also work.
   The hand continues operating while targets change. Pointer capture and
   `touch-action:none` prevent target dragging from scrolling the page.
 - Random target uses a uniform unit quaternion (Shoemake sampling).
@@ -114,8 +116,11 @@ inference results using an epoch token. Rendering and physics remain local.
 - Drop occurs at 0.15 m below initial cube height (z < 0.4099 m). Simulation stops
   with an explicit message until Reset; no silent teleports.
 - Target reached requires error below 0.2 rad for five consecutive policy steps.
-- The trace, error, inference latency, physics cost, render fps and simulation pace
-  use actual runtime values. Timing rates shown as 20/100 Hz refer to sim time.
+- The primary screen contains the hand, target and compact controls. About /
+  Credits opens a keyboard-accessible modal. `?debug=1` exposes inference latency,
+  physics/render CPU cost, render fps, simulated time, pace and actor parity; it
+  also works on the public `/dexterous-rl/?debug=1` route. Timing rates shown as
+  20/100 Hz refer to sim time. No graph or telemetry is displayed by default.
 
 ## Continue improving the model
 

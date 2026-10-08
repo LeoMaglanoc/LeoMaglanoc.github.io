@@ -105,3 +105,44 @@ See `results/chrome-live.jpg` and `results/live-deployment.json`.
 The offline upstream archive was checked against all 380 archived source/model
 files; all upstream Python sources and original model assets are preserved.
 See `results/source-archive-integrity.json` and the recovery instructions in README.
+
+## Shared renderer and fullscreen redesign — 2026-10-08
+
+The hand and physical cube now come from MuJoCo's visualization scene through
+`projects/shared/mujoco-three-renderer.js`. The physical cube retains all six
+authored texture faces. The target reuses these textures with transparent
+materials, rendered in a scissored viewport of the same canvas and WebGL context.
+The original model's nonphysical mocap goal geom is excluded by the application.
+Source normals, visual geom groups and independent normal/UV indices are retained;
+no physical mesh, physics setting, policy, action filtering or observation changed.
+
+Independent Chrome computer-use runs against Docker previews:
+
+- G1: ten native trace comparisons; action error ≤6.56e-7. Standing, walking
+  1.04 m under a 0.4 m/s command, reset, pause/resume and pushes pass. Shared
+  renderer reports and old/new fixed viewport images are under
+  `../shared/validation/`.
+- Wuji: ten golden vectors; observation and action-target errors zero;
+  actor error 2.98e-7; five-step qpos error 3.03e-7.
+- 12/12 fixed-goal trials reach and hold the target, with no drops.
+- Continuous goal changes and bounded impulse recovery pass; final orientation
+  error 2.51°. Raw results: `results/redesign-2026-10-08/browser-regression.txt`.
+- Shared rendering: 28 visual geoms, 27 source-normal mesh geoms, six cube texture
+  faces, stable mesh and geometry identities over 120 frames. Wuji scene-update
+  median 0.6 ms / p95 1.0 ms on this desktop Chrome run. These are CPU samples,
+  not GPU timer measurements or physical Android device performance.
+- Authored normals versus generated indexed normals compared in a fixed pose.
+  Authored normals preserve CAD edges; screenshots are retained in shared results.
+- Desktop 1440×900, phone portrait 390×844, phone landscape 844×390 checked in
+  Chrome. Hero text hides on phones; target, reset and pause remain reachable;
+  no document overflow. Target pointer drag, arrow-key rotation, random goal,
+  background orbit, wheel zoom, perturb, reset and credits dialog exercised.
+  Responsive viewport tests do not substitute for physical phone hardware tests.
+- Production Jekyll build checked in Docker, including the public iframe route
+  and the blog's demo link. The dexterous CSS is excluded from the site's legacy
+  minifier, which corrupts custom properties inside `calc()` (same existing
+  protection as G1). Diagnostics are hidden by default and enabled by `?debug=1`.
+
+The new viewport screenshots and browser regression report are in
+`results/redesign-2026-10-08/`. Existing teacher/checkpoint provenance and licenses
+remain intact.

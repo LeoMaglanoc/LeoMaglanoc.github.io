@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-08",
+  "productionJekyllBuild": {
+    "dockerImage": "amirpourmand/al-folio:v0.14.7",
+    "exitCode": 0,
+    "seconds": 156.755,
+    "cssMatchesSource": true
+  },
+  "checkpointIntegrity": {
+    "dockerImage": "dexterous-rl:2026-10-07",
+    "passed": true,
+    "nativeMujoco": "3.11.0",
+    "nativeONNXRuntime": "1.23.0",
+    "actorInputs": [
+      1,
+      207
+    ],
+    "actorOutputs": [
+      1,
+      20
+    ],
+    "joints": 20,
+    "unchangedMeshFiles": 35
+  },
+  "viewports": {
+    "desktop": [
+      1440,
+      900
+    ],
+    "portrait": [
+      390,
+      844
+    ],
+    "landscape": [
+      844,
+      390
+    ]
+  },
+  "chromeComputerUse": true,
+  "physicalAndroidDeviceTested": false
+}

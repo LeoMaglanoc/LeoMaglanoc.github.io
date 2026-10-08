@@ -272,6 +272,7 @@ jekyll-minifier:
       "robots.txt",
       "assets/js/search/*.js",
       "assets/interactive/g1/g1.css",
+      "assets/interactive/dexterous-rl/style.css",
       "assets/interactive/locomotion-playground/playground.css",
       "assets/interactive/drone-racing/drone.css",
       "assets/interactive/tiny-dreamer/tiny-dreamer.css",
