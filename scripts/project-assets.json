@@ -60,7 +60,9 @@
   },
   "projects/flappy": {
     "destination": "assets/interactive/flappy",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/g1": {
     "destination": "assets/interactive/g1",
@@ -268,11 +270,15 @@
   },
   "projects/race": {
     "destination": "assets/interactive/race",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/robot-runner": {
     "destination": "assets/interactive/robot-runner",
-    "files": ["index.html"]
+    "files": [
+      "index.html"
+    ]
   },
   "projects/tiny-dreamer": {
     "destination": "assets/interactive/tiny-dreamer",
@@ -302,7 +308,13 @@
   },
   "projects/ask-leo": {
     "destination": "assets/js/ask-leo",
-    "files": ["ask-leo.js", "model-config.js", "prompt.js", "retrieval.js", "worker.js"]
+    "files": [
+      "ask-leo.js",
+      "model-config.js",
+      "prompt.js",
+      "retrieval.js",
+      "worker.js"
+    ]
   },
   "projects/rustzero/web": {
     "destination": "assets/interactive/rustzero",
@@ -607,6 +619,12 @@
       "textures/grayleft.png",
       "textures/grayright.png",
       "textures/grayup.png"
+    ]
+  },
+  "projects/shared": {
+    "destination": "assets/interactive/shared",
+    "files": [
+      "mujoco-three-renderer.js"
     ]
   }
 }

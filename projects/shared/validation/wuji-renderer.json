@@ -1,0 +1,11 @@
+{
+  "model": "hand",
+  "result": "PASS",
+  "geoms": 28,
+  "sourceNormalMeshes": 27,
+  "cachedGeometries": 28,
+  "stableFrames": 120,
+  "sceneUpdateMedianMs": 0.6000000014901161,
+  "sceneUpdateP95Ms": 1,
+  "cubeTextureFaces": 6
+}

@@ -1,0 +1,10 @@
+{
+  "model": "primitives",
+  "result": "PASS",
+  "geoms": 6,
+  "sourceNormalMeshes": 0,
+  "cachedGeometries": 6,
+  "stableFrames": 120,
+  "sceneUpdateMedianMs": 0.10000000149011612,
+  "sceneUpdateP95Ms": 0.20000000298023224
+}

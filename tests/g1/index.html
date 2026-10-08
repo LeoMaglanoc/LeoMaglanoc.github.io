@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>G1 policy regression</title
+  ><style>
+    body {
+      background: #101617;
+      color: #b5f36d;
+      font: 14px monospace;
+      padding: 25px;
+    }
+    button {
+      padding: 15px;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  </style>
+  <h1>G1 native → browser regression</h1>
+  <button id="run">Run G1 checks</button>
+  <pre id="output">Ready</pre>
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
+  <script type="module" src="./regression.js"></script>
+</html>

@@ -1,11 +1,11 @@
 import { CommandManager } from "./input.js";
 import { BrowserPolicy } from "./policy.js";
-import { G1Renderer } from "./renderer.js";
+import { createG1Renderer } from "./renderer.js";
 import { G1Simulation } from "./simulation.js";
 import { G1UI } from "./ui.js";
 
 const ui = new G1UI();
-const renderer = new G1Renderer(document.getElementById("g1-canvas"));
+let renderer;
 const commandManager = new CommandManager();
 const policy = new BrowserPolicy(new URL("../models/policy.onnx", import.meta.url));
 let simulation;
@@ -23,7 +23,7 @@ async function start() {
     await policy.load();
     simulation = new G1Simulation(policy, commandManager, update);
     await simulation.init();
-    renderer.buildModel(simulation.model);
+    renderer = createG1Renderer(document.getElementById("g1-canvas"), simulation);
     commandManager.onChange = () => ui.update(commandManager.current, simulation.stats);
     ui.ready();
     ui.resetButton.addEventListener("click", () => {
@@ -32,7 +32,9 @@ async function start() {
     });
     const pushStrength = document.getElementById("g1-push-strength");
     const pushStrengthValue = document.getElementById("g1-push-strength-value");
-    pushStrength.addEventListener("input", () => { pushStrengthValue.textContent = `${pushStrength.value} N`; });
+    pushStrength.addEventListener("input", () => {
+      pushStrengthValue.textContent = `${pushStrength.value} N`;
+    });
     ui.pauseButton.addEventListener("click", () => {
       simulation.setPaused(!simulation.paused);
       ui.setPaused(simulation.paused);

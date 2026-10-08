@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>MuJoCo shared renderer regression</title>
+  <style>
+    body {
+      background: #101617;
+      color: #b5f36d;
+      font: 14px monospace;
+      margin: 0;
+    }
+    nav {
+      position: absolute;
+      z-index: 1;
+      background: #101617cc;
+      padding: 12px;
+    }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+    pre {
+      max-width: 540px;
+      white-space: pre-wrap;
+    }
+    button {
+      padding: 12px;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "../../assets/interactive/mobile-sorting/vendor/three.module.js",
+        "three/addons/controls/OrbitControls.js": "../../assets/interactive/mobile-sorting/vendor/OrbitControls.js"
+      }
+    }
+  </script>
+  <nav>
+    <button id="g1">G1 checks</button> <button id="hand">Wuji checks</button>
+    <label><input type="checkbox" id="generated" /> Generated normals (comparison)</label> <button id="primitives">Primitive checks</button>
+    <pre id="output">Choose a model</pre>
+  </nav>
+  <canvas id="scene"></canvas>
+  <script type="module" src="./regression.js"></script>
+</html>

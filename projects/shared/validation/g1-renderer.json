@@ -1,0 +1,10 @@
+{
+  "model": "g1",
+  "result": "PASS",
+  "geoms": 47,
+  "sourceNormalMeshes": 27,
+  "cachedGeometries": 29,
+  "stableFrames": 120,
+  "sceneUpdateMedianMs": 3.1999999955296516,
+  "sceneUpdateP95Ms": 4.399999998509884
+}
