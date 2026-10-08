@@ -49,6 +49,10 @@ document.querySelector("#run").onclick = async () => {
     if (report.walkDistance < 0.2) throw Error("Command did not produce walking");
     simulation.reset();
     report.resetTime = simulation.stepCount;
+    if (!policy.hidden.every((v) => v === 0) || !policy.cell.every((v) => v === 0)) throw Error("Reset retained recurrent state");
+    await advance(5000);
+    report.afterResetSeconds = simulation.stats.walkTime;
+    report.afterResetHeight = simulation.data.qpos[2];
     report.result = "PASS";
     output.textContent = JSON.stringify(report, null, 2);
   } catch (e) {

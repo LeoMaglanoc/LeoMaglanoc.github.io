@@ -78,11 +78,15 @@ async function run(kind) {
     const original = new Set(renderer.objects.values());
     const cacheCount = renderer.geometryCache.size;
     const costs = [];
-    for (let frame = 0; frame < 120; frame++) {
+    // Warm up allocations, then catch owned-vector leaks over a long run.
+    for (let frame = 0; frame < 10; frame++) renderer.updateScene();
+    const heapBytes = data.qpos.buffer.byteLength;
+    for (let frame = 0; frame < 3000; frame++) {
       const start = performance.now();
       renderer.updateScene();
       costs.push(performance.now() - start);
     }
+    assert(data.qpos.buffer.byteLength === heapBytes, "WASM heap grew during repeated scene updates");
     assert(
       renderer.geometryCache.size === cacheCount && [...renderer.objects.values()].every((o) => original.has(o)),
       "Frame allocations changed geometry or meshes"
@@ -105,9 +109,10 @@ async function run(kind) {
       geoms: expected.length,
       sourceNormalMeshes: sourceNormals,
       cachedGeometries: cacheCount,
-      stableFrames: 120,
-      sceneUpdateMedianMs: costs[60],
-      sceneUpdateP95Ms: costs[114],
+      stableFrames: costs.length,
+      heapBytes,
+      sceneUpdateMedianMs: costs[Math.floor(costs.length * 0.5)],
+      sceneUpdateP95Ms: costs[Math.floor(costs.length * 0.95)],
     };
     if (kind === "hand") {
       const physical = [...renderer.objects.values()].find((o) => o.userData.geomId === model.geom("object/cube_visual").id);

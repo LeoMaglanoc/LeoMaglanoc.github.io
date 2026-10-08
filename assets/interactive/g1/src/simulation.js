@@ -74,6 +74,8 @@ export class G1Simulation {
     this.stepCount = 0;
     this.accumulator = 0;
     this.push = null;
+    this.lastFrame = null;
+    this.paused = false;
     this.startPosition = [this.data.qpos[0], this.data.qpos[1]];
     this.stats = { speed: 0, distance: 0, walkTime: 0, pushes: 0 };
     this.policy.reset();
@@ -104,7 +106,11 @@ export class G1Simulation {
       if (token !== this.runToken) return;
       this.action.set(action.slice(0, 12));
       this.target.set(desiredJointPositions(this.action));
-    }).catch((error) => this.onUpdate?.(this.data, this.stats, error)).finally(() => {
+    }).catch((error) => {
+      if (token !== this.runToken) return;
+      this.setPaused(true);
+      this.onUpdate?.(this.data, this.stats, error);
+    }).finally(() => {
       this.inferenceBusy = false;
     });
   }
@@ -138,9 +144,12 @@ export class G1Simulation {
     const elapsed = Math.min(0.05, Math.max(0, (time - this.lastFrame) / 1000));
     this.lastFrame = time;
     if (!this.paused) {
-      this.accumulator += elapsed;
+      // Keep inference synchronized with simulation time, even on slow frames.
+      // Never skip a 50 Hz policy tick or integrate with a stale target while
+      // its action is being computed. Bound backlog after stalls.
+      this.accumulator = Math.min(0.05, this.accumulator + elapsed);
       let steps = 0;
-      while (this.accumulator >= C.simulationDt && steps < 25) {
+      while (this.accumulator >= C.simulationDt && steps < 25 && !this.inferenceBusy) {
         this.stepPhysics();
         this.accumulator -= C.simulationDt;
         steps += 1;

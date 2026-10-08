@@ -208,44 +208,51 @@ export class MujocoThreeRenderer {
     const mj = this.mujoco;
     mj.mjv_updateScene(this.model, data, this.option, this.perturb, this.mjCamera, mj.mjtCatBit.mjCAT_ALL.value, this.mjScene);
     for (const mesh of this.objects.values()) mesh.visible = false;
-    for (let i = 0; i < this.mjScene.ngeom; i++) {
-      const g = this.mjScene.geoms.get(i);
-      if (g.objtype === mj.mjtObj.mjOBJ_GEOM.value && this.excluded.has(g.objid)) {
-        g.delete();
-        continue;
-      }
-      const key = `${g.objtype}:${g.objid}:${g.type}:${g.dataid}`;
-      let mesh = this.objects.get(key);
-      if (!mesh) {
-        mesh = new THREE.Mesh(this.geometry(g), this.material(g));
-        mesh.userData.geomId = g.objid;
-        mesh.castShadow = g.type !== 0;
-        mesh.receiveShadow = true;
-        this.objects.set(key, mesh);
-        this.scene.add(mesh);
-      }
-      mesh.visible = g.rgba[3] > 0;
-      mesh.position.fromArray(g.pos);
-      const r = g.mat;
-      this.rotation.set(r[0], r[1], r[2], 0, r[3], r[4], r[5], 0, r[6], r[7], r[8], 0, 0, 0, 0, 1);
-      mesh.quaternion.setFromRotationMatrix(this.rotation);
-      const s = g.size;
-      if (g.type === 0) mesh.scale.set(s[0] > 0 ? 2 * s[0] : 40, s[1] > 0 ? 2 * s[1] : 40, 1);
-      else if (g.type === 2) mesh.scale.setScalar(s[0]);
-      else if (g.type === 4 || g.type === 6) mesh.scale.fromArray(s);
-      else if (g.type === 5) mesh.scale.set(s[0], s[0], s[1]);
-      for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
-        const transparent = g.rgba[3] < 1;
-        if (material.transparent !== transparent) {
-          material.transparent = transparent;
-          material.needsUpdate = true;
+    // Embind returns an owned vector copy here. Acquire it once per frame,
+    // then release it; reading .geoms for every geometry leaks WASM memory.
+    const geoms = this.mjScene.geoms;
+    try {
+      for (let i = 0; i < this.mjScene.ngeom; i++) {
+        const g = geoms.get(i);
+        if (g.objtype === mj.mjtObj.mjOBJ_GEOM.value && this.excluded.has(g.objid)) {
+          g.delete();
+          continue;
         }
-        material.color.setRGB(g.rgba[0], g.rgba[1], g.rgba[2]);
-        material.opacity = g.rgba[3];
-        material.depthWrite = !transparent;
-        material.emissive.copy(material.color).multiplyScalar(g.emission);
+        const key = `${g.objtype}:${g.objid}:${g.type}:${g.dataid}`;
+        let mesh = this.objects.get(key);
+        if (!mesh) {
+          mesh = new THREE.Mesh(this.geometry(g), this.material(g));
+          mesh.userData.geomId = g.objid;
+          mesh.castShadow = g.type !== 0;
+          mesh.receiveShadow = true;
+          this.objects.set(key, mesh);
+          this.scene.add(mesh);
+        }
+        mesh.visible = g.rgba[3] > 0;
+        mesh.position.fromArray(g.pos);
+        const r = g.mat;
+        this.rotation.set(r[0], r[1], r[2], 0, r[3], r[4], r[5], 0, r[6], r[7], r[8], 0, 0, 0, 0, 1);
+        mesh.quaternion.setFromRotationMatrix(this.rotation);
+        const s = g.size;
+        if (g.type === 0) mesh.scale.set(s[0] > 0 ? 2 * s[0] : 40, s[1] > 0 ? 2 * s[1] : 40, 1);
+        else if (g.type === 2) mesh.scale.setScalar(s[0]);
+        else if (g.type === 4 || g.type === 6) mesh.scale.fromArray(s);
+        else if (g.type === 5) mesh.scale.set(s[0], s[0], s[1]);
+        for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
+          const transparent = g.rgba[3] < 1;
+          if (material.transparent !== transparent) {
+            material.transparent = transparent;
+            material.needsUpdate = true;
+          }
+          material.color.setRGB(g.rgba[0], g.rgba[1], g.rgba[2]);
+          material.opacity = g.rgba[3];
+          material.depthWrite = !transparent;
+          material.emissive.copy(material.color).multiplyScalar(g.emission);
+        }
+        g.delete();
       }
-      g.delete();
+    } finally {
+      geoms.delete();
     }
     if (this.followBody != null) {
       this.delta.fromArray(data.xpos, this.followBody * 3);

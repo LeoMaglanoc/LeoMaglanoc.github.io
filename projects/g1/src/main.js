@@ -10,6 +10,13 @@ const commandManager = new CommandManager();
 const policy = new BrowserPolicy(new URL("../models/policy.onnx", import.meta.url));
 let simulation;
 
+function resetSimulation() {
+  commandManager.reset();
+  simulation.reset();
+  ui.ready();
+  ui.setPaused(simulation.paused);
+}
+
 function update(data, stats, error) {
   if (error) ui.showError(error);
   if (!simulation) return;
@@ -26,10 +33,7 @@ async function start() {
     renderer = createG1Renderer(document.getElementById("g1-canvas"), simulation);
     commandManager.onChange = () => ui.update(commandManager.current, simulation.stats);
     ui.ready();
-    ui.resetButton.addEventListener("click", () => {
-      commandManager.reset();
-      simulation.reset();
-    });
+    ui.resetButton.addEventListener("click", resetSimulation);
     const pushStrength = document.getElementById("g1-push-strength");
     const pushStrengthValue = document.getElementById("g1-push-strength-value");
     pushStrength.addEventListener("input", () => {
@@ -51,8 +55,7 @@ async function start() {
       }
       if (event.code === "Backspace") {
         event.preventDefault();
-        commandManager.reset();
-        simulation.reset();
+        resetSimulation();
       }
     });
     renderer.update(simulation.data);

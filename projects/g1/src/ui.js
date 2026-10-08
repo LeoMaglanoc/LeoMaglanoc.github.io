@@ -30,6 +30,8 @@ export class G1UI {
 
   ready() {
     this.loading.hidden = true;
+    this.error.hidden = true;
+    this.error.textContent = "";
     this.status.textContent = "Running locally in your browser";
     this.pauseButton.disabled = false;
   }
