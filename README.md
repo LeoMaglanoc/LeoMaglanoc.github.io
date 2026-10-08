@@ -86,11 +86,347 @@ docker compose -f projects/g1/docker-compose.yml run --rm g1-tools \
 
 The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.io/g1/). It uses a fullscreen layout and embeds the static simulator from `projects/g1/`.
 
-## Interactive demos
+## Interactive Web Demos
 
-### EuroGuessr AI
+Small interactive experiments built with coding agents:
+[**Humanoid Walking**](https://leonardo-maglanoc.com/locomotion/) ·
+[**Dexterous Cube Orientation**](https://leonardo-maglanoc.com/dexterous-rl/) ·
+[**EuroGuesser AI**](https://leonardo-maglanoc.com/euroguessr/) ·
+[**BlockTemple**](https://leonardo-maglanoc.com/block-temple/).
 
-The [/euroguessr/](https://leomaglanoc.github.io/euroguessr/) game offers five timed European street-view rounds against a small geolocation model running in an ONNX Runtime Web CPU worker. It compares a trained geographic classifier with visual retrieval, selects on spatial validation, and publishes measured test error. Human win rate has not been measured. See [`projects/euroguessr/README.md`](projects/euroguessr/README.md) for checkpoints, attribution, Chrome validation and overnight training.
+These notes explain the training, runtime architecture, and engineering tradeoffs
+for a technical interview. All four demos execute locally in the browser after
+loading static assets. Training and asset authoring happen offline.
+
+| Demo                       | Learning / algorithm                                                           | Model provenance                                                                  | Browser runtime                           |
+| -------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ----------------------------------------- |
+| Humanoid Walking           | Recurrent PPO policy + joint PD control                                        | Released Unitree actor; exported here, no local retraining                        | ONNX Runtime Web + MuJoCo WASM + Three.js |
+| Dexterous Cube Orientation | PPO policy with observation history + filtered joint targets                   | Released Wuji Hand 1 actor; no local retraining                                   | ONNX Runtime Web + MuJoCo WASM + Three.js |
+| EuroGuesser AI             | Supervised geographic classification + GeoCLIP distillation + visual retrieval | MobileNet student trained here from pretrained weights; optional released GeoCLIP | ONNX Runtime Web/WASM in a CPU worker     |
+| BlockTemple                | Procedural mesh authoring, voxel traversal, collision queries                  | No machine-learning model                                                         | Godot web export + WebGL                  |
+
+### 1. Humanoid Walking
+
+[Open demo](https://leonardo-maglanoc.com/locomotion/) ·
+[Implementation and reproduction](projects/g1/README.md) ·
+[Public playground wrapper](projects/locomotion-playground/README.md)
+
+**Task and model.** A Unitree G1 follows forward, lateral, and yaw velocity
+commands using 12 leg joints. The deployed actor is Unitree's released
+`unitree_rl_gym/deploy/pre_train/g1/motion.pt`. The exporter reconstructs its
+47-input, 64-unit LSTM and `64 -> 32 -> 12` action head with an ELU activation.
+It exports the hidden and cell states explicitly, so JavaScript carries the
+recurrent memory between decisions and clears it on reset.
+
+**How training relates to this project.** The upstream policy uses PPO
+(Proximal Policy Optimization). In PPO, an actor collects simulated trajectories;
+a critic estimates future discounted reward; advantage estimates tell the actor
+which actions performed better than expected. Updates optimize a clipped
+probability-ratio objective to discourage overly large policy changes. The
+critic is needed for training, while deployment only needs the actor. This is
+the algorithmic training pattern, not a reconstruction of this checkpoint's
+original run: this project retains the released actor and deployment contract,
+but does not establish its exact reward weights, randomization schedule,
+training duration, or original learning curves. The work here is browser
+integration, recurrent ONNX export, control-contract reproduction, and validation.
+
+```text
+Upstream training (PPO; original run details not recorded here)
+  simulated trajectories -> reward + critic -> advantage estimates
+           ^                                      |
+           +------------- updated actor <---------+
+                              |
+                    released motion.pt
+                              v
+Local offline: explicit LSTM-state export -> ONNX numerical parity -> static assets
+
+Browser (all rates are per simulated second)
+  keyboard / touch -> command [vx, vy, yaw rate]
+                              |
+  MuJoCo state + previous action + gait phase
+                              |
+                              v
+                       47-D observation
+                              |
+  hidden, cell ------> LSTM actor @ 50 Hz ------> next hidden, cell
+                              |
+                         12 actions
+                              v
+                   q_target = q_default + 0.25 * action
+                              |
+                              v
+            PD @ 500 Hz: torque = Kp*(q_target - q) - Kd*dq
+                              |
+                              v
+                 MuJoCo WASM (10 steps / action)
+                     |                     |
+                     +-> next state        +-> Three.js rendering
+```
+
+**What the policy sees.** The 47 values are angular velocity (3), projected
+gravity (3), velocity command (3), joint-position offsets (12), joint velocities
+(12), previous action (12), and sine/cosine of gait phase (2). Scaling, joint
+order, default angles, and a 0.8-second phase period match the deployment code.
+The observation has no camera or terrain-height map. The actor outputs joint
+position offsets; the fast PD loop turns these into torques, and MuJoCo computes
+contacts and the next physical state. Push buttons apply a physical pelvis force.
+
+**Interview discussion.** The slow learned controller chooses coordinated leg
+motion, while the fast PD controller supplies joint tracking between decisions.
+The LSTM preserves temporal information beyond one observation. Export checks
+compare TorchScript, reconstructed PyTorch, and ONNX outputs and recurrent states
+across sequential inputs with a maximum absolute error threshold of `1e-5`.
+Matching the observation/action contract is essential; it does not establish
+identical long-horizon physics across browsers or real-robot transfer. The public
+`/locomotion/` wrapper currently exposes G1 only; the retained B2 MPC experiments
+are separate from this demo.
+
+### 2. Dexterous Cube Orientation
+
+[Open demo](https://leonardo-maglanoc.com/dexterous-rl/) ·
+[Implementation and reproduction](projects/dexterous-rl/README.md) ·
+[Measured validation](projects/dexterous-rl/VALIDATION.md)
+
+**Task and model.** A 20-joint Wuji Hand 1 rotates a free 54 mm, 120 g cube toward
+a target orientation through simulated contact and friction. It deploys Wuji
+Technology's released `WujiHand_Reorient` actor directly. No new policy was
+trained or distilled here. The target is a quaternion; the actor receives its
+orientation error as a continuous six-dimensional rotation representation.
+
+**How the upstream model is trained.** The pinned upstream release configuration
+uses mjlab/RSL-RL PPO with 8,192 parallel environments, 40 rollout steps per
+environment per iteration, and a configured 5,000 iterations. These are release
+configuration values, not a newly measured training run. The actor MLP has
+`512 -> 256 -> 128` hidden units with ELU; the critic has
+`512 -> 512 -> 256 -> 128`. Training uses learned observation normalization and
+a Gaussian action distribution for exploration. PPO uses a clipping parameter of
+0.2, learning rate `1e-4`, four learning epochs, 32 minibatches, discount 0.99,
+and GAE lambda 0.95. GAE (generalized advantage estimation) combines reward and
+value predictions over time to estimate action advantages.
+
+The task config wires orientation rewards, terminations, a curriculum,
+observation corruption, and physical randomization, including object mass/size,
+friction/contact parameters, actuator gains, and disturbances. These variations
+expose the policy to more than one idealized simulator condition; they are
+removed in the upstream play configuration used for evaluation. The exported
+actor includes its learned observation processing; adding a second normalizer
+would change its behavior. The local CPU tooling reproduces evaluation/export,
+not GPU PPO training.
+
+```text
+Upstream offline training
+  parallel randomized hand/cube simulations
+       -> observations + sampled actions + rewards
+       -> critic / GAE -> clipped PPO actor + value updates
+       -> released checkpoint + normalized ONNX actor + config
+                                      |
+Local preparation                     v
+  official scene + observation builder -> native traces / golden vectors
+                                      |
+                                      v
+Browser
+  target orientation + MuJoCo hand/cube state + previous raw action
+                                      |
+                         three-frame observation history
+                                      |
+                               207-D input
+                                      v
+                          PPO actor @ 20 Hz -> 20 actions
+                                      |
+          clamp [-1,1] -> scale 0.5 -> add grasp -> soft-limit clamp
+                                      |
+                   EMA: target = 0.5*new + 0.5*previous
+                                      |
+                    joint position actuators + contact physics
+                       MuJoCo WASM @ 100 Hz (5 steps / action)
+                            |                         |
+                            +-> next observation      +-> Three.js
+```
+
+**What the policy sees.** Each frame has 20 normalized joint positions, 20
+tracking errors relative to the previous filtered joint target, 3 cube-position
+coordinates in the wrist-tag frame, 6 orientation-error values, and 20 previous
+raw actions: 69 values, with three-frame histories concatenated per observation
+term to make 207. The tracking errors are position differences, not velocities.
+Initial history is filled with the first frame; the first 0.4 simulated seconds
+use the official grasp. Changing the target changes the observation while the
+same policy continues controlling the hand. Cube pose comes from simulator state;
+this demo does not implement camera-based object tracking.
+
+**Interview discussion.** Contact-rich manipulation is sensitive to joint order,
+normalization, action filtering, collision geometry, and solver settings. Native
+and browser MuJoCo are pinned to 3.11.0. Ten frozen vectors check observations,
+actions, filtered targets, and one control interval of physics; the demo checks
+actor parity on startup. Recorded browser regression reached and held all 12
+seeded fixed goals with no drops, using error below 0.2 rad for five policy steps.
+That is limited regression evidence, not a population success-rate estimate.
+A dropped cube stops simulation visibly. The contribution here is faithful
+browser deployment and validation of an upstream learned controller.
+
+### 3. EuroGuesser AI
+
+[Open demo](https://leonardo-maglanoc.com/euroguessr/) ·
+[Implementation and reproduction](projects/euroguessr/README.md) ·
+[Training methodology](projects/euroguessr/RESEARCH_V2.md) ·
+[Shipped model metadata](projects/euroguessr/models/metadata.json)
+
+**Task and data.** Predict latitude/longitude from a European street photograph.
+The game presents five untimed rounds against the model. Research images come
+from a pinned OSV-5M revision with country balancing and sequence deduplication.
+The V2 manifest has 8,500 training, 961 validation, and 363 fresh-test images.
+Hashed 3-degree spatial blocks and a minimum 25 km training/holdout buffer reduce
+nearby-image leakage; the fresh holdouts also avoid preserved V1 training
+neighbors. This is a custom European experiment, not the full OSV-5M benchmark.
+
+**How the default Tiny model is trained.** Start from ImageNet-pretrained
+MobileNetV3-Small, warm-start compatible encoder weights from V1, and derive
+96 geographic cells from training GPS only. A classification head predicts the
+nearest cell; a `576 -> 512` projection maps image features into GeoCLIP's
+embedding space. Cache the frozen encoder prefix to make CPU training practical,
+train the heads, then fine-tune the final two encoder blocks. AdamW updates the
+trainable parameters. The selected FP32 student has 1,394,816 parameters.
+
+A pretrained GeoCLIP teacher supplies soft geographic targets and normalized
+image embeddings for 5,000 covered training images. The selected objective is
+`0.5 * geographic CE + 0.2 * distillation KL + 0.3 * embedding loss`.
+CE is class-weighted cross-entropy with 0.1 label smoothing; KL matches the
+teacher's softened cell probabilities with temperature scaling; embedding loss
+is `1 - cosine_similarity(student_projection, teacher_embedding)`.
+Teacher terms are masked out for uncovered examples. The teacher itself is not
+trained here. Its upstream training overlap with evaluation imagery cannot be
+independently ruled out.
+
+```text
+Offline (Docker, CPU)
+  OSV-5M photos + GPS -> spatial / sequence split
+                            |
+                   training-only geographic cells
+                            |
+       +--------------------+-------------------------+
+       |                                              |
+  MobileNet image features                 pretrained GeoCLIP teacher
+       |                                     cached soft cells + embeddings
+       +-> cell head + 512-D projection <--------------+
+                            |
+                  CE + KL + cosine losses
+                            |
+                heads -> final-block fine-tuning
+                            |
+       validation selects checkpoint + prediction method
+                            |
+             locked fresh-test evaluation -> FP32 ONNX
+                            +-> training-reference embedding/GPS index
+
+Browser (worker receives pixels + token, never answer GPS or photo ID)
+  photo -> matched 224x224 preprocessing -> ONNX MobileNet student
+                            |
+                  normalized 512-D projection
+                            |
+          cosine similarity to training-reference embeddings
+                            |
+          top 50 -> exp(10 * similarity) normalized weights
+                            |
+                 weighted reference latitude/longitude
+                            |
+       AI guess + player pin -> great-circle distance -> round score
+```
+
+**Why retrieval follows classification training.** The classifier teaches
+geographic structure, but validation compares its cell predictions with several
+retrieval strategies. The deployed method is `distilled-50-t10`: retrieve the
+50 closest projected training embeddings and average their GPS with exponential
+similarity weights. Subtracting the best similarity before exponentiation keeps
+the calculation stable without changing the normalized weights. No test-photo
+answers enter the retrieval index. The result is a similarity-weighted location
+estimate; it can fall between distant plausible locations.
+
+**Results and optional model.** On the same spatial validation cohort, median
+error was 833 km for preserved V1, 754 km for supervised V2, and 724 km for the
+selected distilled V2; the separate fresh-test median for the selected model was
+771 km. The optional GeoCLIP mode runs the released image encoder against an
+independent regular GPS gallery, achieving 372 km fresh-test median error. Its
+approximately 320 MiB download stores linear weights in 8-bit form while using
+FP32 arithmetic; it is explicitly opt-in and can take seconds or tens of seconds
+per photo. Both paths run in a single-thread CPU worker with no inference API.
+
+**Interview discussion.** Distillation transfers a larger model's representation
+into a smaller deployable model. Spatial splitting matters because neighboring
+street frames can make random image splits misleading. Validation chooses the
+checkpoint and retrieval settings before the fresh test is inspected. Matched
+Python/JavaScript preprocessing and ONNX parity guard deployment correctness.
+Median geographic error measures localization accuracy; human win rate remains
+unmeasured. The offline map uses local assets, and scores are
+`round(5000 * exp(-distance_km / 1500))` per round.
+
+### 4. BlockTemple
+
+[Open demo](https://leonardo-maglanoc.com/block-temple/) ·
+[Implementation and reproduction](projects/block-temple/README.md) ·
+[World algorithms](projects/block-temple/godot/scripts/world.gd) ·
+[Controller and interactions](projects/block-temple/godot/scripts/game.gd)
+
+**Task and authoring.** Explore an intact Coruscant temple reconstruction, discover
+a service annex, mine recovered blocks, and build a route to an overlook.
+There is no trained model or RL agent. Python scripts generate a repeatable
+Blender module kit and room layout from visual references; dimensions and unseen
+spaces are inferred. Geometry is batched by room/material, exported to GLB with
+separate collision meshes, and imported into Godot for a static web export.
+This combines fixed authored architecture with an editable voxel construction
+area. Coding agents assisted implementation; they do not run inside the game.
+
+```text
+Offline asset pipeline
+  screenshots / map / walkthrough
+       -> Python procedural Blender kit + layout
+       -> editable .blend + separate collision geometry
+       -> scene validation + fixed inspection renders
+       -> GLB + layout.json -> Godot import / mechanics checks -> web export
+
+Browser gameplay loop
+  keyboard / mouse / independent touch pointers
+       -> Godot player motion + camera + collision / stair stepping
+       -> aim ray
+            +-> voxel DDA traversal --------+
+            +-> static architecture raycast +-> closest hit
+                                                   |
+                                     mining / placement validation
+                                                   |
+                        inventory + voxel edit + progression update
+                                                   |
+                   mark affected chunks -> exposed-face mesh / collision rebuild
+                                                   |
+                       room visibility + baked shading -> WebGL frame
+
+Persistence
+  base voxel world + validated saved deltas -> current world
+  edits + player pose + inventory + discoveries -> browser local storage
+```
+
+**How the algorithms work.** Voxel storage uses a packed byte array. Chunks span
+16 by 16 cells horizontally; meshes emit only faces adjacent to empty space,
+avoiding hidden internal faces. An edit marks affected chunks, including relevant
+neighbors, for rebuilding. DDA (digital differential analyzer) advances the aim
+ray to the next grid boundary on each axis, testing cells in traversal order
+instead of testing every block. A separate physics raycast checks permanent
+architecture; the nearest hit wins so the player cannot mine through a wall.
+Placement checks construction bounds, inventory, and overlap with the player
+and fixed geometry. Permanent architecture cannot be mined.
+
+**Interview discussion.** Fixed architecture benefits from authored meshes and
+batched rendering; editable regions benefit from voxel indexing and local
+rebuilds. Room visibility keeps adjacent portal regions visible, baked vertex
+shading avoids costly live lighting, and resolution caps reduce browser GPU
+load. Delta saves store changes relative to the base world, plus player and game
+state, under the isolated `coruscant-temple-v2` storage key. Loading rejects
+invalid cells and recovers unsafe player positions. Validation covers mechanics,
+collision/targeting, placement, touch pointer independence, and save isolation.
+The technical story is asset reproducibility, interaction correctness, and web
+performance; no model-training claim applies.
+
+## Other interactive experiments
+
+The repository also retains the following experiments beyond the four featured
+website demos.
 
 ### Endless mobile manipulation
 
@@ -152,26 +488,6 @@ The trained agent succeeded on **20/20 held-out swing-up episodes**, with mean
 return **753.19**, compared with **122.88** for random actions. Strong pushes can
 break sustained balance. See [`projects/tiny-dreamer/README.md`](projects/tiny-dreamer/README.md)
 for the detailed algorithm, training commands, contracts, validation, and limits.
-
-### G1 locomotion playground
-
-The G1 demo runs a Unitree G1 12-DoF locomotion stack in the browser:
-
-```text
-velocity command
-      ↓
-47-dimensional observation
-      ↓
-ONNX policy in ONNX Runtime Web
-      ↓
-12 leg actions
-      ↓
-PD controller
-      ↓
-MuJoCo WASM physics
-```
-
-It includes a flat walking area and an optional lightweight terrain course with uneven blocks, a shallow ramp, and low steps. Desktop keyboard controls and mobile touch controls are supported. See [`projects/g1/README.md`](projects/g1/README.md) for the runtime contract, model details, controls, and attribution.
 
 ### FPV drone racing
 
