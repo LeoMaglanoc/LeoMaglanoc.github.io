@@ -28,19 +28,35 @@ featured_projects:
   - title: LiDAR-Visual-Inertial SLAM at TUM
     description: "Implemented and evaluated LiDAR feature-extraction and voxel-filtering methods in C++ within a dense multi-sensor SLAM system using real HILTI 2022 sensor data."
 
-builds:
-  - title: Interactive Web Demos
-    description: "Small interactive experiments built with coding agents."
-    links:
-      - label: Humanoid Walking
-        url: /locomotion/
-      - label: Dexterous Cube Orientation
-        url: /dexterous-rl/
-      - label: EuroGuesser AI
-        url: /euroguessr/
-      - label: BlockTemple
-        url: /block-temple/
+demos:
+  - title: Humanoid Walking
+    url: /locomotion/
+    image: assets/img/demos/humanoid.webp
+    alt: Unitree G1 humanoid in the locomotion playground, with velocity and balance controls.
+    description: Steer a humanoid and test its balance.
 
+  - title: Dexterous Cube Orientation
+    url: /dexterous-rl/
+    image: assets/img/demos/dexterous.webp
+    alt: Simulated robotic hand holding a cube beside the target orientation control.
+    description: Change the target and watch the hand reorient the cube.
+
+  - title: EuroGuesser AI
+    url: /euroguessr/
+    image: assets/img/demos/euroguesser.webp
+    alt: European street photograph alongside a map for guessing its location.
+    description: Challenge a vision model at European geography.
+    image_credit:
+      creator: acamat / Mapillary
+      source: https://www.mapillary.com/app/?pKey=5346729442052486&focus=photo
+
+  - title: BlockTemple
+    url: /block-temple/
+    image: assets/img/demos/block-temple.webp
+    alt: A view of the explorable block-built temple and its surrounding world.
+    description: Explore, mine, and build in a temple world.
+
+builds:
   - title: EasyBuy
     description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."
     links:

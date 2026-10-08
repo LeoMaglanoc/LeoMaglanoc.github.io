@@ -1,0 +1,27 @@
+<div class="homepage-demos">
+  {% for demo in site.data.homepage.demos %}
+    <article class="homepage-demo">
+      <a class="homepage-demo-link" href="{{ demo.url | relative_url }}">
+        <h3>{{ demo.title }}</h3>
+        <div class="homepage-demo-preview">
+          <img
+            src="{{ demo.image | relative_url }}"
+            alt="{{ demo.alt | escape }}"
+            width="960"
+            height="600"
+            loading="lazy"
+            decoding="async"
+          >
+          <span class="homepage-demo-open" aria-hidden="true">Try demo <span>↗</span></span>
+        </div>
+      </a>
+      <p>{{ demo.description }}</p>
+      {% if demo.image_credit %}
+        <p class="homepage-demo-credit">
+          Photo: <a href="{{ demo.image_credit.source }}" target="_blank" rel="noopener">{{ demo.image_credit.creator }}</a> ·
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
+        </p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>

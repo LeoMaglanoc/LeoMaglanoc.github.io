@@ -26,6 +26,7 @@ nav_order: 1
       <a href="https://www.linkedin.com/in/leonardo-maglanoc/" target="_blank" rel="noopener">LinkedIn</a> ·
       <a href="{{ site.data.socials.cv_pdf | relative_url }}" target="_blank" rel="noopener">CV</a>
     </p>
+
   </div>
 </section>
 
@@ -36,6 +37,8 @@ nav_order: 1
 
 <section class="homepage-section" id="builds" aria-labelledby="builds-title">
   <h2 id="builds-title">Applied AI &amp; Builds</h2>
+  <p class="homepage-demos-intro">Interactive demos built with coding agents. Pick one to try it in your browser.</p>
+  {% include homepage_demos.liquid %}
   {% include homepage_items.liquid items=site.data.homepage.builds %}
 </section>
 
