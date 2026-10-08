@@ -34,15 +34,12 @@ builds:
     links:
       - label: Humanoid Walking
         url: /locomotion/
+      - label: Dexterous Cube Orientation
+        url: /dexterous-rl/
       - label: EuroGuesser AI
         url: /euroguessr/
-      - label: RustZero
-        url: /rustzero/
       - label: BlockTemple
         url: /block-temple/
-
-
-
 
   - title: EasyBuy
     description: "Agentic AI product built at Hack-Nation’s Global AI Hackathon; invited to Venture Lab."

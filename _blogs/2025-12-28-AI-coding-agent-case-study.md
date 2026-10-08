@@ -14,7 +14,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
-- [Dexterous RL — Manipulation in the loop]({{ "/dexterous-rl/" | relative_url }}) — rotate the target cube; a Wuji hand follows with live reinforcement learning
+- [Dexterous Cube Orientation]({{ "/dexterous-rl/" | relative_url }})
 - [TinyEgoVLA]({{ '/tiny-ego-vla/' | relative_url }}) — archived; source and checkpoints preserved
 - [Language → Vision]({{ '/language-vision/' | relative_url }})
 - [EuroGuessr AI]({{ '/euroguessr/' | relative_url }})
