@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#101617" />
+    <meta name="description" content="OmniContact whole-body humanoid carry and push skills in live browser MuJoCo physics." />
+    <title>{{ page.title | escape }}</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #101617;
+      }
+      .demo-frame {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    {{ content }}
+    <script>
+      if (new URLSearchParams(location.search).get("debug") === "1") {
+        const frame = document.querySelector(".demo-frame");
+        const url = new URL(frame.src);
+        url.searchParams.set("debug", "1");
+        frame.src = url.href;
+      }
+    </script>
+  </body>
+</html>

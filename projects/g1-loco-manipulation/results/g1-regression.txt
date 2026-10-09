@@ -1,0 +1,12 @@
+{
+  "nativeTraces": 10,
+  "maxObservation": 1.4901161193847656e-8,
+  "maxAction": 6.556510925292969e-7,
+  "maxTarget": 2.9802322387695312e-8,
+  "standingHeight": 0.7757562303539279,
+  "walkDistance": 1.0384051734961388,
+  "resetTime": 0,
+  "afterResetSeconds": 10,
+  "afterResetHeight": 0.7740919895154522,
+  "result": "PASS"
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>G1 whole-body regression</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/assets/interactive/mobile-sorting/vendor/three.module.js",
+          "three/addons/controls/OrbitControls.js": "/assets/interactive/mobile-sorting/vendor/OrbitControls.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>OmniContact regression</h1>
+    <button id="run">Run parity & task checks</button>
+    <pre id="result" role="status">Ready</pre>
+    <script type="module" src="./test.js?v=physics-11"></script>
+  </body>
+</html>

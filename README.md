@@ -823,3 +823,11 @@ CI performs this step automatically. Godot exports remain checked in at their
 existing public paths and are rebuilt using each game's `scripts/build_web.sh`.
 SLAM is built separately from `projects/slam/web/` and published at `/slam/`.
 LLM city guard is source-only and is excluded from the site.
+
+### G1 Loco-Manipulation
+
+[G1 Loco-Manipulation](https://leomaglanoc.github.io/loco-manipulation/) runs
+OmniContact's released 29-joint transformer in client-side MuJoCo physics, with
+Carry & Place, Push Box, editable task coordinates and physical disturbances.
+Source, Docker instructions, provenance and validation are in
+[`projects/g1-loco-manipulation/README.md`](projects/g1-loco-manipulation/README.md).

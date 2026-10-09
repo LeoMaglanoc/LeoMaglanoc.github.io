@@ -1,0 +1,135 @@
+{
+  "carrybox": {
+    "observationError": 0.0000015795230865478516,
+    "actionError": 0.0000015795230865478516,
+    "rawInferenceError": 9.238719940185547e-7,
+    "physicsError": 1.3501873452614888e-8,
+    "parity": true,
+    "courses": [
+      {
+        "time": 10.18,
+        "height": 0.7842146938178345,
+        "box": [
+          1.9525126218795776,
+          0.42879772186279297,
+          0.5499265789985657
+        ],
+        "error": 0.08558513593305885,
+        "inferenceMs": 2,
+        "physicsMs": 2.800000000745058,
+        "phase": 25,
+        "pace": 0,
+        "course": "diagonal",
+        "ticks": 509,
+        "peakBoxZ": 0.8547627925872803,
+        "wallSeconds": 2.81839999999851,
+        "success": true
+      },
+      {
+        "time": 9.84,
+        "height": 0.7860055158269748,
+        "box": [
+          1.9335540533065796,
+          -0.05030742660164833,
+          0.5499100685119629
+        ],
+        "error": 0.0833420722280476,
+        "inferenceMs": 1.5999999977648258,
+        "physicsMs": 1.800000000745058,
+        "phase": 25,
+        "pace": 0,
+        "course": "straight",
+        "ticks": 492,
+        "peakBoxZ": 0.8465924859046936,
+        "wallSeconds": 1.8882000000029802,
+        "success": true
+      },
+      {
+        "time": 10.6,
+        "height": 0.7864656545522174,
+        "box": [
+          2.145796298980713,
+          -0.44252315163612366,
+          0.5499251484870911
+        ],
+        "error": 0.06889310291500195,
+        "inferenceMs": 1.5,
+        "physicsMs": 1.9000000022351742,
+        "phase": 25,
+        "pace": 0,
+        "course": "offset",
+        "ticks": 530,
+        "peakBoxZ": 0.855838418006897,
+        "wallSeconds": 1.83110000000149,
+        "success": true
+      }
+    ]
+  },
+  "pushbox": {
+    "observationError": 0.0000027418136596679688,
+    "actionError": 0.0000027418136596679688,
+    "rawInferenceError": 8.344650268554688e-7,
+    "physicsError": 1.322602491415914e-8,
+    "parity": true,
+    "courses": [
+      {
+        "time": 12.26,
+        "height": 0.7785670671260901,
+        "box": [
+          1.9524366855621338,
+          0.5156026482582092,
+          0.2599189281463623
+        ],
+        "error": 0.05005708254567711,
+        "inferenceMs": 1.5999999977648258,
+        "physicsMs": 1.9000000022351742,
+        "phase": 22,
+        "pace": 0,
+        "course": "diagonal",
+        "ticks": 613,
+        "peakBoxZ": 0.260486364364624,
+        "wallSeconds": 2.267699999999255,
+        "success": true
+      },
+      {
+        "time": 10.86,
+        "height": 0.7625960819826213,
+        "box": [
+          2.0091664791107178,
+          0.07155807316303253,
+          0.2598991394042969
+        ],
+        "error": 0.07214279017402322,
+        "inferenceMs": 1.6000000014901161,
+        "physicsMs": 2.199999999254942,
+        "phase": 22,
+        "pace": 0,
+        "course": "straight",
+        "ticks": 543,
+        "peakBoxZ": 0.26036369800567627,
+        "wallSeconds": 1.949,
+        "success": true
+      },
+      {
+        "time": 11.3,
+        "height": 0.7512641257016085,
+        "box": [
+          2.4225056171417236,
+          -0.4351404011249542,
+          0.25985845923423767
+        ],
+        "error": 0.2252633957189714,
+        "inferenceMs": 1.199999999254942,
+        "physicsMs": 1.5,
+        "phase": 22,
+        "pace": 0,
+        "course": "offset",
+        "ticks": 565,
+        "peakBoxZ": 0.2732827365398407,
+        "wallSeconds": 1.893099999997765,
+        "success": false
+      }
+    ]
+  },
+  "pass": false
+}

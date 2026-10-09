@@ -32,3 +32,6 @@ untracked. The original standalone repositories are retained locally.
 - `rustzero`: Rust/Burn self-play Breakthrough, CPU WASM inference and live MCTS statistics; public route `/rustzero/`.
 
 - `euroguessr`: Europe street-view guessing game with CPU/WASM inference, spatial evaluation and resumable CPU training; public route `/euroguessr/`.
+
+- `g1-loco-manipulation`: OmniContact pretrained 29-joint carry/push controller,
+  local browser physics and Docker/native parity tests; public route `/loco-manipulation/`.

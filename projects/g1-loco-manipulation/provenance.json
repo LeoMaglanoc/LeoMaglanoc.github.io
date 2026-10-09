@@ -1,0 +1,9 @@
+{
+  "viewer_revision": "8daf3d331eff1952555f95b7c044049f61d0dd39",
+  "native_revision": "1cf9ddd4067cbe5710b1f475e96f9c69f88055e2",
+  "sha256": {
+    "policy.onnx": "d75742b86696d017b63bc4bb9d4f71599e22aeaea5fa21bdde81325813576c56",
+    "omnicontact_mlp.onnx": "ba73b6043e79e1f17abc454d6d98db448372e49d7dc48aa1be3095d4bfca7180",
+    "omnicontact_transformer.onnx": "d75742b86696d017b63bc4bb9d4f71599e22aeaea5fa21bdde81325813576c56"
+  }
+}

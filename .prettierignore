@@ -78,3 +78,10 @@ projects/dexterous-rl/web/*.json
 assets/interactive/dexterous-rl/runtime/
 assets/interactive/dexterous-rl/licenses/
 assets/interactive/dexterous-rl/*.json
+# OmniContact: upstream source and generated model/validation evidence retain bytes.
+projects/g1-loco-manipulation/src/upstream/
+assets/interactive/g1-loco-manipulation/src/upstream/
+projects/g1-loco-manipulation/artifacts/
+projects/g1-loco-manipulation/results/
+projects/g1-loco-manipulation/*.json
+assets/interactive/g1-loco-manipulation/*.json

@@ -1,0 +1,15 @@
+services:
+  research:
+    build: .
+    image: g1-loco-manipulation:2026-10-09
+    volumes:
+      - ../..:/work
+      - ./artifacts/upstream:/upstream:ro
+    command: python projects/g1-loco-manipulation/tools/native.py
+  preview:
+    image: g1-loco-manipulation:2026-10-09
+    ports:
+      - "127.0.0.1:8094:8000"
+    volumes:
+      - ../..:/work:ro
+    command: python -m http.server 8000

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-09",
+  "browser": "Chrome on Linux",
+  "cpu": "Intel Core i7-8565U",
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "phoneHardwareTested": false,
+  "realTouchPinchTested": false,
+  "checks": [
+    "pause and resume",
+    "reset repeated",
+    "task and course switching",
+    "custom coordinate bounds",
+    "credits dialog and Escape dismissal",
+    "pointer orbit and scroll zoom",
+    "leave and reopen with browser Back",
+    "minified public-route build startup and carry completion"
+  ],
+  "build": "Docker Jekyll build; SLAM build/test/assets; project asset check; public route/dependency check",
+  "g1": "PASS",
+  "dexterous": "PASS (golden, 12 rollouts, moving-goal recovery)"
+}
