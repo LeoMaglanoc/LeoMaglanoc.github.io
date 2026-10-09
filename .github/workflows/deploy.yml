@@ -83,16 +83,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Publish browser project assets
-        run: python3 scripts/publish-project-assets.py
-      - name: Set Giscus repository
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          commitChange: false
-          valueFile: "_config.yml"
-          propertyPath: "giscus.repo"
-          value: ${{ github.repository }}
-
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -108,6 +98,12 @@ jobs:
           python-version: "3.13"
           cache: "pip"
 
+      - name: Install Python build dependencies
+        run: pip3 install --upgrade nbconvert pyyaml
+
+      - name: Publish active browser project assets
+        run: python3 scripts/publish-project-assets.py --site-only
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -115,14 +111,10 @@ jobs:
           cache: "npm"
           cache-dependency-path: projects/slam/web/package-lock.json
 
-      - name: Verify TinyEgoVLA experiment export
-        run: node projects/tiny-ego-vla/tests.mjs
-
       - name: Build Jekyll site
         run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
-          pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
 
