@@ -18,7 +18,7 @@ Interactive demos and games, newest first by creation date:
 - [TinyEgoVLA]({{ '/tiny-ego-vla/' | relative_url }}) — archived; source and checkpoints preserved
 - [Language → Vision]({{ '/language-vision/' | relative_url }})
 - [EuroGuessr AI]({{ '/euroguessr/' | relative_url }})
-- [RustZero]({{ '/rustzero/' | relative_url }})
+- [RustZero]({{ '/rustzero/' | relative_url }}) — play 6×6 Breakthrough against a locally trained self-play AI
 - [BlockTemple]({{ '/block-temple/' | relative_url }})
 - [Block World]({{ '/block-world/' | relative_url }})
 - [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }})

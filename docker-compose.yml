@@ -26,6 +26,7 @@ services:
       - 8080:80
     volumes:
       - ./_site:/usr/share/nginx/html:ro
+      - ./scripts/nginx-preview.conf:/etc/nginx/conf.d/default.conf:ro
 
   site-tools:
     image: node:22-bookworm-slim

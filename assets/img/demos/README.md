@@ -13,3 +13,10 @@ The street photograph in `euroguesser.webp` is by Mapillary contributor **acamat
 - Map data: Natural Earth, public domain.
 
 Other demo assets retain their upstream credits in each demo's THIRD_PARTY_NOTICES.md.
+
+## RustZero
+
+`rustzero.webp` is an authentic Chrome screenshot captured on October 9, 2026
+from the Docker-served `/rustzero/` game after a human move and the champion's
+reply (three plies, Nightmare search). Cropped to 960 × 600 and WebP compressed.
+The board, weights and search readouts are the running application, not artwork.
