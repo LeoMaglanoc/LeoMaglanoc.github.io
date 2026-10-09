@@ -1,6 +1,6 @@
 # G1 Parkour Playground
 
-Self-hosted PHP browser simulator at `/parkour/`. This ports the released demonstration; **no policy training or retraining was performed**. Full source lives here; the Vite production build is committed under `assets/interactive/g1-parkour/`. Jekyll's fullscreen iframe follows the site's existing demo pattern. The demos blog post links to it; homepage showcase slots are unchanged.
+Self-hosted PHP browser simulator at `/parkour/`. This ports the released demonstration; **no policy training or retraining was performed**. Full source lives here; the Vite production build is committed under `assets/interactive/g1-parkour/`. Jekyll's fullscreen iframe follows the site's existing demo pattern. The homepage features it alongside Dexterous Cube Orientation, EuroGuesser AI and RustZero. The demos blog post retains the full archive.
 
 ## Reproduce with Docker
 

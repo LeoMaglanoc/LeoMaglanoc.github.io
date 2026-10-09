@@ -37,7 +37,7 @@ nav_order: 1
 
 <section class="homepage-section" id="builds" aria-labelledby="builds-title">
   <h2 id="builds-title">Applied AI &amp; Builds</h2>
-  <p class="homepage-demos-intro">Interactive demos built with coding agents. Pick one to try it in your browser.</p>
+  <p class="homepage-demos-intro">Explore humanoid parkour, dexterous manipulation, visual geolocation, and self-play game AI. These demos run in your browser.</p>
   {% include homepage_demos.liquid %}
   {% include homepage_items.liquid items=site.data.homepage.builds %}
 </section>

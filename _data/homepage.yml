@@ -29,11 +29,11 @@ featured_projects:
     description: "Implemented and evaluated LiDAR feature-extraction and voxel-filtering methods in C++ within a dense multi-sensor SLAM system using real HILTI 2022 sensor data."
 
 demos:
-  - title: Humanoid Walking
-    url: /locomotion/
-    image: assets/img/demos/humanoid.webp
-    alt: Unitree G1 humanoid in the locomotion playground, with velocity and balance controls.
-    description: Steer a humanoid and test its balance.
+  - title: G1 Parkour
+    url: /parkour/
+    image: assets/img/demos/parkour.webp
+    alt: Unitree G1 facing a colored obstacle course in the depth-conditioned parkour simulator.
+    description: Steer a humanoid through obstacles with a depth-based policy.
 
   - title: Dexterous Cube Orientation
     url: /dexterous-rl/

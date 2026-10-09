@@ -13,7 +13,7 @@ Training and model preparation happen offline; GitHub Pages serves static files.
 
 | Featured demo                                                             | Algorithm and model                                                          | Training provenance                                                           | Browser execution                                              |
 | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| [Humanoid Walking](https://leonardo-maglanoc.com/locomotion/)             | Recurrent actor, 47 observations → 12 leg actions; joint PD control          | Released Unitree G1 PPO actor; local ONNX export, no retraining               | ONNX Runtime Web CPU/WASM, MuJoCo WASM, Three.js               |
+| [G1 Parkour](https://leonardo-maglanoc.com/parkour/) | Depth encoder + 140-input student → 29 actions; joint PD control | Released PHP depth/student pair; no local retraining | ONNX Runtime Web CPU/WASM, MuJoCo WASM, Three.js depth/rendering |
 | [Dexterous Cube Orientation](https://leonardo-maglanoc.com/dexterous-rl/) | 207 observations → 20 hand actions; filtered joint targets                   | Released Wuji Hand 1 PPO actor; no local training or distillation             | ONNX Runtime Web CPU/WASM, MuJoCo 3.11.0 WASM, Three.js        |
 | [EuroGuesser AI](https://leonardo-maglanoc.com/euroguessr/)               | MobileNetV3-Small geographic student + embedding retrieval; optional GeoCLIP | Local OSV-5M supervision/distillation from pretrained ImageNet/GeoCLIP models | Single-thread ONNX Runtime Web/WASM in a CPU Worker; local map |
 | [RustZero](https://leonardo-maglanoc.com/rustzero/)                       | Small policy/value MLP + PUCT for 6×6 Breakthrough                           | Local CPU self-play from random initialization                                | Rust/Burn Flex f32 compiled to WASM in a Worker; JavaScript UI |
@@ -24,123 +24,186 @@ a discrete game tree. None trains a neural network during browser play.
 [The source audit](docs/featured-demo-evidence.md) maps claims to implementation
 and saved artifacts. Project READMEs retain detailed reproduction instructions.
 
-## 1. Humanoid Walking
+## 1. G1 Parkour
 
 ### Overview
 
-Steer a Unitree G1 with forward/lateral velocity and yaw-rate commands, and apply
-physical pushes to test recovery. The public `/locomotion/` playground embeds the
-existing G1 simulator. Its retained B2 MPC experiments are separate and are not
-initialized by this public page. The robot is the official **12-DoF leg model**,
-not the 29-DoF whole-body model.
+Steer a 29-joint Unitree G1 through a colored obstacle course in live MuJoCo
+physics. The released Perceptive Humanoid Parkour (PHP) policy uses simulated
+onboard depth and proprioception to choose joint actions. Keyboard or held touch
+buttons select a direction and LOW/HIGH speed mode; the policy supplies the
+motion. Orbit the camera, inspect the processed depth preview, pause, or reset
+to the start. Shift+mouse dragging applies a physical disturbance.
+
+This website adapts the researchers' released browser demonstration. **No local
+policy training or retraining was performed.** Robot motion comes from neural
+inference, joint control, contacts and gravity. The display camera can move
+independently of the torso-mounted depth sensor used by the policy.
 
 ### System Architecture
 
 ```text
-Offline preparation (local; upstream training is separate)
-  Unitree released motion.pt -> reconstruct explicit-state LSTM actor
-      -> TorchScript / PyTorch / ONNX sequential parity -> policy.onnx
+Upstream offline learning (not reproduced here)
+  retargeted human skills -> motion matching -> long motion/terrain sequences
+      -> privileged RL tracking teachers -> depth student (DAgger + RL)
+      -> released student.onnx + depth_backbone.onnx
 
-Online feedback loop (rates per simulated second)
-  keyboard / touch -> [vx, vy, yaw rate] -----------------------+
-                                                               v
-  MuJoCo qpos/qvel -> scaled proprioception + previous action + phase
-       ^                                                       |
-       |                                               [1,47] observation
-       |                                                       v
-       |   hidden/cell [1,1,64] <-> LSTM + action head @ 50 Hz
-       |                                                       |
-       |                                            12 position offsets
-       |                                                       v
-       |                         default angles + 0.25 * action (rad)
-       |                                                       |
-       +-- MuJoCo @ 500 Hz <- joint PD torques @ 500 Hz <--------+
-                |
-                +-> simulated body poses -> Three.js -> WebGL frame
+Browser feedback loop (rates per simulated second)
+  keyboard / touch -> direction + speed -> 15-D one-hot command ------+
+                                                                    |
+  MuJoCo robot/course -> torso depth camera @ 10 Hz                   |
+       |                 106x60 -> crop -> bicubic 87x58              |
+       |                 -> normalize -> depth_backbone.onnx         |
+       |                 -> 32-D latent -> seven-control-step delay   |
+       |                                                |           |
+       +-> previous action + angular velocity + joint state + gravity
+       |                                                |           |
+       |                                          [1,140] student input
+       |                                                v
+       |                                     student.onnx @ 50 Hz
+       |                                                |
+       |                              29 actions -> named joint targets
+       |                                                |
+       +-- MuJoCo @ 500 Hz <- per-joint PD torques <------+
+                 |
+                 +-> body transforms -> Three.js display + status/depth UI
 ```
 
 ### Subsystem Inputs and Outputs
 
-| Subsystem   | Input                                                    | Processing                                                    | Output                                         | Implementation                                                                                    |
-| ----------- | -------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Commands    | Keyboard/touch                                           | Bound vx ±1 m/s, vy ±0.5 m/s, yaw ±1 rad/s                    | Three velocity commands                        | [input.js](projects/g1/src/input.js), [config.js](projects/g1/src/config.js)                      |
-| Observation | MuJoCo qpos/qvel, command, previous action, physics step | Scale and concatenate; quaternion w,x,y,z → projected gravity | Float32 `[1,47]`                               | [observations.js](projects/g1/src/observations.js)                                                |
-| Actor       | Observation; hidden/cell `[1,1,64]` each                 | 47 → 64-unit LSTM → 32 ELU → 12                               | `[1,12]` action and next recurrent states      | [export_policy.py](projects/g1/tools/export_policy.py), [policy.js](projects/g1/src/policy.js)    |
-| Servo       | Action, joint angles/velocities                          | Position offsets → PD torque                                  | 12 actuator torques                            | [controller.js](projects/g1/src/controller.js)                                                    |
-| Physics     | Torques, optional pelvis force                           | 10 × 0.002 s MuJoCo steps per actor decision                  | Updated floating base/joint state and contacts | [simulation.js](projects/g1/src/simulation.js), [asset manifest](projects/g1/asset-manifest.json) |
-| Display     | Simulated body transforms                                | Mesh transforms, camera and UI                                | Rendered robot and controls                    | [renderer.js](projects/g1/src/renderer.js), [main.js](projects/g1/src/main.js)                    |
+| Subsystem | Input | Processing | Output | Implementation |
+| --- | --- | --- | --- | --- |
+| Commands | Six direction buttons or W/A/Q/D/E/S; LOW/HIGH | Map held direction and mode into the released command indices | 15-D one-hot command | [interface.js](projects/g1-parkour/src/interface.js) |
+| Depth camera | Torso pose and sensor-visible terrain/robot geometry | Render metric depth with the retained camera and clipping range | 106×60 float depth image | [main.js](projects/g1-parkour/src/main.js) |
+| Preprocessing | Rendered depth pixels | Row orientation, crop, clip, antialiased bicubic resize and normalization | 87×58 processed depth | [releaseContract.js](projects/g1-parkour/src/policy/releaseContract.js) |
+| Depth backbone | Processed depth | Released ONNX inference, queued latency | 32-D latent | [policyController.js](projects/g1-parkour/src/policy/policyController.js) |
+| Student actor | Previous actions, base angular velocity, joint position/velocity, gravity, command and depth latent | Concatenate in verified release order; ONNX inference | 29 joint actions | [policyController.js](projects/g1-parkour/src/policy/policyController.js) |
+| Servo/physics | Actions and MuJoCo joint state | Metadata-defined target offsets and gains; name-mapped PD torque | Updated robot state and contacts | [policyController.js](projects/g1-parkour/src/policy/policyController.js), [mujocoUtils.js](projects/g1-parkour/src/mujocoUtils.js) |
+| Display/lifecycle | Body poses, user camera gestures and status | Independent display camera, pause, serialized reset, depth preview | Interactive scene and telemetry | [main.js](projects/g1-parkour/src/main.js), [interface.js](projects/g1-parkour/src/interface.js) |
 
-### Control / Learning Algorithm
+### Observation, Perception and Control Algorithm
 
-The 47 observation values are angular velocity (3), projected gravity (3),
-commands (3), joint-angle offsets (12), joint velocities (12), previous raw action
-(12), and sin/cos gait phase (2). There is no camera or terrain-height input.
-Projected gravity uses the floating-base quaternion; angular velocity uses MuJoCo
-`qvel[3:6]`. Positions and velocities follow the explicit left-leg/right-leg joint
-order in `config.js`; free-base entries are excluded from joint vectors.
+The student consumes **140 values** in this exact order: previous actions (29),
+base angular velocity (3), joint position (29), joint velocity (29), torso
+projected gravity (3), direction/speed command (15), and depth latent (32).
+The implementation follows the released Holosoma inference preset. An older
+observation descriptor embedded in the export is descriptive and does not define
+this concatenation order. Joint/actuator mappings are resolved by name.
 
-Scaling is 0.25 for angular velocity, 1 for angle offsets, 0.05 for joint velocity,
-and `[2,2,0.25]` for commands. Phase repeats every 0.8 simulated seconds.
-The previous action is a network output, not an applied torque. Temporal memory
-is the LSTM state, not a stack of observation frames; reset clears both states.
+The simulated D435i camera has a 106×60 image, 89.5° horizontal field of view,
+and 0.3–3 m range. Readback is converted to top-down rows, cropped by two rows
+at the top and four columns on each side, then resized to 87×58 with separable
+antialiased bicubic interpolation. The release's invalid-value handling,
+clipping and normalization are retained; ordinary depth values are mapped as
+`(depth - 0.3) / (3.0 - 0.3) - 0.5`. The depth encoder produces 32 values.
+A seven-control-step delay preserves approximately 140 ms of simulated latency;
+the actor receives the queued latent rather than an instantly updated sensor.
 
-For joint i, the implemented controller is:
+Command indices are idle 0; LOW W/A/Q/D/E map to 1/2/3/4/5; HIGH maps to
+6/7/8/9/10. S maps to 11 in either mode. These select headings, including
+45° and 90° directions. The learned controller interprets them; the buttons
+are not direct joint controls or lateral velocity sliders.
+
+For joint i, the controller uses model metadata for each default position,
+action scale, stiffness and damping:
 
 ```text
-q_target[i] = q_default[i] + 0.25 * action[i]
+q_target[i] = q_default[i] + action_scale[i] * action[i]
 torque[i]   = Kp[i] * (q_target[i] - q[i]) - Kd[i] * dq[i]
-Kp         = [100,100,100,150,40,40] repeated for both legs
-Kd         = [2,2,2,4,2,2] repeated for both legs
 ```
 
-Angles are radians, velocities rad/s and actuator torques N·m. These explicit
-torques feed physics; Three.js only displays the computed motion.
+MuJoCo advances in 0.002 s steps. The actor runs every ten steps (50 Hz), while
+depth updates every fifty steps (10 Hz). These rates are defined in simulation
+time. The non-convex collision course is split into the original 13 connected
+components; the visual finish gate is excluded from collision and sensor depth.
+Finish status requires reaching the gate corridor, not merely passing its x
+coordinate after drifting away from the course.
 
 ### Training Pipeline and Provenance
 
-The retained [`motion.pt`](projects/g1/models/motion.pt) comes from Unitree's
-`deploy/pre_train/g1/motion.pt`; the local exporter retains its learned weights.
-Unitree's [upstream workflow](https://github.com/unitreerobotics/unitree_rl_gym)
-trains in Gym, exports actors and evaluates them in MuJoCo before physical
-robot deployment. The project identifies this actor as PPO, but **the exact
-training run's reward weights, optimizer settings, randomization, iteration
-count and learning curves are not documented in this repository**. Current
-upstream defaults do not independently establish how this released file was trained.
+The researchers' [PHP repository](https://github.com/amazon-far/php_parkour)
+describes three stages: motion matching composes retargeted human skills into
+long trajectories; reinforcement-learning teachers track those trajectories
+with privileged state/terrain observations; DAgger and RL distill teachers into
+a depth-based multi-skill student. The browser executes the exported student
+and depth encoder. It does not execute motion matching, teacher inference,
+training rollouts, dataset aggregation or optimizer updates.
 
-```text
-Upstream PPO training summary (not a reproduced checkpoint training run)
-  simulated robot + commands -> observations/actions + task rewards
-      -> critic estimates / advantages -> PPO updates -> updated actor
-      ^                                                       |
-      +---------------- subsequent rollouts ------------------+
-                                     |
-                             released motion.pt
+Motion references guide teacher tracking; reinforcement-learning rewards guide
+policy improvement. In the student stage, teacher actions provide imitation
+supervision on visited states and RL adds task feedback. This is the published
+method summary, **not a recovered record of the exact released training run**.
+Original rollout datasets, checkpoint-specific reward weights, optimizer state,
+learning curves and training hardware are not retained here; an exact training
+loss or resumable state cannot be inferred from the exported graphs.
+
+The immutable [released pair](projects/g1-parkour/public/php-release/manifest.json)
+is `student.onnx` (13,841,549 bytes) and `depth_backbone.onnx` (105,240 bytes).
+Their SHA-256 checksums match the official `student-assets-v1` manifest. Source,
+release and terrain revisions are recorded in
+[upstream.json](projects/g1-parkour/upstream.json); the npm lockfile, native
+fixtures and complete scene assets preserve the integration inputs.
+
+[CHECKPOINTS.md](projects/g1-parkour/CHECKPOINTS.md) records the baseline and
+validated Git tags, model hashes, terrain regeneration and future experiment
+requirements. These are inference/source checkpoints. The official release
+contains no raw teacher/student training or optimizer checkpoint. Continuing
+training requires obtaining a real checkpoint and configuration, or beginning
+a new documented run with saved optimizer, RNG, data and environment state.
+
+### Runtime, Deployment and Reproduction
+
+[Source and Docker instructions](projects/g1-parkour/README.md) live in the
+isolated `projects/g1-parkour/` app. Vite builds the runtime into
+`assets/interactive/g1-parkour/`, and `/parkour/` embeds it with the site's
+fullscreen layout. MuJoCo WASM supplies physics, ONNX Runtime Web uses a
+single-thread CPU/WASM execution provider, and Three.js supplies WebGL display
+and sensor rendering. All runtime files are served statically, with no inference
+backend, account, WebGPU or runtime CDN requirement. WebGL2 and floating-point
+depth rendering/readback are required; unsupported GPUs get a startup message.
+
+```sh
+docker compose -f projects/g1-parkour/compose.yaml run --rm tools
+docker compose -f projects/g1-parkour/compose.yaml up -d preview
+# Open http://127.0.0.1:8096/assets/interactive/g1-parkour/index.html
+
+docker build -f projects/g1-parkour/Dockerfile.browser \
+  -t g1-parkour-browser:2026-10-09 projects/g1-parkour
+docker run --rm --network host -v "$PWD":/work g1-parkour-browser:2026-10-09
 ```
 
-This is reinforcement learning: actions are sampled during rollouts, rewards
-assess behavior, and advantage/value targets are derived from trajectories.
-There are no supervised "correct joint angle" labels here. PPO's reward signal
-and its network optimization objective are distinct. An exact checkpoint-specific
-loss or reward equation cannot be recovered from the inference-only actor.
-No local robot-policy training is claimed.
+Reset is serialized after pending inference, returns the robot to the start,
+clears action/depth/held-command state, and reuses the existing models and scene.
+Backgrounding pauses the simulation and clears controls. Slow frames advance
+less simulated time while retaining the physics and policy step cadence.
+The display uses simpler materials and no decorative shadows; the separate
+sensor layer retains the original geometry and depth behavior.
 
-### Runtime and Deployment
+### Validation, Limitations and References
 
-[`projects/locomotion-playground/`](projects/locomotion-playground/README.md)
-wraps [`projects/g1/`](projects/g1/README.md) in a disposable iframe. Static
-assets publish under `assets/interactive/`; ONNX Runtime uses a single-thread
-WASM CPU provider. The simulation clock schedules 50/500 Hz in **simulation
-time**; these rates do not promise 500 rendered frames or real-time performance
-on every phone. Asynchronous inference/reset tokens protect recurrent state.
+[Validation](projects/g1-parkour/VALIDATION.md) records Docker contract checks,
+Chrome desktop/portrait/landscape controls, touch orbit/pinch, reset resource
+reuse and the normal/unsupported-GPU startup paths. Fixtures verify all 29
+mappings, command codes, PD targets and the 140-D input. Native action maximum
+error is 1.49e-7; depth preprocessing maximum error is 6.7353e-6 against a 1e-5
+tolerance. Simplified display materials produced zero change in the tested
+raw sensor pixels. These checks establish numerical contracts, not identical
+long-horizon native/browser trajectories or safe physical robot deployment.
 
-### Limitations and References
+A fixed HIGH-forward rollout cleared the first four obstacles, then drifted off
+the course. Manual traversal of the entire course remains unverified. The
+simulation can fall; no automatic steering or scripted recovery replaces the
+policy. Software-rendered full-view tests were slow, and foreground hardware
+acceleration and physical-phone performance remain unmeasured. Phone screenshots
+are Chrome viewport/touch emulation, not measurements from a physical device.
 
-[Export validation](projects/g1/tools/validate_policy.py) compares TorchScript,
-reconstructed PyTorch and ONNX actions/states, with the exporter enforcing maximum
-absolute error ≤1e-5. This establishes numerical contract agreement, not identical
-long-horizon physics or safe real-robot transfer. Browser pose comes from simulation,
-not sensors on a physical robot. See [policy interface](docs/POLICY_INTERFACE.md)
-and [third-party notices](projects/g1/THIRD_PARTY_NOTICES.md).
+The [third-party notices](projects/g1-parkour/public/THIRD_PARTY_NOTICES.md)
+record browser/research/robot/engine licenses and gaps in model-specific and
+later-contributor license statements. Retaining source provenance and checksums
+does not imply an additional license grant. See the
+[released student assets](https://github.com/amazon-far/php_parkour/releases/tag/student-assets-v1)
+and [pinned browser source](https://github.com/php-parkour/php-parkour.github.io/tree/3898564255525f2a72dbbfb1d190b48a230435ab)
+for the upstream implementation.
 
 ## 2. Dexterous Cube Orientation
 
@@ -568,266 +631,33 @@ measured matchups. Human invincibility, structured human win rates and physical
 phone latency are unmeasured. See [project README](projects/rustzero/README.md),
 [validation](projects/rustzero/VALIDATION.md), [checkpoint selection](projects/rustzero/web/metrics/tournament.json)
 and the [independent 6×6 solution reference](https://cris.maastrichtuniversity.nl/en/publications/solving-breakthrough-for-the-6x6-board/).
-BlockTemple remains available at [its existing route](https://leonardo-maglanoc.com/block-temple/).
 
-## Running Locally
 
-From the repository root, build the static site with Docker and serve it with nginx:
+## Shared Website Build
 
-```bash
-docker compose run --rm jekyll bundle exec jekyll build
-docker compose up -d preview
-```
+The homepage features exactly the four demos described above. Their individual
+READMEs provide source, reproduction commands, model/data provenance and
+validation. The [blog demo index](https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/)
+retains links to the wider archive.
 
-Open [http://localhost:8080/](http://localhost:8080/). Stop `preview` before
-starting `docker compose up jekyll` for the watch/development server: both own
-port 8080. `docker compose pull` refreshes the configured images. The nginx
-preview configuration serves `.mjs` as JavaScript and `.wasm` as WebAssembly,
-so ES-module imports match production behavior.
-
-Build, test, and serve the deployed SLAM route locally (uses only Docker
-containers and mirrors the GitHub Pages publish layout):
-
-```bash
-./scripts/preview-slam.sh
-```
-
-Open [http://localhost:8080/slam/](http://localhost:8080/slam/). Use
-`./scripts/preview-slam.sh --build-only` when you only need the generated
-`_site/slam/` files. This preview owns port 8080, so stop `jekyll` first if it
-is already running.
-
-Run the G1 browser demo directly, without the Jekyll shell:
-
-```bash
-docker compose -f projects/g1/docker-compose.yml up g1-site
-```
-
-Open [http://localhost:8000/assets/interactive/g1/](http://localhost:8000/assets/interactive/g1/).
-
-The G1 policy/model contract tests run in the reproducible tools container:
-
-```bash
-docker compose -f projects/g1/docker-compose.yml run --rm g1-tools \
-  python -m unittest discover -s projects/g1/tests -p 'test_*.py'
-```
-
-The main site route for the G1 playground is [/g1/](https://leomaglanoc.github.io/g1/). It uses a fullscreen layout and embeds the static simulator from `projects/g1/`.
-
-## Deployment and Browser Compatibility
-
-[GitHub Actions](.github/workflows/deploy.yml) publishes project assets, builds
-Jekyll, and deploys the generated static site to GitHub Pages. Route pages in
-`_pages/` and fullscreen layouts embed `assets/interactive/<demo>/`; no training
-process or inference server is deployed. Preserve the source/runtime separation:
-edit `projects/`, then publish with `scripts/publish-project-assets.py` when
-runtime files change. This featured-card/documentation change does not alter
-model weights or runtime source.
-
-Use a browser with WebAssembly and, for the robotics scenes, WebGL. CPU/WASM
-inference avoids requiring WebGPU and uses one thread in the browser. Large
-GeoCLIP assets are opt-in. Serve over HTTP locally rather than opening `file://`;
-production uses HTTPS. A Chrome viewport check demonstrates responsive layout,
-not measured performance on physical Android/iOS hardware or proof of every
-browser's numerical behavior.
-
-Homepage cards come from `_data/homepage.yml` via
-`_includes/homepage_demos.liquid`. The existing 960×600 image convention, 8:5
-crop, two-column desktop and single-column narrow layout are preserved.
-[Current validation](docs/featured-demo-validation.md) records Docker checks,
-Chrome desktop/portrait/landscape observations, navigation and gameplay.
-
-## Credits, Model/Data Provenance, and References
-
-- Unitree G1 robot/model/policy: [Unitree RL Gym](https://github.com/unitreerobotics/unitree_rl_gym),
-  BSD-3-Clause; [local notices](projects/g1/THIRD_PARTY_NOTICES.md).
-- Wuji Hand 1: [pinned source and release identity](projects/dexterous-rl/checkpoints/provenance.json),
-  Apache-2.0; [redistribution notices](projects/dexterous-rl/web/THIRD_PARTY_NOTICES.md).
-- EuroGuesser: [OSV-5M](https://huggingface.co/datasets/osv5m/osv5m) / Mapillary contributors
-  (CC BY-SA 4.0), TorchVision ImageNet initialization, released GeoCLIP/CLIP,
-  Natural Earth map data; [full notices](projects/euroguessr/THIRD_PARTY_NOTICES.md).
-- RustZero: local weights from recorded self-play; [Burn](https://github.com/tracel-ai/burn)
-  and wasm-bindgen provide runtime/training infrastructure. Configurations,
-  source and checkpoint hashes are retained with the published metrics.
-- MuJoCo, Three.js and ONNX Runtime licenses remain in project notices.
-  Site design uses al-folio/Jekyll; see the repository [LICENSE](LICENSE).
-
-Other projects retain their own credits. The absence of original upstream run
-logs is stated in each applicable section; a saved inference graph does not
-establish a complete training history.
-
-## Other interactive experiments
-
-The repository also retains the following experiments beyond the four featured
-website demos.
-
-### Endless mobile manipulation
-
-The [/mobile-sorting/](https://leomaglanoc.github.io/mobile-sorting/) demo runs a
-TIAGo mobile manipulator sorting randomized blue/red boxes into matching bins.
-Analytic top-down grasps, Cartesian inverse kinematics, smooth arm references,
-wheel-driven differential navigation and a recovery state machine execute in
-MuJoCo WASM. The fingers retain objects through contact and friction; there is
-no grasp attachment, learning, camera perception or backend. A fixed five-body
-object pool supports continuous operation. All runtime assets are local.
-
-Desktop and mobile layouts support orbit/pinch, pause, reset and fullscreen.
-See [`projects/mobile-sorting/README.md`](projects/mobile-sorting/README.md)
-for Docker commands, controller details, model modifications and validation.
-
-### TinyDreamer CartPole
-
-The [/tiny-dreamer/](https://leomaglanoc.github.io/tiny-dreamer/) demo uses a small
-Dreamer-inspired agent to swing up and balance DeepMind Control Suite's native
-CartPole. It learns from five state observations with no handcrafted controller
-or imitation teacher. The actor and a recurrent world model run locally in the
-browser alongside MuJoCo WASM physics.
-
-**Algorithm.** CPU training in Docker alternates real experience collection and
-neural imagination. Replay sequences train an encoder, recurrent state-space
-model (RSSM), observation decoder, reward head, and continuation head using
-reconstruction, prediction, and balanced KL losses. Posterior beliefs seed
-imagined trajectories through the learned prior. An actor maximizes bootstrapped
-lambda returns through the frozen world model; a critic learns their values.
-The final stage uses 30-decision imagination. Validation selects the checkpoint,
-and separate held-out episodes measure its performance before ONNX export.
-
-**System pipeline:**
-
-```text
-Offline (Docker, CPU)
-native MuJoCo experience → episode replay → encoder + RSSM + prediction heads
-    → imagined actor rollouts → lambda returns → actor + critic updates
-    → more real experience → validation / held-out evaluation
-    → ONNX export + numerical parity → static model assets
-
-Browser control (20 decisions per simulated second)
-MuJoCo WASM observation + previous action + recurrent belief
-    → posterior.onnx → corrected belief → actor.onnx → bounded motor action
-    → 5 × 10 ms physics controls → next observation → repeat
-
-Browser dream visualization (refreshed every 0.5 simulated seconds)
-copied belief → actor.onnx + rssm.onnx prior → 15 decoded future observations
-    → Canvas ghost poses up to 0.75 seconds ahead
-```
-
-Push buttons apply a separate physical force. The world model receives the
-resulting observations and corrects its belief, making forecast divergence and
-recovery visible. The dreams are neural predictions; the actor supplies control
-directly without runtime planning. ONNX Runtime Web, physics, and rendering use
-local static assets with no backend or runtime CDN dependency.
-
-The trained agent succeeded on **20/20 held-out swing-up episodes**, with mean
-return **753.19**, compared with **122.88** for random actions. Strong pushes can
-break sustained balance. See [`projects/tiny-dreamer/README.md`](projects/tiny-dreamer/README.md)
-for the detailed algorithm, training commands, contracts, validation, and limits.
-
-### FPV drone racing
-
-The [/drone-racing/](https://leomaglanoc.github.io/drone-racing/) demo flies an approximate 650 g FPV quad around a closed ten-gate circuit:
-
-```text
-periodic racing trajectory
-      ↓
-tracking MPC (25 Hz) → desired acceleration
-      ↓
-geometric flight controller (125 Hz) → thrust and torque
-      ↓
-motor mixer → first-order motor response
-      ↓
-MuJoCo WASM physics (250 Hz)
-      ↓
-Three.js rendering → chase / FPV view
-```
-
-Autopilot continuously wraps the reference trajectory without resetting the vehicle. Manual flight replaces MPC with assisted velocity commands and banked steering, using keyboard or dual touch sticks. Directional push buttons apply brief physical forces so the controller's deviation and recovery are visible. Ordered gate crossings track laps and best times; Race AI replays a looping recorded physics rollout. Everything runs locally in the browser with WebGL and no backend. The vehicle is an illustrative model, not a calibrated digital twin.
-
-See [`projects/drone-racing/README.md`](projects/drone-racing/README.md) for parameters, controls, validation and limitations.
-
-### Panda drawing & repair
-
-The [/painter/](https://leomaglanoc.github.io/painter/) demo lets you draw ordered strokes, watch a Franka Panda reproduce them, then erase and repair its output:
-
-```text
-reference strokes → resampling → marker-tip IK → joint targets
-      ↓
-Panda actuators → MuJoCo WASM physics → actual marker-tip motion
-      ↓
-CURRENT ink raster + physical board texture
-      ↓
-erase ink → directional missing-stroke detection
-      ↓
-overlapping repair runs → nearest-endpoint ordering → IK → redraw
-      ↓
-observe again → complete or report stalled repair
-```
-
-CURRENT records actual simulated motion. Detection tolerates sideways tracking error while preserving gaps along a stroke. Manual repair and a two-second auto-repair countdown redraw missing regions; erasing during repair cancels the active plan and replans from the current robot pose. Pointer/touch controls, Canvas, Three.js, and MuJoCo run locally in the browser with no backend or WebGPU requirement.
-
-See [`projects/painter/README.md`](projects/painter/README.md) for implementation details, validation, limitations, and attribution.
-
-All demos are organized as self-contained projects under [`projects/`](projects/). Each demo's local README or Docker configuration is the source of truth for its own commands.
-
-## Editing the site
-
-For normal content changes:
-
-1. Add or edit Markdown in the relevant content directory.
-2. Keep dates, titles, roles, project details, and technical claims consistent with the structured source material.
-3. Add or update assets under `assets/` when needed.
-4. Build the site locally before pushing.
-
-For browser demos, edit source, assets, tests, and documentation in `projects/<name>/`. Run `python3 scripts/publish-project-assets.py` before previewing or building the website. `assets/interactive/` and `assets/js/ask-leo/` contain generated runtime copies; keep their URLs stable.
-
-## What is here
-
-- **Projects** — robotics, AI, software, and research project write-ups.
-- **Writing** — blog posts, notes, news, and poetry.
-- **Academic material** — CV, publications, bibliography, teaching, and profiles.
-- **Interactive demos** — browser-based experiments including humanoid locomotion, SLAM, Pong, Flappy Bird, and other small simulations.
-
-The public site is available at [LeoMaglanoc.github.io](https://leomaglanoc.github.io/).
-
-## Repository structure
-
-```text
-_pages/                 Main website pages
-_projects/              Project narratives
-_blogs/                 Blog posts and technical writing
-_news/                  News and announcements
-_poetry/                Poetry
-_bibliography/          Publication records
-_data/                  Site and CV data
-projects/               Source, tooling and documentation for all side projects
-assets/interactive/     Published browser runtime files (generated)
-assets/json/            Structured source material
-assets/pdf/             PDF documents, including the CV
-docs/                   Technical documentation
-_layouts/               Page layouts
-_includes/              Shared site components
-_sass/                  Site styling
-_plugins/               Jekyll plugins and build helpers
-```
-
-## Side-project development
-
-All side-project source lives under `projects/`; `_projects/` contains the
-website write-ups. See [projects/README.md](projects/README.md) for build and
-publication details. Before a local Jekyll build or static preview, run:
+Build and preview the Jekyll shell from the repository root with Docker:
 
 ```sh
-python3 scripts/publish-project-assets.py
+docker compose run --rm jekyll bundle exec jekyll build
+docker compose up -d preview
+# http://127.0.0.1:8080/
 ```
 
-CI performs this step automatically. Godot exports remain checked in at their
-existing public paths and are rebuilt using each game's `scripts/build_web.sh`.
-SLAM is built separately from `projects/slam/web/` and published at `/slam/`.
-LLM city guard is source-only and is excluded from the site.
+Stop the nginx preview before using the Jekyll watch server because both use
+port 8080. The [Deploy site workflow](.github/workflows/deploy.yml) assembles and
+checks the complete published site before deploying to GitHub Pages. The four
+demos use local static assets; training remains offline. Serve previews over
+HTTP, not `file://`, and retain JavaScript MIME for `.mjs` and WebAssembly MIME
+for `.wasm`. Chrome viewport checks establish layout and interaction behavior,
+not universal browser compatibility or physical-phone performance.
 
-### G1 Loco-Manipulation
-
-[G1 Loco-Manipulation](https://leomaglanoc.github.io/loco-manipulation/) runs
-OmniContact's released 29-joint transformer in client-side MuJoCo physics, with
-Carry & Place, Push Box, editable task coordinates and physical disturbances.
-Source, Docker instructions, provenance and validation are in
-[`projects/g1-loco-manipulation/README.md`](projects/g1-loco-manipulation/README.md).
+The featured cards are defined in [_data/homepage.yml](_data/homepage.yml) and
+rendered by [_includes/homepage_demos.liquid](_includes/homepage_demos.liquid).
+They share 960×600 previews, a two-column desktop layout and one column on
+narrow screens. Demo-specific notices are linked in each chapter; the website
+uses al-folio/Jekyll under the repository [LICENSE](LICENSE).

@@ -1,5 +1,30 @@
 # Featured demo integration validation
 
+## Current selection: G1 Parkour swap — October 9, 2026
+
+The featured set is now G1 Parkour, Dexterous Cube Orientation, EuroGuesser AI
+and RustZero. The first card, image/alt text and About introduction were updated.
+Root README gives extensive technical descriptions only for these four demos,
+with a comparable parkour chapter covering architecture, subsystem I/O, depth
+preprocessing, control rates, upstream training provenance, model/source
+checkpoints, Docker reproduction and measured limits. Older experiments remain
+in the blog and their own project READMEs.
+
+Chrome computer-agent checks at 1440×900, 412×915 and 915×412 found exactly four
+cards, loaded 960×600 images and no horizontal overflow. Desktop/landscape use
+two columns; portrait uses one. Clicking G1 Parkour navigated to `/parkour/`
+and displayed the simulator shell. This content change does not repeat the
+full policy/runtime tests recorded in `projects/g1-parkour/VALIDATION.md`.
+Screenshots are in `docs/featured-parkour/`. All root README local links resolve.
+Docker Jekyll build and the complete public route/dependency checker passed.
+No models or demo runtime source changed. Unrelated user edits in `plan.md`
+and `_plugins/cache-bust.rb` were preserved separately.
+
+## Historical validation: RustZero selection
+
+The details below describe the earlier Humanoid Walking selection and README
+before the parkour swap; they are retained as historical evidence.
+
 Validated October 9, 2026 using Docker containers and the Chrome computer agent.
 No model weights, game rules, policy code or training artifacts changed.
 
