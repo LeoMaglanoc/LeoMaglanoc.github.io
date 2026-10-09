@@ -5,15 +5,27 @@ from pathlib import Path
 from urllib.parse import urljoin, urlsplit, unquote
 import json
 import hashlib
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / '_site'
 ROUTES = [f'/{name}/' for name in (
-    'block-world', 'block-temple', 'scrap-orbit', 'dustfall-outpost', 'mobile-sorting',
-    'rustzero', 'tiny-dreamer', 'tiny-ego-vla', 'language-vision', 'painter', 'drone-racing', 'doom', 'chat', 'slam', 'g1', 'locomotion', 'euroguessr', 'dexterous-rl'
-)] + [f'/assets/interactive/{name}/index.html' for name in (
-    'pong', 'race', 'robot-runner', 'flappy'
-)]
+    'block-temple', 'scrap-orbit', 'rustzero', 'tiny-dreamer', 'slam',
+    'g1', 'locomotion', 'euroguessr', 'dexterous-rl'
+)] + [f'/assets/interactive/{name}/index.html' for name in ('pong', 'flappy')]
+RETIRED = (
+    'tiny-ego-vla', 'language-vision', 'block-world', 'dustfall-outpost',
+    'mobile-sorting', 'painter', 'drone-racing', 'doom', 'chat'
+)
+EXCLUDED = [
+    path.rstrip('/')
+    for path in yaml.safe_load((ROOT / '_config.yml').read_text())['exclude']
+]
+
+
+def excluded(path):
+    return any(path == prefix or path.startswith(prefix + '/') for prefix in EXCLUDED)
+
 
 class Dependencies(HTMLParser):
     def __init__(self):
@@ -50,9 +62,11 @@ def check():
                     pending.append(resolved.path)
     for entry in json.loads((ROOT / 'scripts/project-assets.json').read_text()).values():
         for file in entry['files']:
+            if excluded(f'{entry["destination"]}/{file}'):
+                continue
             if not (SITE / entry['destination'] / file).is_file():
                 raise SystemExit(f'Missing runtime file: {entry["destination"]}/{file}')
-    for name, basename in [('block-world', 'index'), ('scrap-orbit', 'index'), ('block-temple', 'index'), ('dustfall-outpost', 'game')]:
+    for name, basename in [('scrap-orbit', 'index'), ('block-temple', 'index')]:
         for extension in ('html', 'js', 'wasm', 'pck'):
             folder = 'block-world' if extension == 'wasm' and name in ('scrap-orbit', 'block-temple') else name
             path = SITE / f'assets/interactive/{folder}/{basename}.{extension}'
@@ -65,26 +79,32 @@ def check():
             raise SystemExit(f'{name}: shared Godot binary changed; update its loader before deploying')
         if '../block-world/index' not in (SITE / f'assets/interactive/{name}/index.html').read_text():
             raise SystemExit(f'{name}: shared engine path missing from published loader')
-    language_vision = SITE / 'assets/interactive/language-vision'
-    for filename in ('worker.mjs', 'tokenizer.mjs', 'retrieval.mjs', 'masks.mjs', 'models/text-int8.onnx', 'models/model.json', 'vendor/ort.wasm.min.mjs', 'vendor/ort-wasm-simd-threaded.mjs'):
-        if not (language_vision / filename).is_file():
-            raise SystemExit(f'Missing language-vision runtime: {filename}')
-    ort_name = 'vendor/ort-wasm-simd-threaded.wasm'
-    ort_shared = ROOT / 'assets/interactive/euroguessr' / ort_name
-    ort_original = ROOT / 'assets/interactive/language-vision' / ort_name
-    if hashlib.sha256(ort_shared.read_bytes()).digest() != hashlib.sha256(ort_original.read_bytes()).digest():
-        raise SystemExit('LanguageVision: shared ONNX binary changed; update wasmPaths before deploying')
-    if '../euroguessr/vendor/ort-wasm-simd-threaded.wasm' not in (language_vision / 'worker.mjs').read_text():
-        raise SystemExit('LanguageVision: shared WASM path missing from published worker')
-    if not (SITE / 'assets/interactive/euroguessr' / ort_name).is_file():
-        raise SystemExit('Missing shared ONNX runtime')
-    for scene in json.loads((language_vision / 'data/scenes.json').read_text()):
-        for filename in ('scene.webp', 'thumb.webp', 'manifest.json', 'regions.json', 'embeddings.bin', 'masks.bin'):
-            if not (language_vision / 'data' / scene['id'] / filename).is_file():
-                raise SystemExit(f'Missing language-vision scene asset: {scene["id"]}/{filename}')
-    tiny_ego = SITE / 'assets/interactive/tiny-ego-vla'
-    if tiny_ego.exists():
-        raise SystemExit('Archived TinyEgoVLA assets must not be deployed; preserve them in Git only')
+    # These runtime files live under retired demos but are still used by
+    # Dexterous, TinyDreamer, BlockTemple, and Scrap Orbit.
+    for filename in (
+        'language-vision/vendor/ort.wasm.min.mjs',
+        'language-vision/vendor/ort-wasm-simd-threaded.mjs',
+        'euroguessr/vendor/ort-wasm-simd-threaded.wasm',
+        'mobile-sorting/vendor/three.module.js',
+        'mobile-sorting/vendor/three.core.js',
+        'mobile-sorting/vendor/OrbitControls.js',
+        'doom/vendor/ort/ort.min.js',
+        'doom/vendor/ort/ort-wasm-simd-threaded.wasm',
+        'block-world/index.audio.worklet.js',
+        'block-world/index.audio.position.worklet.js',
+    ):
+        if not (SITE / 'assets/interactive' / filename).is_file():
+            raise SystemExit(f'Missing shared runtime: {filename}')
+    for name in RETIRED:
+        for path in (SITE / name / 'index.html', SITE / 'assets/interactive' / name / 'index.html'):
+            if path.exists():
+                raise SystemExit(f'Retired demo must not be deployed: {path.relative_to(SITE)}')
+    for name in ('race', 'robot-runner', 'tiny-ego-vla'):
+        if (SITE / 'assets/interactive' / name).exists():
+            raise SystemExit(f'Retired demo assets must not be deployed: {name}')
+    for path in SITE.rglob('*'):
+        if path.is_file() and excluded(path.relative_to(SITE).as_posix()):
+            raise SystemExit(f'Excluded asset leaked into the public site: {path.relative_to(SITE)}')
     if (SITE / 'projects').exists():
         raise SystemExit('Project source leaked into the public site')
     published_bytes = sum(p.stat().st_size for p in SITE.rglob('*') if p.is_file())

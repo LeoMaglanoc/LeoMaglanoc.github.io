@@ -15,25 +15,14 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 Interactive demos and games, newest first by creation date:
 
 - [Dexterous Cube Orientation]({{ "/dexterous-rl/" | relative_url }})
-- [TinyEgoVLA]({{ '/tiny-ego-vla/' | relative_url }}) — archived; source and checkpoints preserved
-- [Language → Vision]({{ '/language-vision/' | relative_url }})
 - [EuroGuessr AI]({{ '/euroguessr/' | relative_url }})
 - [RustZero]({{ '/rustzero/' | relative_url }}) — play 6×6 Breakthrough against a locally trained self-play AI
 - [BlockTemple]({{ '/block-temple/' | relative_url }})
-- [Block World]({{ '/block-world/' | relative_url }})
 - [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }})
-- [Dustfall Outpost]({{ '/dustfall-outpost/' | relative_url }})
-- [TIAGo Mobile Sorting]({{ '/mobile-sorting/' | relative_url }})
 - [TinyDreamer CartPole]({{ '/tiny-dreamer/' | relative_url }})
-- [Panda Robot Drawing & Repair]({{ '/painter/' | relative_url }})
-- [Autonomous Drone Racing]({{ '/drone-racing/' | relative_url }})
-- [Doom]({{ '/doom/' | relative_url }})
-- [Ask Leo]({{ '/chat/' | relative_url }})
 - [SLAM / 3D Reconstruction]({{ '/slam/' | relative_url }})
 - [Unitree G1 Locomotion Playground]({{ '/locomotion/' | relative_url }})
 - [Pong RL Agent]({{ '/assets/interactive/pong/index.html' | relative_url }})
-- [Top Down Racing Game]({{ '/assets/interactive/race/index.html' | relative_url }})
-- [Jump and Run Sidescroller]({{ '/assets/interactive/robot-runner/index.html' | relative_url }})
 - [Flappy Bird]({{ '/assets/interactive/flappy/index.html' | relative_url }})
 
 everything below here is written by GenAI!

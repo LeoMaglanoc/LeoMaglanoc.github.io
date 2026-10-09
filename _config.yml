@@ -209,6 +209,52 @@ exclude:
   - assets/interactive/scrap-orbit/index.wasm
   - assets/interactive/block-temple/index.wasm
   - assets/interactive/language-vision/vendor/ort-wasm-simd-threaded.wasm
+  # Retired demos stay in Git but are omitted from the published site.
+  # Keep their shared vendor libraries and Godot engine for retained demos.
+  - _pages/tiny-ego-vla.md
+  - _pages/language-vision.md
+  - _pages/block-world.md
+  - _pages/dustfall-outpost.md
+  - _pages/mobile-sorting.md
+  - _pages/painter.md
+  - _pages/drone-racing.md
+  - _pages/doom.md
+  - _pages/chat.md
+  - assets/interactive/dustfall-outpost/
+  - assets/interactive/painter/
+  - assets/interactive/drone-racing/
+  - assets/interactive/race/
+  - assets/interactive/robot-runner/
+  - assets/js/ask-leo/
+  - assets/interactive/block-world/index.html
+  - assets/interactive/block-world/index.js
+  - assets/interactive/block-world/index.pck
+  - assets/interactive/block-world/index.png
+  - assets/interactive/doom/doom.css
+  - assets/interactive/doom/doom.worker.js
+  - assets/interactive/doom/engine/
+  - assets/interactive/doom/game/
+  - assets/interactive/doom/gzdoom.js
+  - assets/interactive/doom/gzdoom.wasm
+  - assets/interactive/doom/index.html
+  - assets/interactive/doom/models/
+  - assets/interactive/doom/src/
+  - assets/interactive/language-vision/app.mjs
+  - assets/interactive/language-vision/benchmark.html
+  - assets/interactive/language-vision/benchmark.mjs
+  - assets/interactive/language-vision/data/
+  - assets/interactive/language-vision/index.html
+  - assets/interactive/language-vision/masks.mjs
+  - assets/interactive/language-vision/models/
+  - assets/interactive/language-vision/retrieval.mjs
+  - assets/interactive/language-vision/style.css
+  - assets/interactive/language-vision/tokenizer.mjs
+  - assets/interactive/language-vision/worker.mjs
+  - assets/interactive/mobile-sorting/asset-manifest.json
+  - assets/interactive/mobile-sorting/index.html
+  - assets/interactive/mobile-sorting/robots/
+  - assets/interactive/mobile-sorting/sorting.css
+  - assets/interactive/mobile-sorting/src/
 keep_files:
   - CNAME
   - .nojekyll
