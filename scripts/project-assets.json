@@ -101,6 +101,7 @@
       "robots/g1/meshes/right_wrist_roll_rubber_hand.STL",
       "robots/g1/meshes/torso_link_23dof_rev_1_0.STL",
       "robots/g1/scene.xml",
+      "src/assets.js",
       "src/config.js",
       "src/controller.js",
       "src/input.js",

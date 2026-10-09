@@ -33,7 +33,6 @@ async function start() {
     renderer = createG1Renderer(document.getElementById("g1-canvas"), simulation);
     commandManager.onChange = () => ui.update(commandManager.current, simulation.stats);
     ui.ready();
-    ui.resetButton.addEventListener("click", resetSimulation);
     const pushStrength = document.getElementById("g1-push-strength");
     const pushStrengthValue = document.getElementById("g1-push-strength-value");
     pushStrength.addEventListener("input", () => {
@@ -69,5 +68,10 @@ function loop(time) {
   simulation.advance(time);
   requestAnimationFrame(loop);
 }
+
+ui.resetButton.addEventListener("click", () => {
+  if (renderer) resetSimulation();
+  else window.location.reload();
+});
 
 start();

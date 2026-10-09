@@ -1,4 +1,5 @@
 import loadMujoco from "../vendor/mujoco.js";
+import { loadAsset, loadMeshes } from "./assets.js";
 import { G1_POLICY_CONFIG as C } from "./config.js";
 import { buildObservation } from "./observations.js";
 import { desiredJointPositions, pdControl } from "./controller.js";
@@ -10,12 +11,6 @@ function mkdirp(FS, path) {
     current += `/${part}`;
     if (!FS.analyzePath(current).exists) FS.mkdir(current);
   }
-}
-
-async function responseBytes(url, label) {
-  const response = await fetch(url, { cache: "force-cache" });
-  if (!response.ok) throw new Error(`Could not load ${label} (${response.status})`);
-  return response.arrayBuffer();
 }
 
 export class G1Simulation {
@@ -43,18 +38,18 @@ export class G1Simulation {
   async init() {
     this.mujoco = await loadMujoco();
     const manifestUrl = new URL("../asset-manifest.json", import.meta.url);
-    const manifest = await (await fetch(manifestUrl)).json();
+    const manifest = await loadAsset(manifestUrl, "asset manifest", response => response.json());
     const root = "/working/g1";
     mkdirp(this.mujoco.FS, `${root}/meshes`);
     const baseUrl = new URL("../", import.meta.url);
-    const scene = await (await fetch(new URL(manifest.scene, baseUrl))).text();
-    const modelXml = await (await fetch(new URL(manifest.model, baseUrl))).text();
+    const scene = await loadAsset(new URL(manifest.scene, baseUrl), "scene XML", response => response.text());
+    const modelXml = await loadAsset(new URL(manifest.model, baseUrl), "robot XML", response => response.text());
     this.mujoco.FS.writeFile(`${root}/scene.xml`, scene);
     this.mujoco.FS.writeFile(`${root}/g1_12dof.xml`, modelXml);
-    await Promise.all(manifest.meshes.map(async (mesh) => {
-      const bytes = await responseBytes(new URL(`../robots/g1/meshes/${mesh}`, import.meta.url), mesh);
+    await loadMeshes(manifest.meshes, async (mesh) => {
+      const bytes = await loadAsset(new URL(`../robots/g1/meshes/${mesh}`, import.meta.url), mesh);
       this.mujoco.FS.writeFile(`${root}/meshes/${mesh}`, new Uint8Array(bytes));
-    }));
+    });
 
     this.model = this.mujoco.MjModel.from_xml_path(`${root}/scene.xml`);
     this.data = new this.mujoco.MjData(this.model);

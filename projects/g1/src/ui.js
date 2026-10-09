@@ -23,6 +23,7 @@ export class G1UI {
   }
 
   setLoading(message) {
+    this.resetButton.disabled = true;
     this.loading.hidden = false;
     this.loading.textContent = message;
     this.status.textContent = message;
@@ -34,6 +35,8 @@ export class G1UI {
     this.error.textContent = "";
     this.status.textContent = "Running locally in your browser";
     this.pauseButton.disabled = false;
+    this.resetButton.disabled = false;
+    this.resetButton.textContent = "Reset";
   }
 
   setPaused(paused) {
@@ -50,6 +53,8 @@ export class G1UI {
   }
 
   showError(error) {
+    this.resetButton.disabled = false;
+    if (this.pauseButton.disabled) this.resetButton.textContent = "Retry";
     console.error(error);
     this.loading.hidden = true;
     this.error.hidden = false;
