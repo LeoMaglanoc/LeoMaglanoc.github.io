@@ -18,7 +18,7 @@ The upstream browser source is pinned to `3898564255525f2a72dbbfb1d190b48a230435
 - Touch-camera checks pass: one-finger orbit and pinch zoom change the camera while paused robot qpos remains identical. Five resets retain the same physics model/data, ONNX sessions and scene object count. Evidence: `results/gestures.json`.
 - The policy controller, releaseContract and mesh-coordinate helper are byte-identical to the pin. No other demo source/model was modified.
 
-`results/browser.json`, `course.json`, `gestures.json`, `environment.json`, contract logs and screenshots are tracked. GitHub Actions repeats the Docker contract, browser, sensor and resource checks.
+`results/browser.json`, `course.json`, `gestures.json`, `environment.json`, contract logs and screenshots are tracked. The Docker contract, browser, sensor and resource checks remain available locally. GitHub Actions is limited to the shared Deploy site workflow, which builds the site and checks published routes and runtime files.
 
 ## Observed behavior and its limit
 
