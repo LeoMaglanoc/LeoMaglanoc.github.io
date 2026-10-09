@@ -1,0 +1,15 @@
+{
+  "source": "https://github.com/amazon-far/php_parkour/releases/tag/student-assets-v1",
+  "files": [
+    {
+      "path": "depth_backbone.onnx",
+      "size": 105240,
+      "sha256": "5b22466a218944e3b0ab0f4f82a910e3eec35375ee03e7fb94eb65fa88431b56"
+    },
+    {
+      "path": "student.onnx",
+      "size": 13841549,
+      "sha256": "e426c4206181d511b838c76efc48e43636299b76cb5a15183977011589931628"
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "source": "amazon-far/holosoma",
+  "commit": "70a344f50de01a77ed3d5ff95127fbb95795c11b",
+  "path": "src/holosoma/holosoma/data/terrains/terrain.obj",
+  "sha256": "efb6a1775b04179af0eee50ad6a514a5db12ebad72a51a4992c044a5c4b85cb5",
+  "components": [
+    {
+      "name": "floor",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        -7.543103,
+        -40.0,
+        -0.1
+      ],
+      "maximum": [
+        72.456897,
+        40.0,
+        0.0
+      ]
+    },
+    {
+      "name": "terrain_box_2",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        4.300692,
+        -0.864262,
+        0.0
+      ],
+      "maximum": [
+        5.699308,
+        0.864262,
+        0.38
+      ]
+    },
+    {
+      "name": "terrain_box_3",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        9.400235,
+        -0.812434,
+        0.0
+      ],
+      "maximum": [
+        10.599765,
+        0.812434,
+        0.38
+      ]
+    },
+    {
+      "name": "terrain_box_4",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        14.342184,
+        -0.844239,
+        0.0
+      ],
+      "maximum": [
+        15.657816,
+        0.844239,
+        0.76
+      ]
+    },
+    {
+      "name": "terrain_box_5",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        19.427623,
+        -0.79617,
+        0.0
+      ],
+      "maximum": [
+        20.572377,
+        0.79617,
+        0.76
+      ]
+    },
+    {
+      "name": "terrain_box_6",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        24.177983,
+        -0.901034,
+        0.0
+      ],
+      "maximum": [
+        25.822017,
+        0.901034,
+        0.38
+      ]
+    },
+    {
+      "name": "terrain_box_7",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        29.300692,
+        -0.864262,
+        0.0
+      ],
+      "maximum": [
+        30.699308,
+        0.864262,
+        0.38
+      ]
+    },
+    {
+      "name": "terrain_box_8",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        34.348379,
+        -0.841038,
+        0.0
+      ],
+      "maximum": [
+        35.651621,
+        0.841038,
+        0.76
+      ]
+    },
+    {
+      "name": "terrain_box_9",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        39.400235,
+        -0.812434,
+        0.0
+      ],
+      "maximum": [
+        40.599765,
+        0.812434,
+        0.76
+      ]
+    },
+    {
+      "name": "terrain_box_10",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        44.214551,
+        -0.895119,
+        0.0
+      ],
+      "maximum": [
+        45.785449,
+        0.895119,
+        0.38
+      ]
+    },
+    {
+      "name": "terrain_box_11",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        49.262625,
+        -0.880053,
+        0.0
+      ],
+      "maximum": [
+        50.737375,
+        0.880053,
+        0.38
+      ]
+    },
+    {
+      "name": "terrain_box_12",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        54.386898,
+        -0.82008,
+        0.0
+      ],
+      "maximum": [
+        55.613102,
+        0.82008,
+        0.76
+      ]
+    },
+    {
+      "name": "terrain_box_13",
+      "vertices": 8,
+      "faces": 12,
+      "minimum": [
+        59.386898,
+        -0.82008,
+        0.0
+      ],
+      "maximum": [
+        60.613102,
+        0.82008,
+        0.76
+      ]
+    }
+  ],
+  "finish_gate": {
+    "source": "g1_with_terrain.xml#finish_marker",
+    "collision_enabled": false,
+    "visible_to_policy_depth": false,
+    "geoms": [
+      {
+        "name": "finish_post_left",
+        "position": [
+          66.0,
+          -0.95,
+          0.82
+        ],
+        "half_extents": [
+          0.08,
+          0.08,
+          0.82
+        ],
+        "rgba": [
+          1.0,
+          0.85,
+          0.2,
+          1.0
+        ],
+        "minimum": [
+          65.92,
+          -1.03,
+          0.0
+        ],
+        "maximum": [
+          66.08,
+          -0.87,
+          1.64
+        ]
+      },
+      {
+        "name": "finish_post_right",
+        "position": [
+          66.0,
+          0.95,
+          0.82
+        ],
+        "half_extents": [
+          0.08,
+          0.08,
+          0.82
+        ],
+        "rgba": [
+          1.0,
+          0.85,
+          0.2,
+          1.0
+        ],
+        "minimum": [
+          65.92,
+          0.87,
+          0.0
+        ],
+        "maximum": [
+          66.08,
+          1.03,
+          1.64
+        ]
+      },
+      {
+        "name": "finish_top_bar",
+        "position": [
+          66.0,
+          0.0,
+          1.72
+        ],
+        "half_extents": [
+          0.08,
+          1.1,
+          0.08
+        ],
+        "rgba": [
+          1.0,
+          0.25,
+          0.25,
+          1.0
+        ],
+        "minimum": [
+          65.92,
+          -1.1,
+          1.64
+        ],
+        "maximum": [
+          66.08,
+          1.1,
+          1.8
+        ]
+      },
+      {
+        "name": "finish_panel",
+        "position": [
+          66.1,
+          0.0,
+          1.35
+        ],
+        "half_extents": [
+          0.02,
+          0.75,
+          0.2
+        ],
+        "rgba": [
+          0.1,
+          0.1,
+          0.1,
+          0.9
+        ],
+        "minimum": [
+          66.08,
+          -0.75,
+          1.1500000000000001
+        ],
+        "maximum": [
+          66.11999999999999,
+          0.75,
+          1.55
+        ]
+      }
+    ],
+    "note": "OBJ/MTL preserve geometry/colors; non-collision and depth exclusion remain XML/renderer settings."
+  },
+  "combined_export": {
+    "path": "terrain-with-finish.obj",
+    "material": "terrain-with-finish.mtl",
+    "sha256": "4a272d26b243c9a6d1ab567eb168bce5d62957786c80ed93d85164651351f184"
+  }
+}

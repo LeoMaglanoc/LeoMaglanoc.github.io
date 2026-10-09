@@ -14,6 +14,8 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
+- [G1 Parkour Playground]({{ "/parkour/" | relative_url }}) — pretrained depth-conditioned parkour in live MuJoCo physics
+
 - [G1 Loco-Manipulation]({{ "/loco-manipulation/" | relative_url }}) — pretrained whole-body carry and push in live physics
 - [Dexterous Cube Orientation]({{ "/dexterous-rl/" | relative_url }})
 - [EuroGuessr AI]({{ '/euroguessr/' | relative_url }})
