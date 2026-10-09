@@ -14,12 +14,11 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
-- [G1 Parkour Playground]({{ "/parkour/" | relative_url }}) — pretrained depth-conditioned parkour in live MuJoCo physics
-
-- [G1 Loco-Manipulation]({{ "/loco-manipulation/" | relative_url }}) — pretrained whole-body carry and push in live physics
+- [G1 Parkour Playground]({{ "/parkour/" | relative_url }})
+- [G1 Loco-Manipulation]({{ "/loco-manipulation/" | relative_url }})
 - [Dexterous Cube Orientation]({{ "/dexterous-rl/" | relative_url }})
 - [EuroGuessr AI]({{ '/euroguessr/' | relative_url }})
-- [RustZero]({{ '/rustzero/' | relative_url }}) — play 6×6 Breakthrough against a locally trained self-play AI
+- [RustZero]({{ '/rustzero/' | relative_url }})
 - [BlockTemple]({{ '/block-temple/' | relative_url }})
 - [Scrap Orbit]({{ '/scrap-orbit/' | relative_url }})
 - [TinyDreamer CartPole]({{ '/tiny-dreamer/' | relative_url }})
