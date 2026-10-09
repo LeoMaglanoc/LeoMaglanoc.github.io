@@ -38,12 +38,12 @@ export class G1Simulation {
   async init() {
     this.mujoco = await loadMujoco();
     const manifestUrl = new URL("../asset-manifest.json", import.meta.url);
-    const manifest = await loadAsset(manifestUrl, "asset manifest", response => response.json());
+    const manifest = await loadAsset(manifestUrl, "asset manifest", (response) => response.json());
     const root = "/working/g1";
     mkdirp(this.mujoco.FS, `${root}/meshes`);
     const baseUrl = new URL("../", import.meta.url);
-    const scene = await loadAsset(new URL(manifest.scene, baseUrl), "scene XML", response => response.text());
-    const modelXml = await loadAsset(new URL(manifest.model, baseUrl), "robot XML", response => response.text());
+    const scene = await loadAsset(new URL(manifest.scene, baseUrl), "scene XML", (response) => response.text());
+    const modelXml = await loadAsset(new URL(manifest.model, baseUrl), "robot XML", (response) => response.text());
     this.mujoco.FS.writeFile(`${root}/scene.xml`, scene);
     this.mujoco.FS.writeFile(`${root}/g1_12dof.xml`, modelXml);
     await loadMeshes(manifest.meshes, async (mesh) => {
@@ -97,17 +97,21 @@ export class G1Simulation {
     const token = this.runToken;
     const observation = buildObservation(this.data, command, this.action, this.stepCount);
     this.inferenceBusy = true;
-    this.policy.act(observation).then((action) => {
-      if (token !== this.runToken) return;
-      this.action.set(action.slice(0, 12));
-      this.target.set(desiredJointPositions(this.action));
-    }).catch((error) => {
-      if (token !== this.runToken) return;
-      this.setPaused(true);
-      this.onUpdate?.(this.data, this.stats, error);
-    }).finally(() => {
-      this.inferenceBusy = false;
-    });
+    this.policy
+      .act(observation)
+      .then((action) => {
+        if (token !== this.runToken) return;
+        this.action.set(action.slice(0, 12));
+        this.target.set(desiredJointPositions(this.action));
+      })
+      .catch((error) => {
+        if (token !== this.runToken) return;
+        this.setPaused(true);
+        this.onUpdate?.(this.data, this.stats, error);
+      })
+      .finally(() => {
+        this.inferenceBusy = false;
+      });
   }
 
   stepPhysics() {

@@ -1,8 +1,10 @@
 // A temporary CDN failure must not permanently prevent the robot from starting.
-export async function loadAsset(url, label, read = response => response.arrayBuffer(), {
-  fetcher = fetch,
-  wait = ms => new Promise(resolve => setTimeout(resolve, ms)),
-} = {}) {
+export async function loadAsset(
+  url,
+  label,
+  read = (response) => response.arrayBuffer(),
+  { fetcher = fetch, wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)) } = {}
+) {
   for (let attempt = 0; attempt < 4; attempt++) {
     let retryable = true;
     try {
