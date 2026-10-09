@@ -1,0 +1,288 @@
+Configuration file: /srv/jekyll/_config.yml
+            Source: /srv/jekyll
+       Destination: /srv/jekyll/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+Fetching external posts from medium.com:
+...fetching https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2
+Fetching external posts from Google Blog:
+...fetching https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
+Terser: Minifying /srv/jekyll/assets/interactive/block-temple/index.audio.position.worklet.js
+Terser: Minifying /srv/jekyll/assets/interactive/block-temple/index.audio.worklet.js
+Terser: Minifying /srv/jekyll/assets/interactive/block-temple/index.js
+Terser: Minifying /srv/jekyll/assets/interactive/block-world/index.audio.position.worklet.js
+Terser: Minifying /srv/jekyll/assets/interactive/block-world/index.audio.worklet.js
+Terser: Minifying /srv/jekyll/assets/interactive/dexterous-rl/app.js
+Terser: Minifying /srv/jekyll/assets/interactive/dexterous-rl/control.js
+Terser: Minifying /srv/jekyll/assets/interactive/dexterous-rl/policy.js
+Terser: Minifying /srv/jekyll/assets/interactive/dexterous-rl/runtime/mujoco.js
+Terser: Minifying /srv/jekyll/assets/interactive/dexterous-rl/scene-overlay.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/app.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/clip-preprocess.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/geo.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/gestures.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/inference.worker.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/preprocess.js
+Terser: Minifying /srv/jekyll/assets/interactive/euroguessr/src/round-selection.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/ort.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/src/main.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/src/renderer.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/src/simulation.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/src/upstream/carryBoxWTACPolicyRunner.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/src/upstream/omniPlanCarryBoxWTACO.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-loco-manipulation/src/upstream/utils/math.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-parkour/assets/index-BU8gAMGl.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1-parkour/assets/main-BWb97L2A.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/assets.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/config.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/controller.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/input.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/main.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/observations.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/policy.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/renderer.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/simulation.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/src/ui.js
+Terser: Minifying /srv/jekyll/assets/interactive/g1/vendor/mujoco.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/client.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/finalization-compat.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/load-casadi.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/runtime.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/vendor/casadi/casadi.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/vendor/casadi/casadi_wasm.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/mpc/worker.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/src/app.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/src/contract.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/src/modes/b2z1-mpc-mode.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/src/modes/g1-rl-mode.js
+Terser: Minifying /srv/jekyll/assets/interactive/locomotion-playground/src/timing.js
+Terser: Minifying /srv/jekyll/assets/interactive/mobile-sorting/vendor/OrbitControls.js
+Terser: Minifying /srv/jekyll/assets/interactive/mobile-sorting/vendor/three.core.js
+Terser: Minifying /srv/jekyll/assets/interactive/mobile-sorting/vendor/three.module.js
+Terser: Minifying /srv/jekyll/assets/interactive/pong/assets/pong/pong.js
+Terser: Minifying /srv/jekyll/assets/interactive/rustzero/app.js
+Terser: Minifying /srv/jekyll/assets/interactive/rustzero/pkg/rustzero.js
+Terser: Minifying /srv/jekyll/assets/interactive/rustzero/worker.js
+Terser: Minifying /srv/jekyll/assets/interactive/scrap-orbit/index.audio.position.worklet.js
+Terser: Minifying /srv/jekyll/assets/interactive/scrap-orbit/index.audio.worklet.js
+Terser: Minifying /srv/jekyll/assets/interactive/scrap-orbit/index.js
+Terser: Minifying /srv/jekyll/assets/interactive/shared/mujoco-three-renderer.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/imagination.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/main.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/observation.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/policy.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/renderer.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/runner.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/simulation.js
+Terser: Minifying /srv/jekyll/assets/interactive/tiny-dreamer/src/ui.js
+Terser: Minifying /srv/jekyll/assets/js/bibsearch.js
+Terser: Minifying /srv/jekyll/assets/js/chartjs-setup.js
+Terser: Minifying /srv/jekyll/assets/js/common.js
+Terser: Minifying /srv/jekyll/assets/js/copy_code.js
+Terser: Minifying /srv/jekyll/assets/js/diff2html-setup.js
+Terser: Minifying /srv/jekyll/assets/js/distillpub/overrides.js
+Terser: Minifying /srv/jekyll/assets/js/distillpub/template.v2.js
+Terser: Minifying /srv/jekyll/assets/js/distillpub/transforms.v2.js
+Terser: Minifying /srv/jekyll/assets/js/echarts-setup.js
+Terser: Minifying /srv/jekyll/assets/js/highlight-search-term.js
+Terser: Minifying /srv/jekyll/assets/js/jupyter_new_tab.js
+Terser: Minifying /srv/jekyll/assets/js/leaflet-setup.js
+Terser: Minifying /srv/jekyll/assets/js/masonry.js
+Terser: Minifying /srv/jekyll/assets/js/mathjax-setup.js
+Terser: Minifying /srv/jekyll/assets/js/mermaid-setup.js
+Terser: Minifying /srv/jekyll/assets/js/newsletter.js
+Terser: Minifying /srv/jekyll/assets/js/no_defer.js
+Terser: Minifying /srv/jekyll/assets/js/plotly-setup.js
+Terser: Minifying /srv/jekyll/assets/js/progress-bar.js
+Terser: Minifying /srv/jekyll/assets/js/pseudocode-setup.js
+Terser: Minifying /srv/jekyll/assets/js/search-setup.js
+Terser: Minifying /srv/jekyll/assets/js/shortcut-key.js
+Terser: Minifying /srv/jekyll/assets/js/theme.js
+Terser: Minifying /srv/jekyll/assets/js/tooltips-setup.js
+Terser: Minifying /srv/jekyll/assets/js/typograms.js
+Terser: Minifying /srv/jekyll/assets/js/vega-setup.js
+Terser: Minifying /srv/jekyll/assets/js/venobox-setup.js
+Terser: Minifying /srv/jekyll/assets/js/wechat.js
+Terser: Minifying /srv/jekyll/assets/js/zoom.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/27626-342f9f3e1752e97e.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/37336-dba7292777f92801.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/56813-ff069dc98508be2e.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/6187-5c30b4d4633a7dce.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/65948-42a4e52f6f75cdaf.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/91739-afa96cde10c9cb9e.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/ClientFramework-e09961eaf9de1603.js
+Terser: Minifying /srv/jekyll/context/China Tech Fellowship I Details_files/app-f59e3f965f0ae4eb.js
+Terser: Minifying /srv/jekyll/tests/g1-loco-manipulation/test.js
+Terser: Minifying /srv/jekyll/tests/g1/regression.js
+Terser: Minifying /srv/jekyll/tests/mujoco-renderer/regression.js
+       Jekyll Feed: Generating feed for blogs
+       Jekyll Feed: Generating feed for posts
+       Imagemagick: Searching files in /srv/jekyll/assets/img/
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/Screenshot from 2026-02-19 09-11-46-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/Screenshot from 2026-02-19 09-11-46-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/Screenshot from 2026-02-19 09-11-46-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/drone_software_architecture-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/drone_software_architecture-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/drone_software_architecture-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/android-chrome-192x192-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/android-chrome-192x192-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/android-chrome-192x192-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/android-chrome-512x512-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/android-chrome-512x512-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/android-chrome-512x512-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/apple-touch-icon-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/apple-touch-icon-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/apple-touch-icon-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/favicon-16x16-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/favicon-16x16-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/favicon-16x16-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/favicon-32x32-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/favicon-32x32-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/favicon-32x32-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/mstile-150x150-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/mstile-150x150-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/favicon/mstile-150x150-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/foundation-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/foundation-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/foundation-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/phastrac-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/phastrac-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/phastrac-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/pipeline-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/pipeline-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/pipeline-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/prof_pic-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/prof_pic-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/prof_pic-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/safety-shield-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/safety-shield-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/safety-shield-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_pic_1-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_pic_1-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_pic_1-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_pic_2-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_pic_2-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_pic_2-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_presentation_smart_way-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_presentation_smart_way-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_presentation_smart_way-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_presentation_usual_way-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_presentation_usual_way-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/siemens/siemens_presentation_usual_way-1400.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/template_error-480.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/template_error-800.webp
+       Imagemagick: Adding static file /srv/jekyll/_site/assets/img/template_error-1400.webp
+       Imagemagick: Generated 0 file(s)
+         AutoPages: Disabled/Not configured in site.config.
+        Pagination: Complete, processed 1 pagination page(s)
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+7 │   "variables",
+  │   ^^^^^^^^^^^
+  ╵
+    /srv/jekyll/assets/css/main.scss 7:3  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+8 │   "themes",
+  │   ^^^^^^^^
+  ╵
+    /srv/jekyll/assets/css/main.scss 8:3  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+9 │   "layout",
+  │   ^^^^^^^^
+  ╵
+    /srv/jekyll/assets/css/main.scss 9:3  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+10 │   "homepage",
+   │   ^^^^^^^^^^
+   ╵
+    /srv/jekyll/assets/css/main.scss 10:3  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+11 │   "ask-leo",
+   │   ^^^^^^^^^
+   ╵
+    /srv/jekyll/assets/css/main.scss 11:3  root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+9 │     #{$fa-icon-property}: unquote("\"#{ $icon }\"");
+  │                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    /srv/jekyll/_sass/font-awesome/_icons.scss 9:27  @import
+    font-awesome/fontawesome.scss 20:9               @import
+    /srv/jekyll/assets/css/main.scss 17:3            root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+10 │     #{$fa-duotone-icon-property}: unquote("\"#{$icon}#{$icon}\"");
+   │                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /srv/jekyll/_sass/font-awesome/_icons.scss 10:35  @import
+    font-awesome/fontawesome.scss 20:9                @import
+    /srv/jekyll/assets/css/main.scss 17:3             root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+29 │   .#{$fa-css-prefix}-#{$name} { #{$fa-icon-property}: unquote("\"#{ $icon }\""); }
+   │                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    font-awesome/brands.scss 29:55         @import
+    /srv/jekyll/assets/css/main.scss 18:3  root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.unquote instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+36 │   @return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"")
+   │           ^^^^^^^^^^^^^
+   ╵
+    tabler-icons/tabler-icons.scss 36:11   unicode()
+    tabler-icons/tabler-icons.scss 40:15   @import
+    /srv/jekyll/assets/css/main.scss 21:3  root stylesheet
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use string.insert instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+36 │   @return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"")
+   │                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    tabler-icons/tabler-icons.scss 36:33   unicode()
+    tabler-icons/tabler-icons.scss 40:15   @import
+    /srv/jekyll/assets/css/main.scss 21:3  root stylesheet
+WARNING: 41 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+[NbConvertApp] Converting notebook /tmp/jekyll-jupyter-notebook20261009-1-1kvi0y.ipynb to html
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/highlight.py:71: UserWarning: IPython3 lexer unavailable, falling back on Python 3
+  return _pygments_highlight(
+                    done in 129.728 seconds.
+ Auto-regeneration: disabled. Use --watch to enable.

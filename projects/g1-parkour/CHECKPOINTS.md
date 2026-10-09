@@ -26,3 +26,11 @@ For local inference experiments the retained upstream query options `policy`, `d
 `docker run --rm -v "$PWD":/work -w /work/projects/g1-parkour python:3.10-slim python scripts/import-release-terrain.py`
 
 The exact source OBJ and upstream finish-gate template are tracked. The script checks closed components, preserves original geometry, and recreates the same terrain include and finish-only export. Follow with the Docker contract suite. It does not create new obstacles.
+
+## Git milestones
+
+- `9c6c43f` — isolated simulator, released models and initial integration checkpoint.
+- `parkour-release-baseline-2026-10-09` — tag for that baseline.
+- `parkour-v1-validated-2026-10-09` — final integration, documentation and test evidence tag.
+
+These tags pin source and inference assets. They do not imply a new training run or a full-course success rate.

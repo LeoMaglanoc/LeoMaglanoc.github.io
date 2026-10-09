@@ -1,0 +1,98 @@
+npm warn deprecated mujoco-js@0.0.7: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+
+added 37 packages, and audited 38 packages in 14s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice
+npm notice New major version of npm available! 10.9.9 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> g1-parkour@3.3.8 test
+> node tests/assets.cjs && node tests/release-contract.cjs
+
+Released model hashes, terrain hash and scene asset completeness passed
+policy.onnx metadata is unavailable in this runtime. Using ONNX fallback parser.
+policy.onnx metadata keys: [
+  'joint_names',
+  'action_scale',
+  'default_joint_pos',
+  'joint_stiffness',
+  'joint_damping',
+  'kp',
+  'kd',
+  'command_names',
+  'observation_names',
+  'anchor_body_name',
+  'body_names'
+]
+Policy joint names: [
+  'left_hip_pitch_joint',
+  'left_hip_roll_joint',
+  'left_hip_yaw_joint',
+  'left_knee_joint',
+  'left_ankle_pitch_joint',
+  'left_ankle_roll_joint',
+  'right_hip_pitch_joint',
+  'right_hip_roll_joint',
+  'right_hip_yaw_joint',
+  'right_knee_joint',
+  'right_ankle_pitch_joint',
+  'right_ankle_roll_joint',
+  'waist_yaw_joint',
+  'waist_roll_joint',
+  'waist_pitch_joint',
+  'left_shoulder_pitch_joint',
+  'left_shoulder_roll_joint',
+  'left_shoulder_yaw_joint',
+  'left_elbow_joint',
+  'left_wrist_roll_joint',
+  'left_wrist_pitch_joint',
+  'left_wrist_yaw_joint',
+  'right_shoulder_pitch_joint',
+  'right_shoulder_roll_joint',
+  'right_shoulder_yaw_joint',
+  'right_elbow_joint',
+  'right_wrist_roll_joint',
+  'right_wrist_pitch_joint',
+  'right_wrist_yaw_joint'
+]
+Native observation/action parity { actionError: 1.4901161193847656e-7 }
+{
+  "status": "passed",
+  "nativeDepthCases": 3,
+  "maxDepthError": 0.000006735324859619141,
+  "observationDimension": 140,
+  "mappedJoints": 29,
+  "mappedActuators": 29,
+  "mujocoVersion": "3.3.8"
+}
+
+> g1-parkour@3.3.8 build:web
+> vite build
+
+vite v6.4.4 building for production...
+transforming...
+[plugin vite:resolve] Module "module" has been externalized for browser compatibility, imported by "/work/projects/g1-parkour/node_modules/mujoco-js/dist/mujoco_wasm.js". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+✓ 22 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                             3.50 kB │ gzip:     1.57 kB
+dist/assets/ort-wasm-simd-threaded.jsep-CQxPUKcR.mjs       46.85 kB
+dist/assets/ort-wasm-simd-threaded.jsep-MDYUKy93.wasm  28,312.03 kB │ gzip: 6,727.97 kB
+dist/assets/index-C7672s8R.css                              4.64 kB │ gzip:     1.63 kB
+dist/assets/__vite-browser-external-BcWzWDyb.js             1.33 kB │ gzip:     0.78 kB
+dist/assets/index-ubW4mG94.js                               1.39 kB │ gzip:     0.77 kB
+dist/assets/main-ClcOBWf1.js                           11,834.48 kB │ gzip: 3,181.34 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 8.19s
+Published /work/assets/interactive/g1-parkour
+Recorded published runtime/model/scene hashes

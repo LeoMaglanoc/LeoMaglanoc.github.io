@@ -6,3 +6,4 @@ fs.mkdirSync(destination, {recursive:true});
 fs.rmSync(destination, {recursive:true,force:true});
 fs.cpSync(path.resolve(__dirname,'../dist'),destination,{recursive:true});
 console.log(`Published ${destination}`);
+require('./manifest.cjs');

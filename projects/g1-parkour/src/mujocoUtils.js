@@ -480,16 +480,14 @@ export async function loadSceneFromURL(mujoco, filename, parent) {
       const alpha = usesByteColor ? color[3] / 255.0 : color[3];
 
       // Create a new material for each geom to avoid cross-contamination
-      let currentMaterial = new THREE.MeshPhysicalMaterial({
+      // Vertex lighting keeps CPU/software rendering usable. Geometry, opacity,
+      // depth writes and sensor layers are unchanged; depth parity is tested.
+      let currentMaterial = new THREE.MeshLambertMaterial({
         color: new THREE.Color(color[0] * colorScale, color[1] * colorScale, color[2] * colorScale),
         flatShading: geomName === "floor" || geomName.startsWith("terrain_box_"),
         transparent: alpha < 1.0,
         opacity: alpha,
-        specularIntensity: model.geom_matid[g] != -1 ?       model.mat_specular   [model.geom_matid[g]] : undefined,
-        reflectivity     : model.geom_matid[g] != -1 ?       model.mat_reflectance[model.geom_matid[g]] : undefined,
-        roughness        : model.geom_matid[g] != -1 ? 1.0 - model.mat_shininess  [model.geom_matid[g]] : undefined,
-        metalness        : model.geom_matid[g] != -1 ?       0.1 : undefined, //model.mat_metallic   [model.geom_matid[g]]
-        map              : texture
+        map: texture ?? null
       });
 
       let mesh;// = new THREE.Mesh();

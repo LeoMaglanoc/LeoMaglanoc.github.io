@@ -129,6 +129,9 @@ export class MuJoCoDemo {
     this.scene.add(this.fillLightRight);
 
     this.renderer = new THREE.WebGLRenderer( { antialias: true } );
+    if (!this.renderer.extensions.has('EXT_color_buffer_float')) {
+      throw new Error('This GPU cannot render the floating-point depth sensor (EXT_color_buffer_float)');
+    }
     this.renderer.setPixelRatio(1.0);////window.devicePixelRatio );
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     this.renderer.shadowMap.enabled = false;
@@ -800,4 +803,4 @@ export class MuJoCoDemo {
 let demo = new MuJoCoDemo();
 await demo.init();
 // Explicit diagnostics for automated verification; absent on normal URLs.
-if (new URLSearchParams(location.search).get('debug') === '1') window.parkourDemo = demo;
+if (new URLSearchParams(location.search).get('debug') === '1') { window.parkourDemo = demo; window.parkourMaterialTypes = { Physical: THREE.MeshPhysicalMaterial, Lambert: THREE.MeshLambertMaterial }; }

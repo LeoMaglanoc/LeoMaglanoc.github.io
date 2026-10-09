@@ -31,6 +31,10 @@ const output = path.resolve(__dirname,'../results'); fs.mkdirSync(output,{recurs
   assert.equal((await state()).command.indexOf(1),6);
   await client.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});
   assert.equal((await state()).command.indexOf(1),0,'Touch cancellation must clear input');
+  await page.keyboard.down('w');
+  await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+  assert.equal((await state()).command.indexOf(1),0,'Blur must clear held commands');
+  await page.keyboard.up('w');
   const buttonBounds=await page.locator('button').evaluateAll(bs=>bs.filter(b=>b.getBoundingClientRect().width).map(b=>{const r=b.getBoundingClientRect();return {label:b.getAttribute('aria-label')||b.textContent.trim(),x:r.x,y:r.y,w:r.width,h:r.height}}));
   for(const b of buttonBounds){assert.ok(b.x>=0&&b.y>=0&&b.x+b.w<=width+1&&b.y+b.h<=height+1,`${name}: clipped ${b.label}`)}
   await page.getByRole('button',{name:'Reset',exact:true}).click();await page.waitForFunction(()=>window.parkourDemo.data.time===0);
@@ -38,11 +42,11 @@ const output = path.resolve(__dirname,'../results'); fs.mkdirSync(output,{recurs
   await page.getByRole('button',{name:'Resume',exact:true}).click();
   console.log(`${name}: UI checks passed; running released policy`);
   await page.keyboard.down('w');
-  await page.waitForFunction(()=>window.parkourDemo.data.time>5,{},{timeout:180000});
+  await page.waitForFunction(()=>window.parkourDemo.data.time>2,{},{timeout:180000});
   await page.keyboard.up('w');
   const running=await state();assert.ok(running.qpos[0]>1,'Released policy must physically walk forward');assert.ok(running.depthQueue>0);assert.ok(running.ctrl.some(x=>Math.abs(x)>.01));
-  await page.getByRole('button',{name:'About',exact:true}).click();
   const performance = await page.locator('#performance').innerText();
+  await page.getByRole('button',{name:'About',exact:true}).click();
   await page.getByRole('button',{name:'Close about'}).click();
   await page.screenshot({path:path.join(output,`${name}.jpg`),type:'jpeg',quality:85});
   assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);

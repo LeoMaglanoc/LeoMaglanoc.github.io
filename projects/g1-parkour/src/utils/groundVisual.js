@@ -32,7 +32,7 @@ export function createGroundVisual(model) {
   texture.repeat.set(repeatX * repeatScale, repeatY * repeatScale);
   texture.needsUpdate = true;
 
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.MeshStandardMaterial({ color: 0x080e0d, roughness: 1 }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.MeshBasicMaterial({ color: 0x172320 }));
   ground.name = 'release_ground_visual';
   ground.rotateX(-Math.PI / 2);
   ground.layers.set(0); // Main view/reflections only; depth camera uses layer 1.

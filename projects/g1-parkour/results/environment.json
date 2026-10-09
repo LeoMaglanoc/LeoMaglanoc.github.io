@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-09",
+  "timezone": "Europe/Vienna",
+  "node": "v22.23.3",
+  "testBrowser": "Chromium 154.0.8037.92 (Docker, SwiftShader software WebGL)",
+  "physicalPhoneTested": false,
+  "images": {
+    "node:22-bookworm-slim": [
+      "node@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c"
+    ],
+    "g1-parkour-browser:2026-10-09": [
+      "sha256:d4bb2faedf31aebdd61b42664c57fb0d1866edca0260524219f20e84bdd5273b"
+    ],
+    "amirpourmand/al-folio:v0.14.7": [
+      "amirpourmand/al-folio@sha256:7e9ed24ef0291295eade76e5f7eed7075a32a2e8296beb9e10e84b65f35a4ada"
+    ],
+    "nginx:1.27-alpine": [
+      "nginx@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10"
+    ]
+  }
+}

@@ -1,8 +1,52 @@
 {
+  "upstream": {
+    "browserRepository": "https://github.com/php-parkour/php-parkour.github.io",
+    "browserCommit": "3898564255525f2a72dbbfb1d190b48a230435ab",
+    "holosomaCommit": "70a344f50de01a77ed3d5ff95127fbb95795c11b",
+    "training": "No training performed. Released student-assets-v1 ONNX models unchanged.",
+    "researchReleaseCommit": "bed6a4524d163fab97d755f89e48e5c1d3e19133",
+    "studentArchiveSha256": "e772504b0b54035e401bcbb752f4f19b6c74f560561c8369e28b9f77c5e6ae5c"
+  },
+  "dependencies": {
+    "mujoco-js": "0.0.7",
+    "three": "0.181.2",
+    "onnxruntime-web": "1.30.0",
+    "vite": "6.4.4",
+    "playwright": "1.61.1"
+  },
+  "totalBytes": 73343496,
   "files": {
     "THIRD_PARTY_NOTICES.md": {
       "bytes": 3084,
       "sha256": "416154f216f2092823886df769f1b79f91f8ae03cd3eb9bb312442c94928968d"
+    },
+    "assets/__vite-browser-external-BcWzWDyb.js": {
+      "bytes": 1334,
+      "sha256": "f70dac7d78c0e2e488f232df93293143d3d196783662108971a782e42e850778"
+    },
+    "assets/index-C7672s8R.css": {
+      "bytes": 4636,
+      "sha256": "23ba3b1e23b2a2232cab1e5680fa6f8174a293189f1b102dbcec458d32fdbc58"
+    },
+    "assets/index-ubW4mG94.js": {
+      "bytes": 1393,
+      "sha256": "5a8f31231801209c84bd7658ac95d0f1439945b1ec48ddd26267a1845e4efdb9"
+    },
+    "assets/main-ClcOBWf1.js": {
+      "bytes": 11834481,
+      "sha256": "1b8ed22b0359b674ffca29c84db6e431ec5faf1b02a1fe042fa468c07e2385d1"
+    },
+    "assets/ort-wasm-simd-threaded.jsep-CQxPUKcR.mjs": {
+      "bytes": 46851,
+      "sha256": "709853412fd1ffc34247af1e73569227b5b79629c5ca3f59cc39cf7e500e4947"
+    },
+    "assets/ort-wasm-simd-threaded.jsep-MDYUKy93.wasm": {
+      "bytes": 28312028,
+      "sha256": "3ad23231b5bd6d9dda55a7f84606315e0bf35b6750c28ee993c987c54cacab0f"
+    },
+    "index.html": {
+      "bytes": 3501,
+      "sha256": "520cdd96036c1795c6ea1143476a4242ca7fb47f9c487e4945534fd10e300459"
     },
     "licenses/Holosoma-Apache-2.0.txt": {
       "bytes": 10142,
@@ -228,6 +272,5 @@
       "bytes": 7007,
       "sha256": "871f9409bcf0616d4b5093d52d802f5e31885358adb4fab504933b514e62a7fc"
     }
-  },
-  "totalBytes": 33139272
+  }
 }

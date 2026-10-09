@@ -54,7 +54,7 @@ export function mountInterface(demo) {
     fps = frames * 1000 / (now - start); rtf = (demo.data.time - lastTime) * 1000 / (now - start);
     frames = 0; start = now; lastTime = demo.data.time;
     const fallen = demo.data.qpos[2] < .35;
-    $('state').textContent = demo.params.paused ? 'Paused' : fallen ? 'Fallen' : demo.data.qpos[0] >= 66 ? 'Finished' : demo.data.time < .2 ? 'Ready' : 'Running';
+    $('state').textContent = demo.params.paused ? 'Paused' : fallen ? 'Fallen' : demo.data.qpos[0] >= 65.5 && Math.abs(demo.data.qpos[1]) < 1.5 ? 'Finished' : demo.data.time < .2 ? 'Ready' : 'Running';
     $('pause').textContent = demo.params.paused ? 'Resume' : 'Pause';
     $('low').setAttribute('aria-pressed', String(!policy.highSpeedMode)); $('high').setAttribute('aria-pressed', String(policy.highSpeedMode));
     const held = [...policy.pressedKeys].filter(k => 'wasdqe'.includes(k));
@@ -62,6 +62,6 @@ export function mountInterface(demo) {
     buttons.forEach(b => b.classList.toggle('active', policy.pressedKeys.has(b.dataset.key)));
     $('time').textContent = `${demo.data.time.toFixed(1)} s`;
     $('distance').textContent = `${Math.max(0,demo.data.qpos[0]).toFixed(1)} / 66 m`;
-    $('performance').textContent = `${fps.toFixed(0)} render FPS · ${inferenceMs.toFixed(1)} ms policy + encoder · ${Math.max(0,rtf).toFixed(2)}× realtime\n500 Hz physics · 50 Hz policy · 10 Hz depth (simulated)`;
+    $('performance').textContent = `${fps.toFixed(fps < 10 ? 1 : 0)} render FPS · ${inferenceMs.toFixed(1)} ms policy + encoder · ${Math.max(0,rtf).toFixed(2)}× realtime\n500 Hz physics · 50 Hz policy · 10 Hz depth (simulated)`;
   };
 }

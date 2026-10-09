@@ -2,5 +2,7 @@
   "browserRepository": "https://github.com/php-parkour/php-parkour.github.io",
   "browserCommit": "3898564255525f2a72dbbfb1d190b48a230435ab",
   "holosomaCommit": "70a344f50de01a77ed3d5ff95127fbb95795c11b",
-  "training": "No training performed. Released student-assets-v1 ONNX models unchanged."
+  "training": "No training performed. Released student-assets-v1 ONNX models unchanged.",
+  "researchReleaseCommit": "bed6a4524d163fab97d755f89e48e5c1d3e19133",
+  "studentArchiveSha256": "e772504b0b54035e401bcbb752f4f19b6c74f560561c8369e28b9f77c5e6ae5c"
 }

@@ -16,3 +16,13 @@ module Jekyll
     end
   end
 end
+
+# Vite emits __vite-browser-external*.js; Jekyll otherwise filters underscore
+# filenames. Copy the complete sealed Vite artifact after writing the site.
+require 'fileutils'
+Jekyll::Hooks.register :site, :post_write do |site|
+  relative = 'assets/interactive/g1-parkour'
+  destination = File.join(site.dest, relative)
+  FileUtils.mkdir_p(destination)
+  FileUtils.cp_r(File.join(site.source, relative, '.'), destination)
+end
