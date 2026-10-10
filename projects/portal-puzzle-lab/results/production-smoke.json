@@ -1,0 +1,62 @@
+[
+  {
+    "name": "desktop",
+    "width": 1440,
+    "height": 900,
+    "mobile": false,
+    "introBounds": {
+      "x": 526,
+      "y": 577.140625,
+      "width": 388,
+      "height": 52
+    },
+    "helpBounds": {
+      "x": 526,
+      "y": 577.140625,
+      "width": 388,
+      "height": 52
+    },
+    "errors": [],
+    "missing": []
+  },
+  {
+    "name": "phone-portrait",
+    "width": 412,
+    "height": 915,
+    "mobile": true,
+    "introBounds": {
+      "x": 53,
+      "y": 597.640625,
+      "width": 306,
+      "height": 52
+    },
+    "helpBounds": {
+      "x": 53,
+      "y": 597.640625,
+      "width": 306,
+      "height": 52
+    },
+    "errors": [],
+    "missing": []
+  },
+  {
+    "name": "phone-landscape",
+    "width": 915,
+    "height": 412,
+    "mobile": true,
+    "introBounds": {
+      "x": 213.5,
+      "y": 296.875,
+      "width": 488,
+      "height": 52
+    },
+    "helpBounds": {
+      "x": 213.5,
+      "y": 296.875,
+      "width": 488,
+      "height": 52
+    },
+    "errors": [],
+    "missing": []
+  }
+]

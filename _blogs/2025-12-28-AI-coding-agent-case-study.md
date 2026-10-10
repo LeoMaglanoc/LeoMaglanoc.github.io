@@ -14,6 +14,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
+- [Portal Puzzle Lab]({{ "/portal/" | relative_url }})
 - [G1 Parkour Playground]({{ "/parkour/" | relative_url }})
 - [G1 Loco-Manipulation]({{ "/loco-manipulation/" | relative_url }})
 - [Dexterous Cube Orientation]({{ "/dexterous-rl/" | relative_url }})

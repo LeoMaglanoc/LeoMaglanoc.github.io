@@ -111,6 +111,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: projects/slam/web/package-lock.json
 
+      - name: Test Portal Puzzle Lab physics
+        run: node --test projects/portal-puzzle-lab/tests/*.test.js
+
       - name: Build Jekyll site
         run: |
           sudo apt-get update

@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "project": "Portal Puzzle Lab",
+  "created": "2026-10-10",
+  "mlModels": false,
+  "upstream": {
+    "repository": "https://github.com/efyang/portal-0.5",
+    "commit": "ff638719c82a7cb908172f29fe35cd0406af2e78",
+    "license": "MIT"
+  },
+  "dependencies": {
+    "three": "0.180.0",
+    "cannon-es": "0.20.0",
+    "playwright": "1.56.0"
+  },
+  "contract": {
+    "physicsTimestep": 0.008333333333333333,
+    "portalWidth": 1.9,
+    "portalHeight": 2.8,
+    "portalCentreY": 1.4,
+    "cooldownSeconds": 0.16,
+    "door": "non-latching cube pressure plate",
+    "chamber": "Escape"
+  },
+  "sha256": {
+    "index.html": "53a9ff8089a723e74b63a37141c2ffa22b8bf9e484d63964a644a2db43b27aa4",
+    "style.css": "1b19dc0b8b7eb2161ec107ea07fadc45cc9862ee13e5f4629677b6c6e3f29f0d",
+    "package-lock.json": "868314e43ed1753153803472542b5702e3d63f7d06056e2c7a00a37cd255d79b",
+    "src/game.js": "3c6d1e9046eab2503d74d9df96d0cd96b3dcb51a8ac39f03bad481e0450c60b9",
+    "src/input.js": "370a276f4255d937f7c3334c91fe32ca8c8e7ac661d011998385d56807fdf453",
+    "src/level.js": "9f6078ed1d68fc6b73a224180cedcb718b72a959eefb5f147aea9fe512d1c3d4",
+    "src/portal.js": "d77f385ed58c68e4beec29df12e0604b6e67277734e8c0af21daeea4d25f4be7",
+    "src/simulation.js": "a9edd574bb896ca28ee363a2f27b402b8e9f40e79c6faeb648132240651378b3",
+    "src/view.js": "9ed9cc01034d6ff404e1271f1b40f45cffbdf9b786342fd59005ccdbec7f9ce4",
+    "vendor/cannon-es.js": "f0700cbd3a482954949b9d58c1b0f76dcc74767750297647a39d8c40dd63d37c",
+    "vendor/three.core.js": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+    "vendor/three.module.js": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+    "licenses/CANNON-ES-MIT.txt": "4714d0272f50cb21fe46fe29333c7c600d3c85b5ebd2a80f4db07e8cfccbf5b2",
+    "licenses/PORTAL-05-MIT.txt": "ce006d6eeb2550a0dbf20a7eadadfc510ca3c14a7b193c71ecb78007b43668b6",
+    "licenses/THREE-MIT.txt": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+  }
+}

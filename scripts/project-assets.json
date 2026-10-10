@@ -700,5 +700,25 @@
       "src/upstream/utils/math.js",
       "style.css"
     ]
+  },
+  "projects/portal-puzzle-lab": {
+    "destination": "assets/interactive/portal-puzzle-lab",
+    "files": [
+      "THIRD_PARTY_NOTICES.md",
+      "index.html",
+      "licenses/CANNON-ES-MIT.txt",
+      "licenses/PORTAL-05-MIT.txt",
+      "licenses/THREE-MIT.txt",
+      "src/game.js",
+      "src/input.js",
+      "src/level.js",
+      "src/portal.js",
+      "src/simulation.js",
+      "src/view.js",
+      "style.css",
+      "vendor/cannon-es.js",
+      "vendor/three.core.js",
+      "vendor/three.module.js"
+    ]
   }
 }

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / '_site'
 ROUTES = [f'/{name}/' for name in (
     'block-temple', 'scrap-orbit', 'rustzero', 'tiny-dreamer', 'slam',
-    'g1', 'locomotion', 'euroguessr', 'dexterous-rl', 'loco-manipulation', 'parkour'
+    'g1', 'locomotion', 'euroguessr', 'dexterous-rl', 'loco-manipulation', 'parkour', 'portal'
 )] + [f'/assets/interactive/{name}/index.html' for name in ('pong', 'flappy')]
 RETIRED = (
     'tiny-ego-vla', 'language-vision', 'block-world', 'dustfall-outpost',

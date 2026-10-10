@@ -1,0 +1,536 @@
+[
+  {
+    "name": "desktop",
+    "width": 1440,
+    "height": 900,
+    "mobile": false,
+    "solved": {
+      "time": 41.641666666664946,
+      "player": [
+        4.283837400610284,
+        0.8899967714688747,
+        4.704925231529279
+      ],
+      "cube": [
+        3.18237633545007,
+        0.49999341053943974,
+        -0.42915084572596335
+      ],
+      "yaw": 9.320000000000107,
+      "pitch": 0.021666666666666667,
+      "holding": false,
+      "doorOpen": true,
+      "complete": true,
+      "portals": [
+        {
+          "panel": "entry",
+          "x": -3.5403047386954016
+        },
+        {
+          "panel": "vault",
+          "x": 5.4817261840867144e-17
+        }
+      ],
+      "crossings": {
+        "player": 2,
+        "cube": 1
+      },
+      "fps": 15.23664412913058,
+      "elapsed": 60.59759999999997,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 803,
+        "calls": 12,
+        "triangles": 132,
+        "points": 0,
+        "lines": 26
+      },
+      "portalResolution": [
+        384,
+        240
+      ]
+    },
+    "reset": {
+      "time": 0,
+      "player": [
+        0,
+        0.9,
+        1.8
+      ],
+      "cube": [
+        0,
+        0.43,
+        -11.5
+      ],
+      "yaw": 0,
+      "pitch": 0,
+      "holding": false,
+      "doorOpen": false,
+      "complete": false,
+      "portals": [
+        null,
+        null
+      ],
+      "crossings": {
+        "player": 0,
+        "cube": 0
+      },
+      "fps": 5.902026362384385,
+      "elapsed": 0,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 810,
+        "calls": 12,
+        "triangles": 132,
+        "points": 0,
+        "lines": 26
+      },
+      "portalResolution": [
+        384,
+        240
+      ]
+    },
+    "performance": {
+      "time": 1.9749999999999954,
+      "player": [
+        0,
+        0.8899967714688747,
+        1.8
+      ],
+      "cube": [
+        0.000006981340982759334,
+        0.39999261361009564,
+        -11.499988689955439
+      ],
+      "yaw": 0,
+      "pitch": 0,
+      "holding": false,
+      "doorOpen": false,
+      "complete": false,
+      "portals": [
+        null,
+        null
+      ],
+      "crossings": {
+        "player": 0,
+        "cube": 0
+      },
+      "fps": 12.380952380952381,
+      "elapsed": 2.6164999999999994,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 836,
+        "calls": 45,
+        "triangles": 454,
+        "points": 0,
+        "lines": 64
+      },
+      "portalResolution": [
+        384,
+        240
+      ]
+    },
+    "errors": [],
+    "missing": [],
+    "bounds": [
+      {
+        "label": "Switch to fast graphics",
+        "x": 1196,
+        "y": 22,
+        "w": 66,
+        "h": 44
+      },
+      {
+        "label": "Restart chamber",
+        "x": 1270,
+        "y": 22,
+        "w": 44,
+        "h": 44
+      },
+      {
+        "label": "Enable sound",
+        "x": 1322,
+        "y": 22,
+        "w": 44,
+        "h": 44
+      },
+      {
+        "label": "Show controls",
+        "x": 1374,
+        "y": 22,
+        "w": 44,
+        "h": 44
+      }
+    ]
+  },
+  {
+    "name": "phone-portrait",
+    "width": 412,
+    "height": 915,
+    "mobile": true,
+    "solved": {
+      "time": 44.41666666666479,
+      "player": [
+        4.28398897543791,
+        0.8899967714688747,
+        4.701524504441587
+      ],
+      "cube": [
+        3.197385166567257,
+        0.49999315446668535,
+        0.04085462234102313
+      ],
+      "yaw": -3.020125839233398,
+      "pitch": 0.000003204345703266886,
+      "holding": false,
+      "doorOpen": true,
+      "complete": true,
+      "portals": [
+        {
+          "panel": "entry",
+          "x": -3.4999998382340376
+        },
+        {
+          "panel": "vault",
+          "x": 2.1926904736346845e-16
+        }
+      ],
+      "crossings": {
+        "player": 2,
+        "cube": 1
+      },
+      "fps": 44.265197717883204,
+      "elapsed": 45.181600000000145,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 1313,
+        "calls": 11,
+        "triangles": 120,
+        "points": 0,
+        "lines": 26
+      },
+      "portalResolution": [
+        173,
+        384
+      ]
+    },
+    "reset": {
+      "time": 0,
+      "player": [
+        0,
+        0.9,
+        1.8
+      ],
+      "cube": [
+        0,
+        0.43,
+        -11.5
+      ],
+      "yaw": 0,
+      "pitch": 0,
+      "holding": false,
+      "doorOpen": false,
+      "complete": false,
+      "portals": [
+        null,
+        null
+      ],
+      "crossings": {
+        "player": 0,
+        "cube": 0
+      },
+      "fps": 44.265197717883204,
+      "elapsed": 0,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 1319,
+        "calls": 11,
+        "triangles": 120,
+        "points": 0,
+        "lines": 26
+      },
+      "portalResolution": [
+        173,
+        384
+      ]
+    },
+    "performance": {
+      "time": 1.908333333333329,
+      "player": [
+        0,
+        0.8899967714688747,
+        1.8
+      ],
+      "cube": [
+        0.000006731419141903503,
+        0.39999261361009564,
+        -11.499989072571376
+      ],
+      "yaw": 0,
+      "pitch": 0,
+      "holding": false,
+      "doorOpen": false,
+      "complete": false,
+      "portals": [
+        null,
+        null
+      ],
+      "crossings": {
+        "player": 0,
+        "cube": 0
+      },
+      "fps": 32.45795219828867,
+      "elapsed": 1.916599999999999,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 1378,
+        "calls": 41,
+        "triangles": 406,
+        "points": 0,
+        "lines": 64
+      },
+      "portalResolution": [
+        173,
+        384
+      ]
+    },
+    "errors": [],
+    "missing": [],
+    "bounds": [
+      {
+        "label": "Switch to quality graphics",
+        "x": 222,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Restart chamber",
+        "x": 268,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Enable sound",
+        "x": 314,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Show controls",
+        "x": 360,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Place blue portal",
+        "x": 250,
+        "y": 769,
+        "w": 64,
+        "h": 52
+      },
+      {
+        "label": "Place orange portal",
+        "x": 324,
+        "y": 769,
+        "w": 64,
+        "h": 52
+      },
+      {
+        "label": "Pick up or drop cube",
+        "x": 250,
+        "y": 831,
+        "w": 138,
+        "h": 52
+      }
+    ]
+  },
+  {
+    "name": "phone-landscape",
+    "width": 915,
+    "height": 412,
+    "mobile": true,
+    "solved": {
+      "time": 21.983333333332727,
+      "player": [
+        4.240708448288577,
+        0.8899967714688747,
+        4.709365181501688
+      ],
+      "cube": [
+        3.5729802017191394,
+        0.49999314870244205,
+        -0.2889145888433668
+      ],
+      "yaw": -3.2428781738281245,
+      "pitch": 0.0000013885498048222815,
+      "holding": false,
+      "doorOpen": true,
+      "complete": true,
+      "portals": [
+        {
+          "panel": "entry",
+          "x": -3.499999838234039
+        },
+        {
+          "panel": "vault",
+          "x": 0
+        }
+      ],
+      "crossings": {
+        "player": 2,
+        "cube": 1
+      },
+      "fps": 23.811791599199974,
+      "elapsed": 22.199000000000005,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 1046,
+        "calls": 12,
+        "triangles": 132,
+        "points": 0,
+        "lines": 26
+      },
+      "portalResolution": [
+        384,
+        173
+      ]
+    },
+    "reset": {
+      "time": 0,
+      "player": [
+        0,
+        0.9,
+        1.8
+      ],
+      "cube": [
+        0,
+        0.43,
+        -11.5
+      ],
+      "yaw": 0,
+      "pitch": 0,
+      "holding": false,
+      "doorOpen": false,
+      "complete": false,
+      "portals": [
+        null,
+        null
+      ],
+      "crossings": {
+        "player": 0,
+        "cube": 0
+      },
+      "fps": 17.539001200036935,
+      "elapsed": 0,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 1053,
+        "calls": 12,
+        "triangles": 132,
+        "points": 0,
+        "lines": 26
+      },
+      "portalResolution": [
+        384,
+        173
+      ]
+    },
+    "performance": {
+      "time": 2.091666666666662,
+      "player": [
+        0,
+        0.8899967714688747,
+        1.8
+      ],
+      "cube": [
+        0.00000741870420391553,
+        0.39999261361009564,
+        -11.499988020377549
+      ],
+      "yaw": 0,
+      "pitch": 0,
+      "holding": false,
+      "doorOpen": false,
+      "complete": false,
+      "portals": [
+        null,
+        null
+      ],
+      "crossings": {
+        "player": 0,
+        "cube": 0
+      },
+      "fps": 18.38768992548148,
+      "elapsed": 2.349999999999999,
+      "lowQuality": true,
+      "renderer": {
+        "frame": 1091,
+        "calls": 45,
+        "triangles": 454,
+        "points": 0,
+        "lines": 64
+      },
+      "portalResolution": [
+        384,
+        173
+      ]
+    },
+    "errors": [],
+    "missing": [],
+    "bounds": [
+      {
+        "label": "Switch to quality graphics",
+        "x": 725,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Restart chamber",
+        "x": 771,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Enable sound",
+        "x": 817,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Show controls",
+        "x": 863,
+        "y": 14,
+        "w": 38,
+        "h": 38
+      },
+      {
+        "label": "Place blue portal",
+        "x": 753,
+        "y": 266,
+        "w": 64,
+        "h": 52
+      },
+      {
+        "label": "Place orange portal",
+        "x": 827,
+        "y": 266,
+        "w": 64,
+        "h": 52
+      },
+      {
+        "label": "Pick up or drop cube",
+        "x": 753,
+        "y": 328,
+        "w": 138,
+        "h": 52
+      }
+    ]
+  }
+]
