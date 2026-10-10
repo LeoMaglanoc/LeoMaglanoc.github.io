@@ -1,0 +1,1 @@
+{"name":"portal-puzzle-lab","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.js","vendor":"node scripts-vendor.js"},"dependencies":{"three":"0.180.0","cannon-es":"0.20.0"},"devDependencies":{"playwright":"1.56.0"}}
