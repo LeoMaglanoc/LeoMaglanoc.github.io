@@ -210,6 +210,30 @@ p {
   border: 0;
   height: 52px;
 }
+.start-actions {
+  display: flex;
+  gap: 10px;
+}
+.start-actions #start {
+  flex: 1;
+  width: auto;
+  font-size: 14px;
+  padding: 0 12px;
+  gap: 8px;
+}
+.start-actions #fullscreen {
+  width: auto;
+  background: #16242b;
+  color: #d1f4ee;
+  border: 1px solid #ffffff30;
+  font-size: 12px;
+  padding: 0 12px;
+}
+#fullscreen-status:not([hidden]) {
+  display: block;
+  margin-top: 10px;
+  letter-spacing: 0;
+}
 .footnote {
   display: block;
   margin-top: 20px;

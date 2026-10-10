@@ -23,6 +23,10 @@ docker compose -f projects/portal-puzzle-lab/compose.yaml up -d preview
 
 See VALIDATION.md for browser checks and CHECKPOINTS.md for continuation.
 
+The opening screen offers Fullscreen before entering the chamber. Use Exit
+fullscreen on the controls overlay or the browser's Escape gesture to leave.
+Browsers without the Fullscreen API show an availability message.
+
 ## Architecture
 
 - `src/level.js`: metre-scale chamber, spawn, cube, plate and panel geometry.

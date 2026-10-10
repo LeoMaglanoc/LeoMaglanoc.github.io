@@ -44,6 +44,28 @@ function start(reset = false) {
   $("complete").hidden = true;
   if (!matchMedia("(pointer:coarse)").matches) canvas.requestPointerLock()?.catch(() => notify("Click the chamber to enable mouse look"));
 }
+const fullscreenButton = $("fullscreen");
+fullscreenButton.disabled = !document.fullscreenEnabled;
+if (!document.fullscreenEnabled) {
+  $("fullscreen-status").hidden = false;
+  $("fullscreen-status").textContent = "Fullscreen is unavailable in this browser.";
+}
+fullscreenButton.onclick = async () => {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await document.documentElement.requestFullscreen();
+    $("fullscreen-status").hidden = true;
+  } catch (error) {
+    console.warn("Fullscreen request failed", error);
+    $("fullscreen-status").hidden = false;
+    $("fullscreen-status").textContent = "Fullscreen could not open. Please try again.";
+  }
+};
+document.addEventListener("fullscreenchange", () => {
+  const active = !!document.fullscreenElement;
+  fullscreenButton.textContent = active ? "Exit fullscreen" : "Fullscreen";
+  fullscreenButton.setAttribute("aria-pressed", String(active));
+});
 try {
   sim = new Simulation();
   view = new View(canvas, sim);

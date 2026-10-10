@@ -75,11 +75,11 @@ The complete browser suite passed on 2026-10-10 with Chromium 154 in Docker.
 All three contexts reported zero console/page errors and zero missing assets.
 Every solved state records two player crossings and at least one cube crossing.
 
-| Viewport | Simulation time to completion | Real active time | Fast FPS after replay |
-| --- | ---: | ---: | ---: |
-| desktop | 41.6 s | 60.6 s | 12.4 |
-| phone-portrait | 44.4 s | 45.2 s | 32.5 |
-| phone-landscape | 22.0 s | 22.2 s | 18.4 |
+| Viewport        | Simulation time to completion | Real active time | Fast FPS after replay |
+| --------------- | ----------------------------: | ---------------: | --------------------: |
+| desktop         |                        41.6 s |           60.6 s |                  12.4 |
+| phone-portrait  |                        44.4 s |           45.2 s |                  32.5 |
+| phone-landscape |                        22.0 s |           22.2 s |                  18.4 |
 
 These FPS values are single post-replay samples with portals reset and SwiftShader,
 not sustained gameplay benchmarks. Render resolution was 384 pixels on the portal
@@ -91,3 +91,12 @@ output (including minified modules): fresh load, public debug API absence, porta
 shots, both graphics settings, pause/help bounds and route refresh. The final
 local site uses the deployment workflow's separately built SLAM viewer before
 running the stable-route checker.
+
+Fullscreen follow-up: the opening button and enter/exit transitions passed the
+Docker Chromium production smoke test at 1440 × 900, 412 × 915 and 915 × 412.
+Chrome computer-agent screenshots confirmed the opening layout at desktop,
+phone portrait and phone landscape. The connected Chrome automation session
+returned `TypeError: not granted` for its fullscreen request; the visible retry
+message was verified. Successful fullscreen transitions are covered by the
+Docker browser checks, rather than claimed for that connected Chrome session.
+The source hash checkpoint was refreshed after this change.

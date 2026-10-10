@@ -34,6 +34,16 @@ const origin = process.env.PORTAL_ORIGIN || "http://127.0.0.1:8098",
     const bounds = await f.locator("#start").boundingBox();
     assert.ok(bounds.y >= 0 && bounds.y + bounds.height <= height, "intro button must fit");
     await page.screenshot({ path: path.join(output, name + "-intro.jpg"), type: "jpeg", quality: 88 });
+    const fullscreenBounds = await f.locator("#fullscreen").boundingBox();
+    assert.ok(
+      fullscreenBounds.x >= 0 && fullscreenBounds.x + fullscreenBounds.width <= width && fullscreenBounds.y + fullscreenBounds.height <= height
+    );
+    await f.getByRole("button", { name: "Fullscreen", exact: true }).click();
+    await f.waitForFunction(() => !!document.fullscreenElement && document.querySelector("#fullscreen").getAttribute("aria-pressed") === "true");
+    assert.equal(await f.locator("#fullscreen").getAttribute("aria-pressed"), "true");
+    await f.getByRole("button", { name: "Exit fullscreen", exact: true }).click();
+    await f.waitForFunction(() => !document.fullscreenElement && document.querySelector("#fullscreen").getAttribute("aria-pressed") === "false");
+    assert.equal(await f.locator("#fullscreen").getAttribute("aria-pressed"), "false");
     await f.getByRole("button", { name: "Enter chamber" }).click();
     if (mobile) await f.locator("#blue").tap();
     else {
@@ -70,8 +80,19 @@ const origin = process.env.PORTAL_ORIGIN || "http://127.0.0.1:8098",
     await page.frameLocator("iframe").getByRole("button", { name: "Enter chamber" }).waitFor();
     assert.deepEqual(errors, []);
     assert.deepEqual(missing, []);
-    results.push({ name, width, height, mobile, introBounds: bounds, helpBounds: resume, errors, missing });
-    console.log(name + ": production route, portal input, graphics, help and refresh passed");
+    results.push({
+      name,
+      width,
+      height,
+      mobile,
+      introBounds: bounds,
+      fullscreenBounds,
+      fullscreenToggle: "passed",
+      helpBounds: resume,
+      errors,
+      missing,
+    });
+    console.log(name + ": production route, fullscreen, portal input, graphics, help and refresh passed");
     await context.close();
   }
   fs.writeFileSync(path.join(output, "production-smoke.json"), JSON.stringify(results, null, 2));

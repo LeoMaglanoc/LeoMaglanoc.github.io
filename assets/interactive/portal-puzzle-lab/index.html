@@ -45,7 +45,12 @@
             >Left thumb to move. Swipe right to look.<br />Use BLUE, ORANGE and GRAB to interact.</span
           >
         </div>
-        <button id="start">Enter chamber <span>→</span></button><small class="footnote">Original chamber · WebGL · Runs on your device</small>
+        <div class="start-actions">
+          <button id="start">Enter chamber <span>→</span></button>
+          <button id="fullscreen" aria-pressed="false">Fullscreen</button>
+        </div>
+        <small id="fullscreen-status" role="status" hidden></small>
+        <small class="footnote">Original chamber · WebGL · Runs on your device</small>
       </div>
     </section>
     <section id="complete" hidden>
