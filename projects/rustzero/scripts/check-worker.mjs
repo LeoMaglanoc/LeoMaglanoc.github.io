@@ -45,3 +45,53 @@ await new Promise((resolve, reject) => {
 clearTimeout(timeout);
 await worker.terminate();
 console.log(JSON.stringify({ actualWorkerCancellation: "PASS", abandonedSearchDidNotPlay: "PASS" }));
+
+// Check the real Worker against direct network inference throughout a full game.
+const { readFileSync } = await import("node:fs");
+const { default: init, Game } = await import("../web/pkg/rustzero.js");
+await init({ module_or_path: readFileSync(new URL("../web/pkg/rustzero_bg.wasm", import.meta.url)) });
+const reference = new Game(readFileSync(new URL("../web/models/final.json", import.meta.url), "utf8"));
+const policyWorker = new Worker(new URL("./worker-node-bridge.mjs", import.meta.url));
+let policyPlies = 0;
+try {
+  await new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("Policy-only game timed out")), 15000);
+    const fail = (error) => {
+      clearTimeout(timer);
+      reject(error);
+    };
+    policyWorker.on("error", fail);
+    policyWorker.on("message", (data) => {
+      try {
+        if (data.type === "error") throw new Error(data.message);
+        assert.notEqual(data.type, "search", "No MCTS must not stream search simulations");
+        if (data.type === "complete") {
+          const root = JSON.parse(reference.state());
+          const { policy, value } = JSON.parse(reference.inference());
+          const best = root.legal.reduce((a, b) => (policy[b.action] > policy[a.action] ? b : a));
+          assert.equal(data.policyOnly, true);
+          assert.equal(data.action, best.action);
+          assert.equal(data.value, value);
+          assert.equal(data.stats.length, root.legal.length);
+          assert.ok(data.stats.every((s) => s.visits === 0 && s.probability >= 0));
+          assert.ok(Math.abs(data.stats.reduce((sum, s) => sum + s.probability, 0) - 1) < 1e-10);
+          reference.play(data.action);
+          assert.deepEqual(data.state, JSON.parse(reference.state()));
+          assert.ok(++policyPlies < 200);
+          if (data.state.terminal !== null) {
+            clearTimeout(timer);
+            resolve();
+            return;
+          }
+        }
+        policyWorker.postMessage({ type: "search", id: policyPlies + 2, simulations: 0 });
+      } catch (error) {
+        fail(error);
+      }
+    });
+    policyWorker.postMessage({ type: "init", id: 1, checkpoint: "final", local: false });
+  });
+} finally {
+  await policyWorker.terminate();
+}
+console.log(JSON.stringify({ policyOnlyMovesMatchNetwork: "PASS", zeroSearchVisits: "PASS", completePolicyOnlyGamePlies: policyPlies }));

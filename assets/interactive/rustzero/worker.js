@@ -30,6 +30,31 @@ self.onmessage = async ({ data }) => {
       const start = performance.now(),
         root = JSON.parse(game.state());
       if (root.terminal !== null) throw new Error("Game is already finished.");
+      if (Number(data.simulations) === 0) {
+        const { policy, value } = JSON.parse(game.inference());
+        const best = root.legal.reduce((a, b) => (policy[b.action] > policy[a.action] ? b : a));
+        const maxLogit = policy[best.action];
+        const weights = root.legal.map((move) => Math.exp(policy[move.action] - maxLogit));
+        const total = weights.reduce((sum, weight) => sum + weight, 0);
+        const stats = root.legal.map((move, i) => ({
+          action: move.action,
+          visits: 0,
+          prior: weights[i] / total,
+          probability: weights[i] / total,
+        }));
+        game.play(best.action);
+        send({
+          type: "complete",
+          policyOnly: true,
+          action: best.action,
+          state: JSON.parse(game.state()),
+          root,
+          value,
+          stats,
+          moveMs: performance.now() - start,
+        });
+        return;
+      }
       game.start_search();
       let result;
       const budget = Math.max(1, Math.min(1024, Number(data.simulations) || 256));

@@ -11,6 +11,7 @@ let worker,
   evidence,
   runInfo,
   requestId = 0;
+const policyOnly = () => $("simulations").value === "0";
 const local = () => $("mode").value === "local";
 const humanBlack = () => !local() && $("side").value === "black";
 function send(type, payload = {}) {
@@ -20,10 +21,15 @@ function clearStats() {
   $("value").textContent = "—";
   $("value-meter").style.width = "50%";
   $("visits").textContent = "0";
-  $("candidates").innerHTML = '<div class="empty-search">' + (local() ? "Two players · no CPU opponent" : "Search → compare → choose") + "</div>";
+  $("candidates").innerHTML =
+    '<div class="empty-search">' +
+    (local() ? "Two players · no CPU opponent" : policyOnly() ? "Evaluate → choose" : "Search → compare → choose") +
+    "</div>";
   $("search-caption").textContent = local()
     ? "Pass the device after each move. No model or AI search runs."
-    : "The AI’s candidate moves appear here as it searches.";
+    : policyOnly()
+      ? "The AI chooses the legal move with the highest network probability, without search."
+      : "The AI’s candidate moves appear here as it searches.";
 }
 function acceptState(next) {
   state = next;
@@ -104,7 +110,8 @@ function render(animateMove = false) {
   document.body.classList.toggle("thinking", busy);
   document.body.classList.toggle("local", local());
   $("opponent-heading").textContent = local() ? "Local players" : "Your opponent";
-  $("search-heading").textContent = local() ? "Two players" : "Inside the search";
+  $("search-heading").textContent = local() ? "Two players" : policyOnly() ? "Inside the network" : "Inside the search";
+  $("search-kind").textContent = policyOnly() ? "02 / POLICY" : "02 / MCTS";
   const wasFinished = !$("game-result").hidden;
   const finished = state?.terminal !== null && state?.terminal !== undefined;
   $("game-result").hidden = !finished;
@@ -161,17 +168,21 @@ function displayStats(data) {
   $("value-meter").style.width = `${(data.value + 1) * 50}%`;
   const total = data.stats.reduce((n, s) => n + s.visits, 0);
   $("visits").textContent = total;
-  $("search-caption").textContent = `${data.type === "complete" ? "Last AI search" : "Searching"} · share of ${total} root visits · AI’s perspective`;
+  $("search-caption").textContent = data.policyOnly
+    ? "Last AI evaluation · legal move probabilities · no MCTS"
+    : `${data.type === "complete" ? "Last AI search" : "Searching"} · share of ${total} root visits · AI’s perspective`;
   const candidates = data.stats
-    .filter((s) => s.visits > 0)
-    .sort((a, b) => b.visits - a.visits)
+    .filter((s) => data.policyOnly || s.visits > 0)
+    .sort((a, b) => (data.policyOnly ? b.probability - a.probability : b.visits - a.visits))
     .slice(0, 5);
   $("candidates").replaceChildren(
     ...candidates.map((s) => {
       const m = data.root.legal.find((m) => m.action === s.action);
       const row = document.createElement("div");
       row.className = "candidate";
-      row.title = `Prior ${(s.prior * 100).toFixed(1)}%; Q ${s.q_value.toFixed(3)}; ${s.visits} visits`;
+      row.title = data.policyOnly
+        ? `Network probability ${(s.probability * 100).toFixed(1)}%; no search`
+        : `Prior ${(s.prior * 100).toFixed(1)}%; Q ${s.q_value.toFixed(3)}; ${s.visits} visits`;
       const name = document.createElement("span");
       name.textContent = `${coordinate(m.from)} → ${coordinate(m.to)}`;
       const bar = document.createElement("div");
@@ -357,7 +368,9 @@ function difficultyChanged() {
   const nightmare = $("simulations").value === "1024";
   $("difficulty-note").textContent = nightmare
     ? "NIGHTMARE · AI moves first by default. 1,024 MCTS simulations. Good luck."
-    : `${$("simulations").value === "64" ? "Fast" : "Strong"} · ${Number($("simulations").value).toLocaleString()} MCTS simulations.`;
+    : policyOnly()
+      ? "No MCTS · the network chooses its highest-probability legal move directly. Zero search simulations."
+      : `${$("simulations").value === "64" ? "Fast" : "Strong"} · ${Number($("simulations").value).toLocaleString()} MCTS simulations.`;
   if (nightmare) {
     $("checkpoint").value = "final";
     $("side").value = "black";

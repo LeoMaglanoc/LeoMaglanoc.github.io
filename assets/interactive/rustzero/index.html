@@ -84,6 +84,7 @@
             <div class="budget">
               <label for="simulations">Difficulty / search budget</label
               ><select id="simulations">
+                <option value="0">No MCTS · network only</option>
                 <option value="64">Fast · 64 simulations</option>
                 <option value="256">Strong · 256 simulations</option>
                 <option value="1024" selected>Nightmare · 1,024 simulations</option>
@@ -95,7 +96,7 @@
           <section class="panel search-panel">
             <div class="panel-heading">
               <h2 id="search-heading">Inside the search</h2>
-              <span>02 / MCTS</span>
+              <span id="search-kind">02 / MCTS</span>
             </div>
             <div class="search-metrics">
               <div><span>AI position estimate</span><strong id="value">—</strong></div>

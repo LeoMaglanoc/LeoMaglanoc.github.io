@@ -74,6 +74,8 @@ fix caused the strength improvement.
 
 ## Browser
 
+No MCTS chooses the network’s highest-probability legal move directly, with zero
+search simulations. The panel shows probabilities normalized over legal moves.
 Fast uses 64 simulations, Strong 256, and Nightmare 1024. Selecting Nightmare
 loads the champion and makes the AI White by default; players may subsequently
 choose White themselves. Search streams statistics every 32 simulations and yields
