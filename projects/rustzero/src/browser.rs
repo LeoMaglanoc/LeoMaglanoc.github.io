@@ -130,6 +130,16 @@ impl Game {
         self.play(action)?;
         Ok(action)
     }
+    /// Evaluate all legal successors without changing the position or history.
+    pub fn value_lookahead(&self) -> Result<String, JsValue> {
+        let model = self
+            .model
+            .as_ref()
+            .ok_or_else(|| JsValue::from_str("No neural model"))?;
+        let result = crate::lookahead::evaluate(self.history.position(), model)
+            .ok_or_else(|| JsValue::from_str("No legal action"))?;
+        Ok(serde_json::to_string(&result).unwrap())
+    }
     pub fn inference(&self) -> Result<String, JsValue> {
         let model = self
             .model

@@ -74,13 +74,32 @@ fix caused the strength improvement.
 
 ## Browser
 
-No MCTS chooses the network’s highest-probability legal move directly, with zero
-search simulations. The panel shows probabilities normalized over legal moves.
+No MCTS uses one-ply value lookahead: evaluate every legal successor and choose
+the maximum negated successor value (the network sees the opponent to move).
+Terminal successors use exact game-rule outcomes, and proven wins take priority
+over saturated neural estimates. The panel shows signed move values, successor
+evaluation counts and zero MCTS visits. This is shallow search, with no MCTS.
+Policy only remains a separate option that chooses the highest legal policy logit
+with one inference; its panel shows probabilities normalized over legal moves.
+Both modes use deterministic first-legal-action tie breaking.
 Fast uses 64 simulations, Strong 256, and Nightmare 1024. Selecting Nightmare
 loads the champion and makes the AI White by default; players may subsequently
 choose White themselves. Search streams statistics every 32 simulations and yields
 with a zero-delay timer so cancellation remains possible. The value is a learned
 position estimate, not an exact winning probability.
+
+The exploratory Gen 200 comparison on 2026-10-11 used 400 games per matchup,
+200 paired openings, both colors, a new seed (20261011), and no search noise.
+Value lookahead won 71/400 (17.75%) against policy-only and 18/400 (4.5%)
+against the same network with MCTS-64. It is an experimental playing option,
+not a strength improvement. These are separate from the published holdout
+measurements and do not select or retrain the checkpoint. Full openings,
+checkpoint hash, color breakdowns and native timings are in
+[experiments/value-lookahead.json](experiments/value-lookahead.json). Reproduce with:
+
+```sh
+docker compose run --rm rustzero cargo run --locked --release --features training --bin compare-lookahead -- web/models/final.json 400 artifacts/value-lookahead.json
+```
 
 New games and checkpoint changes replace the Worker. Epochs and request IDs reject
 stale results. Local two-player mode runs rules/history without a neural model.

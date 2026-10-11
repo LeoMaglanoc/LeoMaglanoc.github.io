@@ -84,7 +84,8 @@
             <div class="budget">
               <label for="simulations">Difficulty / search budget</label
               ><select id="simulations">
-                <option value="0">No MCTS · network only</option>
+                <option value="0">No MCTS · 1-ply value lookahead</option>
+                <option value="policy">Policy only · no lookahead</option>
                 <option value="64">Fast · 64 simulations</option>
                 <option value="256">Strong · 256 simulations</option>
                 <option value="1024" selected>Nightmare · 1,024 simulations</option>
@@ -157,6 +158,6 @@
       <footer><span>Built to make learning visible.</span><span>6 × 6 · 108 actions · 11,757 parameters</span></footer>
     </main>
     <noscript>This demo requires JavaScript and WebAssembly.</noscript>
-    <script type="module" src="app.js"></script>
+    <script type="module" src="app.js?v=value-lookahead-1"></script>
   </body>
 </html>

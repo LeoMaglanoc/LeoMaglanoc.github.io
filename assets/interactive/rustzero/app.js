@@ -11,7 +11,8 @@ let worker,
   evidence,
   runInfo,
   requestId = 0;
-const policyOnly = () => $("simulations").value === "0";
+const valueOnly = () => $("simulations").value === "0";
+const policyOnly = () => $("simulations").value === "policy";
 const local = () => $("mode").value === "local";
 const humanBlack = () => !local() && $("side").value === "black";
 function send(type, payload = {}) {
@@ -23,13 +24,21 @@ function clearStats() {
   $("visits").textContent = "0";
   $("candidates").innerHTML =
     '<div class="empty-search">' +
-    (local() ? "Two players · no CPU opponent" : policyOnly() ? "Evaluate → choose" : "Search → compare → choose") +
+    (local()
+      ? "Two players · no CPU opponent"
+      : valueOnly()
+        ? "Compare next positions → choose"
+        : policyOnly()
+          ? "Evaluate → choose"
+          : "Search → compare → choose") +
     "</div>";
   $("search-caption").textContent = local()
     ? "Pass the device after each move. No model or AI search runs."
-    : policyOnly()
-      ? "The AI chooses the legal move with the highest network probability, without search."
-      : "The AI’s candidate moves appear here as it searches.";
+    : valueOnly()
+      ? "The AI evaluates every legal next position and chooses the highest value. No MCTS runs."
+      : policyOnly()
+        ? "The AI chooses the legal move with the highest network probability, without search."
+        : "The AI’s candidate moves appear here as it searches.";
 }
 function acceptState(next) {
   state = next;
@@ -110,8 +119,14 @@ function render(animateMove = false) {
   document.body.classList.toggle("thinking", busy);
   document.body.classList.toggle("local", local());
   $("opponent-heading").textContent = local() ? "Local players" : "Your opponent";
-  $("search-heading").textContent = local() ? "Two players" : policyOnly() ? "Inside the network" : "Inside the search";
-  $("search-kind").textContent = policyOnly() ? "02 / POLICY" : "02 / MCTS";
+  $("search-heading").textContent = local()
+    ? "Two players"
+    : valueOnly()
+      ? "One move ahead"
+      : policyOnly()
+        ? "Inside the network"
+        : "Inside the search";
+  $("search-kind").textContent = valueOnly() ? "02 / VALUE" : policyOnly() ? "02 / POLICY" : "02 / MCTS";
   const wasFinished = !$("game-result").hidden;
   const finished = state?.terminal !== null && state?.terminal !== undefined;
   $("game-result").hidden = !finished;
@@ -161,37 +176,47 @@ function search(animateMove = false) {
   busy = true;
   status("AI is thinking…");
   render(animateMove);
-  send("search", { simulations: Number($("simulations").value) });
+  send("search", { simulations: policyOnly() ? 0 : Number($("simulations").value), policyOnly: policyOnly() });
 }
 function displayStats(data) {
   $("value").textContent = (data.value >= 0 ? "+" : "") + data.value.toFixed(2);
   $("value-meter").style.width = `${(data.value + 1) * 50}%`;
-  const total = data.stats.reduce((n, s) => n + s.visits, 0);
+  const total = data.valueOnly ? 0 : data.stats.reduce((n, s) => n + s.visits, 0);
   $("visits").textContent = total;
-  $("search-caption").textContent = data.policyOnly
-    ? "Last AI evaluation · legal move probabilities · no MCTS"
-    : `${data.type === "complete" ? "Last AI search" : "Searching"} · share of ${total} root visits · AI’s perspective`;
+  $("search-caption").textContent = data.valueOnly
+    ? `Last AI lookahead · ${data.evaluations} successor evaluations · values from AI’s perspective`
+    : data.policyOnly
+      ? "Last AI evaluation · legal move probabilities · no MCTS"
+      : `${data.type === "complete" ? "Last AI search" : "Searching"} · share of ${total} root visits · AI’s perspective`;
   const candidates = data.stats
-    .filter((s) => data.policyOnly || s.visits > 0)
-    .sort((a, b) => (data.policyOnly ? b.probability - a.probability : b.visits - a.visits))
+    .filter((s) => data.valueOnly || data.policyOnly || s.visits > 0)
+    .sort((a, b) =>
+      data.valueOnly
+        ? Number(b.terminal && b.q_value === 1) - Number(a.terminal && a.q_value === 1) || b.q_value - a.q_value
+        : data.policyOnly
+          ? b.probability - a.probability
+          : b.visits - a.visits
+    )
     .slice(0, 5);
   $("candidates").replaceChildren(
     ...candidates.map((s) => {
       const m = data.root.legal.find((m) => m.action === s.action);
       const row = document.createElement("div");
       row.className = "candidate";
-      row.title = data.policyOnly
-        ? `Network probability ${(s.probability * 100).toFixed(1)}%; no search`
-        : `Prior ${(s.prior * 100).toFixed(1)}%; Q ${s.q_value.toFixed(3)}; ${s.visits} visits`;
+      row.title = data.valueOnly
+        ? `${s.terminal ? "Exact terminal value" : "Successor value estimate"} ${s.q_value.toFixed(3)}; AI’s perspective`
+        : data.policyOnly
+          ? `Network probability ${(s.probability * 100).toFixed(1)}%; no search`
+          : `Prior ${(s.prior * 100).toFixed(1)}%; Q ${s.q_value.toFixed(3)}; ${s.visits} visits`;
       const name = document.createElement("span");
       name.textContent = `${coordinate(m.from)} → ${coordinate(m.to)}`;
       const bar = document.createElement("div");
       bar.className = "bar";
       const fill = document.createElement("i");
-      fill.style.width = `${s.probability * 100}%`;
+      fill.style.width = `${(data.valueOnly ? (s.q_value + 1) / 2 : s.probability) * 100}%`;
       bar.append(fill);
       const percent = document.createElement("span");
-      percent.textContent = `${Math.round(s.probability * 100)}%`;
+      percent.textContent = data.valueOnly ? (s.q_value >= 0 ? "+" : "") + s.q_value.toFixed(2) : `${Math.round(s.probability * 100)}%`;
       row.append(name, bar, percent);
       return row;
     })
@@ -211,7 +236,7 @@ function start() {
   clearStats();
   render();
   updateEvidence();
-  worker = new Worker(new URL("./worker.js", import.meta.url), { type: "module" });
+  worker = new Worker(new URL("./worker.js?v=value-lookahead-1", import.meta.url), { type: "module" });
   worker.onmessage = ({ data }) => {
     if (data.id !== requestId) return;
     if (data.type === "error") {
@@ -368,9 +393,11 @@ function difficultyChanged() {
   const nightmare = $("simulations").value === "1024";
   $("difficulty-note").textContent = nightmare
     ? "NIGHTMARE · AI moves first by default. 1,024 MCTS simulations. Good luck."
-    : policyOnly()
-      ? "No MCTS · the network chooses its highest-probability legal move directly. Zero search simulations."
-      : `${$("simulations").value === "64" ? "Fast" : "Strong"} · ${Number($("simulations").value).toLocaleString()} MCTS simulations.`;
+    : valueOnly()
+      ? "No MCTS · 1-ply value lookahead. Compare every legal next position; immediate wins use the rules."
+      : policyOnly()
+        ? "Policy only · the network chooses its highest-probability legal move directly. Zero search simulations."
+        : `${$("simulations").value === "64" ? "Fast" : "Strong"} · ${Number($("simulations").value).toLocaleString()} MCTS simulations.`;
   if (nightmare) {
     $("checkpoint").value = "final";
     $("side").value = "black";

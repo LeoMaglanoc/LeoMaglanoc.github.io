@@ -122,6 +122,28 @@ export class Game {
             wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
         }
     }
+    /**
+     * Evaluate all legal successors without changing the position or history.
+     * @returns {string}
+     */
+    value_lookahead() {
+        let deferred2_0;
+        let deferred2_1;
+        try {
+            const ret = wasm.game_value_lookahead(this.__wbg_ptr);
+            var ptr1 = ret[0];
+            var len1 = ret[1];
+            if (ret[3]) {
+                ptr1 = 0; len1 = 0;
+                throw takeFromExternrefTable0(ret[2]);
+            }
+            deferred2_0 = ptr1;
+            deferred2_1 = len1;
+            return getStringFromWasm0(ptr1, len1);
+        } finally {
+            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+        }
+    }
 }
 if (Symbol.dispose) Game.prototype[Symbol.dispose] = Game.prototype.free;
 function __wbg_get_imports() {

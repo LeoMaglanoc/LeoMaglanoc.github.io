@@ -1,0 +1,1031 @@
+{
+  "checkpoint": "web/models/final.json",
+  "generation": 200,
+  "opening_protocol": "paired identical positions, 2\u20134 legal plies, both colors; deterministic moves; no noise",
+  "openings": [
+    {
+      "black": 68141187072,
+      "side": false,
+      "white": 16191
+    },
+    {
+      "black": 68568481792,
+      "side": true,
+      "white": 2101119
+    },
+    {
+      "black": 68570578944,
+      "side": false,
+      "white": 69119
+    },
+    {
+      "black": 68686184448,
+      "side": false,
+      "white": 12223
+    },
+    {
+      "black": 68306337792,
+      "side": false,
+      "white": 142271
+    },
+    {
+      "black": 68637687808,
+      "side": true,
+      "white": 76671
+    },
+    {
+      "black": 68637687808,
+      "side": true,
+      "white": 100095
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 133119
+    },
+    {
+      "black": 67629481984,
+      "side": false,
+      "white": 83455
+    },
+    {
+      "black": 68637687808,
+      "side": true,
+      "white": 528255
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 12031
+    },
+    {
+      "black": 68568514560,
+      "side": false,
+      "white": 67071
+    },
+    {
+      "black": 68669669376,
+      "side": true,
+      "white": 76671
+    },
+    {
+      "black": 68436361216,
+      "side": true,
+      "white": 75519
+    },
+    {
+      "black": 68569530368,
+      "side": true,
+      "white": 141247
+    },
+    {
+      "black": 68636639232,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68636639232,
+      "side": true,
+      "white": 85247
+    },
+    {
+      "black": 68506615808,
+      "side": false,
+      "white": 84479
+    },
+    {
+      "black": 68554063872,
+      "side": false,
+      "white": 138175
+    },
+    {
+      "black": 68653154304,
+      "side": false,
+      "white": 20463
+    },
+    {
+      "black": 68438458368,
+      "side": true,
+      "white": 43903
+    },
+    {
+      "black": 68637687808,
+      "side": false,
+      "white": 12223
+    },
+    {
+      "black": 68670193664,
+      "side": false,
+      "white": 35839
+    },
+    {
+      "black": 68108156928,
+      "side": false,
+      "white": 101631
+    },
+    {
+      "black": 68568498176,
+      "side": false,
+      "white": 135135
+    },
+    {
+      "black": 68174217216,
+      "side": true,
+      "white": 85247
+    },
+    {
+      "black": 68636114944,
+      "side": true,
+      "white": 76671
+    },
+    {
+      "black": 68572676096,
+      "side": true,
+      "white": 164863
+    },
+    {
+      "black": 68309483520,
+      "side": false,
+      "white": 36859
+    },
+    {
+      "black": 68636114944,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68174217216,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68670193664,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68621434880,
+      "side": false,
+      "white": 16191
+    },
+    {
+      "black": 68572676096,
+      "side": true,
+      "white": 138111
+    },
+    {
+      "black": 67629219840,
+      "side": false,
+      "white": 1052543
+    },
+    {
+      "black": 68637687808,
+      "side": false,
+      "white": 134143
+    },
+    {
+      "black": 68570578944,
+      "side": true,
+      "white": 20463
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 35839
+    },
+    {
+      "black": 68170022912,
+      "side": false,
+      "white": 69119
+    },
+    {
+      "black": 68438458368,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68537548800,
+      "side": false,
+      "white": 20475
+    },
+    {
+      "black": 68107632640,
+      "side": false,
+      "white": 8187
+    },
+    {
+      "black": 68669177856,
+      "side": false,
+      "white": 19711
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 36351
+    },
+    {
+      "black": 68670193664,
+      "side": false,
+      "white": 67583
+    },
+    {
+      "black": 68685926400,
+      "side": false,
+      "white": 43903
+    },
+    {
+      "black": 68570578944,
+      "side": true,
+      "white": 164863
+    },
+    {
+      "black": 68636114944,
+      "side": true,
+      "white": 1052607
+    },
+    {
+      "black": 68554326016,
+      "side": false,
+      "white": 77183
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 134143
+    },
+    {
+      "black": 68107632640,
+      "side": false,
+      "white": 69623
+    },
+    {
+      "black": 68670193664,
+      "side": true,
+      "white": 135151
+    },
+    {
+      "black": 68635590656,
+      "side": true,
+      "white": 2100735
+    },
+    {
+      "black": 68686184448,
+      "side": true,
+      "white": 69599
+    },
+    {
+      "black": 68637687808,
+      "side": false,
+      "white": 67583
+    },
+    {
+      "black": 68170022912,
+      "side": true,
+      "white": 198143
+    },
+    {
+      "black": 68170022912,
+      "side": true,
+      "white": 44479
+    },
+    {
+      "black": 68686446592,
+      "side": true,
+      "white": 1052415
+    },
+    {
+      "black": 68686184448,
+      "side": true,
+      "white": 36847
+    },
+    {
+      "black": 68619599872,
+      "side": false,
+      "white": 28479
+    },
+    {
+      "black": 68669407232,
+      "side": true,
+      "white": 72575
+    },
+    {
+      "black": 68438458368,
+      "side": false,
+      "white": 20223
+    },
+    {
+      "black": 68157964288,
+      "side": false,
+      "white": 83455
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68569530368,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68686446592,
+      "side": false,
+      "white": 12159
+    },
+    {
+      "black": 68422205440,
+      "side": false,
+      "white": 8190
+    },
+    {
+      "black": 68436361216,
+      "side": false,
+      "white": 12159
+    },
+    {
+      "black": 68436361216,
+      "side": true,
+      "white": 12285
+    },
+    {
+      "black": 68170022912,
+      "side": true,
+      "white": 36831
+    },
+    {
+      "black": 68669407232,
+      "side": false,
+      "white": 69119
+    },
+    {
+      "black": 68410146816,
+      "side": false,
+      "white": 84863
+    },
+    {
+      "black": 68669407232,
+      "side": true,
+      "white": 52479
+    },
+    {
+      "black": 68669669376,
+      "side": true,
+      "white": 71551
+    },
+    {
+      "black": 68669407232,
+      "side": false,
+      "white": 12031
+    },
+    {
+      "black": 68602822656,
+      "side": false,
+      "white": 40319
+    },
+    {
+      "black": 68636639232,
+      "side": false,
+      "white": 134143
+    },
+    {
+      "black": 68636114944,
+      "side": false,
+      "white": 36351
+    },
+    {
+      "black": 68572676096,
+      "side": true,
+      "white": 101119
+    },
+    {
+      "black": 68653678592,
+      "side": false,
+      "white": 76671
+    },
+    {
+      "black": 68174217216,
+      "side": false,
+      "white": 19967
+    },
+    {
+      "black": 68568514560,
+      "side": false,
+      "white": 12279
+    },
+    {
+      "black": 68419846144,
+      "side": false,
+      "white": 142271
+    },
+    {
+      "black": 68442652672,
+      "side": true,
+      "white": 149247
+    },
+    {
+      "black": 68306337792,
+      "side": false,
+      "white": 44479
+    },
+    {
+      "black": 68174217216,
+      "side": false,
+      "white": 12223
+    },
+    {
+      "black": 68306337792,
+      "side": false,
+      "white": 28095
+    },
+    {
+      "black": 68686184448,
+      "side": false,
+      "white": 133119
+    },
+    {
+      "black": 68669669376,
+      "side": true,
+      "white": 149247
+    },
+    {
+      "black": 68157702144,
+      "side": false,
+      "white": 141247
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68569530368,
+      "side": true,
+      "white": 137087
+    },
+    {
+      "black": 68569530368,
+      "side": false,
+      "white": 20351
+    },
+    {
+      "black": 68174217216,
+      "side": false,
+      "white": 8127
+    },
+    {
+      "black": 68570578944,
+      "side": true,
+      "white": 99327
+    },
+    {
+      "black": 68174217216,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68174217216,
+      "side": true,
+      "white": 100863
+    },
+    {
+      "black": 68570578944,
+      "side": true,
+      "white": 28287
+    },
+    {
+      "black": 68635598848,
+      "side": false,
+      "white": 8392191
+    },
+    {
+      "black": 66555478016,
+      "side": false,
+      "white": 165375
+    },
+    {
+      "black": 68372398080,
+      "side": false,
+      "white": 44287
+    },
+    {
+      "black": 68636114944,
+      "side": false,
+      "white": 12223
+    },
+    {
+      "black": 68170022912,
+      "side": true,
+      "white": 28095
+    },
+    {
+      "black": 66556264448,
+      "side": false,
+      "white": 2100735
+    },
+    {
+      "black": 68637687808,
+      "side": false,
+      "white": 12223
+    },
+    {
+      "black": 68502421504,
+      "side": false,
+      "white": 3839
+    },
+    {
+      "black": 68669669376,
+      "side": true,
+      "white": 141055
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 12159
+    },
+    {
+      "black": 68686184448,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68438458368,
+      "side": false,
+      "white": 20223
+    },
+    {
+      "black": 68436361216,
+      "side": true,
+      "white": 44287
+    },
+    {
+      "black": 68306337792,
+      "side": false,
+      "white": 83455
+    },
+    {
+      "black": 68409622528,
+      "side": false,
+      "white": 51711
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 12031
+    },
+    {
+      "black": 68686184448,
+      "side": true,
+      "white": 20471
+    },
+    {
+      "black": 68309483520,
+      "side": false,
+      "white": 83455
+    },
+    {
+      "black": 68570578944,
+      "side": false,
+      "white": 36351
+    },
+    {
+      "black": 68568481792,
+      "side": true,
+      "white": 1051647
+    },
+    {
+      "black": 68174217216,
+      "side": true,
+      "white": 197631
+    },
+    {
+      "black": 68653678592,
+      "side": false,
+      "white": 77183
+    },
+    {
+      "black": 68537286656,
+      "side": false,
+      "white": 12286
+    },
+    {
+      "black": 68537548800,
+      "side": false,
+      "white": 16063
+    },
+    {
+      "black": 68653154304,
+      "side": false,
+      "white": 52479
+    },
+    {
+      "black": 68637687808,
+      "side": false,
+      "white": 36351
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68670193664,
+      "side": true,
+      "white": 52479
+    },
+    {
+      "black": 68572676096,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68636114944,
+      "side": true,
+      "white": 8390655
+    },
+    {
+      "black": 67630006272,
+      "side": false,
+      "white": 4197375
+    },
+    {
+      "black": 68436361216,
+      "side": false,
+      "white": 134143
+    },
+    {
+      "black": 68670193664,
+      "side": true,
+      "white": 135151
+    },
+    {
+      "black": 68570578944,
+      "side": true,
+      "white": 40383
+    },
+    {
+      "black": 68309483520,
+      "side": false,
+      "white": 24191
+    },
+    {
+      "black": 68636639232,
+      "side": false,
+      "white": 35839
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 19967
+    },
+    {
+      "black": 68170022912,
+      "side": false,
+      "white": 20223
+    },
+    {
+      "black": 68305289216,
+      "side": false,
+      "white": 166655
+    },
+    {
+      "black": 68306337792,
+      "side": false,
+      "white": 99327
+    },
+    {
+      "black": 68442652672,
+      "side": true,
+      "white": 84863
+    },
+    {
+      "black": 68170022912,
+      "side": false,
+      "white": 8063
+    },
+    {
+      "black": 68570578944,
+      "side": true,
+      "white": 71551
+    },
+    {
+      "black": 68170022912,
+      "side": true,
+      "white": 197631
+    },
+    {
+      "black": 68686446592,
+      "side": false,
+      "white": 19967
+    },
+    {
+      "black": 68637687808,
+      "side": false,
+      "white": 69119
+    },
+    {
+      "black": 68636639232,
+      "side": true,
+      "white": 72575
+    },
+    {
+      "black": 68669145088,
+      "side": true,
+      "white": 527871
+    },
+    {
+      "black": 68637687808,
+      "side": true,
+      "white": 28287
+    },
+    {
+      "black": 68309483520,
+      "side": false,
+      "white": 199167
+    },
+    {
+      "black": 68434264064,
+      "side": true,
+      "white": 4198143
+    },
+    {
+      "black": 68669407232,
+      "side": true,
+      "white": 8189
+    },
+    {
+      "black": 68669407232,
+      "side": false,
+      "white": 20223
+    },
+    {
+      "black": 68636639232,
+      "side": false,
+      "white": 20223
+    },
+    {
+      "black": 34351349760,
+      "side": false,
+      "white": 69627
+    },
+    {
+      "black": 68670193664,
+      "side": false,
+      "white": 20351
+    },
+    {
+      "black": 68635607040,
+      "side": false,
+      "white": 69599
+    },
+    {
+      "black": 68653154304,
+      "side": false,
+      "white": 8391679
+    },
+    {
+      "black": 68438458368,
+      "side": true,
+      "white": 1052543
+    },
+    {
+      "black": 68539645952,
+      "side": false,
+      "white": 72639
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68569530368,
+      "side": false,
+      "white": 36351
+    },
+    {
+      "black": 51527024640,
+      "side": false,
+      "white": 44415
+    },
+    {
+      "black": 68570578944,
+      "side": false,
+      "white": 20351
+    },
+    {
+      "black": 68036853760,
+      "side": false,
+      "white": 99327
+    },
+    {
+      "black": 68174217216,
+      "side": false,
+      "white": 133119
+    },
+    {
+      "black": 68438458368,
+      "side": false,
+      "white": 133119
+    },
+    {
+      "black": 68605181952,
+      "side": false,
+      "white": 3583
+    },
+    {
+      "black": 68572676096,
+      "side": false,
+      "white": 67583
+    },
+    {
+      "black": 68686184448,
+      "side": true,
+      "white": 8391679
+    },
+    {
+      "black": 68103438336,
+      "side": false,
+      "white": 100863
+    },
+    {
+      "black": 68141711360,
+      "side": false,
+      "white": 24383
+    },
+    {
+      "black": 68434264064,
+      "side": true,
+      "white": 8391679
+    },
+    {
+      "black": 68442652672,
+      "side": false,
+      "white": 67583
+    },
+    {
+      "black": 68636639232,
+      "side": true,
+      "white": 40639
+    },
+    {
+      "black": 68108156928,
+      "side": false,
+      "white": 150271
+    },
+    {
+      "black": 34351349760,
+      "side": false,
+      "white": 12286
+    },
+    {
+      "black": 68438458368,
+      "side": true,
+      "white": 199167
+    },
+    {
+      "black": 68107632640,
+      "side": false,
+      "white": 24383
+    },
+    {
+      "black": 68669407232,
+      "side": false,
+      "white": 35839
+    },
+    {
+      "black": 68137517056,
+      "side": false,
+      "white": 69627
+    },
+    {
+      "black": 68653678592,
+      "side": false,
+      "white": 149247
+    },
+    {
+      "black": 68669407232,
+      "side": true,
+      "white": 8391679
+    },
+    {
+      "black": 68669669376,
+      "side": false,
+      "white": 36351
+    },
+    {
+      "black": 68170022912,
+      "side": true,
+      "white": 84863
+    },
+    {
+      "black": 68403855360,
+      "side": false,
+      "white": 8189
+    },
+    {
+      "black": 68572676096,
+      "side": false,
+      "white": 68607
+    },
+    {
+      "black": 68686184448,
+      "side": false,
+      "white": 19967
+    },
+    {
+      "black": 68670193664,
+      "side": false,
+      "white": 12223
+    },
+    {
+      "black": 68686446592,
+      "side": false,
+      "white": 69119
+    },
+    {
+      "black": 68572676096,
+      "side": false,
+      "white": 8127
+    },
+    {
+      "black": 68686184448,
+      "side": true,
+      "white": 12283
+    },
+    {
+      "black": 67907878912,
+      "side": false,
+      "white": 44479
+    },
+    {
+      "black": 68569530368,
+      "side": true,
+      "white": 44287
+    },
+    {
+      "black": 68170022912,
+      "side": false,
+      "white": 12031
+    },
+    {
+      "black": 60116959232,
+      "side": false,
+      "white": 77247
+    },
+    {
+      "black": 68436361216,
+      "side": false,
+      "white": 67583
+    },
+    {
+      "black": 68436361216,
+      "side": false,
+      "white": 20351
+    },
+    {
+      "black": 68686184448,
+      "side": true,
+      "white": 12285
+    },
+    {
+      "black": 68438458368,
+      "side": false,
+      "white": 20223
+    },
+    {
+      "black": 68436361216,
+      "side": false,
+      "white": 67583
+    },
+    {
+      "black": 68621434880,
+      "side": false,
+      "white": 135135
+    }
+  ],
+  "results": [
+    {
+      "games": 400,
+      "losses": 329,
+      "opponent": "policy-only",
+      "opponent_average_move_ms": 0.00473292866407263,
+      "value_average_move_ms": 0.06718134773969182,
+      "wins": 71,
+      "wins_as_black": 29,
+      "wins_as_white": 42
+    },
+    {
+      "games": 400,
+      "losses": 382,
+      "opponent": "mcts-64",
+      "opponent_average_move_ms": 0.33878542077493806,
+      "value_average_move_ms": 0.06770259289478156,
+      "wins": 18,
+      "wins_as_black": 6,
+      "wins_as_white": 12
+    }
+  ],
+  "seed": 20261011,
+  "checkpoint_sha256": "e30ab63d059dad17296cec20535da8f9b7be81a98b4db2c3cde2c4f309b65e3f"
+}

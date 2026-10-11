@@ -84,7 +84,7 @@ try {
             return;
           }
         }
-        policyWorker.postMessage({ type: "search", id: policyPlies + 2, simulations: 0 });
+        policyWorker.postMessage({ type: "search", id: policyPlies + 2, simulations: 0, policyOnly: true });
       } catch (error) {
         fail(error);
       }
@@ -95,3 +95,64 @@ try {
   await policyWorker.terminate();
 }
 console.log(JSON.stringify({ policyOnlyMovesMatchNetwork: "PASS", zeroSearchVisits: "PASS", completePolicyOnlyGamePlies: policyPlies }));
+
+// Independent successor oracle: play/undo each candidate and evaluate its value.
+reference.reset();
+const valueWorker = new Worker(new URL("./worker-node-bridge.mjs", import.meta.url));
+let valuePlies = 0;
+try {
+  await new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error("Value-lookahead game timed out")), 15000);
+    const fail = (error) => {
+      clearTimeout(timer);
+      reject(error);
+    };
+    valueWorker.on("error", fail);
+    valueWorker.on("message", (data) => {
+      try {
+        if (data.type === "error") throw new Error(data.message);
+        assert.notEqual(data.type, "search", "Value lookahead must not run MCTS simulations");
+        if (data.type === "complete") {
+          const root = JSON.parse(reference.state());
+          const candidates = root.legal.map(({ action }) => {
+            reference.play(action);
+            const terminal = JSON.parse(reference.state()).terminal;
+            const q_value = -(terminal ?? JSON.parse(reference.inference()).value);
+            reference.back(-1);
+            return { action, q_value, terminal: terminal !== null };
+          });
+          const best = candidates.reduce((a, b) => {
+            const aw = a.terminal && a.q_value === 1,
+              bw = b.terminal && b.q_value === 1;
+            return bw !== aw ? (bw ? b : a) : b.q_value > a.q_value ? b : a;
+          });
+          assert.equal(data.valueOnly, true);
+          assert.equal(data.action, best.action);
+          assert.ok(Math.abs(data.value - best.q_value) < 1e-6);
+          assert.equal(data.stats.length, candidates.length);
+          data.stats.forEach((actual, i) => {
+            assert.equal(actual.action, candidates[i].action);
+            assert.equal(actual.terminal, candidates[i].terminal);
+            assert.ok(Math.abs(actual.q_value - candidates[i].q_value) < 1e-6);
+          });
+          assert.equal(data.evaluations, candidates.filter((s) => !s.terminal).length);
+          reference.play(data.action);
+          assert.deepEqual(data.state, JSON.parse(reference.state()));
+          assert.ok(++valuePlies < 200);
+          if (data.state.terminal !== null) {
+            clearTimeout(timer);
+            resolve();
+            return;
+          }
+        }
+        valueWorker.postMessage({ type: "search", id: valuePlies + 2, simulations: 0 });
+      } catch (error) {
+        fail(error);
+      }
+    });
+    valueWorker.postMessage({ type: "init", id: 1, checkpoint: "final", local: false });
+  });
+} finally {
+  await valueWorker.terminate();
+}
+console.log(JSON.stringify({ valueLookaheadMatchesSuccessorOracle: "PASS", completeValueLookaheadGamePlies: valuePlies }));

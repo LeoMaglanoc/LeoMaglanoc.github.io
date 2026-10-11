@@ -1,4 +1,5 @@
-import init, { Game } from "./pkg/rustzero.js";
+import init, { Game } from "./pkg/rustzero.js?v=value-lookahead-1";
+const initialize = () => init({ module_or_path: new URL("./pkg/rustzero_bg.wasm?v=value-lookahead-1", import.meta.url) });
 let game,
   epoch = 0;
 self.onmessage = async ({ data }) => {
@@ -9,10 +10,10 @@ self.onmessage = async ({ data }) => {
       const start = performance.now();
       let inferenceMs = null;
       if (data.local) {
-        await init();
+        await initialize();
         game = new Game("");
       } else {
-        const [_, response] = await Promise.all([init(), fetch(`models/${data.checkpoint}.json`)]);
+        const [_, response] = await Promise.all([initialize(), fetch(`models/${data.checkpoint}.json`)]);
         if (!response.ok) throw new Error("Checkpoint could not be loaded.");
         game = new Game(await response.text());
         const t = performance.now();
@@ -30,6 +31,20 @@ self.onmessage = async ({ data }) => {
       const start = performance.now(),
         root = JSON.parse(game.state());
       if (root.terminal !== null) throw new Error("Game is already finished.");
+      if (Number(data.simulations) === 0 && !data.policyOnly) {
+        const result = JSON.parse(game.value_lookahead());
+        game.play(result.best);
+        send({
+          type: "complete",
+          valueOnly: true,
+          action: result.best,
+          state: JSON.parse(game.state()),
+          root,
+          ...result,
+          moveMs: performance.now() - start,
+        });
+        return;
+      }
       if (Number(data.simulations) === 0) {
         const { policy, value } = JSON.parse(game.inference());
         const best = root.legal.reduce((a, b) => (policy[b.action] > policy[a.action] ? b : a));

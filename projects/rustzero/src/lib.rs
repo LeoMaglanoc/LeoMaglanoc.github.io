@@ -1,5 +1,6 @@
 pub mod browser;
 pub mod game;
+pub mod lookahead;
 pub mod mcts;
 pub mod model;
 #[cfg(feature = "training")]
