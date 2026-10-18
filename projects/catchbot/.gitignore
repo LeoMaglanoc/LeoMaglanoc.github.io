@@ -1,0 +1,4 @@
+__pycache__/
+.local/
+results/*.onnx
+results/onnx-parity-inputs.npz
