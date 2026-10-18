@@ -1,4 +1,20 @@
 {
+  "projects/catchbot": {
+    "destination": "assets/interactive/catchbot",
+    "files": [
+      "index.html",
+      "style.css",
+      "src/config.js",
+      "src/controller.js",
+      "src/game.js",
+      "src/input.js",
+      "src/main.js",
+      "src/predictors.js",
+      "src/renderer.js",
+      "src/replay.js",
+      "src/robot.js"
+    ]
+  },
   "projects/doom": {
     "destination": "assets/interactive/doom",
     "files": [

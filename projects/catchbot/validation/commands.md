@@ -10,7 +10,7 @@ Local container hostnames are included in NO_PROXY for local-only traffic.
 | `docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -f projects/catchbot/Dockerfile.experiments -t catchbot-experiments:2026-10-18 projects/catchbot` | PASS; CPU-only PyTorch environment |
 | `docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -f projects/catchbot/Dockerfile.browser -t catchbot-browser:2026-10-18 projects/catchbot` | PASS; Chromium + Playwright |
 | `docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -f projects/catchbot/Dockerfile.site -t catchbot-site:2026-10-18 .` | PASS; Ruby 3.3.5, pinned Gemfile.lock, Python notebook CLI |
-| `docker run --rm -v "$PWD":/work -w /work node:22-bookworm-slim node --test projects/catchbot/tests/*.test.js` | PASS, 27 tests; `unit-tests-docker.txt` |
+| `docker run --rm -v "$PWD":/work -w /work node:22-bookworm-slim node --test projects/catchbot/tests/*.test.js` | PASS, 29 tests; `unit-tests-docker.txt` |
 | `docker run --rm -v "$PWD":/work -w /work node:22-bookworm-slim node --test projects/portal-puzzle-lab/tests/*.test.js` | PASS; `existing-portal-tests.txt` |
 | `node projects/catchbot/experiments/prepare.mjs` | PASS; 15 fixtures, 1,485 windows |
 | Official inference Docker command in `../CHECKPOINTS.md` | PASS; 1,485 official forecasts, [1,2,9,21] raw quantiles; provenance and lock saved |
@@ -58,3 +58,29 @@ image lacked `jupyter`; the next had `jupyter` but lacked `jupyter-nbconvert`.
 Both command-line packages were added to the Dockerfile. Existing Sass deprecation
 warnings and SLAM chunk-size/dependency-audit notices are retained as existing
 repository warnings; no unrelated dependency upgrades were attempted.
+
+Final site commands (PASS):
+
+```sh
+docker run --rm --mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/ca.pem,readonly -e SSL_CERT_FILE=/run/ca.pem -e GIT_SSL_CAINFO=/run/ca.pem -v "$PWD":/work catchbot-site:2026-10-18
+# Persistent instance of the same image: catchbot-site-tools
+docker exec catchbot-site-tools bundle exec jekyll build --incremental
+docker exec -e NODE_EXTRA_CA_CERTS=/run/ca.pem catchbot-site-tools npx --yes purgecss@6.0.0 -c purgecss.config.js
+docker exec catchbot-site-tools python3 -c 'import shutil; shutil.copytree("projects/slam/web/dist", "_site/slam", dirs_exist_ok=True)'
+docker exec catchbot-site-tools python3 scripts/check-project-links.py
+```
+
+The checker passed all 15 routes, 52 HTML dependencies and manifest assets;
+861,032,471 bytes. The first checker run correctly reported missing `/slam/`
+before the workflow's separate Vite-copy step. It passed after that step.
+A host PurgeCSS attempt hit root-owned build-file permissions; running the
+command in the Docker build environment passed. A browser assertion initially
+sampled game state too sparsely and missed the short playing phase before a
+valid catch; it now observes every gesture step and accepts a positive scored
+time as proof of active play. These were validation issues, not hidden passes.
+
+Built-route smoke (PASS) uses `tests/route-smoke.py` in the browser image on the
+same local network, with a read-only Python server rooted at `_site` named
+`catchbot-built`. Default route: `http://catchbot-built:8765/catchbot/`.
+Desktop/portrait/landscape iframe startup, capture/release, About, no overflow,
+console checks and the blog link passed; `chrome-built.json` records outcomes.

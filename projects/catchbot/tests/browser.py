@@ -27,16 +27,17 @@ with sync_playwright() as p:
    else:page.mouse.up()
   down(pt['x'],pt['y']);assert page.evaluate('catchbot.snapshot().phase')=='warmup'
   rect=page.locator('#field').bounding_box();cx=rect['x']+rect['width']/2;cy=rect['y']+rect['height']/2;r=(min(rect['width'],rect['height'])-48)/2*.73
-  begin=time.perf_counter();snapshots=[]
+  begin=time.perf_counter();snapshots=[];captured_active=False
   for i in range(135):
    a=.6+i*.09;move(cx+r*math.cos(a),cy-r*math.sin(a));page.wait_for_timeout(32)
-   if i%15==0:
-    current=page.evaluate('catchbot.snapshot()');snapshots.append(current)
-    if current['phase']=='playing' and not any(s['phase']=='playing' for s in snapshots[:-1]):page.screenshot(path=str(OUT/f'{label}-active.png'))
+   current=page.evaluate('catchbot.snapshot()')
+   if i%15==0:snapshots.append(current)
+   if current['phase']=='playing' and not captured_active:
+    page.screenshot(path=str(OUT/f'{label}-active.png'));captured_active=True
   elapsed=time.perf_counter()-begin
   state=page.evaluate('catchbot.snapshot()');(OUT/f'{label}-scripted-trace.json').write_text(json.dumps({'origin':'automated CDP drag; not human data','trace':page.evaluate('catchbot.exportTrace()')},separators=(',',':')));page.screenshot(path=str(OUT/f'{label}-playing.png'))
   assert state['diagnostics']['updates']>0
-  assert any(s['phase']=='playing' for s in snapshots),snapshots
+  assert captured_active or state['score']>0, {'phase':state['phase'],'score':state['score']}
   # Ended rounds are allowed; if active, release must freeze the clock.
   up();paused=page.evaluate('catchbot.snapshot()');page.wait_for_timeout(220);after=page.evaluate('catchbot.snapshot()');assert paused['score']==after['score'];assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
   assert page.evaluate('scrollY')==0

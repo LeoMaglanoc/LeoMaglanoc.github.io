@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a121d" />
+    <meta
+      name="description"
+      content="Outrun a two-joint robot. Does predicting your next move help it catch you? Play CatchBot locally in your browser."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%230a121d%27/%3E%3Cpath d=%27M8 24L14 9L25 16%27 fill=%27none%27 stroke=%27%23f6b78e%27 stroke-width=%274%27/%3E%3Ccircle cx=%2725%27 cy=%2716%27 r=%273%27 fill=%27%23a8ffd2%27/%3E%3C/svg%3E"
+    />
+    <title>CatchBot · Outrun the prediction</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <a class="back" href="/blog/AI-coding-agent-case-study/" aria-label="Back to demos"
+          ><span>Demos</span></a
+        >
+        <div class="brand">Catch<span>Bot</span><small>HUMAN VS. PREDICTION</small></div>
+        <button id="about" class="icon" aria-label="About CatchBot">?</button>
+      </header>
+      <section class="toolbar" aria-label="Game controls">
+        <label class="mode"
+          ><span>ROBOT STRATEGY</span
+          ><select id="mode" aria-label="Robot strategy">
+            <option value="velocity">Predictive · velocity</option>
+            <option value="reactive">Reactive · last seen</option>
+          </select></label
+        >
+        <div class="timer"><span id="time">00.0</span><small>/ 20s</small></div>
+        <button id="restart" class="secondary">Restart</button>
+      </section>
+      <section class="arena" aria-label="CatchBot playfield">
+        <canvas
+          id="field"
+          aria-label="Drag the green target inside the circle to evade the robot"
+          tabindex="0"
+        ></canvas>
+        <div id="cue" class="cue" aria-live="polite"></div>
+        <div id="overlay" class="overlay">
+          <div class="card">
+            <p class="eyebrow">A LITTLE ROBOT. ONE SIMPLE QUESTION.</p>
+            <h1 id="headline">Can it catch<br />your next move?</h1>
+            <p id="description">Drag the green target. Outrun the arm for 20 seconds.</p>
+            <button id="start" class="primary">Let’s play <span>&gt;</span></button>
+            <p class="hint" id="hint">Mouse or touch · no downloads</p>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="dot peach"></span> Robot <span class="dot mint"></span> You
+          <span class="cross">+</span> Prediction
+        </div>
+      </section>
+      <footer>
+        <span id="status">100 ms delayed vision · real joint limits</span>
+        <div>
+          <button id="compare" disabled>Compare trace</button
+          ><button id="export" disabled>Save JSON</button>
+        </div>
+      </footer>
+    </main>
+    <dialog id="info">
+      <button class="close" aria-label="Close dialog">×</button>
+      <div id="info-content"></div>
+    </dialog>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

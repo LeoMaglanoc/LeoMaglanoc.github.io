@@ -96,3 +96,5 @@ That command was corrected and the complete official inference rerun. The final
 saved outputs supersede those preliminary artifacts. An initial browser favicon
 404 was fixed. Docker browser networking initially sent the local hostname to
 the session proxy; adding local-only NO_PROXY entries resolved it.
+
+The final review corrected between-frame pointer timestamps: observations now queue until their actual simulation step. Two additional regression tests cover timing and reorder/reset handling. This does not change the saved synthetic trajectories or model results. Research checkpoint: `e8fc0b6` (`catchbot-research-2026-10-18`).

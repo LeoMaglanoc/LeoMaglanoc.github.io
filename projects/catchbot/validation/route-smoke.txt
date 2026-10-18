@@ -1,0 +1,29 @@
+[
+  {
+    "viewport": "desktop",
+    "width": 1440,
+    "height": 900,
+    "status": 200,
+    "browser": "155.0.8059.79",
+    "errors": [],
+    "iframeSource": "/assets/interactive/catchbot/index.html"
+  },
+  {
+    "viewport": "portrait",
+    "width": 390,
+    "height": 844,
+    "status": 200,
+    "browser": "155.0.8059.79",
+    "errors": [],
+    "iframeSource": "/assets/interactive/catchbot/index.html"
+  },
+  {
+    "viewport": "landscape",
+    "width": 844,
+    "height": 390,
+    "status": 200,
+    "browser": "155.0.8059.79",
+    "errors": [],
+    "iframeSource": "/assets/interactive/catchbot/index.html"
+  }
+]

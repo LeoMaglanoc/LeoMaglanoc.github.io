@@ -153,3 +153,35 @@ test('deployment counts busy requests and stale responses instead of replacing m
   assert.equal(r.fallbackRate, 0);
   assert.equal(r.interceptions, 0);
 });
+
+test('between-frame input is queued until its actual simulation timestamp', () => {
+  const g = new Game(),
+    clock = new FixedClock();
+  g.start();
+  g.grab();
+  clock.advance(1000, g);
+  const stamp = clock.observationTime(1010, g);
+  assert.ok(Math.abs(stamp - 0.01) < 1e-10);
+  const old = { ...g.target };
+  g.move({ x: -0.5, y: 0.2 }, stamp);
+  assert.deepEqual(g.target, old);
+  assert.equal(g.events.length, 1);
+  clock.advance(1016.667, g);
+  assert.deepEqual(g.target, { x: -0.5, y: 0.2 });
+  assert.ok(g.events.every((p) => p.t <= g.time + 1e-10));
+  const move = g.trace.find((p) => p.kind === 'move');
+  assert.ok(Math.abs(move.t - 0.01) < 1e-10);
+});
+test('reordered pointer events cannot reverse the current target or survive reset', () => {
+  const g = new Game();
+  g.start();
+  g.grab();
+  g.move({ x: 0.1, y: 0.2 }, 0.05);
+  g.move({ x: 0.3, y: 0.4 }, 0.1);
+  tick(g, 7);
+  g.move({ x: 0, y: 0 }, 0.02);
+  assert.deepEqual(g.target, { x: 0.3, y: 0.4 });
+  g.move({ x: 0.6, y: 0 }, 0.2);
+  g.pause();
+  assert.equal(g.pendingInput.length, 0);
+});

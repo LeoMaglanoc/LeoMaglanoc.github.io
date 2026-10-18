@@ -17,13 +17,13 @@ export function attachInput(canvas, game, renderer, clock) {
   });
   canvas.addEventListener('pointermove', (event) => {
     if (event.pointerId !== activePointer) return;
-    // Coalesced events are timestamped relative to the latest simulation boundary.
-    // All are available now; clamp their times to that boundary, never extrapolate.
+    // Preserve real event timing between fixed steps; future-step input is queued.
+    // Coalesced observations retain their original timestamp and causal availability.
     const events = event.getCoalescedEvents?.() || [event];
     const batch = events.length ? events : [event];
     for (const e of batch) {
-      const t = game.time - Math.max(0, event.timeStamp - e.timeStamp) / 1000;
-      game.move(renderer.toWorld(e.clientX, e.clientY), t);
+      const t = clock.observationTime(e.timeStamp, game);
+      if (t !== null) game.move(renderer.toWorld(e.clientX, e.clientY), t);
     }
     event.preventDefault();
   });

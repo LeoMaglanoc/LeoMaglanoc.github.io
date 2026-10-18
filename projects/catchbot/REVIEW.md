@@ -17,8 +17,9 @@ The synthetic full trace is available to the evaluation process, but prediction
 windows use causal zero-order hold at/before every sample and delayed cutoff.
 Future truth is accessed only for post-prediction error scoring. An independent
 saved-input audit checks all 95,040 samples against original event timestamps.
-Poisoned-future unit tests preserve predictions. Browser callbacks clamp observed
-event time to the latest active simulation boundary; they never extrapolate.
+Poisoned-future unit tests preserve predictions. Browser event timestamps map into the active simulation clock. Between-frame
+input is queued until its actual fixed step; it is not backdated to the previous
+frame. Reordered events cannot reverse the current target.
 
 ## Numerical and physical constraints?
 

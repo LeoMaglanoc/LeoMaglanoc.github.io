@@ -1,0 +1,42 @@
+import { distance } from './config.js';
+export function attachInput(canvas, game, renderer, clock) {
+  let activePointer = null;
+  const release = () => {
+    activePointer = null;
+    game.pause();
+    clock.reset();
+  };
+  canvas.addEventListener('pointerdown', (event) => {
+    if (activePointer !== null || event.button > 0) return;
+    const point = renderer.toWorld(event.clientX, event.clientY);
+    if (distance(point, game.target) > Math.max(0.18, 28 / renderer.scale) || !game.grab()) return;
+    activePointer = event.pointerId;
+    canvas.setPointerCapture(activePointer);
+    event.preventDefault();
+    clock.reset();
+  });
+  canvas.addEventListener('pointermove', (event) => {
+    if (event.pointerId !== activePointer) return;
+    // Preserve real event timing between fixed steps; future-step input is queued.
+    // Coalesced observations retain their original timestamp and causal availability.
+    const events = event.getCoalescedEvents?.() || [event];
+    const batch = events.length ? events : [event];
+    for (const e of batch) {
+      const t = clock.observationTime(e.timeStamp, game);
+      if (t !== null) game.move(renderer.toWorld(e.clientX, e.clientY), t);
+    }
+    event.preventDefault();
+  });
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture'])
+    canvas.addEventListener(type, (event) => {
+      if (event.pointerId !== activePointer) return;
+      const id = activePointer;
+      release();
+      if (canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
+    });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) release();
+  });
+  window.addEventListener('blur', release);
+  return { release };
+}

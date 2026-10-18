@@ -111,6 +111,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: projects/slam/web/package-lock.json
 
+      - name: Test CatchBot kinematics, prediction and gameplay
+        run: node --test projects/catchbot/tests/*.test.js
+
       - name: Test Portal Puzzle Lab physics
         run: node --test projects/portal-puzzle-lab/tests/*.test.js
 

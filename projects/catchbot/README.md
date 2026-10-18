@@ -41,7 +41,9 @@ by generation/request tickets. Late, reordered, wrong-model, nonfinite,
 future-observation or expired responses cannot drive the arm. Failure causes a
 recorded hold; never a prediction from another model under the wrong label.
 
-Pointer Events use capture and one active pointer. Cancellation, lost capture,
+Pointer Events use capture and one active pointer. Event timestamps map to the
+active simulation clock; between-frame input is queued until its actual control
+step, preserving observation age instead of backdating input. Cancellation, lost capture,
 blur and hidden tabs pause. A frame gap above 250 ms pauses instead of fast
 forwarding. Resize only changes the camera scale. The fixed-step accumulator
 keeps robot control independent of ordinary animation cadence.

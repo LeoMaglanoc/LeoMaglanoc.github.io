@@ -92,8 +92,8 @@ The smallest useful next experiment is collecting consented, locally exported hu
 
 | Viewport | Chromium | rAF median ms | rAF p95 ms |
 |---|---|---:|---:|
-| desktop (1440×900) | 155.0.8059.79 | 16.70 | 33.40 |
-| portrait (390×844) | 155.0.8059.79 | 16.70 | 66.80 |
+| desktop (1440×900) | 155.0.8059.79 | 16.70 | 16.80 |
+| portrait (390×844) | 155.0.8059.79 | 16.70 | 16.70 |
 | landscape (844×390) | 155.0.8059.79 | 16.70 | 16.80 |
 
-These are measured headless Docker Chromium intervals during automated input on the shared Xeon server. They correspond to roughly 60 Hz median scheduling; they do not establish physical Android FPS. Baseline prediction timings exclude event-history construction; official PyTorch timings include the forecaster but exclude context array construction.
+Measured headless Docker Chromium intervals during automated input on the shared Xeon server. They correspond to roughly 60 Hz median scheduling; they do not establish physical Android FPS. Baseline predictor timings exclude history construction; PyTorch timings include the official forecaster but exclude context array construction.

@@ -24,6 +24,19 @@ a discrete game tree. None trains a neural network during browser play.
 [The source audit](docs/featured-demo-evidence.md) maps claims to implementation
 and saved artifacts. Project READMEs retain detailed reproduction instructions.
 
+## CatchBot — predictive interception
+
+[Play CatchBot](https://leonardo-maglanoc.com/catchbot/) ·
+[Algorithms, Docker reproduction and checkpoints](projects/catchbot/README.md) ·
+[Evaluation and limitations](projects/catchbot/EVALUATION.md)
+
+Drag a target to evade a delayed, velocity-limited planar two-joint arm for
+20 seconds. Reactive persistence and robust constant-velocity forecasting run
+locally in plain JavaScript/Canvas. A deterministic replay compares the same
+trace with identical robot parameters. Official frozen Timestral-5M is evaluated
+separately in CPU PyTorch; no Timestral browser mode or model download is implied.
+Movement is not sent to a server; JSON export is opt-in.
+
 ## 1. G1 Parkour
 
 ### Overview

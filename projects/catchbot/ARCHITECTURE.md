@@ -22,7 +22,7 @@ pause, clear observation history and require a fresh warm-up before scoring.
 ## Interfaces
 
 Observations: {t,x,y} in active simulation seconds; timestamps map pointer events
-to the current simulation clock. Causal zero-order hold resampling at 30 Hz uses
+to the active simulation clock, queueing them until their fixed step. Causal zero-order hold resampling at 30 Hz uses
 no event after each sample time, and no event after the delayed cutoff. Missing
 initial history is NOT filled with future data. All predictors need 64 samples.
 

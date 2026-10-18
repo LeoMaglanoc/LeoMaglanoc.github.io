@@ -1,6 +1,6 @@
 import { CONFIG as C, distance, boundTarget } from './config.js';
 import { fk, caught } from './robot.js';
-import { historyAt, predict, PredictionGate } from './predictors.js';
+import { historyAt, predict, PredictionGate, cleanEvents } from './predictors.js';
 import { control } from './controller.js';
 export class Game {
   constructor(mode = 'velocity') {
@@ -17,6 +17,8 @@ export class Game {
     this.phase = 'ready';
     this.active = false;
     this.events = [];
+    this.pendingInput = [];
+    this.lastInputTime = 0;
     this.trace = [];
     this.nextPrediction = 0;
     this.segmentStart = 0;
@@ -39,6 +41,8 @@ export class Game {
     this.active = true;
     this.phase = 'warmup';
     this.segmentStart = this.time;
+    this.pendingInput = [];
+    this.lastInputTime = this.time;
     this.events = [{ t: this.time, ...this.target }];
     this.trace.push({ t: this.time, ...this.target, kind: 'resume' });
     this.gate.reset();
@@ -47,9 +51,14 @@ export class Game {
   }
   move(point, timestamp = this.time) {
     if (!this.active || ![point.x, point.y, timestamp].every(Number.isFinite)) return;
-    this.target = boundTarget(point);
-    // Browser event timestamps are mapped to active simulation time, never future time.
-    const p = { t: Math.min(this.time, Math.max(this.segmentStart, timestamp)), ...this.target };
+    const p = { t: Math.max(this.segmentStart, timestamp), ...boundTarget(point) };
+    if (p.t > this.time + 1e-10) this.pendingInput.push(p);
+    else this.applyInput(p);
+  }
+  applyInput(p) {
+    if (p.t < this.lastInputTime - 1e-10) return;
+    this.lastInputTime = p.t;
+    this.target = { x: p.x, y: p.y };
     this.events.push(p);
     this.trace.push({ ...p, kind: 'move' });
   }
@@ -59,11 +68,15 @@ export class Game {
       this.phase = 'paused';
     }
     this.active = false;
+    this.pendingInput = [];
     this.gate.reset();
   }
   tick() {
     if (!this.active) return;
     this.time += C.dt;
+    const pending = cleanEvents(this.pendingInput);
+    this.pendingInput = pending.filter((p) => p.t > this.time + 1e-10);
+    for (const p of pending) if (p.t <= this.time + 1e-10) this.applyInput(p);
     this.trace.push({ t: this.time, ...this.target, kind: 'sample' });
     // Bound memory while retaining more than the required 64-sample context.
     this.events = this.events.filter((p) => p.t >= this.time - 3 || p === this.events.at(-1));
@@ -143,6 +156,16 @@ export class FixedClock {
   reset() {
     this.last = null;
     this.accumulator = 0;
+  }
+  observationTime(timestampMs, game) {
+    if (this.last === null) return game.time;
+    const offset = (timestampMs - this.last) / 1000 + this.accumulator;
+    if (offset > C.suspensionThreshold) {
+      game.pause();
+      this.reset();
+      return null;
+    }
+    return Math.max(game.segmentStart, game.time + offset);
   }
   advance(timestampMs, game) {
     if (this.last === null) {

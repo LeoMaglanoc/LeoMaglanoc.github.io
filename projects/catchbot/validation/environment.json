@@ -6,7 +6,7 @@
   "dockerImages": {
     "catchbot-experiments:2026-10-18": "sha256:9b67308c86f72a5d42127d77af5d9c2b943b9d35e19b6d9e15c6c923b1cb2387",
     "catchbot-browser:2026-10-18": "sha256:233134a75bf4ac03e57ba1c62839b9c1974d8da728cccd2c7d77477042a510ca",
-    "catchbot-site:2026-10-18": "sha256:4d38741e2913b9fb7f7c3d1e559bc62a1c32736d06501e2f4e6f56af79b7574a",
+    "catchbot-site:2026-10-18": "sha256:b23ef7c2751151cd347246ba217b59a4e8dab45b86888de59f8592a9570a235c",
     "node:22-bookworm-slim": "sha256:d0a16be756b6ec6658aecb8b7bcf87fa6c7d0d7fcc6ca53ad14bb49a4c90bdd7"
   },
   "physicalAndroidDevice": false,
