@@ -52,3 +52,10 @@ Keep a run manifest with source revision, Docker image digest, dependency lock, 
 6. Update provenance, hashes, public assets, documentation and the Git checkpoint together.
 
 Implementation milestones are preserved in Git commits: initial Docker/native/export baseline, validated browser integration, and final publishing/evidence changes. The pushed commit reference in the handoff identifies the exact website implementation. Model artifacts are stored in Git, not only in the session's Docker cache.
+
+
+## Published checkpoints
+
+- `42003c3`: preserved original coach checkpoints, native source, exports and the Docker reference.
+- `2ef72e8`: validated browser implementation, `/soccer/` route and existing blog link; deployed successfully through GitHub Pages.
+- The subsequent documentation/evidence commit preserves public Chrome screenshots, deployment metadata and served-asset checks. Its application/model bytes are unchanged from `2ef72e8`.

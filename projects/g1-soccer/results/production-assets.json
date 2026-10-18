@@ -1,0 +1,77 @@
+{
+  "origin": "https://leonardo-maglanoc.com/assets/interactive/g1-soccer/",
+  "commit": "2ef72e886752d58da7348f0f98a2779b0798a62e",
+  "note": "Jekyll minifies JSON/XML. Compare parsed/canonical data; ONNX/WASM bytes must match exactly.",
+  "assets": [
+    {
+      "path": "models/coach.onnx",
+      "served_sha256": "fad52b5775a6445575370fc59bce61f04ba694e6ef4c14725a8160fa9e9a4781",
+      "source_sha256": "fad52b5775a6445575370fc59bce61f04ba694e6ef4c14725a8160fa9e9a4781",
+      "comparison": "bytes",
+      "matches": true,
+      "bytes": 22087,
+      "status": 200,
+      "content_type": "application/octet-stream"
+    },
+    {
+      "path": "models/walker.onnx",
+      "served_sha256": "929dbd2a7846f3063eb463037fc544e825ccc4e7b5a85b1601b05d9175d3d2ec",
+      "source_sha256": "929dbd2a7846f3063eb463037fc544e825ccc4e7b5a85b1601b05d9175d3d2ec",
+      "comparison": "bytes",
+      "matches": true,
+      "bytes": 127100,
+      "status": 200,
+      "content_type": "application/octet-stream"
+    },
+    {
+      "path": "config.json",
+      "served_sha256": "50dd96a8bbc204d5b3682e1601dc17beca7a17efb96ab4bfe996f30ae49e917d",
+      "source_sha256": "f01601d6746baac94d9aa8ff022e076f8c73b81e77c387d0b474c302f7ac066b",
+      "comparison": "json-data",
+      "matches": true,
+      "bytes": 1112,
+      "status": 200,
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "path": "scene/soccer_field.xml",
+      "served_sha256": "26dba7e40a709a07d539261206d792c857c2abe7d7dbcaa0ca4f58228d019154",
+      "source_sha256": "c4c7e28ac2d6bc30de1e209282fe67c7ce0ed3bac210d94a7acf236ec3def079",
+      "comparison": "xml-data",
+      "matches": true,
+      "bytes": 1568,
+      "status": 200,
+      "content_type": "application/xml"
+    },
+    {
+      "path": "scene/g1_description/g1_12dof.xml",
+      "served_sha256": "19d9ecc6a3587e300a14cec191db71921f35161f0de64be9701583d52b0f63f5",
+      "source_sha256": "c31f8cc483d8b6b141c1e41a177c9305928615baecd76ee52a2dd87598257c01",
+      "comparison": "xml-data",
+      "matches": true,
+      "bytes": 14220,
+      "status": 200,
+      "content_type": "application/xml"
+    },
+    {
+      "path": "display-meshes.json",
+      "served_sha256": "862f12fdf02dd7848f74bdea6c60c6c9d6f1db216bf16419cbb050ba7e399385",
+      "source_sha256": "79ed449d604cfa2e84f0d6a24a1e43e0f61f04a042bd0f57df00409626a6413a",
+      "comparison": "json-data",
+      "matches": true,
+      "bytes": 5036206,
+      "status": 200,
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "path": "runtime/mujoco.wasm",
+      "served_sha256": "832597ae0a0e306c97ed43d2a9bbca033cf3e547eced410fb9011d87a68d4207",
+      "source_sha256": "832597ae0a0e306c97ed43d2a9bbca033cf3e547eced410fb9011d87a68d4207",
+      "comparison": "bytes",
+      "matches": true,
+      "bytes": 10143561,
+      "status": 200,
+      "content_type": "application/wasm"
+    }
+  ]
+}

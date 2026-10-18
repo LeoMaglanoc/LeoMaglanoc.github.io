@@ -67,4 +67,14 @@ Publishing uses the existing GitHub Pages workflow. Production verification is r
 
 Playback regression: a queued animation timestamp can precede the click that starts replay. Playback clamps elapsed time at zero before selecting a frame, preventing a negative frame index from stopping rendering. Reset/replay transitions also clear speed sampling and update stable control labels only when their content changes. The delayed-timestamp Chrome test exercises this case with real UI interactions.
 
-Final local production check: the full Docker/Jekyll build completed without minifier exceptions; the existing PurgeCSS step and all 16 stable-route checks passed. Published files total approximately 877 MB, below the repository's 1 GB Pages budget. `built-smoke.json` records Chrome loading the actual built iframe route, finding the new blog link alongside CatchBot, and running live physics in all three layouts. Running display samples were 12 fps desktop, 17 fps portrait and 16 fps landscape under cloud SwiftShader.
+Final local production check: the full Docker/Jekyll build completed without minifier exceptions; the existing PurgeCSS step and all 16 stable-route checks passed. Published files total approximately 876.4 MB, below the repository's 1 GB Pages budget. `built-smoke.json` records Chrome loading the actual built iframe route, finding the new blog link alongside CatchBot, and running live physics in all three layouts. Running display samples were 12 fps desktop, 17 fps portrait and 16 fps landscape under cloud SwiftShader.
+
+## Verified public deployment
+
+- Live demo: https://leonardo-maglanoc.com/soccer/
+- Updated existing blog: https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/
+- Application commit: `2ef72e886752d58da7348f0f98a2779b0798a62e`.
+- GitHub Pages workflow: https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39178154796 — build and deployment succeeded, including policy/asset checks and all existing workflow tests.
+- `production-smoke.json` and `production-*.jpg` preserve actual Google Chrome checks of the public blog link and iframe in all three layouts. Desktop completed the reference episode successfully at **8.6 simulated seconds**; portrait and landscape each ran at least two simulated seconds. Full reference attempts and controls were additionally tested in all three local Chrome layouts.
+- `production-assets.json` verifies exact served ONNX/WASM bytes and semantically identical JSON/MJCF data. Jekyll minifies JSON/XML, so raw source hashes for those text representations differ; parsed JSON and canonical XML match. The WASM response has the required `application/wasm` MIME type.
+- The final evidence commit changes only project documentation, test tooling and reports, which are excluded from the public site. It preserves the already deployed application rather than triggering a duplicate deployment.

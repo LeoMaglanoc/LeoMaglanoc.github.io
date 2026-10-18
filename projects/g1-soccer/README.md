@@ -60,6 +60,15 @@ SOCCER_ORIGIN=http://127.0.0.1:8098 node projects/g1-soccer/tests/production.cjs
 
 The same test accepts `SOCCER_ORIGIN=https://leomaglanoc.github.io` after deployment. Set `CHROME_PATH` as above. HTTPS testing preserves normal certificate verification and uses the configured session proxy when present.
 
+Verify the deployed models, engine and scene data separately:
+
+```sh
+python3 projects/g1-soccer/tools/verify_public_assets.py --origin https://leonardo-maglanoc.com
+```
+
+The site minifies JSON/XML; this verifier checks their parsed/canonical data and requires exact binary identity for ONNX/WASM. Public verification results and the successful Pages workflow are linked in `VALIDATION.md`.
+
+
 Set `SOCCER_ORIGIN` to test another origin. The evaluation harness loads the production worker without a display renderer to isolate numerical/behavioral parity. UI tests separately run actual live episodes with rendering and scheduling enabled. `?debug=1` exposes `window.soccerLab` for those integration tests; ordinary URLs do not.
 
 Chrome tests cover 1440×900 desktop, 412×915 phone portrait, and 915×412 phone landscape. Phone tests emulate viewport, DPR and touch; they are not physical-device measurements. The test Chrome uses SwiftShader in this cloud workspace, so measured rendering FPS is not a phone GPU benchmark. Dedicated Chrome computer-agent access was unavailable; testing used actual Google Chrome automation and inspected screenshots instead.

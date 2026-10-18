@@ -74,9 +74,21 @@ const origin = process.env.SOCCER_ORIGIN || "http://127.0.0.1:8098";
         { timeout: 60000 },
       );
       const livePerformance = await frame.locator("#performance").innerText();
+      if (name === "desktop") {
+        await frame.waitForFunction(
+          () => !!window.soccerLab.state.result,
+          null,
+          { timeout: 90000 },
+        );
+        assert.equal(
+          await frame.evaluate(() => window.soccerLab.state.result),
+          "success",
+        );
+      }
       await frame.evaluate(() => window.soccerLab.request("pause"));
       const state = await frame.evaluate(() => ({
         time: window.soccerLab.state.time,
+        result: window.soccerLab.state.result,
         qpos: window.soccerLab.state.qpos,
         mode: document.querySelector("#mode-badge").textContent,
       }));
@@ -102,6 +114,7 @@ const origin = process.env.SOCCER_ORIGIN || "http://127.0.0.1:8098";
         blog_link: true,
         iframe_loaded: true,
         live_physics: true,
+        complete_attempt: name === "desktop",
         livePerformance,
         state,
         errors,
