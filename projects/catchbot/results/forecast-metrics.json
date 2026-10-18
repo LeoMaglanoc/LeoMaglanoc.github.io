@@ -1,0 +1,354 @@
+{
+  "units": "normalized world units, milliseconds",
+  "humanTrajectories": 0,
+  "metrics": [
+    {
+      "model": "reactive",
+      "movement": "all",
+      "independentTrajectories": 15,
+      "errorAt300msWorldUnits": {
+        "n": 1455,
+        "mean": 0.1288579597766648,
+        "median": 0.1299608893478148,
+        "p95": 0.22027760906122082
+      },
+      "latencyMs": {
+        "n": 1485,
+        "mean": 0.0023965878787877803,
+        "median": 0.0008819999999900574,
+        "p95": 0.002881000000002132
+      }
+    },
+    {
+      "model": "reactive",
+      "movement": "straight",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.10130443580980725,
+        "median": 0.10551972726992657,
+        "p95": 0.12414085561167869
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.006658757575757701,
+        "median": 0.0012260000000026139,
+        "p95": 0.008344999999991387
+      }
+    },
+    {
+      "model": "reactive",
+      "movement": "circle",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.15764538982095325,
+        "median": 0.15767199584778233,
+        "p95": 0.1853032842672635
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.0014002828282836124,
+        "median": 0.0009059999999863066,
+        "p95": 0.002344000000050528
+      }
+    },
+    {
+      "model": "reactive",
+      "movement": "figure-eight",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.17294318691116067,
+        "median": 0.17380295376553725,
+        "p95": 0.2616757918161257
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.0016900336700342122,
+        "median": 0.0008389999999849351,
+        "p95": 0.0019560000000637956
+      }
+    },
+    {
+      "model": "reactive",
+      "movement": "reversal",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.1669233468085804,
+        "median": 0.17640588650617042,
+        "p95": 0.2075363370660834
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.0012011346801352868,
+        "median": 0.0008480000000190557,
+        "p95": 0.0024730000000090513
+      }
+    },
+    {
+      "model": "reactive",
+      "movement": "stop-go",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.04547343953282246,
+        "median": 0.0,
+        "p95": 0.16976901920283136
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.0010327306397280903,
+        "median": 0.0007799999999633656,
+        "p95": 0.002585000000067339
+      }
+    },
+    {
+      "model": "velocity",
+      "movement": "all",
+      "independentTrajectories": 15,
+      "errorAt300msWorldUnits": {
+        "n": 1455,
+        "mean": 0.03469669517471092,
+        "median": 0.02273171517445511,
+        "p95": 0.12084563262284553
+      },
+      "latencyMs": {
+        "n": 1485,
+        "mean": 0.007996226262625682,
+        "median": 0.003965999999991254,
+        "p95": 0.01007699999999545
+      }
+    },
+    {
+      "model": "velocity",
+      "movement": "straight",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.014262148123587164,
+        "median": 4.440892098500626e-16,
+        "p95": 0.1376309648885531
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.01781296632996486,
+        "median": 0.004069000000015421,
+        "p95": 0.01368800000000192
+      }
+    },
+    {
+      "model": "velocity",
+      "movement": "circle",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.03416333513948257,
+        "median": 0.03348045365755701,
+        "p95": 0.04627828775629379
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.005183606060606671,
+        "median": 0.0039289999999709835,
+        "p95": 0.008632000000034168
+      }
+    },
+    {
+      "model": "velocity",
+      "movement": "figure-eight",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.05972139251259084,
+        "median": 0.05586766541809027,
+        "p95": 0.11174836070619662
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.006257750841751714,
+        "median": 0.0036700000000564614,
+        "p95": 0.006339000000025408
+      }
+    },
+    {
+      "model": "velocity",
+      "movement": "reversal",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.04011431828139734,
+        "median": 1.197357615696913e-15,
+        "p95": 0.27113274855239455
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.006746474747471595,
+        "median": 0.004971999999952459,
+        "p95": 0.011457000000064
+      }
+    },
+    {
+      "model": "velocity",
+      "movement": "stop-go",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.0252222818164967,
+        "median": 0.0,
+        "p95": 0.11461522775793756
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 0.003980333333333568,
+        "median": 0.0030130000000099244,
+        "p95": 0.006668999999988046
+      }
+    },
+    {
+      "model": "timestral",
+      "movement": "all",
+      "independentTrajectories": 15,
+      "errorAt300msWorldUnits": {
+        "n": 1455,
+        "mean": 0.024485287507863728,
+        "median": 0.010934699117103411,
+        "p95": 0.11783316128444869
+      },
+      "latencyMs": {
+        "n": 1485,
+        "mean": 35.04921621750929,
+        "median": 26.739173999999366,
+        "p95": 74.08043300006284
+      },
+      "marginal90Coverage": {
+        "x": 0.8604810996563574,
+        "y": 0.7903780068728522,
+        "xTolerance1eMinus6": 0.8604810996563574,
+        "yTolerance1eMinus6": 0.9161512027491409,
+        "note": "Strict and numerical-tolerance marginal coverage. Not joint 2D coverage; constant-coordinate collapsed intervals are sensitive to float32 rounding."
+      }
+    },
+    {
+      "model": "timestral",
+      "movement": "straight",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.01874466027298964,
+        "median": 0.0066965234271521125,
+        "p95": 0.10400218033692821
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 33.13427165993276,
+        "median": 26.31777700003113,
+        "p95": 65.54349999998976
+      },
+      "marginal90Coverage": {
+        "x": 0.8797250859106529,
+        "y": 0.3711340206185567,
+        "xTolerance1eMinus6": 0.8797250859106529,
+        "yTolerance1eMinus6": 1.0,
+        "note": "Strict and numerical-tolerance marginal coverage. Not joint 2D coverage; constant-coordinate collapsed intervals are sensitive to float32 rounding."
+      }
+    },
+    {
+      "model": "timestral",
+      "movement": "circle",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.014236973498404802,
+        "median": 0.009036436459087761,
+        "p95": 0.06711411948836896
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 44.959642885526904,
+        "median": 32.94762699999865,
+        "p95": 87.63678699995125
+      },
+      "marginal90Coverage": {
+        "x": 0.8694158075601375,
+        "y": 0.9381443298969072,
+        "xTolerance1eMinus6": 0.8694158075601375,
+        "yTolerance1eMinus6": 0.9381443298969072,
+        "note": "Strict and numerical-tolerance marginal coverage. Not joint 2D coverage; constant-coordinate collapsed intervals are sensitive to float32 rounding."
+      }
+    },
+    {
+      "model": "timestral",
+      "movement": "figure-eight",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.019516673162346298,
+        "median": 0.014239332874318496,
+        "p95": 0.05204332869798616
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 39.032888380472855,
+        "median": 26.667858999985583,
+        "p95": 85.51111499991748
+      },
+      "marginal90Coverage": {
+        "x": 0.9278350515463918,
+        "y": 0.9484536082474226,
+        "xTolerance1eMinus6": 0.9278350515463918,
+        "yTolerance1eMinus6": 0.9484536082474226,
+        "note": "Strict and numerical-tolerance marginal coverage. Not joint 2D coverage; constant-coordinate collapsed intervals are sensitive to float32 rounding."
+      }
+    },
+    {
+      "model": "timestral",
+      "movement": "reversal",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.04490645700163033,
+        "median": 0.01869789310892799,
+        "p95": 0.19367785362938617
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 28.38598969696853,
+        "median": 24.116036000009444,
+        "p95": 56.06079400001818
+      },
+      "marginal90Coverage": {
+        "x": 0.8591065292096219,
+        "y": 0.8865979381443299,
+        "xTolerance1eMinus6": 0.8591065292096219,
+        "yTolerance1eMinus6": 0.8865979381443299,
+        "note": "Strict and numerical-tolerance marginal coverage. Not joint 2D coverage; constant-coordinate collapsed intervals are sensitive to float32 rounding."
+      }
+    },
+    {
+      "model": "timestral",
+      "movement": "stop-go",
+      "independentTrajectories": 3,
+      "errorAt300msWorldUnits": {
+        "n": 291,
+        "mean": 0.02502167360394757,
+        "median": 0.0044187648721049,
+        "p95": 0.12163841040857189
+      },
+      "latencyMs": {
+        "n": 297,
+        "mean": 29.733288464645394,
+        "median": 26.278787999899578,
+        "p95": 52.59166300004381
+      },
+      "marginal90Coverage": {
+        "x": 0.7663230240549829,
+        "y": 0.8075601374570447,
+        "xTolerance1eMinus6": 0.7663230240549829,
+        "yTolerance1eMinus6": 0.8075601374570447,
+        "note": "Strict and numerical-tolerance marginal coverage. Not joint 2D coverage; constant-coordinate collapsed intervals are sensitive to float32 rounding."
+      }
+    }
+  ]
+}

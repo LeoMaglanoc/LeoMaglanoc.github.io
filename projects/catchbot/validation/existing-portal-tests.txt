@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: portal transform is reversible, rotates momentum and preserves speed
+ok 1 - portal transform is reversible, rotates momentum and preserves speed
+  ---
+  duration_ms: 1.949677
+  type: 'test'
+  ...
+# Subtest: plane sweep rejects reverse direction and crossing outside aperture
+ok 2 - plane sweep rejects reverse direction and crossing outside aperture
+  ---
+  duration_ms: 0.79628
+  type: 'test'
+  ...
+# Subtest: placement rejects edges and overlapping portals; pairs cut real collision holes
+ok 3 - placement rejects edges and overlapping portals; pairs cut real collision holes
+  ---
+  duration_ms: 57.133109
+  type: 'test'
+  ...
+# Subtest: player physically crosses in both directions without teleport loops
+ok 4 - player physically crosses in both directions without teleport loops
+  ---
+  duration_ms: 326.635313
+  type: 'test'
+  ...
+# Subtest: free cube crosses and pressure plate opens and closes exit; reset restores puzzle
+ok 5 - free cube crosses and pressure plate opens and closes exit; reset restores puzzle
+  ---
+  duration_ms: 83.021762
+  type: 'test'
+  ...
+# Subtest: carry spring transports cube through aperture as player follows
+ok 6 - carry spring transports cube through aperture as player follows
+  ---
+  duration_ms: 236.913493
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1164.185653

@@ -1,15 +1,21 @@
 import { distance } from './config.js';
 export function attachInput(canvas, game, renderer, clock) {
   let activePointer = null;
-  const release = () => { activePointer = null; game.pause(); clock.reset(); };
-  canvas.addEventListener('pointerdown', event => {
+  const release = () => {
+    activePointer = null;
+    game.pause();
+    clock.reset();
+  };
+  canvas.addEventListener('pointerdown', (event) => {
     if (activePointer !== null || event.button > 0) return;
     const point = renderer.toWorld(event.clientX, event.clientY);
-    if (distance(point, game.target) > 0.18 || !game.grab()) return;
+    if (distance(point, game.target) > Math.max(0.18, 28 / renderer.scale) || !game.grab()) return;
     activePointer = event.pointerId;
-    canvas.setPointerCapture(activePointer); event.preventDefault(); clock.reset();
+    canvas.setPointerCapture(activePointer);
+    event.preventDefault();
+    clock.reset();
   });
-  canvas.addEventListener('pointermove', event => {
+  canvas.addEventListener('pointermove', (event) => {
     if (event.pointerId !== activePointer) return;
     // Coalesced events are timestamped relative to the latest simulation boundary.
     // All are available now; clamp their times to that boundary, never extrapolate.
@@ -21,12 +27,16 @@ export function attachInput(canvas, game, renderer, clock) {
     }
     event.preventDefault();
   });
-  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) canvas.addEventListener(type, event => {
-    if (event.pointerId !== activePointer) return;
-    const id = activePointer; release();
-    if (canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture'])
+    canvas.addEventListener(type, (event) => {
+      if (event.pointerId !== activePointer) return;
+      const id = activePointer;
+      release();
+      if (canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id);
+    });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) release();
   });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) release(); });
   window.addEventListener('blur', release);
   return { release };
 }

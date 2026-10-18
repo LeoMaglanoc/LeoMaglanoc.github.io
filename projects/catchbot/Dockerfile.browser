@@ -1,0 +1,7 @@
+# syntax=docker/dockerfile:1
+FROM python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+RUN --mount=type=secret,id=proxy_ca,required=true \
+    apt-get update && apt-get install -y --no-install-recommends chromium fonts-liberation && \
+    PIP_CERT=/run/secrets/proxy_ca pip install --no-cache-dir playwright==1.55.0
+WORKDIR /work
+CMD ["python", "projects/catchbot/tests/browser.py"]

@@ -1,0 +1,65 @@
+{
+  "sourceRevision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+  "checkpointRevision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "checkpoint": "mistralai/Timestral-5M",
+  "checkpointHashes": {
+    "config.json": "b5f27f61513f8fd1a3aa996f3720d3679cb40bce5bcb08eb3dc320ce726e7c2f",
+    "model.safetensors": "7ace108c4987e7f2a99a75a445240019d1d31c2117139d1bd05ffdfd25aca738",
+    "LICENSE": "648194727930df730890e9f9affdbcc5c930d406d6829559b25ca3d5a973fc8c"
+  },
+  "sourceObservedRevision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+  "torch": "2.6.0+cpu",
+  "numpy": "2.2.6",
+  "python": "3.12.15",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "threads": 1,
+  "loadMsIncludingDownload": 629.3580810000776,
+  "warmupCalls": 3,
+  "windows": 1485,
+  "latencyMs": {
+    "p50": 26.739173999999366,
+    "p95": 73.95862600005782
+  },
+  "configuration": {
+    "l1": 0.46,
+    "l2": 0.46,
+    "base": {
+      "x": 0,
+      "y": 0
+    },
+    "arenaRadius": 0.87,
+    "captureRadius": 0.062,
+    "proximityRadius": 0.15,
+    "kp": 6,
+    "velocity": [
+      2.2,
+      2.8
+    ],
+    "elbowMin": 0,
+    "elbowMax": 3.141592653589793,
+    "initialQ": [
+      -1.5707963267948966,
+      1.8
+    ],
+    "dt": 0.016666666666666666,
+    "sampleRate": 30,
+    "historyLength": 64,
+    "delay": 0.1,
+    "horizon": 0.3,
+    "predictionPeriod": 0.1,
+    "velocityWindow": 7,
+    "duration": 20,
+    "warmup": 2.4,
+    "suspensionThreshold": 0.25
+  },
+  "forecastOptions": {
+    "prediction_length": 9,
+    "symmetric_averaging": true,
+    "clip_nonnegative": true
+  },
+  "fixtureSha256": "e950fefde78f175120744ffa22e4e13ea63be1b4a16c608ba11acc293c49c8d4",
+  "windowSha256": "b623331c9b46d3c2b835262dac66c25d2f6e196502011a9e9278d57314017718",
+  "humanTrajectories": 0,
+  "limitations": "Synthetic preliminary experiment. No human relevance or joint 2D uncertainty calibration claim."
+}

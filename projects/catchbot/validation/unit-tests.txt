@@ -1,0 +1,35 @@
+✔ start, warm-up, pause, resume and restart lifecycle (9.152337ms)
+✔ warm-up never captures or scores even directly at tip (4.696649ms)
+✔ actual-tip contact ends active game (1.869655ms)
+✔ surviving 20 scored seconds wins without scoring while paused (11.098289ms)
+✔ frame suspension pauses rather than advancing simulation (0.406838ms)
+✔ fixed-step results independent of ordinary rendering cadence (8.376568ms)
+✔ model changes reset all histories and initialized robot is identical (1.298273ms)
+✔ replay is deterministic; both controllers use same constants (69.297271ms)
+✔ real async predictions invalidated by game reset (1.569154ms)
+✔ deployment counts busy requests and stale responses instead of replacing model (2.011204ms)
+✔ persistence uses last legal resampled observation (3.737778ms)
+✔ robust velocity predicts a known linear path (1.280761ms)
+✔ future events do not influence histories or forecasts (1.242447ms)
+✔ irregular-event resampling only holds observations at or before each sample (1.701103ms)
+✔ invalid, reordered and duplicate event times are deterministic (0.290665ms)
+✔ missing early history does not get fabricated (0.149003ms)
+✔ predictions obey legal workspace (0.751883ms)
+✔ future cutoff and expired predictions rejected (0.40564ms)
+✔ delayed and reordered asynchronous results cannot corrupt current state (0.546829ms)
+✔ predict rejects history after observationTime (0.837506ms)
+✔ FK manually checked straight, vertical and right-angle poses (1.060481ms)
+✔ IK/FK roundtrip throughout workspace, positive elbow branch (15.427167ms)
+✔ workspace projection checks reachability before cosine clamping (0.269536ms)
+✔ singular origin and nearly straight poses remain finite (0.931352ms)
+✔ shoulder crossing +/- pi remains continuous (0.357083ms)
+✔ servo obeys speed and elbow limits at every step (9.348953ms)
+✔ capture uses actual FK, never desired IK position (0.285274ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 488.083705

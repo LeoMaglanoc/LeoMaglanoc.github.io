@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: start, warm-up, pause, resume and restart lifecycle
+ok 1 - start, warm-up, pause, resume and restart lifecycle
+  ---
+  duration_ms: 43.907623
+  type: 'test'
+  ...
+# Subtest: warm-up never captures or scores even directly at tip
+ok 2 - warm-up never captures or scores even directly at tip
+  ---
+  duration_ms: 26.198366
+  type: 'test'
+  ...
+# Subtest: actual-tip contact ends active game
+ok 3 - actual-tip contact ends active game
+  ---
+  duration_ms: 34.248121
+  type: 'test'
+  ...
+# Subtest: surviving 20 scored seconds wins without scoring while paused
+ok 4 - surviving 20 scored seconds wins without scoring while paused
+  ---
+  duration_ms: 150.200773
+  type: 'test'
+  ...
+# Subtest: frame suspension pauses rather than advancing simulation
+ok 5 - frame suspension pauses rather than advancing simulation
+  ---
+  duration_ms: 0.437947
+  type: 'test'
+  ...
+# Subtest: fixed-step results independent of ordinary rendering cadence
+ok 6 - fixed-step results independent of ordinary rendering cadence
+  ---
+  duration_ms: 33.561326
+  type: 'test'
+  ...
+# Subtest: model changes reset all histories and initialized robot is identical
+ok 7 - model changes reset all histories and initialized robot is identical
+  ---
+  duration_ms: 40.956463
+  type: 'test'
+  ...
+# Subtest: replay is deterministic; both controllers use same constants
+ok 8 - replay is deterministic; both controllers use same constants
+  ---
+  duration_ms: 115.49814
+  type: 'test'
+  ...
+# Subtest: real async predictions invalidated by game reset
+ok 9 - real async predictions invalidated by game reset
+  ---
+  duration_ms: 1.02792
+  type: 'test'
+  ...
+# Subtest: deployment counts busy requests and stale responses instead of replacing model
+ok 10 - deployment counts busy requests and stale responses instead of replacing model
+  ---
+  duration_ms: 1.536932
+  type: 'test'
+  ...
+# Subtest: persistence uses last legal resampled observation
+ok 11 - persistence uses last legal resampled observation
+  ---
+  duration_ms: 46.077587
+  type: 'test'
+  ...
+# Subtest: robust velocity predicts a known linear path
+ok 12 - robust velocity predicts a known linear path
+  ---
+  duration_ms: 1.137721
+  type: 'test'
+  ...
+# Subtest: future events do not influence histories or forecasts
+ok 13 - future events do not influence histories or forecasts
+  ---
+  duration_ms: 13.480781
+  type: 'test'
+  ...
+# Subtest: irregular-event resampling only holds observations at or before each sample
+ok 14 - irregular-event resampling only holds observations at or before each sample
+  ---
+  duration_ms: 4.172329
+  type: 'test'
+  ...
+# Subtest: invalid, reordered and duplicate event times are deterministic
+ok 15 - invalid, reordered and duplicate event times are deterministic
+  ---
+  duration_ms: 0.637689
+  type: 'test'
+  ...
+# Subtest: missing early history does not get fabricated
+ok 16 - missing early history does not get fabricated
+  ---
+  duration_ms: 0.347531
+  type: 'test'
+  ...
+# Subtest: predictions obey legal workspace
+ok 17 - predictions obey legal workspace
+  ---
+  duration_ms: 0.708426
+  type: 'test'
+  ...
+# Subtest: future cutoff and expired predictions rejected
+ok 18 - future cutoff and expired predictions rejected
+  ---
+  duration_ms: 0.446857
+  type: 'test'
+  ...
+# Subtest: delayed and reordered asynchronous results cannot corrupt current state
+ok 19 - delayed and reordered asynchronous results cannot corrupt current state
+  ---
+  duration_ms: 1.59821
+  type: 'test'
+  ...
+# Subtest: predict rejects history after observationTime
+ok 20 - predict rejects history after observationTime
+  ---
+  duration_ms: 1.189901
+  type: 'test'
+  ...
+# Subtest: FK manually checked straight, vertical and right-angle poses
+ok 21 - FK manually checked straight, vertical and right-angle poses
+  ---
+  duration_ms: 1.771905
+  type: 'test'
+  ...
+# Subtest: IK/FK roundtrip throughout workspace, positive elbow branch
+ok 22 - IK/FK roundtrip throughout workspace, positive elbow branch
+  ---
+  duration_ms: 77.713282
+  type: 'test'
+  ...
+# Subtest: workspace projection checks reachability before cosine clamping
+ok 23 - workspace projection checks reachability before cosine clamping
+  ---
+  duration_ms: 3.667954
+  type: 'test'
+  ...
+# Subtest: singular origin and nearly straight poses remain finite
+ok 24 - singular origin and nearly straight poses remain finite
+  ---
+  duration_ms: 0.336221
+  type: 'test'
+  ...
+# Subtest: shoulder crossing +/- pi remains continuous
+ok 25 - shoulder crossing +/- pi remains continuous
+  ---
+  duration_ms: 1.642041
+  type: 'test'
+  ...
+# Subtest: servo obeys speed and elbow limits at every step
+ok 26 - servo obeys speed and elbow limits at every step
+  ---
+  duration_ms: 16.076866
+  type: 'test'
+  ...
+# Subtest: capture uses actual FK, never desired IK position
+ok 27 - capture uses actual FK, never desired IK position
+  ---
+  duration_ms: 0.225687
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1208.929832

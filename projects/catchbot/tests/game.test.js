@@ -1,13 +1,155 @@
-import test from 'node:test';import assert from 'node:assert/strict';
-import { Game, FixedClock } from '../src/game.js';import { CONFIG as C } from '../src/config.js';
-import { fk } from '../src/robot.js';import { replay } from '../src/replay.js';
-function tick(g,n){for(let i=0;i<n;i++)g.tick();}
-test('start, warm-up, pause, resume and restart lifecycle',()=>{const g=new Game();assert.equal(g.phase,'ready');g.start();assert.equal(g.phase,'paused');g.grab();tick(g,120);assert.equal(g.score,0);assert.equal(g.phase,'warmup');tick(g,30);assert.equal(g.phase,'playing');g.pause();const t=g.time;tick(g,120);assert.equal(g.time,t);g.grab();assert.equal(g.phase,'warmup');assert.equal(g.gate.latest,null);g.reset();assert.equal(g.score,0);assert.deepEqual(g.q,C.initialQ);});
-test('warm-up never captures or scores even directly at tip',()=>{const g=new Game();g.start();g.grab();g.move(fk(g.q).tip);tick(g,200);assert.equal(g.phase,'warmup');assert.equal(g.score,0);assert.deepEqual(g.q,C.initialQ);});
-test('actual-tip contact ends active game',()=>{const g=new Game('reactive');g.start();g.grab();tick(g,145);g.phase='playing';g.target=fk(g.q).tip;g.gate.latest=null;g.nextPrediction=Infinity;g.tick();assert.equal(g.phase,'caught');assert.equal(g.active,false);});
-test('surviving 20 scored seconds wins without scoring while paused',()=>{const g=new Game();g.start();g.grab();tick(g,145);g.phase='playing';g.gate.latest=null;g.nextPrediction=Infinity;tick(g,1201);assert.equal(g.phase,'won');assert.equal(g.score,20);});
-test('frame suspension pauses rather than advancing simulation',()=>{const g=new Game(),c=new FixedClock();g.start();g.grab();c.advance(0,g);c.advance(16.7,g);const t=g.time;c.advance(4000,g);assert.equal(g.time,t);assert.equal(g.phase,'paused');});
-test('fixed-step results independent of ordinary rendering cadence',()=>{function run(fps){const g=new Game(),c=new FixedClock();g.start();g.grab();for(let i=0;i<=fps*3;i++)c.advance(i*1000/fps,g);return {q:g.q,time:g.time,score:g.score,phase:g.phase};}assert.deepEqual(run(30),run(60));assert.deepEqual(run(60),run(120));});
-test('model changes reset all histories and initialized robot is identical',()=>{const g=new Game();g.start();g.grab();tick(g,180);g.reset('reactive');assert.deepEqual(g.q,C.initialQ);assert.equal(g.events.length,0);assert.equal(g.mode,'reactive');});
-test('replay is deterministic; both controllers use same constants',()=>{const e=Array.from({length:361},(_,i)=>({t:i/30,x:.6*Math.cos(i/40),y:.6*Math.sin(i/40)}));const a=replay(e,'velocity'),b=replay(e,'velocity'),r=replay(e,'reactive');assert.deepEqual(a.positions,b.positions);assert.equal(a.interceptions,b.interceptions);assert.equal(a.scoredSteps,r.scoredSteps);assert.equal(a.warmingSteps,r.warmingSteps);assert.ok(a.predictions.every(p=>p.sourceObservationTime<=p.generatedAt-C.delay+1e-8));});
-test('real async predictions invalidated by game reset',async()=>{const g=new Game();g.start();g.grab();tick(g,140);const h=g.events.slice(-64);let resolve;g.requestPrediction(h,()=>new Promise(r=>resolve=r));g.reset();resolve({predictedPosition:{x:0,y:0},generatedAt:0,sourceObservationTime:-.1,targetTime:.2,modelName:'velocity',latencyMs:0});await Promise.resolve();assert.equal(g.gate.latest,null);});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { Game, FixedClock } from '../src/game.js';
+import { CONFIG as C } from '../src/config.js';
+import { fk } from '../src/robot.js';
+import { replay } from '../src/replay.js';
+function tick(g, n) {
+  for (let i = 0; i < n; i++) g.tick();
+}
+test('start, warm-up, pause, resume and restart lifecycle', () => {
+  const g = new Game();
+  assert.equal(g.phase, 'ready');
+  g.start();
+  assert.equal(g.phase, 'paused');
+  g.grab();
+  tick(g, 120);
+  assert.equal(g.score, 0);
+  assert.equal(g.phase, 'warmup');
+  tick(g, 30);
+  assert.equal(g.phase, 'playing');
+  g.pause();
+  const t = g.time;
+  tick(g, 120);
+  assert.equal(g.time, t);
+  g.grab();
+  assert.equal(g.phase, 'warmup');
+  assert.equal(g.gate.latest, null);
+  g.reset();
+  assert.equal(g.score, 0);
+  assert.deepEqual(g.q, C.initialQ);
+});
+test('warm-up never captures or scores even directly at tip', () => {
+  const g = new Game();
+  g.start();
+  g.grab();
+  g.move(fk(g.q).tip);
+  tick(g, 200);
+  assert.equal(g.phase, 'warmup');
+  assert.equal(g.score, 0);
+  assert.deepEqual(g.q, C.initialQ);
+});
+test('actual-tip contact ends active game', () => {
+  const g = new Game('reactive');
+  g.start();
+  g.grab();
+  tick(g, 145);
+  g.phase = 'playing';
+  g.target = fk(g.q).tip;
+  g.gate.latest = null;
+  g.nextPrediction = Infinity;
+  g.tick();
+  assert.equal(g.phase, 'caught');
+  assert.equal(g.active, false);
+});
+test('surviving 20 scored seconds wins without scoring while paused', () => {
+  const g = new Game();
+  g.start();
+  g.grab();
+  tick(g, 145);
+  g.phase = 'playing';
+  g.gate.latest = null;
+  g.nextPrediction = Infinity;
+  tick(g, 1201);
+  assert.equal(g.phase, 'won');
+  assert.equal(g.score, 20);
+});
+test('frame suspension pauses rather than advancing simulation', () => {
+  const g = new Game(),
+    c = new FixedClock();
+  g.start();
+  g.grab();
+  c.advance(0, g);
+  c.advance(16.7, g);
+  const t = g.time;
+  c.advance(4000, g);
+  assert.equal(g.time, t);
+  assert.equal(g.phase, 'paused');
+});
+test('fixed-step results independent of ordinary rendering cadence', () => {
+  function run(fps) {
+    const g = new Game(),
+      c = new FixedClock();
+    g.start();
+    g.grab();
+    for (let i = 0; i <= fps * 3; i++) c.advance((i * 1000) / fps, g);
+    return { q: g.q, time: g.time, score: g.score, phase: g.phase };
+  }
+  assert.deepEqual(run(30), run(60));
+  assert.deepEqual(run(60), run(120));
+});
+test('model changes reset all histories and initialized robot is identical', () => {
+  const g = new Game();
+  g.start();
+  g.grab();
+  tick(g, 180);
+  g.reset('reactive');
+  assert.deepEqual(g.q, C.initialQ);
+  assert.equal(g.events.length, 0);
+  assert.equal(g.mode, 'reactive');
+});
+test('replay is deterministic; both controllers use same constants', () => {
+  const e = Array.from({ length: 361 }, (_, i) => ({
+    t: i / 30,
+    x: 0.6 * Math.cos(i / 40),
+    y: 0.6 * Math.sin(i / 40),
+  }));
+  const a = replay(e, 'velocity'),
+    b = replay(e, 'velocity'),
+    r = replay(e, 'reactive');
+  assert.deepEqual(a.positions, b.positions);
+  assert.equal(a.interceptions, b.interceptions);
+  assert.equal(a.scoredSteps, r.scoredSteps);
+  assert.equal(a.warmingSteps, r.warmingSteps);
+  assert.ok(a.predictions.every((p) => p.sourceObservationTime <= p.generatedAt - C.delay + 1e-8));
+});
+test('real async predictions invalidated by game reset', async () => {
+  const g = new Game();
+  g.start();
+  g.grab();
+  tick(g, 140);
+  const h = g.events.slice(-64);
+  let resolve;
+  g.requestPrediction(h, () => new Promise((r) => (resolve = r)));
+  g.reset();
+  resolve({
+    predictedPosition: { x: 0, y: 0 },
+    generatedAt: 0,
+    sourceObservationTime: -0.1,
+    targetTime: 0.2,
+    modelName: 'velocity',
+    latencyMs: 0,
+  });
+  await Promise.resolve();
+  assert.equal(g.gate.latest, null);
+});
+
+test('deployment counts busy requests and stale responses instead of replacing model', () => {
+  const e = Array.from({ length: 301 }, (_, i) => ({ t: i / 30, x: 0.4, y: 0.2 }));
+  const predictions = Array.from({ length: 70 }, (_, i) => {
+    const t = 2.2 + i * 0.1;
+    return {
+      modelName: 'timestral',
+      generatedAt: t,
+      sourceObservationTime: t - 0.1,
+      targetTime: t + 0.2,
+      latencyMs: 350,
+      predictedPosition: { x: 0.4, y: 0.2 },
+    };
+  });
+  const r = replay(e, 'timestral', { protocol: 'deployment', suppliedPredictions: predictions });
+  assert.ok(r.missedRequests > 0);
+  assert.ok(r.staleResponses > 0);
+  assert.equal(r.fallbackRate, 0);
+  assert.equal(r.interceptions, 0);
+});

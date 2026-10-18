@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+FROM ruby:3.3.5-slim@sha256:25a9df53c6f23406f6bc87426ad5bd74b6d99423a8c2ca630f2443dee2447f53
+RUN --mount=type=secret,id=proxy_ca,required=true \
+    apt-get update && apt-get install -y --no-install-recommends build-essential git imagemagick python3 python3-yaml python3-nbconvert nodejs npm
+WORKDIR /work
+COPY Gemfile Gemfile.lock /tmp/site-deps/
+RUN --mount=type=secret,id=proxy_ca,required=true \
+    cd /tmp/site-deps && SSL_CERT_FILE=/run/secrets/proxy_ca GIT_SSL_CAINFO=/run/secrets/proxy_ca bundle install --jobs=3
+RUN --mount=type=secret,id=proxy_ca,required=true apt-get install -y --no-install-recommends jupyter-core jupyter-nbconvert
+ENV JEKYLL_ENV=production
+CMD ["bundle", "exec", "jekyll", "build"]

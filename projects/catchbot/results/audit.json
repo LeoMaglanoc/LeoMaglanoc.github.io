@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "windows": 1485,
+  "causalSampleChecks": 95040,
+  "quantileShapes": [
+    1,
+    2,
+    9,
+    21
+  ],
+  "violations": 0,
+  "checks": "independent causal zero-order hold against original fixture events; timestamps; all raw quantile shapes, finiteness and ordering; clipped median targets; input hashes"
+}

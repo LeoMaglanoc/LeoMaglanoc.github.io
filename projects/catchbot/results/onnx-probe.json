@@ -1,0 +1,20 @@
+{
+  "sourceRevision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+  "checkpointRevision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "inputShape": [
+    1,
+    2,
+    64
+  ],
+  "outputShape": [
+    1,
+    2,
+    9,
+    21
+  ],
+  "status": "export-failed",
+  "browserIntegrationEnabled": false,
+  "note": "Fixed-shape finite-input export only. Full normalization, symmetric averaging and nonnegative clipping included.",
+  "error": "UnsupportedOperatorError(\"Exporting the operator 'aten::asinh' to ONNX opset version 18 is not supported. Please feel free to request support or submit a pull request on PyTorch GitHub: https://github.com/pytorch/pytorch/issues.\")",
+  "traceback": "Traceback (most recent call last):\n  File \"/work/projects/catchbot/experiments/export_onnx.py\", line 27, in main\n    torch.onnx.export(wrapper,(x,),str(OUT/'timestral-probe.onnx'),input_names=['context'],output_names=['quantiles'],opset_version=18,dynamo=False)\n  File \"/usr/local/lib/python3.12/site-packages/torch/onnx/__init__.py\", line 383, in export\n    export(\n  File \"/usr/local/lib/python3.12/site-packages/torch/onnx/utils.py\", line 495, in export\n    _export(\n  File \"/usr/local/lib/python3.12/site-packages/torch/onnx/utils.py\", line 1428, in _export\n    graph, params_dict, torch_out = _model_to_graph(\n                                    ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/torch/onnx/utils.py\", line 1057, in _model_to_graph\n    graph = _optimize_graph(\n            ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/torch/onnx/utils.py\", line 632, in _optimize_graph\n    graph = _C._jit_pass_onnx(graph, operator_export_type)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/torch/onnx/utils.py\", line 1709, in _run_symbolic_function\n    raise errors.UnsupportedOperatorError(\ntorch.onnx.errors.UnsupportedOperatorError: Exporting the operator 'aten::asinh' to ONNX opset version 18 is not supported. Please feel free to request support or submit a pull request on PyTorch GitHub: https://github.com/pytorch/pytorch/issues.\n"
+}

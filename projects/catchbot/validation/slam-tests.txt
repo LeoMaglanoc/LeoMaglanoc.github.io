@@ -1,0 +1,44 @@
+
+> phone-slam-viewer@1.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: demo registry uses a metadata file below the static base path
+ok 1 - demo registry uses a metadata file below the static base path
+  ---
+  duration_ms: 17.737941
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 353.759313
+
+> phone-slam-viewer@1.0.0 build
+> vite build
+
+vite v5.4.10 building for production...
+transforming...
+✓ 10 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   7.32 kB │ gzip:   2.54 kB
+dist/assets/index-DCoX55iK.css    5.17 kB │ gzip:   1.73 kB
+dist/assets/index-Cla4Kjvu.js   599.46 kB │ gzip: 153.73 kB
+✓ built in 7.03s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+> phone-slam-viewer@1.0.0 test:assets
+> node tests/assets-contract.mjs
+
+Validated 411 trajectory samples and browser assets.
+Validated four ICL sequences, frozen metrics, 15 sweep results, three held-out finalists, and GLB assets.
