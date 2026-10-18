@@ -1,0 +1,82 @@
+{
+  "note": "Jekyll globally minifies JavaScript and CSS. Source and published copies match; built hashes intentionally differ and built runtime is browser-tested.",
+  "files": [
+    {
+      "file": "index.html",
+      "sourceSha256": "a98bb0bf5770fb8ba9d968f380c36a940cd84f2da5f6fde65223dd4c108fe442",
+      "publishedSha256": "a98bb0bf5770fb8ba9d968f380c36a940cd84f2da5f6fde65223dd4c108fe442",
+      "builtSha256": "a98bb0bf5770fb8ba9d968f380c36a940cd84f2da5f6fde65223dd4c108fe442",
+      "builtBytes": 3228
+    },
+    {
+      "file": "style.css",
+      "sourceSha256": "a62fb2bf428c2f4ac002e3b2f9815ffde8476be899fe1609a1dfa3f4ea47f3d4",
+      "publishedSha256": "a62fb2bf428c2f4ac002e3b2f9815ffde8476be899fe1609a1dfa3f4ea47f3d4",
+      "builtSha256": "3dc2aa912691b3a7269404765ee6fbb075ddaef97850578dbcc548a934e204de",
+      "builtBytes": 5742
+    },
+    {
+      "file": "src/config.js",
+      "sourceSha256": "903be8e843e879e6d5ee392b0154d826116fc6b817a666831891e7fde4d256fb",
+      "publishedSha256": "903be8e843e879e6d5ee392b0154d826116fc6b817a666831891e7fde4d256fb",
+      "builtSha256": "c24776c808133a9b7134af566cb2615cef784c76c885c82231345485d00c91c3",
+      "builtBytes": 627
+    },
+    {
+      "file": "src/controller.js",
+      "sourceSha256": "07014be89e11d9351f5c99f08e39499168de364a0cf863d809e4733f2377bafe",
+      "publishedSha256": "07014be89e11d9351f5c99f08e39499168de364a0cf863d809e4733f2377bafe",
+      "builtSha256": "060d26dd44148637246040f11c813125d650aa6012d7aa666951e0167eb4d11f",
+      "builtBytes": 352
+    },
+    {
+      "file": "src/game.js",
+      "sourceSha256": "d0d47cdf96b061862e7d43b9a850f65ef9f743470e7fb8597cdaade79d7f0a00",
+      "publishedSha256": "d0d47cdf96b061862e7d43b9a850f65ef9f743470e7fb8597cdaade79d7f0a00",
+      "builtSha256": "00739850007af0ce6bf00d6e7d4a8fd20b6f563f210c39ce088760b24e5f7473",
+      "builtBytes": 4041
+    },
+    {
+      "file": "src/input.js",
+      "sourceSha256": "3afdc6de801f9e1febfdb0220dbf201a63bd16616d819db73940e5177f6d24a6",
+      "publishedSha256": "3afdc6de801f9e1febfdb0220dbf201a63bd16616d819db73940e5177f6d24a6",
+      "builtSha256": "ec071ca88bcd7e3cb92ae7d8e766dc97b1f63bcdf6b765338178b3dc168f493a",
+      "builtBytes": 916
+    },
+    {
+      "file": "src/main.js",
+      "sourceSha256": "8e6ba215d05b1ceb71dee2105d80ba49f0a868c5bf16f0d037082945cd0d45ef",
+      "publishedSha256": "8e6ba215d05b1ceb71dee2105d80ba49f0a868c5bf16f0d037082945cd0d45ef",
+      "builtSha256": "7a08aea5b73032fea46565273391b8b74490379b6d790fedc5c22468978d7295",
+      "builtBytes": 5850
+    },
+    {
+      "file": "src/predictors.js",
+      "sourceSha256": "ab644354966a6ae1152070562e0a14dfd083065efce0fb9772f4720b5f1ca455",
+      "publishedSha256": "ab644354966a6ae1152070562e0a14dfd083065efce0fb9772f4720b5f1ca455",
+      "builtSha256": "841ade8fab3b47f212ca02e9555891110e273c691a5cbbfc8e830444a13cba1c",
+      "builtBytes": 2165
+    },
+    {
+      "file": "src/renderer.js",
+      "sourceSha256": "6700a13d19b0180d0ba8d6d2fb6c8027c22df60ad9d89a7daa6b51056eaa8774",
+      "publishedSha256": "6700a13d19b0180d0ba8d6d2fb6c8027c22df60ad9d89a7daa6b51056eaa8774",
+      "builtSha256": "95391c2565fbc00b5458f8edbeff0a56986e7e2e5a7a6348f920c64444004586",
+      "builtBytes": 2240
+    },
+    {
+      "file": "src/replay.js",
+      "sourceSha256": "6109a8ffffebb05aeddecbe0b0ea7063fa4ab28efb79df00dee978321a09a74b",
+      "publishedSha256": "6109a8ffffebb05aeddecbe0b0ea7063fa4ab28efb79df00dee978321a09a74b",
+      "builtSha256": "707d7f623a69b467a4c4148f39cc2497e51720e769deb4dff0d129571f31f823",
+      "builtBytes": 2545
+    },
+    {
+      "file": "src/robot.js",
+      "sourceSha256": "a5d3e8cb466e47c039f81c3878154742ad3f9a815198a16e94072cd19a042cfb",
+      "publishedSha256": "a5d3e8cb466e47c039f81c3878154742ad3f9a815198a16e94072cd19a042cfb",
+      "builtSha256": "5f3adff9ca77619deb3a903b9491b8b25485c19fc56ca1bf8e36d96eb1c8fcc0",
+      "builtBytes": 1256
+    }
+  ]
+}

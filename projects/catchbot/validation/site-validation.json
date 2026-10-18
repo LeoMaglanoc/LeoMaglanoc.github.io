@@ -9,5 +9,12 @@
   "pagesBudgetBytes": 1000000000,
   "builtChrome": "passed desktop, portrait and landscape; blog link present",
   "physicalPhone": false,
-  "note": "Full Jekyll build plus final incremental refresh after input timing correction. Existing SLAM Vite build copied to _site/slam as in deployment workflow; PurgeCSS applied. Notebook CLI dependencies repaired in Docker image."
+  "note": "Full Jekyll build plus final incremental refresh after input timing correction. Existing SLAM Vite build copied to _site/slam as in deployment workflow; PurgeCSS applied. Notebook CLI dependencies repaired in Docker image.",
+  "deployment": "success",
+  "deploymentRun": 39120952891,
+  "sourceCommit": "9ffb98f1224f220da9b7a6439e9550700fcdfd2c",
+  "liveChrome": "desktop, portrait and landscape passed; blog link present; zero console errors",
+  "liveRuntimeFiles": 11,
+  "liveRuntimeBytes": 28962,
+  "liveRuntimeMatchesTestedBuild": true
 }

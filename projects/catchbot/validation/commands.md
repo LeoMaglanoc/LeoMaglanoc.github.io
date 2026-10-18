@@ -84,3 +84,29 @@ same local network, with a read-only Python server rooted at `_site` named
 `catchbot-built`. Default route: `http://catchbot-built:8765/catchbot/`.
 Desktop/portrait/landscape iframe startup, capture/release, About, no overflow,
 console checks and the blog link passed; `chrome-built.json` records outcomes.
+
+Final built-runtime and live checks (PASS):
+
+```sh
+# Same browser Docker command above, with:
+# CATCHBOT_URL=http://catchbot-built:8765/assets/interactive/catchbot/
+CATCHBOT_ROUTE=https://leonardo-maglanoc.com/catchbot/ CATCHBOT_LABEL=live \
+  python3 projects/catchbot/tests/route-smoke.py
+```
+
+The full interaction suite also passes against Jekyll-minified runtime files.
+Live smoke uses host Chromium 154.0.8037.57 with TLS verification enabled;
+all three viewports, iframe startup/capture/release, About, no overflow, console
+checks and the blog link pass. GitHub deployment run 39120952891 completed
+successfully for `9ffb98f`. All 11 live runtime body hashes equal the tested
+built files (28,962 bytes in total). `live-runtime.json` records every hash.
+
+An extra audit initially expected built files to equal canonical bytes; Jekyll's
+existing global JS/CSS minification legitimately changes them. The corrected audit
+checks source-to-published equality, records built transformation hashes, exercises
+the minified runtime in Chrome, then verifies live-to-built equality.
+
+`gh run list` returned HTTP 401 for the CLI API credential in this environment,
+while the authorized Git push succeeded. Public GitHub REST endpoints were used
+for read-only deployment monitoring instead; no login or credential replacement
+was attempted.

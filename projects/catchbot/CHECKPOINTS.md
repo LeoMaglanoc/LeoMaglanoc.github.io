@@ -98,3 +98,5 @@ saved outputs supersede those preliminary artifacts. An initial browser favicon
 the session proxy; adding local-only NO_PROXY entries resolved it.
 
 The final review corrected between-frame pointer timestamps: observations now queue until their actual simulation step. Two additional regression tests cover timing and reorder/reset handling. This does not change the saved synthetic trajectories or model results. Research checkpoint: `e8fc0b6` (`catchbot-research-2026-10-18`).
+
+Final complete archive tag: `catchbot-mvp-2026-10-18`. Deployed game source: `9ffb98f`. Live files match the local minified build by SHA-256; live Chrome route/blog evidence is retained. The final documentation-only commit skips CI because it does not change deployed game assets.

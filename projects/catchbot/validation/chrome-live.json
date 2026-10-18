@@ -1,0 +1,34 @@
+{
+  "url": "https://leonardo-maglanoc.com/catchbot/",
+  "physicalPhone": false,
+  "results": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "browser": "154.0.8037.57",
+      "errors": [],
+      "iframeSource": "/assets/interactive/catchbot/index.html"
+    },
+    {
+      "viewport": "portrait",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "browser": "154.0.8037.57",
+      "errors": [],
+      "iframeSource": "/assets/interactive/catchbot/index.html"
+    },
+    {
+      "viewport": "landscape",
+      "width": 844,
+      "height": 390,
+      "status": 200,
+      "browser": "154.0.8037.57",
+      "errors": [],
+      "iframeSource": "/assets/interactive/catchbot/index.html"
+    }
+  ],
+  "blogLink": true
+}

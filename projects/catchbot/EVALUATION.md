@@ -90,10 +90,10 @@ The smallest useful next experiment is collecting consented, locally exported hu
 
 ## Saved default-game frame scheduling
 
-| Viewport | Chromium | rAF median ms | rAF p95 ms |
+| Built-game viewport | Chromium | rAF median ms | rAF p95 ms |
 |---|---|---:|---:|
-| desktop (1440×900) | 155.0.8059.79 | 16.70 | 16.80 |
-| portrait (390×844) | 155.0.8059.79 | 16.70 | 16.70 |
-| landscape (844×390) | 155.0.8059.79 | 16.70 | 16.80 |
+| desktop (1440×900) | 155.0.8059.79 | 16.70 | 16.70 |
+| portrait (390×844) | 155.0.8059.79 | 16.70 | 16.80 |
+| landscape (844×390) | 155.0.8059.79 | 16.70 | 16.70 |
 
-Measured headless Docker Chromium intervals during automated input on the shared Xeon server. They correspond to roughly 60 Hz median scheduling; they do not establish physical Android FPS. Baseline predictor timings exclude history construction; PyTorch timings include the official forecaster but exclude context array construction.
+Measured headless Docker Chromium scheduling during automated input on the shared Xeon server. Approximately 60 Hz median scheduling is not a physical Android FPS result. `chrome-source.json` retains unminified checks; `chrome.json` tests the minified build; `chrome-live.json` records live fullscreen route checks. All 11 live runtime files match tested built hashes. Baseline predictor timings exclude history construction; PyTorch timings include the official forecaster but exclude context-array construction.

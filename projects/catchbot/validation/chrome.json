@@ -1,5 +1,5 @@
 {
-  "url": "http://catchbot-preview:8765/assets/interactive/catchbot/",
+  "url": "http://catchbot-built:8765/assets/interactive/catchbot/",
   "physicalPhone": false,
   "results": [
     {
@@ -11,179 +11,32 @@
       "errors": [],
       "observedState": {
         "phase": "caught",
-        "time": 3.1166666666666605,
-        "score": 0.7000000000000005,
+        "time": 2.8666666666666614,
+        "score": 0.44999999999999996,
         "q": [
-          -2.974273326509711,
-          1.2970842506665279
+          -2.3700383247577146,
+          1.250895080159197
         ],
         "target": {
-          "x": -0.5146323507146318,
-          "y": -0.5177389928536822
+          "x": -0.1108139156371124,
+          "y": -0.7215402056080427
         },
         "tip": {
-          "x": -0.5024243707809568,
-          "y": -0.5340072573851691
+          "x": -0.12897219067960744,
+          "y": -0.7346094683477243
         },
         "diagnostics": {
-          "updates": 10,
+          "updates": 7,
           "warmingSteps": 145,
           "expiredSteps": 0,
           "projected": 0,
           "failures": 0,
           "latencyMs": [
-            0.4000000001396984,
-            0,
-            0,
-            0.6999999999534339,
-            0,
-            0,
-            0,
-            0.10000000009313226,
-            0.10000000009313226,
-            0.19999999995343387
-          ]
-        },
-        "rejected": 0,
-        "config": {
-          "l1": 0.46,
-          "l2": 0.46,
-          "base": {
-            "x": 0,
-            "y": 0
-          },
-          "arenaRadius": 0.87,
-          "captureRadius": 0.062,
-          "proximityRadius": 0.15,
-          "kp": 6,
-          "velocity": [
-            2.2,
-            2.8
-          ],
-          "elbowMin": 0,
-          "elbowMax": 3.141592653589793,
-          "initialQ": [
-            -1.5707963267948966,
-            1.8
-          ],
-          "dt": 0.016666666666666666,
-          "sampleRate": 30,
-          "historyLength": 64,
-          "delay": 0.1,
-          "horizon": 0.3,
-          "predictionPeriod": 0.1,
-          "velocityWindow": 7,
-          "duration": 20,
-          "warmup": 2.4,
-          "suspensionThreshold": 0.25
-        }
-      },
-      "scriptSeconds": 12.482914713000127,
-      "rafMs": {
-        "n": 191,
-        "median": 16.699999999999818,
-        "p95": 16.800000000000182
-      },
-      "checks": "start, actual drag, warmup, online predictions, release pause, no scroll, compare, cancel, lost capture, visibility handler, restart, mode reset, resize"
-    },
-    {
-      "viewport": "portrait",
-      "width": 390,
-      "height": 844,
-      "touchEmulation": true,
-      "browser": "155.0.8059.79",
-      "errors": [],
-      "observedState": {
-        "phase": "playing",
-        "time": 9.200000000000037,
-        "score": 6.783333333333315,
-        "q": [
-          5.8702148559062035,
-          0.9246973293733497
-        ],
-        "target": {
-          "x": 0.7268025586559514,
-          "y": 0.0682495505946457
-        },
-        "tip": {
-          "x": 0.8224031399751559,
-          "y": 0.040641834209035804
-        },
-        "diagnostics": {
-          "updates": 70,
-          "warmingSteps": 145,
-          "expiredSteps": 0,
-          "projected": 0,
-          "failures": 0,
-          "latencyMs": [
-            0.30000000004656613,
-            0.10000000009313226,
-            0,
             0.19999999995343387,
             0,
-            0,
-            0.10000000009313226,
-            0.10000000009313226,
             0.09999999986030161,
             0.09999999986030161,
             0,
-            0,
-            0.10000000009313226,
-            0,
-            0.09999999986030161,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0.10000000009313226,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0.09999999986030161,
-            0.09999999986030161,
-            0.19999999995343387,
-            0.10000000009313226,
-            0,
-            0.19999999995343387,
-            0.10000000009313226,
-            0,
-            0.10000000009313226,
-            0.30000000004656613,
-            0.09999999986030161,
-            0,
-            0.10000000009313226,
-            0.10000000009313226,
-            0.10000000009313226,
-            0.09999999986030161,
-            0.09999999986030161,
-            0.09999999986030161,
-            0.6999999999534339,
-            0,
-            0.10000000009313226,
-            0,
-            0,
-            0.09999999986030161,
-            0.10000000009313226,
-            0.10000000009313226,
-            0,
-            0.09999999986030161,
-            0,
-            0.09999999986030161,
-            0,
-            0.10000000009313226,
-            0.09999999986030161,
-            0,
-            0,
-            0,
-            0,
-            0.09999999986030161,
-            0,
-            0,
-            0.10000000009313226,
             0,
             0
           ]
@@ -222,11 +75,93 @@
           "suspensionThreshold": 0.25
         }
       },
-      "scriptSeconds": 9.20643541100003,
+      "scriptSeconds": 10.182211380999888,
       "rafMs": {
-        "n": 589,
+        "n": 192,
         "median": 16.699999999999818,
         "p95": 16.700000000000728
+      },
+      "checks": "start, actual drag, warmup, online predictions, release pause, no scroll, compare, cancel, lost capture, visibility handler, restart, mode reset, resize"
+    },
+    {
+      "viewport": "portrait",
+      "width": 390,
+      "height": 844,
+      "touchEmulation": true,
+      "browser": "155.0.8059.79",
+      "errors": [],
+      "observedState": {
+        "phase": "caught",
+        "time": 2.933333333333328,
+        "score": 0.5166666666666666,
+        "q": [
+          -2.6264470577617356,
+          1.22384244160777
+        ],
+        "target": {
+          "x": -0.3578904267329319,
+          "y": -0.6362502954568073
+        },
+        "tip": {
+          "x": -0.32329772949150976,
+          "y": -0.680133294769239
+        },
+        "diagnostics": {
+          "updates": 8,
+          "warmingSteps": 145,
+          "expiredSteps": 0,
+          "projected": 0,
+          "failures": 0,
+          "latencyMs": [
+            0.30000000004656613,
+            0.10000000009313226,
+            0,
+            0,
+            0.09999999986030161,
+            0,
+            0,
+            0.09999999986030161
+          ]
+        },
+        "rejected": 0,
+        "config": {
+          "l1": 0.46,
+          "l2": 0.46,
+          "base": {
+            "x": 0,
+            "y": 0
+          },
+          "arenaRadius": 0.87,
+          "captureRadius": 0.062,
+          "proximityRadius": 0.15,
+          "kp": 6,
+          "velocity": [
+            2.2,
+            2.8
+          ],
+          "elbowMin": 0,
+          "elbowMax": 3.141592653589793,
+          "initialQ": [
+            -1.5707963267948966,
+            1.8
+          ],
+          "dt": 0.016666666666666666,
+          "sampleRate": 30,
+          "historyLength": 64,
+          "delay": 0.1,
+          "horizon": 0.3,
+          "predictionPeriod": 0.1,
+          "velocityWindow": 7,
+          "duration": 20,
+          "warmup": 2.4,
+          "suspensionThreshold": 0.25
+        }
+      },
+      "scriptSeconds": 9.36955085600016,
+      "rafMs": {
+        "n": 197,
+        "median": 16.699999999999818,
+        "p95": 16.800000000000182
       },
       "checks": "start, actual drag, warmup, online predictions, release pause, no scroll, compare, cancel, lost capture, visibility handler, restart, mode reset, resize"
     },
@@ -239,39 +174,33 @@
       "errors": [],
       "observedState": {
         "phase": "caught",
-        "time": 3.4166666666666594,
-        "score": 1.0000000000000013,
+        "time": 2.8999999999999946,
+        "score": 0.4833333333333333,
         "q": [
-          -2.833569555544486,
-          1.0902341619582483
+          -2.6341296601282287,
+          1.25571438485457
         ],
         "target": {
-          "x": -0.46601578995988174,
-          "y": -0.5618978964315878
+          "x": -0.3578903610641892,
+          "y": -0.6362502639358109
         },
         "tip": {
-          "x": -0.5173247612353373,
-          "y": -0.5926306024327825
+          "x": -0.3140804773588295,
+          "y": -0.6750561128378387
         },
         "diagnostics": {
-          "updates": 13,
+          "updates": 7,
           "warmingSteps": 145,
           "expiredSteps": 0,
           "projected": 0,
           "failures": 0,
           "latencyMs": [
-            0.39999999990686774,
-            0,
-            0,
-            0.19999999995343387,
-            0,
-            0.19999999995343387,
+            0.20000000018626451,
+            0.10000000009313226,
             0.09999999986030161,
-            0.2999999998137355,
+            0.10000000009313226,
             0,
             0.09999999986030161,
-            0,
-            0,
             0
           ]
         },
@@ -309,11 +238,11 @@
           "suspensionThreshold": 0.25
         }
       },
-      "scriptSeconds": 11.02939371499997,
+      "scriptSeconds": 9.174172322999993,
       "rafMs": {
-        "n": 230,
+        "n": 198,
         "median": 16.699999999999818,
-        "p95": 16.799999999999727
+        "p95": 16.700000000000728
       },
       "checks": "start, actual drag, warmup, online predictions, release pause, no scroll, compare, cancel, lost capture, visibility handler, restart, mode reset, resize"
     }

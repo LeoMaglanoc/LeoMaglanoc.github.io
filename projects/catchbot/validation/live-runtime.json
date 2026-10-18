@@ -1,0 +1,73 @@
+{
+  "sourceCommit": "9ffb98f1224f220da9b7a6439e9550700fcdfd2c",
+  "url": "https://leonardo-maglanoc.com/catchbot/",
+  "allMatchBuilt": true,
+  "files": [
+    {
+      "file": "index.html",
+      "bytes": 3228,
+      "sha256": "a98bb0bf5770fb8ba9d968f380c36a940cd84f2da5f6fde65223dd4c108fe442",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "style.css",
+      "bytes": 5742,
+      "sha256": "3dc2aa912691b3a7269404765ee6fbb075ddaef97850578dbcc548a934e204de",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/config.js",
+      "bytes": 627,
+      "sha256": "c24776c808133a9b7134af566cb2615cef784c76c885c82231345485d00c91c3",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/controller.js",
+      "bytes": 352,
+      "sha256": "060d26dd44148637246040f11c813125d650aa6012d7aa666951e0167eb4d11f",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/game.js",
+      "bytes": 4041,
+      "sha256": "00739850007af0ce6bf00d6e7d4a8fd20b6f563f210c39ce088760b24e5f7473",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/input.js",
+      "bytes": 916,
+      "sha256": "ec071ca88bcd7e3cb92ae7d8e766dc97b1f63bcdf6b765338178b3dc168f493a",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/main.js",
+      "bytes": 5850,
+      "sha256": "7a08aea5b73032fea46565273391b8b74490379b6d790fedc5c22468978d7295",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/predictors.js",
+      "bytes": 2165,
+      "sha256": "841ade8fab3b47f212ca02e9555891110e273c691a5cbbfc8e830444a13cba1c",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/renderer.js",
+      "bytes": 2240,
+      "sha256": "95391c2565fbc00b5458f8edbeff0a56986e7e2e5a7a6348f920c64444004586",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/replay.js",
+      "bytes": 2545,
+      "sha256": "707d7f623a69b467a4c4148f39cc2497e51720e769deb4dff0d129571f31f823",
+      "matchesLocalBuilt": true
+    },
+    {
+      "file": "src/robot.js",
+      "bytes": 1256,
+      "sha256": "5f3adff9ca77619deb3a903b9491b8b25485c19fc56ca1bf8e36d96eb1c8fcc0",
+      "matchesLocalBuilt": true
+    }
+  ]
+}

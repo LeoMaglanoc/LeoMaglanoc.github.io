@@ -1,0 +1,327 @@
+{
+  "deployedCodeCommit": "9ffb98f1224f220da9b7a6439e9550700fcdfd2c",
+  "finalTag": "catchbot-mvp-2026-10-18",
+  "note": "Final source/result/runtime/integration hashes. Validation artifacts excluded to avoid self-reference and mutable-log recursion. Official model hashes are in results/timestral-provenance.json.",
+  "files": [
+    {
+      "path": ".github/workflows/deploy.yml",
+      "bytes": 4114,
+      "sha256": "5be4c4e3c3f11d9c6077c094dd0f3cc5240170a4faacf5b7411fa1403d969065"
+    },
+    {
+      "path": "README.md",
+      "bytes": 47317,
+      "sha256": "d00b34b0fe78b773fd8b10266019e997065294671d41d9ded535df2cca24319f"
+    },
+    {
+      "path": "_blogs/2025-12-28-AI-coding-agent-case-study.md",
+      "bytes": 3546,
+      "sha256": "94786a1bbafde8eeeac7d52664b34b004f6de38cbabc23d40d300f398e03278d"
+    },
+    {
+      "path": "_layouts/catchbot-fullscreen.html",
+      "bytes": 899,
+      "sha256": "0cdaaacf24a2855d8267a9d51cef6828e28423a905e5080f843ec1259ff52c36"
+    },
+    {
+      "path": "_pages/catchbot.md",
+      "bytes": 298,
+      "sha256": "c80521f836a2ae560e7f5100ea09d0e2d730706deee80d17be914a34d0ca5e09"
+    },
+    {
+      "path": "assets/interactive/catchbot/index.html",
+      "bytes": 3228,
+      "sha256": "a98bb0bf5770fb8ba9d968f380c36a940cd84f2da5f6fde65223dd4c108fe442"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/config.js",
+      "bytes": 884,
+      "sha256": "903be8e843e879e6d5ee392b0154d826116fc6b817a666831891e7fde4d256fb"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/controller.js",
+      "bytes": 492,
+      "sha256": "07014be89e11d9351f5c99f08e39499168de364a0cf863d809e4733f2377bafe"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/game.js",
+      "bytes": 6229,
+      "sha256": "d0d47cdf96b061862e7d43b9a850f65ef9f743470e7fb8597cdaade79d7f0a00"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/input.js",
+      "bytes": 1701,
+      "sha256": "3afdc6de801f9e1febfdb0220dbf201a63bd16616d819db73940e5177f6d24a6"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/main.js",
+      "bytes": 7228,
+      "sha256": "8e6ba215d05b1ceb71dee2105d80ba49f0a868c5bf16f0d037082945cd0d45ef"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/predictors.js",
+      "bytes": 3777,
+      "sha256": "ab644354966a6ae1152070562e0a14dfd083065efce0fb9772f4720b5f1ca455"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/renderer.js",
+      "bytes": 3594,
+      "sha256": "6700a13d19b0180d0ba8d6d2fb6c8027c22df60ad9d89a7daa6b51056eaa8774"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/replay.js",
+      "bytes": 4965,
+      "sha256": "6109a8ffffebb05aeddecbe0b0ea7063fa4ab28efb79df00dee978321a09a74b"
+    },
+    {
+      "path": "assets/interactive/catchbot/src/robot.js",
+      "bytes": 2123,
+      "sha256": "a5d3e8cb466e47c039f81c3878154742ad3f9a815198a16e94072cd19a042cfb"
+    },
+    {
+      "path": "assets/interactive/catchbot/style.css",
+      "bytes": 7447,
+      "sha256": "a62fb2bf428c2f4ac002e3b2f9815ffde8476be899fe1609a1dfa3f4ea47f3d4"
+    },
+    {
+      "path": "projects/catchbot/.gitignore",
+      "bytes": 67,
+      "sha256": "d794e5d4a2d96c5b42d746ad4ce10d105e7c927cede4faaf6f0a2aeb153d9432"
+    },
+    {
+      "path": "projects/catchbot/ARCHITECTURE.md",
+      "bytes": 4010,
+      "sha256": "ad42208ec70a815d640be6da7b1377d2803a5e55023d3f19b2f1b9ee70c03157"
+    },
+    {
+      "path": "projects/catchbot/CHECKPOINTS.md",
+      "bytes": 5677,
+      "sha256": "b0226d9fa058f5ef5d982cb8ee20e5503a9ca43196bf92ac4c1cc32bb235963b"
+    },
+    {
+      "path": "projects/catchbot/Dockerfile.browser",
+      "bytes": 419,
+      "sha256": "306c5c57ab689d028b9d835e0709b5d7cbde26c3d00fc110f284d03f3bb3fb13"
+    },
+    {
+      "path": "projects/catchbot/Dockerfile.experiments",
+      "bytes": 600,
+      "sha256": "dce3c1fc68434056d734ac4a7f070a5f29e7388c0acfb76fdfcb887a5633d09b"
+    },
+    {
+      "path": "projects/catchbot/Dockerfile.site",
+      "bytes": 743,
+      "sha256": "e07124e008eb1479079b536537a31413930fd609595f019059beff50c53af47f"
+    },
+    {
+      "path": "projects/catchbot/EVALUATION.md",
+      "bytes": 10084,
+      "sha256": "c913d8d70c6ded80cf6da26988fe1432dffa6e308e6eed8f8e9b16290a8d950a"
+    },
+    {
+      "path": "projects/catchbot/IMPLEMENTATION_REPORT.md",
+      "bytes": 9446,
+      "sha256": "096be4f04c7db6c5e11a00b237602561d3a92eba1d1fc21349f9859e8bbc4558"
+    },
+    {
+      "path": "projects/catchbot/README.md",
+      "bytes": 7060,
+      "sha256": "d56a191bc204e2c35982a2f6d05427777d89b5c64f2d33fd40ba5cc5fb87fedd"
+    },
+    {
+      "path": "projects/catchbot/REVIEW.md",
+      "bytes": 4966,
+      "sha256": "765f3dfad4a49702a34141eb01c00c64a533c7082faaeabdda7183a64f3237ef"
+    },
+    {
+      "path": "projects/catchbot/experiments/audit.py",
+      "bytes": 2315,
+      "sha256": "0f608868606f72b5733f0a214686e163058068c49412bbfab7b4a947b7bf927d"
+    },
+    {
+      "path": "projects/catchbot/experiments/evaluate.py",
+      "bytes": 2974,
+      "sha256": "49f962a617d45484b4dfdf164c28efdc62bbd9adb991bb9d6b5ae9c4bd1f4d5b"
+    },
+    {
+      "path": "projects/catchbot/experiments/export_onnx.py",
+      "bytes": 3459,
+      "sha256": "982ecf345f96a70f121364eac0822b8fcd2cc70b0f889ecd6956305254a3da32"
+    },
+    {
+      "path": "projects/catchbot/experiments/forecast_timestral.py",
+      "bytes": 3836,
+      "sha256": "9ca537c61ed4953d0f8a3ca5a58575294f59321e95cfdb5c923e232bf402e0e6"
+    },
+    {
+      "path": "projects/catchbot/experiments/prepare.mjs",
+      "bytes": 2445,
+      "sha256": "feaea3f3d3836c6cf053febfe29635068dc253fe7478feeb13755639df58e841"
+    },
+    {
+      "path": "projects/catchbot/experiments/replay.mjs",
+      "bytes": 4665,
+      "sha256": "80049dbe30f231ce41f98cb7c33af8af23bd098af27d22ba61107a1333d96e2e"
+    },
+    {
+      "path": "projects/catchbot/experiments/requirements.txt",
+      "bytes": 106,
+      "sha256": "f2105e4969151d575b4eaffb14a9b25cff0f358b11f53cc6bc3cb8c3aa259752"
+    },
+    {
+      "path": "projects/catchbot/index.html",
+      "bytes": 3228,
+      "sha256": "a98bb0bf5770fb8ba9d968f380c36a940cd84f2da5f6fde65223dd4c108fe442"
+    },
+    {
+      "path": "projects/catchbot/package.json",
+      "bytes": 139,
+      "sha256": "5de8ab6b876517b72cc454cbaafea1c3c2b61516a82e6f939563bca48b2ae2c2"
+    },
+    {
+      "path": "projects/catchbot/results/audit.json",
+      "bytes": 331,
+      "sha256": "ba8bcc21d462e2dd4b32aaf4ef54f8f56dd70cc165d56dae779c86600d342813"
+    },
+    {
+      "path": "projects/catchbot/results/baseline-predictions.json.gz",
+      "bytes": 80762,
+      "sha256": "cdc9fc9ab9be6a4f3511c33473a383f3f9eb6341ac35ed2070eba1c1ae07db99"
+    },
+    {
+      "path": "projects/catchbot/results/environment-lock.txt",
+      "bytes": 482,
+      "sha256": "5feda6287783f6694e9148eedbdf655d40b5e96eae56deaa10cb483e6144e549"
+    },
+    {
+      "path": "projects/catchbot/results/evaluation.json",
+      "bytes": 331143,
+      "sha256": "040fb1079fa9753a41542a6cdef087d225b9bbfb20085d385153062b8d2bae6f"
+    },
+    {
+      "path": "projects/catchbot/results/fixtures.json",
+      "bytes": 360041,
+      "sha256": "e950fefde78f175120744ffa22e4e13ea63be1b4a16c608ba11acc293c49c8d4"
+    },
+    {
+      "path": "projects/catchbot/results/forecast-metrics.json",
+      "bytes": 10150,
+      "sha256": "311d97994d934767097661a15cd7ccb01f5b4d673bb8fffc469e1e6a5869b90c"
+    },
+    {
+      "path": "projects/catchbot/results/onnx-probe-mapped.json",
+      "bytes": 2197,
+      "sha256": "94fc0ce99f0c5f8f3c9de19ba5c1f88862a3d3090c5b651a3f3bbbabda8a0cec"
+    },
+    {
+      "path": "projects/catchbot/results/onnx-probe.json",
+      "bytes": 2163,
+      "sha256": "f88417a7a916e94d98901b98b70939dc487f9d0bfd2b207225b5e66abb648c7f"
+    },
+    {
+      "path": "projects/catchbot/results/replay-table.txt",
+      "bytes": 2504,
+      "sha256": "782f15f3f4cab8d10fdf62ed6e7fd287ca46288db01f54a41ca19ad9afd526b1"
+    },
+    {
+      "path": "projects/catchbot/results/timestral-predictions.json.gz",
+      "bytes": 4701350,
+      "sha256": "f85b1886879900062a25c9f37b1fd1162c877e20db8ded262819c138f11dca3e"
+    },
+    {
+      "path": "projects/catchbot/results/timestral-provenance.json",
+      "bytes": 1927,
+      "sha256": "c951d51e8043309d141fd2cbd9b2882504d72dc77e0ca21f3c3671b0b1b93299"
+    },
+    {
+      "path": "projects/catchbot/results/windows.json",
+      "bytes": 5326234,
+      "sha256": "b623331c9b46d3c2b835262dac66c25d2f6e196502011a9e9278d57314017718"
+    },
+    {
+      "path": "projects/catchbot/src/config.js",
+      "bytes": 884,
+      "sha256": "903be8e843e879e6d5ee392b0154d826116fc6b817a666831891e7fde4d256fb"
+    },
+    {
+      "path": "projects/catchbot/src/controller.js",
+      "bytes": 492,
+      "sha256": "07014be89e11d9351f5c99f08e39499168de364a0cf863d809e4733f2377bafe"
+    },
+    {
+      "path": "projects/catchbot/src/game.js",
+      "bytes": 6229,
+      "sha256": "d0d47cdf96b061862e7d43b9a850f65ef9f743470e7fb8597cdaade79d7f0a00"
+    },
+    {
+      "path": "projects/catchbot/src/input.js",
+      "bytes": 1701,
+      "sha256": "3afdc6de801f9e1febfdb0220dbf201a63bd16616d819db73940e5177f6d24a6"
+    },
+    {
+      "path": "projects/catchbot/src/main.js",
+      "bytes": 7228,
+      "sha256": "8e6ba215d05b1ceb71dee2105d80ba49f0a868c5bf16f0d037082945cd0d45ef"
+    },
+    {
+      "path": "projects/catchbot/src/predictors.js",
+      "bytes": 3777,
+      "sha256": "ab644354966a6ae1152070562e0a14dfd083065efce0fb9772f4720b5f1ca455"
+    },
+    {
+      "path": "projects/catchbot/src/renderer.js",
+      "bytes": 3594,
+      "sha256": "6700a13d19b0180d0ba8d6d2fb6c8027c22df60ad9d89a7daa6b51056eaa8774"
+    },
+    {
+      "path": "projects/catchbot/src/replay.js",
+      "bytes": 4965,
+      "sha256": "6109a8ffffebb05aeddecbe0b0ea7063fa4ab28efb79df00dee978321a09a74b"
+    },
+    {
+      "path": "projects/catchbot/src/robot.js",
+      "bytes": 2123,
+      "sha256": "a5d3e8cb466e47c039f81c3878154742ad3f9a815198a16e94072cd19a042cfb"
+    },
+    {
+      "path": "projects/catchbot/style.css",
+      "bytes": 7447,
+      "sha256": "a62fb2bf428c2f4ac002e3b2f9815ffde8476be899fe1609a1dfa3f4ea47f3d4"
+    },
+    {
+      "path": "projects/catchbot/tests/browser.py",
+      "bytes": 5781,
+      "sha256": "ef051d57ea1670c58f9c9c3673a4aa65563c593c9d40bdf03f4dbe7e353a49f2"
+    },
+    {
+      "path": "projects/catchbot/tests/game.test.js",
+      "bytes": 5647,
+      "sha256": "4843d46189488ea02701b920341a3e2b81e60c97adfb37714d685f886da22765"
+    },
+    {
+      "path": "projects/catchbot/tests/predictors.test.js",
+      "bytes": 3288,
+      "sha256": "b9ae666434bca1395486406cbf1c7c01026dbbcfd1df7ab280197f0e74407e30"
+    },
+    {
+      "path": "projects/catchbot/tests/robot.test.js",
+      "bytes": 2454,
+      "sha256": "74a270a1189fc889b3bfbfacb2675550611efb135aca841bcfe3f8aae6c3d85a"
+    },
+    {
+      "path": "projects/catchbot/tests/route-smoke.py",
+      "bytes": 2565,
+      "sha256": "38098b5e87090dc469fb5a6b51f1f7c3c3ff5c21da8e1e3d3ab9fd226a0be2b8"
+    },
+    {
+      "path": "scripts/check-project-links.py",
+      "bytes": 5577,
+      "sha256": "49804c0fa0a469e3016414e5d0b7c6809d218b074919704a7da7895f5174d676"
+    },
+    {
+      "path": "scripts/project-assets.json",
+      "bytes": 25583,
+      "sha256": "cd926e4c070474a45f49d0392017545103b1de6e7161b51c4586d8e95527c2fc"
+    }
+  ]
+}
