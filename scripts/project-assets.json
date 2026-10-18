@@ -736,5 +736,39 @@
       "vendor/three.core.js",
       "vendor/three.module.js"
     ]
+  },
+  "projects/g1-soccer": {
+    "destination": "assets/interactive/g1-soccer",
+    "files": [
+      "display-meshes.json",
+      "index.html",
+      "style.css",
+      "ort.js",
+      "manifest.json",
+      "config.json",
+      "layouts.json",
+      "replays.json",
+      "THIRD_PARTY_NOTICES.md",
+      "src/assets.js",
+      "src/contract.js",
+      "src/main.js",
+      "src/model.js",
+      "src/policy.js",
+      "src/renderer.js",
+      "src/simulation.js",
+      "src/worker.js",
+      "models/coach.onnx",
+      "models/walker.onnx",
+      "runtime/mujoco.js",
+      "runtime/mujoco.wasm",
+      "runtime/package.json",
+      "scene/g1_description/g1_12dof.xml",
+      "scene/soccer_field.xml",
+      "licenses/APACHE-2.0.txt",
+      "licenses/ORT-MIT.txt",
+      "licenses/SOCCER-LICENSE.txt",
+      "licenses/THREE-MIT.txt",
+      "licenses/UNITREE-BSD-3-Clause.txt"
+    ]
   }
 }

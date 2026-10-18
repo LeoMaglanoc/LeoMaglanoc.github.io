@@ -1,0 +1,113 @@
+{
+  "field_cfg": {
+    "half_x": 4.0,
+    "half_y": 3.0,
+    "target_radius": 0.5,
+    "ball_radius": 0.11,
+    "margin": 0.6,
+    "min_robot_ball_dist": 0.8,
+    "min_ball_target_dist": 1.5
+  },
+  "low_level": {
+    "num_actions": 12,
+    "num_obs": 47,
+    "simulation_dt": 0.002,
+    "control_decimation": 10,
+    "kps": [
+      100,
+      100,
+      100,
+      150,
+      40,
+      40,
+      100,
+      100,
+      100,
+      150,
+      40,
+      40
+    ],
+    "kds": [
+      2,
+      2,
+      2,
+      4,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      2,
+      2
+    ],
+    "default_angles": [
+      -0.1,
+      0.0,
+      0.0,
+      0.3,
+      -0.2,
+      0.0,
+      -0.1,
+      0.0,
+      0.0,
+      0.3,
+      -0.2,
+      0.0
+    ],
+    "ang_vel_scale": 0.25,
+    "dof_pos_scale": 1.0,
+    "dof_vel_scale": 0.05,
+    "action_scale": 0.25,
+    "cmd_scale": [
+      2.0,
+      2.0,
+      0.25
+    ],
+    "gait_period": 0.8
+  },
+  "high_level": {
+    "decimation": 10,
+    "delta_cmd_limit": [
+      0.2,
+      0.1,
+      0.1
+    ],
+    "cmd_limit": [
+      1.0,
+      0.5,
+      0.5
+    ],
+    "max_episode_seconds": 20.0,
+    "fall_height_threshold": 0.5,
+    "dribble_speed_soft_limit": 0.6
+  },
+  "reward": {
+    "approach_weight": 1.0,
+    "alignment_weight": 0.05,
+    "dribble_weight": 1.0,
+    "dribble_speed_penalty": 0.5,
+    "cmd_smooth_penalty": 0.05,
+    "alive_bonus": 0.005,
+    "fall_penalty": 10.0,
+    "success_bonus": 20.0,
+    "dribble_range": 0.5
+  },
+  "ppo": {
+    "total_timesteps": 2000000,
+    "n_envs": 8,
+    "n_steps": 512,
+    "batch_size": 256,
+    "n_epochs": 10,
+    "learning_rate": 0.0003,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.001,
+    "net_arch": [
+      64,
+      64
+    ],
+    "seed": 0
+  }
+}

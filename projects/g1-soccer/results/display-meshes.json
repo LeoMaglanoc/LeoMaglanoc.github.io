@@ -1,0 +1,141 @@
+{
+  "tool": "fast-simplification 0.1.13",
+  "triangle_budget_per_mesh": 1500,
+  "meshes": [
+    {
+      "id": 0,
+      "original_triangles": 21216,
+      "display_triangles": 1499
+    },
+    {
+      "id": 1,
+      "original_triangles": 36102,
+      "display_triangles": 8830
+    },
+    {
+      "id": 2,
+      "original_triangles": 3632,
+      "display_triangles": 1500
+    },
+    {
+      "id": 3,
+      "original_triangles": 3842,
+      "display_triangles": 1500
+    },
+    {
+      "id": 4,
+      "original_triangles": 5924,
+      "display_triangles": 1500
+    },
+    {
+      "id": 5,
+      "original_triangles": 17096,
+      "display_triangles": 1560
+    },
+    {
+      "id": 6,
+      "original_triangles": 1422,
+      "display_triangles": 1422
+    },
+    {
+      "id": 7,
+      "original_triangles": 13066,
+      "display_triangles": 1499
+    },
+    {
+      "id": 8,
+      "original_triangles": 3624,
+      "display_triangles": 1500
+    },
+    {
+      "id": 9,
+      "original_triangles": 3852,
+      "display_triangles": 1500
+    },
+    {
+      "id": 10,
+      "original_triangles": 5924,
+      "display_triangles": 1499
+    },
+    {
+      "id": 11,
+      "original_triangles": 17044,
+      "display_triangles": 1562
+    },
+    {
+      "id": 12,
+      "original_triangles": 1422,
+      "display_triangles": 1422
+    },
+    {
+      "id": 13,
+      "original_triangles": 13074,
+      "display_triangles": 1500
+    },
+    {
+      "id": 14,
+      "original_triangles": 156507,
+      "display_triangles": 21265
+    },
+    {
+      "id": 15,
+      "original_triangles": 4866,
+      "display_triangles": 1500
+    },
+    {
+      "id": 16,
+      "original_triangles": 18654,
+      "display_triangles": 1500
+    },
+    {
+      "id": 17,
+      "original_triangles": 3534,
+      "display_triangles": 1500
+    },
+    {
+      "id": 18,
+      "original_triangles": 8004,
+      "display_triangles": 1500
+    },
+    {
+      "id": 19,
+      "original_triangles": 4982,
+      "display_triangles": 1500
+    },
+    {
+      "id": 20,
+      "original_triangles": 1774,
+      "display_triangles": 1500
+    },
+    {
+      "id": 21,
+      "original_triangles": 69696,
+      "display_triangles": 1500
+    },
+    {
+      "id": 22,
+      "original_triangles": 3534,
+      "display_triangles": 1500
+    },
+    {
+      "id": 23,
+      "original_triangles": 8036,
+      "display_triangles": 1500
+    },
+    {
+      "id": 24,
+      "original_triangles": 4998,
+      "display_triangles": 1499
+    },
+    {
+      "id": 25,
+      "original_triangles": 1774,
+      "display_triangles": 1500
+    },
+    {
+      "id": 26,
+      "original_triangles": 69630,
+      "display_triangles": 1500
+    }
+  ]
+}

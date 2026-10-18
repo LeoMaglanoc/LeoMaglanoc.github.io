@@ -3,7 +3,7 @@
   "successes": 84,
   "mean_seconds": 14.366000000000001,
   "mean_reward": 18.459108129474394,
-  "wall_seconds": 60.572192223,
+  "wall_seconds": 61.21447788500018,
   "versions": {
     "python": "3.11.17",
     "torch": "2.7.1+cpu",

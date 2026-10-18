@@ -1,0 +1,13 @@
+{
+  "browser": "155.0.8059.84",
+  "orientation_change": true,
+  "repeated_replay_transitions": 8,
+  "delayed_animation_timestamps_ms": 250,
+  "touch_camera_orbit": true,
+  "camera_preserves_physics": true,
+  "keyboard_start": true,
+  "about_pauses_and_resumes": true,
+  "missing_policy_shows_retry": true,
+  "failureMessage": "failed to load external data file: http://127.0.0.1:8097/assets/interactive/g1-soccer/models/coach.onnx",
+  "errors": []
+}

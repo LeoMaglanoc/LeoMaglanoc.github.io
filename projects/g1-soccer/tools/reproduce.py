@@ -18,6 +18,8 @@ subprocess.run(
     check=True,
 )
 subprocess.run([sys.executable, str(root / "tools/export_models.py")], check=True)
-(root / "requirements.lock").write_text(
+(root / "results/environment-lock.txt").write_text(
     subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True)
 )
+
+subprocess.run([sys.executable, str(root / "tools/visual_meshes.py")], check=True)

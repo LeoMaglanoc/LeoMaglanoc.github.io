@@ -1,0 +1,257 @@
+[
+  {
+    "name": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "mobile_emulation": false,
+    "browser": "155.0.8059.84",
+    "load_ms": 4034,
+    "attempt_wall_ms": 8812,
+    "simulation_seconds": 8.6,
+    "realtime_factor": 0.9759418974126192,
+    "outcome": "success",
+    "performance": "Live physics · ready on your device",
+    "errors": [],
+    "missing": [],
+    "warnings": [
+      "\u001b[0;93m2026-10-18 23:39:50.778899 [W:onnxruntime:Default, cpuid_info.cc:91 LogEarlyWarning] Unknown CPU vendor. cpuinfo_vendor value: 0\u001b[m"
+    ],
+    "control_bounds": [
+      {
+        "label": "Reset view",
+        "x": 1008.640625,
+        "y": 836,
+        "w": 77.359375,
+        "h": 44
+      },
+      {
+        "label": "i",
+        "x": 1382,
+        "y": 36.796875,
+        "w": 34,
+        "h": 34
+      },
+      {
+        "label": "Target",
+        "x": 1139,
+        "y": 511.84375,
+        "w": 89,
+        "h": 36
+      },
+      {
+        "label": "Ball",
+        "x": 1231,
+        "y": 511.84375,
+        "w": 89,
+        "h": 36
+      },
+      {
+        "label": "Camera",
+        "x": 1323,
+        "y": 511.84375,
+        "w": 89,
+        "h": 36
+      },
+      {
+        "label": "Start dribbling ↗",
+        "x": 1135,
+        "y": 617.84375,
+        "w": 281,
+        "h": 48
+      },
+      {
+        "label": "Reset",
+        "x": 1135,
+        "y": 673.84375,
+        "w": 136.5,
+        "h": 44
+      },
+      {
+        "label": "New layout",
+        "x": 1279.5,
+        "y": 673.84375,
+        "w": 136.5,
+        "h": 44
+      },
+      {
+        "label": "Watch reference",
+        "x": 1135,
+        "y": 725.84375,
+        "w": 281,
+        "h": 44
+      }
+    ]
+  },
+  {
+    "name": "phone-portrait",
+    "viewport": {
+      "width": 412,
+      "height": 915
+    },
+    "mobile_emulation": true,
+    "browser": "155.0.8059.84",
+    "load_ms": 3587,
+    "attempt_wall_ms": 8708,
+    "simulation_seconds": 8.6,
+    "realtime_factor": 0.9875976113918236,
+    "outcome": "success",
+    "performance": "Live physics · ready on your device",
+    "errors": [],
+    "missing": [],
+    "warnings": [
+      "\u001b[0;93m2026-10-18 23:40:08.757399 [W:onnxruntime:Default, cpuid_info.cc:91 LogEarlyWarning] Unknown CPU vendor. cpuinfo_vendor value: 0\u001b[m"
+    ],
+    "control_bounds": [
+      {
+        "label": "Reset view",
+        "x": 332.53125,
+        "y": 505.40625,
+        "w": 67.46875,
+        "h": 44
+      },
+      {
+        "label": "i",
+        "x": 360,
+        "y": 581.203125,
+        "w": 34,
+        "h": 34
+      },
+      {
+        "label": "Target",
+        "x": 22,
+        "y": 819.5,
+        "w": 55.328125,
+        "h": 34
+      },
+      {
+        "label": "Ball",
+        "x": 80.328125,
+        "y": 819.5,
+        "w": 55.34375,
+        "h": 34
+      },
+      {
+        "label": "Camera",
+        "x": 138.671875,
+        "y": 819.5,
+        "w": 55.328125,
+        "h": 34
+      },
+      {
+        "label": "Start dribbling ↗",
+        "x": 214,
+        "y": 736.65625,
+        "w": 180,
+        "h": 47.109375
+      },
+      {
+        "label": "Reset",
+        "x": 214,
+        "y": 789.765625,
+        "w": 87,
+        "h": 41.109375
+      },
+      {
+        "label": "New layout",
+        "x": 307,
+        "y": 789.765625,
+        "w": 87,
+        "h": 41.109375
+      },
+      {
+        "label": "Watch reference",
+        "x": 214,
+        "y": 836.875,
+        "w": 180,
+        "h": 41.125
+      }
+    ]
+  },
+  {
+    "name": "phone-landscape",
+    "viewport": {
+      "width": 915,
+      "height": 412
+    },
+    "mobile_emulation": true,
+    "browser": "155.0.8059.84",
+    "load_ms": 3505,
+    "attempt_wall_ms": 8700,
+    "simulation_seconds": 8.6,
+    "realtime_factor": 0.9885057471264368,
+    "outcome": "success",
+    "performance": "Live physics · ready on your device",
+    "errors": [],
+    "missing": [],
+    "warnings": [
+      "\u001b[0;93m2026-10-18 23:40:26.032600 [W:onnxruntime:Default, cpuid_info.cc:91 LogEarlyWarning] Unknown CPU vendor. cpuinfo_vendor value: 0\u001b[m"
+    ],
+    "control_bounds": [
+      {
+        "label": "Reset view",
+        "x": 543.640625,
+        "y": 358,
+        "w": 77.359375,
+        "h": 44
+      },
+      {
+        "label": "i",
+        "x": 865,
+        "y": 19.59375,
+        "w": 34,
+        "h": 34
+      },
+      {
+        "label": "Target",
+        "x": 777,
+        "y": 191.1875,
+        "w": 39,
+        "h": 32
+      },
+      {
+        "label": "Ball",
+        "x": 817,
+        "y": 191.1875,
+        "w": 39,
+        "h": 32
+      },
+      {
+        "label": "Camera",
+        "x": 857,
+        "y": 191.1875,
+        "w": 39,
+        "h": 32
+      },
+      {
+        "label": "Start dribbling ↗",
+        "x": 652,
+        "y": 269.1875,
+        "w": 247,
+        "h": 38
+      },
+      {
+        "label": "Reset",
+        "x": 652,
+        "y": 313.1875,
+        "w": 120.5,
+        "h": 34
+      },
+      {
+        "label": "New layout",
+        "x": 778.5,
+        "y": 313.1875,
+        "w": 120.5,
+        "h": 34
+      },
+      {
+        "label": "Watch reference",
+        "x": 652,
+        "y": 353.1875,
+        "w": 247,
+        "h": 30
+      }
+    ]
+  }
+]

@@ -11,11 +11,18 @@ services:
       MPLCONFIGDIR: /tmp/matplotlib
     command: python tools/reproduce.py
   preview:
-    image: g1-soccer-reference:local
+    image: python:3.11-slim-bookworm@sha256:0a310eeecf4e1f5a0743f9a6520c90c88d089c903ca5fd283f501e3a805f5f89
     user: "1000:1000"
     volumes: ["../..:/work:ro"]
     working_dir: /work
     ports: ["8097:8000"]
+    command: python -m http.server 8000 --bind 0.0.0.0
+  built-preview:
+    image: python:3.11-slim-bookworm@sha256:0a310eeecf4e1f5a0743f9a6520c90c88d089c903ca5fd283f501e3a805f5f89
+    user: "1000:1000"
+    volumes: ["../..:/work:ro"]
+    working_dir: /work/_site
+    ports: ["8098:8000"]
     command: python -m http.server 8000 --bind 0.0.0.0
 secrets:
   proxy_ca:

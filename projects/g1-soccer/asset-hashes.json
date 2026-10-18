@@ -1,0 +1,182 @@
+[
+  {
+    "path": "assets/interactive/euroguessr/vendor/ort-wasm-simd-threaded.wasm",
+    "bytes": 11905541,
+    "sha256": "45eaee27761ad883742a8d4b8fce1538d60ce43b51adf1726fafccc59b8c1a15"
+  },
+  {
+    "path": "assets/interactive/language-vision/vendor/ort-wasm-simd-threaded.mjs",
+    "bytes": 20321,
+    "sha256": "90a557d15c02bac4504d95b67f431d8594635ed2a0a62a7f2cd83d090ff91d3e"
+  },
+  {
+    "path": "assets/interactive/language-vision/vendor/ort.wasm.min.mjs",
+    "bytes": 49856,
+    "sha256": "69751720f611e37d1ce2fa3c6ebaa80f949014752636c5f8887a63d40feadcc7"
+  },
+  {
+    "path": "assets/interactive/mobile-sorting/vendor/OrbitControls.js",
+    "bytes": 38703,
+    "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c"
+  },
+  {
+    "path": "assets/interactive/mobile-sorting/vendor/three.core.js",
+    "bytes": 1401321,
+    "sha256": "3cd45beb4da9ce682bb7f5894dafd8a146379aa4b6b5aa3acd9ef5d47fdaaf92"
+  },
+  {
+    "path": "assets/interactive/mobile-sorting/vendor/three.module.js",
+    "bytes": 603380,
+    "sha256": "ce6be0cb5ead0027e1f6094dd82ad43bba0886c03324a3b21fd9a33ac93fc2b4"
+  },
+  {
+    "path": "assets/interactive/shared/mujoco-three-renderer.js",
+    "bytes": 12268,
+    "sha256": "3cac5830d2ab68b17e6a09506418cbe366ef81d2fadd867139bd025ecdac0397"
+  },
+  {
+    "path": "projects/g1-soccer/THIRD_PARTY_NOTICES.md",
+    "bytes": 1967,
+    "sha256": "eacf325cf99b4570560bf4fc021544d8732186463c5c8a38ebca23e80208a753"
+  },
+  {
+    "path": "projects/g1-soccer/config.json",
+    "bytes": 1795,
+    "sha256": "f01601d6746baac94d9aa8ff022e076f8c73b81e77c387d0b474c302f7ac066b"
+  },
+  {
+    "path": "projects/g1-soccer/display-meshes.json",
+    "bytes": 5036207,
+    "sha256": "79ed449d604cfa2e84f0d6a24a1e43e0f61f04a042bd0f57df00409626a6413a"
+  },
+  {
+    "path": "projects/g1-soccer/index.html",
+    "bytes": 7740,
+    "sha256": "000621ec1438591e8c1ef480c15ca6895eba864943eec41fdfd458664436205b"
+  },
+  {
+    "path": "projects/g1-soccer/layouts.json",
+    "bytes": 38525,
+    "sha256": "a79053821da7a175232e11f29b86e14e7140304f8daa387054af06c8dcd3287b"
+  },
+  {
+    "path": "projects/g1-soccer/licenses/APACHE-2.0.txt",
+    "bytes": 11355,
+    "sha256": "7b127e355b573187c40dd99dac59536f350a0c11c5bfccc886483604a4004500"
+  },
+  {
+    "path": "projects/g1-soccer/licenses/ORT-MIT.txt",
+    "bytes": 1073,
+    "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+  },
+  {
+    "path": "projects/g1-soccer/licenses/SOCCER-LICENSE.txt",
+    "bytes": 1387,
+    "sha256": "6ca01970c4e66d2d5bebd0a00b55de5b4081017e0f0c97ddb415cda28e3e8ffa"
+  },
+  {
+    "path": "projects/g1-soccer/licenses/THREE-MIT.txt",
+    "bytes": 1081,
+    "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+  },
+  {
+    "path": "projects/g1-soccer/licenses/UNITREE-BSD-3-Clause.txt",
+    "bytes": 1561,
+    "sha256": "aef6394ba1597725a68308167324e675f562e6606027404deb1b9da254c2b9c1"
+  },
+  {
+    "path": "projects/g1-soccer/manifest.json",
+    "bytes": 863,
+    "sha256": "a003308a6b2fdb4d7d89b7d2084e06b7bca8e4ea726212b91b52407e0cc9161d"
+  },
+  {
+    "path": "projects/g1-soccer/models/coach.onnx",
+    "bytes": 22087,
+    "sha256": "fad52b5775a6445575370fc59bce61f04ba694e6ef4c14725a8160fa9e9a4781"
+  },
+  {
+    "path": "projects/g1-soccer/models/walker.onnx",
+    "bytes": 127100,
+    "sha256": "929dbd2a7846f3063eb463037fc544e825ccc4e7b5a85b1601b05d9175d3d2ec"
+  },
+  {
+    "path": "projects/g1-soccer/ort.js",
+    "bytes": 425,
+    "sha256": "9cbbde2d49f2374dade8617b776302cd594dae756755a61811cc0e6320725d82"
+  },
+  {
+    "path": "projects/g1-soccer/replays.json",
+    "bytes": 91555,
+    "sha256": "ef514c098afec7797d2fbef5fcead0a7dccb18debef47380ee6d905a5cc58971"
+  },
+  {
+    "path": "projects/g1-soccer/runtime/mujoco.js",
+    "bytes": 292374,
+    "sha256": "45e8e0e1617c19fbf7f00b36a6a72d1c0c980c0a4f38523e04f0641e8fbab7b9"
+  },
+  {
+    "path": "projects/g1-soccer/runtime/mujoco.wasm",
+    "bytes": 10143561,
+    "sha256": "832597ae0a0e306c97ed43d2a9bbca033cf3e547eced410fb9011d87a68d4207"
+  },
+  {
+    "path": "projects/g1-soccer/runtime/package.json",
+    "bytes": 1291,
+    "sha256": "71bd565a806e8ae902ff2b0e3b536d171412b20f52ba292c75daa32054ea7e93"
+  },
+  {
+    "path": "projects/g1-soccer/scene/g1_description/g1_12dof.xml",
+    "bytes": 15594,
+    "sha256": "c31f8cc483d8b6b141c1e41a177c9305928615baecd76ee52a2dd87598257c01"
+  },
+  {
+    "path": "projects/g1-soccer/scene/soccer_field.xml",
+    "bytes": 2396,
+    "sha256": "c4c7e28ac2d6bc30de1e209282fe67c7ce0ed3bac210d94a7acf236ec3def079"
+  },
+  {
+    "path": "projects/g1-soccer/src/assets.js",
+    "bytes": 1590,
+    "sha256": "c7b05340d3766757f9515e33f6a10ce3ac3eb9d9135573b316088fd22b0b2260"
+  },
+  {
+    "path": "projects/g1-soccer/src/contract.js",
+    "bytes": 3130,
+    "sha256": "348674d2fe7ae10a6dcc031458e23a826a8b3ef7ffb0c53777901d32f160b752"
+  },
+  {
+    "path": "projects/g1-soccer/src/main.js",
+    "bytes": 15323,
+    "sha256": "1bb1232a65d04a6da0d59cd2f79f885678200da45cefafa8f523bfa5bd066e71"
+  },
+  {
+    "path": "projects/g1-soccer/src/model.js",
+    "bytes": 1290,
+    "sha256": "7c9df297a526311cda2a6e09aecc19a1f0412e924f32dc1bfa871252385bd236"
+  },
+  {
+    "path": "projects/g1-soccer/src/policy.js",
+    "bytes": 1383,
+    "sha256": "48bac5e47945f046139e99386808ab2bd0d79899fafc966a7d4d05c4fa04f647"
+  },
+  {
+    "path": "projects/g1-soccer/src/renderer.js",
+    "bytes": 3950,
+    "sha256": "23cfc87409c18b5bdcda9a4d9f7b79bcb0e3de8eee1ea603d59210708533fa41"
+  },
+  {
+    "path": "projects/g1-soccer/src/simulation.js",
+    "bytes": 4306,
+    "sha256": "98392cf8a568310a573139780e6602db347ed9ccb856e4357ceb12a29b595930"
+  },
+  {
+    "path": "projects/g1-soccer/src/worker.js",
+    "bytes": 5610,
+    "sha256": "5d7bddc61fd946d3ba1190d52073542385c4fe891806eea920b9798bf9332e5b"
+  },
+  {
+    "path": "projects/g1-soccer/style.css",
+    "bytes": 10898,
+    "sha256": "78a83c1f929a1c504f5b6d70c5ad061ec1211de04472f394a5a5e71aa12f36c9"
+  }
+]

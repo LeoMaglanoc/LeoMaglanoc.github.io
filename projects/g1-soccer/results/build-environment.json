@@ -1,0 +1,7 @@
+{
+  "reference_image": "sha256:ab040de1607d7ec0d311687c7dd08f6068e749eb9be015a9c8d759e9f162f3ac",
+  "jekyll_image": "amirpourmand/al-folio:v0.14.7@sha256:7e9ed24ef0291295eade76e5f7eed7075a32a2e8296beb9e10e84b65f35a4ada",
+  "native_reproduction": "passed from staged upstream source and locked image",
+  "native_reference_commit": "42003c3",
+  "docker_version": "28.4.0"
+}

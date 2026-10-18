@@ -1,0 +1,12 @@
+{
+  "name": "g1-soccer-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/contract.test.js",
+    "browser": "node tests/browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.57.0"
+  }
+}
