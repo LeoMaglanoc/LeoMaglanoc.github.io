@@ -1,0 +1,22 @@
+services:
+  tools:
+    build:
+      context: .
+      secrets: [proxy_ca]
+    image: g1-soccer-reference:local
+    user: "1000:1000"
+    volumes: ["../..:/work"]
+    working_dir: /work/projects/g1-soccer
+    environment:
+      MPLCONFIGDIR: /tmp/matplotlib
+    command: python tools/reproduce.py
+  preview:
+    image: g1-soccer-reference:local
+    user: "1000:1000"
+    volumes: ["../..:/work:ro"]
+    working_dir: /work
+    ports: ["8097:8000"]
+    command: python -m http.server 8000 --bind 0.0.0.0
+secrets:
+  proxy_ca:
+    file: ${SOCCER_CA_BUNDLE:-/etc/ssl/certs/ca-certificates.crt}

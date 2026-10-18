@@ -1,0 +1,12 @@
+{
+  "max_abs_errors": {
+    "coach": 5.960464477539062e-07,
+    "walker": 7.152557373046875e-07,
+    "hidden": 1.7881393432617188e-07,
+    "cell": 4.76837158203125e-07
+  },
+  "tolerance": 1e-05,
+  "coach_samples": 184,
+  "walker_samples": 256,
+  "checkpoint_timesteps": 2363808
+}
