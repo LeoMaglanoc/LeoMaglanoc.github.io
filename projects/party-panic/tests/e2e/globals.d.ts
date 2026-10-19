@@ -13,7 +13,7 @@ declare global {
                 semantics: string;
                 rtt: number;
                 fps: { median: number; p5: number };
-                counts: { sent: number; received: number; rejected: number };
+                counts: { sent: number; received: number; rejected: number; sentBytes: number; receivedBytes: number };
             };
             getLogs: () => unknown[];
             sendControl: (v: unknown) => void;

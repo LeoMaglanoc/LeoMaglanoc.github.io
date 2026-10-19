@@ -22,3 +22,21 @@ test('solo loads real Ammo, keyboard movement and checkpoint respawn', async ({ 
     await page.waitForTimeout(1000);
     expect(errors).toEqual([]);
 });
+
+test('startup holds room and solo actions until Ammo is ready', async ({ page }) => {
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    await page.route('**/ammo/ammo.wasm.js', async (route) => {
+        await gate;
+        await route.continue();
+    });
+    await page.goto('./?debug=1', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#solo')).toBeDisabled();
+    await expect(page.locator('#solo')).toContainText('Loading the course');
+    await expect(page.locator('#host')).toBeDisabled();
+    await expect(page.locator('#join-open')).toBeDisabled();
+    release();
+    await expect(page.locator('#solo')).toBeEnabled({ timeout: 20000 });
+    await page.locator('#solo').click();
+    await expect(page.locator('#countdown')).toBeVisible();
+});

@@ -12,7 +12,7 @@ const escape = (s: string) =>
     s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 $('#app').innerHTML =
     `<div class="shade" id="shade"></div><header class="topbar"><a class="brand" href="./">PARTY<br><b>PANIC!</b></a><div class="top-right"><span class="tag">Small party. Big chaos.</span><span class="pill"><i></i>1–8 friends</span></div></header>
-<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="primary" id="solo">Play solo <span>↗</span></button><button class="secondary" id="host">Host a party <span>＋</span></button><button class="quiet" id="join-open">Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
+<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
 <footer class="bottom-bar" id="footer"><span>ORIGINAL COURSE / NO ELIMINATION</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
 <section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
@@ -537,6 +537,8 @@ function labels() {
 async function boot() {
     try {
         await scene.init($<HTMLCanvasElement>('#application-canvas'));
+        $('#solo').innerHTML = 'Play solo <span>↗</span>';
+        for (const id of ['solo', 'host', 'join-open']) $<HTMLButtonElement>('#' + id).disabled = false;
         log('engine-ready', { version: '2.23.3' });
         $('#stats').textContent = 'Ready. Solo practice needs no signaling.';
         frameAt = performance.now();
