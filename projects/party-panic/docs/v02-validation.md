@@ -55,3 +55,51 @@ three full Laser/Dash cycles: exact repeated native body counts Laser2/Dash15, n
 page errors. Laser here is an explicit disposable floor prototype; shooter rules are
 G5. Existing course/physics4 browser checks pass (latest61.93s input-only finish).
 Independent review found/fixed the P2 rematch-history reset issue; no P0/P1 defects.
+
+## G2/G3 — movement and presentation
+
+See v02-movement.md and v02-presentation.md for before/after measurements and scope.
+Vector acceleration removes direction-dependent tuning. Jump buffering/coyote time,
+bounded cosmetic guest jump feedback and history reset preserve host authority.
+Actual input-only course tests complete in roughly58–66 simulated seconds; three
+host-input bots finished in52.70/58.42/61.98 seconds with no falls in the recorded run.
+This is automated evidence, not a first-time human race. Collision course dimensions
+remain stable; player bumping remains disabled and was not physically prototyped.
+
+## G5/G6 — Laser Tag, AI and multiplayer
+
+Laser Tag has the original shared-cover arena, authoritative capsule/ray intersections,
+3Hz firing, range/occlusion/shield checks, host respawns/scores and 90-second results.
+Solo supports0/1/3/7 input-driven AI opponents in either mode. They use the same host
+input and scoring rules as humans, without injected positions, tags or checkpoints.
+Guest Laser positions interpolate authoritative snapshots; unconstrained prediction
+was removed after independent review found it could visually pass through cover.
+
+Real hosted Chrome WebRTC tests passed at source3d7a26a: two to eight clients,
+malformed/forged/stale rejection, impairments/duplicates, cover, actual fire/tag,
+score agreement, rematches, disconnects and switching modes in the same room.
+See v02-network.md for exact run, runtime channel properties and test limitations.
+
+## G7 — final local release checks
+
+Source6ef427c: typecheck/lint/**91 unit tests**/production build passed. Local browser
+suite: **18 passed,2 skipped** (the two real WebRTC cases run separately in hosted
+Chrome). Production UI-only QA: **6/6 passed**, three viewports per minigame, actual
+keyboard or simultaneous touch input, three bots, no debug API or runtime/asset errors.
+Evidence includes18 screenshots, six diagnostic exports and two landscape recordings.
+See v02-performance.md for actual software-rendered measurements and API outcomes.
+
+Final independent review challenged authority, cleanup, stale input, touch ownership,
+network budgets, guest cover prediction and measurements. Identified critical defects
+were fixed before release; per-round FPS/RTT sampling was corrected in the final pass.
+
+### Remaining acceptance limits
+
+- **High acceptance gap:** physical Android/iOS matrix, human matches, real-phone
+  FPS/thermal behavior and cross-platform fullscreen/orientation remain unverified.
+- **Medium:** no TURN means some NAT/network combinations cannot connect; no host
+  migration. The browser host is trusted. Phone join reliability is unmeasured.
+- **Medium:** Laser guest movement uses100ms interpolation and no rewind; real-phone
+  latency and aim usability need human testing. Movement retransmissions are unlimited.
+- **Low:** player bumping is disabled; course tuning uses automated inputs rather than
+  first-time human playtests. No claims of complete physical-device certification.
