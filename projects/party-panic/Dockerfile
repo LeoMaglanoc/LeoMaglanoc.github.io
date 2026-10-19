@@ -7,4 +7,6 @@ COPY . .
 RUN npm run typecheck && npm run lint && npm test && npm run build
 FROM nginx:1.28-alpine
 COPY --from=build /app/dist /usr/share/nginx/html/party-panic
+# Public files may originate in a workspace with umask 077. Nginx runs as an unprivileged user.
+RUN chmod -R a+rX /usr/share/nginx/html/party-panic
 EXPOSE 80

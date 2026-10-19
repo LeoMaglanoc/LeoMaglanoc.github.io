@@ -44,7 +44,14 @@ test('real WebRTC: two to eight clients, impaired movement, authority, full room
             [host, guest].map((p) =>
                 p.evaluate(() => {
                     const d = window.partyDebug.getDiagnostics();
-                    return { ice: d.ice, semantics: d.semantics, rtt: d.rtt, fps: d.fps, counts: d.counts };
+                    return {
+                        ice: d.ice,
+                        semantics: d.semantics,
+                        rtt: d.rtt,
+                        fps: d.fps,
+                        counts: d.counts,
+                        elapsedSeconds: d.elapsedSeconds
+                    };
                 })
             )
         );
@@ -74,7 +81,10 @@ test('real WebRTC: two to eight clients, impaired movement, authority, full room
             return Math.hypot(r.x - p.x, r.y - p.y, r.z - p.z);
         });
         expect(correction).toBeLessThan(0.8);
-        await guest.evaluate(() => window.partyDebug.sendRaw({ type: 'finish', playerId: 'host', time: 0 }));
+        await guest.evaluate(() => {
+            window.partyDebug.setFaults({ delay: 0, jitter: 0, loss: 0, reorder: 0 });
+            window.partyDebug.sendRaw({ type: 'finish', playerId: 'host', time: 0 });
+        });
         await expect
             .poll(() => host.evaluate(() => window.partyDebug.getDiagnostics().counts.rejected))
             .toBeGreaterThan(0);
@@ -124,6 +134,15 @@ test('real WebRTC: two to eight clients, impaired movement, authority, full room
         const results = await host.evaluate(() => window.partyDebug.getState());
         expect(results.players.filter((p) => p.finish !== null)).toHaveLength(7);
         expect(results.players.filter((p) => !p.connected && p.finish === null)).toHaveLength(1);
+        console.log(
+            'EIGHT CLIENT RESULT EVIDENCE',
+            JSON.stringify({
+                players: results.players.length,
+                finished: 7,
+                dnf: 1,
+                host: await host.evaluate(() => window.partyDebug.getDiagnostics())
+            })
+        );
         await host.locator('#rematch').click();
         await expect(guest.locator('#roster')).toContainText('Host');
         await host.close();

@@ -620,12 +620,19 @@ async function boot() {
                             movement: l.movement?.peerConnection?.iceConnectionState,
                             signal: l.control?.peerConnection?.signalingState
                         })),
+                        elapsedSeconds: Math.max(1, (performance.now() - transport.started) / 1000),
                         ice: transport.ice,
                         semantics: transport.semantics,
                         rtt: transport.rtt,
                         bodies: scene.liveBodies.size,
                         fps: summary(frames),
-                        counts: { sent: transport.sent, received: transport.received, rejected: transport.rejected }
+                        counts: {
+                            sent: transport.sent,
+                            received: transport.received,
+                            sentBytes: transport.sentBytes,
+                            receivedBytes: transport.receivedBytes,
+                            rejected: transport.rejected
+                        }
                     }),
                     setFaults: (f: { delay: number; jitter: number; loss: number; reorder: number }) =>
                         (transport.fault.faults = f),

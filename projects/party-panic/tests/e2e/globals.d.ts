@@ -8,6 +8,7 @@ declare global {
             addTestPlayer: (name: string) => unknown;
             getDiagnostics: () => {
                 bodies: number;
+                elapsedSeconds: number;
                 ice: string;
                 semantics: string;
                 rtt: number;

@@ -17,6 +17,8 @@ jobs:
         working-directory: projects/party-panic
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: projects/party-panic
       - uses: actions/setup-node@v4
         with:
           node-version: 24
