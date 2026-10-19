@@ -1,0 +1,87 @@
+[
+  {
+    "mesh": 0,
+    "original_triangles": 10484,
+    "display_triangles": 2528
+  },
+  {
+    "mesh": 1,
+    "original_triangles": 10484,
+    "display_triangles": 788
+  },
+  {
+    "mesh": 2,
+    "original_triangles": 1612,
+    "display_triangles": 584
+  },
+  {
+    "mesh": 3,
+    "original_triangles": 1612,
+    "display_triangles": 584
+  },
+  {
+    "mesh": 4,
+    "original_triangles": 10484,
+    "display_triangles": 1563
+  },
+  {
+    "mesh": 5,
+    "original_triangles": 1724,
+    "display_triangles": 694
+  },
+  {
+    "mesh": 6,
+    "original_triangles": 1040,
+    "display_triangles": 436
+  },
+  {
+    "mesh": 7,
+    "original_triangles": 10484,
+    "display_triangles": 1589
+  },
+  {
+    "mesh": 8,
+    "original_triangles": 1040,
+    "display_triangles": 368
+  },
+  {
+    "mesh": 9,
+    "original_triangles": 10484,
+    "display_triangles": 1198
+  },
+  {
+    "mesh": 10,
+    "original_triangles": 4970,
+    "display_triangles": 1251
+  },
+  {
+    "mesh": 11,
+    "original_triangles": 1360,
+    "display_triangles": 367
+  },
+  {
+    "mesh": 12,
+    "original_triangles": 10484,
+    "display_triangles": 1587
+  },
+  {
+    "mesh": 13,
+    "original_triangles": 10484,
+    "display_triangles": 586
+  },
+  {
+    "mesh": 14,
+    "original_triangles": 3672,
+    "display_triangles": 314
+  },
+  {
+    "mesh": 15,
+    "original_triangles": 3672,
+    "display_triangles": 314
+  },
+  {
+    "mesh": 16,
+    "original_triangles": 10484,
+    "display_triangles": 552
+  }
+]

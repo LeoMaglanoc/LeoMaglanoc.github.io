@@ -1,0 +1,30 @@
+{
+  "cube": {
+    "max_absolute_difference": {
+      "pos": 1.4432899320127035e-15,
+      "velocity": 3.8326191908251245e-15,
+      "qpos": 3.393672432678973e-13,
+      "ctrl": 0.0,
+      "time": 0.0,
+      "grip": 3.0780933357732465e-14
+    },
+    "contacts_identical": true,
+    "phase_count": 10,
+    "native_success": true,
+    "browser_success": true
+  },
+  "cylinder": {
+    "max_absolute_difference": {
+      "pos": 2.1024463726537768e-05,
+      "velocity": 0.00027964533677185446,
+      "qpos": 2.7576264995943234e-05,
+      "ctrl": 0.0,
+      "time": 0.0,
+      "grip": 5.953361471123381e-06
+    },
+    "contacts_identical": true,
+    "phase_count": 10,
+    "native_success": true,
+    "browser_success": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "yam-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:browser": "node tools/browser_evaluate.cjs",
+    "test:viewports": "node tools/browser_viewports.cjs",
+    "record": "node tools/browser_record.cjs"
+  },
+  "devDependencies": { "playwright": "1.58.2" }
+}

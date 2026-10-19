@@ -16,7 +16,7 @@ REV = "62ab00f2bc44f6f20c1c9b7a13f3fb1dd41a4e35"
 API = f"https://api.github.com/repos/google-deepmind/mujoco_menagerie/contents/i2rt_yam"
 BASE = f"https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/{REV}/i2rt_yam"
 ROOT = Path(__file__).resolve().parents[1]
-DEST = ROOT / "assets" / "i2rt_yam"
+DEST = ROOT / "upstream"
 
 
 def get_bytes(url: str) -> bytes:

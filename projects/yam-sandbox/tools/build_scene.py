@@ -12,7 +12,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-YAM_DIR = ROOT / "assets" / "i2rt_yam"
+YAM_DIR = ROOT / "upstream"
 
 
 def element(tag: str, parent: ET.Element, **attributes: str) -> ET.Element:
