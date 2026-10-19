@@ -1,0 +1,11 @@
+services:
+  party-panic:
+    build:
+      context: .
+      secrets:
+        - proxy_ca
+    ports:
+      - '8080:80'
+secrets:
+  proxy_ca:
+    file: ${CODEX_PROXY_CERT:-/etc/ssl/certs/ca-certificates.crt}
