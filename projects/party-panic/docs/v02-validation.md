@@ -40,3 +40,18 @@ Ready gestures but cannot run locally under managed browser UDP policy.
 Reference runtime follow-up: Freerun HTTP200/canvas/input probe succeeded; Blaster
 HTTP200/canvas/control text observed, screenshot exceeded30s and input probe was not
 reached. No reference movement/performance comparison is inferred from software rendering.
+
+## G4 — two-mode lifecycle
+
+Protocol v2 names modeId+roundId on gameplay inputs/snapshots/events and readiness;
+unknown versions, stale rounds and cross-mode inputs are rejected before sequence
+advancement. Only host lobby UI selects the mode. Room transport is preserved.
+Scene disposal removes the old world's batch group, colliders, triggers and effects;
+player bodies reset explicitly. Rematch advances the epoch, preventing finish-to-spawn
+interpolation and invalidating previous-round inputs/readiness.
+
+Seven new mode/protocol units pass. Actual engine E2E passes initial Dash timeout and
+three full Laser/Dash cycles: exact repeated native body counts Laser2/Dash15, no
+page errors. Laser here is an explicit disposable floor prototype; shooter rules are
+G5. Existing course/physics4 browser checks pass (latest61.93s input-only finish).
+Independent review found/fixed the P2 rematch-history reset issue; no P0/P1 defects.

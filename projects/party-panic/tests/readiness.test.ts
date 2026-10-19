@@ -38,7 +38,7 @@ it('requires all connected players to enter before the authoritative countdown',
     expect(sim.ready('guest', 0)).toBe(true);
     sim.start();
     expect(sim.state.phase).toBe('countdown');
-    expect(sim.state.round).toBe(1);
+    expect(sim.state.roundId).toBe(1);
     expect(sim.ready('guest', 0)).toBe(false);
 });
 

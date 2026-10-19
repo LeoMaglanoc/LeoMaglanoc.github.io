@@ -1,5 +1,5 @@
 import { Vec3, type Entity } from 'playcanvas';
-import { COLORS, neutral, type Input, type Player, type Snapshot } from './protocol';
+import { VERSION, COLORS, neutral, type Input, type Player, type Snapshot, type ModeId } from './protocol';
 import { COURSE, boundedProgress, canTransition, checkpoint, finish, resetPlayer } from './rules';
 import { Scene, type Obstacle } from './scene';
 import { approachHorizontal, RACE_MOVEMENT } from './movement';
@@ -17,7 +17,8 @@ export class Simulation {
     scene: Scene;
     state: Snapshot = {
         type: 'snapshot',
-        mode: 'obstacle-dash',
+        version: VERSION,
+        modeId: 'obstacle-dash',
         sequence: 0,
         tick: 0,
         phase: 'lobby',
@@ -25,7 +26,7 @@ export class Simulation {
         countdown: 3,
         paused: false,
         players: [],
-        round: 0
+        roundId: 0
     };
     motions = new Map<string, Motion>();
     accumulator = 0;
@@ -42,6 +43,12 @@ export class Simulation {
             color: COLORS.find((c) => !this.state.players.some((p) => p.color === c)) ?? COLORS[0],
             connected: true,
             ready: false,
+            bot: false,
+            score: 0,
+            deaths: 0,
+            respawnAt: 0,
+            protectedUntil: 0,
+            aimPitch: 0,
             checkpoint: 0,
             progress: 0,
             finish: null,
@@ -54,7 +61,7 @@ export class Simulation {
             yaw: 0,
             respawns: 0
         };
-        resetPlayer(p, this.state.players.length);
+        this.preparePlayer(p, this.state.players.length);
         this.state.players.push(p);
         this.scene.addPlayer(p, true);
         this.motion(id);
@@ -62,7 +69,7 @@ export class Simulation {
     }
     motion(id: string) {
         const m: Motion = {
-            input: neutral(),
+            input: neutral(this.state.modeId, this.state.roundId),
             received: performance.now(),
             jumpSeen: 0,
             buffer: -1,
@@ -76,7 +83,13 @@ export class Simulation {
     }
     input(id: string, i: Input) {
         const m = this.motions.get(id);
-        if (m && i.sequence > m.input.sequence) {
+        if (
+            m &&
+            i.version === VERSION &&
+            i.modeId === this.state.modeId &&
+            i.roundId === this.state.roundId &&
+            i.sequence > m.input.sequence
+        ) {
             m.input = i;
             m.received = performance.now();
         }
@@ -86,11 +99,36 @@ export class Simulation {
         this.state.phase = phase;
         this.onEvent('phase', { phase });
     }
-    ready(id: string, roundId: number) {
+    ready(id: string, roundId: number, modeId: ModeId = this.state.modeId) {
         const p = this.state.players.find((p) => p.id === id && p.connected);
-        if (!p || this.state.phase !== 'lobby' || roundId !== this.state.round) return false;
+        if (!p || this.state.phase !== 'lobby' || roundId !== this.state.roundId || modeId !== this.state.modeId)
+            return false;
         p.ready = true;
         return true;
+    }
+    selectMode(modeId: ModeId) {
+        if (this.state.phase !== 'lobby') return false;
+        if (modeId === this.state.modeId) return true;
+        this.state.modeId = modeId;
+        this.state.roundId++;
+        this.scene.setMode(modeId);
+        this.state.players.forEach((p, i) => {
+            this.scene.removePlayer(p.id);
+            this.preparePlayer(p, i);
+            this.scene.addPlayer(p, true);
+            this.motion(p.id);
+        });
+        this.onEvent('mode', { modeId });
+        return true;
+    }
+    preparePlayer(p: Player, index: number) {
+        resetPlayer(p, index);
+        if (this.state.modeId === 'laser-tag') {
+            p.x = ((index % 4) - 1.5) * 6;
+            p.z = index < 4 ? 8 : -8;
+            p.yaw = index < 4 ? 0 : 180;
+            p.protectedUntil = 1;
+        }
     }
     start() {
         if (
@@ -99,11 +137,11 @@ export class Simulation {
             this.state.players.some((p) => p.connected && !p.ready)
         )
             return;
-        this.state.round++;
+        this.state.roundId++;
         this.state.elapsed = 0;
         this.state.countdown = 3;
         this.state.players.forEach((p, i) => {
-            resetPlayer(p, i);
+            this.preparePlayer(p, i);
             this.motion(p.id);
             this.teleport(p);
         });
@@ -111,9 +149,10 @@ export class Simulation {
     }
     rematch() {
         if (this.state.phase !== 'results') return;
+        this.state.roundId++;
         for (const p of [...this.state.players]) if (!p.connected) this.remove(p.id);
         this.state.players.forEach((p, i) => {
-            resetPlayer(p, i);
+            this.preparePlayer(p, i);
             this.motion(p.id);
             this.teleport(p);
         });
@@ -164,7 +203,7 @@ export class Simulation {
     }
     trigger(id: string, index: number) {
         const p = this.state.players.find((p) => p.id === id);
-        if (!p || this.state.phase !== 'racing') return;
+        if (!p || this.state.modeId !== 'obstacle-dash' || this.state.phase !== 'racing') return;
         if (index < 3) {
             if (checkpoint(p, index)) this.onEvent('checkpoint', { id, index });
         } else if (finish(p, this.state.elapsed)) this.onEvent('finish', { id, time: p.finish });
@@ -193,6 +232,7 @@ export class Simulation {
     }
     step(dt: number) {
         const s = this.state;
+        const timeout = s.modeId === 'laser-tag' ? 90 : COURSE.timeout;
         s.tick++;
         if (s.phase === 'countdown') {
             s.countdown = Math.max(0, s.countdown - dt);
@@ -206,8 +246,8 @@ export class Simulation {
         }
         if (s.phase === 'racing') {
             s.elapsed += dt;
-            if (s.elapsed >= COURSE.timeout) {
-                s.elapsed = COURSE.timeout;
+            if (s.elapsed >= timeout) {
+                s.elapsed = timeout;
                 this.transition('results');
             }
         }
@@ -235,7 +275,7 @@ export class Simulation {
             p.vx = v.x;
             p.vy = v.y;
             p.vz = v.z;
-            if (s.phase === 'racing' && p.finish === null) {
+            if (s.modeId === 'obstacle-dash' && s.phase === 'racing' && p.finish === null) {
                 if (p.y < -5 || Math.abs(p.x) > 12 || p.z > 14) this.respawn(p);
                 p.progress = Math.max(p.progress, boundedProgress(p));
             }
@@ -244,7 +284,8 @@ export class Simulation {
         }
         if (
             s.phase === 'racing' &&
-            (s.elapsed >= COURSE.timeout || s.players.every((p) => p.finish !== null || !p.connected))
+            (s.elapsed >= timeout ||
+                (s.modeId === 'obstacle-dash' && s.players.every((p) => p.finish !== null || !p.connected)))
         )
             this.transition('results');
     }

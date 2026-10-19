@@ -36,3 +36,25 @@ Keep two PeerJS associations per guest until phone measurements justify replacem
 Actual movement channel retransmission behavior is inspected, not assumed from reliable:false.
 No dedicated server, host migration, rollback or lag rewind. Physical mobile performance,
 Safari fullscreen/orientation, NAT success and human playtest quality remain unverified.
+
+## Implemented session boundary (G4)
+
+Protocol v2 rejects v1 peers. Every gameplay input and snapshot contains version,
+modeId ('obstacle-dash' | 'laser-tag') and roundId. The round identity advances on
+both mode changes and round starts; returning to a previous mode cannot revive old
+ready messages. Ready also names its mode. Connection-bound InputGate checks epoch
+before advancing sequence; stale packets cannot poison the current input sequence.
+Snapshots reject lower epochs and same-epoch mode changes. Events carry the same
+identity; history clears on mode/round changes and respawns snap individual players.
+
+Simulation retains session/phase/clock/roster ownership. selectMode is lobby-only;
+preparePlayer resets mode state; start/step/rematch own round transitions. The scene
+owns one explicit world entity: switching destroys that world's triggers, physics
+bodies and batch group, clears transient effects and rebuilds geometry. Player bodies
+are recreated for the selected mode; PeerJS transports/IDs and accepted peers persist.
+This is two explicit modes with focused rules, not a pluggable game-engine framework.
+
+Laser input has a nested aim {yaw,pitch,fire,sequence}; race input rejects that field.
+Angles are radians, yaw±PI and pitch±.8. Guest hit/score claims are never inputs.
+G4 builds only the lifecycle and disposable Laser floor; complete shooter rules and
+arena follow in G5. No G4 placeholder is presented as a completed shooter release.

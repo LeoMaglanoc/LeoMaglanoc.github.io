@@ -5,6 +5,7 @@ declare global {
         partyDebug: {
             getState: () => Snapshot;
             setTestInput: (axes: [number, number], jumpSequence: number) => void;
+            selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => boolean | undefined;
             readyTestPlayers: () => void;
             addTestPlayer: (name: string) => unknown;
             getDiagnostics: () => {

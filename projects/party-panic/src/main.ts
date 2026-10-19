@@ -4,7 +4,7 @@ import { Vec3 } from 'playcanvas';
 import { Controls } from './input';
 import { JumpFeedback, reconcileHeight } from './prediction';
 import { DisplayMode } from './platform/displayMode';
-import { InputGate, SnapshotGate, VERSION, isSnapshot, parseControl, type Snapshot } from './protocol';
+import { InputGate, SnapshotGate, VERSION, neutral, isSnapshot, parseControl, type Snapshot } from './protocol';
 import { admission, rank } from './rules';
 import { Scene } from './scene';
 import { Simulation } from './simulation';
@@ -194,7 +194,16 @@ function feedback(type: string, payload: unknown) {
 }
 function wireSim() {
     sim!.onEvent = (type, payload) => {
-        const msg = { type: 'event', eventId: ++eventId, tick: sim!.state.tick, event: type, payload };
+        const msg = {
+            type: 'event',
+            version: VERSION,
+            modeId: sim!.state.modeId,
+            roundId: sim!.state.roundId,
+            eventId: ++eventId,
+            tick: sim!.state.tick,
+            event: type,
+            payload
+        };
         transport.broadcast('control', msg, accepted);
         log(type, payload);
         feedback(type, payload);
@@ -214,7 +223,7 @@ function solo() {
     sim.add(localId, nickname);
     wireSim();
     state = sim.state;
-    sim.ready(localId, state.round);
+    sim.ready(localId, state.roundId);
     sim.start();
     view = '';
     renderState();
@@ -235,7 +244,7 @@ function showLobby() {
     url.searchParams.set('room', room);
     const link = url.href;
     showPanel(
-        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'One player is enough for practice. Friends make it messier.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
+        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'One player is enough for practice. Friends make it messier.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="mode-picker" id="mode-picker"><button class="mode-choice" data-mode="obstacle-dash"><b>Obstacle Dash</b><small>Race, jump and dodge obstacles.</small></button><button class="mode-choice" data-mode="laser-tag"><b>Laser Tag</b><small>Tag your friends in a chaotic arena.</small></button></div><div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
     );
     if (isHost && room) {
         $<HTMLInputElement>('#share-link').value = link;
@@ -258,7 +267,7 @@ function showLobby() {
         $('#start').onclick = () => {
             void display.enter();
             sound.enable();
-            sim!.ready(localId, state!.round);
+            sim!.ready(localId, state!.roundId);
             startRequested = true;
             if (state!.players.some((p) => p.connected && !p.ready)) {
                 notice('Waiting for friends to tap Ready. The countdown will start together.');
@@ -275,12 +284,30 @@ function showLobby() {
         $('#ready').onclick = () => {
             void display.enter();
             sound.enable();
-            transport.send(hostId, 'control', { type: 'ready', roundId: state!.round });
+            transport.send(hostId, 'control', { type: 'ready', modeId: state!.modeId, roundId: state!.roundId });
         };
+    for (const button of document.querySelectorAll<HTMLButtonElement>('#mode-picker button')) {
+        button.disabled = !isHost;
+        button.onclick = () => {
+            if (!isHost || !sim) return;
+            startRequested = false;
+            sim.selectMode(button.dataset.mode === 'laser-tag' ? 'laser-tag' : 'obstacle-dash');
+            sendState(true);
+            updateRoster();
+        };
+    }
     updateRoster();
 }
 function updateRoster() {
     if (!state || !document.querySelector('#roster')) return;
+    for (const button of document.querySelectorAll<HTMLButtonElement>('#mode-picker button')) {
+        const selected = button.dataset.mode === state.modeId;
+        button.classList.toggle('selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+    }
+    const startButton = document.querySelector('#start');
+    if (startButton)
+        startButton.textContent = `Start ${state.modeId === 'laser-tag' ? 'Laser Tag' : 'Obstacle Dash'} →`;
     const readyButton = document.querySelector<HTMLButtonElement>('#ready');
     if (readyButton)
         readyButton.textContent = state.players.find((p) => p.id === localId)?.ready
@@ -356,7 +383,7 @@ transport.onMessage = (peer, lane, raw) => {
     if (role === 'host' && sim) {
         if (lane === 'movement') {
             if (!accepted.has(peer)) return;
-            const input = gates.get(peer)?.accept(raw, performance.now());
+            const input = gates.get(peer)?.accept(raw, performance.now(), sim.state.modeId, sim.state.roundId);
             if (input) sim.input(peer, input);
             else transport.rejected++;
             return;
@@ -385,7 +412,7 @@ transport.onMessage = (peer, lane, raw) => {
             updateRoster();
             log('join', { id: peer });
         } else if (msg.type === 'ready' && accepted.has(peer)) {
-            if (!sim.ready(peer, msg.roundId)) transport.rejected++;
+            if (!sim.ready(peer, msg.roundId, msg.modeId)) transport.rejected++;
             if (startRequested && sim.state.players.every((p) => !p.connected || p.ready)) {
                 startRequested = false;
                 sim.start();
@@ -403,11 +430,16 @@ transport.onMessage = (peer, lane, raw) => {
     } else if (role === 'guest' && peer === hostId) {
         if (isSnapshot(raw)) {
             if (!snapshotGate.accept(raw)) return;
-            if (!state || raw.round !== state.round) {
+            if (!state || raw.roundId !== state.roundId || raw.modeId !== state.modeId) {
                 histories = [];
                 jumpFeedback.reset(controls.value.jumpSequence);
             }
+            if (scene.modeId !== raw.modeId) {
+                for (const id of scene.characters.keys()) scene.removePlayer(id);
+                scene.setMode(raw.modeId);
+            }
             state = raw;
+            controls.setContext(raw.modeId, raw.roundId);
             lastSnapshot = performance.now();
             histories.push({ at: lastSnapshot, state: raw });
             histories = histories.slice(-20);
@@ -424,7 +456,14 @@ transport.onMessage = (peer, lane, raw) => {
             if (!state) reset(false);
         } else if (msg.type === 'welcome' && msg.version === VERSION && msg.id === localId)
             log('welcome', { id: localId });
-        else if (msg.type === 'event' && typeof msg.eventId === 'number' && msg.eventId > lastEvent) {
+        else if (
+            msg.type === 'event' &&
+            msg.version === VERSION &&
+            msg.modeId === state?.modeId &&
+            msg.roundId === state?.roundId &&
+            typeof msg.eventId === 'number' &&
+            msg.eventId > lastEvent
+        ) {
             lastEvent = msg.eventId;
             log(String(msg.event), msg.payload);
             feedback(String(msg.event), msg.payload);
@@ -485,8 +524,8 @@ function reset(clearNotice = true) {
     gates = new Map();
     histories = [];
     jumpFeedback.reset(controls.value.jumpSequence);
-    snapshotGate.tick = -1;
-    snapshotGate.sequence = -1;
+    snapshotGate.reset();
+    scene.setMode('obstacle-dash');
     view = '';
     lastEvent = 0;
     transport.peer = null;
@@ -649,6 +688,7 @@ async function boot() {
             frameAt = now;
             fps = fps * 0.95 + 0.05 / Math.max(0.001, actualDelta);
             if (frames.length < 36000) frames.push(1 / Math.max(0.001, actualDelta));
+            controls.setContext(state?.modeId ?? 'obstacle-dash', state?.roundId ?? 0);
             if (now - lastInput >= 1000 / 30) {
                 latestInput = controls.sample();
                 lastInput = now;
@@ -705,10 +745,11 @@ async function boot() {
                     getState: () => structuredClone(state),
                     getLogs: () => logs,
                     getInput: () => latestInput,
+                    selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => sim?.selectMode(modeId),
                     setTestInput: (axes: [number, number], jumpSequence: number) => {
                         if (sim)
                             sim.input(localId, {
-                                type: 'input',
+                                ...neutral(sim.state.modeId, sim.state.roundId),
                                 axes,
                                 jumpSequence,
                                 sequence: 100000 + sim.state.tick,
@@ -717,7 +758,7 @@ async function boot() {
                     },
                     readyTestPlayers: () => {
                         for (const p of sim?.state.players ?? [])
-                            if (p.id.startsWith('test-')) sim?.ready(p.id, sim.state.round);
+                            if (p.id.startsWith('test-')) sim?.ready(p.id, sim.state.roundId);
                     },
                     addTestPlayer: (name: string) => sim?.add('test-' + name, name),
                     getDiagnostics: () => ({

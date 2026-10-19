@@ -823,3 +823,32 @@ body.playing .top-right {
     text-decoration: none;
     font-size: 10px;
 }
+
+.mode-picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+.mode-choice {
+    background: #0e1728;
+    color: #f6f4eb;
+    border: 1px solid #ffffff30;
+    border-radius: 9px;
+    padding: 12px;
+    text-align: left;
+}
+.mode-choice small {
+    display: block;
+    color: #a4afc6;
+    font-size: 10px;
+    margin-top: 5px;
+}
+.mode-choice.selected {
+    border-color: #ffcc4a;
+    background: #ffcc4a16;
+}
+.mode-choice:disabled {
+    opacity: 1;
+    cursor: default;
+}

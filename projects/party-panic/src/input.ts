@@ -1,4 +1,4 @@
-import { neutral } from './protocol';
+import { neutral, type ModeId } from './protocol';
 export class Controls {
     value = neutral();
     keys = new Set<string>();
@@ -51,6 +51,15 @@ export class Controls {
             e.preventDefault();
             this.jump();
         });
+    }
+    setContext(modeId: ModeId, roundId: number) {
+        if (this.value.modeId === modeId && this.value.roundId === roundId) return;
+        this.clear();
+        this.value = {
+            ...neutral(modeId, roundId),
+            sequence: this.value.sequence,
+            jumpSequence: this.value.jumpSequence
+        };
     }
     jump() {
         this.value.jumpSequence++;

@@ -48,6 +48,11 @@ export function boundedProgress(p: Player) {
 export function resetPlayer(p: Player, index: number) {
     Object.assign(p, {
         ready: false,
+        score: 0,
+        deaths: 0,
+        respawnAt: 0,
+        protectedUntil: 0,
+        aimPitch: 0,
         checkpoint: 0,
         progress: 0,
         finish: null,

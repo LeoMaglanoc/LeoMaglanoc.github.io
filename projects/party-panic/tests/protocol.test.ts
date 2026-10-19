@@ -8,6 +8,12 @@ const player = (id = 'a'): Player => ({
     color: '#ffffff',
     connected: true,
     ready: false,
+    bot: false,
+    score: 0,
+    deaths: 0,
+    respawnAt: 0,
+    protectedUntil: 0,
+    aimPitch: 0,
     checkpoint: 0,
     progress: 0,
     finish: null,
@@ -114,12 +120,12 @@ describe('lobby and race rules', () => {
     });
     it('rejects duplicated and reordered snapshots', () => {
         const gate = new SnapshotGate();
-        const s = { tick: 8, sequence: 8 } as Snapshot;
+        const s = { version: VERSION, modeId: 'obstacle-dash', roundId: 0, tick: 8, sequence: 8 } as Snapshot;
         expect(gate.accept(s)).toBe(true);
         expect(gate.accept(s)).toBe(false);
         expect(gate.accept({ ...s, sequence: 9, paused: true })).toBe(true);
         expect(gate.accept({ tick: 4, sequence: 9 } as Snapshot)).toBe(false);
-        expect(gate.accept({ tick: 9, sequence: 10 } as Snapshot)).toBe(true);
+        expect(gate.accept({ ...s, tick: 9, sequence: 10 } as Snapshot)).toBe(true);
     });
 });
 

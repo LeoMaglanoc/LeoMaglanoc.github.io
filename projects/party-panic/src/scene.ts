@@ -16,13 +16,15 @@ import {
     WasmModule,
     createGraphicsDevice
 } from 'playcanvas';
-import type { Player } from './protocol';
+import type { Player, ModeId } from './protocol';
 export type Obstacle = { entity: Entity; z: number; kind: 'sweeper' | 'bumper'; phase: number };
 type CharacterMotion = { model: Entity; arms: Entity[]; feet: Entity[]; vy: number; squash: number };
 type EffectParticle = { entity: Entity; age: number; duration: number; vx: number; vy: number; vz: number };
 export class Scene {
     private motions = new Map<string, CharacterMotion>();
     private particles: EffectParticle[] = [];
+    modeId: ModeId = 'obstacle-dash';
+    world!: Entity;
     app!: AppBase;
     camera!: Entity;
     physics!: RigidBodyComponentSystem;
@@ -96,6 +98,8 @@ export class Scene {
         light.setEulerAngles(48, -25, 0);
         this.app.root.addChild(light);
         this.app.batcher!.addGroup('course', false, 45, 0);
+        this.world = new Entity('obstacle-dash-world');
+        this.app.root.addChild(this.world);
         this.level();
         this.app.batcher!.generate();
         this.app.start();
@@ -137,7 +141,7 @@ export class Scene {
     ) {
         const e = new Entity(name);
         e.setPosition(...pos);
-        this.app.root.addChild(e);
+        this.world.addChild(e);
         const visual = this.mesh(e, 'box', size, color);
         if (body !== 'kinematic') visual.render!.batchGroupId = 0;
         if (body) {
@@ -202,7 +206,7 @@ export class Scene {
             trigger.setPosition(0, 1.5, z);
             trigger.addComponent('collision', { type: 'box', halfExtents: new Vec3(5.8, 2, 1) });
             trigger.collision!.on('triggerenter', (e: Entity) => this.onTrigger(e.name, i + 1));
-            this.app.root.addChild(trigger);
+            this.world.addChild(trigger);
             this.triggers.push(trigger);
         }
         for (let z = 6; z > -134; z -= 6) {
@@ -216,6 +220,21 @@ export class Scene {
             const side = i % 2 ? 1 : -1;
             this.box('island', [side * (14 + (i % 3) * 5), -5 - (i % 3), -i * 15], [5, 3, 7], '#252f47', null);
         }
+    }
+    setMode(modeId: ModeId) {
+        if (this.modeId === modeId) return;
+        this.clearEffects();
+        this.app.batcher!.removeGroup(0);
+        this.world.destroy();
+        this.obstacles = [];
+        this.triggers = [];
+        this.modeId = modeId;
+        this.world = new Entity(modeId + '-world');
+        this.app.root.addChild(this.world);
+        this.app.batcher!.addGroup('course', false, 45, 0);
+        if (modeId === 'obstacle-dash') this.level();
+        else this.box('arena-floor', [0, -0.6, 0], [28, 1.2, 22], '#253d59');
+        this.app.batcher!.generate();
     }
     addPlayer(p: Player, physical: boolean) {
         if (this.characters.has(p.id)) return this.characters.get(p.id)!;
