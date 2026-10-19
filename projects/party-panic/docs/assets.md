@@ -1,0 +1,17 @@
+# Asset and source provenance
+
+v0.2 uses original procedural geometry and character models. No Quaternius packs,
+reference maps, models, sounds or branding have been copied.
+
+- PlayCanvas engine 2.23.3: existing npm dependency, MIT; lockfile pins exact version.
+- Official third-person-controller.mjs: inspected from playcanvas/engine main on
+  2026-10-19, MIT license inspected. Engineering reference only; no source transplant.
+- Freerun 08 and Blaster Range: playcanvas/prompts prompt.md and README source inspected
+  2026-10-19. They are measured specifications, not reusable game source.
+  Runtime pages fetched; subsequent runtime observations must be recorded separately.
+- Existing Ammo distribution/provenance remains public/ammo/SOURCE.md and LICENSE.
+- Existing local font licenses remain public/fonts/*LICENSE.txt.
+
+References: https://github.com/playcanvas/engine/blob/main/scripts/esm/third-person-controller.mjs,
+https://github.com/playcanvas/prompts/tree/main/freerun-08,
+https://github.com/playcanvas/prompts/tree/main/blaster-range.

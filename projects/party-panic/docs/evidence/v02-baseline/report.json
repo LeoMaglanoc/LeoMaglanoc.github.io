@@ -1,0 +1,210 @@
+{
+  "at": "2026-10-19T14:50:00.080Z",
+  "renderer": "Chromium SwiftShader; emulation, not phones",
+  "reports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "errors": [],
+      "motion": {
+        "start": {
+          "id": "solo",
+          "name": "Player",
+          "color": "#ffcc4a",
+          "connected": true,
+          "checkpoint": 0,
+          "progress": 0,
+          "finish": null,
+          "x": -1.9499999284744263,
+          "y": 0.7499682307243347,
+          "z": 3.000000238418579,
+          "vx": -0.0000015646224937881925,
+          "vy": 0,
+          "vz": 0.00000357628005076549,
+          "yaw": 180,
+          "respawns": 0
+        },
+        "final": {
+          "id": "solo",
+          "name": "Player",
+          "color": "#ffcc4a",
+          "connected": true,
+          "checkpoint": 0,
+          "progress": 0,
+          "finish": null,
+          "x": -1.9499984979629517,
+          "y": 0.7499763369560242,
+          "z": 0.3266698122024536,
+          "vx": -0.0000026824159249372315,
+          "vy": 0.00011467933654785156,
+          "vz": -2.8000009059906006,
+          "yaw": 0.00005488966488143462,
+          "respawns": 0
+        },
+        "topSpeed": 2.800002574921225,
+        "maxY": 2.249967575073242,
+        "apexAt": 0.4166666666666667,
+        "firstLift": 0.03333333333333333,
+        "flight": 0.8333333333333334,
+        "diagnostics": {
+          "links": [],
+          "elapsedSeconds": 6.382600000000005,
+          "ice": "not connected",
+          "semantics": "not connected",
+          "rtt": 0,
+          "bodies": 15,
+          "fps": {
+            "samples": 19,
+            "p5": 1.5080681646810303,
+            "median": 5.376344086021505,
+            "p95": 454.5454545430493
+          },
+          "counts": {
+            "sent": 0,
+            "received": 0,
+            "sentBytes": 0,
+            "receivedBytes": 0,
+            "rejected": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "phone-landscape",
+      "width": 844,
+      "height": 390,
+      "errors": [],
+      "motion": {
+        "start": {
+          "id": "solo",
+          "name": "Player",
+          "color": "#ffcc4a",
+          "connected": true,
+          "checkpoint": 0,
+          "progress": 0,
+          "finish": null,
+          "x": -1.9499999284744263,
+          "y": 0.7499682307243347,
+          "z": 3.000000238418579,
+          "vx": -0.0000015646224937881925,
+          "vy": 0,
+          "vz": 0.00000357628005076549,
+          "yaw": 180,
+          "respawns": 0
+        },
+        "final": {
+          "id": "solo",
+          "name": "Player",
+          "color": "#ffcc4a",
+          "connected": true,
+          "checkpoint": 0,
+          "progress": 0,
+          "finish": null,
+          "x": -1.9499984979629517,
+          "y": 0.7499763369560242,
+          "z": 0.3266698122024536,
+          "vx": -0.0000026824159249372315,
+          "vy": 0.00011467933654785156,
+          "vz": -2.8000009059906006,
+          "yaw": 0.00005488966488143462,
+          "respawns": 0
+        },
+        "topSpeed": 2.800002574921225,
+        "maxY": 2.249967575073242,
+        "apexAt": 0.4166666666666667,
+        "firstLift": 0.03333333333333333,
+        "flight": 0.8333333333333334,
+        "diagnostics": {
+          "links": [],
+          "elapsedSeconds": 3.1323000000000176,
+          "ice": "not connected",
+          "semantics": "not connected",
+          "rtt": 0,
+          "bodies": 15,
+          "fps": {
+            "samples": 27,
+            "p5": 2.680965147453083,
+            "median": 15.723270440250134,
+            "p95": 105.26315789473685
+          },
+          "counts": {
+            "sent": 0,
+            "received": 0,
+            "sentBytes": 0,
+            "receivedBytes": 0,
+            "rejected": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "phone-portrait",
+      "width": 390,
+      "height": 844,
+      "errors": [],
+      "motion": {
+        "start": {
+          "id": "solo",
+          "name": "Player",
+          "color": "#ffcc4a",
+          "connected": true,
+          "checkpoint": 0,
+          "progress": 0,
+          "finish": null,
+          "x": -1.9499999284744263,
+          "y": 0.7499682307243347,
+          "z": 3.000000238418579,
+          "vx": -0.0000015646224937881925,
+          "vy": 0,
+          "vz": 0.00000357628005076549,
+          "yaw": 180,
+          "respawns": 0
+        },
+        "final": {
+          "id": "solo",
+          "name": "Player",
+          "color": "#ffcc4a",
+          "connected": true,
+          "checkpoint": 0,
+          "progress": 0,
+          "finish": null,
+          "x": -1.9499984979629517,
+          "y": 0.7499763369560242,
+          "z": 0.3266698122024536,
+          "vx": -0.0000026824159249372315,
+          "vy": 0.00011467933654785156,
+          "vz": -2.8000009059906006,
+          "yaw": 0.00005488966488143462,
+          "respawns": 0
+        },
+        "topSpeed": 2.800002574921225,
+        "maxY": 2.249967575073242,
+        "apexAt": 0.4166666666666667,
+        "firstLift": 0.03333333333333333,
+        "flight": 0.8333333333333334,
+        "diagnostics": {
+          "links": [],
+          "elapsedSeconds": 2.7803000000000173,
+          "ice": "not connected",
+          "semantics": "not connected",
+          "rtt": 0,
+          "bodies": 15,
+          "fps": {
+            "samples": 29,
+            "p5": 4.291845493562231,
+            "median": 23.866348448690665,
+            "p95": 133.33333333333334
+          },
+          "counts": {
+            "sent": 0,
+            "received": 0,
+            "sentBytes": 0,
+            "receivedBytes": 0,
+            "rejected": 0
+          }
+        }
+      }
+    }
+  ]
+}
