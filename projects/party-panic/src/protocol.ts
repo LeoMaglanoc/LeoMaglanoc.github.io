@@ -1,4 +1,4 @@
-export const VERSION = 2;
+export const VERSION = 3;
 export const COLORS = ['#ffcc4a', '#75dfd1', '#ec8ee5', '#9fa7ff', '#ff9376', '#99db67', '#82cfff', '#f3f0cf'];
 export type ModeId = 'obstacle-dash' | 'laser-tag';
 export type Phase = 'lobby' | 'countdown' | 'racing' | 'results';
@@ -10,6 +10,8 @@ type InputBase = {
     sequence: number;
     axes: [number, number];
     jumpSequence: number;
+    jumpHeld: boolean;
+    diveSequence: number;
     clientTime: number;
 };
 export type Aim = { yaw: number; pitch: number; fire: boolean; sequence: number };
@@ -64,6 +66,8 @@ export function neutral(modeId: ModeId = 'obstacle-dash', roundId = 0): Input {
         sequence: 0,
         axes: [0, 0] as [number, number],
         jumpSequence: 0,
+        jumpHeld: false,
+        diveSequence: 0,
         clientTime: 0
     };
     return modeId === 'laser-tag'
@@ -83,13 +87,26 @@ export function parseInput(v: unknown): Input | null {
         !seq(v.roundId) ||
         !seq(v.sequence) ||
         !seq(v.jumpSequence) ||
+        !seq(v.diveSequence) ||
+        typeof v.jumpHeld !== 'boolean' ||
         !finite(v.clientTime) ||
         !Array.isArray(v.axes) ||
         v.axes.length !== 2 ||
         !v.axes.every(finite)
     )
         return null;
-    const keys = ['type', 'version', 'modeId', 'roundId', 'sequence', 'axes', 'jumpSequence', 'clientTime'];
+    const keys = [
+        'type',
+        'version',
+        'modeId',
+        'roundId',
+        'sequence',
+        'axes',
+        'jumpSequence',
+        'jumpHeld',
+        'diveSequence',
+        'clientTime'
+    ];
     if (v.modeId === 'laser-tag') keys.push('aim');
     if (Object.keys(v).some((k) => !keys.includes(k))) return null;
     let [x, z] = v.axes.map((n) => Math.max(-1, Math.min(1, n)));
@@ -105,6 +122,8 @@ export function parseInput(v: unknown): Input | null {
         sequence: v.sequence,
         axes: [x, z] as [number, number],
         jumpSequence: v.jumpSequence,
+        jumpHeld: v.jumpHeld,
+        diveSequence: v.diveSequence,
         clientTime: v.clientTime
     };
     if (v.modeId === 'obstacle-dash') return { ...base, modeId: v.modeId };

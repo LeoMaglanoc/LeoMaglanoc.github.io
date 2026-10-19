@@ -5,7 +5,7 @@ import { Scene, type Obstacle } from './scene';
 import { LASER } from './laser';
 import { BotController } from './bots';
 import { LaserRound } from './laserRound';
-import { approachHorizontal, RACE_MOVEMENT } from './movement';
+import { approachHorizontal, raceHorizontal, raceGravity, turnToward, RACE_MOVEMENT } from './movement';
 export type Motion = {
     input: Input;
     received: number;
@@ -15,6 +15,9 @@ export type Motion = {
     lastJump: number;
     grace: number;
     hitAt: number;
+    diveSeen: number;
+    diveUntil: number;
+    diveReady: number;
 };
 export class Simulation {
     scene: Scene;
@@ -82,7 +85,10 @@ export class Simulation {
             groundedAt: -100,
             lastJump: -100,
             grace: 1,
-            hitAt: -100
+            hitAt: -100,
+            diveSeen: 0,
+            diveUntil: -100,
+            diveReady: -100
         };
         this.motions.set(id, m);
         return m;
@@ -188,7 +194,13 @@ export class Simulation {
     pause(value: boolean) {
         this.state.paused = value;
         this.accumulator = 0;
-        for (const m of this.motions.values()) m.input = { ...m.input, axes: [0, 0] };
+        for (const m of this.motions.values()) {
+            m.input = { ...m.input, axes: [0, 0], jumpHeld: false };
+            if (m.input.modeId === 'laser-tag') m.input.aim.fire = false;
+            m.jumpSeen = m.input.jumpSequence;
+            m.diveSeen = m.input.diveSequence;
+            m.buffer = -100;
+        }
         this.onEvent('pause', { paused: value });
     }
     teleport(p: Player) {
@@ -210,6 +222,9 @@ export class Simulation {
         m.grace = 1;
         m.buffer = -1;
         m.groundedAt = -100;
+        m.lastJump = m.hitAt = m.diveUntil = m.diveReady = -100;
+        m.jumpSeen = m.input.jumpSequence;
+        m.diveSeen = m.input.diveSequence;
         this.onEvent('respawn', { id: p.id, checkpoint: p.checkpoint });
     }
     trigger(id: string, index: number) {
@@ -227,7 +242,13 @@ export class Simulation {
         const body = this.scene.characters.get(id)!.rigidbody!;
         const sign =
             o.kind === 'bumper' ? Math.sign(Math.cos(this.state.elapsed * 1.7 + o.phase)) : Math.sign(p.z - o.z) || 1;
-        body.applyImpulse(sign * 4.8, 2.5, o.kind === 'sweeper' ? 1 : 0);
+        const v = body.linearVelocity;
+        body.linearVelocity = new Vec3(
+            v.x * 0.45 + sign * 4.8,
+            Math.max(v.y, 2.5),
+            v.z * 0.45 + (o.kind === 'sweeper' ? 1 : 0)
+        );
+        m.diveUntil = -100;
         this.onEvent('hit', { id });
     }
     update(dt: number) {
@@ -251,6 +272,7 @@ export class Simulation {
                 this.transition('racing');
                 for (const m of this.motions.values()) {
                     m.jumpSeen = m.input.jumpSequence;
+                    m.diveSeen = m.input.diveSequence;
                     m.buffer = -1;
                 }
             }
@@ -306,7 +328,7 @@ export class Simulation {
                 this.teleport(p);
             }
             if (s.modeId === 'obstacle-dash' && Math.hypot(v.x, v.z) > 0.15)
-                p.yaw = (Math.atan2(-v.x, -v.z) * 180) / Math.PI;
+                p.yaw = (turnToward((p.yaw * Math.PI) / 180, Math.atan2(-v.x, -v.z), dt) * 180) / Math.PI;
             this.scene.face(p.id, p.yaw);
         }
         if (s.modeId === 'laser-tag' && s.phase === 'racing') this.laser.afterStep(s, this.scene, this.motions);
@@ -342,30 +364,53 @@ export class Simulation {
                 }
             }
         if (grounded) m.groundedAt = time;
+        const fresh = performance.now() - m.received < 400;
+        const race = this.state.modeId === 'obstacle-dash';
+        const axes = fresh ? m.input.axes : [0, 0];
+        const sinceHit = time - m.hitAt;
         if (m.input.jumpSequence > m.jumpSeen) {
             m.jumpSeen = m.input.jumpSequence;
-            m.buffer = time;
+            if (fresh && sinceHit >= RACE_MOVEMENT.stumbleDeadTime) m.buffer = time;
         }
-        const fresh = performance.now() - m.received < 400;
-        const axes = fresh ? m.input.axes : [0, 0];
-        const accel = grounded
-            ? Math.hypot(...axes) < 0.01
-                ? RACE_MOVEMENT.groundBraking
-                : RACE_MOVEMENT.groundAcceleration
-            : RACE_MOVEMENT.airAcceleration;
-        // Preserve a brief authoritative sideways impulse instead of braking it away immediately.
-        const [vx, vz] = approachHorizontal(
-            v.x,
-            v.z,
-            axes[0],
-            axes[1],
-            this.state.modeId === 'laser-tag' ? LASER.speed : RACE_MOVEMENT.speed,
-            time - m.hitAt > 0.25 ? accel : RACE_MOVEMENT.hitRecoveryAcceleration,
-            dt
-        );
-        let vy = v.y;
+        let vx = v.x,
+            vz = v.z,
+            vy = v.y;
+        if (m.input.diveSequence > m.diveSeen) {
+            m.diveSeen = m.input.diveSequence;
+            if (race && fresh && sinceHit >= RACE_MOVEMENT.stumbleRecovery && time >= m.diveReady) {
+                const speed = Math.hypot(vx, vz);
+                const wish = Math.hypot(...axes);
+                const dirX = speed > 0.5 ? vx / speed : wish > 0.01 ? axes[0] / wish : 0;
+                const dirZ = speed > 0.5 ? vz / speed : wish > 0.01 ? axes[1] / wish : -1;
+                const next = Math.min(
+                    RACE_MOVEMENT.diveMaxSpeed,
+                    Math.max(speed, RACE_MOVEMENT.speed) + RACE_MOVEMENT.diveImpulse
+                );
+                vx = dirX * next;
+                vz = dirZ * next;
+                vy = Math.max(vy, 0) + RACE_MOVEMENT.diveLift;
+                m.diveUntil = time + RACE_MOVEMENT.diveDuration;
+                m.diveReady = time + RACE_MOVEMENT.diveCooldown;
+                m.groundedAt = -100;
+                this.onEvent('dive', { id: e.name });
+            }
+        }
+        [vx, vz] = race
+            ? raceHorizontal(vx, vz, axes, grounded, time < m.diveUntil, sinceHit, dt)
+            : approachHorizontal(
+                  vx,
+                  vz,
+                  axes[0],
+                  axes[1],
+                  LASER.speed,
+                  grounded ? (Math.hypot(...axes) < 0.01 ? 42 : 48) : 24,
+                  dt
+              );
         if (
-            this.state.modeId === 'obstacle-dash' &&
+            race &&
+            fresh &&
+            time >= m.diveUntil &&
+            sinceHit >= RACE_MOVEMENT.stumbleDeadTime &&
             time - m.buffer <= RACE_MOVEMENT.jumpBuffer &&
             time - m.groundedAt <= RACE_MOVEMENT.coyoteTime &&
             time - m.lastJump > 0.18
@@ -376,6 +421,9 @@ export class Simulation {
             m.lastJump = time;
             this.onEvent('jump', { id: e.name });
         }
+        // Ammo owns gravity/integration/collision. Adjust only the difference from
+        // its -18 world gravity so there is still one integrator and one body.
+        if (race && (!grounded || vy > 0.5)) vy += (18 - raceGravity(vy, fresh && m.input.jumpHeld)) * dt;
         body.linearVelocity = new Vec3(
             Math.max(-8, Math.min(8, vx)),
             Math.max(-25, Math.min(12, vy)),

@@ -17,6 +17,8 @@ export class Controls {
     private aimPosition: [number, number] = [0, 0];
     private firePointer: number | null = null;
     private mouseFire = false;
+    private jumpPointer: number | null = null;
+    private divePointer: number | null = null;
     private fireSequence = 0;
     private firedAt = -Infinity;
     private shotUntil = -Infinity;
@@ -35,7 +37,19 @@ export class Controls {
         if (Number.isFinite(value)) this.pitch = Math.max(-0.8, Math.min(0.8, value));
     }
     constructor() {
-        const relevant = ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'];
+        const relevant = [
+            'KeyW',
+            'KeyA',
+            'KeyS',
+            'KeyD',
+            'ArrowUp',
+            'ArrowDown',
+            'ArrowLeft',
+            'ArrowRight',
+            'Space',
+            'ShiftLeft',
+            'ShiftRight'
+        ];
         window.addEventListener('keydown', (e) => {
             if (e.code === 'Escape') {
                 this.clear();
@@ -46,6 +60,7 @@ export class Controls {
             if (relevant.includes(e.code)) {
                 e.preventDefault();
                 if (e.code === 'Space' && !this.keys.has(e.code)) this.jump();
+                if (e.code.startsWith('Shift') && !this.keys.has(e.code)) this.dive();
                 this.keys.add(e.code);
             }
         });
@@ -98,28 +113,46 @@ export class Controls {
         zone.addEventListener('pointerup', release);
         zone.addEventListener('pointercancel', release);
         zone.addEventListener('lostpointercapture', release);
-        document.querySelector('#jump')!.addEventListener('pointerdown', (e) => {
-            e.preventDefault();
-            this.jump();
-        });
+        for (const id of ['jump', 'dive'] as const) {
+            const button = document.querySelector<HTMLElement>('#' + id);
+            if (!button) continue;
+            const field = id === 'jump' ? 'jumpPointer' : 'divePointer';
+            button.addEventListener('pointerdown', (e) => {
+                if (!this.enabled || this.value.modeId !== 'obstacle-dash' || this[field] !== null) return;
+                e.preventDefault();
+                this[field] = e.pointerId;
+                if (id === 'jump') this.jump();
+                else this.dive();
+                try {
+                    button.setPointerCapture(e.pointerId);
+                } catch {
+                    /* Synthetic QA events have no native capture. */
+                }
+            });
+            const release = (e: PointerEvent) => {
+                if (this[field] === e.pointerId) this[field] = null;
+            };
+            button.addEventListener('pointerup', release);
+            button.addEventListener('pointercancel', release);
+            button.addEventListener('lostpointercapture', release);
+        }
         const aim = document.querySelector<HTMLElement>('#aim-zone');
         const fire = document.querySelector<HTMLElement>('#fire');
         for (const area of [aim, fire, this.canvas]) {
             if (!area) continue;
             area.addEventListener('pointerdown', (e) => {
-                if (!this.laserActive || this.aimPointer !== null || (e.pointerType === 'mouse' && e.button !== 0))
-                    return;
+                if (!this.enabled || this.aimPointer !== null || (e.pointerType === 'mouse' && e.button !== 0)) return;
                 e.preventDefault();
                 this.aimPointer = e.pointerId;
                 this.aimMouse = e.pointerType === 'mouse';
                 this.aimPosition = [e.clientX, e.clientY];
                 area.setPointerCapture(e.pointerId);
-                if (area === fire || e.pointerType === 'mouse') {
+                if (this.laserActive && (area === fire || e.pointerType === 'mouse')) {
                     if (e.pointerType === 'mouse') this.mouseFire = true;
                     else this.firePointer = e.pointerId;
                     this.shoot(performance.now());
                 }
-                if (e.pointerType === 'mouse') {
+                if (this.laserActive && e.pointerType === 'mouse') {
                     // Keep this call in the qualifying gameplay pointer gesture.
                     try {
                         const request = this.canvas?.requestPointerLock?.();
@@ -130,7 +163,7 @@ export class Controls {
                 }
             });
             area.addEventListener('pointermove', (e) => {
-                if (!this.laserActive || this.aimPointer !== e.pointerId) return;
+                if (!this.enabled || this.aimPointer !== e.pointerId) return;
                 if (document.pointerLockElement !== this.canvas) {
                     this.rotate(e.clientX - this.aimPosition[0], e.clientY - this.aimPosition[1]);
                 }
@@ -187,14 +220,19 @@ export class Controls {
         this.value = {
             ...neutral(modeId, roundId),
             sequence: this.value.sequence,
-            jumpSequence: this.value.jumpSequence
+            jumpSequence: this.value.jumpSequence,
+            diveSequence: this.value.diveSequence
         };
     }
     jump() {
         if (this.enabled && this.value.modeId === 'obstacle-dash') this.value.jumpSequence++;
     }
+    dive() {
+        if (this.enabled && this.value.modeId === 'obstacle-dash') this.value.diveSequence++;
+    }
     clear() {
-        const pointers = [this.active, this.aimPointer, this.firePointer];
+        const pointers = [this.active, this.aimPointer, this.firePointer, this.jumpPointer, this.divePointer];
+        this.jumpPointer = this.divePointer = null;
         this.keys.clear();
         this.stick = [0, 0];
         this.active = null;
@@ -203,6 +241,7 @@ export class Controls {
         this.mouseFire = false;
         this.shotUntil = -Infinity;
         this.value.axes = [0, 0];
+        this.value.jumpHeld = false;
         if (this.value.modeId === 'laser-tag') this.value.aim.fire = false;
         if (document.pointerLockElement === this.canvas) {
             try {
@@ -211,7 +250,7 @@ export class Controls {
                 /* A browser may already be exiting. */
             }
         }
-        for (const id of ['joystick', 'aim-zone', 'fire', 'application-canvas']) {
+        for (const id of ['joystick', 'aim-zone', 'fire', 'application-canvas', 'jump', 'dive']) {
             const area = document.querySelector<HTMLElement>('#' + id);
             for (const pointer of pointers) {
                 if (pointer === null) continue;
@@ -240,10 +279,12 @@ export class Controls {
         x /= n;
         z /= n;
         const now = performance.now();
-        if (this.value.modeId === 'laser-tag') {
+        {
             const cos = Math.cos(this.aimYaw),
                 sin = Math.sin(this.aimYaw);
             [x, z] = [x * cos - z * sin, x * sin + z * cos];
+        }
+        if (this.value.modeId === 'laser-tag') {
             const holding = this.enabled && (this.mouseFire || this.firePointer !== null);
             if (holding) this.shoot(now);
             const firing = this.enabled && (holding || now < this.shotUntil);
@@ -252,7 +293,13 @@ export class Controls {
                 aim: { yaw: this.aimYaw, pitch: this.aimPitch, fire: firing, sequence: this.fireSequence }
             };
         }
-        this.value = { ...this.value, sequence: this.value.sequence + 1, axes: [x, z], clientTime: now };
+        this.value = {
+            ...this.value,
+            sequence: this.value.sequence + 1,
+            axes: [x, z],
+            jumpHeld: this.enabled && (this.keys.has('Space') || this.jumpPointer !== null),
+            clientTime: now
+        };
         return this.value;
     }
 }

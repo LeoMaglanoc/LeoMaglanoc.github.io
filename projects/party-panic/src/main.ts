@@ -20,7 +20,7 @@ $('#app').innerHTML =
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
 <footer class="bottom-bar" id="footer"><span>2 MINIGAMES / SOLO AI + MULTIPLAYER</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
 <section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
-<div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
+<div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button><button id="dive" aria-label="Dive">DIVE ↗</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
 <details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><button id="sound-toggle">Sound on</button><pre id="display-status"></pre></details>`;
 const scene = new Scene(),
     transport = new Transport(),
@@ -262,6 +262,7 @@ function syncControls() {
         roundId,
         !!state && !ended && !state.paused && (state.phase === 'countdown' || state.phase === 'racing') && !p?.respawnAt
     );
+    if (changed && modeId === 'obstacle-dash') controls.aimPitch = 0.55;
     if (changed && modeId === 'laser-tag') {
         controls.aimYaw = (-(p?.yaw ?? 0) * Math.PI) / 180;
         controls.aimPitch = -0.08;
@@ -288,8 +289,8 @@ function feedback(type: string, payload: unknown) {
         return;
     }
     if (!payload || typeof payload !== 'object' || !('id' in payload) || typeof payload.id !== 'string') return;
-    if (['jump', 'land', 'hit', 'checkpoint'].includes(type)) {
-        scene.effect(type as 'jump' | 'land' | 'hit' | 'checkpoint', payload.id);
+    if (['jump', 'dive', 'land', 'hit', 'checkpoint'].includes(type)) {
+        scene.effect(type === 'dive' ? 'jump' : (type as 'jump' | 'land' | 'hit' | 'checkpoint'), payload.id);
         if (payload.id === localId) sound.play(type);
     }
 }
@@ -469,13 +470,14 @@ function renderState() {
     $('#shade').classList.toggle('hidden', active);
     for (const id of ['controls', 'keyboard-help', 'hud']) $('#' + id).classList.toggle('hidden', !active);
     $('#jump').classList.toggle('hidden', laser);
+    $('#dive').classList.toggle('hidden', laser);
     $('#fire').classList.toggle('hidden', !laser);
     $('#aim-zone').classList.toggle('hidden', !active || !laser || dead);
     $('#reticle').classList.toggle('hidden', !active || !laser || dead);
     $('#tag-board').classList.toggle('hidden', !active || !laser);
     $('#keyboard-help').textContent = laser
         ? 'WASD MOVE · MOUSE AIM · CLICK FIRE · ESC RELEASES MOUSE'
-        : 'WASD / ARROWS MOVE · SPACE JUMP';
+        : 'WASD / ARROWS MOVE · SPACE HOLD TO JUMP · SHIFT DIVE';
     if (active) {
         $('#panel').classList.add('hidden');
         $('#hud').innerHTML =
@@ -897,7 +899,7 @@ async function boot() {
             if (state && !ended) {
                 if (state.phase === 'countdown' || state.phase === 'racing' || state.phase === 'results') {
                     if (state.modeId === 'laser-tag') scene.followLaser(localId, controls.aimYaw, controls.aimPitch);
-                    else scene.follow(localId, dt);
+                    else scene.follow(localId, dt, false, controls.aimYaw, controls.aimPitch);
                 }
                 $('#reticle').classList.toggle('confirmed', now < hitUntil);
                 if (now - lastUI >= 100) {
@@ -967,12 +969,14 @@ async function boot() {
                         controls.aimPitch = pitch;
                     },
                     selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => sim?.selectMode(modeId),
-                    setTestInput: (axes: [number, number], jumpSequence: number) => {
+                    setTestInput: (axes: [number, number], jumpSequence: number, jumpHeld = true, diveSequence = 0) => {
                         if (sim)
                             sim.input(localId, {
                                 ...neutral(sim.state.modeId, sim.state.roundId),
                                 axes,
                                 jumpSequence,
+                                jumpHeld,
+                                diveSequence,
                                 sequence: 100000 + sim.state.tick,
                                 clientTime: performance.now()
                             });

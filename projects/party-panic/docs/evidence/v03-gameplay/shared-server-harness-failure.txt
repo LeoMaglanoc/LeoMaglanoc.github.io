@@ -1,0 +1,145 @@
+
+Running 5 tests using 1 worker
+
+(node:4162) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+AI RACE FINISHES [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":0,"progress":0,"finish":null,"x":-1.9499999284744263,"y":0.7499682307243347,"z":3.000000238418579,"vx":-0.0000015646224937881925,"vy":0,"vz":0.00000357628005076549,"yaw":180,"respawns":0},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.5801239013672,"finish":62.11666666666442,"x":-4.056999683380127,"y":0.7499614357948303,"z":-130.6697235107422,"vx":-8.940698990045348e-7,"vy":0,"vz":-0.0000071525591920362785,"yaw":-0.000038126301650452766,"respawns":0},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.57736206054688,"finish":67.48333333333079,"x":3.975872278213501,"y":0.7499020099639893,"z":-130.67068481445312,"vx":0.0000013411089412329602,"vy":7.152557373046875e-7,"vz":-0.000007152580110414419,"yaw":360.00019167546196,"respawns":2},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.5763702392578,"finish":65.68333333333089,"x":-1.934774398803711,"y":0.7499490976333618,"z":-130.6641082763672,"vx":0.000001790378405530646,"vy":0.000286102294921875,"vz":-0.000003580756811061292,"yaw":-0.00004867853565208791,"respawns":1}]
+  ✓  1 tests/e2e/laser.spec.ts:91:1 › AI racers traverse the real course without test positions or progress claims (13.1s)
+  ✘  2 tests/e2e/movement.spec.ts:4:5 › real Ammo: cardinal acceleration and braking stay bounded (1.1s)
+(node:4449) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/e2e/movement.spec.ts:4:5 › real Ammo: diagonal acceleration and braking stay bounded (1.1s)
+(node:4590) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump (1.4s)
+(node:4728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 tests/e2e/movement.spec.ts:57:1 › real Ammo: short hops, committed dives and duplicate edges (2.0s)
+
+
+  1) tests/e2e/movement.spec.ts:4:5 › real Ammo: cardinal acceleration and braking stay bounded ────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5173/party-panic/?debug=1
+    Call log:
+      - navigating to "http://127.0.0.1:5173/party-panic/?debug=1", waiting until "load"
+
+
+      3 | for (const direction of ['cardinal', 'diagonal'] as const) {
+      4 |     test(`real Ammo: ${direction} acceleration and braking stay bounded`, async ({ page }) => {
+    > 5 |         await page.goto('./?debug=1');
+        |                    ^
+      6 |         await page.waitForFunction(() => window.partyDebug);
+      7 |         await page.locator('#bot-count').selectOption('0');
+      8 |         await page.locator('#solo').click();
+        at /workspace/party-repo/projects/party-panic/tests/e2e/movement.spec.ts:5:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-cardina-5963f-on-and-braking-stay-bounded/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/movement-real-Ammo-cardina-5963f-on-and-braking-stay-bounded/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-cardina-5963f-on-and-braking-stay-bounded/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/movement-real-Ammo-cardina-5963f-on-and-braking-stay-bounded/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/movement.spec.ts:4:5 › real Ammo: diagonal acceleration and braking stay bounded ────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5173/party-panic/?debug=1
+    Call log:
+      - navigating to "http://127.0.0.1:5173/party-panic/?debug=1", waiting until "load"
+
+
+      3 | for (const direction of ['cardinal', 'diagonal'] as const) {
+      4 |     test(`real Ammo: ${direction} acceleration and braking stay bounded`, async ({ page }) => {
+    > 5 |         await page.goto('./?debug=1');
+        |                    ^
+      6 |         await page.waitForFunction(() => window.partyDebug);
+      7 |         await page.locator('#bot-count').selectOption('0');
+      8 |         await page.locator('#solo').click();
+        at /workspace/party-repo/projects/party-panic/tests/e2e/movement.spec.ts:5:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-diagona-d5615-on-and-braking-stay-bounded/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/movement-real-Ammo-diagona-d5615-on-and-braking-stay-bounded/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-diagona-d5615-on-and-braking-stay-bounded/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/movement-real-Ammo-diagona-d5615-on-and-braking-stay-bounded/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5173/party-panic/?debug=1
+    Call log:
+      - navigating to "http://127.0.0.1:5173/party-panic/?debug=1", waiting until "load"
+
+
+      39 |
+      40 | test('real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump', async ({ page }) => {
+    > 41 |     await page.goto('./?debug=1');
+         |                ^
+      42 |     await page.waitForFunction(() => window.partyDebug);
+      43 |     await page.locator('#bot-count').selectOption('0');
+      44 |     await page.locator('#solo').click();
+        at /workspace/party-repo/projects/party-panic/tests/e2e/movement.spec.ts:41:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/e2e/movement.spec.ts:57:1 › real Ammo: short hops, committed dives and duplicate edges ──
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5173/party-panic/?debug=1
+    Call log:
+      - navigating to "http://127.0.0.1:5173/party-panic/?debug=1", waiting until "load"
+
+
+      56 |
+      57 | test('real Ammo: short hops, committed dives and duplicate edges', async ({ page }) => {
+    > 58 |     await page.goto('./?debug=1');
+         |                ^
+      59 |     await page.waitForFunction(() => window.partyDebug);
+      60 |     const results = [];
+      61 |     for (const scenario of ['held', 'cut', 'run', 'dive']) {
+        at /workspace/party-repo/projects/party-panic/tests/e2e/movement.spec.ts:58:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-short-h-19e4f-d-dives-and-duplicate-edges/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/movement-real-Ammo-short-h-19e4f-d-dives-and-duplicate-edges/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-short-h-19e4f-d-dives-and-duplicate-edges/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/movement-real-Ammo-short-h-19e4f-d-dives-and-duplicate-edges/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/e2e/movement.spec.ts:4:5 › real Ammo: cardinal acceleration and braking stay bounded ─────
+    tests/e2e/movement.spec.ts:4:5 › real Ammo: diagonal acceleration and braking stay bounded ─────
+    tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump 
+    tests/e2e/movement.spec.ts:57:1 › real Ammo: short hops, committed dives and duplicate edges ───
+  1 passed (25.2s)

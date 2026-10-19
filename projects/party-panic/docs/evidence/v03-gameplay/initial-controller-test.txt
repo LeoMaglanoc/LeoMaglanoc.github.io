@@ -1,0 +1,74 @@
+[WebServer] (node:3083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:3102) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+INPUT-ONLY COURSE {"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.5940704345703,"finish":65.64123333333092,"x":-4.0252885818481445,"y":0.7499508261680603,"z":-130.64073181152344,"vx":-0.000001782202161848545,"vy":0.0001742839813232422,"vz":-2.7999963760375977,"yaw":360.0000364688551,"respawns":0}
+  ✓  1 tests/e2e/course.spec.ts:2:1 › solo traverses the actual course with input only and authoritative finish (5.3s)
+LASER AI HALFWAY [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":11,"respawnAt":41.49436666666572,"protectedUntil":38.84436666666581,"aimPitch":-0.08,"checkpoint":0,"progress":0,"finish":null,"x":11,"y":0.7499745488166809,"z":-8,"vx":0,"vy":0,"vz":0,"yaw":180,"respawns":10},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":10,"deaths":4,"respawnAt":0,"protectedUntil":35.66103333333266,"aimPitch":-0.07266788610165384,"checkpoint":0,"progress":0,"finish":null,"x":-3.549318790435791,"y":0.7499696612358093,"z":-8,"vx":2.0166690349578857,"vy":-0.000027477741241455078,"vz":0.00000443512817582814,"yaw":164.16896485401764,"respawns":4},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":12,"deaths":5,"respawnAt":0,"protectedUntil":38.36103333333251,"aimPitch":-0.07270331258572336,"checkpoint":0,"progress":0,"finish":null,"x":-7.000001430511475,"y":0.7499707937240601,"z":2.40165114402771,"vx":0.000005078614776721224,"vy":-0.0000058710575103759766,"vz":-2.113236427307129,"yaw":-14.773260496919443,"respawns":5},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":5,"deaths":7,"respawnAt":0,"protectedUntil":41.36103333333234,"aimPitch":-0.04800219972452047,"checkpoint":0,"progress":0,"finish":null,"x":8.747930526733398,"y":0.7499998807907104,"z":8,"vx":1.3262265920639038,"vy":0.000009328126907348633,"vz":8.940618840824754e-7,"yaw":72.78811601749871,"respawns":7}]
+  ✓  2 tests/e2e/laser.spec.ts:3:1 › solo Laser Tag: real AI inputs tag, respawn, score and finish a complete match (7.9s)
+  ✓  3 tests/e2e/laser.spec.ts:45:1 › laser touch move + aim-and-fire reach real input and host shooting; release clears fire (11.1s)
+AI RACE FINISHES [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":0,"progress":0,"finish":null,"x":-1.9499999284744263,"y":0.7499682307243347,"z":3.000000238418579,"vx":-0.0000015646224937881925,"vy":0,"vz":0.00000357628005076549,"yaw":180,"respawns":0},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":0,"progress":17.745346069335938,"finish":null,"x":-1.9350253343582153,"y":1.974944829940796,"z":-16.30834197998047,"vx":0,"vy":2.999998092651367,"vz":-2.687999963760376,"yaw":-4320,"respawns":12},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.5989532470703,"finish":71.18333333333058,"x":3.957939624786377,"y":0.7499055862426758,"z":-130.69227600097656,"vx":0.000004467176495381864,"vy":-0.0002002716064453125,"vz":-0.0000035737414236791665,"yaw":359.99995429905584,"respawns":2},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":0,"progress":17.728864669799805,"finish":null,"x":0.0000013544897683459567,"y":0.7499530911445618,"z":1.6244738101959229,"vx":3.278489941749285e-7,"vy":0.00043064355850219727,"vz":-2.632002592086792,"yaw":-0.000007136909264568458,"respawns":13}]
+  ✘  4 tests/e2e/laser.spec.ts:91:1 › AI racers traverse the real course without test positions or progress claims (17.4s)
+(node:3768) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 tests/e2e/movement.spec.ts:4:5 › real Ammo: cardinal acceleration and braking stay bounded (9.7s)
+  ✓  6 tests/e2e/movement.spec.ts:4:5 › real Ammo: diagonal acceleration and braking stay bounded (7.7s)
+  ✘  7 tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump (11.9s)
+
+
+  1) tests/e2e/laser.spec.ts:91:1 › AI racers traverse the real course without test positions or progress claims 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 3
+    Received length: 1
+    Received array:  [{"aimPitch": 0, "bot": true, "checkpoint": 2, "color": "#ec8ee5", "connected": true, "deaths": 0, "finish": 71.18333333333058, "id": "bot-1", "name": "Nova", "progress": 130.5989532470703, "protectedUntil": 0, "ready": true, "respawnAt": 0, "respawns": 2, "score": 0, "vx": 0.000004467176495381864, "vy": -0.0002002716064453125, "vz": -0.0000035737414236791665, "x": 3.957939624786377, "y": 0.7499055862426758, "yaw": 359.99995429905584, "z": -130.69227600097656}]
+
+       97 |     const state = await page.evaluate(() => window.partyDebug.getState());
+       98 |     console.log('AI RACE FINISHES', JSON.stringify(state.players));
+    >  99 |     expect(state.players.filter((p) => p.bot && p.finish !== null)).toHaveLength(3);
+          |                                                                     ^
+      100 |     expect(state.players.filter((p) => p.bot).every((p) => p.checkpoint === 2)).toBe(true);
+      101 | });
+      102 |
+        at /workspace/party-repo/projects/party-panic/tests/e2e/laser.spec.ts:99:69
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/laser-AI-racers-traverse-t-ea082-ositions-or-progress-claims/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/laser-AI-racers-traverse-t-ea082-ositions-or-progress-claims/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/laser-AI-racers-traverse-t-ea082-ositions-or-progress-claims/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/laser-AI-racers-traverse-t-ea082-ositions-or-progress-claims/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump 
+
+    Error: browserContext.close: ENOENT: no such file or directory, open '/workspace/party-repo/projects/party-panic/test-results/.playwright-artifacts-1/traces/4f4644ce1bc9a9704a33-905667f4c635d1beb87e-recording4.trace'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/movement-real-Ammo-buffers-1f4f4-ence-cannot-repeatedly-jump/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/laser.spec.ts:91:1 › AI racers traverse the real course without test positions or progress claims 
+    tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump 
+  5 passed (1.3m)

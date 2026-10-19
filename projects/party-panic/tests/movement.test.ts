@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { approachHorizontal, RACE_MOVEMENT } from '../src/movement';
+import { raceHorizontal, raceGravity, turnToward, approachHorizontal, RACE_MOVEMENT } from '../src/movement';
 
 describe('authoritative race horizontal movement', () => {
     it('applies the same acceleration and braking magnitude on cardinal and diagonal paths', () => {
@@ -27,4 +27,13 @@ describe('authoritative race horizontal movement', () => {
     it('does not move when simulation delta is zero', () => {
         expect(approachHorizontal(1, -2, 0, 0, 2.8, 42, 0)).toEqual([1, -2]);
     });
+});
+
+it('preserves impulse speed and bounds stumble recovery and dive steering', () => {
+    expect(raceHorizontal(5, 0, [0, -1], false, true, 10, 1 / 60)[0]).toBeGreaterThan(4.9);
+    expect(raceHorizontal(0, 0, [0, -1], true, false, 0.03, 1 / 60)).toEqual([0, 0]);
+    expect(raceHorizontal(0, 0, [0, -1], true, false, 0.5, 1 / 60)[1]).toBeCloseTo(-0.6);
+    expect(raceGravity(3, false)).toBeGreaterThan(raceGravity(3, true));
+    expect(raceGravity(-3, true)).toBeGreaterThan(raceGravity(3, true));
+    expect(turnToward(Math.PI - 0.01, -Math.PI + 0.01, 1 / 60)).toBeCloseTo(Math.PI + 0.01);
 });

@@ -1025,3 +1025,23 @@ body.laser .name-label {
         font-size: 11px;
     }
 }
+#dive {
+    position: absolute;
+    right: max(120px, calc(110px + env(safe-area-inset-right)));
+    bottom: 24px;
+    width: 76px;
+    height: 66px;
+    border-radius: 24px;
+    background: #75dfd1;
+    color: #152039;
+    font-weight: 800;
+    touch-action: none;
+}
+@media (max-height: 500px) {
+    #dive {
+        right: max(104px, calc(94px + env(safe-area-inset-right)));
+        bottom: 15px;
+        width: 66px;
+        height: 54px;
+    }
+}

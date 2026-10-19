@@ -5,7 +5,12 @@ declare global {
         partyDebug: {
             getInput: () => import('../../src/protocol').Input;
             getState: () => Snapshot;
-            setTestInput: (axes: [number, number], jumpSequence: number) => void;
+            setTestInput: (
+                axes: [number, number],
+                jumpSequence: number,
+                jumpHeld?: boolean,
+                diveSequence?: number
+            ) => void;
             aimAtPlayer: (id: string) => void;
             clearMeasurements: () => void;
             setAim: (yaw: number, pitch: number) => void;

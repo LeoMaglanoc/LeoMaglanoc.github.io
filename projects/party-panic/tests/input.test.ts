@@ -26,7 +26,7 @@ function event(target: EventTarget, type: string, fields: Record<string, unknown
 }
 function fixture() {
     const surfaces = Object.fromEntries(
-        ['joystick', 'knob', 'jump', 'aim-zone', 'fire', 'application-canvas'].map((id) => [id, new Surface()])
+        ['joystick', 'knob', 'jump', 'dive', 'aim-zone', 'fire', 'application-canvas'].map((id) => [id, new Surface()])
     );
     const document = Object.assign(new EventTarget(), {
         pointerLockElement: null as Surface | null,
@@ -209,4 +209,20 @@ describe('mode-specific controls', () => {
         expect(surfaces.fire.captures.size).toBe(0);
         expect(surfaces.joystick.captures.size).toBe(0);
     });
+});
+
+it('jump duration and dive edges retain pointer ownership and clear on cancel', () => {
+    const { controls, surfaces } = fixture();
+    controls.setContext('obstacle-dash', 1);
+    event(surfaces.jump, 'pointerdown', pointer(4));
+    event(surfaces.jump, 'pointerdown', pointer(5));
+    event(surfaces.dive, 'pointerdown', pointer(6));
+    event(surfaces.dive, 'pointerdown', pointer(6));
+    expect(controls.sample()).toMatchObject({ jumpHeld: true, jumpSequence: 1, diveSequence: 1 });
+    event(surfaces.jump, 'pointercancel', pointer(5));
+    expect(controls.sample().jumpHeld).toBe(true);
+    event(surfaces.jump, 'pointercancel', pointer(4));
+    expect(controls.sample().jumpHeld).toBe(false);
+    controls.clear();
+    expect(controls.sample().axes).toEqual([0, 0]);
 });

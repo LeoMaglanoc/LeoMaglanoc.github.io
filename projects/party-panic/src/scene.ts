@@ -24,6 +24,7 @@ type EffectParticle = { entity: Entity; age: number; duration: number; vx: numbe
 export class Scene {
     private motions = new Map<string, CharacterMotion>();
     private particles: EffectParticle[] = [];
+    private raceTarget = new Vec3();
     modeId: ModeId = 'obstacle-dash';
     traces: { entity: Entity; age: number }[] = [];
     world!: Entity;
@@ -425,14 +426,33 @@ export class Scene {
             else o.entity.setPosition(Math.sin(t * 1.7 + o.phase) * 4.2, 0.8, o.z);
         }
     }
-    follow(id: string, dt: number, snap = false) {
+    follow(id: string, dt: number, snap = false, yaw = 0, pitch = 0.55) {
         const e = this.characters.get(id);
         if (!e) return;
         const p = e.getPosition();
-        const desired = new Vec3(p.x, p.y + 6.2, p.z + 8.4);
-        const alpha = snap ? 1 : 1 - Math.exp(-dt * 10);
-        this.camera.setPosition(this.camera.getPosition().lerp(this.camera.getPosition(), desired, alpha));
-        this.camera.lookAt(this.camera.getPosition().x, p.y + 0.2, p.z - 4.5);
+        const pivot = new Vec3(p.x, p.y + 0.6, p.z);
+        const elevation = Math.max(0.2, Math.min(0.85, pitch));
+        const desired = new Vec3(
+            p.x - Math.sin(yaw) * 10 * Math.cos(elevation),
+            pivot.y + 10 * Math.sin(elevation),
+            p.z + Math.cos(yaw) * 10 * Math.cos(elevation)
+        );
+        const alpha = snap ? 1 : 1 - 2 ** (-Math.max(0, dt) / 0.09);
+        desired.lerp(this.camera.getPosition(), desired, alpha);
+        // Clamp AFTER smoothing; even a recovering camera cannot drift through cover.
+        const hit = this.physics.raycastFirst(pivot, desired, {
+            filterCallback: (other: Entity) => !!other.rigidbody && other.rigidbody.type !== 'dynamic'
+        });
+        if (hit) {
+            const offset = desired.clone().sub(pivot);
+            const distance = Math.max(0.2, hit.point.distance(pivot) - 0.25);
+            desired.copy(pivot).add(offset.normalize().mulScalar(distance));
+        }
+        this.camera.setPosition(desired);
+        const target = new Vec3(p.x + Math.sin(yaw) * 1.5, p.y + 0.3, p.z - Math.cos(yaw) * 1.5);
+        if (snap || this.raceTarget.lengthSq() === 0) this.raceTarget.copy(target);
+        else this.raceTarget.lerp(this.raceTarget, target, 1 - 2 ** (-Math.max(0, dt) / 0.07));
+        this.camera.lookAt(this.raceTarget);
     }
     face(id: string, yaw: number) {
         this.characters.get(id)?.findByName('model')?.setLocalEulerAngles(0, yaw, 0);

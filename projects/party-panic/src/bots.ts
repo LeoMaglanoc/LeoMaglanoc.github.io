@@ -72,7 +72,7 @@ export class BotController {
             let x = clamp((lane - p.x) * 3, -1, 1),
                 z = -1;
             for (const edge of [-16, -26, -35]) {
-                if (p.z > edge - 0.25 && p.z < edge + 0.38 && p.y < 1.05 && !b.jumped.has(edge)) {
+                if (p.z > edge - 0.25 && p.z < edge + 0.2 && p.y < 1.05 && !b.jumped.has(edge)) {
                     b.jump++;
                     b.jumped.add(edge);
                 }
@@ -88,6 +88,7 @@ export class BotController {
             input.axes = [(x / length) * pace, (z / length) * pace];
         }
         input.jumpSequence = b.jump;
+        input.jumpHeld = modeId === 'obstacle-dash';
         // Laser navigation and aiming below use ordinary aim/fire inputs, validated by the host.
         if (input.modeId === 'laser-tag') this.laser(p, players, input, b, elapsed, dt);
         return input;
