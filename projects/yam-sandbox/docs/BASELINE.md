@@ -1,0 +1,11 @@
+# Native baseline (checkpoint A)
+
+The supplied ZIP's original generated scene loads and settles in Docker, with 29 bodies, 18 joints, 14 actuators, 5 cameras and a 0.002 s timestep. Raw dependency versions, source hash, actuator IDs/ranges, base and grasp transforms, and settled object positions are in `../results/baseline.json`. Untouched source MJCF and MIT license are under `upstream/`; untouched ZIP-derived compiled scene is `scene/zip_baseline.xml`.
+
+Menagerie source: `62ab00f2bc44f6f20c1c9b7a13f3fb1dd41a4e35/i2rt_yam`. All 17 referenced STL assets are original bytes. The downloader needed to ignore unrelated subdirectories (the original fails on `linear_4310`). Structural tests from the attachment passed (2/2). No Dream Labs runtime, proprietary scene, or learned policy is included.
+
+The tabletop is at world Z=0.730 m. Cube half-size .031 m, mass .06 kg; cylinder radius .024 m, half-height .031 m, mass .09 kg. Original initial centers: cube (-.10,-.10,.82), cylinder (.08,.07,.82). Left/right bases (-.44,.07,.732)/(+.44,.07,.732), right rotated 180° about world Z. Refer to the JSON for full frame matrices. Source `grasp_site` is 0.1347 m along wrist local Z from `tcp_site` with the same -90° local Z rotation. Desired top-down grasps have site Z toward world -Z; four cube-symmetric yaw candidates are tested with bounded FK-based numerical IK. High approach Z=1.03 m was unreachable; use .88 m.
+
+Measured finger pad box center separation = 0.0048 + 2q m (q is left slider, paired right slider = -q). Inner face gap = 2q + .0008 m: q=0 closes, q=.0375 opens to .0758 m. This is opposite to a "larger closes" assumption. Verify with geometry, not a visual animation. Original finger servos kp=100/kv=10 could lift but slipped during transfer; retain these logs as failed experiments, tune separately with documented gains and force limits.
+
+Robot visual geoms group 2; collision group 3, primitive contacts retained. Finger contact bodies: `{left,right}_{lf_down,rf_down,lf_rot,rf_rot}`. Object geoms `cube_geom`, `cylinder_geom`, table `tabletop`. Named sites have group 4 and are hidden in presentation. The original ZIP only holds home joint targets and has no grasp planner, feedback state machine, success oracle, or browser port.
