@@ -74,7 +74,21 @@ export class DisplayMode {
         this.listen(environment.window, 'orientationchange', refresh);
         this.listen(environment.window.visualViewport, 'resize', refresh);
         this.listen(environment.orientation, 'change', refresh);
-        this.listen(environment.document, 'fullscreenchange', refresh);
+        this.listen(environment.document, 'fullscreenchange', () => {
+            // Escape/system exits invalidate late orientation and wake grants.
+            // Never request fullscreen from this event or from visibilitychange.
+            if (!environment.document.fullscreenElement && this.wanted && !this.exiting) {
+                this.wanted = false;
+                ++this.generation;
+                try {
+                    environment.orientation?.unlock?.();
+                } catch {
+                    /* Optional API. */
+                }
+                void this.releaseWake();
+            }
+            this.notify();
+        });
         this.listen(environment.document, 'visibilitychange', () => {
             if (environment.document.visibilityState === 'visible') {
                 void this.acquireWake();
@@ -137,7 +151,7 @@ export class DisplayMode {
                 if (orientation?.lock) {
                     try {
                         await orientation.lock('landscape');
-                        if (!this.wanted) orientation.unlock?.();
+                        if (!this.wanted || this.disposed) orientation.unlock?.();
                     } catch (error) {
                         if (this.current(generation)) {
                             this.errors.orientationError = errorMessage(error);

@@ -1012,3 +1012,16 @@ body.laser .name-label {
         bottom: max(32px, env(safe-area-inset-bottom));
     }
 }
+
+/* First-interaction display entry is usable before engine/signaling readiness. */
+#party-enter {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px 14px;
+}
+@media (max-height: 500px) and (orientation: landscape) {
+    #party-enter {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}

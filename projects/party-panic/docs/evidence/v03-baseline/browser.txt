@@ -31,3 +31,8 @@ REPEATED MODE BODY COUNTS [{"mode":"laser-tag","count":17},{"mode":"obstacle-das
   ✓  16 tests/e2e/responsive.spec.ts:7:5 › desktop: home, touch input, portrait hint and no page scroll (6.6s)
   ✓  17 tests/e2e/responsive.spec.ts:7:5 › phone-portrait: home, touch input, portrait hint and no page scroll (5.3s)
   ✓  18 tests/e2e/responsive.spec.ts:7:5 › phone-landscape: home, touch input, portrait hint and no page scroll (5.4s)
+  ✓  19 tests/e2e/smoke.spec.ts:2:1 › solo loads real Ammo, keyboard movement and checkpoint respawn (13.0s)
+  ✓  20 tests/e2e/smoke.spec.ts:27:1 › startup holds room and solo actions until Ammo is ready (4.9s)
+
+  2 skipped
+  18 passed (2.1m)

@@ -85,6 +85,26 @@ test('results and rematch retain display state; explicit exit and reenter work',
         { type: 'enter', active: true }
     ]);
     await page.locator('#leave').click();
-    await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(false);
+    await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(true);
     await expect(page.locator('#solo')).toBeVisible();
 });
+
+for (const action of ['party-enter', 'host', 'join-open']) {
+    test(`main-menu ${action} enters early and Back preserves fullscreen`, async ({ page }) => {
+        await displayBrowser(page, false);
+        await page.goto('./?debug=1');
+        await page.waitForFunction(() => !!window.partyDebug);
+        expect(await page.evaluate(() => Reflect.get(window, 'displayCalls'))).toEqual([]);
+        await page.locator('#' + action).click();
+        await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(true);
+        expect(await page.evaluate(() => Reflect.get(window, 'displayCalls'))).toEqual([
+            { type: 'enter', active: true }
+        ]);
+        if (action !== 'party-enter') await page.locator('#back').click();
+        expect(await page.evaluate(() => !!document.fullscreenElement)).toBe(true);
+        await page.evaluate(() => document.exitFullscreen());
+        await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+        expect(await page.evaluate(() => !!document.fullscreenElement)).toBe(false);
+        expect(await page.evaluate(() => Reflect.get(window, 'displayCalls'))).toHaveLength(2);
+    });
+}

@@ -1,0 +1,14 @@
+[WebServer] (node:2584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:2608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable (7.0s)
+  ✓  2 tests/e2e/display.spec.ts:59:1 › results and rematch retain display state; explicit exit and reenter work (6.0s)
+  ✓  3 tests/e2e/display.spec.ts:93:5 › main-menu party-enter enters early and Back preserves fullscreen (4.6s)
+  ✓  4 tests/e2e/display.spec.ts:93:5 › main-menu host enters early and Back preserves fullscreen (3.8s)
+  ✓  5 tests/e2e/display.spec.ts:93:5 › main-menu join-open enters early and Back preserves fullscreen (4.5s)
+
+  5 passed (27.7s)

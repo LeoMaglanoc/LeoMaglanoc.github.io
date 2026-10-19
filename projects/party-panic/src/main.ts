@@ -16,7 +16,7 @@ const escape = (s: string) =>
     s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 $('#app').innerHTML =
     `<div class="shade" id="shade"></div><header class="topbar"><a class="brand" href="./">PARTY<br><b>PANIC!</b></a><div class="top-right"><span class="tag">Small party. Big chaos.</span><span class="pill"><i></i>1–8 friends</span></div></header>
-<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
+<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="secondary" id="party-enter">Enter Party Panic — Fullscreen</button><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
 <footer class="bottom-bar" id="footer"><span>2 MINIGAMES / SOLO AI + MULTIPLAYER</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
 <section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
@@ -34,6 +34,14 @@ const display = new DisplayMode((status) => {
     document.documentElement.style.setProperty('--viewport-width', status.width + 'px');
     document.body.classList.toggle('portrait-game', status.portrait);
     if (scene.app) scene.resize(status.width, status.height);
+    $('#party-enter').classList.toggle('hidden', status.fullscreen);
+    $('#party-enter').textContent = status.fullscreenError ? 'Try fullscreen again' : 'Enter Party Panic — Fullscreen';
+    $('#party-enter').setAttribute(
+        'aria-label',
+        status.fullscreenSupported
+            ? 'Enter Party Panic — Fullscreen'
+            : 'Enter Party Panic — fullscreen unavailable in this browser'
+    );
     $('#display-status').textContent =
         `Fullscreen ${status.fullscreen ? 'active' : status.fullscreenError || 'inactive'} · Landscape ${status.landscape ? 'observed' : status.orientationError || 'not locked'}`;
 });
@@ -44,9 +52,14 @@ window.addEventListener('pagehide', (event) => {
         sound.dispose();
     }
 });
-$('.brand').addEventListener('click', () => {
-    void display.exit();
+$('.brand').addEventListener('click', (event) => {
+    event.preventDefault();
+    reset();
 });
+$('#party-enter').onclick = () => {
+    void display.enter();
+    sound.enable();
+};
 $('#display-enter').onclick = () => {
     void display.enter();
     sound.enable();
@@ -139,6 +152,8 @@ function nameForm(join = false) {
     );
     $('#back').onclick = () => reset();
     $('#continue').onclick = () => {
+        void display.enter();
+        sound.enable();
         saveName();
         if (join) {
             const raw = $<HTMLInputElement>('#room').value.trim();
@@ -633,7 +648,6 @@ function endSession(message: string) {
     $('#new-room').onclick = () => reset();
 }
 function reset(clearNotice = true) {
-    void display.exit();
     attempt++;
     startRequested = false;
     ended = true;
@@ -686,8 +700,16 @@ $('#solo-mode').onchange = () => {
         : 'Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.';
 };
 $('#solo').onclick = solo;
-$('#host').onclick = () => nameForm();
-$('#join-open').onclick = () => nameForm(true);
+$('#host').onclick = () => {
+    void display.enter();
+    sound.enable();
+    nameForm();
+};
+$('#join-open').onclick = () => {
+    void display.enter();
+    sound.enable();
+    nameForm(true);
+};
 $('#leave').onclick = () => reset();
 document.addEventListener('visibilitychange', () => {
     frameAt = performance.now();
