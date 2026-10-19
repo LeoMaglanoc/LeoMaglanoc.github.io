@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-19T20:05:03.992Z",
+  "measurement": {
+    "scope": {
+      "role": "host",
+      "modeId": "obstacle-dash",
+      "roundId": 1
+    },
+    "seconds": 13.109100000000094,
+    "phases": [
+      "countdown",
+      "racing"
+    ],
+    "rollingFrameLimit": 36000,
+    "rttLimit": 1024
+  },
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+  "viewport": [
+    390,
+    844
+  ],
+  "display": {
+    "fullscreenSupported": true,
+    "orientationSupported": true,
+    "wakeLockSupported": true,
+    "fullscreen": true,
+    "landscape": false,
+    "portrait": true,
+    "width": 390,
+    "height": 844,
+    "wakeLockActive": true,
+    "orientationError": "screen.orientation.lock() is not available on this device."
+  },
+  "modeId": "obstacle-dash",
+  "roundId": 1,
+  "role": "host",
+  "ice": "not connected",
+  "semantics": "not connected",
+  "counts": {
+    "sent": 0,
+    "received": 0,
+    "sentBytes": 0,
+    "receivedBytes": 0,
+    "rejected": 0,
+    "droppedBackpressure": 0
+  },
+  "prediction": {
+    "snapshots": 0,
+    "corrections": 0,
+    "maxCorrection": 0
+  },
+  "fps": {
+    "samples": 268,
+    "p5": 11.261261261255356,
+    "median": 23.584905660429165,
+    "p95": 92.59259259219337
+  },
+  "rtt": {
+    "samples": 0,
+    "p5": 0,
+    "median": 0,
+    "p95": 0
+  },
+  "logs": [
+    {
+      "at": "2026-10-19T20:04:50.316Z",
+      "type": "engine-ready",
+      "payload": {
+        "version": "2.23.3"
+      }
+    },
+    {
+      "at": "2026-10-19T20:04:50.876Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-19T20:04:53.879Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-19T20:04:54.764Z",
+      "type": "jump",
+      "payload": {
+        "id": "solo"
+      }
+    },
+    {
+      "at": "2026-10-19T20:05:00.972Z",
+      "type": "jump",
+      "payload": {
+        "id": "bot-1"
+      }
+    },
+    {
+      "at": "2026-10-19T20:05:01.217Z",
+      "type": "jump",
+      "payload": {
+        "id": "bot-0"
+      }
+    },
+    {
+      "at": "2026-10-19T20:05:01.473Z",
+      "type": "jump",
+      "payload": {
+        "id": "bot-2"
+      }
+    }
+  ]
+}

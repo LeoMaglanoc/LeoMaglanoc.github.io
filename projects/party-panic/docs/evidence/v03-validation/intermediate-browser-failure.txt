@@ -1,0 +1,91 @@
+
+> party-panic@0.3.0 test:e2e
+> playwright test
+
+
+Running 24 tests using 1 worker
+
+(node:6685) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+INPUT-ONLY COURSE {"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":104109,"shotSequence":0,"checkpoint":2,"progress":130.5825958251953,"finish":65.64793333333087,"x":-4.00969934463501,"y":0.7499584555625916,"z":-130.62925720214844,"vx":-0.000024071207008091733,"vy":-0.001646280288696289,"vz":-2.8000035285949707,"yaw":360.000492563154,"respawns":0}
+  ✓   1 tests/e2e/course.spec.ts:2:1 › solo traverses the actual course with input only and authoritative finish (5.8s)
+  ✘   2 tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable (1.0m)
+(node:7050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/e2e/display.spec.ts:59:1 › results and rematch retain display state; explicit exit and reenter work (10.4s)
+  ✓   4 tests/e2e/display.spec.ts:93:5 › main-menu party-enter enters early and Back preserves fullscreen (6.0s)
+  ✓   5 tests/e2e/display.spec.ts:93:5 › main-menu host enters early and Back preserves fullscreen (5.4s)
+  ✓   6 tests/e2e/display.spec.ts:93:5 › main-menu join-open enters early and Back preserves fullscreen (5.3s)
+LASER AI HALFWAY [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":4,"respawnAt":0,"protectedUntil":25.04616666666659,"aimPitch":-0.08,"health":32,"energy":1,"weapon":"quick","charge":0,"inputSequence":10,"shotSequence":0,"checkpoint":0,"progress":0,"finish":null,"x":11,"y":0.7499745488166809,"z":-8,"vx":-0.0000017881391158880433,"vy":0,"vz":0,"yaw":0,"respawns":4},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":5,"deaths":4,"respawnAt":0,"protectedUntil":38.76283333333248,"aimPitch":-0.07678508022088396,"health":66,"energy":0.6219999999999847,"weapon":"quick","charge":0,"inputSequence":2478,"shotSequence":16,"checkpoint":0,"progress":0,"finish":null,"x":-0.12727896869182587,"y":0.749970555305481,"z":-7.287919521331787,"vx":4.790195941925049,"vy":-0.000024437904357910156,"vz":-0.30655020475387573,"yaw":-137.0423561642906,"respawns":4},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":9,"deaths":5,"respawnAt":44.22949999999889,"protectedUntil":32.72949999999949,"aimPitch":-0.07025365125026986,"health":0,"energy":1,"weapon":"quick","charge":0,"inputSequence":2463,"shotSequence":31,"checkpoint":0,"progress":0,"finish":null,"x":-1.6590948104858398,"y":0.7499951124191284,"z":3.967655897140503,"vx":0,"vy":0,"vz":0,"yaw":0.7048390699815187,"respawns":4},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":4,"deaths":5,"respawnAt":0,"protectedUntil":43.39616666666555,"aimPitch":-0.04966899992190832,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":2478,"shotSequence":15,"checkpoint":0,"progress":0,"finish":null,"x":-10.800000190734863,"y":0.7499822378158569,"z":7.999999523162842,"vx":4.160002708435059,"vy":-0.0002536773681640625,"vz":0.0000017929216937773162,"yaw":28.421534615444074,"respawns":5}]
+  ✘   7 tests/e2e/laser.spec.ts:3:1 › solo Laser Tag: real AI inputs tag, respawn, score and finish a complete match (13.8s)
+
+
+  1) tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: page.waitForFunction: Test timeout of 60000ms exceeded.
+
+      47 |     const z = await page.evaluate(() => window.partyDebug.getState().players[0].z);
+      48 |     await page.keyboard.down('w');
+    > 49 |     await page.waitForFunction((before) => window.partyDebug.getState().players[0].z < before - 1, z);
+         |                ^
+      50 |     await page.keyboard.up('w');
+      51 |     await page.setViewportSize({ width: 844, height: 390 });
+      52 |     await expect(page.locator('.portrait-hint')).toBeHidden();
+        at /workspace/party-repo/projects/party-panic/tests/e2e/display.spec.ts:49:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/display-denied-gesture-ful-194bc--and-manual-rotation-usable/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/display-denied-gesture-ful-194bc--and-manual-rotation-usable/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/display-denied-gesture-ful-194bc--and-manual-rotation-usable/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/display-denied-gesture-ful-194bc--and-manual-rotation-usable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/laser.spec.ts:3:1 › solo Laser Tag: real AI inputs tag, respawn, score and finish a complete match 
+
+    Test was interrupted.
+
+    Error: page.screenshot: Test ended.
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      25 |     expect(halfway.players.reduce((n, p) => n + p.score, 0)).toBe(halfway.players.reduce((n, p) => n + p.deaths, 0));
+      26 |     expect(halfway.players.some((p) => p.respawns > 0)).toBe(true);
+    > 27 |     await page.screenshot({ path: 'test-results/laser-ai-arena.png' });
+         |                ^
+      28 |     await page.evaluate(() => window.partyDebug.hostAdvance(55));
+      29 |     await expect(page.locator('#panel')).toContainText('Top tags.');
+      30 |     const final = await page.evaluate(() => window.partyDebug.getState());
+        at /workspace/party-repo/projects/party-panic/tests/e2e/laser.spec.ts:27:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/laser-solo-Laser-Tag-real--ed0e6-and-finish-a-complete-match/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/laser-solo-Laser-Tag-real--ed0e6-and-finish-a-complete-match/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/laser-solo-Laser-Tag-real--ed0e6-and-finish-a-complete-match/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/laser-solo-Laser-Tag-real--ed0e6-and-finish-a-complete-match/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable 
+  1 interrupted
+    tests/e2e/laser.spec.ts:3:1 › solo Laser Tag: real AI inputs tag, respawn, score and finish a complete match 
+  17 did not run
+  5 passed (1.9m)

@@ -1,0 +1,106 @@
+{
+  "milliseconds": 14.30000000000291,
+  "origin": {
+    "x": -4,
+    "y": 0.800000011920929,
+    "z": -8
+  },
+  "visible": {
+    "x": -4,
+    "y": 0.800000011920929,
+    "z": -7.927748680114746
+  },
+  "authoritative": {
+    "id": "424c4641-e5df-475a-a875-8fd6b8ecb698",
+    "name": "Laser Guest",
+    "color": "#75dfd1",
+    "connected": true,
+    "ready": false,
+    "bot": false,
+    "score": 0,
+    "deaths": 0,
+    "respawnAt": 0,
+    "protectedUntil": 1,
+    "aimPitch": 0,
+    "health": 100,
+    "energy": 1,
+    "weapon": "quick",
+    "charge": 0,
+    "inputSequence": 0,
+    "shotSequence": 0,
+    "checkpoint": 0,
+    "progress": 0,
+    "finish": null,
+    "x": -4,
+    "y": 0.800000011920929,
+    "z": -8,
+    "vx": 0,
+    "vy": 0,
+    "vz": 0,
+    "yaw": 180,
+    "respawns": 0
+  },
+  "diagnostics": {
+    "links": [
+      {
+        "id": "32e161c8-6b8d-4c68-9f52-461b937fd341",
+        "control": "connected",
+        "movement": "connected",
+        "signal": "stable"
+      }
+    ],
+    "elapsedSeconds": 6.214,
+    "ice": "host ↔ host · direct",
+    "semantics": "movement: ordered=false, retransmits=unlimited",
+    "rtt": 5.5,
+    "bodies": 16,
+    "renderComponents": 85,
+    "transientEntities": 0,
+    "connectionCount": 2,
+    "bufferedBytes": 0,
+    "prediction": {
+      "snapshots": 1,
+      "corrections": 0,
+      "maxCorrection": 0
+    },
+    "snapshotAge": 83.30000000000291,
+    "display": {
+      "fullscreenSupported": true,
+      "orientationSupported": true,
+      "wakeLockSupported": true,
+      "fullscreen": true,
+      "landscape": true,
+      "portrait": false,
+      "width": 844,
+      "height": 390,
+      "wakeLockActive": true,
+      "orientationError": "screen.orientation.lock() is not available on this device."
+    },
+    "fps": {
+      "samples": 62,
+      "p5": 17.094017094017094,
+      "median": 20.080321285139387,
+      "p95": 21.27659574468085
+    },
+    "measurement": {
+      "scope": {
+        "role": "guest",
+        "modeId": "laser-tag",
+        "roundId": 2
+      },
+      "seconds": 3.051,
+      "phases": [
+        "countdown",
+        "racing"
+      ]
+    },
+    "counts": {
+      "sent": 82,
+      "received": 71,
+      "sentBytes": 18967,
+      "receivedBytes": 58719,
+      "rejected": 0,
+      "droppedBackpressure": 0
+    }
+  }
+}

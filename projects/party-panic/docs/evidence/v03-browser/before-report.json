@@ -1,0 +1,3459 @@
+{
+  "date": "2026-10-19T19:58:13.587Z",
+  "url": "http://127.0.0.1:8081/party-panic/",
+  "browser": "154.0.8037.57",
+  "renderer": "Automated Chromium with SwiftShader software rendering; emulated viewports, not physical Android/iOS devices.",
+  "limitations": [
+    "Solo host with 3 genuine simulation-controlled bots; this report does not certify WebRTC multiplayer.",
+    "FPS diagnostics include countdown and the active interval; these are not steady-state phone performance measurements.",
+    "Fullscreen/orientation fields record only actual automated browser API outcomes; they do not certify Android or iPhone behavior.",
+    "No physical-phone performance target is verified by this run."
+  ],
+  "videoAvailable": true,
+  "failures": 0,
+  "results": [
+    {
+      "scenario": "before-obstacle-dash-desktop",
+      "modeId": "obstacle-dash",
+      "viewportName": "desktop",
+      "expectedViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "loading": {
+        "coldReadyMs": 2339.3000000000466,
+        "warmReadyMs": 938.6000000000931,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8081/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.411,
+      "inputs": [
+        "Keyboard W held for 8 real seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT111.2sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T19:56:52.117Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 12.3975,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          1440,
+          900
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 1440,
+          "height": 900,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 142,
+          "p5": 6.472491909385114,
+          "median": 11.481056257194075,
+          "p95": 27.100271002778424
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T19:56:38.419Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:39.715Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:42.658Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:43.298Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:45.308Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:47.260Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:49.281Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:50.367Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:50.662Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:50.905Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:51.718Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo",
+              "checkpoint": 0
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          39,
+          16.600000000000364,
+          150.09999999999945,
+          149.90000000000055,
+          66.79999999999927,
+          99.90000000000055,
+          83.39999999999964,
+          99.90000000000055,
+          133.39999999999964,
+          83.19999999999982,
+          83.5,
+          83.30000000000018,
+          66.60000000000036,
+          50,
+          83.29999999999927,
+          116.70000000000073,
+          83.39999999999964,
+          66.60000000000036,
+          83.29999999999927,
+          50.100000000000364,
+          49.899999999999636,
+          166.70000000000073,
+          83.29999999999927,
+          33.400000000000546,
+          66.59999999999945,
+          116.70000000000073,
+          83.29999999999927,
+          66.70000000000073,
+          83.29999999999927,
+          100,
+          83.30000000000018,
+          83.30000000000018,
+          83.30000000000018,
+          66.69999999999982,
+          83.39999999999964,
+          166.70000000000073,
+          83.29999999999927,
+          66.60000000000036,
+          50.100000000000364,
+          116.60000000000036,
+          16.69999999999891,
+          83.20000000000073,
+          100.10000000000036,
+          66.59999999999854,
+          133.40000000000146,
+          83.29999999999927,
+          16.700000000000728,
+          83.29999999999927,
+          100,
+          50,
+          83.29999999999927,
+          100.10000000000036,
+          149.89999999999964,
+          66.70000000000073,
+          83.29999999999927,
+          83.40000000000146,
+          100,
+          16.599999999998545,
+          150,
+          33.30000000000109,
+          66.69999999999891,
+          66.60000000000036,
+          83.39999999999964,
+          83.30000000000109,
+          83.39999999999964,
+          100,
+          166.60000000000036,
+          133.39999999999964,
+          49.899999999999636,
+          50,
+          100,
+          83.30000000000109,
+          50,
+          116.69999999999891,
+          66.60000000000036,
+          183.39999999999964,
+          116.70000000000073,
+          100,
+          83.29999999999927,
+          83.30000000000109,
+          66.69999999999891,
+          83.30000000000109,
+          83.39999999999964,
+          83.29999999999927,
+          83.30000000000109,
+          66.59999999999854,
+          83.40000000000146,
+          166.6999999999989,
+          99.89999999999964,
+          50,
+          100.10000000000036,
+          33.30000000000109,
+          99.89999999999964,
+          66.69999999999891,
+          83.40000000000146,
+          83.29999999999927,
+          100,
+          83.29999999999927,
+          83.40000000000146,
+          66.69999999999891,
+          33.30000000000109,
+          116.59999999999854,
+          116.70000000000073
+        ],
+        "jsHeap": {
+          "used": 23011389,
+          "total": 36650761
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": []
+    },
+    {
+      "scenario": "before-obstacle-dash-phone-landscape",
+      "modeId": "obstacle-dash",
+      "viewportName": "phone-landscape",
+      "expectedViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "loading": {
+        "coldReadyMs": 1282.8000000000466,
+        "warmReadyMs": 600.3000000000466,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8081/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.112,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: jump tapped every 2 seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT110.1sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T19:57:08.071Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 13.248699999999953,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          844,
+          390
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 251,
+          "p5": 11.037527593807638,
+          "median": 20.2020202020202,
+          "p95": 57.47126436735467
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T19:56:54.237Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:54.811Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:57.878Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T19:56:58.699Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:05.218Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:05.566Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:05.755Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          17.9000000001397,
+          66.69999999999982,
+          83.30000000000018,
+          33.399999999999636,
+          83.30000000000018,
+          50,
+          50,
+          50,
+          50,
+          33.30000000000018,
+          66.60000000000036,
+          33.399999999999636,
+          100,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          83.30000000000018,
+          50,
+          50,
+          33.399999999999636,
+          33.20000000000073,
+          66.69999999999982,
+          33.399999999999636,
+          83.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          16.699999999999818,
+          83.30000000000018,
+          49.899999999999636,
+          33.400000000000546,
+          33.30000000000018,
+          83.29999999999927,
+          66.80000000000018,
+          16.600000000000364,
+          33.399999999999636,
+          66.60000000000036,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          50,
+          50,
+          50,
+          33.29999999999927,
+          83.40000000000055,
+          66.59999999999945,
+          33.400000000000546,
+          66.59999999999945,
+          16.700000000000728,
+          33.399999999999636,
+          66.60000000000036,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          83.39999999999964,
+          49.899999999999636,
+          66.70000000000073,
+          83.29999999999927,
+          83.30000000000018,
+          66.69999999999982,
+          50,
+          50,
+          66.70000000000073,
+          50,
+          283.2999999999993,
+          100,
+          350,
+          150,
+          66.60000000000036,
+          16.700000000000728,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.60000000000036,
+          16.69999999999891,
+          66.70000000000073,
+          33.29999999999927,
+          50.100000000000364,
+          49.899999999999636,
+          50.100000000000364,
+          33.30000000000109,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          83.39999999999964,
+          33.20000000000073,
+          33.399999999999636,
+          50,
+          33.29999999999927,
+          50,
+          33.400000000001455,
+          66.59999999999854,
+          33.400000000001455,
+          83.19999999999891,
+          33.5,
+          66.5,
+          50,
+          83.39999999999964,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          16.600000000000364,
+          66.69999999999891,
+          50,
+          66.70000000000073,
+          16.600000000000364,
+          33.399999999999636,
+          66.70000000000073,
+          66.59999999999854,
+          50,
+          66.70000000000073,
+          83.20000000000073,
+          16.69999999999891,
+          33.30000000000109,
+          50.099999999998545,
+          33.30000000000109,
+          33.399999999999636,
+          66.60000000000036,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.60000000000036,
+          66.70000000000073,
+          33.399999999999636,
+          33.399999999999636,
+          66.60000000000036,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          33.399999999999636,
+          66.60000000000036,
+          100.10000000000036,
+          33.20000000000073,
+          66.69999999999891,
+          33.30000000000109,
+          50,
+          50,
+          66.69999999999891,
+          50,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          100,
+          16.600000000000364,
+          33.399999999999636,
+          66.60000000000036,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          33.399999999999636,
+          16.600000000000364,
+          66.69999999999891,
+          33.30000000000109,
+          50,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          33.29999999999927,
+          50,
+          33.400000000001455,
+          50,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          83.39999999999964,
+          16.600000000000364,
+          33.399999999999636,
+          66.60000000000036,
+          66.60000000000036,
+          33.399999999999636,
+          16.700000000000728,
+          50,
+          49.899999999999636,
+          16.69999999999891,
+          66.70000000000073,
+          16.700000000000728,
+          66.59999999999854
+        ],
+        "jsHeap": {
+          "used": 16480540,
+          "total": 36002028
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "video": {
+        "path": "docs/evidence/v03-browser/videos/before-obstacle-dash-phone-landscape.webm",
+        "description": "Automated Chromium viewport capture; includes loading/countdown and 8 seconds of real-input gameplay. Not a human phone recording."
+      }
+    },
+    {
+      "scenario": "before-obstacle-dash-phone-portrait",
+      "modeId": "obstacle-dash",
+      "viewportName": "phone-portrait",
+      "expectedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loading": {
+        "coldReadyMs": 1082,
+        "warmReadyMs": 482.30000000004657,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8081/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.904,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: jump tapped every 2 seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "portrait-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "portrait-primary",
+        "hud": "TIME LEFT109.3sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "block",
+        "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+      },
+      "diagnostics": {
+        "date": "2026-10-19T19:57:24.803Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 14.442100000000092,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          390,
+          844
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": false,
+          "portrait": true,
+          "width": 390,
+          "height": 844,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 263,
+          "p5": 10.449320794128043,
+          "median": 18.975332068327962,
+          "p95": 57.47126436735467
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T19:57:09.835Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:10.355Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:13.799Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:15.606Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:21.393Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:21.684Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:21.993Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          34.300000000139335,
+          100,
+          200,
+          216.70000000000073,
+          33.29999999999927,
+          50,
+          100,
+          116.60000000000036,
+          433.39999999999964,
+          33.30000000000018,
+          83.40000000000055,
+          116.59999999999945,
+          83.40000000000055,
+          149.89999999999964,
+          50.100000000000364,
+          33.29999999999927,
+          83.30000000000018,
+          66.69999999999982,
+          66.70000000000073,
+          66.59999999999945,
+          66.69999999999982,
+          50,
+          83.30000000000018,
+          33.400000000000546,
+          33.29999999999927,
+          33.20000000000073,
+          66.79999999999927,
+          50,
+          66.60000000000036,
+          33.30000000000018,
+          66.69999999999982,
+          50,
+          100,
+          33.30000000000018,
+          33.30000000000018,
+          33.399999999999636,
+          66.69999999999982,
+          33.19999999999982,
+          50,
+          33.400000000000546,
+          50,
+          66.69999999999982,
+          66.69999999999982,
+          33.30000000000018,
+          66.60000000000036,
+          150,
+          33.29999999999927,
+          16.700000000000728,
+          66.69999999999982,
+          16.699999999999818,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.60000000000036,
+          33.399999999999636,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          33.399999999999636,
+          66.70000000000073,
+          33.19999999999891,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          16.600000000000364,
+          66.79999999999927,
+          33.20000000000073,
+          66.69999999999891,
+          16.700000000000728,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          16.600000000000364,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          16.600000000000364,
+          33.399999999999636,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          16.600000000000364,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          66.70000000000073,
+          16.69999999999891,
+          83.30000000000109,
+          33.29999999999927,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.59999999999854,
+          33.400000000001455,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.59999999999854,
+          33.400000000001455,
+          66.59999999999854,
+          16.700000000000728,
+          33.399999999999636,
+          66.60000000000036,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          50.100000000000364,
+          49.899999999999636,
+          66.70000000000073,
+          16.700000000000728,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          50,
+          66.60000000000036,
+          33.29999999999927,
+          66.70000000000073,
+          33.399999999999636,
+          66.5,
+          33.399999999999636,
+          66.70000000000073,
+          33.29999999999927,
+          83.40000000000146,
+          83.29999999999927,
+          33.29999999999927,
+          83.40000000000146,
+          16.599999999998545,
+          83.30000000000109,
+          16.69999999999891,
+          66.70000000000073,
+          66.70000000000073,
+          33.29999999999927,
+          83.29999999999927,
+          16.700000000000728,
+          66.60000000000036,
+          33.399999999999636,
+          33.29999999999927,
+          66.70000000000073,
+          33.20000000000073,
+          66.69999999999891,
+          33.399999999999636,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          83.30000000000109,
+          33.399999999999636,
+          33.29999999999927,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          16.600000000000364,
+          16.600000000000364,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          50,
+          33.399999999999636,
+          33.29999999999927,
+          33.30000000000109,
+          66.69999999999891,
+          66.70000000000073,
+          33.29999999999927,
+          33.399999999999636,
+          49.900000000001455,
+          33.399999999999636,
+          66.60000000000036,
+          16.69999999999891,
+          33.399999999999636,
+          49.900000000001455,
+          83.39999999999964,
+          33.29999999999927,
+          33.30000000000109,
+          66.69999999999891,
+          16.600000000000364,
+          66.70000000000073,
+          33.399999999999636,
+          66.60000000000036,
+          16.69999999999891,
+          83.30000000000109,
+          33.399999999999636,
+          16.600000000000364,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          16.700000000000728,
+          66.5
+        ],
+        "jsHeap": {
+          "used": 15394491,
+          "total": 38281463
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": []
+    },
+    {
+      "scenario": "before-laser-tag-desktop",
+      "modeId": "laser-tag",
+      "viewportName": "desktop",
+      "expectedViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "loading": {
+        "coldReadyMs": 2139.399999999907,
+        "warmReadyMs": 1038.6000000000931,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8081/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.093,
+      "inputs": [
+        "Keyboard W held for 8 real seconds",
+        "Primary mouse held; pointer movement for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT80.4sYOUR TAGS0",
+        "reticleVisible": true,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T19:57:42.482Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.2115,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          1440,
+          900
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 1440,
+          "height": 900,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 133,
+          "p5": 5.51571980143267,
+          "median": 10.1010101010101,
+          "p95": 51.81347150246567
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T19:57:28.137Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:29.207Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:32.298Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:33.121Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "from": {
+                "x": -11.25,
+                "y": 1.0600102280886559,
+                "z": -7.291599108701718
+              },
+              "to": {
+                "x": -11.485882508895592,
+                "y": 1.4104698559394808,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:33.815Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "from": {
+                "x": -11.162142614483347,
+                "y": 1.0740616257456932,
+                "z": -6.106746996504565
+              },
+              "to": {
+                "x": -11.649999046325684,
+                "y": 1.5195121563470568,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:33.815Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "from": {
+                "x": 5.364438758013197,
+                "y": 1.0236129691284808,
+                "z": -7.837624498114074
+              },
+              "to": {
+                "x": 9.844692367069001,
+                "y": 0.7817973500974479,
+                "z": -8.204457928982169
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:33.818Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:33.916Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "from": {
+                "x": -6.003753699799046,
+                "y": 1.0313272430925053,
+                "z": -8.011958062042476
+              },
+              "to": {
+                "x": -10.849829816866318,
+                "y": 0.790494975505809,
+                "z": -6.779066018541329
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:33.916Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:34.857Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "from": {
+                "x": 1.4185724331799998,
+                "y": 1.0253087051959853,
+                "z": -8.21718252009855
+              },
+              "to": {
+                "x": -3.137201918776528,
+                "y": 0.5475650196430357,
+                "z": -8.270559271935008
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:34.857Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:35.866Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:36.061Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:36.987Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:37.111Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "from": {
+                "x": -10.284217838821267,
+                "y": 1.0676853518149965,
+                "z": -7.763886668499008
+              },
+              "to": {
+                "x": 1.0981344685859344,
+                "y": 0.7815002747140446,
+                "z": -7.845839671673174
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:37.111Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:37.713Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "from": {
+                "x": -6.358965233493631,
+                "y": 1.0776642916590193,
+                "z": 8.226299935300665
+              },
+              "to": {
+                "x": 10.66132523167662,
+                "y": 0.7670392935297683,
+                "z": 7.827664857614059
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:37.714Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:38.168Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "from": {
+                "x": -9.41716742670734,
+                "y": 1.075315491262749,
+                "z": -7.461781324880317
+              },
+              "to": {
+                "x": -6.68487147611722,
+                "y": 0.768984380278019,
+                "z": 7.620050157150288
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:38.170Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:39.089Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:39.858Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:40.277Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:41.107Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "from": {
+                "x": 8.888305622289817,
+                "y": 1.0754987071444673,
+                "z": -7.5530761476420585
+              },
+              "to": {
+                "x": 5.929959312647413,
+                "y": 0.7642403128260087,
+                "z": 7.70619568337388
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:41.108Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:41.685Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "from": {
+                "x": 6.693573193328009,
+                "y": 1.07189432840468,
+                "z": -8.221798589816444
+              },
+              "to": {
+                "x": -6.517287684589021,
+                "y": 0.7792397081775444,
+                "z": -7.885220631144692
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:41.685Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          50.2000000000462,
+          83.40000000000055,
+          16.599999999999454,
+          150,
+          166.70000000000073,
+          183.29999999999927,
+          50.100000000000364,
+          166.60000000000036,
+          33.29999999999927,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          150,
+          16.700000000000728,
+          99.89999999999964,
+          100,
+          116.80000000000018,
+          66.59999999999945,
+          100,
+          83.30000000000018,
+          133.30000000000018,
+          66.69999999999982,
+          166.69999999999982,
+          50,
+          99.90000000000055,
+          16.699999999999818,
+          133.39999999999964,
+          50,
+          83.30000000000018,
+          100.00000000000091,
+          66.59999999999854,
+          100,
+          150,
+          33.30000000000109,
+          150,
+          33.399999999999636,
+          166.70000000000073,
+          49.899999999999636,
+          100,
+          100,
+          166.6999999999989,
+          33.30000000000109,
+          83.29999999999927,
+          100.10000000000036,
+          100,
+          99.89999999999964,
+          283.3000000000011,
+          116.69999999999891,
+          216.70000000000073,
+          216.6999999999989,
+          249.90000000000146,
+          116.69999999999891,
+          100,
+          16.600000000000364,
+          116.70000000000073,
+          50,
+          83.29999999999927,
+          133.39999999999964,
+          16.600000000000364,
+          83.39999999999964,
+          100,
+          100,
+          33.30000000000109,
+          83.29999999999927,
+          100,
+          83.39999999999964,
+          99.89999999999964,
+          100,
+          100.10000000000036,
+          166.60000000000036,
+          116.70000000000073,
+          100,
+          16.599999999998545,
+          100,
+          83.30000000000109,
+          116.69999999999891,
+          133.3000000000011,
+          50,
+          150,
+          50,
+          100,
+          133.39999999999964,
+          99.89999999999964,
+          16.700000000000728,
+          33.399999999999636,
+          133.29999999999927,
+          166.60000000000036,
+          100.10000000000036,
+          33.20000000000073,
+          100.09999999999854,
+          100,
+          16.600000000000364,
+          150,
+          116.60000000000036
+        ],
+        "jsHeap": {
+          "used": 25171464,
+          "total": 37847984
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": []
+    },
+    {
+      "scenario": "before-laser-tag-phone-landscape",
+      "modeId": "laser-tag",
+      "viewportName": "phone-landscape",
+      "expectedViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "loading": {
+        "coldReadyMs": 1346.6000000000931,
+        "warmReadyMs": 615.8999999999069,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8081/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.013,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: fire held and dragged for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT80.2sYOUR TAGS0",
+        "reticleVisible": true,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T19:57:58.384Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.00490000000014,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          844,
+          390
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 287,
+          "p5": 13.071895424836601,
+          "median": 26.109660574380786,
+          "p95": 57.803468207936895
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T19:57:44.659Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:45.365Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:48.308Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:49.194Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "from": {
+                "x": -11.25,
+                "y": 1.0600121950419334,
+                "z": -6.811598135953915
+              },
+              "to": {
+                "x": -11.564132934811134,
+                "y": 1.448954031138899,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:49.566Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 2,
+              "from": {
+                "x": -11.195860435938014,
+                "y": 1.0738051451843564,
+                "z": -6.106360902030946
+              },
+              "to": {
+                "x": -11.68388134388092,
+                "y": 1.5181930387803295,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:50.156Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "from": {
+                "x": -11.217909984463892,
+                "y": 1.0736644319700566,
+                "z": -6.106360902030946
+              },
+              "to": {
+                "x": -11.705047166216854,
+                "y": 1.518054309087363,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:50.163Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "from": {
+                "x": 5.364438758013197,
+                "y": 1.0236129691284808,
+                "z": -7.837624498114074
+              },
+              "to": {
+                "x": 9.844692367069001,
+                "y": 0.7817973500974479,
+                "z": -8.204457928982169
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:50.166Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:50.398Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "from": {
+                "x": -6.056196747635434,
+                "y": 1.0317759608235642,
+                "z": -8.074679774287663
+              },
+              "to": {
+                "x": -11.010480307561526,
+                "y": 0.7798039378534303,
+                "z": -6.804820242578069
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:50.399Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:51.217Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "from": {
+                "x": 1.4184135558374622,
+                "y": 1.0260004718945268,
+                "z": -8.234949297873037
+              },
+              "to": {
+                "x": -3.1436869914713945,
+                "y": 0.5520228390053159,
+                "z": -8.28654665868514
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:51.217Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:52.185Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:52.460Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.261Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.382Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "from": {
+                "x": -10.284101460420647,
+                "y": 1.067948028798649,
+                "z": -7.764320540501174
+              },
+              "to": {
+                "x": 1.1889203634755106,
+                "y": 0.7819250739097164,
+                "z": -7.8536431182619
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.382Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.792Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "from": {
+                "x": -7.006317505152355,
+                "y": 1.0784615992915547,
+                "z": 8.229228016165326
+              },
+              "to": {
+                "x": 10.632598988397644,
+                "y": 0.7685369612101747,
+                "z": 7.902961365046919
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.792Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.955Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "from": {
+                "x": -9.36156420491407,
+                "y": 1.0751803166678926,
+                "z": -7.467999898216227
+              },
+              "to": {
+                "x": -7.224396990596583,
+                "y": 0.768996243538583,
+                "z": 7.6207383293742295
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:53.956Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:55.374Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:55.771Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:55.960Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:57.355Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "from": {
+                "x": 8.131891028801515,
+                "y": 1.0649082189244952,
+                "z": -3.97253208783319
+              },
+              "to": {
+                "x": 8.018817633308172,
+                "y": 0.7875008690860786,
+                "z": 6.378110886384241
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:57.356Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:57.971Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "from": {
+                "x": 7.306060640905297,
+                "y": 1.0748436322677528,
+                "z": -4.361708443484287
+              },
+              "to": {
+                "x": -7.626862555464273,
+                "y": 0.772618024805486,
+                "z": -4.96001797390854
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:57:57.971Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          27.100000000000364,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          16.599999999999454,
+          150.10000000000036,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          33.30000000000018,
+          83.29999999999927,
+          116.70000000000073,
+          66.69999999999982,
+          66.59999999999945,
+          16.700000000000728,
+          100.09999999999945,
+          33.19999999999982,
+          83.40000000000055,
+          83.30000000000018,
+          200,
+          183.29999999999927,
+          366.7000000000007,
+          50,
+          33.29999999999927,
+          83.40000000000055,
+          33.30000000000018,
+          50,
+          33.399999999999636,
+          49.899999999999636,
+          33.30000000000018,
+          16.699999999999818,
+          66.70000000000073,
+          33.29999999999927,
+          16.600000000000364,
+          66.69999999999982,
+          16.699999999999818,
+          50,
+          33.30000000000018,
+          33.400000000000546,
+          50,
+          33.29999999999927,
+          66.60000000000036,
+          16.699999999999818,
+          33.30000000000018,
+          50,
+          33.399999999999636,
+          50,
+          33.30000000000018,
+          16.699999999999818,
+          66.70000000000073,
+          33.29999999999927,
+          16.700000000000728,
+          66.59999999999945,
+          16.699999999999818,
+          66.60000000000036,
+          16.699999999999818,
+          83.40000000000055,
+          16.599999999999454,
+          16.600000000000364,
+          66.69999999999982,
+          16.699999999999818,
+          66.60000000000036,
+          33.399999999999636,
+          16.699999999999818,
+          66.60000000000036,
+          33.30000000000018,
+          50.099999999999454,
+          33.20000000000073,
+          33.399999999999636,
+          33.30000000000018,
+          33.399999999999636,
+          66.60000000000036,
+          33.400000000000546,
+          66.59999999999854,
+          33.400000000001455,
+          66.69999999999891,
+          33.20000000000073,
+          33.399999999999636,
+          83.39999999999964,
+          16.5,
+          50.100000000000364,
+          33.29999999999927,
+          83.40000000000146,
+          33.29999999999927,
+          33.29999999999927,
+          50,
+          16.700000000000728,
+          50,
+          50,
+          50,
+          33.29999999999927,
+          50,
+          33.400000000001455,
+          33.29999999999927,
+          66.60000000000036,
+          16.69999999999891,
+          66.70000000000073,
+          33.29999999999927,
+          16.700000000000728,
+          66.60000000000036,
+          83.39999999999964,
+          16.600000000000364,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          33.399999999999636,
+          50,
+          33.30000000000109,
+          16.69999999999891,
+          16.700000000000728,
+          66.60000000000036,
+          16.69999999999891,
+          16.600000000000364,
+          66.70000000000073,
+          16.69999999999891,
+          50,
+          33.30000000000109,
+          33.29999999999927,
+          33.399999999999636,
+          33.30000000000109,
+          33.399999999999636,
+          49.899999999999636,
+          16.600000000000364,
+          16.700000000000728,
+          50,
+          50,
+          16.69999999999891,
+          50,
+          16.700000000000728,
+          66.60000000000036,
+          33.399999999999636,
+          16.600000000000364,
+          50,
+          33.399999999999636,
+          16.600000000000364,
+          66.69999999999891,
+          16.600000000000364,
+          16.700000000000728,
+          50,
+          33.29999999999927,
+          33.29999999999927,
+          50.100000000000364,
+          16.600000000000364,
+          16.700000000000728,
+          66.69999999999891,
+          16.600000000000364,
+          33.399999999999636,
+          50,
+          33.30000000000109,
+          16.69999999999891,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          50,
+          33.29999999999927,
+          33.29999999999927,
+          66.70000000000073,
+          33.399999999999636,
+          66.60000000000036,
+          16.600000000000364,
+          66.69999999999891,
+          33.400000000001455,
+          66.59999999999854,
+          16.80000000000109,
+          66.60000000000036,
+          33.29999999999927,
+          33.399999999999636,
+          49.899999999999636,
+          16.700000000000728,
+          33.29999999999927,
+          50,
+          33.30000000000109,
+          83.39999999999964,
+          16.700000000000728,
+          16.599999999998545,
+          50,
+          33.400000000001455,
+          83.29999999999927,
+          16.600000000000364,
+          66.69999999999891,
+          16.600000000000364,
+          16.700000000000728,
+          66.69999999999891,
+          33.30000000000109,
+          50,
+          50,
+          50,
+          33.399999999999636,
+          16.600000000000364,
+          50,
+          33.29999999999927,
+          16.700000000000728,
+          50,
+          33.399999999999636,
+          33.29999999999927,
+          66.70000000000073,
+          16.600000000000364,
+          83.39999999999964,
+          33.29999999999927,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          16.600000000000364,
+          16.700000000000728,
+          16.69999999999891,
+          66.60000000000036,
+          66.70000000000073
+        ],
+        "jsHeap": {
+          "used": 26731378,
+          "total": 38110150
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "video": {
+        "path": "docs/evidence/v03-browser/videos/before-laser-tag-phone-landscape.webm",
+        "description": "Automated Chromium viewport capture; includes loading/countdown and 8 seconds of real-input gameplay. Not a human phone recording."
+      }
+    },
+    {
+      "scenario": "before-laser-tag-phone-portrait",
+      "modeId": "laser-tag",
+      "viewportName": "phone-portrait",
+      "expectedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loading": {
+        "coldReadyMs": 1180.9000000001397,
+        "warmReadyMs": 557,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8081/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.561,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: fire held and dragged for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "portrait-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "portrait-primary",
+        "hud": "TIME LEFT80.6sYOUR TAGS0",
+        "reticleVisible": true,
+        "portraitHint": "block",
+        "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+      },
+      "diagnostics": {
+        "date": "2026-10-19T19:58:13.513Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 12.581700000000186,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          390,
+          844
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": false,
+          "portrait": true,
+          "width": 390,
+          "height": 844,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 366,
+          "p5": 14.124293785301445,
+          "median": 36.90036900356322,
+          "p95": 90.90909090909092
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T19:58:00.429Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:00.916Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:03.897Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:04.606Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "from": {
+                "x": -11.25,
+                "y": 1.0600126718790917,
+                "z": -7.154456927305233
+              },
+              "to": {
+                "x": -11.508239617973578,
+                "y": 1.4214671399145475,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:05.317Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "from": {
+                "x": -11.24483868596646,
+                "y": 1.073656221097795,
+                "z": -6.106360902030946
+              },
+              "to": {
+                "x": -11.731926340207677,
+                "y": 1.518046209379484,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:05.357Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "from": {
+                "x": 5.364438758013197,
+                "y": 1.0236129691284808,
+                "z": -7.837624498114074
+              },
+              "to": {
+                "x": 9.844692367069001,
+                "y": 0.7817973500974479,
+                "z": -8.204457928982169
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:05.358Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:05.490Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "from": {
+                "x": -6.056282509963637,
+                "y": 1.032006296766542,
+                "z": -8.07524221608973
+              },
+              "to": {
+                "x": -11.01899733839929,
+                "y": 0.781228830015002,
+                "z": -6.802502264965586
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:05.490Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:06.323Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "from": {
+                "x": 1.4184126329943636,
+                "y": 1.0260008841940627,
+                "z": -8.235112373599444
+              },
+              "to": {
+                "x": -3.143397420792831,
+                "y": 0.5520572416482783,
+                "z": -8.286704888776333
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:06.323Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:07.357Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:07.517Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:08.377Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:08.455Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "from": {
+                "x": -10.28416533197807,
+                "y": 1.068507175158246,
+                "z": -7.76411138179622
+              },
+              "to": {
+                "x": 1.418566959072951,
+                "y": 0.7809645667763794,
+                "z": -7.855164509186186
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:08.458Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:08.867Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "from": {
+                "x": -7.037465970411826,
+                "y": 1.0785039628789506,
+                "z": 8.229905833439952
+              },
+              "to": {
+                "x": 10.627253528065975,
+                "y": 0.7689769824986312,
+                "z": 7.926107729356921
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:08.868Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:09.064Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "from": {
+                "x": -9.36257967581782,
+                "y": 1.0751744583435388,
+                "z": -7.468325526977452
+              },
+              "to": {
+                "x": -7.254509384664309,
+                "y": 0.7689983973050414,
+                "z": 7.620693380778144
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:09.068Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:10.455Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:10.889Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:11.081Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:12.405Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "from": {
+                "x": 8.14628457342117,
+                "y": 1.0648351638712354,
+                "z": -3.9699561516352215
+              },
+              "to": {
+                "x": 8.117523919395616,
+                "y": 0.7889296305440432,
+                "z": 6.338521106123004
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:12.405Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:13.121Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "from": {
+                "x": 7.415800171451562,
+                "y": 1.0749699313179493,
+                "z": -4.388962630847429
+              },
+              "to": {
+                "x": -7.626002161257808,
+                "y": 0.7712589374181329,
+                "z": -4.957311813634822
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T19:58:13.121Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          8.099999999906686,
+          33.30000000000018,
+          16.59999999999991,
+          33.29999999999973,
+          83.40000000000055,
+          66.69999999999982,
+          33.30000000000018,
+          16.699999999999818,
+          66.60000000000036,
+          33.399999999999636,
+          16.699999999999818,
+          49.900000000000546,
+          33.399999999999636,
+          66.60000000000036,
+          16.699999999999818,
+          16.699999999999818,
+          66.69999999999982,
+          49.900000000000546,
+          50,
+          16.599999999999454,
+          33.400000000000546,
+          50,
+          16.699999999999818,
+          66.69999999999982,
+          33.30000000000018,
+          16.599999999999454,
+          16.700000000000728,
+          50,
+          50,
+          50,
+          16.699999999999818,
+          16.699999999999818,
+          66.60000000000036,
+          16.699999999999818,
+          33.30000000000018,
+          33.399999999999636,
+          49.899999999999636,
+          16.700000000000728,
+          50,
+          16.699999999999818,
+          33.30000000000018,
+          49.899999999999636,
+          33.399999999999636,
+          16.700000000000728,
+          50,
+          16.599999999999454,
+          16.800000000000182,
+          66.60000000000036,
+          16.599999999999454,
+          16.699999999999818,
+          50,
+          16.700000000000728,
+          16.699999999999818,
+          16.599999999999454,
+          16.700000000000728,
+          49.899999999999636,
+          16.800000000000182,
+          16.599999999999454,
+          16.700000000000728,
+          50,
+          33.29999999999927,
+          16.600000000000364,
+          33.399999999999636,
+          33.30000000000018,
+          16.699999999999818,
+          16.700000000000728,
+          50,
+          16.599999999999454,
+          16.699999999999818,
+          16.600000000000364,
+          50.100000000000364,
+          16.599999999999454,
+          16.699999999999818,
+          50,
+          16.600000000000364,
+          16.699999999999818,
+          33.30000000000018,
+          50,
+          16.699999999999818,
+          16.699999999999818,
+          16.600000000000364,
+          50.100000000000364,
+          16.599999999999454,
+          16.600000000000364,
+          50,
+          33.399999999999636,
+          16.600000000000364,
+          16.699999999999818,
+          50.100000000000364,
+          16.599999999999454,
+          16.600000000000364,
+          16.800000000000182,
+          50,
+          16.599999999999454,
+          16.699999999999818,
+          16.600000000000364,
+          50,
+          16.699999999999818,
+          33.30000000000018,
+          33.399999999999636,
+          16.600000000000364,
+          33.30000000000018,
+          16.699999999999818,
+          33.30000000000018,
+          33.399999999999636,
+          16.699999999999818,
+          16.600000000000364,
+          33.399999999999636,
+          33.30000000000018,
+          33.30000000000018,
+          33.30000000000018,
+          33.399999999999636,
+          33.30000000000018,
+          50,
+          16.600000000000364,
+          16.799999999999272,
+          66.60000000000036,
+          33.399999999999636,
+          16.600000000000364,
+          66.69999999999982,
+          16.699999999999818,
+          49.900000000000546,
+          33.399999999999636,
+          33.30000000000018,
+          50,
+          33.399999999999636,
+          49.900000000000546,
+          16.699999999999818,
+          16.699999999999818,
+          83.30000000000018,
+          16.699999999999818,
+          33.30000000000018,
+          49.899999999999636,
+          16.700000000000728,
+          33.29999999999927,
+          50.100000000000364,
+          33.29999999999927,
+          50,
+          16.600000000000364,
+          16.80000000000109,
+          66.59999999999854,
+          33.30000000000109,
+          16.69999999999891,
+          16.700000000000728,
+          66.60000000000036,
+          33.29999999999927,
+          50.100000000000364,
+          16.600000000000364,
+          33.399999999999636,
+          49.899999999999636,
+          16.700000000000728,
+          16.69999999999891,
+          66.70000000000073,
+          16.600000000000364,
+          16.69999999999891,
+          66.70000000000073,
+          33.20000000000073,
+          16.799999999999272,
+          50,
+          16.600000000000364,
+          33.399999999999636,
+          50,
+          16.600000000000364,
+          33.399999999999636,
+          33.29999999999927,
+          16.700000000000728,
+          16.600000000000364,
+          16.69999999999891,
+          16.700000000000728,
+          49.899999999999636,
+          16.700000000000728,
+          33.29999999999927,
+          16.700000000000728,
+          33.29999999999927,
+          16.700000000000728,
+          16.600000000000364,
+          50.099999999998545,
+          16.600000000000364,
+          16.700000000000728,
+          16.69999999999891,
+          50,
+          16.600000000000364,
+          16.700000000000728,
+          33.29999999999927,
+          33.30000000000109,
+          16.69999999999891,
+          16.700000000000728,
+          16.69999999999891,
+          16.600000000000364,
+          66.70000000000073,
+          16.69999999999891,
+          16.600000000000364,
+          33.399999999999636,
+          16.700000000000728,
+          16.600000000000364,
+          16.600000000000364,
+          50,
+          16.69999999999891,
+          16.700000000000728,
+          33.29999999999927,
+          33.30000000000109,
+          33.399999999999636,
+          16.600000000000364,
+          16.69999999999891,
+          33.399999999999636,
+          16.600000000000364,
+          16.700000000000728,
+          16.600000000000364,
+          50,
+          16.599999999998545,
+          33.400000000001455,
+          50.099999999998545,
+          16.600000000000364,
+          33.30000000000109,
+          50,
+          33.29999999999927,
+          16.700000000000728,
+          66.59999999999854,
+          16.700000000000728,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          66.70000000000073,
+          16.600000000000364,
+          66.59999999999854,
+          33.400000000001455,
+          66.59999999999854,
+          16.700000000000728,
+          16.700000000000728,
+          66.59999999999854,
+          16.700000000000728,
+          33.399999999999636,
+          50,
+          33.30000000000109,
+          16.69999999999891,
+          83.30000000000109,
+          16.599999999998545,
+          33.30000000000109,
+          33.399999999999636,
+          33.29999999999927,
+          50.100000000000364,
+          33.30000000000109,
+          66.69999999999891,
+          16.600000000000364,
+          16.600000000000364,
+          16.799999999999272,
+          66.60000000000036,
+          16.600000000000364,
+          66.69999999999891,
+          16.700000000000728,
+          33.29999999999927,
+          50,
+          33.400000000001455,
+          50,
+          33.29999999999927,
+          16.600000000000364,
+          66.69999999999891,
+          33.400000000001455,
+          49.899999999999636,
+          16.69999999999891,
+          33.400000000001455,
+          49.899999999999636,
+          33.399999999999636,
+          16.600000000000364,
+          66.79999999999927,
+          16.600000000000364,
+          33.29999999999927,
+          33.400000000001455,
+          50,
+          16.599999999998545,
+          50,
+          16.600000000000364,
+          16.80000000000109,
+          66.59999999999854,
+          33.30000000000109,
+          16.69999999999891,
+          66.60000000000036,
+          133.39999999999964,
+          16.600000000000364,
+          16.80000000000109,
+          16.5,
+          50.099999999998545,
+          33.30000000000109,
+          50,
+          16.69999999999891
+        ],
+        "jsHeap": {
+          "used": 23776848,
+          "total": 40222124
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8081/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "publicURL": "https://leonardo-maglanoc.com/party-panic/",
+  "liveScenarios": 2,
+  "liveFailures": 0,
+  "assetHashesMatchPreview": true,
+  "assets": [
+    [
+      "index-B_WexXAw.css",
+      "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+    ],
+    [
+      "index-D61cb1lQ.js",
+      "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+    ]
+  ],
+  "twoClientFinalHealthScoreRespawnEnergyMatch": true,
+  "twoClientFinalState": [
+    {
+      "id": "32e161c8-6b8d-4c68-9f52-461b937fd341",
+      "health": 100,
+      "score": 1,
+      "deaths": 0,
+      "respawnAt": 0,
+      "respawns": 0,
+      "energy": 1
+    },
+    {
+      "id": "424c4641-e5df-475a-a875-8fd6b8ecb698",
+      "health": 100,
+      "score": 0,
+      "deaths": 1,
+      "respawnAt": 0,
+      "respawns": 1,
+      "energy": 1
+    }
+  ],
+  "scope": "Posthoc comparison of recorded real Chrome snapshots and live assets; not physical-device acceptance"
+}

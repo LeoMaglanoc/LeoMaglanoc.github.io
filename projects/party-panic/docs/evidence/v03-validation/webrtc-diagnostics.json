@@ -1,0 +1,42 @@
+[
+  {
+    "ice": "host ↔ host · direct",
+    "semantics": "movement: ordered=false, retransmits=unlimited",
+    "rtt": 9.299999999995634,
+    "fps": {
+      "samples": 140,
+      "p5": 15.33742331288412,
+      "median": 37.31343283581684,
+      "p95": 74.07407407407408
+    },
+    "counts": {
+      "sent": 15,
+      "received": 17,
+      "sentBytes": 11977,
+      "receivedBytes": 2636,
+      "rejected": 0,
+      "droppedBackpressure": 0
+    },
+    "elapsedSeconds": 7.5567999999999955
+  },
+  {
+    "ice": "host ↔ host · direct",
+    "semantics": "movement: ordered=false, retransmits=unlimited",
+    "rtt": 3.8000000000029104,
+    "fps": {
+      "samples": 14,
+      "p5": 7.716049382715703,
+      "median": 19.12045889101232,
+      "p95": 26.24671916010599
+    },
+    "counts": {
+      "sent": 17,
+      "received": 15,
+      "sentBytes": 2636,
+      "receivedBytes": 11977,
+      "rejected": 0,
+      "droppedBackpressure": 0
+    },
+    "elapsedSeconds": 3.5200999999999985
+  }
+]

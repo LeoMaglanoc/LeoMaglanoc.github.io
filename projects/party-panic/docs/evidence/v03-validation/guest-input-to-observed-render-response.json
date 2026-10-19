@@ -1,0 +1,106 @@
+{
+  "milliseconds": 10.19999999999709,
+  "origin": {
+    "x": -4,
+    "y": 0.7850000262260437,
+    "z": -8
+  },
+  "visible": {
+    "x": -4.000000476837158,
+    "y": 0.7499693632125854,
+    "z": -7.927748680114746
+  },
+  "authoritative": {
+    "id": "9bc76a31-3c4c-4eb0-9980-cf6c448eb613",
+    "name": "Laser Guest",
+    "color": "#75dfd1",
+    "connected": true,
+    "ready": false,
+    "bot": false,
+    "score": 0,
+    "deaths": 0,
+    "respawnAt": 0,
+    "protectedUntil": 1,
+    "aimPitch": -0.08,
+    "health": 100,
+    "energy": 1,
+    "weapon": "quick",
+    "charge": 0,
+    "inputSequence": 90,
+    "shotSequence": 0,
+    "checkpoint": 0,
+    "progress": 0,
+    "finish": null,
+    "x": -4.000000476837158,
+    "y": 0.7499693632125854,
+    "z": -8,
+    "vx": -8.940706948123989e-7,
+    "vy": 0.000001430511474609375,
+    "vz": -0.0000017881413896247977,
+    "yaw": 180,
+    "respawns": 0
+  },
+  "diagnostics": {
+    "links": [
+      {
+        "id": "c6d3a965-509e-4648-85a6-741f4174fc08",
+        "control": "connected",
+        "movement": "connected",
+        "signal": "stable"
+      }
+    ],
+    "elapsedSeconds": 7.020800000000003,
+    "ice": "host ↔ host · direct",
+    "semantics": "movement: ordered=false, retransmits=unlimited",
+    "rtt": 3.1000000000058208,
+    "bodies": 16,
+    "renderComponents": 85,
+    "transientEntities": 0,
+    "connectionCount": 2,
+    "bufferedBytes": 0,
+    "prediction": {
+      "snapshots": 2,
+      "corrections": 0,
+      "maxCorrection": 0
+    },
+    "snapshotAge": 38.30000000000291,
+    "display": {
+      "fullscreenSupported": true,
+      "orientationSupported": true,
+      "wakeLockSupported": true,
+      "fullscreen": true,
+      "landscape": true,
+      "portrait": false,
+      "width": 844,
+      "height": 390,
+      "wakeLockActive": true,
+      "orientationError": "screen.orientation.lock() is not available on this device."
+    },
+    "fps": {
+      "samples": 52,
+      "p5": 14.36781609195282,
+      "median": 16.501650165014915,
+      "p95": 17.699115044247787
+    },
+    "measurement": {
+      "scope": {
+        "role": "guest",
+        "modeId": "laser-tag",
+        "roundId": 2
+      },
+      "seconds": 3.094199999999997,
+      "phases": [
+        "countdown",
+        "racing"
+      ]
+    },
+    "counts": {
+      "sent": 75,
+      "received": 84,
+      "sentBytes": 16950,
+      "receivedBytes": 72768,
+      "rejected": 0,
+      "droppedBackpressure": 0
+    }
+  }
+}

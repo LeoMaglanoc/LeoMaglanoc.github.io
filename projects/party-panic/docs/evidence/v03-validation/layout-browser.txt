@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:12963) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable (7.9s)
+  ✓  2 tests/e2e/display.spec.ts:59:1 › results and rematch retain display state; explicit exit and reenter work (7.8s)
+  ✓  3 tests/e2e/display.spec.ts:93:5 › main-menu party-enter enters early and Back preserves fullscreen (8.4s)
+  ✓  4 tests/e2e/display.spec.ts:93:5 › main-menu host enters early and Back preserves fullscreen (7.4s)
+  ✓  5 tests/e2e/display.spec.ts:93:5 › main-menu join-open enters early and Back preserves fullscreen (6.0s)
+  ✓  6 tests/e2e/responsive.spec.ts:7:5 › desktop: home, touch input, portrait hint and no page scroll (7.8s)
+  ✓  7 tests/e2e/responsive.spec.ts:7:5 › phone-portrait: home, touch input, portrait hint and no page scroll (4.8s)
+  ✓  8 tests/e2e/responsive.spec.ts:7:5 › phone-landscape: home, touch input, portrait hint and no page scroll (4.7s)
+  ✓  9 tests/e2e/responsive.spec.ts:57:1 › landscape Laser weapon controls remain clickable above the playfield and clear of diagnostics (6.6s)
+
+  9 passed (1.1m)

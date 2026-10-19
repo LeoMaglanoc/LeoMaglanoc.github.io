@@ -1,0 +1,371 @@
+{
+  "baseline": "43cb574b1fb3e6d55fe0187f90d03027cbaafdc5",
+  "implementation": "778bdb73ee81447251feb85cd8698c102454fd94",
+  "scope": "Separate sequential Chromium/SwiftShader runs on localhost. Active interval includes screenshots; not phone hardware or steady-state performance certification. Heap is JavaScript-only and excludes native/GPU memory. No causal performance claim from a single run.",
+  "summaries": [
+    {
+      "label": "before",
+      "mode": "obstacle-dash",
+      "viewport": "desktop",
+      "passed": true,
+      "samples": 103,
+      "medianFrameMs": 83.30000000000018,
+      "p95FrameMs": 150.09999999999945,
+      "p99FrameMs": 166.70000000000073,
+      "minimumFrameMs": 16.599999999998545,
+      "maximumFrameMs": 183.39999999999964,
+      "approximateMedianFPS": 12.004801920768282,
+      "loading": {
+        "coldReadyMs": 2339.3000000000466,
+        "warmReadyMs": 938.6000000000931,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 23011389,
+        "total": 36650761
+      },
+      "diagnosticsFPS": {
+        "samples": 142,
+        "p5": 6.472491909385114,
+        "median": 11.481056257194075,
+        "p95": 27.100271002778424
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "before",
+      "mode": "obstacle-dash",
+      "viewport": "phone-landscape",
+      "passed": true,
+      "samples": 181,
+      "medianFrameMs": 50,
+      "p95FrameMs": 83.39999999999964,
+      "p99FrameMs": 283.2999999999993,
+      "minimumFrameMs": 16.600000000000364,
+      "maximumFrameMs": 350,
+      "approximateMedianFPS": 20,
+      "loading": {
+        "coldReadyMs": 1282.8000000000466,
+        "warmReadyMs": 600.3000000000466,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 16480540,
+        "total": 36002028
+      },
+      "diagnosticsFPS": {
+        "samples": 251,
+        "p5": 11.037527593807638,
+        "median": 20.2020202020202,
+        "p95": 57.47126436735467
+      },
+      "video": "docs/evidence/v03-browser/videos/before-obstacle-dash-phone-landscape.webm",
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "before",
+      "mode": "obstacle-dash",
+      "viewport": "phone-portrait",
+      "passed": true,
+      "samples": 196,
+      "medianFrameMs": 50,
+      "p95FrameMs": 100,
+      "p99FrameMs": 216.70000000000073,
+      "minimumFrameMs": 16.599999999998545,
+      "maximumFrameMs": 433.39999999999964,
+      "approximateMedianFPS": 20,
+      "loading": {
+        "coldReadyMs": 1082,
+        "warmReadyMs": 482.30000000004657,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 15394491,
+        "total": 38281463
+      },
+      "diagnosticsFPS": {
+        "samples": 263,
+        "p5": 10.449320794128043,
+        "median": 18.975332068327962,
+        "p95": 57.47126436735467
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+    },
+    {
+      "label": "before",
+      "mode": "laser-tag",
+      "viewport": "desktop",
+      "passed": true,
+      "samples": 97,
+      "medianFrameMs": 100,
+      "p95FrameMs": 183.29999999999927,
+      "p99FrameMs": 283.3000000000011,
+      "minimumFrameMs": 16.599999999998545,
+      "maximumFrameMs": 283.3000000000011,
+      "approximateMedianFPS": 10,
+      "loading": {
+        "coldReadyMs": 2139.399999999907,
+        "warmReadyMs": 1038.6000000000931,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 25171464,
+        "total": 37847984
+      },
+      "diagnosticsFPS": {
+        "samples": 133,
+        "p5": 5.51571980143267,
+        "median": 10.1010101010101,
+        "p95": 51.81347150246567
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "before",
+      "mode": "laser-tag",
+      "viewport": "phone-landscape",
+      "passed": true,
+      "samples": 215,
+      "medianFrameMs": 33.399999999999636,
+      "p95FrameMs": 83.39999999999964,
+      "p99FrameMs": 183.29999999999927,
+      "minimumFrameMs": 16.5,
+      "maximumFrameMs": 366.7000000000007,
+      "approximateMedianFPS": 29.94011976047937,
+      "loading": {
+        "coldReadyMs": 1346.6000000000931,
+        "warmReadyMs": 615.8999999999069,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 26731378,
+        "total": 38110150
+      },
+      "diagnosticsFPS": {
+        "samples": 287,
+        "p5": 13.071895424836601,
+        "median": 26.109660574380786,
+        "p95": 57.803468207936895
+      },
+      "video": "docs/evidence/v03-browser/videos/before-laser-tag-phone-landscape.webm",
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "before",
+      "mode": "laser-tag",
+      "viewport": "phone-portrait",
+      "passed": true,
+      "samples": 285,
+      "medianFrameMs": 33.29999999999927,
+      "p95FrameMs": 66.69999999999891,
+      "p99FrameMs": 83.30000000000109,
+      "minimumFrameMs": 8.099999999906686,
+      "maximumFrameMs": 133.39999999999964,
+      "approximateMedianFPS": 30.030030030030687,
+      "loading": {
+        "coldReadyMs": 1180.9000000001397,
+        "warmReadyMs": 557,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 23776848,
+        "total": 40222124
+      },
+      "diagnosticsFPS": {
+        "samples": 366,
+        "p5": 14.124293785301445,
+        "median": 36.90036900356322,
+        "p95": 90.90909090909092
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+    },
+    {
+      "label": "after",
+      "mode": "obstacle-dash",
+      "viewport": "desktop",
+      "passed": true,
+      "samples": 95,
+      "medianFrameMs": 83.39999999999964,
+      "p95FrameMs": 166.60000000000036,
+      "p99FrameMs": 300,
+      "minimumFrameMs": 16.600000000000364,
+      "maximumFrameMs": 300,
+      "approximateMedianFPS": 11.990407673860963,
+      "loading": {
+        "coldReadyMs": 2916.5,
+        "warmReadyMs": 952.4000000001397,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 23565085,
+        "total": 36971797
+      },
+      "diagnosticsFPS": {
+        "samples": 134,
+        "p5": 6.009615384618748,
+        "median": 11.049723756906078,
+        "p95": 46.296296296096685
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "after",
+      "mode": "obstacle-dash",
+      "viewport": "phone-landscape",
+      "passed": true,
+      "samples": 186,
+      "medianFrameMs": 50,
+      "p95FrameMs": 83.40000000000146,
+      "p99FrameMs": 133.39999999999964,
+      "minimumFrameMs": 16.5,
+      "maximumFrameMs": 350,
+      "approximateMedianFPS": 20,
+      "loading": {
+        "coldReadyMs": 1353.7999999998137,
+        "warmReadyMs": 600.5,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 16159847,
+        "total": 36078239
+      },
+      "diagnosticsFPS": {
+        "samples": 253,
+        "p5": 11.248593925741604,
+        "median": 20.703933747392046,
+        "p95": 59.52380952364454
+      },
+      "video": "docs/evidence/v03-browser/videos/after-obstacle-dash-phone-landscape.webm",
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "after",
+      "mode": "obstacle-dash",
+      "viewport": "phone-portrait",
+      "passed": true,
+      "samples": 205,
+      "medianFrameMs": 33.400000000001455,
+      "p95FrameMs": 83.39999999999964,
+      "p99FrameMs": 133.29999999999927,
+      "minimumFrameMs": 16.599999999998545,
+      "maximumFrameMs": 149.90000000000055,
+      "approximateMedianFPS": 29.94011976047774,
+      "loading": {
+        "coldReadyMs": 996.3000000000466,
+        "warmReadyMs": 554.1000000000931,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 16170494,
+        "total": 31985090
+      },
+      "diagnosticsFPS": {
+        "samples": 268,
+        "p5": 11.261261261255356,
+        "median": 23.584905660429165,
+        "p95": 92.59259259219337
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+    },
+    {
+      "label": "after",
+      "mode": "laser-tag",
+      "viewport": "desktop",
+      "passed": true,
+      "samples": 88,
+      "medianFrameMs": 100,
+      "p95FrameMs": 183.40000000000055,
+      "p99FrameMs": 233.3000000000011,
+      "minimumFrameMs": 16.600000000000364,
+      "maximumFrameMs": 233.3000000000011,
+      "approximateMedianFPS": 10,
+      "loading": {
+        "coldReadyMs": 2129.899999999907,
+        "warmReadyMs": 886.8999999999069,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 28057243,
+        "total": 40267115
+      },
+      "diagnosticsFPS": {
+        "samples": 123,
+        "p5": 5.417118093171698,
+        "median": 9.737098344697696,
+        "p95": 38.31417624507401
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "after",
+      "mode": "laser-tag",
+      "viewport": "phone-landscape",
+      "passed": true,
+      "samples": 190,
+      "medianFrameMs": 50,
+      "p95FrameMs": 100,
+      "p99FrameMs": 200,
+      "minimumFrameMs": 16.600000000000364,
+      "maximumFrameMs": 349.90000000000055,
+      "approximateMedianFPS": 20,
+      "loading": {
+        "coldReadyMs": 1296.1999999999534,
+        "warmReadyMs": 585.7999999998137,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 30559729,
+        "total": 56520065
+      },
+      "diagnosticsFPS": {
+        "samples": 252,
+        "p5": 9.852216748768472,
+        "median": 19.801980198019802,
+        "p95": 50.50505050493173
+      },
+      "video": "docs/evidence/v03-browser/videos/after-laser-tag-phone-landscape.webm",
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape observed"
+    },
+    {
+      "label": "after",
+      "mode": "laser-tag",
+      "viewport": "phone-portrait",
+      "passed": true,
+      "samples": 246,
+      "medianFrameMs": 33.30000000000109,
+      "p95FrameMs": 83.20000000000073,
+      "p99FrameMs": 100,
+      "minimumFrameMs": 16.5,
+      "maximumFrameMs": 100.10000000000036,
+      "approximateMedianFPS": 30.030030030029046,
+      "loading": {
+        "coldReadyMs": 1097,
+        "warmReadyMs": 519.1999999999534,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "jsHeap": {
+        "used": 24095582,
+        "total": 40791474
+      },
+      "diagnosticsFPS": {
+        "samples": 316,
+        "p5": 12.135922330110803,
+        "median": 30.12048192775309,
+        "p95": 88.49557522087426
+      },
+      "fullscreen": true,
+      "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+    }
+  ]
+}

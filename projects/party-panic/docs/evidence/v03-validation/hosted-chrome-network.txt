@@ -1,0 +1,313 @@
+chrome-webrtc	Set up job	﻿2026-10-19T19:56:02.1956863Z Current runner version: '2.337.0'
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1982676Z ##[group]Runner Image Provisioner
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1983721Z Hosted Compute Agent
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1984316Z Version: 20261012.601
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1984936Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1985790Z Build Date: 2026-10-12T17:48:21Z
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1986472Z Worker ID: {3ca973e5-21d8-4920-867e-5c2199f601e3}
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1987657Z Region: westus3
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1988226Z Cloud: Azure
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1988749Z ##[endgroup]
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1990457Z ##[group]Operating System
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1991207Z Ubuntu
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1991824Z 24.04.5
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1992577Z LTS
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1993104Z ##[endgroup]
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1993749Z ##[group]Runner Image
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1994374Z Image: ubuntu-24.04
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1994978Z Version: 20261012.334.1
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1996068Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1997869Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+chrome-webrtc	Set up job	2026-10-19T19:56:02.1998865Z ##[endgroup]
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2000044Z ##[group]GITHUB_TOKEN Permissions
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2002233Z Contents: read
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2003005Z Metadata: read
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2003584Z ##[endgroup]
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2005698Z Secret source: Actions
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2006757Z Cache mode: write
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2007457Z Prepare workflow directory
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2431289Z Prepare all required actions
+chrome-webrtc	Set up job	2026-10-19T19:56:02.2479822Z Getting action download info
+chrome-webrtc	Set up job	2026-10-19T19:56:02.5730691Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+chrome-webrtc	Set up job	2026-10-19T19:56:02.7019798Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+chrome-webrtc	Set up job	2026-10-19T19:56:02.7877743Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+chrome-webrtc	Set up job	2026-10-19T19:56:02.9996089Z Complete job name: chrome-webrtc
+chrome-webrtc	Run actions/checkout@v4	﻿2026-10-19T19:56:03.0795093Z ##[group]Run actions/checkout@v4
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0796024Z with:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0796508Z   sparse-checkout: projects/party-panic
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0797148Z   repository: LeoMaglanoc/LeoMaglanoc.github.io
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0800841Z   token: ***
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0801283Z   ssh-strict: true
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0801721Z   ssh-user: git
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0802720Z   persist-credentials: true
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0803239Z   clean: true
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0803680Z   sparse-checkout-cone-mode: true
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0804202Z   fetch-depth: 1
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0804636Z   fetch-tags: false
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0805079Z   show-progress: true
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0805523Z   lfs: false
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0805929Z   submodules: false
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0806374Z   set-safe-directory: true
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0806878Z   allow-unsafe-pr-checkout: false
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.0807723Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1859553Z Syncing repository: LeoMaglanoc/LeoMaglanoc.github.io
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1861556Z ##[group]Getting Git version info
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1863221Z Working directory is '/home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io'
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1865283Z [command]/usr/bin/git version
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1941272Z git version 2.55.0
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1968836Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1986580Z Temporarily overriding HOME='/home/runner/work/_temp/a379fbcb-33ef-4a8e-90d4-be190d93d829' before making global git config changes
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1988135Z Adding repository directory to the temporary git global config as a safe directory
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.1994708Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2051795Z Deleting the contents of '/home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io'
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2056599Z ##[group]Initializing the repository
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2062198Z [command]/usr/bin/git init /home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2182383Z hint: Using 'master' as the name for the initial branch. This default branch name
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2184671Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2186459Z hint: to use in all of your new repositories, which will suppress this warning,
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2188194Z hint: call:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2189161Z hint:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2189905Z hint: 	git config --global init.defaultBranch <name>
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2190682Z hint:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2191422Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2193066Z hint: 'development'. The just-created branch can be renamed via this command:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2193998Z hint:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2194576Z hint: 	git branch -m <name>
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2195415Z hint:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2196405Z hint: Disable this message with "git config set advice.defaultBranchName false"
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2197976Z Initialized empty Git repository in /home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io/.git/
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2200410Z [command]/usr/bin/git remote add origin https://github.com/LeoMaglanoc/LeoMaglanoc.github.io
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2249693Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2250534Z ##[group]Disabling automatic garbage collection
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2255038Z [command]/usr/bin/git config --local gc.auto 0
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2291068Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2291827Z ##[group]Setting up auth
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2299941Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2339194Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2803095Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.2854729Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.3119382Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.3162257Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.3406699Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.3450040Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.3451496Z ##[group]Fetching the repository
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.3461767Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin +7f0feb8174f587c61aabf366ff6f90d1543636c7:refs/remotes/origin/main
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9586360Z From https://github.com/LeoMaglanoc/LeoMaglanoc.github.io
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9587691Z  * [new ref]         7f0feb8174f587c61aabf366ff6f90d1543636c7 -> origin/main
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9599459Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9600424Z ##[group]Determining the checkout info
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9601414Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9602933Z ##[group]Setting up sparse checkout
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9604683Z [command]/usr/bin/git sparse-checkout set projects/party-panic
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9658411Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9660102Z ##[group]Checking out the ref
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:03.9663796Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7179572Z Updating files:   0% (1/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7180429Z Updating files:   1% (3/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7181054Z Updating files:   2% (5/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7181651Z Updating files:   3% (7/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7182601Z Updating files:   4% (9/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7193060Z Updating files:   5% (11/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7196378Z Updating files:   6% (13/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7198414Z Updating files:   7% (15/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7199541Z Updating files:   8% (17/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7200622Z Updating files:   9% (19/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7201335Z Updating files:  10% (21/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7202349Z Updating files:  11% (23/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7203020Z Updating files:  12% (25/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7204258Z Updating files:  13% (27/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7205552Z Updating files:  14% (29/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7213868Z Updating files:  15% (31/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7215068Z Updating files:  16% (33/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7216163Z Updating files:  17% (35/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7217724Z Updating files:  18% (37/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7218375Z Updating files:  19% (39/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7236482Z Updating files:  20% (41/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7257899Z Updating files:  21% (43/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7263604Z Updating files:  22% (45/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7264219Z Updating files:  23% (47/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7269321Z Updating files:  24% (49/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7277429Z Updating files:  25% (51/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7284195Z Updating files:  26% (53/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7290574Z Updating files:  27% (55/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7312954Z Updating files:  28% (57/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7321221Z Updating files:  29% (59/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7328022Z Updating files:  30% (61/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7330842Z Updating files:  31% (63/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7335293Z Updating files:  32% (65/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7343194Z Updating files:  33% (67/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7352405Z Updating files:  34% (69/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7357184Z Updating files:  35% (71/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7360371Z Updating files:  36% (73/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7380857Z Updating files:  37% (75/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7390807Z Updating files:  38% (77/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7393780Z Updating files:  39% (79/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7396709Z Updating files:  40% (81/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7403688Z Updating files:  41% (83/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7406637Z Updating files:  42% (85/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7426351Z Updating files:  43% (87/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7430002Z Updating files:  44% (89/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7437834Z Updating files:  45% (91/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7440683Z Updating files:  46% (93/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7447544Z Updating files:  47% (95/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7450623Z Updating files:  48% (97/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7519240Z Updating files:  49% (99/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7521554Z Updating files:  50% (101/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7523365Z Updating files:  51% (103/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7526214Z Updating files:  52% (105/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7527520Z Updating files:  53% (107/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7536094Z Updating files:  54% (109/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7541786Z Updating files:  55% (111/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7542598Z Updating files:  56% (113/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7543129Z Updating files:  57% (115/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7543620Z Updating files:  58% (117/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7553467Z Updating files:  59% (119/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7553924Z Updating files:  60% (121/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7554237Z Updating files:  61% (123/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7554540Z Updating files:  62% (125/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7554843Z Updating files:  63% (127/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7555141Z Updating files:  64% (129/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7555466Z Updating files:  65% (131/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7557687Z Updating files:  66% (133/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7558291Z Updating files:  67% (135/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7625861Z Updating files:  68% (137/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7725357Z Updating files:  69% (139/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7726889Z Updating files:  70% (141/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7735471Z Updating files:  71% (143/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7739615Z Updating files:  72% (145/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7742388Z Updating files:  73% (147/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7744160Z Updating files:  74% (149/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7746731Z Updating files:  75% (151/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7748318Z Updating files:  76% (153/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7752172Z Updating files:  77% (155/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7754280Z Updating files:  78% (157/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7756012Z Updating files:  79% (159/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7758896Z Updating files:  80% (161/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7761405Z Updating files:  81% (163/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7763109Z Updating files:  82% (165/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7765912Z Updating files:  83% (167/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7767540Z Updating files:  84% (169/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7768955Z Updating files:  85% (171/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7770347Z Updating files:  86% (173/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7772723Z Updating files:  87% (175/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7774447Z Updating files:  88% (177/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7776746Z Updating files:  89% (179/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7778098Z Updating files:  90% (181/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7780316Z Updating files:  91% (183/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7781408Z Updating files:  92% (185/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7782697Z Updating files:  93% (187/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7785373Z Updating files:  94% (189/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7786797Z Updating files:  95% (191/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7787895Z Updating files:  96% (193/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7789249Z Updating files:  97% (195/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7790386Z Updating files:  98% (197/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7791448Z Updating files:  99% (199/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7792205Z Updating files: 100% (201/201)
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7792749Z Updating files: 100% (201/201), done.
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7847471Z Switched to a new branch 'main'
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7853467Z branch 'main' set up to track 'origin/main'.
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7865275Z ##[endgroup]
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7956680Z [command]/usr/bin/git log -1 --format=%H
+chrome-webrtc	Run actions/checkout@v4	2026-10-19T19:56:05.7957360Z 7f0feb8174f587c61aabf366ff6f90d1543636c7
+chrome-webrtc	Run actions/setup-node@v4	﻿2026-10-19T19:56:05.8217862Z ##[group]Run actions/setup-node@v4
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8218252Z with:
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8218498Z   node-version: 24
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8218749Z   cache: npm
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8219088Z   cache-dependency-path: projects/party-panic/package-lock.json
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8219491Z   always-auth: false
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8219750Z   check-latest: false
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8222507Z   token: ***
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.8222780Z ##[endgroup]
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.9660084Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.9664463Z (node:2307) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.9665769Z (Use `node --trace-deprecation ...` to show where the warning was created)
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:05.9668219Z ##[group]Environment details
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.3807940Z node: v24.21.0
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.3808607Z npm: 11.19.0
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.3808993Z yarn: 1.22.22
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.3810265Z ##[endgroup]
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.3852927Z [command]/opt/hostedtoolcache/node/24.21.0/x64/bin/npm config get cache
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.4969052Z /home/runner/.npm
+chrome-webrtc	Run actions/setup-node@v4	2026-10-19T19:56:06.7170648Z npm cache is not found
+chrome-webrtc	Run npm ci	﻿2026-10-19T19:56:06.7327742Z ##[group]Run npm ci
+chrome-webrtc	Run npm ci	2026-10-19T19:56:06.7328087Z [36;1mnpm ci[0m
+chrome-webrtc	Run npm ci	2026-10-19T19:56:06.7623893Z shell: /usr/bin/bash -e {0}
+chrome-webrtc	Run npm ci	2026-10-19T19:56:06.7624230Z ##[endgroup]
+chrome-webrtc	Run npm ci	2026-10-19T19:56:10.2521376Z npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0427756Z 
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0428767Z added 182 packages, and audited 183 packages in 8s
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0429291Z 
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0429642Z 53 packages are looking for funding
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0430690Z   run `npm fund` for details
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0441521Z 
+chrome-webrtc	Run npm ci	2026-10-19T19:56:15.0442088Z found 0 vulnerabilities
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	﻿2026-10-19T19:56:15.1050667Z ##[group]Run google-chrome --version
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1051037Z [36;1mgoogle-chrome --version[0m
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1051363Z [36;1mnpm run test:e2e -- tests/e2e/network.spec.ts[0m
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1119684Z shell: /usr/bin/bash -e {0}
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1119955Z env:
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1120169Z   CHROMIUM_PATH: /usr/bin/google-chrome
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1120454Z   RUN_WEBRTC: 1
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.1120653Z ##[endgroup]
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.2941203Z Google Chrome 155.0.8059.39 
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.3955889Z 
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.3956670Z > party-panic@0.3.0 test:e2e
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.3958640Z > playwright test tests/e2e/network.spec.ts
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:15.3959388Z 
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:16.7604133Z 
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:16.7626953Z Running 2 tests using 1 worker
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:16.7629205Z 
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:56:26.6430015Z REAL WEBRTC EVIDENCE [{"ice":"host ↔ host · direct","semantics":"movement: ordered=false, retransmits=unlimited","rtt":9.299999999995634,"fps":{"samples":140,"p5":15.33742331288412,"median":37.31343283581684,"p95":74.07407407407408},"counts":{"sent":15,"received":17,"sentBytes":11977,"receivedBytes":2636,"rejected":0,"droppedBackpressure":0},"elapsedSeconds":7.5567999999999955},{"ice":"host ↔ host · direct","semantics":"movement: ordered=false, retransmits=unlimited","rtt":3.8000000000029104,"fps":{"samples":14,"p5":7.716049382715703,"median":19.12045889101232,"p95":26.24671916010599},"counts":{"sent":17,"received":15,"sentBytes":2636,"receivedBytes":11977,"rejected":0,"droppedBackpressure":0},"elapsedSeconds":3.5200999999999985}]
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:57:25.1740420Z EIGHT CLIENT RESULT EVIDENCE {"players":8,"finished":7,"dnf":1,"host":{"links":[{"id":"47e0dd99-3e69-444a-aa34-b913401d5b4f","control":"connected","movement":"connected","signal":"stable"},{"id":"d60e1b5d-c75c-4c2a-a5cc-43bff6daaff0","control":"connected","movement":"connected","signal":"stable"},{"id":"6586b0be-bf6b-4816-b53f-4c84ed19ad21","control":"connected","movement":"connected","signal":"stable"},{"id":"19106055-d9c3-408c-8d36-8d4f4435732b","control":"connected","movement":"connected","signal":"stable"},{"id":"2e5bdce6-9046-4962-8bb7-787fd713c259","control":"connected","movement":"connected","signal":"stable"},{"id":"041f39b7-eda0-48e1-a0c5-f372af5d531b","control":"connected","movement":"connected","signal":"stable"}],"elapsedSeconds":66.08909999999999,"ice":"host ↔ host · direct","semantics":"movement: ordered=false, retransmits=unlimited","rtt":39.69999999999709,"bodies":22,"renderComponents":237,"transientEntities":24,"connectionCount":12,"bufferedBytes":0,"prediction":{"snapshots":0,"corrections":0,"maxCorrection":0},"snapshotAge":0,"display":{"fullscreenSupported":true,"orientationSupported":true,"wakeLockSupported":true,"fullscreen":true,"landscape":true,"portrait":false,"width":640,"height":360,"wakeLockActive":true,"orientationError":"screen.orientation.lock() is not available on this device."},"fps":{"samples":2,"p5":2.320724065908595,"median":2.788622420524216,"p95":2.788622420524216},"measurement":{"scope":{"role":"host","modeId":"obstacle-dash","roundId":3},"seconds":0.6983999999999941,"phases":["racing"]},"counts":{"sent":2230,"received":1767,"sentBytes":4419460,"receivedBytes":252406,"rejected":9,"droppedBackpressure":0}}}
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:57:31.7827453Z   ✓  1 tests/e2e/network.spec.ts:5:1 › real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch (1.2m)
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:59:30.7985098Z   ✓  2 tests/e2e/network.spec.ts:165:1 › real WebRTC Laser: gesture readiness, cover, authoritative tags, faults and eight-client firing (2.0m)
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:59:31.0577990Z 
+chrome-webrtc	Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)	2026-10-19T19:59:31.0584224Z   2 passed (3.3m)
+chrome-webrtc	Preserve browser evidence	﻿2026-10-19T19:59:31.1077478Z ##[group]Run actions/upload-artifact@v4
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1077791Z with:
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1077999Z   name: party-panic-chrome-webrtc
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1078289Z   path: projects/party-panic/test-results
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1078563Z   retention-days: 7
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1078774Z   if-no-files-found: warn
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1079006Z   compression-level: 6
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1079213Z   overwrite: false
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1079420Z   include-hidden-files: false
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.1079654Z ##[endgroup]
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.2701701Z (node:3137) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.2703349Z (Use `node --trace-deprecation ...` to show where the warning was created)
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.2770029Z With the provided path, there will be 1 file uploaded
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.2788133Z Artifact name is valid!
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.2788892Z Root directory input is valid!
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.6540840Z Beginning upload of artifact content to blob storage
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.6798460Z (node:3137) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:31.9654148Z Uploaded bytes 26965
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:32.0319660Z Finished uploading artifact content to blob storage!
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:32.0321470Z SHA256 digest of uploaded artifact zip is e745a68da3eca8f7792fd374dc5de7611e7e744cb100040414a7745b3bfad623
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:32.0323242Z Finalizing artifact upload
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:32.3031806Z Artifact party-panic-chrome-webrtc.zip successfully finalized. Artifact ID 12218215710
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:32.3033943Z Artifact party-panic-chrome-webrtc has been successfully uploaded! Final size is 26965 bytes. Artifact ID is 12218215710
+chrome-webrtc	Preserve browser evidence	2026-10-19T19:59:32.3041484Z Artifact download URL: https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39315066614/artifacts/12218215710
+chrome-webrtc	Post Run actions/setup-node@v4	﻿2026-10-19T19:59:32.3241250Z Post job cleanup.
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:32.4440839Z (node:3150) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:32.4441731Z (Use `node --trace-deprecation ...` to show where the warning was created)
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:32.4657715Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io --files-from manifest.txt --use-compress-program zstdmt
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:32.9001891Z (node:3150) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:33.8915841Z Sent 35127296 of 61882447 (56.8%), 33.5 MBs/sec
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:34.6399933Z Sent 61882447 of 61882447 (100.0%), 33.7 MBs/sec
+chrome-webrtc	Post Run actions/setup-node@v4	2026-10-19T19:59:34.8845449Z Cache saved with the key: node-cache-Linux-x64-npm-7e098fe8fc341c03ff458694741f55231d0a16f2b6eceec9bfaed1d3f96cf48f
+chrome-webrtc	Post Run actions/checkout@v4	﻿2026-10-19T19:59:34.9030579Z Post job cleanup.
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:34.9887577Z [command]/usr/bin/git version
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:34.9947076Z git version 2.55.0
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:34.9990512Z Temporarily overriding HOME='/home/runner/work/_temp/8b93ccbf-9e3e-42ad-aaaf-02ede880a82f' before making global git config changes
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:34.9992262Z Adding repository directory to the temporary git global config as a safe directory
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:34.9997146Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/LeoMaglanoc.github.io/LeoMaglanoc.github.io
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0038873Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0076542Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0501022Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0536577Z http.https://github.com/.extraheader
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0550003Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0590406Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0856766Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+chrome-webrtc	Post Run actions/checkout@v4	2026-10-19T19:59:35.0901587Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+chrome-webrtc	Complete job	﻿2026-10-19T19:59:35.1289243Z Cleaning up orphan processes
+chrome-webrtc	Complete job	2026-10-19T19:59:35.1618510Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

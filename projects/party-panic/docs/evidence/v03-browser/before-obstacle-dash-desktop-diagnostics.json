@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-19T19:56:52.117Z",
+  "measurement": {
+    "scope": {
+      "role": "host",
+      "modeId": "obstacle-dash",
+      "roundId": 1
+    },
+    "seconds": 12.3975,
+    "phases": [
+      "countdown",
+      "racing"
+    ],
+    "rollingFrameLimit": 36000,
+    "rttLimit": 1024
+  },
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+  "viewport": [
+    1440,
+    900
+  ],
+  "display": {
+    "fullscreenSupported": true,
+    "orientationSupported": true,
+    "wakeLockSupported": true,
+    "fullscreen": true,
+    "landscape": true,
+    "portrait": false,
+    "width": 1440,
+    "height": 900,
+    "wakeLockActive": true,
+    "orientationError": "screen.orientation.lock() is not available on this device."
+  },
+  "modeId": "obstacle-dash",
+  "roundId": 1,
+  "role": "host",
+  "ice": "not connected",
+  "semantics": "not connected",
+  "counts": {
+    "sent": 0,
+    "received": 0,
+    "sentBytes": 0,
+    "receivedBytes": 0,
+    "rejected": 0,
+    "droppedBackpressure": 0
+  },
+  "fps": {
+    "samples": 142,
+    "p5": 6.472491909385114,
+    "median": 11.481056257194075,
+    "p95": 27.100271002778424
+  },
+  "rtt": {
+    "samples": 0,
+    "p5": 0,
+    "median": 0,
+    "p95": 0
+  },
+  "logs": [
+    {
+      "at": "2026-10-19T19:56:38.419Z",
+      "type": "engine-ready",
+      "payload": {
+        "version": "2.23.3"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:39.715Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:42.658Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:43.298Z",
+      "type": "jump",
+      "payload": {
+        "id": "solo"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:45.308Z",
+      "type": "jump",
+      "payload": {
+        "id": "solo"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:47.260Z",
+      "type": "jump",
+      "payload": {
+        "id": "solo"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:49.281Z",
+      "type": "jump",
+      "payload": {
+        "id": "solo"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:50.367Z",
+      "type": "jump",
+      "payload": {
+        "id": "bot-1"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:50.662Z",
+      "type": "jump",
+      "payload": {
+        "id": "bot-0"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:50.905Z",
+      "type": "jump",
+      "payload": {
+        "id": "bot-2"
+      }
+    },
+    {
+      "at": "2026-10-19T19:56:51.718Z",
+      "type": "respawn",
+      "payload": {
+        "id": "solo",
+        "checkpoint": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+Fresh-context read-only reviewer, /root/independent_review.
+Reviewed current diff against baseline 43cb574, with focused commands independently run.
+Final disposition: no outstanding P0/P1/P2 findings in the reviewed runtime changes.
+Final independent focused verification: 68 tests passed across eight files.
+
+Findings fixed during review:
+1. Energy reconciliation could defer host state during bursts. Fixed with consumed
+   shot acknowledgements, per-snapshot reconciliation and pending local costs.
+2. Pitch-only visual camera recoil diverged from authoritative center ray. Replaced
+   by field-of-view kick preserving the shot ray, with exponential recovery.
+3. Unseen pre-death input could arrive after respawn in the same round. Added and
+   validated per-life generation on input, including simulation, bots and controls.
+4. Unacknowledged old-life costs survived respawn. setLife clears pending costs and
+   energy reconciliation tick; regression tests cover restored authoritative energy.
+5. A prediction unit test moved away from the cover it expected to reach. Corrected
+   its input direction and retained cover/perimeter assertions.
+
+Reviewed authority, collision prediction, display promises/Escape, stale input,
+resource cleanup, protocol boundaries, licensing, bots and mode resets. No new
+resource leak or scope violation identified. Public MIT notices and guest event
+budget reviewed. Reviewer explicitly conditioned readiness on final browser/network
+results and truthful physical-device/human-playtest limitations. This review is
+code QA, not an independent human gameplay preference test.
+
+Final fresh-context review (separate reviewer with no inherited implementation history):
+/root/fresh_final_review independently inspected baseline..778bdb7 source and retained
+CI/browser evidence, and independently ran the entire npm test suite: 104/104 passed.
+No P0/P1 runtime defect, resource leak or license omission identified. Physical-device,
+human-comparison and representative hardware performance gates remain open; the
+software-rendered Laser landscape slowdown requires follow-up. The reviewer found
+that the report still described the final hosted repeat as pending while it had
+succeeded. That documentation was corrected to exact run 39315842519, 2 passed / 0
+skipped in 159.8s, and Pages' exact-commit 24 passed / 2 explicitly skipped. This
+review relied on recorded browser artifacts and did not claim another browser run.

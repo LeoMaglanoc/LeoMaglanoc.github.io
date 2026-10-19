@@ -1,0 +1,4784 @@
+{
+  "date": "2026-10-19T20:03:35.224Z",
+  "url": "http://127.0.0.1:8080/party-panic/",
+  "browser": "154.0.8037.57",
+  "renderer": "Automated Chromium with SwiftShader software rendering; emulated viewports, not physical Android/iOS devices.",
+  "limitations": [
+    "Solo host with 3 genuine simulation-controlled bots; this report does not certify WebRTC multiplayer.",
+    "FPS diagnostics include countdown and the active interval; these are not steady-state phone performance measurements.",
+    "Fullscreen/orientation fields record only actual automated browser API outcomes; they do not certify Android or iPhone behavior.",
+    "No physical-phone performance target is verified by this run."
+  ],
+  "videoAvailable": true,
+  "failures": 2,
+  "results": [
+    {
+      "scenario": "after-obstacle-dash-desktop",
+      "modeId": "obstacle-dash",
+      "viewportName": "desktop",
+      "expectedViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "loading": {
+        "coldReadyMs": 2198.8000000000466,
+        "warmReadyMs": 758.9000000001397,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": false,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": false,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.294,
+      "inputs": [
+        "Keyboard W held for 8 real seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT111.2sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T20:02:13.260Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 12.279300000000047,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          1440,
+          900
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 1440,
+          "height": 900,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "fps": {
+          "samples": 140,
+          "p5": 6.5832784726733395,
+          "median": 11.185682326604445,
+          "p95": 45.248868778566575
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T20:01:59.871Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:00.976Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:03.967Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:04.553Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:06.522Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:08.559Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:10.523Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:11.793Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:12.061Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:12.304Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:13.090Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo",
+              "checkpoint": 0
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          65.49999999995362,
+          116.69999999999982,
+          83.30000000000018,
+          133.30000000000018,
+          133.39999999999964,
+          100,
+          83.39999999999964,
+          99.90000000000055,
+          83.39999999999964,
+          83.19999999999982,
+          100.10000000000036,
+          133.30000000000018,
+          83.30000000000018,
+          33.399999999999636,
+          83.30000000000018,
+          100,
+          83.30000000000018,
+          166.59999999999945,
+          33.400000000000546,
+          66.69999999999982,
+          100,
+          116.59999999999945,
+          100,
+          100,
+          16.700000000000728,
+          166.59999999999945,
+          66.69999999999982,
+          83.30000000000018,
+          100.10000000000036,
+          49.899999999999636,
+          133.40000000000055,
+          33.29999999999927,
+          100,
+          100,
+          100,
+          83.30000000000018,
+          83.40000000000055,
+          116.60000000000036,
+          166.6999999999989,
+          83.30000000000109,
+          50,
+          66.69999999999891,
+          83.30000000000109,
+          66.59999999999854,
+          133.40000000000146,
+          50,
+          83.29999999999927,
+          83.39999999999964,
+          99.89999999999964,
+          83.40000000000146,
+          116.59999999999854,
+          33.30000000000109,
+          83.39999999999964,
+          116.60000000000036,
+          83.29999999999927,
+          33.399999999999636,
+          83.40000000000146,
+          149.89999999999964,
+          33.29999999999927,
+          66.70000000000073,
+          100.10000000000036,
+          133.1999999999989,
+          16.700000000000728,
+          150,
+          33.29999999999927,
+          83.30000000000109,
+          116.69999999999891,
+          33.399999999999636,
+          83.30000000000109,
+          83.29999999999927,
+          83.39999999999964,
+          100,
+          83.20000000000073,
+          66.79999999999927,
+          83.30000000000109,
+          83.29999999999927,
+          83.30000000000109,
+          100,
+          116.59999999999854,
+          83.40000000000146,
+          33.29999999999927,
+          83.29999999999927,
+          116.70000000000073,
+          66.70000000000073,
+          116.69999999999891,
+          100,
+          99.89999999999964,
+          16.700000000000728,
+          83.39999999999964,
+          83.30000000000109,
+          83.29999999999927,
+          100,
+          133.39999999999964,
+          16.600000000000364,
+          83.29999999999927,
+          100.10000000000036,
+          83.30000000000109,
+          133.29999999999927,
+          16.700000000000728,
+          100,
+          133.29999999999927
+        ],
+        "jsHeap": {
+          "used": 19583098,
+          "total": 37490178
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [
+        "Could not hash asset http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css: Error: response.body: Response body is unavailable for redirect responses",
+        "Could not hash asset http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js: Error: response.body: Response body is unavailable for redirect responses"
+      ]
+    },
+    {
+      "scenario": "after-obstacle-dash-phone-landscape",
+      "modeId": "obstacle-dash",
+      "viewportName": "phone-landscape",
+      "expectedViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "loading": {
+        "coldReadyMs": 1307.4000000001397,
+        "warmReadyMs": 578.2999999998137,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.849,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: jump tapped every 2 seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT109.6sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T20:02:29.894Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 13.929100000000092,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          844,
+          390
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "fps": {
+          "samples": 251,
+          "p5": 10.1729399796493,
+          "median": 19.45525291823506,
+          "p95": 58.8235294117647
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T20:02:15.303Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:15.960Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:18.921Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:19.695Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:25.973Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:26.355Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:26.573Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          7.400000000093314,
+          33.399999999999636,
+          66.60000000000036,
+          50,
+          133.39999999999964,
+          33.30000000000018,
+          66.60000000000036,
+          16.699999999999818,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          83.29999999999927,
+          83.40000000000055,
+          33.30000000000018,
+          50,
+          33.29999999999927,
+          66.70000000000073,
+          50,
+          66.69999999999982,
+          33.30000000000018,
+          66.59999999999945,
+          33.400000000000546,
+          50,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          50,
+          33.400000000000546,
+          66.69999999999982,
+          83.30000000000018,
+          16.599999999999454,
+          33.400000000000546,
+          66.69999999999982,
+          49.899999999999636,
+          50.100000000000364,
+          49.899999999999636,
+          50,
+          50.100000000000364,
+          49.899999999999636,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          83.30000000000018,
+          16.699999999999818,
+          83.39999999999964,
+          66.60000000000036,
+          50,
+          66.69999999999982,
+          33.30000000000018,
+          50,
+          33.30000000000018,
+          66.69999999999982,
+          33.399999999999636,
+          83.30000000000018,
+          33.400000000000546,
+          49.899999999999636,
+          33.399999999999636,
+          66.60000000000036,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          33.399999999999636,
+          66.69999999999982,
+          33.20000000000073,
+          50,
+          83.39999999999964,
+          16.600000000000364,
+          33.399999999999636,
+          66.69999999999982,
+          50,
+          49.900000000000546,
+          16.69999999999891,
+          66.60000000000036,
+          33.399999999999636,
+          33.30000000000109,
+          50,
+          33.29999999999927,
+          83.39999999999964,
+          66.70000000000073,
+          33.29999999999927,
+          16.700000000000728,
+          100,
+          16.600000000000364,
+          50,
+          16.69999999999891,
+          83.30000000000109,
+          33.399999999999636,
+          49.899999999999636,
+          16.700000000000728,
+          33.399999999999636,
+          83.29999999999927,
+          66.60000000000036,
+          16.700000000000728,
+          33.29999999999927,
+          66.70000000000073,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          66.60000000000036,
+          83.29999999999927,
+          33.399999999999636,
+          16.600000000000364,
+          50,
+          50,
+          50,
+          100,
+          66.70000000000073,
+          50,
+          33.29999999999927,
+          83.30000000000109,
+          16.69999999999891,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          50,
+          50,
+          50,
+          50,
+          50,
+          66.60000000000036,
+          16.700000000000728,
+          83.39999999999964,
+          83.29999999999927,
+          33.30000000000109,
+          16.599999999998545,
+          66.70000000000073,
+          100.10000000000036,
+          33.29999999999927,
+          66.60000000000036,
+          16.700000000000728,
+          83.29999999999927,
+          150,
+          66.70000000000073,
+          66.59999999999854,
+          16.700000000000728,
+          33.29999999999927,
+          50,
+          66.70000000000073,
+          383.2999999999993,
+          66.70000000000073,
+          133.29999999999927,
+          83.30000000000109,
+          100.10000000000036,
+          33.29999999999927,
+          33.29999999999927,
+          50,
+          50,
+          50,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          83.30000000000109,
+          66.69999999999891,
+          50,
+          116.60000000000036,
+          100,
+          83.39999999999964,
+          83.30000000000109,
+          83.29999999999927,
+          100,
+          100,
+          33.399999999999636,
+          199.90000000000146,
+          216.6999999999989,
+          50,
+          33.30000000000109,
+          150,
+          33.399999999999636
+        ],
+        "jsHeap": {
+          "used": 23075070,
+          "total": 36323446
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "video": {
+        "path": "docs/evidence/v03-browser/videos/after-obstacle-dash-phone-landscape.webm",
+        "description": "Automated Chromium viewport capture; includes loading/countdown and 8 seconds of real-input gameplay. Not a human phone recording."
+      }
+    },
+    {
+      "scenario": "after-obstacle-dash-phone-portrait",
+      "modeId": "obstacle-dash",
+      "viewportName": "phone-portrait",
+      "expectedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loading": {
+        "coldReadyMs": 1639.1000000000931,
+        "warmReadyMs": 470.30000000004657,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": false,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": false,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.789,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: jump tapped every 2 seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "portrait-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "portrait-primary",
+        "hud": "TIME LEFT110.4sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "block",
+        "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+      },
+      "diagnostics": {
+        "date": "2026-10-19T20:02:45.795Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 12.831,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          390,
+          844
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": false,
+          "portrait": true,
+          "width": 390,
+          "height": 844,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "fps": {
+          "samples": 259,
+          "p5": 11.8906064209143,
+          "median": 23.923444976049904,
+          "p95": 80
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T20:02:32.436Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:32.959Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:35.983Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:36.620Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:43.365Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:43.681Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:43.880Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          -4.999999999906777,
+          16.699999999999818,
+          33.30000000000018,
+          16.699999999999818,
+          50.000000000000455,
+          100,
+          100,
+          16.699999999999818,
+          16.699999999999818,
+          83.19999999999982,
+          33.400000000000546,
+          49.899999999999636,
+          16.699999999999818,
+          33.400000000000546,
+          66.59999999999945,
+          33.30000000000018,
+          66.69999999999982,
+          16.699999999999818,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          33.400000000000546,
+          33.30000000000018,
+          66.59999999999945,
+          16.699999999999818,
+          66.70000000000073,
+          16.599999999999454,
+          66.69999999999982,
+          33.400000000000546,
+          16.599999999999454,
+          66.70000000000073,
+          33.29999999999927,
+          50,
+          33.30000000000018,
+          16.699999999999818,
+          66.60000000000036,
+          33.399999999999636,
+          66.70000000000073,
+          16.599999999999454,
+          66.69999999999982,
+          33.30000000000018,
+          33.30000000000018,
+          50,
+          33.30000000000018,
+          66.69999999999982,
+          83.39999999999964,
+          33.30000000000018,
+          16.600000000000364,
+          66.80000000000018,
+          33.19999999999982,
+          66.69999999999982,
+          16.699999999999818,
+          83.30000000000018,
+          33.30000000000018,
+          50,
+          33.399999999999636,
+          66.60000000000036,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          33.399999999999636,
+          16.600000000000364,
+          66.69999999999982,
+          16.699999999999818,
+          66.60000000000036,
+          33.399999999999636,
+          66.60000000000036,
+          50,
+          66.69999999999982,
+          50,
+          66.60000000000036,
+          33.399999999999636,
+          83.30000000000018,
+          50,
+          33.30000000000018,
+          16.699999999999818,
+          83.39999999999964,
+          66.60000000000036,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          16.599999999999454,
+          66.69999999999982,
+          33.400000000000546,
+          66.59999999999945,
+          50.100000000000364,
+          416.60000000000036,
+          50,
+          233.29999999999927,
+          83.30000000000109,
+          50.099999999998545,
+          33.30000000000109,
+          66.60000000000036,
+          50,
+          66.69999999999891,
+          83.30000000000109,
+          66.69999999999891,
+          66.70000000000073,
+          83.29999999999927,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          50,
+          33.399999999999636,
+          66.60000000000036,
+          33.29999999999927,
+          66.70000000000073,
+          50,
+          83.29999999999927,
+          83.39999999999964,
+          100,
+          16.600000000000364,
+          33.399999999999636,
+          49.899999999999636,
+          33.400000000001455,
+          66.69999999999891,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          49.899999999999636,
+          33.399999999999636,
+          83.29999999999927,
+          33.400000000001455,
+          66.59999999999854,
+          33.400000000001455,
+          66.69999999999891,
+          33.20000000000073,
+          50.100000000000364,
+          50,
+          49.899999999999636,
+          33.29999999999927,
+          66.80000000000109,
+          33.29999999999927,
+          66.60000000000036,
+          33.399999999999636,
+          33.29999999999927,
+          50,
+          33.400000000001455,
+          66.59999999999854,
+          33.30000000000109,
+          66.69999999999891,
+          33.30000000000109,
+          16.69999999999891,
+          83.30000000000109,
+          50,
+          33.29999999999927,
+          16.700000000000728,
+          50.100000000000364,
+          50,
+          49.899999999999636,
+          33.29999999999927,
+          83.39999999999964,
+          33.30000000000109,
+          66.60000000000036,
+          16.69999999999891,
+          83.39999999999964,
+          83.30000000000109,
+          16.69999999999891,
+          33.30000000000109,
+          83.29999999999927,
+          16.700000000000728,
+          50,
+          33.29999999999927,
+          33.399999999999636,
+          50,
+          33.30000000000109,
+          66.69999999999891,
+          33.20000000000073,
+          66.70000000000073,
+          33.399999999999636,
+          66.69999999999891,
+          33.30000000000109,
+          16.600000000000364,
+          50,
+          16.69999999999891,
+          133.3000000000011
+        ],
+        "jsHeap": {
+          "used": 15938330,
+          "total": 37752306
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [
+        "Could not hash asset http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css: Error: response.body: Response body is unavailable for redirect responses",
+        "Could not hash asset http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js: Error: response.body: Response body is unavailable for redirect responses"
+      ]
+    },
+    {
+      "scenario": "after-laser-tag-desktop",
+      "modeId": "laser-tag",
+      "viewportName": "desktop",
+      "expectedViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "loading": {
+        "coldReadyMs": 1490.1000000000931,
+        "warmReadyMs": 883.3000000000466,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.635,
+      "inputs": [
+        "Keyboard W held for 8 real seconds",
+        "Primary mouse held; pointer movement for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT79.9sSHIELD ACTIVE · TAGS0HEALTH100",
+        "reticleVisible": true,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T20:03:03.189Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.723699999999953,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          1440,
+          900
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 1440,
+          "height": 900,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "fps": {
+          "samples": 122,
+          "p5": 4.833252779122524,
+          "median": 9.775171065489197,
+          "p95": 34.843205574686756
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T20:02:48.348Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:49.393Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:52.521Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:53.510Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": -11.25295782132529,
+                "y": 1.0576886025803796,
+                "z": -7.223286134035982
+              },
+              "to": {
+                "x": -11.506947603281754,
+                "y": 1.4079977800757346,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.177Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": -11.250794526292008,
+                "y": 1.0606255077600466,
+                "z": -6.741950467544583
+              },
+              "to": {
+                "x": -11.577235736802768,
+                "y": 1.455965222654053,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.457Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": -11.159842947887862,
+                "y": 1.075030640318455,
+                "z": -6.106826418910495
+              },
+              "to": {
+                "x": -11.647912999756144,
+                "y": 1.5208405989984815,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.597Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": 9.665142988814964,
+                "y": 1.0238965869916905,
+                "z": -8.238439906842421
+              },
+              "to": {
+                "x": 5.071781976324413,
+                "y": 0.532907897168067,
+                "z": -8.29721127092619
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.597Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 66,
+              "damage": 34,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.803Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": -11.169673149732965,
+                "y": 1.0640955879763903,
+                "z": -6.106441230435021
+              },
+              "to": {
+                "x": -11.656524387249933,
+                "y": 1.5069856431202933,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.803Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": -6.0070624785100755,
+                "y": 1.0289168588354443,
+                "z": -7.999241019884528
+              },
+              "to": {
+                "x": -10.87711476067405,
+                "y": 0.7608016008971481,
+                "z": -6.789579297721232
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.803Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 66,
+              "damage": 34,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.861Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "weapon": "charged",
+              "from": {
+                "x": 5.355688586737708,
+                "y": 1.02443595246773,
+                "z": -7.811109605311794
+              },
+              "to": {
+                "x": 9.78914788295339,
+                "y": 0.7994266358629735,
+                "z": -7.944013413169176
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.861Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2",
+              "health": 30,
+              "damage": 70,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.862Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": 9.645534510035777,
+                "y": 1.0258920567568635,
+                "z": -8.192784455341728
+              },
+              "to": {
+                "x": 5.211596555093257,
+                "y": 0.8133922958869719,
+                "z": -8.050748621401192
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.862Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 32,
+              "damage": 34,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:54.999Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": -6.010697360781957,
+                "y": 1.0312290175868788,
+                "z": -7.971316127697304
+              },
+              "to": {
+                "x": -10.66286824288311,
+                "y": 0.8093928094949944,
+                "z": -6.576374750499071
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.000Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 32,
+              "damage": 34,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.203Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": -11.189250685773903,
+                "y": 1.06767739900689,
+                "z": -6.106364089895226
+              },
+              "to": {
+                "x": -11.67609743409477,
+                "y": 1.5109408262666904,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.203Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": 9.644064771266727,
+                "y": 1.0266446889788157,
+                "z": -8.189070567661549
+              },
+              "to": {
+                "x": 5.21461932490028,
+                "y": 0.8215469359027439,
+                "z": -8.01701643787181
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.203Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 0,
+              "damage": 34,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.205Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.307Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": -6.011127328032957,
+                "y": 1.0321394099079066,
+                "z": -7.967819128436262
+              },
+              "to": {
+                "x": -10.663663918609469,
+                "y": 0.818017020876416,
+                "z": -6.540189636796146
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.307Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 0,
+              "damage": 34,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.310Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.557Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": 8.97363615232642,
+                "y": 1.0705275071703793,
+                "z": -8.220389581930013
+              },
+              "to": {
+                "x": -4.945488653794298,
+                "y": 0.699581458493125,
+                "z": -7.9013292100564465
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.558Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 66,
+              "damage": 34,
+              "sequence": 4,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.880Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": 8.01390054554019,
+                "y": 1.0723602496593412,
+                "z": -8.216246430027939
+              },
+              "to": {
+                "x": -4.0090371532780615,
+                "y": 0.8579507150106059,
+                "z": -8.014379123357557
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:55.881Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 32,
+              "damage": 34,
+              "sequence": 5,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:56.159Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 6,
+              "weapon": "quick",
+              "from": {
+                "x": 7.052585919637789,
+                "y": 1.062544271417288,
+                "z": -8.206807661081852
+              },
+              "to": {
+                "x": -3.0473450008638583,
+                "y": 0.7550606536346561,
+                "z": -8.011971133084032
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:56.159Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 0,
+              "damage": 34,
+              "sequence": 6,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:56.160Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:57.264Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:57.327Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:58.207Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:58.962Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "weapon": "charged",
+              "from": {
+                "x": -5.449736501552473,
+                "y": 1.0767516310520373,
+                "z": 8.231054967361988
+              },
+              "to": {
+                "x": 10.62096247853701,
+                "y": 0.7792402008507375,
+                "z": 8.027028823931918
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:58.963Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "solo",
+              "health": 30,
+              "damage": 70,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:59.170Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": -7.104522146487107,
+                "y": 1.0703834817550952,
+                "z": -7.761357732977029
+              },
+              "to": {
+                "x": 7.024443945125664,
+                "y": 0.6832882618475418,
+                "z": -7.684958788349065
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:59.171Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2",
+              "health": 0,
+              "damage": 34,
+              "sequence": 4,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:59.171Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:59.911Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 3,
+              "weapon": "charged",
+              "from": {
+                "x": -1.5269705332356178,
+                "y": 1.0700321696128756,
+                "z": 8.224068827745931
+              },
+              "to": {
+                "x": 10.620000630212031,
+                "y": 0.7911892625001569,
+                "z": 8.000692069882602
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:59.911Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "solo",
+              "health": 0,
+              "damage": 70,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:02:59.912Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:01.285Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:01.561Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": -7.143287327844275,
+                "y": 1.0676346871454232,
+                "z": -2.6382820667451727
+              },
+              "to": {
+                "x": -5.419938876711514,
+                "y": 0.8435891871519704,
+                "z": 7.624095458591675
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:01.561Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 66,
+              "damage": 34,
+              "sequence": 5,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:01.794Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 6,
+              "weapon": "quick",
+              "from": {
+                "x": -7.163152146308606,
+                "y": 1.0599729265166913,
+                "z": -1.8011555656371412
+              },
+              "to": {
+                "x": -5.970860901245812,
+                "y": 0.7482022022983416,
+                "z": 7.622245543387417
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:01.795Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 32,
+              "damage": 34,
+              "sequence": 6,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:02.011Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:02.104Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 7,
+              "weapon": "quick",
+              "from": {
+                "x": -7.122783980105574,
+                "y": 1.0552834319236188,
+                "z": -0.8729779343447858
+              },
+              "to": {
+                "x": -6.4535735971875035,
+                "y": 0.8014543790329289,
+                "z": 6.950564458839663
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:02.104Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 0,
+              "damage": 34,
+              "sequence": 7,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:02.105Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          106.69999999990705,
+          166.59999999999945,
+          200,
+          50.100000000000364,
+          266.60000000000036,
+          133.19999999999982,
+          650.0999999999995,
+          83.30000000000018,
+          116.69999999999982,
+          99.90000000000055,
+          133.39999999999964,
+          66.69999999999982,
+          149.90000000000055,
+          50,
+          133.39999999999964,
+          216.60000000000036,
+          100,
+          250,
+          116.59999999999945,
+          200.10000000000036,
+          116.60000000000036,
+          166.6999999999989,
+          50,
+          83.40000000000146,
+          83.19999999999891,
+          133.39999999999964,
+          66.60000000000036,
+          116.70000000000073,
+          100,
+          66.69999999999891,
+          116.70000000000073,
+          33.20000000000073,
+          83.39999999999964,
+          166.60000000000036,
+          66.69999999999891,
+          133.3000000000011,
+          100,
+          116.69999999999891,
+          16.700000000000728,
+          99.89999999999964,
+          116.70000000000073,
+          100,
+          200,
+          100,
+          50,
+          100,
+          100,
+          116.59999999999854,
+          183.3000000000011,
+          100.10000000000036,
+          100,
+          116.69999999999891,
+          133.20000000000073,
+          100,
+          116.69999999999891,
+          133.3000000000011,
+          100,
+          150.10000000000036,
+          66.59999999999854,
+          100,
+          216.70000000000073,
+          100,
+          33.29999999999927,
+          83.30000000000109,
+          150,
+          33.29999999999927,
+          83.30000000000109,
+          133.39999999999964,
+          83.29999999999927,
+          33.399999999999636,
+          83.30000000000109,
+          16.600000000000364,
+          166.6999999999989,
+          83.39999999999964,
+          100,
+          83.30000000000109,
+          66.69999999999891,
+          83.30000000000109,
+          83.29999999999927,
+          133.3000000000011,
+          83.29999999999927,
+          100.10000000000036,
+          50,
+          149.89999999999964,
+          83.29999999999927,
+          16.700000000000728,
+          100,
+          16.700000000000728,
+          183.29999999999927
+        ],
+        "jsHeap": {
+          "used": 20700291,
+          "total": 34530355
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": []
+    },
+    {
+      "scenario": "after-laser-tag-phone-landscape",
+      "modeId": "laser-tag",
+      "viewportName": "phone-landscape",
+      "expectedViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "loading": {
+        "coldReadyMs": 1645.2000000001863,
+        "warmReadyMs": 711.4000000001397,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.308,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: fire held and dragged for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT80.0sYOUR TAGS0HEALTH30",
+        "reticleVisible": true,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T20:03:19.915Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.31140000000014,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          844,
+          390
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "fps": {
+          "samples": 248,
+          "p5": 10.351966873696023,
+          "median": 19.569471624230477,
+          "p95": 55.86592178800016
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T20:03:05.837Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:06.587Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:09.568Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:10.300Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": -11.25295782132529,
+                "y": 1.0576922384637109,
+                "z": -6.960428220065035
+              },
+              "to": {
+                "x": -11.548212599262298,
+                "y": 1.4302861824709798,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:10.873Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": -11.221367773292478,
+                "y": 1.0746430295625558,
+                "z": -6.106444431978954
+              },
+              "to": {
+                "x": -11.708621564610864,
+                "y": 1.5194272898175631,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.070Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": 9.665142988814964,
+                "y": 1.0238965869916905,
+                "z": -8.238439906842421
+              },
+              "to": {
+                "x": 5.071781976324413,
+                "y": 0.532907897168067,
+                "z": -8.29721127092619
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.070Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 66,
+              "damage": 34,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.188Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": -11.257090513698836,
+                "y": 1.0718821491659438,
+                "z": -6.1063921249050575
+              },
+              "to": {
+                "x": -11.744144299945289,
+                "y": 1.5160101291764425,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.188Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": -6.04105548950014,
+                "y": 1.0297334819121395,
+                "z": -8.078410503901369
+              },
+              "to": {
+                "x": -11.086505029967324,
+                "y": 0.7437844245375869,
+                "z": -6.809989127744332
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.188Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 66,
+              "damage": 34,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.289Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "weapon": "charged",
+              "from": {
+                "x": 5.355688579004844,
+                "y": 1.0244359635116076,
+                "z": -7.811109579579822
+              },
+              "to": {
+                "x": 9.789147919010663,
+                "y": 0.7994267421928287,
+                "z": -7.944013171107574
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.289Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2",
+              "health": 30,
+              "damage": 70,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.293Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": 9.645534266659594,
+                "y": 1.0258918982772147,
+                "z": -8.192783738648828
+              },
+              "to": {
+                "x": 5.211597428411686,
+                "y": 0.813390831728628,
+                "z": -8.050742140246868
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.293Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 32,
+              "damage": 34,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.423Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": -6.045128981310097,
+                "y": 1.0322397239546235,
+                "z": -8.045788540386491
+              },
+              "to": {
+                "x": -10.765685038525323,
+                "y": 0.8086067667689116,
+                "z": -6.579165383903983
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.423Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 32,
+              "damage": 34,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.476Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": -11.289932192419188,
+                "y": 1.0757198570932685,
+                "z": -6.106531263430378
+              },
+              "to": {
+                "x": -11.777373884120593,
+                "y": 1.5209121158687295,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.609Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": 9.644064770953216,
+                "y": 1.026644688692238,
+                "z": -8.189070566686594
+              },
+              "to": {
+                "x": 5.21461932529786,
+                "y": 0.8215469330646622,
+                "z": -8.017016429002279
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.609Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 0,
+              "damage": 34,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.613Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.702Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": -6.045513883200771,
+                "y": 1.0332454630766832,
+                "z": -8.042601613632437
+              },
+              "to": {
+                "x": -10.773080405699485,
+                "y": 0.8175575444285301,
+                "z": -6.542946160699567
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.702Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 0,
+              "damage": 34,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.703Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.971Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": 8.414113818507927,
+                "y": 1.0683793213310713,
+                "z": -8.22460265625264
+              },
+              "to": {
+                "x": -4.352473614727421,
+                "y": 0.7106733583033509,
+                "z": -7.985364136418467
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:11.971Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 66,
+              "damage": 34,
+              "sequence": 4,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:12.174Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": 7.133539606270203,
+                "y": 1.067520738782966,
+                "z": -8.223052003077477
+              },
+              "to": {
+                "x": -3.081662831126046,
+                "y": 0.8537805304923746,
+                "z": -8.082888824298575
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:12.175Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 32,
+              "damage": 34,
+              "sequence": 5,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:12.458Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 6,
+              "weapon": "quick",
+              "from": {
+                "x": 5.850988239502935,
+                "y": 1.0526827550655162,
+                "z": -8.214257972213352
+              },
+              "to": {
+                "x": -1.8007978641871167,
+                "y": 0.7767581117052645,
+                "z": -8.079095757501134
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:12.458Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 0,
+              "damage": 34,
+              "sequence": 6,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:12.458Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:13.604Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:13.693Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:14.478Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:15.080Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": -8.291854476445243,
+                "y": 1.0683473715940779,
+                "z": -7.775251867620146
+              },
+              "to": {
+                "x": 4.472555716937055,
+                "y": 0.7099121920567982,
+                "z": -8.013917869522492
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:15.080Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2",
+              "health": 0,
+              "damage": 34,
+              "sequence": 4,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:15.081Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:15.357Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "weapon": "charged",
+              "from": {
+                "x": -5.4895436579214225,
+                "y": 1.0768027186792815,
+                "z": 8.23109995371882
+              },
+              "to": {
+                "x": 10.620960850819262,
+                "y": 0.7791997415405565,
+                "z": 8.027005988009176
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:15.357Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "solo",
+              "health": 30,
+              "damage": 70,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:16.121Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": -7.261538598086669,
+                "y": 1.0757940344876262,
+                "z": -6.064168467853736
+              },
+              "to": {
+                "x": -5.471751247928137,
+                "y": 0.8578523757634661,
+                "z": 7.624341737661454
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:16.122Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 66,
+              "damage": 34,
+              "sequence": 5,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:16.873Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 6,
+              "weapon": "quick",
+              "from": {
+                "x": -7.181660550178349,
+                "y": 1.0712676964876942,
+                "z": -6.152488352266467
+              },
+              "to": {
+                "x": -5.4814282303714865,
+                "y": 0.7234631833098071,
+                "z": 7.624530434243271
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:16.873Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 32,
+              "damage": 34,
+              "sequence": 6,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:17.142Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:17.201Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 7,
+              "weapon": "quick",
+              "from": {
+                "x": -7.167058663768948,
+                "y": 1.0722058586470862,
+                "z": -5.829536985298183
+              },
+              "to": {
+                "x": -5.6,
+                "y": 0.8067143749532983,
+                "z": 5.9008140830800935
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:17.611Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 8,
+              "weapon": "quick",
+              "from": {
+                "x": -7.158710253732973,
+                "y": 1.0722562918772796,
+                "z": -4.769222952498208
+              },
+              "to": {
+                "x": -5.6,
+                "y": 0.8604431036747988,
+                "z": 5.956324628007125
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:17.869Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 9,
+              "weapon": "quick",
+              "from": {
+                "x": -7.167465791898555,
+                "y": 1.0668848061915586,
+                "z": -4.598082926852454
+              },
+              "to": {
+                "x": -5.599335038379247,
+                "y": 0.6991153228780064,
+                "z": 7.640399540546021
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:17.869Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 0,
+              "damage": 34,
+              "sequence": 9,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:17.870Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.768Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 7,
+              "weapon": "quick",
+              "from": {
+                "x": 6.7677444638160145,
+                "y": 1.0720193910374047,
+                "z": -8.151679789162888
+              },
+              "to": {
+                "x": -6.722366966368081,
+                "y": 0.7575404025518662,
+                "z": -5.976515568389946
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.768Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 66,
+              "damage": 34,
+              "sequence": 7,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.768Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 10,
+              "weapon": "quick",
+              "from": {
+                "x": -6.470093089646243,
+                "y": 1.0748249353725767,
+                "z": -6.126714710693967
+              },
+              "to": {
+                "x": 6.903676017292147,
+                "y": 0.8453931309323695,
+                "z": -7.936383875105232
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.769Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2",
+              "health": 66,
+              "damage": 34,
+              "sequence": 10,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.988Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 8,
+              "weapon": "quick",
+              "from": {
+                "x": 5.9096975810786825,
+                "y": 1.07156482742451,
+                "z": -8.10457312187933
+              },
+              "to": {
+                "x": -6.049214898879691,
+                "y": 0.8370040611284637,
+                "z": -6.7032795254424205
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.988Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 32,
+              "damage": 34,
+              "sequence": 8,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.990Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 11,
+              "weapon": "quick",
+              "from": {
+                "x": -5.822227889548103,
+                "y": 1.0681319287724667,
+                "z": -6.529327369267295
+              },
+              "to": {
+                "x": 5.986741427496518,
+                "y": 0.7599955308364859,
+                "z": -7.858416014337987
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:18.990Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2",
+              "health": 32,
+              "damage": 34,
+              "sequence": 11,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:19.259Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 9,
+              "weapon": "quick",
+              "from": {
+                "x": 4.715295700865555,
+                "y": 1.0598195734464928,
+                "z": -7.9888395475859095
+              },
+              "to": {
+                "x": -4.86615691684859,
+                "y": 0.7338554105875648,
+                "z": -6.911262519216658
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:19.259Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 0,
+              "damage": 34,
+              "sequence": 9,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:19.259Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:19.900Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          1.199999999999818,
+          16.600000000000364,
+          16.699999999999818,
+          83.30000000000018,
+          83.30000000000018,
+          83.29999999999927,
+          33.400000000000546,
+          66.69999999999982,
+          33.19999999999982,
+          66.80000000000018,
+          33.30000000000018,
+          66.59999999999945,
+          33.400000000000546,
+          83.30000000000018,
+          33.29999999999927,
+          100.10000000000036,
+          83.19999999999982,
+          66.69999999999982,
+          16.700000000000728,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          66.60000000000036,
+          33.399999999999636,
+          66.70000000000073,
+          33.29999999999927,
+          83.30000000000018,
+          16.699999999999818,
+          83.30000000000018,
+          83.30000000000018,
+          50.100000000000364,
+          49.899999999999636,
+          33.399999999999636,
+          100,
+          99.90000000000055,
+          50.099999999999454,
+          100,
+          116.60000000000036,
+          33.30000000000018,
+          50.099999999999454,
+          49.900000000000546,
+          66.80000000000018,
+          16.599999999999454,
+          33.30000000000018,
+          66.69999999999982,
+          16.699999999999818,
+          49.900000000000546,
+          33.399999999999636,
+          66.69999999999982,
+          16.600000000000364,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          49.900000000000546,
+          33.399999999999636,
+          16.699999999999818,
+          66.60000000000036,
+          16.699999999999818,
+          33.30000000000018,
+          50,
+          16.699999999999818,
+          83.30000000000018,
+          16.600000000000364,
+          33.399999999999636,
+          50,
+          50,
+          50,
+          16.699999999999818,
+          16.600000000000364,
+          50,
+          50,
+          50,
+          16.699999999999818,
+          33.30000000000018,
+          66.69999999999982,
+          16.600000000000364,
+          33.29999999999927,
+          66.80000000000109,
+          16.599999999998545,
+          50,
+          33.400000000001455,
+          33.29999999999927,
+          66.60000000000036,
+          33.29999999999927,
+          50.100000000000364,
+          33.29999999999927,
+          66.60000000000036,
+          50,
+          50,
+          50,
+          50,
+          50.100000000000364,
+          50,
+          16.600000000000364,
+          66.69999999999891,
+          33.30000000000109,
+          33.399999999999636,
+          49.899999999999636,
+          33.30000000000109,
+          66.69999999999891,
+          50,
+          66.70000000000073,
+          83.29999999999927,
+          33.30000000000109,
+          50,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          33.29999999999927,
+          50,
+          83.39999999999964,
+          33.30000000000109,
+          16.600000000000364,
+          50.099999999998545,
+          33.30000000000109,
+          66.60000000000036,
+          33.29999999999927,
+          33.399999999999636,
+          83.39999999999964,
+          66.60000000000036,
+          50,
+          66.70000000000073,
+          66.60000000000036,
+          66.59999999999854,
+          50.100000000000364,
+          33.30000000000109,
+          50,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          33.29999999999927,
+          50,
+          100,
+          100,
+          83.30000000000109,
+          400,
+          133.29999999999927,
+          66.70000000000073,
+          83.29999999999927,
+          66.60000000000036,
+          50.100000000000364,
+          33.29999999999927,
+          83.29999999999927,
+          83.40000000000146,
+          133.29999999999927,
+          283.2999999999993,
+          49.900000000001455,
+          250.09999999999854,
+          99.90000000000146,
+          33.5,
+          50,
+          33.19999999999891,
+          66.70000000000073,
+          33.29999999999927,
+          33.399999999999636,
+          66.60000000000036,
+          33.399999999999636,
+          49.900000000001455,
+          33.399999999999636,
+          66.69999999999891,
+          50,
+          50,
+          16.700000000000728,
+          33.29999999999927,
+          66.70000000000073,
+          16.600000000000364,
+          66.60000000000036,
+          33.399999999999636,
+          50,
+          50,
+          50,
+          49.899999999999636,
+          66.79999999999927,
+          16.600000000000364,
+          16.700000000000728,
+          50,
+          50,
+          66.60000000000036
+        ],
+        "jsHeap": {
+          "used": 21081187,
+          "total": 37267919
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "video": {
+        "path": "docs/evidence/v03-browser/videos/after-laser-tag-phone-landscape.webm",
+        "description": "Automated Chromium viewport capture; includes loading/countdown and 8 seconds of real-input gameplay. Not a human phone recording."
+      }
+    },
+    {
+      "scenario": "after-laser-tag-phone-portrait",
+      "modeId": "laser-tag",
+      "viewportName": "phone-portrait",
+      "expectedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loading": {
+        "coldReadyMs": 1151.5,
+        "warmReadyMs": 565.3999999999069,
+        "scope": "new browser context then reload; localhost, includes JS/Ammo/WebGL readiness"
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.739,
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: fire held and dragged for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "portrait-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "portrait-primary",
+        "hud": "TIME LEFT80.5sYOUR TAGS0HEALTH30",
+        "reticleVisible": true,
+        "portraitHint": "block",
+        "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+      },
+      "diagnostics": {
+        "date": "2026-10-19T20:03:35.182Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 12.69859999999986,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          390,
+          844
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": false,
+          "portrait": true,
+          "width": 390,
+          "height": 844,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "fps": {
+          "samples": 302,
+          "p5": 12.515644555672736,
+          "median": 28.73563218406185,
+          "p95": 84.74576271320213
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T20:03:21.904Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:22.468Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:25.412Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:26.022Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": -11.25295782132529,
+                "y": 1.0576899138825646,
+                "z": -7.166142922671236
+              },
+              "to": {
+                "x": -11.515918283873635,
+                "y": 1.412843621655768,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:26.555Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": -11.215589075939556,
+                "y": 1.0746459046912402,
+                "z": -6.106444431978954
+              },
+              "to": {
+                "x": -11.702861499820534,
+                "y": 1.519430132524988,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:26.857Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": -11.251331274502059,
+                "y": 1.071882089561299,
+                "z": -6.1063921249050575
+              },
+              "to": {
+                "x": -11.738385060748511,
+                "y": 1.5160100695717977,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:26.964Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": 9.665142988814964,
+                "y": 1.0238965869916905,
+                "z": -8.238439906842421
+              },
+              "to": {
+                "x": 5.071781976324413,
+                "y": 0.532907897168067,
+                "z": -8.29721127092619
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:26.965Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 66,
+              "damage": 34,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.061Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "weapon": "quick",
+              "from": {
+                "x": -6.041286291627393,
+                "y": 1.0299430152149032,
+                "z": -8.079788193920015
+              },
+              "to": {
+                "x": -11.091421032621785,
+                "y": 0.7455345171434016,
+                "z": -6.809797233582863
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.062Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 66,
+              "damage": 34,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.214Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": -11.290941284892714,
+                "y": 1.0754952580094306,
+                "z": -6.106306097448001
+              },
+              "to": {
+                "x": -11.777957261719314,
+                "y": 1.5201272360813691,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.217Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "weapon": "charged",
+              "from": {
+                "x": 5.355688579004844,
+                "y": 1.0244359635116076,
+                "z": -7.811109579579822
+              },
+              "to": {
+                "x": 9.789147919010663,
+                "y": 0.7994267421928287,
+                "z": -7.944013171107574
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.218Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2",
+              "health": 30,
+              "damage": 70,
+              "sequence": 1,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.219Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": 9.645534294632526,
+                "y": 1.0258919179716655,
+                "z": -8.192783821592009
+              },
+              "to": {
+                "x": 5.211597327354286,
+                "y": 0.8133910149326093,
+                "z": -8.050742890266811
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.220Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 32,
+              "damage": 34,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.293Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "weapon": "quick",
+              "from": {
+                "x": -6.045314737872038,
+                "y": 1.0324340344146716,
+                "z": -8.047651429238403
+              },
+              "to": {
+                "x": -10.78284093801709,
+                "y": 0.8084769195529741,
+                "z": -6.578886844153404
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.294Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 32,
+              "damage": 34,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.462Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": 9.644064770953257,
+                "y": 1.026644688692283,
+                "z": -8.189070566686725
+              },
+              "to": {
+                "x": 5.214619325297803,
+                "y": 0.8215469330651096,
+                "z": -8.017016429003474
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.463Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1",
+              "health": 0,
+              "damage": 34,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.464Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.563Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "weapon": "quick",
+              "from": {
+                "x": -6.045705215291029,
+                "y": 1.033415747488286,
+                "z": -8.044388934368305
+              },
+              "to": {
+                "x": -10.78815882489352,
+                "y": 0.8174695586049168,
+                "z": -6.542609088241044
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.563Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo",
+              "health": 0,
+              "damage": 34,
+              "sequence": 3,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.565Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.796Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": 8.334032503276571,
+                "y": 1.0680442197618298,
+                "z": -8.22448034102121
+              },
+              "to": {
+                "x": -4.272649003077802,
+                "y": 0.7119771269530202,
+                "z": -7.987487148369838
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:27.797Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 66,
+              "damage": 34,
+              "sequence": 4,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:28.059Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": 7.053409240121441,
+                "y": 1.067017464515655,
+                "z": -8.222903772521965
+              },
+              "to": {
+                "x": -3.001807391455733,
+                "y": 0.8535119422995772,
+                "z": -8.083840770404347
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:28.060Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 32,
+              "damage": 34,
+              "sequence": 5,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:28.324Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 6,
+              "weapon": "quick",
+              "from": {
+                "x": 5.77079374689398,
+                "y": 1.0518467646275105,
+                "z": -8.213944159482413
+              },
+              "to": {
+                "x": -1.7210421544651222,
+                "y": 0.7784597945789481,
+                "z": -8.08038185584762
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:28.325Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 0,
+              "damage": 34,
+              "sequence": 6,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:28.325Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:29.472Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:29.576Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:30.378Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:30.962Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 4,
+              "weapon": "quick",
+              "from": {
+                "x": -8.304914461862216,
+                "y": 1.0683747312273444,
+                "z": -7.775249055586156
+              },
+              "to": {
+                "x": 4.458330842301592,
+                "y": 0.7106506062925754,
+                "z": -8.013367103557117
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:30.963Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2",
+              "health": 0,
+              "damage": 34,
+              "sequence": 4,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:30.963Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:31.205Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "weapon": "charged",
+              "from": {
+                "x": -5.4895436579214225,
+                "y": 1.0768027186792815,
+                "z": 8.23109995371882
+              },
+              "to": {
+                "x": 10.620960850819262,
+                "y": 0.7791997415405565,
+                "z": 8.027005988009176
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:31.205Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "solo",
+              "health": 30,
+              "damage": 70,
+              "sequence": 2,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:31.390Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 5,
+              "weapon": "quick",
+              "from": {
+                "x": -8.297728632847173,
+                "y": 1.0757644065868825,
+                "z": -5.968131384692236
+              },
+              "to": {
+                "x": -5.335340380574044,
+                "y": 0.8510115911841587,
+                "z": 7.64079332029094
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:31.390Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 66,
+              "damage": 34,
+              "sequence": 5,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:31.983Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 6,
+              "weapon": "quick",
+              "from": {
+                "x": -7.2794711100246,
+                "y": 1.071408054281255,
+                "z": -6.184477665119739
+              },
+              "to": {
+                "x": -5.465799683168999,
+                "y": 0.7249323129166783,
+                "z": 7.623482344511994
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:31.984Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 32,
+              "damage": 34,
+              "sequence": 6,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:32.367Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 7,
+              "weapon": "quick",
+              "from": {
+                "x": -7.179156068170238,
+                "y": 1.072833281224796,
+                "z": -6.159652287065117
+              },
+              "to": {
+                "x": -5.6,
+                "y": 0.8067719972580805,
+                "z": 5.852166654015195
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:32.618Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 8,
+              "weapon": "quick",
+              "from": {
+                "x": -7.189466321435652,
+                "y": 1.0737973879936782,
+                "z": -5.543610025291568
+              },
+              "to": {
+                "x": -5.96206699194607,
+                "y": 0.8301898612191406,
+                "z": 7.640058019373048
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:32.619Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1",
+              "health": 0,
+              "damage": 34,
+              "sequence": 8,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:32.654Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:32.988Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.057Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 7,
+              "weapon": "quick",
+              "from": {
+                "x": 8.228058721148436,
+                "y": 1.0718846470424228,
+                "z": -8.070894978248937
+              },
+              "to": {
+                "x": -4.538205014965234,
+                "y": 0.7690208691349234,
+                "z": -4.022525497289192
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.057Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 66,
+              "damage": 34,
+              "sequence": 7,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.269Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 8,
+              "weapon": "quick",
+              "from": {
+                "x": 7.673040932687487,
+                "y": 1.0715809375679124,
+                "z": -8.055934852635282
+              },
+              "to": {
+                "x": -3.8624885795505115,
+                "y": 0.8284815539453576,
+                "z": -4.090044591708292
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.269Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 32,
+              "damage": 34,
+              "sequence": 8,
+              "eliminated": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.557Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 9,
+              "weapon": "quick",
+              "from": {
+                "x": 6.844171398224637,
+                "y": 1.0626705114067245,
+                "z": -8.033581747624453
+              },
+              "to": {
+                "x": -3.131854892855767,
+                "y": 0.7138657132085156,
+                "z": -4.19764053546033
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.557Z",
+            "type": "damage",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0",
+              "health": 0,
+              "damage": 34,
+              "sequence": 9,
+              "eliminated": true
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.557Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T20:03:34.654Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          }
+        ]
+      },
+      "performanceSamples": {
+        "frameTimesMs": [
+          1.800000000000182,
+          16.699999999999818,
+          16.59999999999991,
+          116.79999999999973,
+          33.20000000000073,
+          100,
+          16.699999999999818,
+          83.30000000000018,
+          16.699999999999818,
+          33.30000000000018,
+          50.099999999999454,
+          33.30000000000018,
+          33.30000000000018,
+          83.39999999999964,
+          16.600000000000364,
+          50,
+          33.399999999999636,
+          50,
+          33.30000000000018,
+          66.69999999999982,
+          33.30000000000018,
+          16.699999999999818,
+          49.900000000000546,
+          33.29999999999927,
+          33.30000000000018,
+          50.100000000000364,
+          33.30000000000018,
+          50.099999999999454,
+          33.19999999999982,
+          33.400000000000546,
+          50,
+          16.699999999999818,
+          66.60000000000036,
+          33.29999999999927,
+          16.700000000000728,
+          50,
+          16.699999999999818,
+          33.30000000000018,
+          50,
+          33.399999999999636,
+          16.600000000000364,
+          100,
+          50,
+          33.29999999999927,
+          83.30000000000018,
+          33.30000000000018,
+          50.100000000000364,
+          50,
+          50,
+          33.29999999999927,
+          33.30000000000018,
+          66.69999999999982,
+          66.70000000000073,
+          33.29999999999927,
+          33.400000000000546,
+          49.899999999999636,
+          33.400000000000546,
+          66.59999999999945,
+          16.699999999999818,
+          16.700000000000728,
+          49.899999999999636,
+          16.699999999999818,
+          16.699999999999818,
+          33.30000000000018,
+          50,
+          50,
+          33.400000000000546,
+          16.699999999999818,
+          16.599999999999454,
+          33.400000000000546,
+          49.899999999999636,
+          33.400000000000546,
+          383.2999999999993,
+          133.30000000000018,
+          50,
+          33.30000000000018,
+          83.39999999999964,
+          16.600000000000364,
+          50,
+          83.30000000000018,
+          50,
+          83.30000000000018,
+          16.799999999999272,
+          33.30000000000018,
+          50,
+          33.30000000000018,
+          50,
+          16.699999999999818,
+          49.900000000000546,
+          66.69999999999891,
+          33.400000000001455,
+          83.29999999999927,
+          50,
+          66.70000000000073,
+          83.29999999999927,
+          50,
+          33.29999999999927,
+          66.70000000000073,
+          50,
+          49.899999999999636,
+          50.100000000000364,
+          66.60000000000036,
+          100,
+          16.600000000000364,
+          66.79999999999927,
+          33.20000000000073,
+          16.799999999999272,
+          16.600000000000364,
+          66.69999999999891,
+          16.600000000000364,
+          16.700000000000728,
+          66.69999999999891,
+          16.700000000000728,
+          49.899999999999636,
+          16.700000000000728,
+          83.39999999999964,
+          16.600000000000364,
+          16.69999999999891,
+          66.60000000000036,
+          16.700000000000728,
+          33.29999999999927,
+          16.700000000000728,
+          33.399999999999636,
+          33.29999999999927,
+          16.700000000000728,
+          49.899999999999636,
+          50,
+          50,
+          33.399999999999636,
+          33.30000000000109,
+          49.899999999999636,
+          33.399999999999636,
+          50,
+          33.399999999999636,
+          16.600000000000364,
+          66.70000000000073,
+          33.29999999999927,
+          50.100000000000364,
+          33.20000000000073,
+          16.69999999999891,
+          16.600000000000364,
+          66.70000000000073,
+          16.69999999999891,
+          66.70000000000073,
+          16.69999999999891,
+          16.600000000000364,
+          66.60000000000036,
+          16.799999999999272,
+          66.60000000000036,
+          16.700000000000728,
+          16.69999999999891,
+          66.60000000000036,
+          16.600000000000364,
+          33.399999999999636,
+          16.700000000000728,
+          50,
+          16.600000000000364,
+          66.69999999999891,
+          16.700000000000728,
+          33.29999999999927,
+          66.70000000000073,
+          33.29999999999927,
+          16.600000000000364,
+          50,
+          33.29999999999927,
+          50.100000000000364,
+          33.30000000000109,
+          16.69999999999891,
+          16.600000000000364,
+          66.70000000000073,
+          16.69999999999891,
+          83.20000000000073,
+          33.399999999999636,
+          66.70000000000073,
+          66.59999999999854,
+          16.700000000000728,
+          16.700000000000728,
+          33.29999999999927,
+          50,
+          16.600000000000364,
+          33.399999999999636,
+          50,
+          33.29999999999927,
+          50,
+          50,
+          50,
+          33.400000000001455,
+          16.599999999998545,
+          16.700000000000728,
+          50,
+          33.29999999999927,
+          50,
+          33.400000000001455,
+          16.599999999998545,
+          50,
+          50,
+          16.700000000000728,
+          50,
+          33.29999999999927,
+          50,
+          16.600000000000364,
+          33.5,
+          16.600000000000364,
+          50,
+          16.700000000000728,
+          33.29999999999927,
+          50,
+          16.700000000000728,
+          33.19999999999891,
+          50,
+          50.100000000000364,
+          33.29999999999927,
+          33.30000000000109,
+          16.69999999999891,
+          50,
+          50,
+          16.700000000000728,
+          66.60000000000036,
+          16.69999999999891,
+          50,
+          33.30000000000109,
+          16.69999999999891,
+          16.700000000000728,
+          33.29999999999927,
+          16.600000000000364,
+          100.10000000000036
+        ],
+        "jsHeap": {
+          "used": 27216562,
+          "total": 39381682
+        }
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-B_WexXAw.css",
+          "status": 200,
+          "bytes": 14936,
+          "sha256": "618fc289e37506554adc51bea918837358cd788c5f8d9610bcb28b91defc2306"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-D61cb1lQ.js",
+          "status": 200,
+          "bytes": 1325499,
+          "sha256": "a397a50c674d59663bafd87ce978040e016774f61e7658a77d867d07e88d970d"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": []
+    }
+  ]
+}

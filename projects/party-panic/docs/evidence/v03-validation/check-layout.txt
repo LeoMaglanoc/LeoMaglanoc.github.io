@@ -1,0 +1,47 @@
+
+> party-panic@0.3.0 check
+> npm run typecheck && npm run lint && npm test && npm run build
+
+
+> party-panic@0.3.0 typecheck
+> tsc --noEmit
+
+
+> party-panic@0.3.0 lint
+> eslint .
+
+
+> party-panic@0.3.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /workspace/party-repo/projects/party-panic
+
+
+ Test Files  13 passed (13)
+      Tests  104 passed (104)
+   Start at  20:00:55
+   Duration  7.90s (import 77%, tests 17%, transform 4%, worker 2%)
+
+    Isolate  13 workers spawned · ~218ms startup each (spawn + environment, per file)
+             at least ~2.62s faster with isolate: false — reuses workers across files instead of one per file
+
+
+> party-panic@0.3.0 build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 1326 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.09 kB │ gzip:   0.60 kB
+dist/assets/index-B_WexXAw.css     14.93 kB │ gzip:   3.99 kB
+dist/assets/index-D61cb1lQ.js   1,325.49 kB │ gzip: 356.43 kB
+
+✓ built in 1.46s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

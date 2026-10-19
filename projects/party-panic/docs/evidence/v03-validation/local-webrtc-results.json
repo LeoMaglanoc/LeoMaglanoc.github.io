@@ -1,0 +1,294 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/party-repo/projects/party-panic/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/network.spec.ts"
+    ],
+    "configFile": "/workspace/party-repo/projects/party-panic/playwright.config.ts",
+    "rootDir": "/workspace/party-repo/projects/party-panic/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/party-repo/projects/party-panic/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/party-repo/projects/party-panic/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/party-repo/projects/party-panic/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/workspace/party-repo/projects/party-panic/tests/e2e",
+        "snapshotDir": "/workspace/party-repo/projects/party-panic/tests/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5173/party-panic/",
+          "headless": true,
+          "proxy": {
+            "server": "http://proxy:8080",
+            "bypass": "127.0.0.1,localhost"
+          },
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--use-gl=angle",
+              "--use-angle=swiftshader",
+              "--enable-unsafe-swiftshader"
+            ]
+          },
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --port 5173",
+      "url": "http://127.0.0.1:5173/party-panic/",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "network.spec.ts",
+      "file": "network.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 33881,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#roster')\nExpected substring: \u001b[32m\"Guest\"\u001b[39m\nReceived string:    \u001b[31m\"Host (you)HOST\"\u001b[39m\nTimeout: 20000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#roster') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for locator('#roster')\u001b[22m\n\u001b[2m    43 × locator resolved to <div id=\"roster\" class=\"roster\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Host (you)HOST\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#roster')\nExpected substring: \u001b[32m\"Guest\"\u001b[39m\nReceived string:    \u001b[31m\"Host (you)HOST\"\u001b[39m\nTimeout: 20000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#roster') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for locator('#roster')\u001b[22m\n\u001b[2m    43 × locator resolved to <div id=\"roster\" class=\"roster\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Host (you)HOST\"\u001b[22m\n\n    at /workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts:36:47",
+                    "location": {
+                      "file": "/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts",
+                      "column": 47,
+                      "line": 36
+                    },
+                    "snippet": "  34 |     try {\n  35 |         const guest = await join('Guest');\n> 36 |         await expect(host.locator('#roster')).toContainText('Guest', { timeout: 20000 });\n     |                                               ^\n  37 |         await expect(guest.locator('#roster')).toContainText('Host');\n  38 |         await expect\n  39 |             .poll(() => guest.evaluate(() => window.partyDebug.getDiagnostics().ice), { timeout: 10000 })"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts",
+                        "column": 47,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#roster')\nExpected substring: \u001b[32m\"Guest\"\u001b[39m\nReceived string:    \u001b[31m\"Host (you)HOST\"\u001b[39m\nTimeout: 20000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#roster') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for locator('#roster')\u001b[22m\n\u001b[2m    43 × locator resolved to <div id=\"roster\" class=\"roster\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Host (you)HOST\"\u001b[22m\n\n\n  34 |     try {\n  35 |         const guest = await join('Guest');\n> 36 |         await expect(host.locator('#roster')).toContainText('Guest', { timeout: 20000 });\n     |                                               ^\n  37 |         await expect(guest.locator('#roster')).toContainText('Host');\n  38 |         await expect\n  39 |             .poll(() => guest.evaluate(() => window.partyDebug.getDiagnostics().ice), { timeout: 10000 })\n    at /workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts:36:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T19:55:04.522Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/test-failed-2.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts",
+                    "column": 47,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5567a9004528a7a67849-deef1c71a3934fba72bd",
+          "file": "network.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "real WebRTC Laser: gesture readiness, cover, authoritative tags, faults and eight-client firing",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 40313,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#roster')\nExpected substring: \u001b[32m\"Laser \u001b[7mGuest\u001b[27m\"\u001b[39m\nReceived string:    \u001b[31m\"Laser \u001b[7mHost (you)HOST\u001b[27m\"\u001b[39m\nTimeout: 25000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#roster') with timeout 25000ms\u001b[22m\n\u001b[2m  - waiting for locator('#roster')\u001b[22m\n\u001b[2m    53 × locator resolved to <div id=\"roster\" class=\"roster\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Laser Host (you)HOST\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#roster')\nExpected substring: \u001b[32m\"Laser \u001b[7mGuest\u001b[27m\"\u001b[39m\nReceived string:    \u001b[31m\"Laser \u001b[7mHost (you)HOST\u001b[27m\"\u001b[39m\nTimeout: 25000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#roster') with timeout 25000ms\u001b[22m\n\u001b[2m  - waiting for locator('#roster')\u001b[22m\n\u001b[2m    53 × locator resolved to <div id=\"roster\" class=\"roster\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Laser Host (you)HOST\"\u001b[22m\n\n    at join (/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts:233:51)\n    at /workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts:237:23",
+                    "location": {
+                      "file": "/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts",
+                      "column": 51,
+                      "line": 233
+                    },
+                    "snippet": "  231 |             await page.locator('#nickname').fill(name);\n  232 |             await page.locator('#continue').click();\n> 233 |             await expect(host.locator('#roster')).toContainText(name, { timeout: 25000 });\n      |                                                   ^\n  234 |             await expect(page.locator('#roster')).toContainText('Laser Host');\n  235 |             return page;\n  236 |         };"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts",
+                        "column": 51,
+                        "line": 233
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#roster')\nExpected substring: \u001b[32m\"Laser \u001b[7mGuest\u001b[27m\"\u001b[39m\nReceived string:    \u001b[31m\"Laser \u001b[7mHost (you)HOST\u001b[27m\"\u001b[39m\nTimeout: 25000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#roster') with timeout 25000ms\u001b[22m\n\u001b[2m  - waiting for locator('#roster')\u001b[22m\n\u001b[2m    53 × locator resolved to <div id=\"roster\" class=\"roster\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Laser Host (you)HOST\"\u001b[22m\n\n\n  231 |             await page.locator('#nickname').fill(name);\n  232 |             await page.locator('#continue').click();\n> 233 |             await expect(host.locator('#roster')).toContainText(name, { timeout: 25000 });\n      |                                                   ^\n  234 |             await expect(page.locator('#roster')).toContainText('Laser Host');\n  235 |             return page;\n  236 |         };\n    at join (/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts:233:51)\n    at /workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts:237:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T19:55:40.126Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "laser-webrtc-last-state",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJzdGF0dXMiOiAiZnVsZmlsbGVkIiwKICAgICJ2YWx1ZSI6IHsKICAgICAgInN0YXRlIjogewogICAgICAgICJ0eXBlIjogInNuYXBzaG90IiwKICAgICAgICAidmVyc2lvbiI6IDMsCiAgICAgICAgIm1vZGVJZCI6ICJvYnN0YWNsZS1kYXNoIiwKICAgICAgICAic2VxdWVuY2UiOiAzNzAsCiAgICAgICAgInRpY2siOiAxNzU3LAogICAgICAgICJwaGFzZSI6ICJsb2JieSIsCiAgICAgICAgImVsYXBzZWQiOiAwLAogICAgICAgICJjb3VudGRvd24iOiAzLAogICAgICAgICJwYXVzZWQiOiBmYWxzZSwKICAgICAgICAicGxheWVycyI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImlkIjogImM1MzcyZTEyLWYwYzgtNDdhOS1hNWUzLWI5MTAyOWNlM2JjZiIsCiAgICAgICAgICAgICJuYW1lIjogIkxhc2VyIEhvc3QiLAogICAgICAgICAgICAiY29sb3IiOiAiI2ZmY2M0YSIsCiAgICAgICAgICAgICJjb25uZWN0ZWQiOiB0cnVlLAogICAgICAgICAgICAicmVhZHkiOiBmYWxzZSwKICAgICAgICAgICAgImJvdCI6IGZhbHNlLAogICAgICAgICAgICAic2NvcmUiOiAwLAogICAgICAgICAgICAiZGVhdGhzIjogMCwKICAgICAgICAgICAgInJlc3Bhd25BdCI6IDAsCiAgICAgICAgICAgICJwcm90ZWN0ZWRVbnRpbCI6IDAsCiAgICAgICAgICAgICJhaW1QaXRjaCI6IDAsCiAgICAgICAgICAgICJoZWFsdGgiOiAxMDAsCiAgICAgICAgICAgICJlbmVyZ3kiOiAxLAogICAgICAgICAgICAid2VhcG9uIjogInF1aWNrIiwKICAgICAgICAgICAgImNoYXJnZSI6IDAsCiAgICAgICAgICAgICJpbnB1dFNlcXVlbmNlIjogMCwKICAgICAgICAgICAgInNob3RTZXF1ZW5jZSI6IDAsCiAgICAgICAgICAgICJjaGVja3BvaW50IjogMCwKICAgICAgICAgICAgInByb2dyZXNzIjogMCwKICAgICAgICAgICAgImZpbmlzaCI6IG51bGwsCiAgICAgICAgICAgICJ4IjogLTEuOTUwMDAwMDQ3NjgzNzE1OCwKICAgICAgICAgICAgInkiOiAwLjgwMDAwMDAxMTkyMDkyOSwKICAgICAgICAgICAgInoiOiAzLAogICAgICAgICAgICAidngiOiAwLAogICAgICAgICAgICAidnkiOiAwLAogICAgICAgICAgICAidnoiOiAwLAogICAgICAgICAgICAieWF3IjogMTgwLAogICAgICAgICAgICAicmVzcGF3bnMiOiAwCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAicm91bmRJZCI6IDAKICAgICAgfSwKICAgICAgImRpYWdub3N0aWNzIjogewogICAgICAgICJsaW5rcyI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImlkIjogIjc0MjVkYTg5LTU3ODUtNDUwNS1iNTUyLWU2NDQ0YTIwMjg1MiIKICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJlbGFwc2VkU2Vjb25kcyI6IDM1Ljk2OCwKICAgICAgICAiaWNlIjogIklDRSBzdGF0aXN0aWNzIHVuYXZhaWxhYmxlIGluIHRoaXMgYnJvd3NlciIsCiAgICAgICAgInNlbWFudGljcyI6ICJub3QgY29ubmVjdGVkIiwKICAgICAgICAicnR0IjogMCwKICAgICAgICAiYm9kaWVzIjogMTUsCiAgICAgICAgInJlbmRlckNvbXBvbmVudHMiOiAxNTcsCiAgICAgICAgInRyYW5zaWVudEVudGl0aWVzIjogMCwKICAgICAgICAiY29ubmVjdGlvbkNvdW50IjogMiwKICAgICAgICAiYnVmZmVyZWRCeXRlcyI6IDAsCiAgICAgICAgInByZWRpY3Rpb24iOiB7CiAgICAgICAgICAic25hcHNob3RzIjogMCwKICAgICAgICAgICJjb3JyZWN0aW9ucyI6IDAsCiAgICAgICAgICAibWF4Q29ycmVjdGlvbiI6IDAKICAgICAgICB9LAogICAgICAgICJzbmFwc2hvdEFnZSI6IDAsCiAgICAgICAgImRpc3BsYXkiOiB7CiAgICAgICAgICAiZnVsbHNjcmVlblN1cHBvcnRlZCI6IHRydWUsCiAgICAgICAgICAib3JpZW50YXRpb25TdXBwb3J0ZWQiOiB0cnVlLAogICAgICAgICAgIndha2VMb2NrU3VwcG9ydGVkIjogdHJ1ZSwKICAgICAgICAgICJmdWxsc2NyZWVuIjogdHJ1ZSwKICAgICAgICAgICJsYW5kc2NhcGUiOiB0cnVlLAogICAgICAgICAgInBvcnRyYWl0IjogZmFsc2UsCiAgICAgICAgICAid2lkdGgiOiA4NDQsCiAgICAgICAgICAiaGVpZ2h0IjogMzkwLAogICAgICAgICAgIndha2VMb2NrQWN0aXZlIjogdHJ1ZSwKICAgICAgICAgICJvcmllbnRhdGlvbkVycm9yIjogInNjcmVlbi5vcmllbnRhdGlvbi5sb2NrKCkgaXMgbm90IGF2YWlsYWJsZSBvbiB0aGlzIGRldmljZS4iCiAgICAgICAgfSwKICAgICAgICAiZnBzIjogewogICAgICAgICAgInNhbXBsZXMiOiA0MDIsCiAgICAgICAgICAicDUiOiA3LjI0NjM3NjgxMTU5NDIwMiwKICAgICAgICAgICJtZWRpYW4iOiAxMi41LAogICAgICAgICAgInA5NSI6IDI1LjMxNjQ1NTY5NjIwMjUzCiAgICAgICAgfSwKICAgICAgICAibWVhc3VyZW1lbnQiOiB7CiAgICAgICAgICAic2NvcGUiOiB7CiAgICAgICAgICAgICJyb2xlIjogImhvc3QiLAogICAgICAgICAgICAibW9kZUlkIjogIm9ic3RhY2xlLWRhc2giLAogICAgICAgICAgICAicm91bmRJZCI6IDAKICAgICAgICAgIH0sCiAgICAgICAgICAic2Vjb25kcyI6IDMxLjY0MDYwMDAwMDAwMDA5LAogICAgICAgICAgInBoYXNlcyI6IFsKICAgICAgICAgICAgImxvYmJ5IgogICAgICAgICAgXQogICAgICAgIH0sCiAgICAgICAgImNvdW50cyI6IHsKICAgICAgICAgICJzZW50IjogMCwKICAgICAgICAgICJyZWNlaXZlZCI6IDAsCiAgICAgICAgICAic2VudEJ5dGVzIjogMCwKICAgICAgICAgICJyZWNlaXZlZEJ5dGVzIjogMCwKICAgICAgICAgICJyZWplY3RlZCI6IDAsCiAgICAgICAgICAiZHJvcHBlZEJhY2twcmVzc3VyZSI6IDAKICAgICAgICB9CiAgICAgIH0KICAgIH0KICB9LAogIHsKICAgICJzdGF0dXMiOiAiZnVsZmlsbGVkIiwKICAgICJ2YWx1ZSI6IHsKICAgICAgInN0YXRlIjogbnVsbCwKICAgICAgImRpYWdub3N0aWNzIjogewogICAgICAgICJsaW5rcyI6IFtdLAogICAgICAgICJlbGFwc2VkU2Vjb25kcyI6IDI5LjI3NTEwMDAwMDAwMDA5NCwKICAgICAgICAiaWNlIjogImNhbmRpZGF0ZSBwYWlyIHBlbmRpbmcgLyB1bmF2YWlsYWJsZSIsCiAgICAgICAgInNlbWFudGljcyI6ICJtb3ZlbWVudDogb3JkZXJlZD1mYWxzZSwgcmV0cmFuc21pdHM9dW5saW1pdGVkIiwKICAgICAgICAicnR0IjogMCwKICAgICAgICAiYm9kaWVzIjogMTQsCiAgICAgICAgInJlbmRlckNvbXBvbmVudHMiOiAxNDksCiAgICAgICAgInRyYW5zaWVudEVudGl0aWVzIjogMCwKICAgICAgICAiY29ubmVjdGlvbkNvdW50IjogMCwKICAgICAgICAiYnVmZmVyZWRCeXRlcyI6IDAsCiAgICAgICAgInByZWRpY3Rpb24iOiB7CiAgICAgICAgICAic25hcHNob3RzIjogMCwKICAgICAgICAgICJjb3JyZWN0aW9ucyI6IDAsCiAgICAgICAgICAibWF4Q29ycmVjdGlvbiI6IDAKICAgICAgICB9LAogICAgICAgICJzbmFwc2hvdEFnZSI6IDAsCiAgICAgICAgImRpc3BsYXkiOiB7CiAgICAgICAgICAiZnVsbHNjcmVlblN1cHBvcnRlZCI6IHRydWUsCiAgICAgICAgICAib3JpZW50YXRpb25TdXBwb3J0ZWQiOiB0cnVlLAogICAgICAgICAgIndha2VMb2NrU3VwcG9ydGVkIjogdHJ1ZSwKICAgICAgICAgICJmdWxsc2NyZWVuIjogdHJ1ZSwKICAgICAgICAgICJsYW5kc2NhcGUiOiB0cnVlLAogICAgICAgICAgInBvcnRyYWl0IjogZmFsc2UsCiAgICAgICAgICAid2lkdGgiOiA4NDQsCiAgICAgICAgICAiaGVpZ2h0IjogMzkwLAogICAgICAgICAgIndha2VMb2NrQWN0aXZlIjogdHJ1ZSwKICAgICAgICAgICJvcmllbnRhdGlvbkVycm9yIjogInNjcmVlbi5vcmllbnRhdGlvbi5sb2NrKCkgaXMgbm90IGF2YWlsYWJsZSBvbiB0aGlzIGRldmljZS4iCiAgICAgICAgfSwKICAgICAgICAiZnBzIjogewogICAgICAgICAgInNhbXBsZXMiOiAxMTAsCiAgICAgICAgICAicDUiOiA4LjA1ODAxNzcyNzY0ODA3MSwKICAgICAgICAgICJtZWRpYW4iOiAxMi41OTQ0NTg0MzgzMDE5MjgsCiAgICAgICAgICAicDk1IjogMjEuODM0MDYxMTM1MzQ4OTgKICAgICAgICB9LAogICAgICAgICJtZWFzdXJlbWVudCI6IHsKICAgICAgICAgICJzY29wZSI6IHsKICAgICAgICAgICAgInJvbGUiOiAibm9uZSIKICAgICAgICAgIH0sCiAgICAgICAgICAic2Vjb25kcyI6IDguNTk5Mzk5OTk5OTk5OTA3LAogICAgICAgICAgInBoYXNlcyI6IFsKICAgICAgICAgICAgImhvbWUiCiAgICAgICAgICBdCiAgICAgICAgfSwKICAgICAgICAiY291bnRzIjogewogICAgICAgICAgInNlbnQiOiAwLAogICAgICAgICAgInJlY2VpdmVkIjogMCwKICAgICAgICAgICJzZW50Qnl0ZXMiOiAwLAogICAgICAgICAgInJlY2VpdmVkQnl0ZXMiOiAwLAogICAgICAgICAgInJlamVjdGVkIjogMCwKICAgICAgICAgICJkcm9wcGVkQmFja3ByZXNzdXJlIjogMAogICAgICAgIH0KICAgICAgfQogICAgfQogIH0KXQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-Laser--3649f-lts-and-eight-client-firing/test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-Laser--3649f-lts-and-eight-client-firing/test-failed-2.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-Laser--3649f-lts-and-eight-client-firing/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/party-repo/projects/party-panic/test-results/network-real-WebRTC-Laser--3649f-lts-and-eight-client-firing/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/party-repo/projects/party-panic/tests/e2e/network.spec.ts",
+                    "column": 51,
+                    "line": 233
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5567a9004528a7a67849-4c35837ae1b9468ee34f",
+          "file": "network.spec.ts",
+          "line": 165,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-19T19:55:03.851Z",
+    "duration": 77739.904,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

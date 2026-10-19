@@ -1,0 +1,6 @@
+{"scenario":"after-obstacle-dash-desktop","passed":true,"failure":null}
+{"scenario":"after-obstacle-dash-phone-landscape","passed":true,"failure":null}
+{"scenario":"after-obstacle-dash-phone-portrait","passed":true,"failure":null}
+{"scenario":"after-laser-tag-desktop","passed":true,"failure":null}
+{"scenario":"after-laser-tag-phone-landscape","passed":true,"failure":null}
+{"scenario":"after-laser-tag-phone-portrait","passed":true,"failure":null}

@@ -12,21 +12,21 @@ ran against unchanged Vite on port 5174, actual PlayCanvas/Ammo at fixed 60 Hz,
 ordinary inputs, no position or progress mutation. Raw traces: `movement.json`.
 Baseline browser suite outcome is recorded in v03-validation.md.
 
-| Deterministic measurement | Before |
-| --- | ---: |
-| Speed (cardinal/diagonal) | 2.8000 / 2.8000 units/s |
-| Ground acceleration / braking (source) | 36 / 42 units/s² |
-| Time to speed (both) | 83.3 ms |
-| Time to stop (both) | 66.7 ms |
-| Braking distance (both) | 0.11667 units |
-| Jump rise | 1.5000 units |
-| Flight to landing threshold | 833.3 ms |
-| Rest-start jump range | 1.99916 units |
-| First simulated lift | 33.3 ms (not browser input latency) |
-| Buffer / coyote windows (source) | 100 / 100 ms |
-| Camera follow (source) | exponential 10/s, 69.3 ms half-response |
-| Firing (source) | 3 Hz; one-hit tag; no energy |
-| Respawn / shield (source) | 2 s / 1 s |
+| Deterministic measurement              |                                  Before |
+| -------------------------------------- | --------------------------------------: |
+| Speed (cardinal/diagonal)              |                 2.8000 / 2.8000 units/s |
+| Ground acceleration / braking (source) |                        36 / 42 units/s² |
+| Time to speed (both)                   |                                 83.3 ms |
+| Time to stop (both)                    |                                 66.7 ms |
+| Braking distance (both)                |                           0.11667 units |
+| Jump rise                              |                            1.5000 units |
+| Flight to landing threshold            |                                833.3 ms |
+| Rest-start jump range                  |                           1.99916 units |
+| First simulated lift                   |     33.3 ms (not browser input latency) |
+| Buffer / coyote windows (source)       |                            100 / 100 ms |
+| Camera follow (source)                 | exponential 10/s, 69.3 ms half-response |
+| Firing (source)                        |            3 Hz; one-hit tag; no energy |
+| Respawn / shield (source)              |                               2 s / 1 s |
 
 Baseline short and held jumps are identical. Baseline impact applies impulse
 (±4.8, 2.5, 0 or 1); recovery acceleration is 3 for 250 ms, then normal.
@@ -49,14 +49,14 @@ not newly measured baseline performance or v03 results.
 
 ## Upstream source study
 
-* Wobble Rush 3D `b395e4a91ebdfb829533b1ae6beda244371658a3`, MIT,
+- Wobble Rush 3D `b395e4a91ebdfb829533b1ae6beda244371658a3`, MIT,
   copyright 2026 YeonGyu Kim. Read player.ts, constants.ts, contact-response.ts,
   collision.ts, camera-rig.ts, camera-math.ts, jumping/contact tests.
-* Blockyard `a8cce1caeda1fbec9c913030f14ed3435c6d8d20`, MIT,
+- Blockyard `a8cce1caeda1fbec9c913030f14ed3435c6d8d20`, MIT,
   copyright 2026 Patrick Blais. Read tagger.shared.ts, tagger.server.ts,
   client/tagger.ts, blockfront/weapons.ts, blockfront/hits.ts and the actual
   tests/headless/lasertag.ts rate/energy/serial/authority test.
-* PlayCanvas engine `982f5a68b248c66e7cd382e61de83acb22686249`, read the native
+- PlayCanvas engine `982f5a68b248c66e7cd382e61de83acb22686249`, read the native
   third-person-controller.mjs, including independent touch sources, yaw-only
   movement, frame-independent turning and padded camera raycast.
 
