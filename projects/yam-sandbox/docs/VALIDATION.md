@@ -56,3 +56,9 @@ Actually run (see README for portable commands):
 ## Remaining scope
 
 Fixed scripted targets only; arbitrary positions, different object sizes, simultaneous arms and learned-policy inference are unsupported. Larger perturbations can fail and report a timeout or lost grasp. Physical Android performance, mobile WAN load time, peak process memory and broad GPU/browser coverage remain unmeasured. Future model/controller changes require new native/browser evaluations and new version-matched checkpoints.
+
+## Verified public release
+
+GitHub Pages workflow39335062711 succeeded for publication commit517e825. Public `/yam-sandbox/`, the existing blog post, and the scene XML all returned200. The published scene hash exactly matches the native/browser reference hash (`results/deployment.json`). The blog contains the new navigable demo link.
+
+Final live Chromium checks loaded the public iframe on desktop, portrait and landscape, completed the cube task with genuine contact-verified Success, checked visible44 px controls, and observed no page errors. `results/live-browser.json` and `results/live-*.png` preserve this final evidence. Both tasks also passed the20-run suite against the exact built/minified release assets. Public validation used the configured HTTPS proxy with normal certificate verification. Native/controller/browser checkpoint commits and final evidence are all pushed to main.

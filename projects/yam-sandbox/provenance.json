@@ -54,6 +54,7 @@
     "package.json": "3c03250cffaec6826576276863af8218390ff8ce9b0ed07435affea81d840c0b",
     "compose.yaml": "c252209d2042d85ffcb042ddc2dd60c63ed940de7c067f885b4cafc373a23967",
     "tools/browser_performance.cjs": "2c85cee09e4506145ca55241b78c2a29f4ddf9ac5fd2064378bb727d7c7076d0",
-    "tools/browser_route.cjs": "2cf22fc24edf4ad748e4f77363cad3fe01f0689cddc2ffce2dfaca2f41ff4428"
+    "tools/browser_route.cjs": "2cf22fc24edf4ad748e4f77363cad3fe01f0689cddc2ffce2dfaca2f41ff4428",
+    "tools/browser_live.cjs": "5e6a4be1b1b22dfd5f99a5d6e36224466271b9b46fa9f4b6f4a410eec35f516f"
   }
 }

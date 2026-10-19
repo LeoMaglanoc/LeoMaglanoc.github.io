@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-10-19T22:35:02.380443+00:00",
+  "workflow_url": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39335062711",
+  "publication_commit": "517e82526eefcf425545d5f7ed183946e9b73bcb",
+  "deployment": "success",
+  "urls": {
+    "https://leomaglanoc.github.io/yam-sandbox/": 200,
+    "https://leomaglanoc.github.io/blog/AI-coding-agent-case-study/": 200,
+    "https://leomaglanoc.github.io/assets/interactive/yam-sandbox/scene/bimanual_scene.xml": 200
+  },
+  "blog_link_present": true,
+  "scene_sha256": "fd5ac89b3be31a8d70e3ca0955f492684149cb6c471f9f7e629b372b13837e7c",
+  "scene_matches_native_and_browser_references": true
+}
