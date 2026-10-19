@@ -51,3 +51,8 @@ reported ordered reliable control and unordered movement with **unlimited
 retransmissions**, so limited retransmission is not claimed. Eight-client firing,
 authoritative results, fault injection and same-room mode switching passed.
 This is hosted desktop Chrome evidence, not physical mobile or varied-NAT testing.
+
+Final runtime repeat: source `6ef427c7f8578c087716447b53373b58e26b750e`,
+[run39279750886](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39279750886),
+again **2 passed (2.2 minutes)**. Dash took47.7s; Laser took1.4 minutes.
+The following publication commit changes documentation only.

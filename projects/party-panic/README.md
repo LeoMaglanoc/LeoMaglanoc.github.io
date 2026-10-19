@@ -1,19 +1,20 @@
 # Party Panic v0.2
 
-Two original3D party games: **Obstacle Dash** and **Laser Tag**. Play solo against
-0/1/3/7 AI opponents, or host a persistent P2P room for1–8 friends. PlayCanvas,
+Two original 3D party games: **Obstacle Dash** and **Laser Tag**. Play solo against
+0/1/3/7 AI opponents, or host a persistent P2P room for 1–8 friends. PlayCanvas,
 Ammo, TypeScript/Vite and PeerJS; no accounts or dedicated simulation server.
 
 **Play:** https://leonardo-maglanoc.com/party-panic/
 
 Physical Android/iPhone acceptance is still unverified. This is a provisional browser
 release; viewport emulation and desktop Chrome networking do not certify phones.
+Publication is currently pending a GitHub Pages incident; see [release status](docs/v02-release.md).
 
 ## Play
 
 Choose a minigame and AI count, then Play Solo. Zero bots preserves solo practice.
 Bots use the same host-authoritative movement, scoring and shot rules as people.
-They are visibly markedAI and are rule-based opponents, not trained models.
+They are visibly marked AI and are rule-based opponents, not trained models.
 
 Host a Party creates a QR/invitation link. Friends join and tap **READY — ENTER GAME**
 on their own devices. The host selects a minigame and taps Start; countdown waits
@@ -23,10 +24,10 @@ AI opponents belong to solo sessions.
 
 - **Obstacle Dash:** joystick + Jump, or WASD/arrows + Space. Clear gaps, sweepers
   and bumpers, then both ordered checkpoints and the finish. Falls respawn quickly;
-  hard timeout120s. Results rank finish times and DNF progress.
+  hard timeout 120s. Results rank finish times and DNF progress.
 - **Laser Tag:** joystick + right-side drag; hold and drag FIRE to aim while shooting.
-  Desktop WASD/mouse + left click; Escape releases pointer lock.90s free-for-all,
-  one-hit tags,3shots/s,25-unit range,2s respawn and1s spawn shield. Most tags wins;
+  Desktop WASD/mouse + left click; Escape releases pointer lock. 90s free-for-all,
+  one-hit tags, 3 shots/s, 25-unit range, 2s respawn and 1s spawn shield. Most tags wins;
   equal top scores display a tie. No reload, pickups, headshots or human aim assistance.
 
 Start/Solo/Ready immediately attempt fullscreen, landscape and screen wake lock.
@@ -40,7 +41,7 @@ to load and signal; direct P2P only works where ICE succeeds. Same Wi-Fi is reco
 
 ## Develop and test
 
-Node≥22.23.2; local validation uses24.19.0.
+Node ≥22.23.2; local validation uses 24.19.0.
 
 ```sh
 npm ci
@@ -79,7 +80,7 @@ The existing Docker setup remains available with `docker compose up --build` at
 Connection & performance shows frame estimate, RTT, actual ICE/channel properties,
 application payload counters and backpressure drops. Save diagnostics includes display
 API outcomes and bounded logs. It excludes IP addresses; payload counters exclude
-WebRTC overhead. Two PeerJS associations per guest mean14 host connections at capacity.
+WebRTC overhead. Two PeerJS associations per guest mean 14 host connections at capacity.
 Laser guests use authoritative movement interpolation and immediate cosmetic aim/fire;
 Dash adds bounded jump feedback. No lag rewind or rollback.
 
