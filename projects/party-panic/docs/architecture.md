@@ -1,44 +1,74 @@
-# Party Panic architecture
+# Party Panic v0.2 architecture
 
-## Runtime and trust
+## Runtime and ownership
 
-Static HTTPS (GitHub Pages) serves Vite/TypeScript and PlayCanvas. PeerJS Cloud provides signaling only. One browser is the trusted host; up to seven guests connect directly to it in a star. No database, accounts, dedicated simulation server, host migration, TURN deployment, or offline claim. Solo practice uses the same host simulation without signaling.
+GitHub Pages serves static HTTPS assets (Vite/TypeScript, PlayCanvas2.23.3, local Ammo).
+PeerJS Cloud signals a star of one trusted browser host and up to7guests. Physics and
+scores run on the host; no dedicated simulation server, accounts, database, migration,
+TURN or offline multiplayer claim. Solo uses that same host with0/1/3/7 labeled bots.
 
-Only the host creates Ammo dynamic capsules and collision outcomes. Terrain uses static boxes; scripted sweepers/pushers use kinematic boxes; ordered checkpoint and finish triggers are host-owned. Guest scenes contain visual entities, no physics authority. Inputs are associated with the connection, never with a supplied player ID. Host validates types, sizes, rates, sequence monotonicity and bounds; unknown messages (including position/finish claims) are rejected.
+`main.ts` owns room/UI/round orchestration and accepted peer identities. `transport.ts`
+owns the existing two PeerJS associations per guest, counters, real channel inspection
+and a debug fault adapter. `protocol.ts` validates versioned, connection-bound input.
+`simulation.ts` owns the roster, clock, phases, authoritative capsule motion and mode
+selection. `rules.ts` owns race progress/results. `laser.ts` owns original arena data,
+shared aim/camera/intersection math and fire/spawn rules; `laserRound.ts` owns Laser tags,
+protection and respawn. `bots.ts` generates ordinary inputs without mutating world state.
+`scene.ts` renders both worlds and host physics; `input.ts` handles pointer/keyboard controls.
+`platform/displayMode.ts` independently manages browser display/wake state.
 
-## Boundaries
+## Protocol v2
 
-`protocol.ts`: wire schemas/validation. `transport.ts`: PeerJS channels, diagnostic counters, ICE stats, fault injection. `rules.ts`: phase, ordered progression, scoring. `scene.ts`: PlayCanvas entities/camera. `simulation.ts`: host movement/physics and race. `input.ts`: keyboard and pointer controls. `main.ts`: session and UI integration. Only Obstacle Dash is registered; a future mode reuses identities, round transitions, transport and result format.
+Join explicitly rejects other versions. Inputs, snapshots and authoritative events name
+`modeId` and `roundId`; Ready names the same current selection. Epoch advances on mode
+selection, start and rematch. Old rounds/modes are rejected before accepting a sequence.
+Only accepted connection identity determines the controlled player. Guests cannot send
+position, hit, score or finish claims. Full snapshots carry monotonically increasing
+transmission sequence and tick; histories reset on epoch change and snap on respawn.
 
-## Protocol v1
+Reliable control carries joins/readiness/lifecycle/host effects and recovery snapshots.
+Movement lane carries30Hz normalized inputs and20Hz full snapshots. Reliable recovery
+runs1Hz and on lifecycle/respawn. No per-shot full reliable snapshot. Actual unordered/
+retransmission channel properties are inspected; `reliable:false` is not a limited-retry
+guarantee. At8players the host has14 RTCPeerConnections. Guest input control budget30/s;
+authoritative host traffic budget128/s; movement90/s plus75/s connection input gate.
 
-Reliable ordered control: join(version,nickname), welcome(assigned identity), roster, state snapshots for recovery, errors, authoritative events(eventId,tick,type,payload). Separate `movement` channel: JSON, `reliable:false` (verify actual RTCDataChannel ordered/maxRetransmits in diagnostics). Guests send `{type:input,sequence,axes:[x,z],jumpSequence,clientTime}` at 30Hz, repeating the monotonic jump sequence until observed; host sends full snapshots at 20Hz. Snapshots contain a monotonic transmission sequence independent of tick (so pause/resume and roster updates at the same tick are applied), tick, phase, round elapsed/countdown, paused state and authoritative positions/velocities/progress/results. Superseded ticks and input sequences are discarded. A reliable full snapshot every second and on lifecycle transitions recovers missing state. Channel identity must match the accepted control connection.
+## Two explicit modes
 
-## Lifecycle
+Lobby → host-selected mode → all-ready →3s countdown → play → results → same lobby.
+Switching mode invalidates readiness and clears mode state without resetting transport.
+Each world has one parent entity. Disposal destroys that world's batch group, triggers,
+physics bodies and transients; player bodies/models recreate for the new mode. There
+is no generic game framework or third minigame. Repeated mode/body-count tests verify
+ownership. Race timeout120s; Laser90s. Disconnects cannot score; host departure ends play.
 
-Home → solo/host/join → lobby → synchronized host-timed 3s countdown → race → results → lobby/rematch. Host may start with one player (user override); room capacity eight. A round lasts at most 120s. Guests disconnecting after start become DNF; host loss ends the session. No implicit reconnection or migration. Host visibility change pauses simulation, clears movement, broadcasts full state; resume sends state before continuing. Snapshot silence shows an inactive warning; prolonged silence ends the session.
+Dash preserves ordered checkpoints, five-ray capsule grounding,100ms buffer/coyote,
+2.8speed/7.5jump/18gravity. Vector acceleration fixes direction-dependent response.
+Guests interpolate remote actors100ms and use bounded cosmetic local jump feedback
+plus horizontal approximation. The host alone changes race progress. Player bumping
+remains disabled; obstacle impulses remain bounded and authoritative.
 
-## Simulation and rendering
+Laser movement4.8; bounded yaw/pitch aim and monotonic fire sequences drive host capsule
+intersections at3shots/s within25units. Shared cover AABBs drive Ammo, rendering, camera
+clipping and authoritative rays. Camera aimpoint then muzzle line-of-sight prevents
+cover exploits. One hit gives one tag,2s respawn,1s visible shield. Protected capsules
+absorb shots; no duplicate deaths/farming. Ties display explicitly. No aim assist,
+headshots, server rewind or rollback. Laser guests use authoritative interpolation,
+not unconstrained local movement prediction; local aim/tracers/audio respond immediately.
 
-PlayCanvas fixed physics target 60Hz, max catch-up bounded. Host movement executes before physics; race checks after physics. Ground/air acceleration, speed cap, capsule upright constraint, 100ms coyote/buffer, edge-preserving jump, safe respawn and grace. Guest local visual prediction is an isolated velocity approximation reconciled to host snapshots; remote players interpolate between buffered snapshots. It is not a physics replica. Dynamic obstacles are derived from authoritative round time. Player collision disabled initially: preserve stable jumping; eight-phone bump benchmark is pending.
+## Browser lifecycle and measurement
 
-## Risks and acceptance
+Start/Solo/Ready invoke fullscreen synchronously inside their own gesture. Orientation
+and wake requests may fail; actual API/viewport state is reported independently. Safe
+areas and visual viewport size drive canvas/HUD. Portrait remains playable with a hint.
+No CSS rotation, forced incoming-message fullscreen or automatic reentry after Escape.
+Leave releases locks. Host visibility pauses/clears authority; browser suspension still
+cannot be prevented. Cache restoration cannot revive a closed party connection silently.
 
-WebRTC may fail across NAT/firewalls without TURN. iOS host background suspension cannot be prevented. Mobile GPU/thermal performance, input ergonomics, 60–90s course tuning and physical Android↔iOS connectivity require real devices. Chromium emulation is layout and browser testing only. On 2026-10-19 the user explicitly authorized proceeding with the complete game while real-phone connectivity/QA remain pending. Test evidence must label this release provisional.
+Frame/RTT samples are bounded and scoped by role/room/mode/epoch, with measured phases
+reported; counters/bandwidth are page-lifetime application payloads excluding overhead.
+Software-rendered/browser-emulated results do not certify physical phone performance.
+Debug APIs exist only in development. See v02-network.md for current CI evidence and
+v02-validation.md for missing physical-device/human playtests.
 
-## Official baseline and references
-
-Scaffold: `npm create playcanvas@0.10.1 party-panic -- --format engine --starter third-person-controller --no-skills --yes`. Original scaffold main/controller retained as text in this folder. Read engine ThirdPersonController (velocity capsule, center ray grounding, camera orbit) and starter edge probes. Replaced input/controller integration to separate host authority from local rendering, use capsule and explicit jump edges, and remove manual orbit.
-
-- https://github.com/playcanvas/create-playcanvas
-- https://developer.playcanvas.com/user-manual/engine/
-- https://api.playcanvas.com/engine/classes/RigidBodyComponent.html
-- https://github.com/playcanvas/engine/blob/main/scripts/esm/third-person-controller.mjs
-- https://peerjs.com/docs/
-- https://github.com/peers/peerjs
-
-See package-lock.json for exact versions and public/ammo/SOURCE.md for pinned WASM provenance.
-
-## Observed MVP outcome
-
-Real Chrome CI established direct host-candidate ICE, first with two clients and then eight, including explicit movement delay/loss, authority rejection, full room, DNF, result/rematch and host-leave flows. See network-spike.md for exact evidence and the earlier managed-policy failure. Each guest currently uses two PeerJS associations, so an eight-person host owns 14 RTCPeerConnections; physical-phone CPU/memory and thermal behavior must be measured. Gameplay runs on the host; eight Chrome tabs in one VM are not eight phones.
+Historical v0.1 release evidence remains in validation.md/network-spike.md and Git history.

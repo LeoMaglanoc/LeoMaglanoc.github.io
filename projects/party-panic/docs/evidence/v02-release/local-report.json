@@ -1,0 +1,2170 @@
+{
+  "date": "2026-10-19T15:37:02.535Z",
+  "url": "http://127.0.0.1:8080/party-panic/",
+  "browser": "154.0.8037.57",
+  "renderer": "Automated Chromium with SwiftShader software rendering; emulated viewports, not physical Android/iOS devices.",
+  "limitations": [
+    "Solo host with 3 genuine simulation-controlled bots; this report does not certify WebRTC multiplayer.",
+    "FPS diagnostics include countdown and the active interval; these are not steady-state phone performance measurements.",
+    "Fullscreen/orientation fields record only actual automated browser API outcomes; they do not certify Android or iPhone behavior.",
+    "No physical-phone performance target is verified by this run."
+  ],
+  "videoAvailable": true,
+  "failures": 0,
+  "results": [
+    {
+      "scenario": "local-obstacle-dash-desktop",
+      "modeId": "obstacle-dash",
+      "viewportName": "desktop",
+      "expectedViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "inputs": [
+        "Keyboard W held for 8 real seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT111.2sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T15:35:44.059Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 12.415799999999814,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          1440,
+          900
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 1440,
+          "height": 900,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 114,
+          "p5": 4.512635379059475,
+          "median": 10.040160642560894,
+          "p95": 45.24886877808986
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T15:35:30.055Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:31.636Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:34.539Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:35.026Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:37.261Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:39.079Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:41.069Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:43.786Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.515
+    },
+    {
+      "scenario": "local-obstacle-dash-phone-landscape",
+      "modeId": "obstacle-dash",
+      "viewportName": "phone-landscape",
+      "expectedViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: jump tapped every 2 seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT110.3sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T15:35:59.346Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 13.0165,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          844,
+          390
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 246,
+          "p5": 11.248593925771063,
+          "median": 18.867924528301888,
+          "p95": 58.13953488309132
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T15:35:45.464Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:46.324Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:49.354Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:50.104Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:56.355Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:56.572Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:35:56.838Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "video": {
+        "path": "docs/evidence/v02-release/videos/local-obstacle-dash-phone-landscape.webm",
+        "description": "Automated Chromium viewport capture; includes loading/countdown and 8 seconds of real-input gameplay. Not a human phone recording."
+      },
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.915
+    },
+    {
+      "scenario": "local-obstacle-dash-phone-portrait",
+      "modeId": "obstacle-dash",
+      "viewportName": "phone-portrait",
+      "expectedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: jump tapped every 2 seconds"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "portrait-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "portrait-primary",
+        "hud": "TIME LEFT110.5sCHECKPOINT0 / 2",
+        "reticleVisible": false,
+        "portraitHint": "block",
+        "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+      },
+      "diagnostics": {
+        "date": "2026-10-19T15:36:14.179Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "obstacle-dash",
+            "roundId": 1
+          },
+          "seconds": 12.796799999999815,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          390,
+          844
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": false,
+          "portrait": true,
+          "width": 390,
+          "height": 844,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "obstacle-dash",
+        "roundId": 1,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 258,
+          "p5": 11.481056257163385,
+          "median": 21.55172413797429,
+          "p95": 71.9424460436475
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T15:36:00.756Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:01.373Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:04.356Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:05.044Z",
+            "type": "jump",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:11.287Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:11.625Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:11.825Z",
+            "type": "jump",
+            "payload": {
+              "id": "bot-2"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.793
+    },
+    {
+      "scenario": "local-laser-tag-desktop",
+      "modeId": "laser-tag",
+      "viewportName": "desktop",
+      "expectedViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "inputs": [
+        "Keyboard W held for 8 real seconds",
+        "Primary mouse held; pointer movement for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "visualViewport": {
+          "width": 1440,
+          "height": 900,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "bufferWidth": 1440,
+          "bufferHeight": 900
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT80.2sYOUR TAGS0",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T15:36:30.643Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.54919999999972,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          1440,
+          900
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 1440,
+          "height": 900,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 136,
+          "p5": 5.361930294906166,
+          "median": 10.277492291851269,
+          "p95": 42.19409282667261
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T15:36:15.719Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:17.067Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:20.157Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:20.938Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "from": {
+                "x": -11.25,
+                "y": 1.0600102280886559,
+                "z": -7.291599108701718
+              },
+              "to": {
+                "x": -11.485882508895592,
+                "y": 1.4104698559394808,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:21.478Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "from": {
+                "x": -11.162142614483347,
+                "y": 1.0740616257456932,
+                "z": -6.106746996504565
+              },
+              "to": {
+                "x": -11.649999046325684,
+                "y": 1.5195121563470568,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:21.581Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "from": {
+                "x": 5.364438758013197,
+                "y": 1.0236129691284808,
+                "z": -7.837624498114074
+              },
+              "to": {
+                "x": 9.844692367069001,
+                "y": 0.7817973500974479,
+                "z": -8.204457928982169
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:21.582Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:21.773Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "from": {
+                "x": -6.025475050195481,
+                "y": 1.0313380543347894,
+                "z": -8.074096611929347
+              },
+              "to": {
+                "x": -10.967080309825084,
+                "y": 0.776627414910638,
+                "z": -6.808568435848638
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:21.774Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:22.667Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "from": {
+                "x": 1.4184755505543174,
+                "y": 1.0255846275225016,
+                "z": -8.234780411605735
+              },
+              "to": {
+                "x": -3.114288992206398,
+                "y": 0.5520093696487658,
+                "z": -8.287152690766218
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:22.667Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:23.655Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:23.837Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:24.883Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:24.974Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "from": {
+                "x": -10.284104072820647,
+                "y": 1.0679461664083612,
+                "z": -7.764315559465538
+              },
+              "to": {
+                "x": 1.188914256460757,
+                "y": 0.7819217605868192,
+                "z": -7.8535583183891875
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:24.974Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:25.291Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "from": {
+                "x": -6.0151891924884655,
+                "y": 1.0772245943524486,
+                "z": 8.225444466773935
+              },
+              "to": {
+                "x": 10.668284819822182,
+                "y": 0.7669480341625863,
+                "z": 7.814621901941967
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:25.293Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:25.553Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "from": {
+                "x": -9.4278228786958,
+                "y": 1.0754408399984057,
+                "z": -7.457830567289175
+              },
+              "to": {
+                "x": -6.26173673079502,
+                "y": 0.7688846531733692,
+                "z": 7.623372236788127
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:25.554Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:27.027Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:27.378Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:27.631Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:29.234Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 3,
+              "from": {
+                "x": 8.066903023553012,
+                "y": 1.075023885401929,
+                "z": 7.479692287013318
+              },
+              "to": {
+                "x": 8.761602361905759,
+                "y": 0.7701639501554478,
+                "z": -7.598453809224255
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:29.235Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:29.868Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 4,
+              "from": {
+                "x": 5.188753116152549,
+                "y": 1.0762421126522406,
+                "z": 7.5984619656880765
+              },
+              "to": {
+                "x": -10.667927436390888,
+                "y": 0.7721475205347359,
+                "z": 7.815262855662175
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:29.869Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "solo"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.487
+    },
+    {
+      "scenario": "local-laser-tag-phone-landscape",
+      "modeId": "laser-tag",
+      "viewportName": "phone-landscape",
+      "expectedViewport": {
+        "width": 844,
+        "height": 390
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: fire held and dragged for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "landscape-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "visualViewport": {
+          "width": 844,
+          "height": 390,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "bufferWidth": 844,
+          "bufferHeight": 390
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "landscape-primary",
+        "hud": "TIME LEFT80.4sYOUR TAGS0",
+        "reticleVisible": true,
+        "portraitHint": "none",
+        "displayStatus": "Fullscreen active · Landscape observed"
+      },
+      "diagnostics": {
+        "date": "2026-10-19T15:36:46.339Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.4625,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          844,
+          390
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 286,
+          "p5": 12.121212121212121,
+          "median": 23.094688221808354,
+          "p95": 59.5238095228196
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T15:36:32.000Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:32.859Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:35.826Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:36.532Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "from": {
+                "x": -11.25,
+                "y": 1.0600106453211693,
+                "z": -7.223028018003475
+              },
+              "to": {
+                "x": -11.497061063434586,
+                "y": 1.4159676932643097,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:37.228Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 3,
+              "from": {
+                "x": -11.23907073811675,
+                "y": 1.0736576591152573,
+                "z": -6.106360902030946
+              },
+              "to": {
+                "x": -11.726166646943256,
+                "y": 1.5180476288695492,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:37.230Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "from": {
+                "x": 5.364438758013197,
+                "y": 1.0236129691284808,
+                "z": -7.837624498114074
+              },
+              "to": {
+                "x": 9.844692367069001,
+                "y": 0.7817973500974479,
+                "z": -8.204457928982169
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:37.230Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:37.453Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "from": {
+                "x": -6.056277592722605,
+                "y": 1.0319648230350817,
+                "z": -8.075243105223235
+              },
+              "to": {
+                "x": -11.017586490834393,
+                "y": 0.7809550023412144,
+                "z": -6.802983469605088
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:37.453Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:38.241Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "from": {
+                "x": 1.4184126323823325,
+                "y": 1.0260008882876273,
+                "z": -8.235112373581565
+              },
+              "to": {
+                "x": -3.143399328685712,
+                "y": 0.5520570737947692,
+                "z": -8.286704899369916
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:38.241Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:39.256Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:39.453Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.260Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.347Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "from": {
+                "x": -10.284165331978066,
+                "y": 1.0685071751582882,
+                "z": -7.76411138179622
+              },
+              "to": {
+                "x": 1.418566959072912,
+                "y": 0.780964566777412,
+                "z": -7.855164509186179
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.347Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.763Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "from": {
+                "x": -7.037465970411826,
+                "y": 1.0785039628789506,
+                "z": 8.229905833439952
+              },
+              "to": {
+                "x": 10.627253528065975,
+                "y": 0.7689769824986312,
+                "z": 7.926107729356921
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.763Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.942Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "from": {
+                "x": -9.36257967581782,
+                "y": 1.0751744583435388,
+                "z": -7.468325526977452
+              },
+              "to": {
+                "x": -7.254509384664309,
+                "y": 0.7689983973050414,
+                "z": 7.620693380778144
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:40.943Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:42.389Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:42.764Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:42.971Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:44.332Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "from": {
+                "x": 7.915054501660879,
+                "y": 1.064262197581223,
+                "z": -3.8375043202242605
+              },
+              "to": {
+                "x": 7.276582281822569,
+                "y": 0.7882504816658101,
+                "z": 6.286952169663895
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:44.332Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:44.876Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "from": {
+                "x": 6.98871678965431,
+                "y": 1.074399159313657,
+                "z": -3.358028209237938
+              },
+              "to": {
+                "x": -7.648967731276473,
+                "y": 0.7696702036550651,
+                "z": -5.043677993899127
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:44.876Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "video": {
+        "path": "docs/evidence/v02-release/videos/local-laser-tag-phone-landscape.webm",
+        "description": "Automated Chromium viewport capture; includes loading/countdown and 8 seconds of real-input gameplay. Not a human phone recording."
+      },
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 10.505
+    },
+    {
+      "scenario": "local-laser-tag-phone-portrait",
+      "modeId": "laser-tag",
+      "viewportName": "phone-portrait",
+      "expectedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "passed": true,
+      "checks": {
+        "httpOK": true,
+        "debugAbsent": true,
+        "noRuntimeErrors": true,
+        "noConsoleErrors": true,
+        "noRequestFailures": true,
+        "noScroll": true,
+        "expectedMode": true,
+        "canvasFitsViewport": true,
+        "modeHUD": true
+      },
+      "status": 200,
+      "finalURL": "http://127.0.0.1:8080/party-panic/",
+      "inputs": [
+        "Browser CDP touch: movement joystick held forward",
+        "Simultaneous second touch: fire held and dragged for aim"
+      ],
+      "home": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": false,
+        "orientationObserved": "portrait-primary",
+        "hud": "",
+        "reticleVisible": false,
+        "portraitHint": "none",
+        "displayStatus": ""
+      },
+      "gameplay": {
+        "debugAPI": "undefined",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visualViewport": {
+          "width": 390,
+          "height": 844,
+          "scale": 1
+        },
+        "scroll": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "canvas": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "bufferWidth": 390,
+          "bufferHeight": 844
+        },
+        "fullscreenObserved": true,
+        "orientationObserved": "portrait-primary",
+        "hud": "TIME LEFT80.3sYOUR TAGS0",
+        "reticleVisible": true,
+        "portraitHint": "block",
+        "displayStatus": "Fullscreen active · Landscape screen.orientation.lock() is not available on this device."
+      },
+      "diagnostics": {
+        "date": "2026-10-19T15:37:02.463Z",
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "laser-tag",
+            "roundId": 2
+          },
+          "seconds": 13.169900000000373,
+          "phases": [
+            "countdown",
+            "racing"
+          ],
+          "rollingFrameLimit": 36000,
+          "rttLimit": 1024
+        },
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "viewport": [
+          390,
+          844
+        ],
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": false,
+          "portrait": true,
+          "width": 390,
+          "height": 844,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "modeId": "laser-tag",
+        "roundId": 2,
+        "role": "host",
+        "ice": "not connected",
+        "semantics": "not connected",
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        },
+        "fps": {
+          "samples": 295,
+          "p5": 9.794319294800077,
+          "median": 30.21148036245276,
+          "p95": 80.64516129092829
+        },
+        "rtt": {
+          "samples": 0,
+          "p5": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "logs": [
+          {
+            "at": "2026-10-19T15:36:48.571Z",
+            "type": "engine-ready",
+            "payload": {
+              "version": "2.23.3"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:49.260Z",
+            "type": "phase",
+            "payload": {
+              "phase": "countdown"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:52.489Z",
+            "type": "phase",
+            "payload": {
+              "phase": "racing"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:53.557Z",
+            "type": "shot",
+            "payload": {
+              "id": "solo",
+              "sequence": 1,
+              "from": {
+                "x": -11.25,
+                "y": 1.0600134467394737,
+                "z": -6.948741747861874
+              },
+              "to": {
+                "x": -11.54177559252918,
+                "y": 1.437960327966123,
+                "z": -6.05
+              },
+              "targetId": null,
+              "blocked": true
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:53.879Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 1,
+              "from": {
+                "x": 5.364438758013197,
+                "y": 1.0236129691284808,
+                "z": -7.837624498114074
+              },
+              "to": {
+                "x": 9.844692367069001,
+                "y": 0.7817973500974479,
+                "z": -8.204457928982169
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:53.879Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:54.025Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 1,
+              "from": {
+                "x": -6.0520952492040525,
+                "y": 1.0309701398234217,
+                "z": -7.907597364266391
+              },
+              "to": {
+                "x": -10.889196404746492,
+                "y": 0.6134428480031211,
+                "z": -6.774084734672376
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:54.025Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:54.888Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-1",
+              "sequence": 2,
+              "from": {
+                "x": 1.4079739407390832,
+                "y": 1.0248195254891612,
+                "z": -8.154801579982998
+              },
+              "to": {
+                "x": -3.160131153575618,
+                "y": 0.7830249419096613,
+                "z": -8.19349033289779
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:54.889Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-1",
+              "targetId": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:55.881Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:56.037Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:56.956Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-0"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:57.028Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 2,
+              "from": {
+                "x": -10.345018137560116,
+                "y": 1.0684862714701087,
+                "z": -7.761668526598052
+              },
+              "to": {
+                "x": 1.4142727593265416,
+                "y": 0.776835247135043,
+                "z": -7.822195057215349
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:57.029Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:57.374Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 1,
+              "from": {
+                "x": -7.0375219191297615,
+                "y": 1.078505196236382,
+                "z": 8.230029800216089
+              },
+              "to": {
+                "x": 10.626396998313663,
+                "y": 0.7690595181166466,
+                "z": 7.930568039557235
+              },
+              "targetId": "solo",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:57.374Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:57.635Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-0",
+              "sequence": 3,
+              "from": {
+                "x": -9.362658242310804,
+                "y": 1.0751744857745387,
+                "z": -7.468293902063677
+              },
+              "to": {
+                "x": -7.254499137628402,
+                "y": 0.768998420468002,
+                "z": 7.620692761044652
+              },
+              "targetId": "bot-2",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:57.635Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-0",
+              "targetId": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:59.028Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:59.383Z",
+            "type": "respawn",
+            "payload": {
+              "id": "solo"
+            }
+          },
+          {
+            "at": "2026-10-19T15:36:59.677Z",
+            "type": "respawn",
+            "payload": {
+              "id": "bot-2"
+            }
+          },
+          {
+            "at": "2026-10-19T15:37:01.028Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 2,
+              "from": {
+                "x": 8.124165957973641,
+                "y": 1.0656587692670254,
+                "z": -4.146724497112768
+              },
+              "to": {
+                "x": 7.908075542468939,
+                "y": 0.7851303879944659,
+                "z": 6.475956455028394
+              },
+              "targetId": "bot-1",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:37:01.029Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-1"
+            }
+          },
+          {
+            "at": "2026-10-19T15:37:01.943Z",
+            "type": "shot",
+            "payload": {
+              "id": "bot-2",
+              "sequence": 3,
+              "from": {
+                "x": 6.567326965551402,
+                "y": 1.0734810065014648,
+                "z": -4.784633033177759
+              },
+              "to": {
+                "x": -7.628750568926041,
+                "y": 0.7699822412898804,
+                "z": -4.672462340267579
+              },
+              "targetId": "bot-0",
+              "blocked": false
+            }
+          },
+          {
+            "at": "2026-10-19T15:37:01.943Z",
+            "type": "tag",
+            "payload": {
+              "shooterId": "bot-2",
+              "targetId": "bot-0"
+            }
+          }
+        ]
+      },
+      "assets": [
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CcVvxptN.css",
+          "status": 200,
+          "bytes": 13369,
+          "sha256": "38cc2258b1bc9ffe997a878a6befe524497b99a1715deb9ab0fb064285895d83"
+        },
+        {
+          "url": "http://127.0.0.1:8080/party-panic/assets/index-CbcAdoWy.js",
+          "status": 200,
+          "bytes": 1312662,
+          "sha256": "858c90216dc290caba6de97666cf34464daa5e8767ee2b1387b263fe6fb3ba96"
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "requestedInputHoldSeconds": 8,
+      "gameplayCaptureWindowSeconds": 9.915
+    }
+  ]
+}

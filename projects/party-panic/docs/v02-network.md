@@ -40,3 +40,14 @@ completion accelerates the authoritative clock; it is automated browser evidence
 not a full human match or physical-device acceptance.
 
 Physical Android↔Android/Android↔iOS/iOS host, NAT variety and8phones: NOT RUN.
+
+## Actual real Chrome result
+
+GitHub-hosted Ubuntu / Chrome 155.0.8059.39 passed both real WebRTC tests on
+2026-10-19: **2 passed (3.0 minutes)**, source `3d7a26a244be80764ab36275423768e0137c6a0a`.
+[Run and downloadable evidence](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39278177934).
+The two-client connection used direct host↔host ICE. Runtime channel inspection
+reported ordered reliable control and unordered movement with **unlimited
+retransmissions**, so limited retransmission is not claimed. Eight-client firing,
+authoritative results, fault injection and same-room mode switching passed.
+This is hosted desktop Chrome evidence, not physical mobile or varied-NAT testing.

@@ -1,3 +1,5 @@
+> Historical v0.1 release evidence. For the current implementation see [v0.2 validation](v02-validation.md), [networking](v02-network.md) and [Laser/AI evidence](v02-laser.md).
+
 # Validation — provisional browser MVP
 
 **Published demo:** https://leonardo-maglanoc.com/party-panic/

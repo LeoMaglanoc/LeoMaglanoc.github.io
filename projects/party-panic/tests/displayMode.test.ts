@@ -252,3 +252,13 @@ describe('display mode browser lifecycle', () => {
         display.dispose();
     });
 });
+
+it('reports the visible viewport when browser chrome shrinks the layout viewport', () => {
+    const { display, environment, changed } = fixture();
+    Object.assign(environment.window.visualViewport, { width: 390, height: 700 });
+    environment.window.visualViewport.dispatchEvent(new Event('resize'));
+    expect(display.state.width).toBe(390);
+    expect(display.state.height).toBe(700);
+    expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ height: 700, portrait: true }));
+    display.dispose();
+});

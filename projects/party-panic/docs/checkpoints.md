@@ -28,3 +28,16 @@ Movement tuning: `src/simulation.ts`; local guest visual approximation: `src/mai
 Run `npm run test:e2e` against the dev server; the managed environment's network test is explicitly skipped. Reproduce real connectivity on a suitable workstation with `RUN_WEBRTC=1 npm run test:e2e -- tests/e2e/network.spec.ts`, or dispatch the Party Panic Chrome connectivity workflow. Production smoke checks are `node tools/production-qa.ts` with Docker running; set `PARTY_URL` and `PARTY_QA_LABEL=live` for HTTPS.
 
 The next task is physical Android/iOS acceptance and human races, not model training. Record device/network/role, joins, selected ICE, RTT/bandwidth, 10-minute FPS/heap/thermal behavior, rematches and lifecycle failures before claiming phone certification. Preserve the explicit player-bumping and no-TURN limitations until measured evidence supports a change.
+
+## v0.2 continuation checkpoints
+
+- `076fb87`: measured unchanged baseline/screenshots and minimal architecture.
+- `e189ca9`: gesture-driven display mode and authoritative readiness.
+- `164df18`: measured vector movement and bounded guest jump feedback.
+- `5fa183b`: course readability, character feedback and procedural sound.
+- `8d51c37`: mode-aware epochs and disposable worlds.
+- `9d6bcc8`: complete Laser Tag and solo AI;84units/18browser checks passed.
+- `3d7a26a`: network faults/budgets and real two/eight-client acceptance tests.
+
+Current real Chrome run/deployment outcomes are recorded in v02-network.md and
+v02-validation.md when complete. Physical-device acceptance remains unavailable.

@@ -18,7 +18,7 @@ $('#app').innerHTML =
     `<div class="shade" id="shade"></div><header class="topbar"><a class="brand" href="./">PARTY<br><b>PANIC!</b></a><div class="top-right"><span class="tag">Small party. Big chaos.</span><span class="pill"><i></i>1–8 friends</span></div></header>
 <section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
-<footer class="bottom-bar" id="footer"><span>ORIGINAL COURSE / NO ELIMINATION</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
+<footer class="bottom-bar" id="footer"><span>2 MINIGAMES / SOLO AI + MULTIPLAYER</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
 <section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
 <div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
 <details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><button id="sound-toggle">Sound on</button><pre id="display-status"></pre></details>`;
@@ -31,8 +31,9 @@ scene.onLanding = (id) => {
 };
 const display = new DisplayMode((status) => {
     document.documentElement.style.setProperty('--viewport-height', status.height + 'px');
+    document.documentElement.style.setProperty('--viewport-width', status.width + 'px');
     document.body.classList.toggle('portrait-game', status.portrait);
-    if (scene.app) scene.app.resizeCanvas();
+    if (scene.app) scene.resize(status.width, status.height);
     $('#display-status').textContent =
         `Fullscreen ${status.fullscreen ? 'active' : status.fullscreenError || 'inactive'} · Landscape ${status.landscape ? 'observed' : status.orientationError || 'not locked'}`;
 });
@@ -89,6 +90,18 @@ let histories: { at: number; state: Snapshot }[] = [],
 let nickname = localStorage.getItem('party-panic-name') || 'Player',
     noticeUntil = 0,
     latestInput = controls.value;
+let measurementKey = '',
+    measurementAt = performance.now(),
+    frameCursor = 0;
+let measurementScope: { role: string; modeId?: string; roundId?: number } = { role: 'none' };
+const measurementPhases = new Set<string>();
+function clearMeasurements() {
+    frames.length = 0;
+    rtts.length = 0;
+    frameCursor = 0;
+    measurementAt = performance.now();
+    measurementPhases.clear();
+}
 const frames: number[] = [],
     rtts: number[] = [],
     logs: { at: string; type: string; payload: unknown }[] = [];
@@ -326,7 +339,7 @@ function showLobby() {
     url.searchParams.set('room', room);
     const link = url.href;
     showPanel(
-        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'One player is enough for practice. Friends make it messier.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="mode-picker" id="mode-picker"><button class="mode-choice" data-mode="obstacle-dash"><b>Obstacle Dash</b><small>Race, jump and dodge obstacles.</small></button><button class="mode-choice" data-mode="laser-tag"><b>Laser Tag</b><small>Tag your friends in a chaotic arena.</small></button></div><div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
+        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'Pick a game. Friends stay in this room between rounds.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="mode-picker" id="mode-picker"><button class="mode-choice" data-mode="obstacle-dash"><b>Obstacle Dash</b><small>Race, jump and dodge obstacles.</small></button><button class="mode-choice" data-mode="laser-tag"><b>Laser Tag</b><small>Tag your friends in a chaotic arena.</small></button></div><div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small" id="lobby-help">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
     );
     if (isHost && room) {
         $<HTMLInputElement>('#share-link').value = link;
@@ -387,6 +400,13 @@ function updateRoster() {
         button.classList.toggle('selected', selected);
         button.setAttribute('aria-pressed', String(selected));
     }
+    const help = document.querySelector('#lobby-help');
+    if (help)
+        help.innerHTML =
+            (state.modeId === 'laser-tag'
+                ? 'Move with the left stick. Hold and drag FIRE to aim and shoot.<br>'
+                : 'WASD + Space on desktop. Joystick + Jump on phones.<br>') +
+            'Ready/Start requests fullscreen and landscape. Rotate manually if unavailable.';
     const startButton = document.querySelector('#start');
     if (startButton)
         startButton.textContent = `Start ${state.modeId === 'laser-tag' ? 'Laser Tag' : 'Obstacle Dash'} →`;
@@ -527,6 +547,7 @@ transport.onMessage = (peer, lane, raw) => {
         else if (msg.type === 'pong' && accepted.has(peer)) {
             transport.rtt = performance.now() - msg.at;
             rtts.push(transport.rtt);
+            if (rtts.length > 1024) rtts.shift();
         }
     } else if (role === 'guest' && peer === hostId) {
         if (isSnapshot(raw)) {
@@ -574,6 +595,7 @@ transport.onMessage = (peer, lane, raw) => {
             if (control?.type === 'pong') {
                 transport.rtt = performance.now() - control.at;
                 rtts.push(transport.rtt);
+                if (rtts.length > 1024) rtts.shift();
             }
         }
     }
@@ -650,6 +672,19 @@ function reset(clearNotice = true) {
     url.searchParams.delete('room');
     history.replaceState(null, '', url);
 }
+$('#solo-mode').onchange = () => {
+    const laser = $<HTMLSelectElement>('#solo-mode').value === 'laser-tag';
+    $('#home .eyebrow').textContent = laser ? '02 / Laser Tag' : '01 / Obstacle Dash';
+    $('#home h1').innerHTML = laser ? 'Aim on.<br><em>Tag on.</em>' : 'Stay on.<br><em>Dash on.</em>';
+    $('#home .intro').innerHTML = laser
+        ? 'One arena. Quick comebacks.<br>And some questionable aim.'
+        : 'A race against your friends.<br>And your questionable timing.';
+    $('#course-card .num').textContent = laser ? '90' : '03';
+    $('#course-card h3').textContent = laser ? 'Seconds to make your mark.' : 'Ways to lose your footing.';
+    $('#course-card p').innerHTML = laser
+        ? 'Find a route. Tag your rivals.<br>Most tags wins. Then one more rematch.'
+        : 'Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.';
+};
 $('#solo').onclick = solo;
 $('#host').onclick = () => nameForm();
 $('#join-open').onclick = () => nameForm(true);
@@ -670,6 +705,13 @@ window.addEventListener('pagehide', (event) => {
 $('#export').onclick = () => {
     const report = {
         date: new Date().toISOString(),
+        measurement: {
+            scope: measurementScope,
+            seconds: (performance.now() - measurementAt) / 1000,
+            phases: [...measurementPhases],
+            rollingFrameLimit: 36000,
+            rttLimit: 1024
+        },
         userAgent: navigator.userAgent,
         viewport: [innerWidth, innerHeight],
         display: display.state,
@@ -792,6 +834,7 @@ function labels() {
 async function boot() {
     try {
         await scene.init($<HTMLCanvasElement>('#application-canvas'));
+        scene.resize(display.state.width, display.state.height);
         $('#solo').innerHTML = 'Play solo <span>↗</span>';
         for (const id of ['solo', 'host', 'join-open']) $<HTMLButtonElement>('#' + id).disabled = false;
         log('engine-ready', { version: '2.23.3' });
@@ -803,7 +846,16 @@ async function boot() {
                 actualDelta = (now - frameAt) / 1000;
             frameAt = now;
             fps = fps * 0.95 + 0.05 / Math.max(0.001, actualDelta);
-            if (frames.length < 36000) frames.push(1 / Math.max(0.001, actualDelta));
+            const key = `${role}:${room}:${state?.modeId}:${state?.roundId}`;
+            if (key !== measurementKey) {
+                measurementKey = key;
+                measurementScope = { role, modeId: state?.modeId, roundId: state?.roundId };
+                clearMeasurements();
+            }
+            measurementPhases.add(state?.phase ?? 'home');
+            const frameFps = 1 / Math.max(0.001, actualDelta);
+            if (frames.length < 36000) frames.push(frameFps);
+            else frames[frameCursor++ % 36000] = frameFps;
             syncControls();
             if (now - lastInput >= 1000 / 30) {
                 latestInput = controls.sample();
@@ -887,10 +939,7 @@ async function boot() {
                         controls.aimYaw = yaw;
                         controls.aimPitch = pitch;
                     },
-                    clearMeasurements: () => {
-                        frames.length = 0;
-                        rtts.length = 0;
-                    },
+                    clearMeasurements,
                     setAim: (yaw: number, pitch: number) => {
                         controls.aimYaw = yaw;
                         controls.aimPitch = pitch;
@@ -939,6 +988,11 @@ async function boot() {
                         snapshotAge: role === 'guest' ? performance.now() - lastSnapshot : 0,
                         display: display.state,
                         fps: summary(frames),
+                        measurement: {
+                            scope: measurementScope,
+                            seconds: (performance.now() - measurementAt) / 1000,
+                            phases: [...measurementPhases]
+                        },
                         counts: {
                             sent: transport.sent,
                             received: transport.received,

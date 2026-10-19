@@ -983,3 +983,32 @@ body.laser .name-label {
         width: 130px;
     }
 }
+
+/* Keep canvas, reticle and controls on the same visible viewport, including browser chrome. */
+#app {
+    width: var(--viewport-width, 100%);
+    height: var(--viewport-height, 100dvh);
+    right: auto;
+    bottom: auto;
+}
+.topbar {
+    top: max(16px, env(safe-area-inset-top));
+    left: max(20px, env(safe-area-inset-left));
+    right: max(20px, env(safe-area-inset-right));
+}
+.hud {
+    top: max(13px, env(safe-area-inset-top));
+}
+.controls {
+    left: max(25px, env(safe-area-inset-left));
+    right: max(25px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+}
+.leave {
+    right: max(20px, env(safe-area-inset-right));
+}
+@media (orientation: portrait) {
+    .controls {
+        bottom: max(32px, env(safe-area-inset-bottom));
+    }
+}

@@ -1,10 +1,46 @@
-# Party Panic · Obstacle Dash
+# Party Panic v0.2
 
-Original 3D browser party race: solo practice or one trusted host and up to seven friends. PlayCanvas + Ammo physics, TypeScript/Vite, PeerJS. No accounts, database, or dedicated game server. This MVP is provisional until physical-phone acceptance is completed.
+Two original3D party games: **Obstacle Dash** and **Laser Tag**. Play solo against
+0/1/3/7 AI opponents, or host a persistent P2P room for1–8 friends. PlayCanvas,
+Ammo, TypeScript/Vite and PeerJS; no accounts or dedicated simulation server.
 
-## Run
+**Play:** https://leonardo-maglanoc.com/party-panic/
 
-Node >=22.23.2 (validated with 24.19.0):
+Physical Android/iPhone acceptance is still unverified. This is a provisional browser
+release; viewport emulation and desktop Chrome networking do not certify phones.
+
+## Play
+
+Choose a minigame and AI count, then Play Solo. Zero bots preserves solo practice.
+Bots use the same host-authoritative movement, scoring and shot rules as people.
+They are visibly markedAI and are rule-based opponents, not trained models.
+
+Host a Party creates a QR/invitation link. Friends join and tap **READY — ENTER GAME**
+on their own devices. The host selects a minigame and taps Start; countdown waits
+for everyone ready. Switching games clears readiness and keeps the room connected.
+Results return to the same lobby for rematch/switching. Multiplayer rooms use humans;
+AI opponents belong to solo sessions.
+
+- **Obstacle Dash:** joystick + Jump, or WASD/arrows + Space. Clear gaps, sweepers
+  and bumpers, then both ordered checkpoints and the finish. Falls respawn quickly;
+  hard timeout120s. Results rank finish times and DNF progress.
+- **Laser Tag:** joystick + right-side drag; hold and drag FIRE to aim while shooting.
+  Desktop WASD/mouse + left click; Escape releases pointer lock.90s free-for-all,
+  one-hit tags,3shots/s,25-unit range,2s respawn and1s spawn shield. Most tags wins;
+  equal top scores display a tie. No reload, pickups, headshots or human aim assistance.
+
+Start/Solo/Ready immediately attempt fullscreen, landscape and screen wake lock.
+Browser refusal never blocks a game: portrait displays a manual-rotation hint.
+iPhone fullscreen/orientation support varies. Exit Fullscreen is in the collapsible
+Connection & performance panel. Results/rematches retain display mode; Leave releases it.
+
+Keep the host tab visible: backgrounding pauses authority. Guest departure is handled;
+host departure ends the session. No host migration or TURN server. Internet is needed
+to load and signal; direct P2P only works where ICE succeeds. Same Wi-Fi is recommended.
+
+## Develop and test
+
+Node≥22.23.2; local validation uses24.19.0.
 
 ```sh
 npm ci
@@ -14,51 +50,41 @@ npm run check
 npm run test:e2e
 ```
 
-Playwright uses installed Chromium at `/usr/bin/chromium`. Override `CHROMIUM_PATH` as needed. On another workstation install Chrome/Chromium or `npx playwright install chromium` and point to its executable. Browser tests run against an already running development server; `PARTY_URL` can select another origin. Tests requiring public PeerJS signaling are real network tests, not mocked transport. Run them with `RUN_WEBRTC=1 npm run test:e2e -- tests/e2e/network.spec.ts` on an unrestricted workstation, or use the Party Panic Chrome connectivity workflow. The default local suite explicitly skips that test because managed Chromium blocks non-proxied UDP; the real Chrome CI test has passed twice.
-
-## Docker
-
-```sh
-docker compose up --build
-# http://localhost:8080/party-panic/
-```
-
-The image runs checks, tests and production build, then serves only static assets with nginx. For a corporate proxy set `CODEX_PROXY_CERT` to its CA bundle. Compose defaults to the system trust bundle. Direct build in the managed workspace:
+Playwright defaults to `/usr/bin/chromium`; override `CHROMIUM_PATH`. Two network tests
+are explicitly skipped unless enabled:
 
 ```sh
-docker build --secret id=proxy_ca,src="$CODEX_PROXY_CERT" -t party-panic .
-docker run --rm -p 8080:80 party-panic
+RUN_WEBRTC=1 npm run test:e2e -- tests/e2e/network.spec.ts
 ```
 
-Phones need deployed **HTTPS**, or a trusted local HTTPS proxy. A loopback URL in the cloud workspace is not a phone-accessible demo. No TURN server is configured; use the same Wi-Fi/hotspot first. Internet is needed to load the app and contact PeerJS Cloud. Gameplay is direct P2P where ICE succeeds, not truly offline.
+Use an unrestricted Chrome environment or the existing Party Panic Chrome connectivity
+workflow. Managed Chromium here blocks non-proxied UDP; HTTP throttling is not a WebRTC
+loss simulation. The network tests use real PeerJS/ICE, real engine inputs and no mock
+transport. Tests that accelerate host time are labeled; isolated race trigger tests
+use debug placement, while full-course and bot checks use input-only traversal.
 
-## Play
+For development-only fault injection use `?debug=1`. Faults support movement delay,
+jitter/loss/reordering, ordered reliable delay and duplicates. Debug APIs compile out
+of production. Do not publish the Vite development server as the game.
 
-Play Solo starts a three-second countdown without signaling. Host a Party lets you name yourself, creates a room and shows a QR/link. Friends open that link, enter a nickname, then join. The host can start with 1–8 people. Touch: left joystick + right Jump. Desktop: WASD/arrows + Space. Camera follows automatically. Landscape gives more space; portrait remains usable and displays a rotation hint.
+## Deployment and diagnostics
 
-Jump gaps, dodge rotating sweepers, time moving bumpers. Fall to respawn at your latest ordered checkpoint. Cross both checkpoints and then the gold finish gate. Everyone remains in the race until they finish or the 120-second deadline. Results include DNF progress; host can rematch. Guests leaving become DNF; host leaving ends the session. No host migration. Keep the host tab visible; backgrounding pauses authority, resuming sends full state.
+The existing GitHub Pages workflow builds/tests this project and copies `dist/` to
+`_site/party-panic/`. Preserve Vite base `/party-panic/`; Ammo and fonts ship locally.
+Do not commit generated builds or node_modules. HTTPS is needed on phones.
 
-## Deployment and website
+The existing Docker setup remains available with `docker compose up --build` at
+`http://localhost:8080/party-panic/`. See Dockerfile for build checks and proxy CA support.
 
-The GitHub Pages deployment builds this project, copies `dist/` into `_site/party-panic/`, and adds the link to the existing AI Coding Agent Case Study blog post. Do not commit generated builds or node_modules. The app's Vite base is `/party-panic/`. Deploying elsewhere requires changing `base` in `vite.config.ts`. Ammo URLs resolve against that base and the pinned WASM files ship locally.
+Connection & performance shows frame estimate, RTT, actual ICE/channel properties,
+application payload counters and backpressure drops. Save diagnostics includes display
+API outcomes and bounded logs. It excludes IP addresses; payload counters exclude
+WebRTC overhead. Two PeerJS associations per guest mean14 host connections at capacity.
+Laser guests use authoritative movement interpolation and immediate cosmetic aim/fire;
+Dash adds bounded jump feedback. No lag rewind or rollback.
 
-## Diagnostics and continuation
-
-Open “Connection & performance” to inspect current FPS estimate, RTT, selected ICE candidate types, channel delivery settings, message counts and application bandwidth. Save diagnostics exports bounded structured event logs and distributions. It does not export candidate IP addresses. Counts exclude protocol overhead; software-rendered CI FPS is not a phone benchmark.
-
-For fault injection run the **development** build with `?debug=1`; use the diagnostics button for 80ms ±40ms, 3% movement loss and 5% reordering. The debug window API is for invariant E2E tests only and is compiled out of production. Do not expose test builds publicly. Browser network throttling is not used to simulate WebRTC packet loss.
-
-Continue from the task-specific Git commits, package lock, architecture and decision log. There are **no trained ML models** or GPU training in this project; no model weights/checkpoints are applicable. Original characters/course are generated from deterministic source geometry. Movement tuning lives in `simulation.ts`; layout in `scene.ts`; scoring/checkpoints in `rules.ts`. Source and tuning checkpoints, rather than learned weights, preserve the complete work.
-
-The live demo is https://leonardo-maglanoc.com/party-panic/ and is linked from the existing [demos post](https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/).
-
-See [architecture](docs/architecture.md), [network experiment](docs/network-spike.md), [validation](docs/validation.md), [decisions](docs/decisions.md), and Ammo provenance at `public/ammo/SOURCE.md`.
-
-Production bundle QA after starting Docker:
-
-```sh
-node tools/production-qa.ts
-PARTY_URL=https://leonardo-maglanoc.com/party-panic/ PARTY_QA_LABEL=live node tools/production-qa.ts
-```
-
-These save three viewport screenshots and JSON evidence; they never enable the development debug API.
+See [v0.2 validation](docs/v02-validation.md), [baseline](docs/v02-baseline.md),
+[movement comparison](docs/v02-movement.md), [Laser/AI](docs/v02-laser.md),
+[network evidence](docs/v02-network.md), [architecture](docs/v02-architecture.md) and
+[asset provenance](docs/assets.md). Earlier v0.1 evidence is preserved in validation.md;
+its measurements apply to the recorded release, not automatically to v0.2.

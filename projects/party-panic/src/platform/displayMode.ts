@@ -30,7 +30,7 @@ export interface DisplayModeEnvironment {
     window: EventTarget & {
         innerWidth: number;
         innerHeight: number;
-        visualViewport?: EventTarget | null;
+        visualViewport?: (EventTarget & { width?: number; height?: number }) | null;
     };
     orientation?: EventTarget & {
         lock?: (orientation: 'landscape') => Promise<void>;
@@ -87,15 +87,17 @@ export class DisplayMode {
 
     get state(): DisplayModeState {
         const { document: doc, window: view, orientation, wakeLock } = this.environment;
+        const width = view.visualViewport?.width ?? view.innerWidth;
+        const height = view.visualViewport?.height ?? view.innerHeight;
         return {
             fullscreenSupported: !!doc.documentElement.requestFullscreen && doc.fullscreenEnabled !== false,
             orientationSupported: !!orientation?.lock,
             wakeLockSupported: !!wakeLock,
             fullscreen: !!doc.fullscreenElement,
-            landscape: view.innerWidth > view.innerHeight,
-            portrait: view.innerHeight > view.innerWidth,
-            width: view.innerWidth,
-            height: view.innerHeight,
+            landscape: width > height,
+            portrait: height > width,
+            width,
+            height,
             wakeLockActive: !!this.wake && !this.wake.released,
             ...this.errors
         };

@@ -6,7 +6,7 @@ import {
     CollisionComponentSystem,
     Color,
     Entity,
-    FILLMODE_FILL_WINDOW,
+    FILLMODE_NONE,
     LightComponentSystem,
     RenderComponentSystem,
     RESOLUTION_AUTO,
@@ -65,7 +65,11 @@ export class Scene {
         ];
         this.app = new AppBase(canvas);
         this.app.init(options);
-        this.app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+        this.app.setCanvasFillMode(
+            FILLMODE_NONE,
+            window.visualViewport?.width ?? innerWidth,
+            window.visualViewport?.height ?? innerHeight
+        );
         this.app.setCanvasResolution(RESOLUTION_AUTO);
         this.app.scene.ambientLight = new Color(0.65, 0.7, 0.8);
         this.physics = this.app.systems.rigidbody!;
@@ -105,7 +109,9 @@ export class Scene {
         this.level();
         this.app.batcher!.generate();
         this.app.start();
-        window.addEventListener('resize', () => this.app.resizeCanvas());
+    }
+    resize(width: number, height: number) {
+        this.app.resizeCanvas(Math.round(width), Math.round(height));
     }
     material(hex: string) {
         let m = this.materials.get(hex);
@@ -236,6 +242,7 @@ export class Scene {
         this.app.batcher!.addGroup('course', false, 45, 0);
         if (modeId === 'obstacle-dash') this.level();
         else this.arena();
+        this.camera.camera!.fov = modeId === 'laser-tag' ? 70 : 60;
         this.camera.camera!.clearColor =
             modeId === 'laser-tag' ? new Color(0.025, 0.04, 0.09) : new Color(0.075, 0.11, 0.19);
         this.app.batcher!.generate();
