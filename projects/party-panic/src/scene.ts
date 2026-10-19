@@ -18,7 +18,11 @@ import {
 } from 'playcanvas';
 import type { Player } from './protocol';
 export type Obstacle = { entity: Entity; z: number; kind: 'sweeper' | 'bumper'; phase: number };
+type CharacterMotion = { model: Entity; arms: Entity[]; feet: Entity[]; vy: number; squash: number };
+type EffectParticle = { entity: Entity; age: number; duration: number; vx: number; vy: number; vz: number };
 export class Scene {
+    private motions = new Map<string, CharacterMotion>();
+    private particles: EffectParticle[] = [];
     app!: AppBase;
     camera!: Entity;
     physics!: RigidBodyComponentSystem;
@@ -27,6 +31,7 @@ export class Scene {
     obstacles: Obstacle[] = [];
     triggers: Entity[] = [];
     materials = new Map<string, StandardMaterial>();
+    onLanding: (id: string) => void = () => {};
     onTrigger: (id: string, index: number) => void = () => {};
     onHit: (id: string, obstacle: Obstacle) => void = () => {};
     async init(canvas: HTMLCanvasElement) {
@@ -150,11 +155,28 @@ export class Scene {
             [-37, -44]
         ].entries())
             this.box('gap-platform-' + i, [0, -0.6, (a + b) / 2], [12, 1.2, a - b], i % 2 ? '#6768b4' : '#7676c9');
+        // Contrasting lips describe the actual take-off and landing edges; no fake rails over gaps.
+        for (const z of [-16, -18, -26, -28, -35, -37]) {
+            this.box('gap-lip', [0, 0.018, z], [12, 0.036, 0.18], '#f3f0cf', null);
+            this.box('gap-depth', [0, -0.55, z], [12, 0.5, 0.08], '#373956', null);
+        }
         this.box('sweeper-deck', [0, -0.6, -64], [12, 1.2, 40], '#3e9c9e');
         this.box('bumper-deck', [0, -0.6, -109.5], [12, 1.2, 51], '#bc717e');
         for (const z of [-56, -71]) {
             const e = this.box('rotating-sweeper', [0, 0.7, z], [10.4, 0.45, 0.55], '#ffcc4a', 'kinematic');
             this.mesh(e, 'cylinder', [0.7, 2, 0.7], '#f3f0cf', [0, -0.1, 0]);
+            for (const x of [-4.9, 4.9]) this.mesh(e, 'box', [0.5, 0.49, 0.6], '#fff4a3', [x, 0, 0]);
+            for (let i = 0; i < 12; i++) {
+                const a = (i / 12) * Math.PI * 2;
+                const mark = this.box(
+                    'sweep-radius',
+                    [Math.sin(a) * 5.1, 0.02, z + Math.cos(a) * 5.1],
+                    [0.16, 0.04, 0.55],
+                    '#9bd5cc',
+                    null
+                );
+                mark.setEulerAngles(0, (a * 180) / Math.PI, 0);
+            }
             const o: Obstacle = { entity: e, z, kind: 'sweeper', phase: 0 };
             this.obstacles.push(o);
             e.collision!.on('collisionstart', (r: { other: Entity }) => this.onHit(r.other.name, o));
@@ -166,6 +188,9 @@ export class Scene {
             this.obstacles.push(o);
             e.collision!.on('collisionstart', (r: { other: Entity }) => this.onHit(r.other.name, o));
             this.box('bumper-track', [0, 0.02, z], [12, 0.04, 1.5], '#935361', null);
+            for (const dz of [-0.82, 0.82])
+                this.box('bumper-rail', [0, 0.026, z + dz], [11.8, 0.052, 0.09], '#f3b5ad', null);
+            for (const x of [-5.5, 5.5]) this.box('bumper-stop', [x, 0.035, z], [0.14, 0.07, 1.5], '#ffce5c', null);
             for (const x of [-6.2, 6.2]) this.box('pusher-base', [x, 0.7, z], [0.35, 1.4, 2], '#e59ca5', null);
         }
         for (const [i, z] of [-40, -85, -132].entries()) {
@@ -181,6 +206,7 @@ export class Scene {
             this.triggers.push(trigger);
         }
         for (let z = 6; z > -134; z -= 6) {
+            if ((z < -16 && z > -18) || (z < -26 && z > -28) || (z < -35 && z > -37)) continue;
             for (const x of [-6.4, 6.4]) this.box('edge-light', [x, -0.2, z], [0.15, 0.2, 2], '#d1e2e7', null);
         }
         for (const x of [-2, -1, 0, 1, 2])
@@ -202,8 +228,11 @@ export class Scene {
         this.mesh(model, 'sphere', [0.59, 0.4, 0.25], '#202b41', [0, 0.35, -0.34]);
         this.mesh(model, 'sphere', [0.09, 0.1, 0.05], '#f9faf6', [-0.14, 0.37, -0.47]);
         this.mesh(model, 'sphere', [0.09, 0.1, 0.05], '#f9faf6', [0.14, 0.37, -0.47]);
-        this.mesh(model, 'sphere', [0.2, 0.28, 0.23], p.color, [-0.4, -0.1, 0]);
-        this.mesh(model, 'sphere', [0.2, 0.28, 0.23], p.color, [0.4, -0.1, 0]);
+        const arms = [-0.4, 0.4].map((x) => this.mesh(model, 'sphere', [0.2, 0.28, 0.23], p.color, [x, -0.1, 0]));
+        const feet = [-0.2, 0.2].map((x) =>
+            this.mesh(model, 'sphere', [0.25, 0.19, 0.35], '#202b41', [x, -0.59, -0.04])
+        );
+        this.motions.set(p.id, { model, arms, feet, vy: 0, squash: 0 });
         if (physical) {
             e.addComponent('collision', { type: 'capsule', radius: 0.38, height: 1.5 });
             e.addComponent('rigidbody', {
@@ -222,6 +251,77 @@ export class Scene {
     removePlayer(id: string) {
         this.characters.get(id)?.destroy();
         this.characters.delete(id);
+        this.motions.delete(id);
+    }
+    /** Render-only motion: authoritative capsules never scale, lean or receive particles. */
+    animate(players: Player[], time: number, dt: number) {
+        const step = Math.min(Math.max(dt, 0), 0.1);
+        for (const p of players) {
+            const m = this.motions.get(p.id);
+            if (!m) continue;
+            if (m.vy < -1 && Math.abs(p.vy) < 0.5 && p.y > -0.2 && p.y < 1.1) {
+                m.squash = 0.14;
+                this.effect('land', p.id);
+                this.onLanding(p.id);
+            }
+            m.vy = p.vy;
+            m.squash *= Math.exp(-step * 16);
+            const speed = Math.min(Math.hypot(p.vx, p.vz) / 2.8, 1);
+            const grounded = Math.abs(p.vy) < 0.5;
+            const swing = grounded ? Math.sin(time * 17) * speed : 0;
+            m.feet.forEach((foot, i) =>
+                foot.setLocalPosition(
+                    i ? 0.2 : -0.2,
+                    -0.59 + Math.max(0, swing * (i ? 1 : -1)) * 0.12,
+                    -0.04 + swing * (i ? 1 : -1) * 0.16
+                )
+            );
+            m.arms.forEach((arm, i) =>
+                arm.setLocalPosition(i ? 0.4 : -0.4, -0.1 + (grounded ? 0 : 0.12), swing * (i ? -1 : 1) * 0.12)
+            );
+            const stretch = grounded ? -m.squash : Math.min(Math.abs(p.vy) * 0.006, 0.05);
+            m.model.setLocalScale(1 - stretch * 0.5, 1 + stretch, 1 - stretch * 0.5);
+            m.model.setLocalPosition(0, grounded ? -m.squash * 0.2 : 0, 0);
+        }
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+            const particle = this.particles[i];
+            particle.age += step;
+            if (particle.age >= particle.duration) {
+                particle.entity.destroy();
+                this.particles.splice(i, 1);
+                continue;
+            }
+            particle.vy -= step * 5;
+            particle.entity.translate(particle.vx * step, particle.vy * step, particle.vz * step);
+            const size = 0.12 * (1 - particle.age / particle.duration);
+            particle.entity.setLocalScale(size, size, size);
+        }
+    }
+    effect(type: 'jump' | 'land' | 'hit' | 'checkpoint', id: string) {
+        const character = this.characters.get(id);
+        if (!character) return;
+        const motion = this.motions.get(id);
+        if (motion && type === 'hit') motion.squash = 0.2;
+        const color = type === 'checkpoint' ? '#92f1db' : type === 'hit' ? '#ff9376' : '#f3f0cf';
+        const count = type === 'checkpoint' ? 8 : 4;
+        const p = character.getPosition();
+        for (let i = 0; i < count; i++) {
+            if (this.particles.length >= 24) this.particles.shift()!.entity.destroy();
+            const angle = (i / count) * Math.PI * 2;
+            const entity = this.mesh(this.app.root, 'box', [0.12, 0.12, 0.12], color, [p.x, p.y - 0.5, p.z]);
+            this.particles.push({
+                entity,
+                age: 0,
+                duration: type === 'checkpoint' ? 0.65 : 0.3,
+                vx: Math.sin(angle) * 1.5,
+                vy: type === 'checkpoint' ? 3 : 1,
+                vz: Math.cos(angle) * 1.5
+            });
+        }
+    }
+    clearEffects() {
+        for (const particle of this.particles) particle.entity.destroy();
+        this.particles.length = 0;
     }
     obstaclesAt(t: number) {
         for (const o of this.obstacles) {

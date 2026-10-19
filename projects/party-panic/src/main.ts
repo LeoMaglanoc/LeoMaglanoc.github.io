@@ -1,4 +1,5 @@
 import QRCode from 'qrcode';
+import { AudioFeedback } from './audio';
 import { Vec3 } from 'playcanvas';
 import { Controls } from './input';
 import { JumpFeedback, reconcileHeight } from './prediction';
@@ -19,10 +20,14 @@ $('#app').innerHTML =
 <footer class="bottom-bar" id="footer"><span>ORIGINAL COURSE / NO ELIMINATION</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
 <section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
 <div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
-<details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><pre id="display-status"></pre></details>`;
+<details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><button id="sound-toggle">Sound on</button><pre id="display-status"></pre></details>`;
 const scene = new Scene(),
     transport = new Transport(),
     controls = new Controls();
+const sound = new AudioFeedback();
+scene.onLanding = (id) => {
+    if (id === localId) sound.play('land');
+};
 const display = new DisplayMode((status) => {
     document.documentElement.style.setProperty('--viewport-height', status.height + 'px');
     document.body.classList.toggle('portrait-game', status.portrait);
@@ -32,13 +37,22 @@ const display = new DisplayMode((status) => {
 });
 window.addEventListener('pagehide', (event) => {
     if (event.persisted) void display.exit();
-    else display.dispose();
+    else {
+        display.dispose();
+        sound.dispose();
+    }
 });
 $('.brand').addEventListener('click', () => {
     void display.exit();
 });
 $('#display-enter').onclick = () => {
     void display.enter();
+    sound.enable();
+};
+$('#sound-toggle').onclick = () => {
+    sound.muted = !sound.muted;
+    $('#sound-toggle').textContent = sound.muted ? 'Sound off' : 'Sound on';
+    if (!sound.muted) sound.enable();
 };
 $('#display-exit').onclick = () => {
     void display.exit();
@@ -171,17 +185,26 @@ async function connect(next: 'host' | 'guest', id = '') {
         if (token === attempt) busy = false;
     }
 }
+function feedback(type: string, payload: unknown) {
+    if (!payload || typeof payload !== 'object' || !('id' in payload) || typeof payload.id !== 'string') return;
+    if (['jump', 'land', 'hit', 'checkpoint'].includes(type)) {
+        scene.effect(type as 'jump' | 'land' | 'hit' | 'checkpoint', payload.id);
+        if (payload.id === localId) sound.play(type);
+    }
+}
 function wireSim() {
     sim!.onEvent = (type, payload) => {
         const msg = { type: 'event', eventId: ++eventId, tick: sim!.state.tick, event: type, payload };
         transport.broadcast('control', msg, accepted);
         log(type, payload);
+        feedback(type, payload);
         sendState(true);
     };
 }
 function solo() {
     if (busy) return;
     void display.enter();
+    sound.enable();
     ended = false;
     homeVisible(false);
     role = 'host';
@@ -234,6 +257,7 @@ function showLobby() {
     if (isHost)
         $('#start').onclick = () => {
             void display.enter();
+            sound.enable();
             sim!.ready(localId, state!.round);
             startRequested = true;
             if (state!.players.some((p) => p.connected && !p.ready)) {
@@ -250,6 +274,7 @@ function showLobby() {
     if (!isHost)
         $('#ready').onclick = () => {
             void display.enter();
+            sound.enable();
             transport.send(hostId, 'control', { type: 'ready', roundId: state!.round });
         };
     updateRoster();
@@ -402,6 +427,7 @@ transport.onMessage = (peer, lane, raw) => {
         else if (msg.type === 'event' && typeof msg.eventId === 'number' && msg.eventId > lastEvent) {
             lastEvent = msg.eventId;
             log(String(msg.event), msg.payload);
+            feedback(String(msg.event), msg.payload);
         } else {
             const control = parseControl(raw);
             if (control?.type === 'ping') transport.send(peer, 'control', { type: 'pong', at: control.at });
@@ -474,6 +500,7 @@ function reset(clearNotice = true) {
     scene.camera.setPosition(17, 23, 25);
     scene.camera.lookAt(0, 0, -32);
     controls.clear();
+    scene.clearEffects();
     const url = new URL(location.href);
     url.searchParams.delete('room');
     history.replaceState(null, '', url);
@@ -644,6 +671,7 @@ async function boot() {
                     renderState();
                     lastUI = now;
                 }
+                scene.animate(state.players, state.elapsed, dt);
                 labels();
             }
             if (now - lastReliable >= 1000) {
