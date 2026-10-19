@@ -1,0 +1,62 @@
+{
+    "date": "2026-10-19",
+    "browser": "Google Chrome 155.0.8059.39",
+    "run": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39238538702",
+    "commit": "2daa03c508d15ce0a1979491e27f5d407e211351",
+    "result": "passed",
+    "duration": "1.1 minutes",
+    "path": "real PeerJS Cloud signaling, direct host-to-host ICE, no mocked transport or TURN",
+    "clients": "2 growing to 8 plus rejected ninth join",
+    "checks": [
+        "duplicate join",
+        "80ms delay with 40ms jitter, 3% movement loss and 5% reorder",
+        "host rejects fake finish",
+        "two-client results and rematch",
+        "eight clients connected",
+        "full room rejection",
+        "guest leaving becomes DNF",
+        "seven finishers plus one DNF",
+        "multiview results and rematch",
+        "host leave ends session",
+        "no uncaught runtime exceptions"
+    ],
+    "twoClientDiagnosticSamples": [
+        {
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 5.30000000000291,
+            "fps": {
+                "samples": 219,
+                "p5": 19.083969465650974,
+                "median": 52.631578947368425,
+                "p95": 78.740157480333
+            },
+            "counts": {
+                "sent": 25,
+                "received": 27,
+                "rejected": 0
+            }
+        },
+        {
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 4.100000000005821,
+            "fps": {
+                "samples": 83,
+                "p5": 18.55287569572983,
+                "median": 38.16793893130195,
+                "p95": 71.42857142857143
+            },
+            "counts": {
+                "sent": 27,
+                "received": 25,
+                "rejected": 0
+            }
+        }
+    ],
+    "limitations": [
+        "desktop Chrome in one CI VM, not physical phones",
+        "RTT samples are reliable control pings; do not represent impaired movement latency",
+        "FPS statistics include startup and short run, not a 10-minute mobile benchmark"
+    ]
+}

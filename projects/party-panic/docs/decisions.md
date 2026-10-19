@@ -15,3 +15,5 @@
 - Review fixed same-tick lifecycle snapshots: transmission sequence is separate from simulation tick, so pause/roster changes at a frozen tick are not discarded. Snapshot player arrays are copied before debug delay injection to preserve sent-state semantics.
 - Render polish: shared unlit StandardMaterials, static batches (45m maximum bounds), no shadow maps, capped device pixel ratio 1.5, locally hosted OFL fonts, HUD updates at 10Hz. FPS samples use actual performance timestamps rather than PlayCanvas's clamped delta.
 - Trusted host simulation is bounded to six catch-up steps per render frame. Active wall-clock excess still advances the round clock; visibility pause resets the frame timestamp, preserving the hard deadline without counting paused time.
+
+- Final review: disable startup actions until physics/scene readiness; freeze the race at the active 120s deadline before stepping contacts and reject late finish timestamps; classify unavailable ICE candidates as unknown. Regression checks cover all three cases.

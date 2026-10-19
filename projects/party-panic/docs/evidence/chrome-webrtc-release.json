@@ -1,0 +1,104 @@
+{
+    "date": "2026-10-19",
+    "run": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39240738143",
+    "commit": "99d98c7bf19e50fa57817178ed54d93797c0099e",
+    "result": "passed",
+    "twoClientSamples": [
+        {
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "control: ordered=true, retransmits=unlimited",
+            "rtt": 0,
+            "fps": {
+                "samples": 145,
+                "p5": 11.31221719456995,
+                "median": 37.87878787878579,
+                "p95": 70.92198581561016
+            },
+            "counts": {
+                "sent": 7,
+                "received": 6,
+                "sentBytes": 3136,
+                "receivedBytes": 435,
+                "rejected": 0
+            },
+            "elapsedSeconds": 5.9335
+        },
+        {
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 6,
+            "fps": {
+                "samples": 30,
+                "p5": 10.214504596526917,
+                "median": 34.96503496502785,
+                "p95": 56.17977528091265
+            },
+            "counts": {
+                "sent": 6,
+                "received": 7,
+                "sentBytes": 435,
+                "receivedBytes": 3136,
+                "rejected": 0
+            },
+            "elapsedSeconds": 2.6782999999999957
+        }
+    ],
+    "eightClientResults": {
+        "players": 8,
+        "finished": 7,
+        "dnf": 1,
+        "host": {
+            "links": [
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                }
+            ],
+            "elapsedSeconds": 54.1656,
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 36.40000000000873,
+            "bodies": 22,
+            "fps": {
+                "samples": 623,
+                "p5": 4.310344827586206,
+                "median": 21.41327623126138,
+                "p95": 59.88023952096852
+            },
+            "counts": {
+                "sent": 2101,
+                "received": 1617,
+                "sentBytes": 2566030,
+                "receivedBytes": 124102,
+                "rejected": 10
+            }
+        }
+    },
+    "limits": "Short desktop Chrome CI session; single VM; not physical phones or steady-state benchmarks."
+}

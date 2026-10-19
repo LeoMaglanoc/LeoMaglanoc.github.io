@@ -1,0 +1,37 @@
+{
+    "date": "2026-10-19T10:59:24.109Z",
+    "browser": "154.0.8037.57",
+    "image": null,
+    "results": [
+        {
+            "name": "desktop",
+            "url": "https://leonardo-maglanoc.com/party-panic/",
+            "status": 200,
+            "viewport": [1440, 900],
+            "script": "/party-panic/assets/index-C6rFjFDh.js",
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "runtimeErrors": []
+        },
+        {
+            "name": "phone-portrait",
+            "url": "https://leonardo-maglanoc.com/party-panic/",
+            "status": 200,
+            "viewport": [390, 844],
+            "script": "/party-panic/assets/index-C6rFjFDh.js",
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "runtimeErrors": []
+        },
+        {
+            "name": "phone-landscape",
+            "url": "https://leonardo-maglanoc.com/party-panic/",
+            "status": 200,
+            "viewport": [844, 390],
+            "script": "/party-panic/assets/index-C6rFjFDh.js",
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "runtimeErrors": []
+        }
+    ]
+}

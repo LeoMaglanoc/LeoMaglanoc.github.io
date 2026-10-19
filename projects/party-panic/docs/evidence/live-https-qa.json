@@ -1,0 +1,30 @@
+{
+    "date": "2026-10-19T10:42:28.576Z",
+    "browser": "154.0.8037.57",
+    "results": [
+        {
+            "name": "desktop",
+            "url": "https://leonardo-maglanoc.com/party-panic/",
+            "status": 200,
+            "viewport": [1440, 900],
+            "runtimeErrors": [],
+            "debugAPI": "undefined"
+        },
+        {
+            "name": "phone-portrait",
+            "url": "https://leonardo-maglanoc.com/party-panic/",
+            "status": 200,
+            "viewport": [390, 844],
+            "runtimeErrors": [],
+            "debugAPI": "undefined"
+        },
+        {
+            "name": "phone-landscape",
+            "url": "https://leonardo-maglanoc.com/party-panic/",
+            "status": 200,
+            "viewport": [844, 390],
+            "runtimeErrors": [],
+            "debugAPI": "undefined"
+        }
+    ]
+}

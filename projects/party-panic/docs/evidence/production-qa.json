@@ -1,0 +1,37 @@
+{
+    "date": "2026-10-19T10:59:07.974Z",
+    "browser": "154.0.8037.57",
+    "image": "sha256:267391bbe54bbd2194d5c748554af8143b804d6cc58090c0f06b86e45ae3aba6",
+    "results": [
+        {
+            "name": "desktop",
+            "url": "http://127.0.0.1:8080/party-panic/",
+            "status": 200,
+            "viewport": [1440, 900],
+            "script": "/party-panic/assets/index-C6rFjFDh.js",
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "runtimeErrors": []
+        },
+        {
+            "name": "phone-portrait",
+            "url": "http://127.0.0.1:8080/party-panic/",
+            "status": 200,
+            "viewport": [390, 844],
+            "script": "/party-panic/assets/index-C6rFjFDh.js",
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "runtimeErrors": []
+        },
+        {
+            "name": "phone-landscape",
+            "url": "http://127.0.0.1:8080/party-panic/",
+            "status": 200,
+            "viewport": [844, 390],
+            "script": "/party-panic/assets/index-C6rFjFDh.js",
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "runtimeErrors": []
+        }
+    ]
+}

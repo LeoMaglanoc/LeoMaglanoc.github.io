@@ -14,7 +14,7 @@ npm run check
 npm run test:e2e
 ```
 
-Playwright uses installed Chromium at `/usr/bin/chromium`. Override `CHROMIUM_PATH` as needed. On another workstation install Chrome/Chromium or `npx playwright install chromium` and point to its executable. Browser tests run against an already running development server; `PARTY_URL` can select another origin. Tests requiring public PeerJS signaling are real network tests, not mocked transport.
+Playwright uses installed Chromium at `/usr/bin/chromium`. Override `CHROMIUM_PATH` as needed. On another workstation install Chrome/Chromium or `npx playwright install chromium` and point to its executable. Browser tests run against an already running development server; `PARTY_URL` can select another origin. Tests requiring public PeerJS signaling are real network tests, not mocked transport. Run them with `RUN_WEBRTC=1 npm run test:e2e -- tests/e2e/network.spec.ts` on an unrestricted workstation, or use the Party Panic Chrome connectivity workflow. The default local suite explicitly skips that test because managed Chromium blocks non-proxied UDP; the real Chrome CI test has passed twice.
 
 ## Docker
 
@@ -50,4 +50,15 @@ For fault injection run the **development** build with `?debug=1`; use the diagn
 
 Continue from the task-specific Git commits, package lock, architecture and decision log. There are **no trained ML models** or GPU training in this project; no model weights/checkpoints are applicable. Original characters/course are generated from deterministic source geometry. Movement tuning lives in `simulation.ts`; layout in `scene.ts`; scoring/checkpoints in `rules.ts`. Source and tuning checkpoints, rather than learned weights, preserve the complete work.
 
+The live demo is https://leonardo-maglanoc.com/party-panic/ and is linked from the existing [demos post](https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/).
+
 See [architecture](docs/architecture.md), [network experiment](docs/network-spike.md), [validation](docs/validation.md), [decisions](docs/decisions.md), and Ammo provenance at `public/ammo/SOURCE.md`.
+
+Production bundle QA after starting Docker:
+
+```sh
+node tools/production-qa.ts
+PARTY_URL=https://leonardo-maglanoc.com/party-panic/ PARTY_QA_LABEL=live node tools/production-qa.ts
+```
+
+These save three viewport screenshots and JSON evidence; they never enable the development debug API.

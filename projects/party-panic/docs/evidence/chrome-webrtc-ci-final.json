@@ -1,0 +1,117 @@
+{
+    "date": "2026-10-19",
+    "run": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39239258088",
+    "commit": "a67f1f541d34884b76e1e91d1305924dab3f9ed7",
+    "result": "passed",
+    "browser": "155.0.8059.39",
+    "initialTwoClientSamples": [
+        {
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 6.899999999994179,
+            "fps": {
+                "samples": 191,
+                "p5": 15.037593984962406,
+                "median": 42.19409282698349,
+                "p95": 72.99270072986498
+            },
+            "counts": {
+                "sent": 18,
+                "received": 19,
+                "sentBytes": 9317,
+                "receivedBytes": 1537,
+                "rejected": 0
+            },
+            "elapsedSeconds": 6.564399999999994,
+            "sessionAveragePayloadKBps": {
+                "tx": 1.386,
+                "rx": 0.229
+            }
+        },
+        {
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 2.6000000000058208,
+            "fps": {
+                "samples": 54,
+                "p5": 12.642225031604633,
+                "median": 32.78688524590164,
+                "p95": 50.76142131984195
+            },
+            "counts": {
+                "sent": 19,
+                "received": 18,
+                "sentBytes": 1537,
+                "receivedBytes": 9317,
+                "rejected": 0
+            },
+            "elapsedSeconds": 3.6427999999999883,
+            "sessionAveragePayloadKBps": {
+                "tx": 0.412,
+                "rx": 2.498
+            }
+        }
+    ],
+    "eightClientResults": {
+        "players": 8,
+        "finished": 7,
+        "dnf": 1,
+        "host": {
+            "links": [
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                },
+                {
+                    "control": "connected",
+                    "movement": "connected",
+                    "signal": "stable"
+                }
+            ],
+            "elapsedSeconds": 59.45659999999997,
+            "ice": "host \u2194 host \u00b7 direct",
+            "semantics": "movement: ordered=false, retransmits=unlimited",
+            "rtt": 41.89999999999418,
+            "bodies": 22,
+            "fps": {
+                "samples": 619,
+                "p5": 3.7608123354645424,
+                "median": 15.974440894567206,
+                "p95": 60.24096385540056
+            },
+            "counts": {
+                "sent": 2110,
+                "received": 1629,
+                "sentBytes": 2477271,
+                "receivedBytes": 124554,
+                "rejected": 15
+            },
+            "sessionAveragePayloadKBps": {
+                "tx": 40.689,
+                "rx": 2.046
+            }
+        }
+    },
+    "measurementLimits": "One CI VM, short run with startup/lobby time included in rates and FPS; reliable control RTT bypasses injected movement impairment. Not mobile performance or different-network evidence."
+}

@@ -1,0 +1,74 @@
+{
+    "date": "2026-10-19",
+    "browser": "Chromium 154.0.8037.57",
+    "stats": {
+        "startTime": "2026-10-19T10:52:28.196Z",
+        "duration": 51280.232,
+        "expected": 9,
+        "skipped": 1,
+        "unexpected": 0,
+        "flaky": 0
+    },
+    "tests": [
+        {
+            "title": "solo traverses the actual course with input only and authoritative finish",
+            "file": "course.spec.ts",
+            "status": "expected",
+            "durationMs": 4901
+        },
+        {
+            "title": "real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch",
+            "file": "network.spec.ts",
+            "status": "skipped",
+            "durationMs": 0
+        },
+        {
+            "title": "real Ammo: ten jumps, ordered triggers, respawn, timeout and rematch",
+            "file": "physics.spec.ts",
+            "status": "expected",
+            "durationMs": 4788
+        },
+        {
+            "title": "eight capsules complete host-authoritative triggers and repeat rematches",
+            "file": "physics.spec.ts",
+            "status": "expected",
+            "durationMs": 5942
+        },
+        {
+            "title": "jump deduplication, pause/resume clock, wall timeout and leaving releases bodies",
+            "file": "physics.spec.ts",
+            "status": "expected",
+            "durationMs": 4560
+        },
+        {
+            "title": "desktop: home, touch input, portrait hint and no page scroll",
+            "file": "responsive.spec.ts",
+            "status": "expected",
+            "durationMs": 6375
+        },
+        {
+            "title": "phone-portrait: home, touch input, portrait hint and no page scroll",
+            "file": "responsive.spec.ts",
+            "status": "expected",
+            "durationMs": 4979
+        },
+        {
+            "title": "phone-landscape: home, touch input, portrait hint and no page scroll",
+            "file": "responsive.spec.ts",
+            "status": "expected",
+            "durationMs": 4150
+        },
+        {
+            "title": "solo loads real Ammo, keyboard movement and checkpoint respawn",
+            "file": "smoke.spec.ts",
+            "status": "expected",
+            "durationMs": 9641
+        },
+        {
+            "title": "startup holds room and solo actions until Ammo is ready",
+            "file": "smoke.spec.ts",
+            "status": "expected",
+            "durationMs": 4326
+        }
+    ]
+}

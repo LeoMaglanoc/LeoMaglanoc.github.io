@@ -1,0 +1,31 @@
+{
+    "date": "2026-10-19T10:39:25.074Z",
+    "browser": "154.0.8037.57",
+    "image": "sha256:19ec68f8d2e2df5e60d59bbc79c119575d3ff71ecb948700e60f598212c9d8b3",
+    "results": [
+        {
+            "name": "desktop",
+            "httpStatus": 200,
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "viewport": [1440, 900],
+            "errors": []
+        },
+        {
+            "name": "phone-portrait",
+            "httpStatus": 200,
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "viewport": [390, 844],
+            "errors": []
+        },
+        {
+            "name": "phone-landscape",
+            "httpStatus": 200,
+            "debugAPI": "undefined",
+            "scroll": [0, 0],
+            "viewport": [844, 390],
+            "errors": []
+        }
+    ]
+}

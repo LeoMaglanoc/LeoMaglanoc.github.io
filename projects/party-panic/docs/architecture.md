@@ -38,3 +38,7 @@ Scaffold: `npm create playcanvas@0.10.1 party-panic -- --format engine --starter
 - https://github.com/peers/peerjs
 
 See package-lock.json for exact versions and public/ammo/SOURCE.md for pinned WASM provenance.
+
+## Observed MVP outcome
+
+Real Chrome CI established direct host-candidate ICE, first with two clients and then eight, including explicit movement delay/loss, authority rejection, full room, DNF, result/rematch and host-leave flows. See network-spike.md for exact evidence and the earlier managed-policy failure. Each guest currently uses two PeerJS associations, so an eight-person host owns 14 RTCPeerConnections; physical-phone CPU/memory and thermal behavior must be measured. Gameplay runs on the host; eight Chrome tabs in one VM are not eight phones.
