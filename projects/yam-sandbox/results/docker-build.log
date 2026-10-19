@@ -72,7 +72,7 @@
 #10 9.890 Installing collected packages: PyOpenGL, glfw, zipp, typing_extensions, numpy, fsspec, etils, absl-py, trimesh, scipy, mujoco
 #10 25.30 Successfully installed PyOpenGL-3.1.10 absl-py-2.5.1 etils-1.14.0 fsspec-2026.9.0 glfw-2.11.0 mujoco-3.11.0 numpy-2.5.4 scipy-1.16.3 trimesh-4.11.2 typing_extensions-4.16.0 zipp-4.1.1
 #10 25.30 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
-#10 25.47 
+#10 25.47
 #10 25.47 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
 #10 25.47 [notice] To update, run: pip install --upgrade pip
 #10 DONE 25.6s

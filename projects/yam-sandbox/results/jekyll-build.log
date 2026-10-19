@@ -2,7 +2,7 @@ Configuration file: /site/_config.yml
             Source: /site
        Destination: /site/_site
  Incremental build: disabled. Enable with --incremental
-      Generating... 
+      Generating...
 Fetching external posts from medium.com:
 ...fetching https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2
 Fetching external posts from Google Blog:
