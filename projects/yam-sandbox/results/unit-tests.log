@@ -6,6 +6,6 @@ test_bimanual_scene_valid_and_names_unique (test_zip_structure.SceneStructure.te
 test_output_location_must_keep_relative_mesh_paths (test_zip_structure.SceneStructure.test_output_location_must_keep_relative_mesh_paths) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 4.944s
+Ran 6 tests in 1.474s
 
 OK

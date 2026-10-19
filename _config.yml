@@ -324,6 +324,7 @@ jekyll-minifier:
       "assets/interactive/tiny-dreamer/tiny-dreamer.css",
       "assets/interactive/mobile-sorting/sorting.css",
       "assets/interactive/language-vision/**",
+      "assets/interactive/yam-sandbox/scene/**", # preserve the physics/reference SHA256 contract
       "assets/interactive/tiny-ego-vla/**",
     ]
 

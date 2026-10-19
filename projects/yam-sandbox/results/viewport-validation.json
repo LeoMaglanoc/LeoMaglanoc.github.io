@@ -1,0 +1,690 @@
+{
+  "browser": "154.0.8037.57",
+  "hardware": "Cloud Linux; SwiftShader software WebGL. Phone viewport/touch emulation, not physical Android.",
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "height": 900,
+        "scrollWidth": 1440,
+        "controls": [
+          {
+            "id": "task",
+            "x": 495.578125,
+            "y": 815,
+            "w": 190,
+            "h": 44
+          },
+          {
+            "id": "run",
+            "x": 695.578125,
+            "y": 815,
+            "w": 85,
+            "h": 44
+          },
+          {
+            "id": "pause",
+            "x": 790.578125,
+            "y": 815,
+            "w": 73.578125,
+            "h": 44
+          },
+          {
+            "id": "reset",
+            "x": 874.15625,
+            "y": 815,
+            "w": 70.265625,
+            "h": 44
+          }
+        ]
+      },
+      "pauseFrozen": true,
+      "reset": {
+        "time": 1.0000000000000007,
+        "controller": null,
+        "pos": [
+          -0.0999998862442976,
+          -0.09999999998317263,
+          0.7607140739366358
+        ]
+      },
+      "performance": {
+        "renderedFPS": 14.586199466277703,
+        "meanFrameMs": 68.55795454545454,
+        "physicsPace": 1.0001160227404269,
+        "loadedMs": 888.5,
+        "wasmHeapBytes": 131203072,
+        "jsUsedHeapBytes": 21851032,
+        "resources": [
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/style.css",
+            "transferSize": 3982,
+            "encodedBytes": 3682
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/main.js",
+            "transferSize": 4797,
+            "encodedBytes": 4497
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/simulation.js",
+            "transferSize": 4565,
+            "encodedBytes": 4265
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/renderer.js",
+            "transferSize": 1596,
+            "encodedBytes": 1296
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/three.module.js",
+            "transferSize": 603680,
+            "encodedBytes": 603380
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/shared/mujoco-three-renderer.js",
+            "transferSize": 12568,
+            "encodedBytes": 12268
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/dexterous-rl/runtime/mujoco.js",
+            "transferSize": 292769,
+            "encodedBytes": 292469
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/controller.js",
+            "transferSize": 4180,
+            "encodedBytes": 3880
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/OrbitControls.js",
+            "transferSize": 39003,
+            "encodedBytes": 38703
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/three.core.js",
+            "transferSize": 1401621,
+            "encodedBytes": 1401321
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/dexterous-rl/runtime/mujoco.wasm",
+            "transferSize": 10117877,
+            "encodedBytes": 10117577
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/references/cube.json",
+            "transferSize": 38959,
+            "encodedBytes": 38659
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/references/cylinder.json",
+            "transferSize": 39431,
+            "encodedBytes": 39131
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/asset-manifest.json",
+            "transferSize": 882,
+            "encodedBytes": 582
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/bimanual_scene.xml",
+            "transferSize": 24903,
+            "encodedBytes": 24603
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__10.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__11.stl",
+            "transferSize": 248884,
+            "encodedBytes": 248584
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__12.stl",
+            "transferSize": 68384,
+            "encodedBytes": 68084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__13.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__14.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__15.stl",
+            "transferSize": 183984,
+            "encodedBytes": 183684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__16.stl",
+            "transferSize": 183984,
+            "encodedBytes": 183684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__17.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__2.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__3.stl",
+            "transferSize": 80984,
+            "encodedBytes": 80684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__4.stl",
+            "transferSize": 80984,
+            "encodedBytes": 80684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__5.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__6.stl",
+            "transferSize": 86584,
+            "encodedBytes": 86284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__7.stl",
+            "transferSize": 52384,
+            "encodedBytes": 52084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__8.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__9.stl",
+            "transferSize": 52384,
+            "encodedBytes": 52084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/display-meshes.json",
+            "transferSize": 405877,
+            "encodedBytes": 405577
+          }
+        ]
+      },
+      "cubeSuccess": true,
+      "cylinderSuccess": true,
+      "errors": [],
+      "badRequests": []
+    },
+    "phone-portrait": {
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "controls": [
+          {
+            "id": "task",
+            "x": 76,
+            "y": 709,
+            "w": 298,
+            "h": 44
+          },
+          {
+            "id": "run",
+            "x": 16,
+            "y": 761,
+            "w": 114,
+            "h": 44
+          },
+          {
+            "id": "pause",
+            "x": 138,
+            "y": 761,
+            "w": 114,
+            "h": 44
+          },
+          {
+            "id": "reset",
+            "x": 260,
+            "y": 761,
+            "w": 114,
+            "h": 44
+          }
+        ]
+      },
+      "pauseFrozen": true,
+      "reset": {
+        "time": 1.0000000000000007,
+        "controller": null,
+        "pos": [
+          -0.0999998862442976,
+          -0.09999999998317263,
+          0.7607140739366358
+        ]
+      },
+      "performance": {
+        "renderedFPS": 19.334300048335752,
+        "meanFrameMs": 51.72155172413793,
+        "physicsPace": 0.9607314882846594,
+        "loadedMs": 925.6000000000931,
+        "wasmHeapBytes": 131203072,
+        "jsUsedHeapBytes": 21654758,
+        "resources": [
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/style.css",
+            "transferSize": 3982,
+            "encodedBytes": 3682
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/main.js",
+            "transferSize": 4797,
+            "encodedBytes": 4497
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/simulation.js",
+            "transferSize": 4565,
+            "encodedBytes": 4265
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/renderer.js",
+            "transferSize": 1596,
+            "encodedBytes": 1296
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/three.module.js",
+            "transferSize": 603680,
+            "encodedBytes": 603380
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/shared/mujoco-three-renderer.js",
+            "transferSize": 12568,
+            "encodedBytes": 12268
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/dexterous-rl/runtime/mujoco.js",
+            "transferSize": 292769,
+            "encodedBytes": 292469
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/controller.js",
+            "transferSize": 4180,
+            "encodedBytes": 3880
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/OrbitControls.js",
+            "transferSize": 39003,
+            "encodedBytes": 38703
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/three.core.js",
+            "transferSize": 1401621,
+            "encodedBytes": 1401321
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/dexterous-rl/runtime/mujoco.wasm",
+            "transferSize": 10117877,
+            "encodedBytes": 10117577
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/references/cube.json",
+            "transferSize": 38959,
+            "encodedBytes": 38659
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/references/cylinder.json",
+            "transferSize": 39431,
+            "encodedBytes": 39131
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/asset-manifest.json",
+            "transferSize": 882,
+            "encodedBytes": 582
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/bimanual_scene.xml",
+            "transferSize": 24903,
+            "encodedBytes": 24603
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__10.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__11.stl",
+            "transferSize": 248884,
+            "encodedBytes": 248584
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__12.stl",
+            "transferSize": 68384,
+            "encodedBytes": 68084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__13.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__14.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__15.stl",
+            "transferSize": 183984,
+            "encodedBytes": 183684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__16.stl",
+            "transferSize": 183984,
+            "encodedBytes": 183684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__17.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__2.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__3.stl",
+            "transferSize": 80984,
+            "encodedBytes": 80684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__4.stl",
+            "transferSize": 80984,
+            "encodedBytes": 80684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__5.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__6.stl",
+            "transferSize": 86584,
+            "encodedBytes": 86284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__7.stl",
+            "transferSize": 52384,
+            "encodedBytes": 52084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__8.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__9.stl",
+            "transferSize": 52384,
+            "encodedBytes": 52084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/display-meshes.json",
+            "transferSize": 405877,
+            "encodedBytes": 405577
+          }
+        ]
+      },
+      "cubeSuccess": true,
+      "cylinderSuccess": true,
+      "errors": [],
+      "badRequests": []
+    },
+    "phone-landscape": {
+      "width": 844,
+      "height": 390,
+      "layout": {
+        "width": 844,
+        "height": 390,
+        "scrollWidth": 844,
+        "controls": [
+          {
+            "id": "task",
+            "x": 67.6875,
+            "y": 340,
+            "w": 174,
+            "h": 44
+          },
+          {
+            "id": "run",
+            "x": 248.6875,
+            "y": 340,
+            "w": 85,
+            "h": 44
+          },
+          {
+            "id": "pause",
+            "x": 340.6875,
+            "y": 340,
+            "w": 65.578125,
+            "h": 44
+          },
+          {
+            "id": "reset",
+            "x": 413.265625,
+            "y": 340,
+            "w": 62.265625,
+            "h": 44
+          }
+        ]
+      },
+      "pauseFrozen": true,
+      "reset": {
+        "time": 1.0000000000000007,
+        "controller": null,
+        "pos": [
+          -0.0999998862442976,
+          -0.09999999998317263,
+          0.7607140739366358
+        ]
+      },
+      "performance": {
+        "renderedFPS": 6.341772769403384,
+        "meanFrameMs": 157.6846153846154,
+        "physicsPace": 0.5984319693009319,
+        "loadedMs": 2103.5,
+        "wasmHeapBytes": 131203072,
+        "jsUsedHeapBytes": 19989519,
+        "resources": [
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/style.css",
+            "transferSize": 3982,
+            "encodedBytes": 3682
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/main.js",
+            "transferSize": 4937,
+            "encodedBytes": 4637
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/simulation.js",
+            "transferSize": 4565,
+            "encodedBytes": 4265
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/renderer.js",
+            "transferSize": 1596,
+            "encodedBytes": 1296
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/src/controller.js",
+            "transferSize": 4180,
+            "encodedBytes": 3880
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/dexterous-rl/runtime/mujoco.js",
+            "transferSize": 292769,
+            "encodedBytes": 292469
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/three.module.js",
+            "transferSize": 603680,
+            "encodedBytes": 603380
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/shared/mujoco-three-renderer.js",
+            "transferSize": 12568,
+            "encodedBytes": 12268
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/OrbitControls.js",
+            "transferSize": 39003,
+            "encodedBytes": 38703
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/mobile-sorting/vendor/three.core.js",
+            "transferSize": 1401621,
+            "encodedBytes": 1401321
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/dexterous-rl/runtime/mujoco.wasm",
+            "transferSize": 10117877,
+            "encodedBytes": 10117577
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/references/cube.json",
+            "transferSize": 38959,
+            "encodedBytes": 38659
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/references/cylinder.json",
+            "transferSize": 39431,
+            "encodedBytes": 39131
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/asset-manifest.json",
+            "transferSize": 882,
+            "encodedBytes": 582
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/bimanual_scene.xml",
+            "transferSize": 24903,
+            "encodedBytes": 24603
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__11.stl",
+            "transferSize": 248884,
+            "encodedBytes": 248584
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__10.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__12.stl",
+            "transferSize": 68384,
+            "encodedBytes": 68084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__15.stl",
+            "transferSize": 183984,
+            "encodedBytes": 183684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__13.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__14.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__16.stl",
+            "transferSize": 183984,
+            "encodedBytes": 183684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__17.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__2.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__3.stl",
+            "transferSize": 80984,
+            "encodedBytes": 80684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__4.stl",
+            "transferSize": 80984,
+            "encodedBytes": 80684
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__5.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__6.stl",
+            "transferSize": 86584,
+            "encodedBytes": 86284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__7.stl",
+            "transferSize": 52384,
+            "encodedBytes": 52084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__8.stl",
+            "transferSize": 524584,
+            "encodedBytes": 524284
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/scene/assets/model2__9.stl",
+            "transferSize": 52384,
+            "encodedBytes": 52084
+          },
+          {
+            "url": "http://localhost:8000/assets/interactive/yam-sandbox/display-meshes.json",
+            "transferSize": 405877,
+            "encodedBytes": 405577
+          }
+        ]
+      },
+      "cubeSuccess": true,
+      "cylinderSuccess": true,
+      "errors": [],
+      "badRequests": []
+    }
+  }
+}

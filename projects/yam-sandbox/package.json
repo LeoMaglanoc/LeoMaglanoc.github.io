@@ -6,7 +6,12 @@
   "scripts": {
     "test:browser": "node tools/browser_evaluate.cjs",
     "test:viewports": "node tools/browser_viewports.cjs",
-    "record": "node tools/browser_record.cjs"
+    "record": "node tools/browser_record.cjs",
+    "test:contracts": "node tools/browser_contracts.cjs",
+    "test:route": "node tools/browser_route.cjs",
+    "test:performance": "node tools/browser_performance.cjs"
   },
-  "devDependencies": { "playwright": "1.58.2" }
+  "devDependencies": {
+    "playwright": "1.58.2"
+  }
 }

@@ -1,0 +1,29 @@
+{
+  "desktop": {
+    "iframeWidth": 1440,
+    "iframeHeight": 900,
+    "innerWidth": 1440,
+    "innerHeight": 900,
+    "modelActuators": 14,
+    "sceneHash": "fd5ac89b3be31a8d70e3ca0955f492684149cb6c471f9f7e629b372b13837e7c",
+    "errors": []
+  },
+  "phone-portrait": {
+    "iframeWidth": 390,
+    "iframeHeight": 844,
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "modelActuators": 14,
+    "sceneHash": "fd5ac89b3be31a8d70e3ca0955f492684149cb6c471f9f7e629b372b13837e7c",
+    "errors": []
+  },
+  "phone-landscape": {
+    "iframeWidth": 844,
+    "iframeHeight": 390,
+    "innerWidth": 844,
+    "innerHeight": 390,
+    "modelActuators": 14,
+    "sceneHash": "fd5ac89b3be31a8d70e3ca0955f492684149cb6c471f9f7e629b372b13837e7c",
+    "errors": []
+  }
+}

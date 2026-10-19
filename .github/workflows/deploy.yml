@@ -131,6 +131,9 @@ jobs:
           node --test projects/g1-soccer/tests/contract.test.js
           python3 projects/g1-soccer/tools/check_artifacts.py
 
+      - name: Verify YAM simulation artifacts
+        run: python3 projects/yam-sandbox/tools/check_artifacts.py
+
       - name: Build Jekyll site
         run: |
           sudo apt-get update

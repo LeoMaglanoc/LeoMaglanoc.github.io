@@ -1,0 +1,21 @@
+{
+  "resets": {
+    "count": 40,
+    "beforeWasmBytes": 131203072,
+    "afterWasmBytes": 131203072,
+    "beforeRenderObjects": 44,
+    "afterRenderObjects": 44
+  },
+  "lifecycle": {
+    "nu": 14,
+    "alive": true
+  },
+  "about": {
+    "clientHeight": 246,
+    "scrollHeight": 261,
+    "overflow": "auto"
+  },
+  "backNavigation": true,
+  "loadFailure": "Could not start the sandbox: scene/bimanual_scene.xml: HTTP 503. Please reload in a browser with WebAssembly and WebGL support.",
+  "errors": []
+}

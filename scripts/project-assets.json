@@ -770,5 +770,42 @@
       "licenses/THREE-MIT.txt",
       "licenses/UNITREE-BSD-3-Clause.txt"
     ]
+  },
+  "projects/yam-sandbox": {
+    "destination": "assets/interactive/yam-sandbox",
+    "files": [
+      "THIRD_PARTY_NOTICES.md",
+      "asset-manifest.json",
+      "index.html",
+      "licenses/APACHE-2.0.txt",
+      "licenses/THREE-MIT.txt",
+      "licenses/YAM-MIT.txt",
+      "references/cube.json",
+      "references/cylinder.json",
+      "scene/assets/model2.stl",
+      "scene/assets/model2__10.stl",
+      "scene/assets/model2__11.stl",
+      "scene/assets/model2__12.stl",
+      "scene/assets/model2__13.stl",
+      "scene/assets/model2__14.stl",
+      "scene/assets/model2__15.stl",
+      "scene/assets/model2__16.stl",
+      "scene/assets/model2__17.stl",
+      "scene/assets/model2__2.stl",
+      "scene/assets/model2__3.stl",
+      "scene/assets/model2__4.stl",
+      "scene/assets/model2__5.stl",
+      "scene/assets/model2__6.stl",
+      "scene/assets/model2__7.stl",
+      "scene/assets/model2__8.stl",
+      "scene/assets/model2__9.stl",
+      "scene/bimanual_scene.xml",
+      "src/controller.js",
+      "src/main.js",
+      "src/simulation.js",
+      "style.css",
+      "src/renderer.js",
+      "display-meshes.json"
+    ]
   }
 }

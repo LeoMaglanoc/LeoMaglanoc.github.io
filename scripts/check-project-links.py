@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / '_site'
 ROUTES = [f'/{name}/' for name in (
     'party-panic', 'block-temple', 'scrap-orbit', 'rustzero', 'tiny-dreamer', 'slam',
-    'soccer', 'catchbot', 'g1', 'locomotion', 'euroguessr', 'dexterous-rl', 'loco-manipulation', 'parkour', 'portal'
+    'yam-sandbox', 'soccer', 'catchbot', 'g1', 'locomotion', 'euroguessr', 'dexterous-rl', 'loco-manipulation', 'parkour', 'portal'
 )] + [f'/assets/interactive/{name}/index.html' for name in ('pong', 'flappy')]
 RETIRED = (
     'tiny-ego-vla', 'language-vision', 'block-world', 'dustfall-outpost',
@@ -66,6 +66,12 @@ def check():
                 continue
             if not (SITE / entry['destination'] / file).is_file():
                 raise SystemExit(f'Missing runtime file: {entry["destination"]}/{file}')
+    # YAM references pin exact MJCF bytes; XML minification must not invalidate them.
+    yam_scene = 'assets/interactive/yam-sandbox/scene/bimanual_scene.xml'
+    if hashlib.sha256((SITE / yam_scene).read_bytes()).digest() != hashlib.sha256(
+        (ROOT / 'projects/yam-sandbox/scene/bimanual_scene.xml').read_bytes()
+    ).digest():
+        raise SystemExit('Published YAM scene changed; preserve its exact reference hash')
     for name, basename in [('scrap-orbit', 'index'), ('block-temple', 'index')]:
         for extension in ('html', 'js', 'wasm', 'pck'):
             folder = 'block-world' if extension == 'wasm' and name in ('scrap-orbit', 'block-temple') else name

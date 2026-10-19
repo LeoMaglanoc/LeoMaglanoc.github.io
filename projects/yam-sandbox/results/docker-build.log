@@ -1,0 +1,85 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 470B done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 0.9s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.1s
+
+#6 [stage-0 1/4] FROM docker.io/library/python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 218B 0.0s done
+#7 DONE 0.0s
+
+#8 [stage-0 2/4] WORKDIR /work
+#8 CACHED
+
+#9 [stage-0 3/4] COPY requirements.lock .
+#9 DONE 3.7s
+
+#10 [stage-0 4/4] RUN --mount=type=secret,id=proxy_ca,required=false sh -c 'if [ -f /run/secrets/proxy_ca ]; then export PIP_CERT=/run/secrets/proxy_ca; fi; pip install --no-cache-dir -r requirements.lock'
+#10 4.744 Collecting absl-py==2.5.1 (from -r requirements.lock (line 1))
+#10 4.935   Downloading absl_py-2.5.1-py3-none-any.whl.metadata (3.3 kB)
+#10 5.073 Collecting etils==1.14.0 (from -r requirements.lock (line 2))
+#10 5.219   Downloading etils-1.14.0-py3-none-any.whl.metadata (6.5 kB)
+#10 5.313 Collecting fsspec==2026.9.0 (from -r requirements.lock (line 3))
+#10 5.358   Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+#10 5.480 Collecting glfw==2.11.0 (from -r requirements.lock (line 4))
+#10 5.534   Downloading glfw-2.11.0-py2.py3-none-manylinux_2_28_x86_64.whl.metadata (5.5 kB)
+#10 5.646 Collecting mujoco==3.11.0 (from -r requirements.lock (line 5))
+#10 5.688   Downloading mujoco-3.11.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (232 kB)
+#10 6.306 Collecting numpy==2.5.4 (from -r requirements.lock (line 6))
+#10 6.389   Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+#10 6.430 Collecting PyOpenGL==3.1.10 (from -r requirements.lock (line 7))
+#10 6.513   Downloading pyopengl-3.1.10-py3-none-any.whl.metadata (3.3 kB)
+#10 6.752 Collecting scipy==1.16.3 (from -r requirements.lock (line 8))
+#10 6.793   Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (62 kB)
+#10 6.988 Collecting trimesh==4.11.2 (from -r requirements.lock (line 9))
+#10 6.992   Downloading trimesh-4.11.2-py3-none-any.whl.metadata (13 kB)
+#10 7.037 Collecting typing_extensions==4.16.0 (from -r requirements.lock (line 10))
+#10 7.090   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#10 7.133 Collecting zipp==4.1.1 (from -r requirements.lock (line 11))
+#10 7.189   Downloading zipp-4.1.1-py3-none-any.whl.metadata (3.6 kB)
+#10 7.248 Downloading absl_py-2.5.1-py3-none-any.whl (137 kB)
+#10 7.291 Downloading etils-1.14.0-py3-none-any.whl (172 kB)
+#10 7.330 Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+#10 7.389 Downloading glfw-2.11.0-py2.py3-none-manylinux_2_28_x86_64.whl (248 kB)
+#10 7.438 Downloading mujoco-3.11.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (18.9 MB)
+#10 8.188    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.9/18.9 MB 25.9 MB/s eta 0:00:00
+#10 8.203 Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+#10 8.698    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 34.6 MB/s eta 0:00:00
+#10 8.730 Downloading pyopengl-3.1.10-py3-none-any.whl (3.2 MB)
+#10 8.810    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 44.9 MB/s eta 0:00:00
+#10 8.841 Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (35.7 MB)
+#10 9.508    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.7/35.7 MB 53.7 MB/s eta 0:00:00
+#10 9.550 Downloading trimesh-4.11.2-py3-none-any.whl (740 kB)
+#10 9.589    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 740.3/740.3 kB 139.1 MB/s eta 0:00:00
+#10 9.594 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#10 9.631 Downloading zipp-4.1.1-py3-none-any.whl (10 kB)
+#10 9.890 Installing collected packages: PyOpenGL, glfw, zipp, typing_extensions, numpy, fsspec, etils, absl-py, trimesh, scipy, mujoco
+#10 25.30 Successfully installed PyOpenGL-3.1.10 absl-py-2.5.1 etils-1.14.0 fsspec-2026.9.0 glfw-2.11.0 mujoco-3.11.0 numpy-2.5.4 scipy-1.16.3 trimesh-4.11.2 typing_extensions-4.16.0 zipp-4.1.1
+#10 25.30 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#10 25.47 
+#10 25.47 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#10 25.47 [notice] To update, run: pip install --upgrade pip
+#10 DONE 25.6s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 1.5s done
+#11 writing image sha256:eb32bc802ae21b626241471734e561e4961944f32674e99c3dafbb1e14c6994a done
+#11 naming to docker.io/library/yam-sandbox:lab done
+#11 DONE 1.5s
