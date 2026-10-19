@@ -1,6 +1,7 @@
 import QRCode from 'qrcode';
 import { Vec3 } from 'playcanvas';
 import { Controls } from './input';
+import { JumpFeedback, reconcileHeight } from './prediction';
 import { DisplayMode } from './platform/displayMode';
 import { InputGate, SnapshotGate, VERSION, isSnapshot, parseControl, type Snapshot } from './protocol';
 import { admission, rank } from './rules';
@@ -55,6 +56,7 @@ let startRequested = false;
 let accepted = new Set<string>(),
     gates = new Map<string, InputGate>();
 const snapshotGate = new SnapshotGate();
+const jumpFeedback = new JumpFeedback();
 let lastSnapshot = 0,
     lastPacket = 0,
     lastReliable = 0,
@@ -376,6 +378,10 @@ transport.onMessage = (peer, lane, raw) => {
     } else if (role === 'guest' && peer === hostId) {
         if (isSnapshot(raw)) {
             if (!snapshotGate.accept(raw)) return;
+            if (!state || raw.round !== state.round) {
+                histories = [];
+                jumpFeedback.reset(controls.value.jumpSequence);
+            }
             state = raw;
             lastSnapshot = performance.now();
             histories.push({ at: lastSnapshot, state: raw });
@@ -452,6 +458,7 @@ function reset(clearNotice = true) {
     accepted = new Set();
     gates = new Map();
     histories = [];
+    jumpFeedback.reset(controls.value.jumpSequence);
     snapshotGate.tick = -1;
     snapshotGate.sequence = -1;
     view = '';
@@ -544,20 +551,26 @@ function renderGuest(dt: number, now: number) {
         const e = scene.characters.get(p.id)!;
         e.enabled = p.connected;
         if (!p.connected) continue;
+        if (p.id === localId && (state.phase !== 'racing' || state.paused || p.finish !== null))
+            jumpFeedback.seed(p, controls.value.jumpSequence);
         const prev = a.state.players.find((q) => q.id === p.id) ?? p,
             next = b.state.players.find((q) => q.id === p.id) ?? p;
+        const teleported = prev.respawns !== p.respawns || next.respawns !== p.respawns;
         const dest = new Vec3(
             prev.x + (next.x - prev.x) * f,
             prev.y + (next.y - prev.y) * f,
             prev.z + (next.z - prev.z) * f
         );
+        if (teleported) dest.set(p.x, p.y, p.z);
         if (
+            !teleported &&
             p.id === localId &&
             state.phase === 'racing' &&
             p.finish === null &&
             !state.paused &&
             now - lastSnapshot < 600
         ) {
+            const predictedY = jumpFeedback.sample(p, controls.value.jumpSequence, now);
             const age = Math.min(0.15, (now - lastSnapshot) / 1000);
             dest.set(p.x + p.vx * age, p.y + p.vy * age, p.z + p.vz * age);
             const pos = e.getPosition();
@@ -566,7 +579,7 @@ function renderGuest(dt: number, now: number) {
                 const alpha = 1 - Math.exp(-dt * 12);
                 dest.set(
                     pos.x + latestInput.axes[0] * 2.8 * dt + (dest.x - pos.x) * alpha,
-                    pos.y + (dest.y - pos.y) * alpha,
+                    predictedY ?? reconcileHeight(pos.y, dest.y, p.vy, dt),
                     pos.z + latestInput.axes[1] * 2.8 * dt + (dest.z - pos.z) * alpha
                 );
             }

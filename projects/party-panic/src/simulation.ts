@@ -2,6 +2,7 @@ import { Vec3, type Entity } from 'playcanvas';
 import { COLORS, neutral, type Input, type Player, type Snapshot } from './protocol';
 import { COURSE, boundedProgress, canTransition, checkpoint, finish, resetPlayer } from './rules';
 import { Scene, type Obstacle } from './scene';
+import { approachHorizontal, RACE_MOVEMENT } from './movement';
 export type Motion = {
     input: Input;
     received: number;
@@ -278,24 +279,28 @@ export class Simulation {
         }
         const fresh = performance.now() - m.received < 400;
         const axes = fresh ? m.input.axes : [0, 0];
-        const speed = 2.8;
-        const accel = grounded ? 30 : 9;
-        let vx = v.x,
-            vz = v.z;
-        const targetX = axes[0] * speed,
-            targetZ = axes[1] * speed;
-        const approach = (a: number, b: number, d: number) => a + Math.max(-d, Math.min(d, b - a));
+        const accel = grounded
+            ? Math.hypot(...axes) < 0.01
+                ? RACE_MOVEMENT.groundBraking
+                : RACE_MOVEMENT.groundAcceleration
+            : RACE_MOVEMENT.airAcceleration;
         // Preserve a brief authoritative sideways impulse instead of braking it away immediately.
-        if (time - m.hitAt > 0.25) {
-            vx = approach(vx, targetX, accel * dt);
-            vz = approach(vz, targetZ, accel * dt);
-        } else {
-            vx = approach(vx, targetX, 3 * dt);
-            vz = approach(vz, targetZ, 3 * dt);
-        }
+        const [vx, vz] = approachHorizontal(
+            v.x,
+            v.z,
+            axes[0],
+            axes[1],
+            RACE_MOVEMENT.speed,
+            time - m.hitAt > 0.25 ? accel : RACE_MOVEMENT.hitRecoveryAcceleration,
+            dt
+        );
         let vy = v.y;
-        if (time - m.buffer <= 0.1 && time - m.groundedAt <= 0.1 && time - m.lastJump > 0.18) {
-            vy = 7.5;
+        if (
+            time - m.buffer <= RACE_MOVEMENT.jumpBuffer &&
+            time - m.groundedAt <= RACE_MOVEMENT.coyoteTime &&
+            time - m.lastJump > 0.18
+        ) {
+            vy = RACE_MOVEMENT.jumpVelocity;
             m.buffer = -100;
             m.groundedAt = -100;
             m.lastJump = time;

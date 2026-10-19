@@ -233,10 +233,10 @@ export class Scene {
         const e = this.characters.get(id);
         if (!e) return;
         const p = e.getPosition();
-        const desired = new Vec3(p.x, p.y + 5.8, p.z + 8.4);
-        const alpha = snap ? 1 : 1 - Math.exp(-dt * 7);
+        const desired = new Vec3(p.x, p.y + 6.2, p.z + 8.4);
+        const alpha = snap ? 1 : 1 - Math.exp(-dt * 10);
         this.camera.setPosition(this.camera.getPosition().lerp(this.camera.getPosition(), desired, alpha));
-        this.camera.lookAt(this.camera.getPosition().x, p.y + 0.2, p.z - 3);
+        this.camera.lookAt(this.camera.getPosition().x, p.y + 0.2, p.z - 4.5);
     }
     face(id: string, yaw: number) {
         this.characters.get(id)?.findByName('model')?.setLocalEulerAngles(0, yaw, 0);
