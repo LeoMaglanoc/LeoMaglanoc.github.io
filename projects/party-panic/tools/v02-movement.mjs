@@ -19,6 +19,7 @@ for (const scenario of ['cardinal', 'diagonal', 'jump', 'buffered-landing', 'exp
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto((process.env.PARTY_URL || 'http://127.0.0.1:5174/party-panic/') + '?debug=1');
     await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     const result = await page.evaluate((scenario) => {
         const d = window.partyDebug;

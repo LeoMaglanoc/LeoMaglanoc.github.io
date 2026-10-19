@@ -6,6 +6,7 @@ test('three repeated Dash/Laser mode cycles use authoritative timeouts and relea
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('./?debug=1');
     await page.waitForFunction(() => !!window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     const baseline = await page.evaluate(() => window.partyDebug.getDiagnostics().bodies);
     expect(baseline).toBeGreaterThan(1);

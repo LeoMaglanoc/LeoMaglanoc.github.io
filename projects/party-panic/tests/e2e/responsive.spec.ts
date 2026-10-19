@@ -20,6 +20,7 @@ for (const [name, width, height] of [
         await expect(page.locator('#host')).toBeInViewport();
         await expect(page.locator('#join-open')).toBeInViewport();
         await page.screenshot({ path: `test-results/${name}-home.png` });
+        await page.locator('#bot-count').selectOption('0');
         await page.locator('#solo').click();
         await page.evaluate(() => window.partyDebug.hostAdvance(4));
         await page.waitForFunction(() => window.partyDebug.getState().phase === 'racing');

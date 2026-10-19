@@ -4,6 +4,7 @@ test('real Ammo: ten jumps, ordered triggers, respawn, timeout and rematch', asy
     page.on('pageerror', (e) => errors.push(e.message));
     await page.goto('./?debug=1');
     await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     await page.evaluate(() => window.partyDebug.hostAdvance(4));
     const landingHeights = await page.evaluate(() => {
@@ -69,6 +70,7 @@ test('real Ammo: ten jumps, ordered triggers, respawn, timeout and rematch', asy
 test('eight capsules complete host-authoritative triggers and repeat rematches', async ({ page }) => {
     await page.goto('./?debug=1');
     await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     await page.evaluate(() => {
         for (let n = 1; n < 8; n++) window.partyDebug.addTestPlayer('Local fixture ' + n);
@@ -104,6 +106,7 @@ test('eight capsules complete host-authoritative triggers and repeat rematches',
 test('jump deduplication, pause/resume clock, wall timeout and leaving releases bodies', async ({ page }) => {
     await page.goto('./?debug=1');
     await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     await page.evaluate(() => window.partyDebug.hostAdvance(4));
     const values = await page.evaluate(() => {
@@ -142,6 +145,7 @@ test('jump deduplication, pause/resume clock, wall timeout and leaving releases 
     await expect(page.locator('#panel')).toContainText('DNF');
     await page.locator('#result-leave').click();
     expect(await page.evaluate(() => window.partyDebug.getDiagnostics().bodies)).toBe(14);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     expect((await page.evaluate(() => window.partyDebug.getState())).phase).toBe('countdown');
 });

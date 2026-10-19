@@ -852,3 +852,134 @@ body.playing .top-right {
     opacity: 1;
     cursor: default;
 }
+
+.solo-options {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 9px;
+}
+.solo-options label {
+    font-size: 10px;
+    color: #a4afc6;
+}
+select {
+    width: 100%;
+    margin-top: 5px;
+    background: #182238;
+    border: 1px solid #ffffff30;
+    border-radius: 7px;
+    padding: 10px 7px;
+    color: #f6f4eb;
+    font: inherit;
+    pointer-events: auto;
+}
+#aim-zone {
+    position: absolute;
+    inset: 0 0 0 42%;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    z-index: 1;
+}
+#reticle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffffdd;
+    font-size: 28px;
+    line-height: 1;
+    text-shadow: 0 1px 3px #000;
+    z-index: 2;
+}
+#reticle.confirmed {
+    color: #ffcc4a;
+    transform: translate(-50%, -50%) scale(1.5);
+}
+#tag-board {
+    position: absolute;
+    top: max(104px, env(safe-area-inset-top));
+    right: max(18px, env(safe-area-inset-right));
+    width: 150px;
+    padding: 9px;
+    border: 1px solid #ffffff25;
+    border-radius: 8px;
+    background: #141c30c9;
+    font-size: 10px;
+    z-index: 2;
+}
+#tag-board > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px;
+}
+#tag-board b {
+    margin-left: auto;
+    color: #75dfd1;
+}
+#tag-board .dot {
+    width: 9px;
+    height: 9px;
+}
+.controls {
+    z-index: 3;
+}
+.panel,
+.leave,
+.notice,
+.hud {
+    z-index: 5;
+}
+.center-message {
+    z-index: 4;
+}
+#fire {
+    width: 98px;
+    height: 98px;
+    border: 2px solid #a1fff2;
+    border-radius: 50%;
+    background: #75dfd1de;
+    color: #14233a;
+    font-size: 17px;
+    font-weight: 800;
+    touch-action: none;
+    user-select: none;
+    box-shadow: 0 4px 0 #287d7c;
+    pointer-events: auto;
+}
+#fire small {
+    font-size: 8px;
+}
+body.laser .name-label {
+    font-size: 9px;
+}
+@media (orientation: landscape) and (max-height: 540px) {
+    #fire {
+        width: 84px;
+        height: 84px;
+    }
+    #tag-board {
+        top: 96px;
+        width: 128px;
+        right: 20px;
+        padding: 5px;
+    }
+    .solo-options select {
+        padding: 7px 4px;
+    }
+    .actions {
+        top: 22vh;
+    }
+}
+@media (orientation: portrait) {
+    #fire {
+        width: 90px;
+        height: 90px;
+    }
+    #tag-board {
+        top: 152px;
+        right: 16px;
+        width: 130px;
+    }
+}

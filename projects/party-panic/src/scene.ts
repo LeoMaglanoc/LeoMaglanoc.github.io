@@ -16,6 +16,7 @@ import {
     WasmModule,
     createGraphicsDevice
 } from 'playcanvas';
+import { LASER_COVERS, LASER_SPAWNS, getAimRig, type Point } from './laser';
 import type { Player, ModeId } from './protocol';
 export type Obstacle = { entity: Entity; z: number; kind: 'sweeper' | 'bumper'; phase: number };
 type CharacterMotion = { model: Entity; arms: Entity[]; feet: Entity[]; vy: number; squash: number };
@@ -24,6 +25,7 @@ export class Scene {
     private motions = new Map<string, CharacterMotion>();
     private particles: EffectParticle[] = [];
     modeId: ModeId = 'obstacle-dash';
+    traces: { entity: Entity; age: number }[] = [];
     world!: Entity;
     app!: AppBase;
     camera!: Entity;
@@ -233,8 +235,57 @@ export class Scene {
         this.app.root.addChild(this.world);
         this.app.batcher!.addGroup('course', false, 45, 0);
         if (modeId === 'obstacle-dash') this.level();
-        else this.box('arena-floor', [0, -0.6, 0], [28, 1.2, 22], '#253d59');
+        else this.arena();
+        this.camera.camera!.clearColor =
+            modeId === 'laser-tag' ? new Color(0.025, 0.04, 0.09) : new Color(0.075, 0.11, 0.19);
         this.app.batcher!.generate();
+    }
+    arena() {
+        for (const [i, c] of LASER_COVERS.entries()) {
+            const size: [number, number, number] = [c.max.x - c.min.x, c.max.y - c.min.y, c.max.z - c.min.z];
+            const pos: [number, number, number] = [
+                (c.min.x + c.max.x) / 2,
+                (c.min.y + c.max.y) / 2,
+                (c.min.z + c.max.z) / 2
+            ];
+            this.box(c.id ?? 'cover-' + i, pos, size, c.color ?? '#455b7e');
+            if (c.id !== 'arena-floor')
+                this.box(
+                    'cover-light',
+                    [pos[0], c.max.y + 0.02, pos[2]],
+                    [size[0], 0.04, size[2]],
+                    i % 2 ? '#75dfd1' : '#b6a0ff',
+                    null
+                );
+        }
+        for (let x = -12; x <= 12; x += 2) this.box('floor-grid', [x, 0.012, 0], [0.025, 0.025, 21], '#334b69', null);
+        for (let z = -10; z <= 10; z += 2) this.box('floor-grid', [0, 0.013, z], [27, 0.025, 0.025], '#334b69', null);
+        LASER_SPAWNS.forEach((p, i) => {
+            this.box('spawn-pad', [p.x, 0.025, p.z], [1.4, 0.05, 1.4], i % 2 ? '#75dfd1' : '#b6a0ff', null);
+        });
+    }
+    followLaser(id: string, yaw: number, pitch: number) {
+        const p = this.characters.get(id)?.getPosition();
+        if (!p) return;
+        const rig = getAimRig(p, yaw, pitch);
+        this.camera.setPosition(rig.camera.x, rig.camera.y, rig.camera.z);
+        this.camera.lookAt(
+            rig.camera.x + rig.direction.x * 25,
+            rig.camera.y + rig.direction.y * 25,
+            rig.camera.z + rig.direction.z * 25
+        );
+    }
+    showShot(from: Point, to: Point, color: string) {
+        if (this.traces.length >= 16) this.traces.shift()!.entity.destroy();
+        const length = Math.hypot(to.x - from.x, to.y - from.y, to.z - from.z);
+        if (length < 0.01) return;
+        const entity = this.mesh(this.app.root, 'box', [0.045, 0.045, length], color, [
+            (from.x + to.x) / 2,
+            (from.y + to.y) / 2,
+            (from.z + to.z) / 2
+        ]);
+        entity.lookAt(to.x, to.y, to.z);
+        this.traces.push({ entity, age: 0 });
     }
     addPlayer(p: Player, physical: boolean) {
         if (this.characters.has(p.id)) return this.characters.get(p.id)!;
@@ -247,6 +298,11 @@ export class Scene {
         this.mesh(model, 'sphere', [0.59, 0.4, 0.25], '#202b41', [0, 0.35, -0.34]);
         this.mesh(model, 'sphere', [0.09, 0.1, 0.05], '#f9faf6', [-0.14, 0.37, -0.47]);
         this.mesh(model, 'sphere', [0.09, 0.1, 0.05], '#f9faf6', [0.14, 0.37, -0.47]);
+        if (this.modeId === 'laser-tag') {
+            this.mesh(model, 'box', [0.18, 0.22, 0.6], '#e6eeff', [0.44, 0.05, -0.4]);
+            this.mesh(model, 'box', [0.12, 0.12, 0.18], p.color, [0.44, 0.05, -0.79]);
+            this.mesh(e, 'cylinder', [1.2, 0.03, 1.2], '#75dfd1', [0, -0.68, 0]).name = 'spawn-shield';
+        }
         const arms = [-0.4, 0.4].map((x) => this.mesh(model, 'sphere', [0.2, 0.28, 0.23], p.color, [x, -0.1, 0]));
         const feet = [-0.2, 0.2].map((x) =>
             this.mesh(model, 'sphere', [0.25, 0.19, 0.35], '#202b41', [x, -0.59, -0.04])
@@ -276,6 +332,8 @@ export class Scene {
     animate(players: Player[], time: number, dt: number) {
         const step = Math.min(Math.max(dt, 0), 0.1);
         for (const p of players) {
+            const shield = this.characters.get(p.id)?.findByName('spawn-shield');
+            if (shield) shield.enabled = p.protectedUntil > time;
             const m = this.motions.get(p.id);
             if (!m) continue;
             if (m.vy < -1 && Math.abs(p.vy) < 0.5 && p.y > -0.2 && p.y < 1.1) {
@@ -301,6 +359,13 @@ export class Scene {
             const stretch = grounded ? -m.squash : Math.min(Math.abs(p.vy) * 0.006, 0.05);
             m.model.setLocalScale(1 - stretch * 0.5, 1 + stretch, 1 - stretch * 0.5);
             m.model.setLocalPosition(0, grounded ? -m.squash * 0.2 : 0, 0);
+        }
+        for (let i = this.traces.length - 1; i >= 0; i--) {
+            this.traces[i].age += step;
+            if (this.traces[i].age >= 0.1) {
+                this.traces[i].entity.destroy();
+                this.traces.splice(i, 1);
+            }
         }
         for (let i = this.particles.length - 1; i >= 0; i--) {
             const particle = this.particles[i];
@@ -339,6 +404,8 @@ export class Scene {
         }
     }
     clearEffects() {
+        for (const trace of this.traces) trace.entity.destroy();
+        this.traces.length = 0;
         for (const particle of this.particles) particle.entity.destroy();
         this.particles.length = 0;
     }

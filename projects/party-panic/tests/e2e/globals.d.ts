@@ -3,8 +3,10 @@ import type { Faults } from '../../src/transport';
 declare global {
     interface Window {
         partyDebug: {
+            getInput: () => import('../../src/protocol').Input;
             getState: () => Snapshot;
             setTestInput: (axes: [number, number], jumpSequence: number) => void;
+            setAim: (yaw: number, pitch: number) => void;
             selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => boolean | undefined;
             readyTestPlayers: () => void;
             addTestPlayer: (name: string) => unknown;

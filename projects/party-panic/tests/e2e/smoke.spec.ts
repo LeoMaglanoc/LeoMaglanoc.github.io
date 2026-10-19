@@ -5,6 +5,7 @@ test('solo loads real Ammo, keyboard movement and checkpoint respawn', async ({ 
     await page.goto('./?debug=1');
     await page.waitForFunction(() => !!window.partyDebug);
     await page.screenshot({ path: 'test-results/home-desktop.png' });
+    await page.locator('#bot-count').selectOption('0');
     await page.getByRole('button', { name: 'Play solo' }).click();
     await expect(page.locator('#countdown')).toContainText('3');
     await page.waitForFunction(() => window.partyDebug.getState()?.phase === 'racing');
@@ -37,6 +38,7 @@ test('startup holds room and solo actions until Ammo is ready', async ({ page })
     await expect(page.locator('#join-open')).toBeDisabled();
     release();
     await expect(page.locator('#solo')).toBeEnabled({ timeout: 20000 });
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     await expect(page.locator('#countdown')).toBeVisible();
 });

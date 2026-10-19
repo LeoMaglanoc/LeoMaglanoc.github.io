@@ -2,6 +2,9 @@ import { Vec3, type Entity } from 'playcanvas';
 import { VERSION, COLORS, neutral, type Input, type Player, type Snapshot, type ModeId } from './protocol';
 import { COURSE, boundedProgress, canTransition, checkpoint, finish, resetPlayer } from './rules';
 import { Scene, type Obstacle } from './scene';
+import { LASER } from './laser';
+import { BotController } from './bots';
+import { LaserRound } from './laserRound';
 import { approachHorizontal, RACE_MOVEMENT } from './movement';
 export type Motion = {
     input: Input;
@@ -15,6 +18,8 @@ export type Motion = {
 };
 export class Simulation {
     scene: Scene;
+    laser = new LaserRound();
+    bots = new BotController();
     state: Snapshot = {
         type: 'snapshot',
         version: VERSION,
@@ -33,6 +38,7 @@ export class Simulation {
     onEvent: (type: string, payload: unknown) => void = () => {};
     constructor(scene: Scene) {
         this.scene = scene;
+        this.laser.onEvent = (type, payload) => this.onEvent(type, payload);
         scene.onTrigger = (id, index) => this.trigger(id, index);
         scene.onHit = (id, o) => this.hit(id, o);
     }
@@ -109,6 +115,8 @@ export class Simulation {
     selectMode(modeId: ModeId) {
         if (this.state.phase !== 'lobby') return false;
         if (modeId === this.state.modeId) return true;
+        this.laser.reset();
+        this.bots.reset();
         this.state.modeId = modeId;
         this.state.roundId++;
         this.scene.setMode(modeId);
@@ -123,21 +131,19 @@ export class Simulation {
     }
     preparePlayer(p: Player, index: number) {
         resetPlayer(p, index);
-        if (this.state.modeId === 'laser-tag') {
-            p.x = ((index % 4) - 1.5) * 6;
-            p.z = index < 4 ? 8 : -8;
-            p.yaw = index < 4 ? 0 : 180;
-            p.protectedUntil = 1;
-        }
+        p.ready = p.bot;
+        if (this.state.modeId === 'laser-tag') this.laser.prepare(p, index);
     }
     start() {
         if (
             this.state.phase !== 'lobby' ||
             !this.state.players.length ||
-            this.state.players.some((p) => p.connected && !p.ready)
+            this.state.players.some((p) => p.connected && !p.bot && !p.ready)
         )
             return;
         this.state.roundId++;
+        this.laser.reset();
+        this.bots.reset();
         this.state.elapsed = 0;
         this.state.countdown = 3;
         this.state.players.forEach((p, i) => {
@@ -149,6 +155,8 @@ export class Simulation {
     }
     rematch() {
         if (this.state.phase !== 'results') return;
+        this.laser.reset();
+        this.bots.reset();
         this.state.roundId++;
         for (const p of [...this.state.players]) if (!p.connected) this.remove(p.id);
         this.state.players.forEach((p, i) => {
@@ -163,6 +171,7 @@ export class Simulation {
     remove(id: string) {
         this.state.players = this.state.players.filter((p) => p.id !== id);
         this.motions.delete(id);
+        this.bots.remove(id);
         this.scene.removePlayer(id);
     }
     disconnect(id: string) {
@@ -171,7 +180,7 @@ export class Simulation {
         if (this.state.phase === 'lobby') this.remove(id);
         else {
             p.connected = false;
-            this.motions.get(id)!.input = neutral();
+            this.motions.get(id)!.input = neutral(this.state.modeId, this.state.roundId);
             this.scene.characters.get(id)!.enabled = false;
             this.onEvent('disconnect', { id });
         }
@@ -183,7 +192,9 @@ export class Simulation {
         this.onEvent('pause', { paused: value });
     }
     teleport(p: Player) {
-        const body = this.scene.characters.get(p.id)!.rigidbody!;
+        const entity = this.scene.characters.get(p.id)!;
+        entity.enabled = p.connected;
+        const body = entity.rigidbody!;
         body.teleport(p.x, p.y, p.z);
         body.linearVelocity = Vec3.ZERO;
         body.angularVelocity = Vec3.ZERO;
@@ -232,7 +243,7 @@ export class Simulation {
     }
     step(dt: number) {
         const s = this.state;
-        const timeout = s.modeId === 'laser-tag' ? 90 : COURSE.timeout;
+        const timeout = s.modeId === 'laser-tag' ? LASER.duration : COURSE.timeout;
         s.tick++;
         if (s.phase === 'countdown') {
             s.countdown = Math.max(0, s.countdown - dt);
@@ -251,13 +262,19 @@ export class Simulation {
                 this.transition('results');
             }
         }
+        if (s.modeId === 'laser-tag' && s.phase === 'racing') this.laser.beforeStep(s, this.scene);
         this.scene.obstaclesAt(s.elapsed);
+        if (s.phase === 'racing')
+            for (const p of s.players) {
+                if (p.bot && p.connected)
+                    this.input(p.id, this.bots.update(p, s.players, s.modeId, s.roundId, s.elapsed, dt));
+            }
         for (const p of s.players) {
             if (!p.connected) continue;
             const e = this.scene.characters.get(p.id)!,
                 m = this.motions.get(p.id)!;
             m.grace = Math.max(0, m.grace - dt);
-            if (s.phase !== 'racing' || p.finish !== null) {
+            if (s.phase !== 'racing' || p.finish !== null || p.respawnAt > 0) {
                 e.rigidbody!.linearVelocity = Vec3.ZERO;
                 continue;
             }
@@ -265,7 +282,7 @@ export class Simulation {
         }
         if (s.phase === 'racing') this.scene.physics.step(dt);
         for (const p of s.players) {
-            if (!p.connected) continue;
+            if (!p.connected || p.respawnAt > 0) continue;
             const e = this.scene.characters.get(p.id)!,
                 pos = e.getPosition(),
                 v = e.rigidbody!.linearVelocity;
@@ -279,9 +296,20 @@ export class Simulation {
                 if (p.y < -5 || Math.abs(p.x) > 12 || p.z > 14) this.respawn(p);
                 p.progress = Math.max(p.progress, boundedProgress(p));
             }
-            if (Math.hypot(v.x, v.z) > 0.15) p.yaw = (Math.atan2(-v.x, -v.z) * 180) / Math.PI;
+            if (
+                s.modeId === 'laser-tag' &&
+                (p.y < -3 || Math.abs(p.x) > LASER.bounds.x || Math.abs(p.z) > LASER.bounds.z)
+            ) {
+                this.laser.prepare(p, s.players.indexOf(p));
+                p.protectedUntil = s.elapsed + LASER.spawnProtection;
+                p.respawns++;
+                this.teleport(p);
+            }
+            if (s.modeId === 'obstacle-dash' && Math.hypot(v.x, v.z) > 0.15)
+                p.yaw = (Math.atan2(-v.x, -v.z) * 180) / Math.PI;
             this.scene.face(p.id, p.yaw);
         }
+        if (s.modeId === 'laser-tag' && s.phase === 'racing') this.laser.afterStep(s, this.scene, this.motions);
         if (
             s.phase === 'racing' &&
             (s.elapsed >= timeout ||
@@ -331,12 +359,13 @@ export class Simulation {
             v.z,
             axes[0],
             axes[1],
-            RACE_MOVEMENT.speed,
+            this.state.modeId === 'laser-tag' ? LASER.speed : RACE_MOVEMENT.speed,
             time - m.hitAt > 0.25 ? accel : RACE_MOVEMENT.hitRecoveryAcceleration,
             dt
         );
         let vy = v.y;
         if (
+            this.state.modeId === 'obstacle-dash' &&
             time - m.buffer <= RACE_MOVEMENT.jumpBuffer &&
             time - m.groundedAt <= RACE_MOVEMENT.coyoteTime &&
             time - m.lastJump > 0.18

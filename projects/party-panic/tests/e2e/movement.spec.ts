@@ -4,6 +4,7 @@ for (const direction of ['cardinal', 'diagonal'] as const) {
     test(`real Ammo: ${direction} acceleration and braking stay bounded`, async ({ page }) => {
         await page.goto('./?debug=1');
         await page.waitForFunction(() => window.partyDebug);
+        await page.locator('#bot-count').selectOption('0');
         await page.locator('#solo').click();
         const measured = await page.evaluate((direction) => {
             const d = window.partyDebug;
@@ -39,6 +40,7 @@ for (const direction of ['cardinal', 'diagonal'] as const) {
 test('real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump', async ({ page }) => {
     await page.goto('./?debug=1');
     await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     const jumpEvents = await page.evaluate(() => {
         const d = window.partyDebug;

@@ -1,5 +1,6 @@
 import QRCode from 'qrcode';
 import { AudioFeedback } from './audio';
+import { LASER, getAimRig, resolveShot, laserRank, type Point } from './laser';
 import { Vec3 } from 'playcanvas';
 import { Controls } from './input';
 import { JumpFeedback, reconcileHeight } from './prediction';
@@ -15,11 +16,11 @@ const escape = (s: string) =>
     s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 $('#app').innerHTML =
     `<div class="shade" id="shade"></div><header class="topbar"><a class="brand" href="./">PARTY<br><b>PANIC!</b></a><div class="top-right"><span class="tag">Small party. Big chaos.</span><span class="pill"><i></i>1–8 friends</span></div></header>
-<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
+<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
 <footer class="bottom-bar" id="footer"><span>ORIGINAL COURSE / NO ELIMINATION</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
-<section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
-<div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
+<section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
+<div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
 <details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><button id="sound-toggle">Sound on</button><pre id="display-status"></pre></details>`;
 const scene = new Scene(),
     transport = new Transport(),
@@ -67,6 +68,8 @@ let sim: Simulation | null = null,
     room = '',
     busy = false;
 let startRequested = false;
+let lastPredictedShot = -1,
+    hitUntil = 0;
 let accepted = new Set<string>(),
     gates = new Map<string, InputGate>();
 const snapshotGate = new SnapshotGate();
@@ -185,7 +188,76 @@ async function connect(next: 'host' | 'guest', id = '') {
         if (token === attempt) busy = false;
     }
 }
+function point(value: unknown): value is Point {
+    return (
+        !!value &&
+        typeof value === 'object' &&
+        ['x', 'y', 'z'].every(
+            (k) => typeof Reflect.get(value, k) === 'number' && Number.isFinite(Reflect.get(value, k))
+        )
+    );
+}
+controls.onShot = (sequence) => {
+    const p = state?.players.find((p) => p.id === localId);
+    if (
+        !state ||
+        state.modeId !== 'laser-tag' ||
+        state.phase !== 'racing' ||
+        state.paused ||
+        !p ||
+        p.respawnAt > 0 ||
+        !p.connected
+    )
+        return;
+    lastPredictedShot = sequence;
+    const position = scene.characters.get(localId)?.getPosition() ?? p;
+    const rig = getAimRig(position, controls.aimYaw, controls.aimPitch);
+    const shot = resolveShot({
+        ...rig,
+        yaw: controls.aimYaw,
+        pitch: controls.aimPitch,
+        shooterId: localId,
+        targets: state.players,
+        now: state.elapsed
+    });
+    scene.showShot(shot.from, shot.to, p.color);
+    sound.play('shot');
+};
+function syncControls() {
+    const modeId = state?.modeId ?? 'obstacle-dash',
+        roundId = state?.roundId ?? 0;
+    const changed = controls.value.modeId !== modeId || controls.value.roundId !== roundId;
+    const p = state?.players.find((p) => p.id === localId);
+    controls.setContext(
+        modeId,
+        roundId,
+        !!state && !ended && !state.paused && (state.phase === 'countdown' || state.phase === 'racing') && !p?.respawnAt
+    );
+    if (changed && modeId === 'laser-tag') {
+        controls.aimYaw = (-(p?.yaw ?? 0) * Math.PI) / 180;
+        controls.aimPitch = -0.08;
+    }
+}
 function feedback(type: string, payload: unknown) {
+    if (type === 'shot' && payload && typeof payload === 'object') {
+        const shot = payload as Record<string, unknown>;
+        if (typeof shot.id !== 'string' || !point(shot.from) || !point(shot.to)) return;
+        if (shot.id !== localId || Number(shot.sequence) > lastPredictedShot) {
+            scene.showShot(shot.from, shot.to, state?.players.find((p) => p.id === shot.id)?.color ?? '#75dfd1');
+            if (shot.id === localId) sound.play('shot');
+        }
+        return;
+    }
+    if (type === 'tag' && payload && typeof payload === 'object') {
+        const tag = payload as Record<string, unknown>;
+        if (typeof tag.targetId === 'string') scene.effect('hit', tag.targetId);
+        if (tag.shooterId === localId) {
+            sound.play('tag');
+            hitUntil = performance.now() + 180;
+        }
+        if (tag.targetId === localId) sound.play('hit');
+        return;
+    }
     if (!payload || typeof payload !== 'object' || !('id' in payload) || typeof payload.id !== 'string') return;
     if (['jump', 'land', 'hit', 'checkpoint'].includes(type)) {
         scene.effect(type as 'jump' | 'land' | 'hit' | 'checkpoint', payload.id);
@@ -207,7 +279,7 @@ function wireSim() {
         transport.broadcast('control', msg, accepted);
         log(type, payload);
         feedback(type, payload);
-        sendState(true);
+        if (['phase', 'mode', 'disconnect', 'respawn', 'finish'].includes(type)) sendState(true);
     };
 }
 function solo() {
@@ -220,7 +292,15 @@ function solo() {
     localId = 'solo';
     hostId = 'solo';
     sim = new Simulation(scene);
+    const selected = $<HTMLSelectElement>('#solo-mode').value === 'laser-tag' ? 'laser-tag' : 'obstacle-dash';
+    sim.selectMode(selected);
     sim.add(localId, nickname);
+    const count = Math.max(0, Math.min(7, Number($<HTMLSelectElement>('#bot-count').value) || 0));
+    for (let i = 0; i < count; i++) {
+        const bot = sim.add('bot-' + i, ['Pip', 'Nova', 'Byte', 'Zig', 'Echo', 'Mochi', 'Bolt'][i]);
+        bot.bot = true;
+        bot.ready = true;
+    }
     wireSim();
     state = sim.state;
     sim.ready(localId, state.roundId);
@@ -316,24 +396,23 @@ function updateRoster() {
     $('#roster').innerHTML = state.players
         .map(
             (p) =>
-                `<div class="player-row"><i class="dot" style="background:${p.color}"></i><span>${escape(p.name)}${p.id === localId ? ' (you)' : ''}</span><small>${p.id === hostId ? 'HOST' : !p.connected ? 'LEFT' : p.ready ? 'READY' : 'NOT READY'}</small></div>`
+                `<div class="player-row"><i class="dot" style="background:${p.color}"></i><span>${escape(p.name)}${p.id === localId ? ' (you)' : ''}</span><small>${p.bot ? 'AI BOT' : p.id === hostId ? 'HOST' : !p.connected ? 'LEFT' : p.ready ? 'READY' : 'NOT READY'}</small></div>`
         )
         .join('');
 }
 function results() {
     if (!state) return;
     view = 'results';
+    const laser = state.modeId === 'laser-tag';
+    const ranked = laser ? laserRank(state.players) : rank(state.players);
+    const leaders = laser
+        ? ranked.filter((p) => p.score === ranked[0]?.score)
+        : ranked.filter((p) => p.finish !== null && p.finish === ranked[0]?.finish);
+    const winner = leaders.length
+        ? `${leaders.length > 1 ? 'Tie: ' : 'Winner: '}${leaders.map((p) => escape(p.name)).join(' · ')}`
+        : 'Time’s up! Reach both checkpoints, then cross the gold gate.';
     showPanel(
-        `<p class="eyebrow">Every fall was character building</p><h2>That was a dash.</h2><p>${state.players.some((p) => p.finish !== null) ? 'Same friends. Fresh chances. One more?' : 'Time’s up! Reach both checkpoints, then cross the gold gate.'}</p>${rank(
-            state.players
-        )
-            .map(
-                (p, i) =>
-                    `<div class="result-row"><span class="place">${i + 1}</span><i class="dot" style="background:${p.color}"></i><span class="name">${escape(p.name)}${p.id === localId ? ' · you' : ''}</span><span class="time">${p.finish !== null ? p.finish.toFixed(2) + 's' : 'DNF · CP ' + p.checkpoint + '/2'}</span></div>`
-            )
-            .join(
-                ''
-            )}<div class="row">${role === 'host' ? '<button class="primary" id="rematch">Run it back ↻</button>' : '<p class="status">Waiting for the host to rematch…</p>'}<button class="quiet" id="result-leave">Leave</button></div>`
+        `<p class="eyebrow">${laser ? 'Good aim. Better rematch.' : 'Every fall was character building'}</p><h2>${laser ? 'Top tags.' : 'That was a dash.'}</h2><p>${winner}</p>${ranked.map((p, i) => `<div class="result-row"><span class="place">${i + 1}</span><i class="dot" style="background:${p.color}"></i><span class="name">${escape(p.name)}${p.id === localId ? ' · you' : p.bot ? ' · AI' : ''}</span><span class="time">${laser ? `${p.score} tags${p.connected ? '' : ' · LEFT'}` : p.finish !== null ? p.finish.toFixed(2) + 's' : 'DNF · CP ' + p.checkpoint + '/2'}</span></div>`).join('')}<div class="row">${role === 'host' ? '<button class="primary" id="rematch">Play again / switch game ↻</button>' : '<p class="status">Waiting for the host to rematch…</p>'}<button class="quiet" id="result-leave">Leave</button></div>`
     );
     if (role === 'host')
         $('#rematch').onclick = () => {
@@ -345,23 +424,43 @@ function results() {
 function renderState() {
     if (!state || ended) return;
     const active = state.phase === 'racing' || state.phase === 'countdown';
+    const laser = state.modeId === 'laser-tag';
+    const p = state.players.find((p) => p.id === localId);
+    const dead = !!p?.respawnAt;
     document.body.classList.toggle('playing', active);
+    document.body.classList.toggle('laser', laser && active);
     $('#shade').classList.toggle('hidden', active);
-    $('#controls').classList.toggle('hidden', !active);
-    $('#keyboard-help').classList.toggle('hidden', !active);
-    $('#hud').classList.toggle('hidden', !active);
+    for (const id of ['controls', 'keyboard-help', 'hud']) $('#' + id).classList.toggle('hidden', !active);
+    $('#jump').classList.toggle('hidden', laser);
+    $('#fire').classList.toggle('hidden', !laser);
+    $('#aim-zone').classList.toggle('hidden', !active || !laser || dead);
+    $('#reticle').classList.toggle('hidden', !active || !laser || dead);
+    $('#tag-board').classList.toggle('hidden', !active || !laser);
+    $('#keyboard-help').textContent = laser
+        ? 'WASD MOVE · MOUSE AIM · CLICK FIRE · ESC RELEASES MOUSE'
+        : 'WASD / ARROWS MOVE · SPACE JUMP';
     if (active) {
         $('#panel').classList.add('hidden');
-        const p = state.players.find((p) => p.id === localId);
         $('#hud').innerHTML =
-            `<div><small>TIME LEFT</small><strong>${Math.max(0, 120 - state.elapsed).toFixed(1)}<span style="font-size:14px">s</span></strong></div><div><small>CHECKPOINT</small><strong>${p?.checkpoint ?? 0}<span style="font-size:14px"> / 2</span></strong></div>`;
+            `<div><small>TIME LEFT</small><strong>${Math.max(0, (laser ? LASER.duration : 120) - state.elapsed).toFixed(1)}<span style="font-size:14px">s</span></strong></div><div><small>${laser ? ((p?.protectedUntil ?? 0) > state.elapsed ? 'SHIELD ACTIVE · TAGS' : 'YOUR TAGS') : 'CHECKPOINT'}</small><strong>${laser ? (p?.score ?? 0) : (p?.checkpoint ?? 0)}${laser ? '' : '<span style="font-size:14px"> / 2</span>'}</strong></div>`;
+        if (laser)
+            $('#tag-board').innerHTML = laserRank(state.players)
+                .slice(0, 3)
+                .map(
+                    (q) =>
+                        `<div><i class="dot" style="background:${q.color}"></i>${escape(q.name)}${q.bot ? ' · AI' : ''}<b>${q.score}</b></div>`
+                )
+                .join('');
         const count = state.phase === 'countdown';
-        $('#countdown').classList.toggle('hidden', !count && !state.paused && p?.finish === null);
+        $('#countdown').classList.toggle('hidden', !count && !state.paused && !(laser ? dead : p?.finish !== null));
         if (count)
             $('#countdown').innerHTML =
-                `<strong>${Math.max(1, Math.ceil(state.countdown))}</strong><p>Find your footing.</p>`;
+                `<strong>${Math.max(1, Math.ceil(state.countdown))}</strong><p>${laser ? 'Find cover. Make your move.' : 'Find your footing.'}</p>`;
         else if (state.paused) $('#countdown').innerHTML = '<strong>PAUSED</strong><p>Host is in another tab.</p>';
-        else if (p?.finish !== null)
+        else if (laser && dead)
+            $('#countdown').innerHTML =
+                `<strong>TAGGED!</strong><p>Back in ${Math.max(0, Math.ceil((p?.respawnAt ?? 0) - state.elapsed))}s · then 1s shield</p>`;
+        else if (!laser && p?.finish !== null)
             $('#countdown').innerHTML = '<strong>FINISHED!</strong><p>Waiting for the rest of the party…</p>';
     } else {
         $('#countdown').classList.add('hidden');
@@ -439,7 +538,7 @@ transport.onMessage = (peer, lane, raw) => {
                 scene.setMode(raw.modeId);
             }
             state = raw;
-            controls.setContext(raw.modeId, raw.roundId);
+            syncControls();
             lastSnapshot = performance.now();
             histories.push({ at: lastSnapshot, state: raw });
             histories = histories.slice(-20);
@@ -501,6 +600,7 @@ function endSession(message: string) {
     $('#controls').classList.add('hidden');
     $('#countdown').classList.add('hidden');
     $('#hud').classList.add('hidden');
+    for (const id of ['aim-zone', 'reticle', 'tag-board']) $('#' + id).classList.add('hidden');
     $('#labels').innerHTML = '';
     view = 'ended';
     showPanel(
@@ -514,6 +614,7 @@ function reset(clearNotice = true) {
     startRequested = false;
     ended = true;
     transport.close();
+    if (document.pointerLockElement) document.exitPointerLock();
     for (const id of scene.characters.keys()) scene.removePlayer(id);
     sim = null;
     state = null;
@@ -531,7 +632,8 @@ function reset(clearNotice = true) {
     transport.peer = null;
     document.body.classList.remove('playing');
     $('#panel').classList.add('hidden');
-    for (const id of ['controls', 'hud', 'countdown', 'keyboard-help']) $('#' + id).classList.add('hidden');
+    for (const id of ['controls', 'hud', 'countdown', 'keyboard-help', 'aim-zone', 'reticle', 'tag-board'])
+        $('#' + id).classList.add('hidden');
     $('#labels').innerHTML = '';
     $('#shade').classList.remove('hidden');
     if (clearNotice) $('#notice').classList.add('hidden');
@@ -539,6 +641,7 @@ function reset(clearNotice = true) {
     scene.camera.setPosition(17, 23, 25);
     scene.camera.lookAt(0, 0, -32);
     controls.clear();
+    lastPredictedShot = -1;
     scene.clearEffects();
     const url = new URL(location.href);
     url.searchParams.delete('room');
@@ -615,8 +718,8 @@ function renderGuest(dt: number, now: number) {
     const f = Math.max(0, Math.min(1, (target - a.at) / Math.max(1, b.at - a.at)));
     for (const p of state.players) {
         const e = scene.characters.get(p.id)!;
-        e.enabled = p.connected;
-        if (!p.connected) continue;
+        e.enabled = p.connected && p.respawnAt === 0;
+        if (!e.enabled) continue;
         if (p.id === localId && (state.phase !== 'racing' || state.paused || p.finish !== null))
             jumpFeedback.seed(p, controls.value.jumpSequence);
         const prev = a.state.players.find((q) => q.id === p.id) ?? p,
@@ -630,13 +733,15 @@ function renderGuest(dt: number, now: number) {
         if (teleported) dest.set(p.x, p.y, p.z);
         if (
             !teleported &&
+            state.modeId === 'obstacle-dash' &&
             p.id === localId &&
             state.phase === 'racing' &&
             p.finish === null &&
             !state.paused &&
             now - lastSnapshot < 600
         ) {
-            const predictedY = jumpFeedback.sample(p, controls.value.jumpSequence, now);
+            const predictedY =
+                state.modeId === 'obstacle-dash' ? jumpFeedback.sample(p, controls.value.jumpSequence, now) : null;
             const age = Math.min(0.15, (now - lastSnapshot) / 1000);
             dest.set(p.x + p.vx * age, p.y + p.vy * age, p.z + p.vz * age);
             const pos = e.getPosition();
@@ -651,7 +756,7 @@ function renderGuest(dt: number, now: number) {
             }
         }
         e.setPosition(dest);
-        scene.face(p.id, p.yaw);
+        scene.face(p.id, p.id === localId && state.modeId === 'laser-tag' ? (-controls.aimYaw * 180) / Math.PI : p.yaw);
     }
 }
 function labels() {
@@ -662,7 +767,7 @@ function labels() {
     const html: string[] = [];
     for (const p of state.players) {
         const e = scene.characters.get(p.id);
-        if (!e || !p.connected) continue;
+        if (!e || !p.connected || p.respawnAt > 0 || (state.modeId === 'laser-tag' && p.id === localId)) continue;
         const pos = e.getPosition().clone();
         pos.y += 1.25;
         const screen = scene.camera.camera!.worldToScreen(pos);
@@ -688,7 +793,7 @@ async function boot() {
             frameAt = now;
             fps = fps * 0.95 + 0.05 / Math.max(0.001, actualDelta);
             if (frames.length < 36000) frames.push(1 / Math.max(0.001, actualDelta));
-            controls.setContext(state?.modeId ?? 'obstacle-dash', state?.roundId ?? 0);
+            syncControls();
             if (now - lastInput >= 1000 / 30) {
                 latestInput = controls.sample();
                 lastInput = now;
@@ -705,8 +810,11 @@ async function boot() {
             }
             if (role === 'guest') renderGuest(dt, now);
             if (state && !ended) {
-                if (state.phase === 'countdown' || state.phase === 'racing' || state.phase === 'results')
-                    scene.follow(localId, dt);
+                if (state.phase === 'countdown' || state.phase === 'racing' || state.phase === 'results') {
+                    if (state.modeId === 'laser-tag') scene.followLaser(localId, controls.aimYaw, controls.aimPitch);
+                    else scene.follow(localId, dt);
+                }
+                $('#reticle').classList.toggle('confirmed', now < hitUntil);
                 if (now - lastUI >= 100) {
                     renderState();
                     lastUI = now;
@@ -729,7 +837,7 @@ async function boot() {
             if (now - lastStats >= 500) {
                 const secs = Math.max(1, (now - transport.started) / 1000);
                 $('#stats').textContent =
-                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.1 · real-phone QA pending`;
+                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.2 · real-phone QA pending`;
                 lastStats = now;
             }
             if (now > noticeUntil) $('#notice').classList.add('hidden');
@@ -745,6 +853,10 @@ async function boot() {
                     getState: () => structuredClone(state),
                     getLogs: () => logs,
                     getInput: () => latestInput,
+                    setAim: (yaw: number, pitch: number) => {
+                        controls.aimYaw = yaw;
+                        controls.aimPitch = pitch;
+                    },
                     selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => sim?.selectMode(modeId),
                     setTestInput: (axes: [number, number], jumpSequence: number) => {
                         if (sim)

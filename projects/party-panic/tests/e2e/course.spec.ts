@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 test('solo traverses the actual course with input only and authoritative finish', async ({ page }) => {
     await page.goto('./?debug=1');
     await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     await page.evaluate(() => window.partyDebug.hostAdvance(4));
     const result = await page.evaluate(() => {

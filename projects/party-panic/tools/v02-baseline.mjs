@@ -19,6 +19,7 @@ for (const [name, width, height] of [
     await page.goto('http://127.0.0.1:5174/party-panic/?debug=1');
     await page.waitForFunction(() => window.partyDebug);
     await page.screenshot({ path: `${dir}/${name}-home.png` });
+    await page.locator('#bot-count').selectOption('0');
     await page.locator('#solo').click();
     await page.evaluate(() => window.partyDebug.hostAdvance(4));
     await page.waitForTimeout(500);
