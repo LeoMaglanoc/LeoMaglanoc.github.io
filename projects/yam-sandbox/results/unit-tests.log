@@ -1,0 +1,11 @@
+test_contract_and_reference_frames (test_physics.Physics.test_contract_and_reference_frames) ... ok
+test_finger_gap_direction (test_physics.Physics.test_finger_gap_direction) ... ok
+test_lost_grasp_reports_failure (test_physics.Physics.test_lost_grasp_reports_failure) ... ok
+test_no_pose_writes_in_live_controller (test_physics.Physics.test_no_pose_writes_in_live_controller) ... ok
+test_bimanual_scene_valid_and_names_unique (test_zip_structure.SceneStructure.test_bimanual_scene_valid_and_names_unique) ... ok
+test_output_location_must_keep_relative_mesh_paths (test_zip_structure.SceneStructure.test_output_location_must_keep_relative_mesh_paths) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 4.944s
+
+OK

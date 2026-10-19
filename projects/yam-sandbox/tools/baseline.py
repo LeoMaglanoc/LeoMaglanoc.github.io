@@ -7,7 +7,6 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from build_scene import build
 scene=build(ROOT/'upstream/yam.xml')
-m=mj.MjModel.from_xml_path(str(scene).replace('upstream/bimanual_scene.xml','scene/zip_baseline.xml')) if False else None
 # Compile with assets relative to the XML; preserve untouched output separately.
 (ROOT/'scene/zip_baseline.xml').write_bytes(scene.read_bytes());scene.unlink()
 m=mj.MjModel.from_xml_path(str(ROOT/'scene/zip_baseline.xml'));d=mj.MjData(m)
