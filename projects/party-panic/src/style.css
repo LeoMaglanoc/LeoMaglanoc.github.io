@@ -1101,3 +1101,19 @@ body.damaged::after {
         padding: 6px 9px;
     }
 }
+
+/* Keep diagnostics clear of both thumbs and the weapon selector. */
+body.playing .diagnostics {
+    top: max(96px, env(safe-area-inset-top));
+    left: max(20px, env(safe-area-inset-left));
+    right: auto;
+    bottom: auto;
+    max-width: min(340px, calc(100vw - 40px));
+}
+@media (orientation: landscape) and (max-height: 540px) {
+    .bottom-bar a {
+        left: 28px;
+        right: auto;
+        bottom: 40px;
+    }
+}

@@ -27,6 +27,18 @@ for (const [name, width, height] of [
         if (name === 'phone-portrait') await expect(page.locator('.portrait-hint')).toBeVisible();
         await expect(page.locator('#jump')).toBeInViewport();
         await expect(page.locator('#joystick')).toBeInViewport();
+        await expect(page.locator('#dive')).toBeInViewport();
+        expect(
+            await page.evaluate(() => {
+                const button = document.querySelector('#dive')!;
+                const rect = button.getBoundingClientRect();
+                return [0.2, 0.5, 0.8].every((x) =>
+                    [0.2, 0.5, 0.8].every((y) =>
+                        button.contains(document.elementFromPoint(rect.x + rect.width * x, rect.y + rect.height * y))
+                    )
+                );
+            })
+        ).toBe(true);
         const stick = await page.locator('#joystick').boundingBox();
         await page.mouse.move(stick!.x + stick!.width / 2, stick!.y + stick!.height / 2);
         await page.mouse.down();
@@ -41,3 +53,31 @@ for (const [name, width, height] of [
         await context.close();
     });
 }
+
+test('landscape Laser weapon controls remain clickable above the playfield and clear of diagnostics', async ({
+    page
+}) => {
+    await page.setViewportSize({ width: 844, height: 390 });
+    await page.goto('./?debug=1');
+    await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#solo-mode').selectOption('laser-tag');
+    await page.locator('#bot-count').selectOption('0');
+    await page.locator('#solo').click();
+    await page.waitForFunction(() => window.partyDebug.getState().phase === 'racing');
+    for (const id of ['fire', 'weapon-quick', 'weapon-charged']) {
+        await expect(page.locator('#' + id)).toBeInViewport();
+        expect(
+            await page.evaluate((id) => {
+                const button = document.getElementById(id)!;
+                const rect = button.getBoundingClientRect();
+                return [0.2, 0.5, 0.8].every((x) =>
+                    [0.2, 0.5, 0.8].every((y) =>
+                        button.contains(document.elementFromPoint(rect.x + rect.width * x, rect.y + rect.height * y))
+                    )
+                );
+            }, id)
+        ).toBe(true);
+    }
+    await page.locator('#weapon-charged').click();
+    await expect(page.locator('#weapon-charged')).toHaveAttribute('aria-pressed', 'true');
+});
