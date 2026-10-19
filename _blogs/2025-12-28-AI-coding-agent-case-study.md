@@ -14,6 +14,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
+- [Party Panic — Obstacle Dash]({{ "/party-panic/" | relative_url }}) · solo practice + experimental P2P rooms
 - [G1 Soccer Lab]({{ "/soccer/" | relative_url }})
 - [CatchBot — outrun a predictive robot]({{ "/catchbot/" | relative_url }})
 - [Portal Puzzle Lab]({{ "/portal/" | relative_url }})

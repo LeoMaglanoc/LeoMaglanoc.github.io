@@ -1,0 +1,39 @@
+name: Party Panic Chrome connectivity
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/party-panic/**'
+      - '.github/workflows/party-panic-connectivity.yml'
+permissions:
+  contents: read
+jobs:
+  chrome-webrtc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: projects/party-panic
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: projects/party-panic/package-lock.json
+      - run: npm ci
+      - name: Real Chrome and PeerJS Cloud WebRTC test (no mocked transport)
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+          RUN_WEBRTC: '1'
+        run: |
+          google-chrome --version
+          npm run test:e2e -- tests/e2e/network.spec.ts
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: party-panic-chrome-webrtc
+          path: projects/party-panic/test-results
+          retention-days: 7

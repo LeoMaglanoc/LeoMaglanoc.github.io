@@ -111,6 +111,15 @@ jobs:
           cache: "npm"
           cache-dependency-path: projects/slam/web/package-lock.json
 
+      - name: Build and test Party Panic
+        working-directory: projects/party-panic
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: |
+          npm ci
+          npm run check
+          npm run test:e2e
+
       - name: Test CatchBot kinematics, prediction and gameplay
         run: node --test projects/catchbot/tests/*.test.js
 
@@ -146,6 +155,13 @@ jobs:
           mkdir -p _site/slam
           cp -R projects/slam/web/dist/. _site/slam/
           test -f _site/slam/index.html
+
+      - name: Publish Party Panic at /party-panic/
+        run: |
+          mkdir -p _site/party-panic
+          cp -R projects/party-panic/dist/. _site/party-panic/
+          test -f _site/party-panic/index.html
+          test -f _site/party-panic/ammo/ammo.wasm.wasm
 
       - name: Verify stable project routes and runtime files
         run: python3 scripts/check-project-links.py
