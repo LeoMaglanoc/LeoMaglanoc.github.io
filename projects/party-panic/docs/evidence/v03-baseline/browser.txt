@@ -1,0 +1,33 @@
+
+> party-panic@0.2.0 test:e2e
+> playwright test
+
+[WebServer] (node:980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:1002) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+INPUT-ONLY COURSE {"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.56468200683594,"finish":58.23333333333131,"x":-3.9441123008728027,"y":0.7499361038208008,"z":-130.61134338378906,"vx":-8.945559102357947e-7,"vy":0.00038623809814453125,"vz":-2.799999952316284,"yaw":0.000018305099667088637,"respawns":0}
+  ✓   1 tests/e2e/course.spec.ts:2:1 › solo traverses the actual course with input only and authoritative finish (5.3s)
+  ✓   2 tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable (7.8s)
+  ✓   3 tests/e2e/display.spec.ts:59:1 › results and rematch retain display state; explicit exit and reenter work (11.9s)
+LASER AI HALFWAY [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":7,"respawnAt":42.643566666665635,"protectedUntil":40.26023333333238,"aimPitch":-0.08,"checkpoint":0,"progress":0,"finish":null,"x":11,"y":0.7499745488166809,"z":-8,"vx":0,"vy":0,"vz":0,"yaw":180,"respawns":6},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":9,"deaths":5,"respawnAt":0,"protectedUntil":39.84356666666574,"aimPitch":-0.04308650980374339,"checkpoint":0,"progress":0,"finish":null,"x":-8.763998031616211,"y":0.7499850988388062,"z":8,"vx":1.7257435321807861,"vy":-0.000008046627044677734,"vz":0.000005222175332164625,"yaw":-28.991904335654088,"respawns":5},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":6,"deaths":6,"respawnAt":0,"protectedUntil":35.026899999999344,"aimPitch":-0.04308438154939549,"checkpoint":0,"progress":0,"finish":null,"x":0.5601329803466797,"y":0.7499650120735168,"z":-7.999999523162842,"vx":-2.947068452835083,"vy":-0.000017970800399780273,"vz":-0.000006759089501429116,"yaw":151.0080957895396,"respawns":6},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":10,"deaths":7,"respawnAt":42.59356666666564,"protectedUntil":37.44356666666587,"aimPitch":-0.06424552272876809,"checkpoint":0,"progress":0,"finish":null,"x":5.037422180175781,"y":0.7495253682136536,"z":4.002878189086914,"vx":0,"vy":0,"vz":0,"yaw":15.770502598786946,"respawns":6}]
+  ✓   4 tests/e2e/laser.spec.ts:3:1 › solo Laser Tag: real AI inputs tag, respawn, score and finish a complete match (12.2s)
+  ✓   5 tests/e2e/laser.spec.ts:45:1 › laser touch move + aim-and-fire reach real input and host shooting; release clears fire (4.9s)
+AI RACE FINISHES [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":0,"progress":0,"finish":null,"x":-1.9499999284744263,"y":0.7499682307243347,"z":3.000000238418579,"vx":-0.0000015646224937881925,"vy":0,"vz":0.00000357628005076549,"yaw":180,"respawns":0},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.56446838378906,"finish":58.41666666666463,"x":-3.938406467437744,"y":0.7499666213989258,"z":-130.65406799316406,"vx":-0.0000017883129430629197,"vy":0.000022172927856445312,"vz":0,"yaw":-0.00002859623570218895,"respawns":0},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.5956268310547,"finish":52.69999999999829,"x":4.062777996063232,"y":0.7499066591262817,"z":-130.68894958496094,"vx":0.000001788491658771818,"vy":0.00004506111145019531,"vz":0,"yaw":-0.0001646093380137926,"respawns":0},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"checkpoint":2,"progress":130.59487915039062,"finish":61.983333333331096,"x":-2.0623180866241455,"y":0.7499659657478333,"z":-130.6826171875,"vx":0.0000017881505982586532,"vy":0.000001430511474609375,"vz":-0.0000035763011965173064,"yaw":0.00003889898444160564,"respawns":0}]
+  ✓   6 tests/e2e/laser.spec.ts:91:1 › AI racers traverse the real course without test positions or progress claims (4.7s)
+REPEATED MODE BODY COUNTS [{"mode":"laser-tag","count":17},{"mode":"obstacle-dash","count":15},{"mode":"laser-tag","count":17},{"mode":"obstacle-dash","count":15},{"mode":"laser-tag","count":17},{"mode":"obstacle-dash","count":15}]
+  ✓   7 tests/e2e/modes.spec.ts:3:1 › three repeated Dash/Laser mode cycles use authoritative timeouts and release scene bodies (12.7s)
+  ✓   8 tests/e2e/movement.spec.ts:4:5 › real Ammo: cardinal acceleration and braking stay bounded (3.4s)
+  ✓   9 tests/e2e/movement.spec.ts:4:5 › real Ammo: diagonal acceleration and braking stay bounded (3.7s)
+  ✓  10 tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump (3.9s)
+  -  11 tests/e2e/network.spec.ts:5:1 › real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch
+  -  12 tests/e2e/network.spec.ts:165:1 › real WebRTC Laser: gesture readiness, cover, authoritative tags, faults and eight-client firing
+  ✓  13 tests/e2e/physics.spec.ts:2:1 › real Ammo: ten jumps, ordered triggers, respawn, timeout and rematch (5.7s)
+  ✓  14 tests/e2e/physics.spec.ts:70:1 › eight capsules complete host-authoritative triggers and repeat rematches (6.8s)
+  ✓  15 tests/e2e/physics.spec.ts:106:1 › jump deduplication, pause/resume clock, wall timeout and leaving releases bodies (4.4s)
+  ✓  16 tests/e2e/responsive.spec.ts:7:5 › desktop: home, touch input, portrait hint and no page scroll (6.6s)
+  ✓  17 tests/e2e/responsive.spec.ts:7:5 › phone-portrait: home, touch input, portrait hint and no page scroll (5.3s)
+  ✓  18 tests/e2e/responsive.spec.ts:7:5 › phone-landscape: home, touch input, portrait hint and no page scroll (5.4s)
