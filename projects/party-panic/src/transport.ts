@@ -1,5 +1,8 @@
 import Peer, { type DataConnection } from 'peerjs';
 export type Lane = 'control' | 'movement';
+export function candidatePath(local?: string, remote?: string) {
+    return local === 'relay' || remote === 'relay' ? 'relayed' : local && remote ? 'direct' : 'unknown';
+}
 export type Faults = { delay: number; jitter: number; loss: number; reorder: number };
 export class FaultLink {
     timers = new Set<ReturnType<typeof setTimeout>>();
@@ -193,7 +196,7 @@ export class Transport {
                 };
                 const a = stats.get(p.localCandidateId),
                     b = stats.get(p.remoteCandidateId);
-                this.ice = `${a?.candidateType ?? '?'} ↔ ${b?.candidateType ?? '?'} · ${a?.candidateType === 'relay' || b?.candidateType === 'relay' ? 'relayed' : 'direct'}`;
+                this.ice = `${a?.candidateType ?? '?'} ↔ ${b?.candidateType ?? '?'} · ${candidatePath(a?.candidateType, b?.candidateType)}`;
             } else this.ice = 'candidate pair pending / unavailable';
         } catch {
             this.ice = 'ICE statistics unavailable in this browser';

@@ -1,5 +1,5 @@
 import { it, expect, vi, afterEach } from 'vitest';
-import { FaultLink } from '../src/transport';
+import { FaultLink, candidatePath } from '../src/transport';
 afterEach(() => vi.useRealTimers());
 it('injects movement loss but preserves reliable round events', () => {
     const link = new FaultLink({ delay: 0, jitter: 0, loss: 1, reorder: 0 });
@@ -29,4 +29,12 @@ it('delivers jittered messages without treating a missing packet as connection l
     vi.advanceTimersByTime(300);
     expect(send).toHaveBeenCalledWith({ sequence: 3, jumpSequence: 1 });
     expect(link.timers.size).toBe(0);
+});
+
+it('does not label an unavailable ICE candidate as a direct connection', () => {
+    expect(candidatePath('host', 'srflx')).toBe('direct');
+    expect(candidatePath('host', 'relay')).toBe('relayed');
+    expect(candidatePath('relay', undefined)).toBe('relayed');
+    expect(candidatePath('host', undefined)).toBe('unknown');
+    expect(candidatePath()).toBe('unknown');
 });

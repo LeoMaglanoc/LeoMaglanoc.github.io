@@ -128,7 +128,16 @@ test('jump deduplication, pause/resume clock, wall timeout and leaving releases 
     expect(values.paused).toBe(values.time);
     expect(values.resumed - values.time).toBeCloseTo(3, 1);
     expect(values.bodies).toBe(15);
-    await page.evaluate(() => window.partyDebug.advanceWall(121));
+    await page.evaluate(() => {
+        const d = window.partyDebug,
+            id = d.getState().players[0].id;
+        d.teleport(id, -40);
+        d.hostAdvance(0.1);
+        d.teleport(id, -85);
+        d.hostAdvance(0.1);
+        d.teleport(id, -132);
+        d.advanceWall(121);
+    });
     await expect(page.locator('#panel')).toContainText('DNF');
     await page.locator('#result-leave').click();
     expect(await page.evaluate(() => window.partyDebug.getDiagnostics().bodies)).toBe(14);

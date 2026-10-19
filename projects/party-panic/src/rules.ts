@@ -24,6 +24,7 @@ export function checkpoint(p: Player, index: number) {
     return true;
 }
 export function finish(p: Player, elapsed: number) {
+    if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed > COURSE.timeout) return false;
     if (p.checkpoint !== 2 || p.finish !== null || !p.connected) return false;
     p.finish = elapsed;
     return true;

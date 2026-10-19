@@ -191,7 +191,13 @@ export class Simulation {
                 }
             }
         }
-        if (s.phase === 'racing') s.elapsed += dt;
+        if (s.phase === 'racing') {
+            s.elapsed += dt;
+            if (s.elapsed >= COURSE.timeout) {
+                s.elapsed = COURSE.timeout;
+                this.transition('results');
+            }
+        }
         this.scene.obstaclesAt(s.elapsed);
         for (const p of s.players) {
             if (!p.connected) continue;

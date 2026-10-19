@@ -121,3 +121,11 @@ describe('lobby and race rules', () => {
         expect(gate.accept({ tick: 9, sequence: 10 } as Snapshot)).toBe(true);
     });
 });
+
+it('does not award a finish after the active hard deadline', () => {
+    const p = player();
+    p.checkpoint = 2;
+    for (const time of [-1, NaN, Infinity, 120.001]) expect(finish(p, time)).toBe(false);
+    expect(p.finish).toBeNull();
+    expect(finish(p, 120)).toBe(true);
+});
