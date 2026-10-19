@@ -1,1 +1,1 @@
-export { default } from '@playcanvas/eslint-config/prettier';
+export default { singleQuote: true, tabWidth: 4, printWidth: 120, trailingComma: 'none' };

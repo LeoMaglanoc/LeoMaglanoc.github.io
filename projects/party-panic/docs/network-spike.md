@@ -11,6 +11,7 @@ Fault injection is available only in the Vite development build with `?debug=1`:
 Physical-device acceptance remains NOT RUN: Android↔Android, Android host↔iOS Safari guest, iOS Safari host↔Android guest, eight phones, ten join attempts, host background/foreground and thermal/performance measurements. Desktop Chromium WebRTC proves only that environment's path, not mobile connectivity.
 
 ## Actual two-browser experiment
+
 Executed public PeerJS Cloud signaling with two real Chromium pages in the managed workspace. Both peers received OPEN. Guest sent two OFFER messages, host received them and sent two ANSWER messages; guest received both answers. Neither association reached connected: iceConnectionState remained `new`, zero gameplay packets exchanged, no candidate pair selected, RTT unavailable. Test failed to join the guest. Repeated runs with the configured HTTP proxy showed the same failure. No mocked WebRTC was used.
 
 Root cause evidence: `/etc/chromium/policies/managed/misc.json` sets `WebRtcIPHandling: disable_non_proxied_udp`. This is an environment policy; it was not modified or bypassed. Direct P2P cannot be certified in this managed browser. No relayed path was configured and no TURN deployment was added. This does not establish that ordinary phone browsers will fail, nor that they will succeed.

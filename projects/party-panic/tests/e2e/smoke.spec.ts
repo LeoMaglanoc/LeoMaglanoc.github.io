@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+test('solo loads real Ammo, keyboard movement and checkpoint respawn', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('./?debug=1');
+    await page.waitForFunction(() => !!window.partyDebug);
+    await page.screenshot({ path: 'test-results/home-desktop.png' });
+    await page.getByRole('button', { name: 'Play solo' }).click();
+    await expect(page.locator('#countdown')).toContainText('3');
+    await page.waitForFunction(() => window.partyDebug.getState()?.phase === 'racing');
+    await page.keyboard.down('w');
+    await page.waitForFunction(() => window.partyDebug.getState().players[0].z < 0);
+    await page.keyboard.up('w');
+    let s = await page.evaluate(() => window.partyDebug.getState());
+    expect(s.players[0].z).toBeLessThan(0);
+    expect(s.players[0].y).toBeGreaterThan(0.5);
+    await page.keyboard.press('Space');
+    await page.waitForFunction(() => window.partyDebug.getState().players[0].y > 1.15);
+    s = await page.evaluate(() => window.partyDebug.getState());
+    expect(s.players[0].y).toBeGreaterThan(1.15);
+    await page.screenshot({ path: 'test-results/racing-desktop.png' });
+    await page.waitForTimeout(1000);
+    expect(errors).toEqual([]);
+});
