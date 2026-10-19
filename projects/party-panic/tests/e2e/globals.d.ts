@@ -6,18 +6,33 @@ declare global {
             getInput: () => import('../../src/protocol').Input;
             getState: () => Snapshot;
             setTestInput: (axes: [number, number], jumpSequence: number) => void;
+            aimAtPlayer: (id: string) => void;
+            clearMeasurements: () => void;
             setAim: (yaw: number, pitch: number) => void;
             selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => boolean | undefined;
             readyTestPlayers: () => void;
             addTestPlayer: (name: string) => unknown;
             getDiagnostics: () => {
                 bodies: number;
+                renderComponents: number;
+                transientEntities: number;
+                connectionCount: number;
+                bufferedBytes: number;
+                snapshotAge: number;
+                display: import('../../src/platform/displayMode').DisplayModeState;
                 elapsedSeconds: number;
                 ice: string;
                 semantics: string;
                 rtt: number;
                 fps: { median: number; p5: number };
-                counts: { sent: number; received: number; rejected: number; sentBytes: number; receivedBytes: number };
+                counts: {
+                    sent: number;
+                    received: number;
+                    rejected: number;
+                    droppedBackpressure: number;
+                    sentBytes: number;
+                    receivedBytes: number;
+                };
             };
             getLogs: () => unknown[];
             sendControl: (v: unknown) => void;

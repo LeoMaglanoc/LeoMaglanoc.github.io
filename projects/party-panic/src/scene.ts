@@ -403,6 +403,9 @@ export class Scene {
             });
         }
     }
+    get transientCount() {
+        return this.traces.length + this.particles.length;
+    }
     clearEffects() {
         for (const trace of this.traces) trace.entity.destroy();
         this.traces.length = 0;

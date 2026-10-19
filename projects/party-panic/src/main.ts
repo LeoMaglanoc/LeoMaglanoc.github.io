@@ -9,7 +9,7 @@ import { InputGate, SnapshotGate, VERSION, neutral, isSnapshot, parseControl, ty
 import { admission, rank } from './rules';
 import { Scene } from './scene';
 import { Simulation } from './simulation';
-import { Transport } from './transport';
+import { Transport, type Faults } from './transport';
 import './style.css';
 const $ = <T extends HTMLElement = HTMLElement>(s: string) => document.querySelector<T>(s)!;
 const escape = (s: string) =>
@@ -152,6 +152,7 @@ async function connect(next: 'host' | 'guest', id = '') {
     );
     $('#cancel').onclick = () => reset();
     role = next;
+    transport.controlLimit = next === 'guest' ? 128 : 30;
     ended = false;
     homeVisible(false);
     try {
@@ -289,6 +290,7 @@ function solo() {
     ended = false;
     homeVisible(false);
     role = 'host';
+    transport.controlLimit = 30;
     localId = 'solo';
     hostId = 'solo';
     sim = new Simulation(scene);
@@ -619,6 +621,7 @@ function reset(clearNotice = true) {
     sim = null;
     state = null;
     role = 'none';
+    transport.controlLimit = 30;
     room = '';
     busy = false;
     accepted = new Set();
@@ -659,12 +662,19 @@ document.addEventListener('visibilitychange', () => {
         sendState(true);
     }
 });
-window.addEventListener('pagehide', () => transport.close());
+window.addEventListener('pagehide', (event) => {
+    transport.close();
+    if (event.persisted && role !== 'none')
+        endSession('The party connection closed while this page was away. Start a fresh party.');
+});
 $('#export').onclick = () => {
     const report = {
         date: new Date().toISOString(),
         userAgent: navigator.userAgent,
         viewport: [innerWidth, innerHeight],
+        display: display.state,
+        modeId: state?.modeId,
+        roundId: state?.roundId,
         role,
         ice: transport.ice,
         semantics: transport.semantics,
@@ -673,7 +683,8 @@ $('#export').onclick = () => {
             received: transport.received,
             sentBytes: transport.sentBytes,
             receivedBytes: transport.receivedBytes,
-            rejected: transport.rejected
+            rejected: transport.rejected,
+            droppedBackpressure: transport.droppedBackpressure
         },
         fps: summary(frames),
         rtt: summary(rtts),
@@ -837,7 +848,7 @@ async function boot() {
             if (now - lastStats >= 500) {
                 const secs = Math.max(1, (now - transport.started) / 1000);
                 $('#stats').textContent =
-                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.2 · real-phone QA pending`;
+                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · Backpressure ${transport.droppedBackpressure} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.2 · real-phone QA pending`;
                 lastStats = now;
             }
             if (now > noticeUntil) $('#notice').classList.add('hidden');
@@ -853,6 +864,33 @@ async function boot() {
                     getState: () => structuredClone(state),
                     getLogs: () => logs,
                     getInput: () => latestInput,
+                    aimAtPlayer: (id: string) => {
+                        const local = state?.players.find((p) => p.id === localId);
+                        const target = state?.players.find((p) => p.id === id);
+                        if (!local || !target) return;
+                        let yaw = Math.atan2(target.x - local.x, -(target.z - local.z)),
+                            pitch = 0;
+                        for (let i = 0; i < 8; i++) {
+                            const rig = getAimRig(local, yaw, pitch);
+                            yaw = Math.atan2(target.x - rig.camera.x, -(target.z - rig.camera.z));
+                            pitch = Math.max(
+                                -0.8,
+                                Math.min(
+                                    0.8,
+                                    Math.atan2(
+                                        target.y - rig.camera.y,
+                                        Math.hypot(target.x - rig.camera.x, target.z - rig.camera.z)
+                                    )
+                                )
+                            );
+                        }
+                        controls.aimYaw = yaw;
+                        controls.aimPitch = pitch;
+                    },
+                    clearMeasurements: () => {
+                        frames.length = 0;
+                        rtts.length = 0;
+                    },
                     setAim: (yaw: number, pitch: number) => {
                         controls.aimYaw = yaw;
                         controls.aimPitch = pitch;
@@ -885,17 +923,32 @@ async function boot() {
                         semantics: transport.semantics,
                         rtt: transport.rtt,
                         bodies: scene.liveBodies.size,
+                        renderComponents: scene.app.root.findComponents('render').length,
+                        transientEntities: scene.transientCount,
+                        connectionCount: [...transport.links.values()].reduce(
+                            (n, l) => n + Number(!!l.control) + Number(!!l.movement),
+                            0
+                        ),
+                        bufferedBytes: [...transport.links.values()].reduce(
+                            (n, l) =>
+                                n +
+                                (l.control?.dataChannel?.bufferedAmount ?? 0) +
+                                (l.movement?.dataChannel?.bufferedAmount ?? 0),
+                            0
+                        ),
+                        snapshotAge: role === 'guest' ? performance.now() - lastSnapshot : 0,
+                        display: display.state,
                         fps: summary(frames),
                         counts: {
                             sent: transport.sent,
                             received: transport.received,
                             sentBytes: transport.sentBytes,
                             receivedBytes: transport.receivedBytes,
-                            rejected: transport.rejected
+                            rejected: transport.rejected,
+                            droppedBackpressure: transport.droppedBackpressure
                         }
                     }),
-                    setFaults: (f: { delay: number; jitter: number; loss: number; reorder: number }) =>
-                        (transport.fault.faults = f),
+                    setFaults: (f: Faults) => (transport.fault.faults = f),
                     sendControl: (v: unknown) => transport.send(hostId, 'control', v),
                     getRenderPosition: (id: string) => {
                         const p = scene.characters.get(id)?.getPosition();

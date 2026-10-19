@@ -3,38 +3,67 @@ export type Lane = 'control' | 'movement';
 export function candidatePath(local?: string, remote?: string) {
     return local === 'relay' || remote === 'relay' ? 'relayed' : local && remote ? 'direct' : 'unknown';
 }
-export type Faults = { delay: number; jitter: number; loss: number; reorder: number };
+export type Faults = {
+    delay: number;
+    jitter: number;
+    loss: number;
+    reorder: number;
+    reliableDelay?: number;
+    duplicate?: number;
+};
 export class FaultLink {
     timers = new Set<ReturnType<typeof setTimeout>>();
     faults: Faults;
     constructor(faults: Faults) {
         this.faults = faults;
     }
+    private reliableDue = 0;
+    private reliablePending = 0;
     deliver(value: unknown, send: (v: unknown) => void, reliable: boolean) {
+        const duplicate = (this.faults.duplicate ?? 0) > 0 && Math.random() < (this.faults.duplicate ?? 0);
+        const deliver = () => {
+            send(value);
+            if (duplicate) send(value);
+        };
+        let wait: number;
         if (reliable) {
-            send(value);
-            return;
+            const delay = this.faults.reliableDelay ?? 0;
+            const due = Math.max(Date.now() + (Number.isFinite(delay) ? Math.max(0, delay) : 0), this.reliableDue);
+            wait = Math.max(0, due - Date.now());
+            this.reliableDue = due;
+            // Even an overdue queued packet must precede a new immediate packet.
+            if (!wait && !this.reliablePending) {
+                deliver();
+                return;
+            }
+            this.reliablePending++;
+        } else {
+            if (Math.random() < this.faults.loss) return;
+            wait = Math.max(
+                0,
+                this.faults.delay +
+                    (Math.random() * 2 - 1) * this.faults.jitter +
+                    (Math.random() < this.faults.reorder ? 120 : 0)
+            );
+            if (!wait) {
+                deliver();
+                return;
+            }
         }
-        if (Math.random() < this.faults.loss) return;
-        const wait = Math.max(
-            0,
-            this.faults.delay +
-                (Math.random() * 2 - 1) * this.faults.jitter +
-                (Math.random() < this.faults.reorder ? 120 : 0)
-        );
-        if (!wait) {
-            send(value);
-            return;
-        }
+        // A packet on a real channel has already been serialized. Local input
+        // cleanup must not rewrite an older packet while its fault timer waits.
+        value = structuredClone(value);
         const timer = setTimeout(() => {
             this.timers.delete(timer);
-            send(value);
+            if (reliable && --this.reliablePending === 0) this.reliableDue = 0;
+            deliver();
         }, wait);
         this.timers.add(timer);
     }
     close() {
         for (const timer of this.timers) clearTimeout(timer);
         this.timers.clear();
+        this.reliableDue = this.reliablePending = 0;
     }
 }
 export type Link = { control?: DataConnection; movement?: DataConnection };
@@ -47,6 +76,9 @@ export class Transport {
     sentBytes = 0;
     receivedBytes = 0;
     rejected = 0;
+    droppedBackpressure = 0;
+    // Hosts retain the tighter guest-input budget; guests allow authoritative round traffic.
+    controlLimit = 30;
     rtt = 0;
     ice = 'not connected';
     semantics = 'not connected';
@@ -120,7 +152,7 @@ export class Transport {
                 rateAt = at;
                 rateCount = 0;
             }
-            if (++rateCount > (lane === 'control' ? 30 : 90)) {
+            if (++rateCount > (lane === 'control' ? this.controlLimit : 90)) {
                 this.rejected++;
                 return;
             }
@@ -151,7 +183,11 @@ export class Transport {
     }
     send(peer: string, lane: Lane, value: unknown) {
         const c = this.links.get(peer)?.[lane];
-        if (!c?.open || c.dataChannel.bufferedAmount > 65536) return;
+        if (!c?.open) return;
+        if (c.dataChannel.bufferedAmount > 65536) {
+            this.droppedBackpressure++;
+            return;
+        }
         this.fault.deliver(
             value,
             (v) => {

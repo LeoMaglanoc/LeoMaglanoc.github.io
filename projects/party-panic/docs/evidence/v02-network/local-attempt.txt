@@ -1,0 +1,53 @@
+
+Running 1 test using 1 worker
+
+(node:15959) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/network.spec.ts:5:1 › real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch (31.1s)
+
+
+  1) tests/e2e/network.spec.ts:5:1 › real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#roster')
+    Expected substring: "Guest"
+    Received string:    "Host (you)HOST"
+    Timeout: 20000ms
+
+    Call log:
+      - Expect "toContainText" locator('#roster') with timeout 20000ms
+      - waiting for locator('#roster')
+        43 × locator resolved to <div id="roster" class="roster">…</div>
+           - unexpected value "Host (you)HOST"
+
+
+      34 |     try {
+      35 |         const guest = await join('Guest');
+    > 36 |         await expect(host.locator('#roster')).toContainText('Guest', { timeout: 20000 });
+         |                                               ^
+      37 |         await expect(guest.locator('#roster')).toContainText('Host');
+      38 |         await expect
+      39 |             .poll(() => guest.evaluate(() => window.partyDebug.getDiagnostics().ice), { timeout: 10000 })
+        at /workspace/party-panic/projects/party-panic/tests/e2e/network.spec.ts:36:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../scratch/g6-local-network/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../scratch/g6-local-network/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../scratch/g6-local-network/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../scratch/g6-local-network/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../scratch/g6-local-network/network-real-WebRTC-two-to-eb1c1-ll-room-results-and-rematch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/network.spec.ts:5:1 › real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch 
