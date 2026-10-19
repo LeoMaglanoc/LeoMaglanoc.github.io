@@ -46,3 +46,6 @@ retained verbatim in `evidence/v03-baseline/wobble-rush-LICENSE.txt` and
 `evidence/v03-baseline/blockyard-LICENSE.txt`. They accompany source distribution.
 No new third-party assets were imported; all new effects use existing primitives
 and independently synthesized audio. No Fall Guys or Star Wars assets.
+
+The two MIT notices also ship with production builds under
+`public/licenses/{wobble-rush,blockyard}-MIT.txt` (served as `licenses/…`).

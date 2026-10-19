@@ -28,11 +28,18 @@ function player(id: string, z: number): Player {
         deaths: 0,
         respawnAt: 0,
         protectedUntil: 0,
-        aimPitch: 0
+        aimPitch: 0,
+        health: 100,
+        energy: 1,
+        weapon: 'quick',
+        charge: 0,
+        inputSequence: 0,
+        shotSequence: 0
     };
 }
 function fixture() {
     const players = [player('shooter', 0), player('target', -4), player('second', 2)];
+    players[1].health = 34; // One remaining quick hit for elimination/lifecycle fixtures.
     players[2].x = -9; // Separate sightline: the two shooters do not stand in each other's ray.
     // Only rendering/rigidbody effects are mocked; authority and geometry execute unchanged.
     const characters = new Map(
@@ -70,7 +77,7 @@ function fixture() {
             ...neutral('laser-tag', state.roundId),
             modeId: 'laser-tag',
             sequence,
-            aim: { yaw, pitch, sequence, fire: true }
+            aim: { yaw, pitch, sequence, fire: true, weapon: 'quick' }
         };
         inputs.set(shooter.id, { input, received: performance.now() });
         return input;
@@ -109,7 +116,7 @@ describe('LaserRound host score and respawn ownership', () => {
         expect(f.target.deaths).toBe(1);
         expect(f.target.respawnAt).toBe(7);
         expect(f.characters.get('target')!.enabled).toBe(false);
-        expect(f.events.map((e) => e.type)).toEqual(['shot', 'tag']);
+        expect(f.events.map((e) => e.type)).toEqual(['shot', 'damage', 'tag']);
     });
     it('does not double score repeated input, excess sequences or simultaneous shooters', () => {
         const f = fixture();
@@ -187,13 +194,14 @@ describe('LaserRound host score and respawn ownership', () => {
         expect(f.characters.get('target')!.enabled).toBe(false);
     });
     it('does not fire for dead, disconnected, stale, previous-round or wrong-mode shooters', () => {
-        for (const invalid of ['dead', 'disconnected', 'stale', 'round', 'mode'] as const) {
+        for (const invalid of ['dead', 'disconnected', 'stale', 'round', 'mode', 'life'] as const) {
             const f = fixture();
             const input = f.aim(f.shooter, f.target, 1);
             if (invalid === 'dead') f.shooter.respawnAt = 6;
             if (invalid === 'disconnected') f.shooter.connected = false;
             if (invalid === 'stale') f.inputs.get(f.shooter.id)!.received = performance.now() - 401;
             if (invalid === 'round') input.roundId--;
+            if (invalid === 'life') input.life++;
             if (invalid === 'mode') f.inputs.get(f.shooter.id)!.input = neutral('obstacle-dash', f.state.roundId);
             f.round.afterStep(f.state, f.scene, f.inputs);
             expect(f.shooter.score, invalid).toBe(0);
@@ -215,4 +223,48 @@ describe('LaserRound host score and respawn ownership', () => {
         expect({ x: f.shooter.x, y: f.shooter.y, z: f.shooter.z }).toEqual(LASER_SPAWNS[5]);
         expect(f.shooter.protectedUntil).toBe(LASER.spawnProtection);
     });
+});
+
+it('three authoritative quick hits reduce full health before exactly one elimination', () => {
+    const f = fixture();
+    f.target.health = 100;
+    for (let serial = 1; serial <= 3; serial++) {
+        f.state.elapsed = 5 + (serial - 1) * 0.26;
+        f.aim(f.shooter, f.target, serial);
+        f.round.afterStep(f.state, f.scene, f.inputs);
+        expect(f.target.health).toBe(Math.max(0, 100 - serial * 34));
+        expect(f.shooter.score).toBe(serial === 3 ? 1 : 0);
+    }
+    expect(f.events.filter((e) => e.type === 'damage')).toHaveLength(3);
+    expect(f.events.filter((e) => e.type === 'tag')).toHaveLength(1);
+});
+it('charged shots require authoritative preparation and cannot replay rejected serials', () => {
+    const f = fixture();
+    f.target.health = 100;
+    const i = f.aim(f.shooter, f.target, 1);
+    if (i.modeId !== 'laser-tag') throw new Error('fixture');
+    i.aim.weapon = 'charged';
+    f.round.afterStep(f.state, f.scene, f.inputs);
+    expect(f.target.health).toBe(100);
+    f.state.elapsed += 0.35;
+    f.round.afterStep(f.state, f.scene, f.inputs);
+    expect(f.target.health).toBe(100);
+    i.aim.sequence = 2;
+    f.round.afterStep(f.state, f.scene, f.inputs);
+    expect(f.target.health).toBe(30);
+    expect(f.shooter.score).toBe(0);
+});
+
+it('rejects an unseen pre-death shot arriving after respawn, with the same round', () => {
+    const f = fixture();
+    const old = f.aim(f.shooter, f.target, 99);
+    f.shooter.respawns = 1;
+    f.inputs.set(f.shooter.id, { input: old, received: performance.now() });
+    f.round.afterStep(f.state, f.scene, f.inputs);
+    expect(f.events).toHaveLength(0);
+    expect(f.target.health).toBe(34);
+    old.life = 1;
+    if (old.modeId === 'laser-tag') old.aim.sequence = 100;
+    f.round.afterStep(f.state, f.scene, f.inputs);
+    expect(f.target.health).toBe(0);
 });

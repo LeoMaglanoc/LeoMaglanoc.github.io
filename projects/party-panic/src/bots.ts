@@ -1,3 +1,4 @@
+import { WEAPONS } from './weapons';
 import { LASER, LASER_COVERS, getAimRig, rayBox, resolveShot, type Point } from './laser';
 import { neutral, type Input, type ModeId, type Player } from './protocol';
 
@@ -51,6 +52,7 @@ export class BotController {
             this.brains.set(p.id, b);
         }
         const input = neutral(modeId, roundId);
+        input.life = p.respawns;
         input.sequence = ++b.sequence;
         input.clientTime = elapsed * 1000;
         input.jumpSequence = b.jump;
@@ -121,17 +123,22 @@ export class BotController {
         b.yaw = angle(b.yaw + clamp(angle(desired - b.yaw), -turn, turn));
         b.pitch = clamp(b.pitch + clamp(desiredPitch - b.pitch, -turn, turn), -LASER.maxPitch, LASER.maxPitch);
         const aimRig = getAimRig(p, b.yaw, b.pitch);
-        const fire =
+        const weapon = /^bot-[1357]$/.test(p.id) ? 'charged' : 'quick';
+        const tracking =
             distance < LASER.range &&
             elapsed - b.acquired >= 0.3 &&
-            elapsed - b.fired >= LASER.cooldown &&
             resolveShot({ ...aimRig, yaw: b.yaw, pitch: b.pitch, shooterId: p.id, targets: players, now: elapsed })
                 .targetId === target.id;
+        const fire =
+            tracking &&
+            elapsed - b.fired >= WEAPONS[weapon].cooldown &&
+            p.energy >= WEAPONS[weapon].cost &&
+            (weapon === 'quick' || p.charge >= 1);
         if (fire) {
             b.fire++;
             b.fired = elapsed;
         }
-        input.aim = { yaw: b.yaw, pitch: b.pitch, fire, sequence: b.fire };
+        input.aim = { yaw: b.yaw, pitch: b.pitch, fire: tracking, sequence: b.fire, weapon };
         if (distance > 6 || !clearPath(p, target, 0)) {
             if (elapsed - b.planned > 0.4 || !b.path.length) {
                 b.path = route(p, target);

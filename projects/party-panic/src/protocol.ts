@@ -1,3 +1,4 @@
+import { isWeapon, type WeaponId } from './weapons';
 export const VERSION = 3;
 export const COLORS = ['#ffcc4a', '#75dfd1', '#ec8ee5', '#9fa7ff', '#ff9376', '#99db67', '#82cfff', '#f3f0cf'];
 export type ModeId = 'obstacle-dash' | 'laser-tag';
@@ -7,6 +8,7 @@ type InputBase = {
     version: number;
     modeId: ModeId;
     roundId: number;
+    life: number;
     sequence: number;
     axes: [number, number];
     jumpSequence: number;
@@ -14,7 +16,7 @@ type InputBase = {
     diveSequence: number;
     clientTime: number;
 };
-export type Aim = { yaw: number; pitch: number; fire: boolean; sequence: number };
+export type Aim = { yaw: number; pitch: number; fire: boolean; sequence: number; weapon: WeaponId };
 export type Input = (InputBase & { modeId: 'obstacle-dash' }) | (InputBase & { modeId: 'laser-tag'; aim: Aim });
 export type Player = {
     id: string;
@@ -39,6 +41,12 @@ export type Player = {
     respawnAt: number;
     protectedUntil: number;
     aimPitch: number;
+    health: number;
+    energy: number;
+    weapon: WeaponId;
+    charge: number;
+    inputSequence: number;
+    shotSequence: number;
 };
 export type Snapshot = {
     type: 'snapshot';
@@ -63,6 +71,7 @@ export function neutral(modeId: ModeId = 'obstacle-dash', roundId = 0): Input {
         type: 'input' as const,
         version: VERSION,
         roundId,
+        life: 0,
         sequence: 0,
         axes: [0, 0] as [number, number],
         jumpSequence: 0,
@@ -71,7 +80,7 @@ export function neutral(modeId: ModeId = 'obstacle-dash', roundId = 0): Input {
         clientTime: 0
     };
     return modeId === 'laser-tag'
-        ? { ...base, modeId, aim: { yaw: 0, pitch: 0, fire: false, sequence: 0 } }
+        ? { ...base, modeId, aim: { yaw: 0, pitch: 0, fire: false, sequence: 0, weapon: 'quick' } }
         : { ...base, modeId };
 }
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
@@ -86,6 +95,7 @@ export function parseInput(v: unknown): Input | null {
         !isMode(v.modeId) ||
         !seq(v.roundId) ||
         !seq(v.sequence) ||
+        !seq(v.life) ||
         !seq(v.jumpSequence) ||
         !seq(v.diveSequence) ||
         typeof v.jumpHeld !== 'boolean' ||
@@ -102,6 +112,7 @@ export function parseInput(v: unknown): Input | null {
         'roundId',
         'sequence',
         'axes',
+        'life',
         'jumpSequence',
         'jumpHeld',
         'diveSequence',
@@ -119,6 +130,7 @@ export function parseInput(v: unknown): Input | null {
         type: 'input' as const,
         version: VERSION,
         roundId: v.roundId,
+        life: v.life,
         sequence: v.sequence,
         axes: [x, z] as [number, number],
         jumpSequence: v.jumpSequence,
@@ -136,10 +148,15 @@ export function parseInput(v: unknown): Input | null {
         Math.abs(a.pitch) > 0.8 ||
         typeof a.fire !== 'boolean' ||
         !seq(a.sequence) ||
-        Object.keys(a).some((k) => !['yaw', 'pitch', 'fire', 'sequence'].includes(k))
+        !isWeapon(a.weapon) ||
+        Object.keys(a).some((k) => !['yaw', 'pitch', 'fire', 'sequence', 'weapon'].includes(k))
     )
         return null;
-    return { ...base, modeId: 'laser-tag', aim: { yaw: a.yaw, pitch: a.pitch, fire: a.fire, sequence: a.sequence } };
+    return {
+        ...base,
+        modeId: 'laser-tag',
+        aim: { yaw: a.yaw, pitch: a.pitch, fire: a.fire, sequence: a.sequence, weapon: a.weapon }
+    };
 }
 export function parseControl(v: unknown): Control | null {
     if (!record(v)) return null;
@@ -207,8 +224,22 @@ export function isSnapshot(v: unknown): v is Snapshot {
                 'deaths',
                 'respawnAt',
                 'protectedUntil',
-                'aimPitch'
+                'aimPitch',
+                'health',
+                'energy',
+                'charge',
+                'inputSequence',
+                'shotSequence'
             ].every((k) => finite(p[k])) ||
+            !isWeapon(p.weapon) ||
+            !seq(p.inputSequence) ||
+            !seq(p.shotSequence) ||
+            (p.health as number) < 0 ||
+            (p.health as number) > 100 ||
+            (p.energy as number) < 0 ||
+            (p.energy as number) > 1 ||
+            (p.charge as number) < 0 ||
+            (p.charge as number) > 1 ||
             !(p.finish === null || finite(p.finish))
         )
             return false;

@@ -1,0 +1,42 @@
+import { expect, it } from 'vitest';
+import { WeaponCycle, WEAPONS, weaponAim } from '../src/weapons';
+it('consumes serials exactly once, including cooldown and energy rejections', () => {
+    const g = new WeaponCycle();
+    g.advance(0, 'quick', true);
+    expect(g.attempt(1, 0, 'quick')).toBe(true);
+    expect(g.attempt(2, 0.1, 'quick')).toBe(false);
+    g.advance(1, 'quick', true);
+    expect(g.attempt(2, 1, 'quick')).toBe(false);
+    expect(g.attempt(3, 1, 'quick')).toBe(true);
+    g.energy = 0;
+    g.advance(1.25, 'quick', true);
+    expect(g.attempt(4, 1.25, 'quick')).toBe(false);
+    g.advance(2, 'quick', true);
+    expect(g.attempt(4, 2, 'quick')).toBe(false);
+    expect(g.attempt(5, 2, 'quick')).toBe(true);
+});
+it('charges on the host clock, cancels on release/switch and shares cooldown/energy', () => {
+    const g = new WeaponCycle();
+    g.advance(1, 'charged', true);
+    expect(g.attempt(1, 1, 'charged')).toBe(false);
+    g.advance(1.3, 'charged', true);
+    expect(g.attempt(2, 1.3, 'charged')).toBe(true);
+    expect(g.energy).toBeCloseTo(0.48);
+    g.advance(1.4, 'quick', true);
+    expect(g.attempt(3, 1.4, 'quick')).toBe(false);
+    g.advance(2, 'charged', true);
+    g.advance(2.2, 'charged', false);
+    g.advance(2.3, 'charged', true);
+    expect(g.charge).toBe(0);
+    expect(g.attempt(4, 2.3, 'charged')).toBe(false);
+    g.advance(2.6, 'charged', true);
+    expect(g.attempt(5, 2.6, 'charged')).toBe(true);
+});
+it('quick and charged have distinct cadence, damage, spread and recoil', () => {
+    expect(WEAPONS.charged.damage).toBeGreaterThan(WEAPONS.quick.damage);
+    expect(WEAPONS.charged.cooldown).toBeGreaterThan(WEAPONS.quick.cooldown * 3);
+    const a = weaponAim(Math.PI, 0.8, 8, 'quick');
+    expect(Math.abs(a.yaw)).toBeLessThanOrEqual(Math.PI);
+    expect(a.pitch).toBeLessThanOrEqual(0.8);
+    expect(a).toEqual(weaponAim(Math.PI, 0.8, 8, 'quick'));
+});

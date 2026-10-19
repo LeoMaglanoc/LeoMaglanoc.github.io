@@ -1,4 +1,4 @@
-# Party Panic v0.2
+# Party Panic v0.3
 
 Two original 3D party games: **Obstacle Dash** and **Laser Tag**. Play solo against
 0/1/3/7 AI opponents, or host a persistent P2P room for 1–8 friends. PlayCanvas,
@@ -8,7 +8,7 @@ Ammo, TypeScript/Vite and PeerJS; no accounts or dedicated simulation server.
 
 Physical Android/iPhone acceptance is still unverified. This is a provisional browser
 release; viewport emulation and desktop Chrome networking do not certify phones.
-Publication is currently pending a GitHub Pages incident; see [release status](docs/v02-release.md).
+Release evidence and open gates: [v0.3 validation](docs/v03-validation.md).
 
 ## Play
 
@@ -22,18 +22,23 @@ for everyone ready. Switching games clears readiness and keeps the room connecte
 Results return to the same lobby for rematch/switching. Multiplayer rooms use humans;
 AI opponents belong to solo sessions.
 
-- **Obstacle Dash:** joystick + Jump, or WASD/arrows + Space. Clear gaps, sweepers
+- **Obstacle Dash:** joystick + held Jump + Dive, or WASD/arrows + held Space and Shift.
+  Release Jump early for a short hop; drag the playfield to orbit the camera. Clear gaps, sweepers
   and bumpers, then both ordered checkpoints and the finish. Falls respawn quickly;
   hard timeout 120s. Results rank finish times and DNF progress.
 - **Laser Tag:** joystick + right-side drag; hold and drag FIRE to aim while shooting.
   Desktop WASD/mouse + left click; Escape releases pointer lock. 90s free-for-all,
-  one-hit tags, 3 shots/s, 25-unit range, 2s respawn and 1s spawn shield. Most tags wins;
+  100 health, Quick (4 shots/s, 34 damage) and Charged (hold to prepare, 70 damage)
+  blasters. Tap weapon buttons or 1/2; both share recharging energy. 25-unit range,
+  2s respawn and 1s spawn shield. Most eliminations wins;
   equal top scores display a tie. No reload, pickups, headshots or human aim assistance.
 
-Start/Solo/Ready immediately attempt fullscreen, landscape and screen wake lock.
+Enter Party Panic on the main menu, Host, Join, Solo, invitation Continue, Start and
+Ready attempt fullscreen in a genuine gesture, then landscape and screen wake lock.
 Browser refusal never blocks a game: portrait displays a manual-rotation hint.
 iPhone fullscreen/orientation support varies. Exit Fullscreen is in the collapsible
-Connection & performance panel. Results/rematches retain display mode; Leave releases it.
+Connection & performance panel. Results, rematches, mode switching and Leave retain display mode. Explicit Exit
+Fullscreen or browser Escape releases it; the app never forces automatic reentry.
 
 Keep the host tab visible: backgrounding pauses authority. Guest departure is handled;
 host departure ends the session. No host migration or TURN server. Internet is needed
@@ -81,11 +86,12 @@ Connection & performance shows frame estimate, RTT, actual ICE/channel propertie
 application payload counters and backpressure drops. Save diagnostics includes display
 API outcomes and bounded logs. It excludes IP addresses; payload counters exclude
 WebRTC overhead. Two PeerJS associations per guest mean 14 host connections at capacity.
-Laser guests use authoritative movement interpolation and immediate cosmetic aim/fire;
-Dash adds bounded jump feedback. No lag rewind or rollback.
+Laser guests use bounded collision-aware visual prediction with input acknowledgements
+and replay against shared arena cover; host Ammo still owns all outcomes. Remote
+players interpolate snapshots. Dash adds bounded jump feedback. No lag rewind.
 
-See [v0.2 validation](docs/v02-validation.md), [baseline](docs/v02-baseline.md),
-[movement comparison](docs/v02-movement.md), [Laser/AI](docs/v02-laser.md),
-[network evidence](docs/v02-network.md), [architecture](docs/v02-architecture.md) and
-[asset provenance](docs/assets.md). Earlier v0.1 evidence is preserved in validation.md;
-its measurements apply to the recorded release, not automatically to v0.2.
+See [v0.3 validation](docs/v03-validation.md), [baseline](docs/v03-baseline.md),
+[gameplay decisions and measurements](docs/v03-gameplay.md),
+[display lifecycle](docs/v03-display.md) and [asset provenance](docs/assets.md).
+Historical v0.1/v0.2 reports remain under docs; their measurements apply only to
+those recorded releases. Human preference and physical-device acceptance remain open.

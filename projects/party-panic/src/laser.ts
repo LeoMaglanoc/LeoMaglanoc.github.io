@@ -1,3 +1,4 @@
+import { WeaponCycle, type WeaponId } from './weapons';
 /** Original primitive arena and host-side laser rules; no rendering dependency. */
 export type Point = { x: number; y: number; z: number };
 export type Cover = { min: Point; max: Point; id?: string; color?: string };
@@ -10,7 +11,7 @@ export type LaserTarget = Point & {
 export const LASER = {
     duration: 90,
     speed: 4.8,
-    cooldown: 1 / 3,
+    cooldown: 0.25,
     range: 25,
     respawnDelay: 2,
     spawnProtection: 1,
@@ -129,15 +130,32 @@ export function getAimRig(position: Point, yaw: number, pitch: number, covers: C
 }
 
 export class ShotGate {
-    sequence = 0;
-    lastShot = -Infinity;
-    attempt(sequence: number, now: number, yaw: number, pitch: number): boolean {
-        if (!Number.isSafeInteger(sequence) || sequence <= this.sequence) return false;
-        this.sequence = sequence;
-        if (!Number.isFinite(now) || now < 0 || !validAim(yaw, pitch) || now - this.lastShot + 1e-9 < LASER.cooldown)
-            return false;
-        this.lastShot = now;
-        return true;
+    private cycle = new WeaponCycle();
+    get sequence() {
+        return this.cycle.sequence;
+    }
+    get lastShot() {
+        return this.cycle.lastShot;
+    }
+    get energy() {
+        return this.cycle.energy;
+    }
+    get charge() {
+        return this.cycle.charge;
+    }
+    advance(now: number, weapon: WeaponId, trigger: boolean) {
+        this.cycle.advance(now, weapon, trigger);
+    }
+    discard(sequence: number) {
+        if (Number.isSafeInteger(sequence)) this.cycle.sequence = Math.max(this.cycle.sequence, sequence);
+    }
+    respawn(now: number) {
+        this.cycle.energy = 1;
+        this.cycle.readyAt = now;
+        this.cycle.advance(now, 'quick', false);
+    }
+    attempt(sequence: number, now: number, yaw: number, pitch: number, weapon: WeaponId = 'quick'): boolean {
+        return this.cycle.attempt(sequence, now, weapon, validAim(yaw, pitch));
     }
 }
 

@@ -33,7 +33,7 @@ describe('two-mode protocol boundaries', () => {
     });
 
     it('rejects malformed or out-of-bounds aim and fabricated authority', () => {
-        const aim = { yaw: 0, pitch: 0, fire: true, sequence: 1 };
+        const aim = { yaw: 0, pitch: 0, fire: true, sequence: 1, weapon: 'quick' };
         for (const invalid of [
             null,
             { ...aim, yaw: NaN },

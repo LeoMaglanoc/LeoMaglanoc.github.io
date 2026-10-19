@@ -87,7 +87,7 @@ describe('mode-specific controls', () => {
         time(20);
         const tap = controls.sample();
         expect(tap.modeId === 'laser-tag' && tap.aim.fire).toBe(true);
-        time(334);
+        time(251);
         const released = controls.sample();
         expect(released.modeId === 'laser-tag' && released.aim.fire).toBe(false);
         expect(shot).toHaveBeenCalledExactlyOnceWith(1);
@@ -131,10 +131,10 @@ describe('mode-specific controls', () => {
         let input = controls.sample();
         expect(input.axes[1]).toBeLessThan(-0.9);
         expect(input.modeId === 'laser-tag' && input.aim.fire).toBe(true);
-        time(332);
+        time(249);
         controls.sample();
         expect(shot).toHaveBeenCalledTimes(1);
-        time(334);
+        time(251);
         input = controls.sample();
         expect(shot).toHaveBeenCalledTimes(2);
         expect(input.modeId === 'laser-tag' && input.aim.sequence).toBe(2);
@@ -171,7 +171,7 @@ describe('mode-specific controls', () => {
         expect(controls.aimYaw).toBeCloseTo(0.4);
         expect(controls.aimPitch).toBeCloseTo(0.08);
         event(surfaces['application-canvas'], 'lostpointercapture', pointer(1, 0, 0, 'mouse'));
-        time(334);
+        time(251);
         controls.sample();
         expect(shot).toHaveBeenCalledTimes(2);
         event(document, 'mouseup', { button: 0 });
@@ -225,4 +225,43 @@ it('jump duration and dive edges retain pointer ownership and clear on cancel', 
     expect(controls.sample().jumpHeld).toBe(false);
     controls.clear();
     expect(controls.sample().axes).toEqual([0, 0]);
+});
+
+it('charged preparation cancels on release and switching does not bypass shared cooldown', () => {
+    const { controls, surfaces, shot, time } = fixture();
+    controls.setContext('laser-tag', 1);
+    controls.selectWeapon('charged');
+    event(surfaces.fire, 'pointerdown', pointer(2));
+    time(200);
+    controls.sample();
+    expect(shot).not.toHaveBeenCalled();
+    event(surfaces.fire, 'pointercancel', pointer(2));
+    controls.sample();
+    time(1000);
+    event(surfaces.fire, 'pointerdown', pointer(3));
+    time(1331);
+    controls.sample();
+    expect(shot).toHaveBeenCalledOnce();
+    controls.selectWeapon('quick');
+    time(1400);
+    controls.sample();
+    expect(shot).toHaveBeenCalledOnce();
+});
+
+it('reconciles rejected-shot energy during a held burst and resets actions on a new life', () => {
+    const { controls, surfaces, time, shot } = fixture();
+    controls.setContext('laser-tag', 1);
+    event(surfaces.fire, 'pointerdown', pointer(2));
+    expect(shot).toHaveBeenCalledOnce();
+    controls.syncEnergy(1, 1, 2); // host consumed/rejected the speculative shot
+    expect(controls.energy).toBe(1);
+    time(251);
+    controls.sample();
+    expect(shot).toHaveBeenCalledTimes(2);
+    controls.syncEnergy(0.5, 1, 3); // one unacknowledged 0.22-energy shot
+    expect(controls.energy).toBeCloseTo(0.28);
+    controls.setLife(1);
+    expect(controls.sample()).toMatchObject({ life: 1, aim: { fire: false } });
+    controls.syncEnergy(1, 1, 3);
+    expect(controls.energy).toBe(1);
 });

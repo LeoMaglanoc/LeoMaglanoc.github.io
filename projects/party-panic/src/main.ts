@@ -1,3 +1,5 @@
+import { WEAPONS, isWeapon, weaponAim } from './weapons';
+import { LaserPrediction } from './laserPrediction';
 import QRCode from 'qrcode';
 import { AudioFeedback } from './audio';
 import { LASER, getAimRig, resolveShot, laserRank, type Point } from './laser';
@@ -19,7 +21,7 @@ $('#app').innerHTML =
 <section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="secondary" id="party-enter">Enter Party Panic — Fullscreen</button><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
 <footer class="bottom-bar" id="footer"><span>2 MINIGAMES / SOLO AI + MULTIPLAYER</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
-<section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
+<section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div id="weapon-bar" class="hidden"><button id="weapon-quick" aria-label="Quick Blaster">1 · QUICK</button><button id="weapon-charged" aria-label="Charged Blaster">2 · CHARGED</button><span id="weapon-status"></span></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
 <div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button><button id="dive" aria-label="Dive">DIVE ↗</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
 <details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><button id="sound-toggle">Sound on</button><pre id="display-status"></pre></details>`;
 const scene = new Scene(),
@@ -88,6 +90,7 @@ let accepted = new Set<string>(),
     gates = new Map<string, InputGate>();
 const snapshotGate = new SnapshotGate();
 const jumpFeedback = new JumpFeedback();
+const laserPrediction = new LaserPrediction();
 let lastSnapshot = 0,
     lastPacket = 0,
     lastReliable = 0,
@@ -180,7 +183,7 @@ async function connect(next: 'host' | 'guest', id = '') {
     );
     $('#cancel').onclick = () => reset();
     role = next;
-    transport.controlLimit = next === 'guest' ? 128 : 30;
+    transport.controlLimit = next === 'guest' ? 256 : 30;
     ended = false;
     homeVisible(false);
     try {
@@ -240,17 +243,19 @@ controls.onShot = (sequence) => {
         return;
     lastPredictedShot = sequence;
     const position = scene.characters.get(localId)?.getPosition() ?? p;
-    const rig = getAimRig(position, controls.aimYaw, controls.aimPitch);
+    const aim = weaponAim(controls.aimYaw, controls.aimPitch, sequence, controls.weapon);
+    const rig = getAimRig(position, aim.yaw, aim.pitch);
     const shot = resolveShot({
         ...rig,
-        yaw: controls.aimYaw,
-        pitch: controls.aimPitch,
+        yaw: aim.yaw,
+        pitch: aim.pitch,
         shooterId: localId,
         targets: state.players,
         now: state.elapsed
     });
-    scene.showShot(shot.from, shot.to, p.color);
-    sound.play('shot');
+    scene.showShot(shot.from, shot.to, WEAPONS[controls.weapon].color);
+    scene.kick(WEAPONS[controls.weapon].recoil);
+    sound.play(controls.weapon === 'charged' ? 'charged' : 'shot');
 };
 function syncControls() {
     const modeId = state?.modeId ?? 'obstacle-dash',
@@ -262,6 +267,10 @@ function syncControls() {
         roundId,
         !!state && !ended && !state.paused && (state.phase === 'countdown' || state.phase === 'racing') && !p?.respawnAt
     );
+    controls.firingEnabled = state?.phase === 'racing' && !state.paused;
+    if (p) controls.setLife(p.respawns);
+    if (p && modeId === 'laser-tag') controls.syncEnergy(p.energy, p.shotSequence, state!.tick);
+    if (changed) laserPrediction.reset();
     if (changed && modeId === 'obstacle-dash') controls.aimPitch = 0.55;
     if (changed && modeId === 'laser-tag') {
         controls.aimYaw = (-(p?.yaw ?? 0) * Math.PI) / 180;
@@ -273,8 +282,24 @@ function feedback(type: string, payload: unknown) {
         const shot = payload as Record<string, unknown>;
         if (typeof shot.id !== 'string' || !point(shot.from) || !point(shot.to)) return;
         if (shot.id !== localId || Number(shot.sequence) > lastPredictedShot) {
-            scene.showShot(shot.from, shot.to, state?.players.find((p) => p.id === shot.id)?.color ?? '#75dfd1');
-            if (shot.id === localId) sound.play('shot');
+            scene.showShot(shot.from, shot.to, isWeapon(shot.weapon) ? WEAPONS[shot.weapon].color : '#75dfd1');
+            sound.play(shot.weapon === 'charged' ? 'charged' : 'shot');
+        }
+        return;
+    }
+    if (type === 'damage' && payload && typeof payload === 'object') {
+        const hit = payload as Record<string, unknown>;
+        if (typeof hit.targetId === 'string') scene.effect('hit', hit.targetId);
+        if (hit.shooterId === localId) {
+            sound.play('confirm');
+            hitUntil = performance.now() + 150;
+            $('#reticle').textContent = hit.eliminated ? '✦' : '×';
+        }
+        if (hit.targetId === localId) {
+            sound.play('hit');
+            document.body.classList.remove('damaged');
+            void document.body.offsetWidth;
+            document.body.classList.add('damaged');
         }
         return;
     }
@@ -283,6 +308,7 @@ function feedback(type: string, payload: unknown) {
         if (typeof tag.targetId === 'string') scene.effect('hit', tag.targetId);
         if (tag.shooterId === localId) {
             sound.play('tag');
+            $('#reticle').textContent = '✦';
             hitUntil = performance.now() + 180;
         }
         if (tag.targetId === localId) sound.play('hit');
@@ -475,13 +501,20 @@ function renderState() {
     $('#aim-zone').classList.toggle('hidden', !active || !laser || dead);
     $('#reticle').classList.toggle('hidden', !active || !laser || dead);
     $('#tag-board').classList.toggle('hidden', !active || !laser);
+    $('#weapon-bar').classList.toggle('hidden', !active || !laser || dead);
+    if (laser && active) {
+        $('#weapon-status').textContent =
+            `${WEAPONS[controls.weapon].name} · ${Math.round(controls.energy * 100)}% energy${controls.weapon === 'charged' && controls.charge > 0 ? ' · CHARGING ' + Math.round(controls.charge * 100) + '%' : ''}`;
+        for (const weapon of ['quick', 'charged'])
+            $('#weapon-' + weapon).setAttribute('aria-pressed', String(weapon === controls.weapon));
+    }
     $('#keyboard-help').textContent = laser
-        ? 'WASD MOVE · MOUSE AIM · CLICK FIRE · ESC RELEASES MOUSE'
+        ? 'WASD MOVE · MOUSE AIM · HOLD FIRE · 1 / 2 WEAPONS · ESC RELEASES MOUSE'
         : 'WASD / ARROWS MOVE · SPACE HOLD TO JUMP · SHIFT DIVE';
     if (active) {
         $('#panel').classList.add('hidden');
         $('#hud').innerHTML =
-            `<div><small>TIME LEFT</small><strong>${Math.max(0, (laser ? LASER.duration : 120) - state.elapsed).toFixed(1)}<span style="font-size:14px">s</span></strong></div><div><small>${laser ? ((p?.protectedUntil ?? 0) > state.elapsed ? 'SHIELD ACTIVE · TAGS' : 'YOUR TAGS') : 'CHECKPOINT'}</small><strong>${laser ? (p?.score ?? 0) : (p?.checkpoint ?? 0)}${laser ? '' : '<span style="font-size:14px"> / 2</span>'}</strong></div>`;
+            `<div><small>TIME LEFT</small><strong>${Math.max(0, (laser ? LASER.duration : 120) - state.elapsed).toFixed(1)}<span style="font-size:14px">s</span></strong></div><div><small>${laser ? ((p?.protectedUntil ?? 0) > state.elapsed ? 'SHIELD ACTIVE · TAGS' : 'YOUR TAGS') : 'CHECKPOINT'}</small><strong>${laser ? (p?.score ?? 0) : (p?.checkpoint ?? 0)}${laser ? '' : '<span style="font-size:14px"> / 2</span>'}</strong></div>${laser ? '<div><small>HEALTH</small><strong>' + (p?.health ?? 100) + '</strong></div>' : ''}`;
         if (laser)
             $('#tag-board').innerHTML = laserRank(state.players)
                 .slice(0, 3)
@@ -572,6 +605,7 @@ transport.onMessage = (peer, lane, raw) => {
             if (!state || raw.roundId !== state.roundId || raw.modeId !== state.modeId) {
                 histories = [];
                 jumpFeedback.reset(controls.value.jumpSequence);
+                laserPrediction.reset();
             }
             if (scene.modeId !== raw.modeId) {
                 for (const id of scene.characters.keys()) scene.removePlayer(id);
@@ -641,7 +675,7 @@ function endSession(message: string) {
     $('#controls').classList.add('hidden');
     $('#countdown').classList.add('hidden');
     $('#hud').classList.add('hidden');
-    for (const id of ['aim-zone', 'reticle', 'tag-board']) $('#' + id).classList.add('hidden');
+    for (const id of ['aim-zone', 'reticle', 'tag-board', 'weapon-bar']) $('#' + id).classList.add('hidden');
     $('#labels').innerHTML = '';
     view = 'ended';
     showPanel(
@@ -666,6 +700,7 @@ function reset(clearNotice = true) {
     gates = new Map();
     histories = [];
     jumpFeedback.reset(controls.value.jumpSequence);
+    laserPrediction.reset();
     snapshotGate.reset();
     scene.setMode('obstacle-dash');
     view = '';
@@ -673,7 +708,16 @@ function reset(clearNotice = true) {
     transport.peer = null;
     document.body.classList.remove('playing');
     $('#panel').classList.add('hidden');
-    for (const id of ['controls', 'hud', 'countdown', 'keyboard-help', 'aim-zone', 'reticle', 'tag-board'])
+    for (const id of [
+        'controls',
+        'hud',
+        'countdown',
+        'keyboard-help',
+        'aim-zone',
+        'reticle',
+        'tag-board',
+        'weapon-bar'
+    ])
         $('#' + id).classList.add('hidden');
     $('#labels').innerHTML = '';
     $('#shade').classList.remove('hidden');
@@ -751,6 +795,11 @@ $('#export').onclick = () => {
             receivedBytes: transport.receivedBytes,
             rejected: transport.rejected,
             droppedBackpressure: transport.droppedBackpressure
+        },
+        prediction: {
+            snapshots: laserPrediction.snapshots,
+            corrections: laserPrediction.corrections,
+            maxCorrection: laserPrediction.maxCorrection
         },
         fps: summary(frames),
         rtt: summary(rtts),
@@ -832,6 +881,16 @@ function renderGuest(dt: number, now: number) {
                 );
             }
         }
+        if (
+            state.modeId === 'laser-tag' &&
+            p.id === localId &&
+            state.phase === 'racing' &&
+            !state.paused &&
+            !teleported
+        ) {
+            const predicted = laserPrediction.sample(p, state.tick, latestInput, dt, now - lastSnapshot);
+            dest.set(predicted.x, predicted.y, predicted.z);
+        } else if (p.id === localId) laserPrediction.reset();
         e.setPosition(dest);
         scene.face(p.id, p.id === localId && state.modeId === 'laser-tag' ? (-controls.aimYaw * 180) / Math.PI : p.yaw);
     }
@@ -881,8 +940,8 @@ async function boot() {
             if (frames.length < 36000) frames.push(frameFps);
             else frames[frameCursor++ % 36000] = frameFps;
             syncControls();
+            latestInput = controls.sample();
             if (now - lastInput >= 1000 / 30) {
-                latestInput = controls.sample();
                 lastInput = now;
                 if (role === 'host') sim?.input(localId, latestInput);
                 else if (role === 'guest' && state) transport.send(hostId, 'movement', latestInput);
@@ -902,6 +961,7 @@ async function boot() {
                     else scene.follow(localId, dt, false, controls.aimYaw, controls.aimPitch);
                 }
                 $('#reticle').classList.toggle('confirmed', now < hitUntil);
+                if (now >= hitUntil) $('#reticle').textContent = '＋';
                 if (now - lastUI >= 100) {
                     renderState();
                     lastUI = now;
@@ -924,7 +984,7 @@ async function boot() {
             if (now - lastStats >= 500) {
                 const secs = Math.max(1, (now - transport.started) / 1000);
                 $('#stats').textContent =
-                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · Backpressure ${transport.droppedBackpressure} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.2 · real-phone QA pending`;
+                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · Backpressure ${transport.droppedBackpressure} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.3 · real-phone QA pending`;
                 lastStats = now;
             }
             if (now > noticeUntil) $('#notice').classList.add('hidden');
@@ -974,6 +1034,7 @@ async function boot() {
                             sim.input(localId, {
                                 ...neutral(sim.state.modeId, sim.state.roundId),
                                 axes,
+                                life: sim.state.players.find((p) => p.id === localId)!.respawns,
                                 jumpSequence,
                                 jumpHeld,
                                 diveSequence,
@@ -1011,6 +1072,11 @@ async function boot() {
                                 (l.movement?.dataChannel?.bufferedAmount ?? 0),
                             0
                         ),
+                        prediction: {
+                            snapshots: laserPrediction.snapshots,
+                            corrections: laserPrediction.corrections,
+                            maxCorrection: laserPrediction.maxCorrection
+                        },
                         snapshotAge: role === 'guest' ? performance.now() - lastSnapshot : 0,
                         display: display.state,
                         fps: summary(frames),

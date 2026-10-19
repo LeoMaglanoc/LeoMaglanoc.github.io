@@ -26,6 +26,12 @@ const player = (id = 'bot', overrides: Partial<Player> = {}): Player => ({
     respawnAt: 0,
     protectedUntil: 0,
     aimPitch: 0,
+    health: 100,
+    energy: 1,
+    weapon: 'quick',
+    charge: 0,
+    inputSequence: 0,
+    shotSequence: 0,
     ...overrides
 });
 it('produces valid bounded monotonic inputs without mutating authoritative player state', () => {
@@ -47,13 +53,13 @@ it('produces valid bounded monotonic inputs without mutating authoritative playe
 });
 it('jumps once per actual gap edge and retries after an authoritative respawn', () => {
     const bot = new BotController(),
-        p = player('bot', { z: -15.7 });
+        p = player('bot', { z: -15.85 });
     const first = bot.update(p, [p], 'obstacle-dash', 1, 0, 1 / 60);
     expect(first.jumpSequence).toBe(1);
     expect(bot.update(p, [p], 'obstacle-dash', 1, 0.1, 1 / 60).jumpSequence).toBe(1);
-    p.z = -25.7;
+    p.z = -25.85;
     expect(bot.update(p, [p], 'obstacle-dash', 1, 0.2, 1 / 60).jumpSequence).toBe(2);
-    p.z = -15.7;
+    p.z = -15.85;
     p.respawns++;
     expect(bot.update(p, [p], 'obstacle-dash', 1, 0.3, 1 / 60).jumpSequence).toBe(3);
 });
@@ -63,7 +69,8 @@ it('aims with bounded turning, reaction time and ordinary rate-limited shots', (
         target = player('human', { x: 8, z: -3 });
     let yaw = 0,
         lastFire = -Infinity,
-        shots = 0;
+        shots = 0,
+        lastSerial = 0;
     for (let i = 0; i < 180; i++) {
         const time = i / 60,
             input = bot.update(p, [p, target], 'laser-tag', 1, time, 1 / 60);
@@ -72,7 +79,8 @@ it('aims with bounded turning, reaction time and ordinary rate-limited shots', (
             0.050001
         );
         yaw = input.aim.yaw;
-        if (input.aim.fire) {
+        if (input.aim.fire && input.aim.sequence > lastSerial) {
+            lastSerial = input.aim.sequence;
             expect(time).toBeGreaterThanOrEqual(0.3);
             expect(time - lastFire).toBeGreaterThanOrEqual(LASER.cooldown - 1e-9);
             const rig = getAimRig(p, input.aim.yaw, input.aim.pitch);

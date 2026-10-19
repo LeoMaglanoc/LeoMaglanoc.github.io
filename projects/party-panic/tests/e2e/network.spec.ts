@@ -237,8 +237,8 @@ test('real WebRTC Laser: gesture readiness, cover, authoritative tags, faults an
         const guest = await join('Laser Guest');
         await host.locator('[data-mode="laser-tag"]').click();
         await guest.waitForFunction(() => window.partyDebug.getState().modeId === 'laser-tag');
-        expect(await fullscreenCalls(host)).toEqual([]);
-        expect(await fullscreenCalls(guest)).toEqual([]);
+        expect(await fullscreenCalls(host)).toEqual([expect.objectContaining({ active: true })]);
+        expect(await fullscreenCalls(guest)).toEqual([expect.objectContaining({ active: true })]);
         await guest.locator('#ready').click();
         expect(await fullscreenCalls(guest)).toEqual([expect.objectContaining({ active: true })]);
         await expect
@@ -253,8 +253,44 @@ test('real WebRTC Laser: gesture readiness, cover, authoritative tags, faults an
         const initial = await host.evaluate(() => window.partyDebug.getState());
         const guestId = initial.players.find((p) => p.name === 'Laser Guest')!.id;
         const hostId = initial.players.find((p) => p.name === 'Laser Host')!.id;
+        // Observe real guest response with delayed input/snapshots; no position injection.
+        for (const page of [host, guest])
+            await page.evaluate(() =>
+                window.partyDebug.setFaults({ delay: 120, jitter: 0, loss: 0, reorder: 0, reliableDelay: 120 })
+            );
+        await guest.evaluate((id) => {
+            const origin = window.partyDebug.getRenderPosition(id)!;
+            document.addEventListener(
+                'keydown',
+                () => {
+                    const started = performance.now();
+                    const probe = () => {
+                        const visible = window.partyDebug.getRenderPosition(id)!;
+                        if (Math.hypot(visible.x - origin.x, visible.z - origin.z) > 0.005) {
+                            Object.assign(window, {
+                                guestResponse: {
+                                    milliseconds: performance.now() - started,
+                                    origin,
+                                    visible,
+                                    authoritative: window.partyDebug.getState().players.find((p) => p.id === id),
+                                    diagnostics: window.partyDebug.getDiagnostics()
+                                }
+                            });
+                        } else requestAnimationFrame(probe);
+                    };
+                    requestAnimationFrame(probe);
+                },
+                { once: true }
+            );
+        }, guestId);
         // Aim points into the shelter in front of the guest's actual spawn.
         await guest.keyboard.down('w');
+        await guest.waitForFunction(() => Reflect.has(window, 'guestResponse'));
+        const response = await guest.evaluate(() => Reflect.get(window, 'guestResponse'));
+        await testInfo.attach('guest-input-to-observed-render-response', {
+            body: JSON.stringify(response, null, 2),
+            contentType: 'application/json'
+        });
         await guest.waitForTimeout(2200);
         await guest.keyboard.up('w');
         await host.waitForFunction(
@@ -271,8 +307,15 @@ test('real WebRTC Laser: gesture readiness, cover, authoritative tags, faults an
         expect(blocked.z).toBeGreaterThan(-7.5);
         expect(blocked.z).toBeLessThanOrEqual(-6.3);
         expect(rendered!.z).toBeLessThanOrEqual(-6.3);
+        for (const page of [host, guest])
+            await page.evaluate(() => window.partyDebug.setFaults({ delay: 0, jitter: 0, loss: 0, reorder: 0 }));
         await host.evaluate((id) => window.partyDebug.aimAtPlayer(id), guestId);
-        await host.locator('#fire').click();
+        const fireBox = (await host.locator('#fire').boundingBox())!;
+        const firingSession = await host.context().newCDPSession(host);
+        await firingSession.send('Input.dispatchTouchEvent', {
+            type: 'touchStart',
+            touchPoints: [{ x: fireBox.x + fireBox.width / 2, y: fireBox.y + fireBox.height / 2, id: 77 }]
+        });
         await expect
             .poll(() =>
                 host.evaluate((id) => window.partyDebug.getState().players.find((p) => p.id === id)!.score, hostId)
@@ -284,6 +327,7 @@ test('real WebRTC Laser: gesture readiness, cover, authoritative tags, faults an
             )
             .toBe(1);
         for (const page of [host, guest]) await page.evaluate((f) => window.partyDebug.setFaults(f), impaired);
+        await firingSession.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
         const protectedScores = await scores(host);
         const rejected = await host.evaluate(() => window.partyDebug.getDiagnostics().counts.rejected);
         const stale = { ...neutral('laser-tag', initial.roundId - 1), sequence: 1000000 };

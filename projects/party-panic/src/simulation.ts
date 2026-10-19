@@ -58,6 +58,12 @@ export class Simulation {
             respawnAt: 0,
             protectedUntil: 0,
             aimPitch: 0,
+            health: 100,
+            energy: 1,
+            weapon: 'quick',
+            charge: 0,
+            inputSequence: 0,
+            shotSequence: 0,
             checkpoint: 0,
             progress: 0,
             finish: null,
@@ -100,6 +106,7 @@ export class Simulation {
             i.version === VERSION &&
             i.modeId === this.state.modeId &&
             i.roundId === this.state.roundId &&
+            i.life === this.state.players.find((p) => p.id === id)?.respawns &&
             i.sequence > m.input.sequence
         ) {
             m.input = i;
@@ -301,6 +308,7 @@ export class Simulation {
                 continue;
             }
             this.move(e, m, dt);
+            p.inputSequence = m.input.sequence;
         }
         if (s.phase === 'racing') this.scene.physics.step(dt);
         for (const p of s.players) {
@@ -364,7 +372,9 @@ export class Simulation {
                 }
             }
         if (grounded) m.groundedAt = time;
-        const fresh = performance.now() - m.received < 400;
+        const fresh =
+            performance.now() - m.received < 400 &&
+            m.input.life === this.state.players.find((p) => p.id === e.name)?.respawns;
         const race = this.state.modeId === 'obstacle-dash';
         const axes = fresh ? m.input.axes : [0, 0];
         const sinceHit = time - m.hitAt;

@@ -99,3 +99,38 @@ test('AI racers traverse the real course without test positions or progress clai
     expect(state.players.filter((p) => p.bot && p.finish !== null)).toHaveLength(3);
     expect(state.players.filter((p) => p.bot).every((p) => p.checkpoint === 2)).toBe(true);
 });
+
+test('charged blaster prepares before firing and reports energy, health and weapon selection', async ({ page }) => {
+    await page.goto('./?debug=1');
+    await page.waitForFunction(() => window.partyDebug);
+    await page.locator('#solo-mode').selectOption('laser-tag');
+    await page.locator('#bot-count').selectOption('0');
+    await page.locator('#solo').click();
+    await page.waitForFunction(() => window.partyDebug.getState().phase === 'racing');
+    await page.locator('#weapon-charged').click();
+    const fire = (await page.locator('#fire').boundingBox())!;
+    const session = await page.context().newCDPSession(page);
+    await session.send('Input.dispatchTouchEvent', {
+        type: 'touchStart',
+        touchPoints: [{ id: 3, x: fire.x + fire.width / 2, y: fire.y + fire.height / 2 }]
+    });
+    await page.waitForTimeout(150);
+    expect(
+        (await page.evaluate(() => window.partyDebug.getLogs())).filter((e) => (e as { type: string }).type === 'shot')
+    ).toHaveLength(0);
+    await expect
+        .poll(() =>
+            page.evaluate(
+                () => window.partyDebug.getLogs().filter((e) => (e as { type: string }).type === 'shot').length
+            )
+        )
+        .toBeGreaterThan(0);
+    await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    const p = (await page.evaluate(() => window.partyDebug.getState())).players[0];
+    expect(p.weapon).toBe('charged');
+    expect(p.energy).toBeLessThan(1);
+    expect(p.health).toBe(100);
+    await expect(page.locator('#weapon-charged')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#hud')).toContainText('HEALTH');
+    await session.detach();
+});

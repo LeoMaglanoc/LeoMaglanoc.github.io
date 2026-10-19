@@ -1,6 +1,6 @@
 import { neutral, type ModeId } from './protocol';
 
-const SHOT_INTERVAL = 1000 / 3;
+import { WeaponCycle, WEAPONS, type WeaponId } from './weapons';
 const AIM_SENSITIVITY = 0.004;
 
 export class Controls {
@@ -10,6 +10,7 @@ export class Controls {
     active: number | null = null;
     onShot: (sequence: number) => void = () => {};
     private enabled = true;
+    firingEnabled = true;
     private yaw = 0;
     private pitch = 0;
     private aimPointer: number | null = null;
@@ -20,7 +21,30 @@ export class Controls {
     private jumpPointer: number | null = null;
     private divePointer: number | null = null;
     private fireSequence = 0;
-    private firedAt = -Infinity;
+    private cycle = new WeaponCycle();
+    private preparationAt: number | null = null;
+    weapon: WeaponId = 'quick';
+    private pendingShots: { sequence: number; cost: number }[] = [];
+    private energyTick = -1;
+    get energy() {
+        return this.cycle.energy;
+    }
+    get charge() {
+        return this.cycle.charge;
+    }
+    selectWeapon(weapon: WeaponId) {
+        if (this.weapon === weapon) return;
+        this.weapon = weapon;
+        this.preparationAt = null;
+        this.shotUntil = -Infinity;
+        this.cycle.advance(performance.now() / 1000, weapon, false);
+    }
+    syncEnergy(energy: number, acknowledged: number, tick: number) {
+        if (tick === this.energyTick) return;
+        this.energyTick = tick;
+        this.pendingShots = this.pendingShots.filter((shot) => shot.sequence > acknowledged);
+        this.cycle.energy = Math.max(0, energy - this.pendingShots.reduce((sum, shot) => sum + shot.cost, 0));
+    }
     private shotUntil = -Infinity;
 
     get aimYaw() {
@@ -57,6 +81,10 @@ export class Controls {
             }
             const target = e.target as HTMLElement | null;
             if (!this.enabled || target?.matches?.('input,textarea,select,[contenteditable="true"]')) return;
+            if (this.laserActive && ['Digit1', 'Digit2'].includes(e.code)) {
+                e.preventDefault();
+                this.selectWeapon(e.code === 'Digit1' ? 'quick' : 'charged');
+            }
             if (relevant.includes(e.code)) {
                 e.preventDefault();
                 if (e.code === 'Space' && !this.keys.has(e.code)) this.jump();
@@ -136,6 +164,10 @@ export class Controls {
             button.addEventListener('pointercancel', release);
             button.addEventListener('lostpointercapture', release);
         }
+        for (const weapon of ['quick', 'charged'] as const)
+            document.querySelector('#weapon-' + weapon)?.addEventListener('click', () => {
+                if (this.laserActive) this.selectWeapon(weapon);
+            });
         const aim = document.querySelector<HTMLElement>('#aim-zone');
         const fire = document.querySelector<HTMLElement>('#fire');
         for (const area of [aim, fire, this.canvas]) {
@@ -199,12 +231,19 @@ export class Controls {
         this.aimPitch -= y * AIM_SENSITIVITY;
     }
     private shoot(now: number) {
-        if (!this.laserActive || now - this.firedAt < SHOT_INTERVAL) return;
-        this.firedAt = now;
+        if (!this.laserActive || !this.firingEnabled) return;
+        this.cycle.advance(now / 1000, this.weapon, true);
+        this.preparationAt ??= now;
+        if (this.weapon === 'charged' && now - this.preparationAt < (WEAPONS.charged.charge + 0.05) * 1000) return;
+        if (!this.cycle.canFire(now / 1000, this.weapon)) return;
         // Preserve a quick tap across render/input-send cadence. The monotonic
         // sequence prevents this short delivery window from producing repeats.
         this.shotUntil = now + 100;
         this.fireSequence++;
+        this.cycle.spend(this.fireSequence, now / 1000, this.weapon);
+        this.pendingShots.push({ sequence: this.fireSequence, cost: WEAPONS[this.weapon].cost });
+        if (this.pendingShots.length > 32) this.pendingShots.shift();
+        this.preparationAt = null;
         this.onShot(this.fireSequence);
     }
     setContext(modeId: ModeId, roundId: number, enabled = true) {
@@ -215,7 +254,10 @@ export class Controls {
         if (changedRound) {
             this.aimYaw = 0;
             this.aimPitch = 0;
-            this.firedAt = -Infinity;
+            this.cycle = new WeaponCycle();
+            this.weapon = 'quick';
+            this.pendingShots = [];
+            this.energyTick = -1;
         }
         this.value = {
             ...neutral(modeId, roundId),
@@ -223,6 +265,13 @@ export class Controls {
             jumpSequence: this.value.jumpSequence,
             diveSequence: this.value.diveSequence
         };
+    }
+    setLife(life: number) {
+        if (life === this.value.life) return;
+        this.clear();
+        this.value.life = life;
+        this.pendingShots = [];
+        this.energyTick = -1;
     }
     jump() {
         if (this.enabled && this.value.modeId === 'obstacle-dash') this.value.jumpSequence++;
@@ -240,6 +289,8 @@ export class Controls {
         this.aimMouse = false;
         this.mouseFire = false;
         this.shotUntil = -Infinity;
+        this.preparationAt = null;
+        this.cycle.advance(performance.now() / 1000, this.weapon, false);
         this.value.axes = [0, 0];
         this.value.jumpHeld = false;
         if (this.value.modeId === 'laser-tag') this.value.aim.fire = false;
@@ -285,12 +336,22 @@ export class Controls {
             [x, z] = [x * cos - z * sin, x * sin + z * cos];
         }
         if (this.value.modeId === 'laser-tag') {
-            const holding = this.enabled && (this.mouseFire || this.firePointer !== null);
+            const holding = this.enabled && this.firingEnabled && (this.mouseFire || this.firePointer !== null);
             if (holding) this.shoot(now);
+            else {
+                this.cycle.advance(now / 1000, this.weapon, false);
+                this.preparationAt = null;
+            }
             const firing = this.enabled && (holding || now < this.shotUntil);
             this.value = {
                 ...this.value,
-                aim: { yaw: this.aimYaw, pitch: this.aimPitch, fire: firing, sequence: this.fireSequence }
+                aim: {
+                    yaw: this.aimYaw,
+                    pitch: this.aimPitch,
+                    fire: firing,
+                    sequence: this.fireSequence,
+                    weapon: this.weapon
+                }
             };
         }
         this.value = {

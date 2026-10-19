@@ -25,6 +25,10 @@ export class Scene {
     private motions = new Map<string, CharacterMotion>();
     private particles: EffectParticle[] = [];
     private raceTarget = new Vec3();
+    private recoil = 0;
+    kick(amount: number) {
+        this.recoil = Math.max(this.recoil, amount);
+    }
     modeId: ModeId = 'obstacle-dash';
     traces: { entity: Entity; age: number }[] = [];
     world!: Entity;
@@ -276,6 +280,7 @@ export class Scene {
         const p = this.characters.get(id)?.getPosition();
         if (!p) return;
         const rig = getAimRig(p, yaw, pitch);
+        this.camera.camera!.fov = 60 + this.recoil * 1.5;
         this.camera.setPosition(rig.camera.x, rig.camera.y, rig.camera.z);
         this.camera.lookAt(
             rig.camera.x + rig.direction.x * 25,
@@ -339,6 +344,7 @@ export class Scene {
     /** Render-only motion: authoritative capsules never scale, lean or receive particles. */
     animate(players: Player[], time: number, dt: number) {
         const step = Math.min(Math.max(dt, 0), 0.1);
+        this.recoil *= Math.exp(-step * 18);
         for (const p of players) {
             const shield = this.characters.get(p.id)?.findByName('spawn-shield');
             if (shield) shield.enabled = p.protectedUntil > time;
@@ -415,6 +421,8 @@ export class Scene {
         return this.traces.length + this.particles.length;
     }
     clearEffects() {
+        this.recoil = 0;
+        if (this.camera?.camera) this.camera.camera.fov = 60;
         for (const trace of this.traces) trace.entity.destroy();
         this.traces.length = 0;
         for (const particle of this.particles) particle.entity.destroy();

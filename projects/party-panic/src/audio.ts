@@ -14,7 +14,17 @@ export class AudioFeedback {
     play(kind: string) {
         const context = this.context;
         if (!context || context.state !== 'running' || this.muted || this.voices >= 8) return;
-        const frequency = { jump: 260, land: 95, hit: 120, checkpoint: 740, shot: 520, tag: 920 }[kind];
+        const frequency = {
+            jump: 260,
+            land: 95,
+            hit: 120,
+            checkpoint: 740,
+            shot: 520,
+            charged: 190,
+            confirm: 780,
+            dive: 330,
+            tag: 920
+        }[kind];
         if (!frequency) return;
         const oscillator = context.createOscillator();
         const gain = context.createGain();
