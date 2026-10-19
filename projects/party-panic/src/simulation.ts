@@ -40,6 +40,7 @@ export class Simulation {
             name,
             color: COLORS.find((c) => !this.state.players.some((p) => p.color === c)) ?? COLORS[0],
             connected: true,
+            ready: false,
             checkpoint: 0,
             progress: 0,
             finish: null,
@@ -84,8 +85,19 @@ export class Simulation {
         this.state.phase = phase;
         this.onEvent('phase', { phase });
     }
+    ready(id: string, roundId: number) {
+        const p = this.state.players.find((p) => p.id === id && p.connected);
+        if (!p || this.state.phase !== 'lobby' || roundId !== this.state.round) return false;
+        p.ready = true;
+        return true;
+    }
     start() {
-        if (this.state.phase !== 'lobby' || !this.state.players.length) return;
+        if (
+            this.state.phase !== 'lobby' ||
+            !this.state.players.length ||
+            this.state.players.some((p) => p.connected && !p.ready)
+        )
+            return;
         this.state.round++;
         this.state.elapsed = 0;
         this.state.countdown = 3;

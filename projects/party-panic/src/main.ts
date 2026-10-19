@@ -1,6 +1,7 @@
 import QRCode from 'qrcode';
 import { Vec3 } from 'playcanvas';
 import { Controls } from './input';
+import { DisplayMode } from './platform/displayMode';
 import { InputGate, SnapshotGate, VERSION, isSnapshot, parseControl, type Snapshot } from './protocol';
 import { admission, rank } from './rules';
 import { Scene } from './scene';
@@ -17,10 +18,30 @@ $('#app').innerHTML =
 <footer class="bottom-bar" id="footer"><span>ORIGINAL COURSE / NO ELIMINATION</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
 <section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
 <div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
-<details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button></details>`;
+<details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><pre id="display-status"></pre></details>`;
 const scene = new Scene(),
     transport = new Transport(),
     controls = new Controls();
+const display = new DisplayMode((status) => {
+    document.documentElement.style.setProperty('--viewport-height', status.height + 'px');
+    document.body.classList.toggle('portrait-game', status.portrait);
+    if (scene.app) scene.app.resizeCanvas();
+    $('#display-status').textContent =
+        `Fullscreen ${status.fullscreen ? 'active' : status.fullscreenError || 'inactive'} · Landscape ${status.landscape ? 'observed' : status.orientationError || 'not locked'}`;
+});
+window.addEventListener('pagehide', (event) => {
+    if (event.persisted) void display.exit();
+    else display.dispose();
+});
+$('.brand').addEventListener('click', () => {
+    void display.exit();
+});
+$('#display-enter').onclick = () => {
+    void display.enter();
+};
+$('#display-exit').onclick = () => {
+    void display.exit();
+};
 let attempt = 0,
     frameAt = performance.now();
 let sim: Simulation | null = null,
@@ -30,6 +51,7 @@ let sim: Simulation | null = null,
     hostId = '',
     room = '',
     busy = false;
+let startRequested = false;
 let accepted = new Set<string>(),
     gates = new Map<string, InputGate>();
 const snapshotGate = new SnapshotGate();
@@ -157,6 +179,7 @@ function wireSim() {
 }
 function solo() {
     if (busy) return;
+    void display.enter();
     ended = false;
     homeVisible(false);
     role = 'host';
@@ -166,6 +189,7 @@ function solo() {
     sim.add(localId, nickname);
     wireSim();
     state = sim.state;
+    sim.ready(localId, state.round);
     sim.start();
     view = '';
     renderState();
@@ -186,7 +210,7 @@ function showLobby() {
     url.searchParams.set('room', room);
     const link = url.href;
     showPanel(
-        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'One player is enough for practice. Friends make it messier.' : 'You’re in. The host starts the race.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<span class="status">● Connected · Waiting for host</span>'}</div><p class="small">WASD + Space on desktop. Joystick + Jump on phones.<br>Internet needed to load and connect. Direct P2P where available.</p>`
+        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'One player is enough for practice. Friends make it messier.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
     );
     if (isHost && room) {
         $<HTMLInputElement>('#share-link').value = link;
@@ -207,18 +231,38 @@ function showLobby() {
     }
     if (isHost)
         $('#start').onclick = () => {
+            void display.enter();
+            sim!.ready(localId, state!.round);
+            startRequested = true;
+            if (state!.players.some((p) => p.connected && !p.ready)) {
+                notice('Waiting for friends to tap Ready. The countdown will start together.');
+                sendState(true);
+                updateRoster();
+                return;
+            }
+            startRequested = false;
             sim!.start();
             view = '';
             renderState();
+        };
+    if (!isHost)
+        $('#ready').onclick = () => {
+            void display.enter();
+            transport.send(hostId, 'control', { type: 'ready', roundId: state!.round });
         };
     updateRoster();
 }
 function updateRoster() {
     if (!state || !document.querySelector('#roster')) return;
+    const readyButton = document.querySelector<HTMLButtonElement>('#ready');
+    if (readyButton)
+        readyButton.textContent = state.players.find((p) => p.id === localId)?.ready
+            ? 'READY ✓ · ENTER GAME'
+            : 'READY — ENTER GAME';
     $('#roster').innerHTML = state.players
         .map(
             (p) =>
-                `<div class="player-row"><i class="dot" style="background:${p.color}"></i><span>${escape(p.name)}${p.id === localId ? ' (you)' : ''}</span><small>${p.id === hostId ? 'HOST' : p.connected ? 'READY' : 'LEFT'}</small></div>`
+                `<div class="player-row"><i class="dot" style="background:${p.color}"></i><span>${escape(p.name)}${p.id === localId ? ' (you)' : ''}</span><small>${p.id === hostId ? 'HOST' : !p.connected ? 'LEFT' : p.ready ? 'READY' : 'NOT READY'}</small></div>`
         )
         .join('');
 }
@@ -313,6 +357,16 @@ transport.onMessage = (peer, lane, raw) => {
             sendState(true);
             updateRoster();
             log('join', { id: peer });
+        } else if (msg.type === 'ready' && accepted.has(peer)) {
+            if (!sim.ready(peer, msg.roundId)) transport.rejected++;
+            if (startRequested && sim.state.players.every((p) => !p.connected || p.ready)) {
+                startRequested = false;
+                sim.start();
+                view = '';
+                renderState();
+            }
+            sendState(true);
+            updateRoster();
         } else if (msg.type === 'ping' && accepted.has(peer))
             transport.send(peer, 'control', { type: 'pong', at: msg.at });
         else if (msg.type === 'pong' && accepted.has(peer)) {
@@ -358,6 +412,10 @@ transport.onClose = (peer) => {
         accepted.delete(peer);
         gates.delete(peer);
         sim?.disconnect(peer);
+        if (startRequested && sim?.state.players.every((p) => !p.connected || p.ready)) {
+            startRequested = false;
+            sim.start();
+        }
         sendState(true);
         updateRoster();
     } else if (peer === hostId && !ended) endSession('The host left. This match has ended.');
@@ -380,7 +438,9 @@ function endSession(message: string) {
     $('#new-room').onclick = () => reset();
 }
 function reset(clearNotice = true) {
+    void display.exit();
     attempt++;
+    startRequested = false;
     ended = true;
     transport.close();
     for (const id of scene.characters.keys()) scene.removePlayer(id);
@@ -613,6 +673,10 @@ async function boot() {
                                 sequence: 100000 + sim.state.tick,
                                 clientTime: performance.now()
                             });
+                    },
+                    readyTestPlayers: () => {
+                        for (const p of sim?.state.players ?? [])
+                            if (p.id.startsWith('test-')) sim?.ready(p.id, sim.state.round);
                     },
                     addTestPlayer: (name: string) => sim?.add('test-' + name, name),
                     getDiagnostics: () => ({

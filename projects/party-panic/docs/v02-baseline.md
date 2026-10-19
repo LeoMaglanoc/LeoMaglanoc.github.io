@@ -21,21 +21,21 @@ will change. Node v24.19.0. npm ci installed 182 pinned packages successfully.
 `docs/evidence/v02-baseline/`. Measurements step actual Ammo via existing debug API;
 no test teleport or fake finish is used. Desktop and both phone viewports agree:
 
-| Quantity | Baseline / method |
-| --- | --- |
-| Max run speed | 2.800003 units/s measured |
-| Acceleration | 30 units/s² ground, 9 air from source |
-| Rest to run speed | 0.0933s continuous / 6 fixed steps (calculated ground) |
-| Braking distance | ≈0.131 units continuous ground calculation |
-| Jump input to visible simulated lift | 0.0333s in fixed-step harness |
-| Host input sampling | 30Hz; adds 0–33.3ms before simulation, excluding network |
-| Jump apex | y=2.24997 from y=0.74997, rise≈1.5 units measured |
-| Time to apex / flight | 0.4167s / 0.8333s measured |
-| Full-speed horizontal jump | ≈2.333 units calculated speed × flight |
-| Jump buffer / coyote | Both 100ms, existing source; jump sequence deduplicates |
-| Camera | exponential rate 7/s, ≈99ms half-response / 429ms 95% calculated |
-| Player collision | group128 mask22 excludes other players; obstacle collision enabled |
-| Guest rendering | 100ms remote interpolation; max150ms extrapolation; horizontal approximation and rate12 reconciliation; no initial local jump prediction |
+| Quantity                             | Baseline / method                                                                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Max run speed                        | 2.800003 units/s measured                                                                                                                |
+| Acceleration                         | 30 units/s² ground, 9 air from source                                                                                                    |
+| Rest to run speed                    | 0.0933s continuous / 6 fixed steps (calculated ground)                                                                                   |
+| Braking distance                     | ≈0.131 units continuous ground calculation                                                                                               |
+| Jump input to visible simulated lift | 0.0333s in fixed-step harness                                                                                                            |
+| Host input sampling                  | 30Hz; adds 0–33.3ms before simulation, excluding network                                                                                 |
+| Jump apex                            | y=2.24997 from y=0.74997, rise≈1.5 units measured                                                                                        |
+| Time to apex / flight                | 0.4167s / 0.8333s measured                                                                                                               |
+| Full-speed horizontal jump           | ≈2.333 units calculated speed × flight                                                                                                   |
+| Jump buffer / coyote                 | Both 100ms, existing source; jump sequence deduplicates                                                                                  |
+| Camera                               | exponential rate 7/s, ≈99ms half-response / 429ms 95% calculated                                                                         |
+| Player collision                     | group128 mask22 excludes other players; obstacle collision enabled                                                                       |
+| Guest rendering                      | 100ms remote interpolation; max150ms extrapolation; horizontal approximation and rate12 reconciliation; no initial local jump prediction |
 
 Input-only course: finish **61.9379 simulated seconds**, checkpoint2, zero falls.
 This already meets nominal short-session course duration in automation; no evidence

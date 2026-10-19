@@ -1,4 +1,4 @@
-export const VERSION = 1;
+export const VERSION = 2;
 export const COLORS = ['#ffcc4a', '#75dfd1', '#ec8ee5', '#9fa7ff', '#ff9376', '#99db67', '#82cfff', '#f3f0cf'];
 export type Phase = 'lobby' | 'countdown' | 'racing' | 'results';
 export type Input = {
@@ -13,6 +13,7 @@ export type Player = {
     name: string;
     color: string;
     connected: boolean;
+    ready: boolean;
     checkpoint: number;
     progress: number;
     finish: number | null;
@@ -38,7 +39,10 @@ export type Snapshot = {
     round: number;
 };
 export type Control =
-    { type: 'join'; version: number; nickname: string } | { type: 'ping'; at: number } | { type: 'pong'; at: number };
+    | { type: 'join'; version: number; nickname: string }
+    | { type: 'ready'; roundId: number }
+    | { type: 'ping'; at: number }
+    | { type: 'pong'; at: number };
 export const neutral = (): Input => ({ type: 'input', sequence: 0, axes: [0, 0], jumpSequence: 0, clientTime: 0 });
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 const seq = (v: unknown): v is number => Number.isSafeInteger(v) && (v as number) >= 0;
@@ -73,6 +77,7 @@ export function parseInput(v: unknown): Input | null {
 }
 export function parseControl(v: unknown): Control | null {
     if (!record(v)) return null;
+    if (v.type === 'ready' && seq(v.roundId)) return { type: 'ready', roundId: v.roundId };
     if (
         v.type === 'join' &&
         seq(v.version) &&
@@ -107,6 +112,7 @@ export function isSnapshot(v: unknown): v is Snapshot {
             typeof p.name === 'string' &&
             /^#[0-9a-f]{6}$/i.test(String(p.color)) &&
             typeof p.connected === 'boolean' &&
+            typeof p.ready === 'boolean' &&
             ['x', 'y', 'z', 'vx', 'vy', 'vz', 'yaw', 'checkpoint', 'progress', 'respawns'].every((k) => finite(p[k])) &&
             (p.finish === null || finite(p.finish))
     );

@@ -1,4 +1,4 @@
-import type { Phase, Player } from './protocol';
+import { VERSION, type Phase, type Player } from './protocol';
 export const COURSE = { checkpointZ: [-40, -85], finishZ: -132, timeout: 120, spawnZ: [3, -43, -88] };
 export const MODE = { id: 'obstacle-dash', name: 'Obstacle Dash', minPlayers: 1, maxPlayers: 8 } as const;
 export function canTransition(a: Phase, b: Phase) {
@@ -10,7 +10,7 @@ export function canTransition(a: Phase, b: Phase) {
     );
 }
 export function admission(version: number, count: number, phase: Phase) {
-    return version !== 1
+    return version !== VERSION
         ? 'Version mismatch. Reload both devices.'
         : count >= 8
           ? 'Room full (8 players).'
@@ -47,6 +47,7 @@ export function boundedProgress(p: Player) {
 }
 export function resetPlayer(p: Player, index: number) {
     Object.assign(p, {
+        ready: false,
         checkpoint: 0,
         progress: 0,
         finish: null,

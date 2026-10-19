@@ -92,6 +92,7 @@ test('eight capsules complete host-authoritative triggers and repeat rematches',
         expect(new Set(s.players.map((p) => p.color)).size).toBe(8);
         await expect(page.locator('#rematch')).toBeVisible();
         await page.locator('#rematch').click();
+        await page.evaluate(() => window.partyDebug.readyTestPlayers());
         await page.locator('#start').click();
         await page.evaluate(() => window.partyDebug.hostAdvance(4));
     }

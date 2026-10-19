@@ -5,6 +5,7 @@ declare global {
         partyDebug: {
             getState: () => Snapshot;
             setTestInput: (axes: [number, number], jumpSequence: number) => void;
+            readyTestPlayers: () => void;
             addTestPlayer: (name: string) => unknown;
             getDiagnostics: () => {
                 bodies: number;

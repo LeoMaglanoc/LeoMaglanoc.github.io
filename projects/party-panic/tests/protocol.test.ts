@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { InputGate, SnapshotGate, parseInput, parseControl, neutral } from '../src/protocol';
+import { InputGate, SnapshotGate, parseInput, parseControl, neutral, VERSION } from '../src/protocol';
 import { admission, canTransition, checkpoint, finish, rank, resetPlayer, boundedProgress } from '../src/rules';
 import type { Player, Snapshot } from '../src/protocol';
 const player = (id = 'a'): Player => ({
@@ -7,6 +7,7 @@ const player = (id = 'a'): Player => ({
     name: id,
     color: '#ffffff',
     connected: true,
+    ready: false,
     checkpoint: 0,
     progress: 0,
     finish: null,
@@ -61,10 +62,10 @@ describe('connection-bound input validation', () => {
 });
 describe('lobby and race rules', () => {
     it('rejects versions, full room, late joins', () => {
-        expect(admission(2, 1, 'lobby')).toContain('Version');
-        expect(admission(1, 8, 'lobby')).toContain('full');
-        expect(admission(1, 1, 'racing')).toContain('started');
-        expect(admission(1, 7, 'lobby')).toBeNull();
+        expect(admission(1, 1, 'lobby')).toContain('Version');
+        expect(admission(VERSION, 8, 'lobby')).toContain('full');
+        expect(admission(VERSION, 1, 'racing')).toContain('started');
+        expect(admission(VERSION, 7, 'lobby')).toBeNull();
     });
     it('requires ordered lifecycle', () => {
         expect(canTransition('lobby', 'racing')).toBe(false);

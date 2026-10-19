@@ -1,4 +1,5 @@
 import process from 'node:process';
+import { VERSION } from '../../src/protocol';
 import { test, expect, type Page } from '@playwright/test';
 test.skip(process.env.RUN_WEBRTC !== '1', 'Public WebRTC path required; managed Chromium UDP policy blocks ICE here.');
 test('real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch', async ({
@@ -61,11 +62,15 @@ test('real WebRTC: two to eight clients, impaired movement, authority, full room
             contentType: 'application/json'
         });
         // Duplicate join belongs to the existing connection; it cannot allocate a new player.
-        await guest.evaluate(() => window.partyDebug.sendControl({ type: 'join', version: 1, nickname: 'Duplicate' }));
+        await guest.evaluate(
+            (version) => window.partyDebug.sendControl({ type: 'join', version, nickname: 'Duplicate' }),
+            VERSION
+        );
         await expect(guest.locator('#notice')).toContainText('Already joined');
         expect((await host.evaluate(() => window.partyDebug.getState())).players).toHaveLength(2);
         for (const p of [host, guest])
             await p.evaluate(() => window.partyDebug.setFaults({ delay: 80, jitter: 40, loss: 0.03, reorder: 0.05 }));
+        await guest.locator('#ready').click();
         await host.locator('#start').click();
         await guest.waitForFunction(() => window.partyDebug.getState()?.phase === 'racing');
         await guest.keyboard.down('w');
@@ -119,6 +124,10 @@ test('real WebRTC: two to eight clients, impaired movement, authority, full room
         const extra = await join('Overflow');
         await expect(extra.locator('#notice')).toContainText('Room full', { timeout: 20000 });
         await extra.close();
+        for (const p of guests) await p.locator('#ready').click();
+        await expect
+            .poll(() => host.evaluate(() => window.partyDebug.getState().players.filter((p) => p.ready).length))
+            .toBe(7);
         await host.locator('#start').click();
         await host.evaluate(() => window.partyDebug.hostAdvance(4));
         await guest.waitForFunction(() => window.partyDebug.getState().phase === 'racing');
