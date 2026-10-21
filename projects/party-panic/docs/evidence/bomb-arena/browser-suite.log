@@ -1,0 +1,51 @@
+
+> party-panic@0.4.0 test:e2e
+> playwright test --output /tmp/bomb-suite-final
+
+[WebServer] (node:163207) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 33 tests using 1 worker
+
+(node:163261) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/bomb.spec.ts:9:5 › Bomb Arena desktop: input, fuse, elimination, rematch and mode switch (18.7s)
+  ✓   2 tests/e2e/bomb.spec.ts:9:5 › Bomb Arena portrait: input, fuse, elimination, rematch and mode switch (13.1s)
+  ✓   3 tests/e2e/bomb.spec.ts:9:5 › Bomb Arena landscape: input, fuse, elimination, rematch and mode switch (14.3s)
+  ✓   4 tests/e2e/bomb.spec.ts:9:5 › Bomb Arena wide-landscape: input, fuse, elimination, rematch and mode switch (16.9s)
+  ✓   5 tests/e2e/bomb.spec.ts:9:5 › Bomb Arena narrow-landscape: input, fuse, elimination, rematch and mode switch (16.4s)
+  ✓   6 tests/e2e/bomb.spec.ts:75:1 › Bomb Arena seven bots use real legal inputs and finish an accelerated round (5.4s)
+INPUT-ONLY COURSE {"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":104555,"shotSequence":0,"checkpoint":2,"progress":130.56387329101562,"finish":73.02053333333345,"x":-4.039466381072998,"y":0.7499523758888245,"z":-130.61053466796875,"vx":0,"vy":0.00010943412780761719,"vz":-2.799999952316284,"yaw":720,"respawns":1}
+  ✓   7 tests/e2e/course.spec.ts:2:1 › solo traverses the actual course with input only and authoritative finish (6.7s)
+  ✓   8 tests/e2e/display.spec.ts:34:1 › denied gesture fullscreen keeps solo input and manual rotation usable (7.0s)
+  ✓   9 tests/e2e/display.spec.ts:59:1 › results and rematch retain display state; explicit exit and reenter work (6.2s)
+  ✓  10 tests/e2e/display.spec.ts:93:5 › main-menu party-enter enters early and Back preserves fullscreen (4.5s)
+  ✓  11 tests/e2e/display.spec.ts:93:5 › main-menu host enters early and Back preserves fullscreen (6.7s)
+  ✓  12 tests/e2e/display.spec.ts:93:5 › main-menu join-open enters early and Back preserves fullscreen (12.0s)
+LASER AI HALFWAY [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":7,"respawnAt":0,"protectedUntil":38.2168333333325,"aimPitch":-0.08,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":6,"shotSequence":0,"checkpoint":0,"progress":0,"finish":null,"x":11,"y":0.7499745488166809,"z":-8,"vx":-0.0000017881391158880433,"vy":0,"vz":0,"yaw":180,"respawns":7},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":6,"deaths":5,"respawnAt":0,"protectedUntil":38.55016666666582,"aimPitch":-0.08173528160710976,"health":32,"energy":1,"weapon":"quick","charge":0,"inputSequence":2481,"shotSequence":22,"checkpoint":0,"progress":0,"finish":null,"x":7.999998569488525,"y":0.749996542930603,"z":1.2782704830169678,"vx":0.000007760510925436392,"vy":0.00000858306884765625,"vz":-1.4640827178955078,"yaw":-14.039905402333973,"respawns":5},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":6,"deaths":6,"respawnAt":0,"protectedUntil":41.200166666665666,"aimPitch":-0.1483247657695083,"health":100,"energy":0.7739999999999839,"weapon":"charged","charge":1,"inputSequence":2481,"shotSequence":12,"checkpoint":0,"progress":0,"finish":null,"x":-8.846435546875,"y":0.7499599456787109,"z":6.839138984680176,"vx":-0.000008940699444792699,"vy":7.152557373046875e-7,"vz":0,"yaw":-24.933454277512894,"respawns":6},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":10,"deaths":4,"respawnAt":0,"protectedUntil":35.76683333333264,"aimPitch":-0.2498160783783514,"health":30,"energy":0.7759999999999883,"weapon":"quick","charge":0,"inputSequence":2481,"shotSequence":30,"checkpoint":0,"progress":0,"finish":null,"x":-6.000011920928955,"y":0.7499735951423645,"z":2.2582802772521973,"vx":0.0000035762782317760866,"vy":0,"vz":0.0000017881391158880433,"yaw":-144.40826536287332,"respawns":4}]
+  ✓  13 tests/e2e/laser.spec.ts:3:1 › solo Laser Tag: real AI inputs tag, respawn, score and finish a complete match (17.1s)
+  ✓  14 tests/e2e/laser.spec.ts:45:1 › laser touch move + aim-and-fire reach real input and host shooting; release clears fire (8.3s)
+AI RACE FINISHES [{"id":"solo","name":"Player","color":"#ffcc4a","connected":true,"ready":false,"bot":false,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":6,"shotSequence":0,"checkpoint":0,"progress":0,"finish":null,"x":-1.9499999284744263,"y":0.7499682307243347,"z":3.000000238418579,"vx":-0.0000015646224937881925,"vy":0,"vz":0.00000357628005076549,"yaw":180,"respawns":0},{"id":"bot-0","name":"Pip","color":"#75dfd1","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":3727,"shotSequence":0,"checkpoint":2,"progress":130.5801239013672,"finish":62.11666666666442,"x":-4.056999683380127,"y":0.7499614357948303,"z":-130.6697235107422,"vx":-8.940698990045348e-7,"vy":0,"vz":-0.0000071525591920362785,"yaw":-0.000038126301650452766,"respawns":0},{"id":"bot-1","name":"Nova","color":"#ec8ee5","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":4049,"shotSequence":0,"checkpoint":2,"progress":130.57736206054688,"finish":67.48333333333079,"x":3.975872278213501,"y":0.7499020099639893,"z":-130.67068481445312,"vx":0.0000013411089412329602,"vy":7.152557373046875e-7,"vz":-0.000007152580110414419,"yaw":360.00019167546196,"respawns":2},{"id":"bot-2","name":"Byte","color":"#9fa7ff","connected":true,"ready":true,"bot":true,"score":0,"deaths":0,"respawnAt":0,"protectedUntil":0,"aimPitch":0,"health":100,"energy":1,"weapon":"quick","charge":0,"inputSequence":3941,"shotSequence":0,"checkpoint":2,"progress":130.5763702392578,"finish":65.68333333333089,"x":-1.9347745180130005,"y":0.7499648928642273,"z":-130.6641082763672,"vx":6.667403340543387e-7,"vy":-0.0016057491302490234,"vz":-0.00001066784534486942,"yaw":-0.00004867853565208791,"respawns":1}]
+  ✓  15 tests/e2e/laser.spec.ts:91:1 › AI racers traverse the real course without test positions or progress claims (6.4s)
+  ✓  16 tests/e2e/laser.spec.ts:103:1 › charged blaster prepares before firing and reports energy, health and weapon selection (8.4s)
+REPEATED MODE BODY COUNTS [{"mode":"laser-tag","count":17},{"mode":"obstacle-dash","count":15},{"mode":"laser-tag","count":17},{"mode":"obstacle-dash","count":15},{"mode":"laser-tag","count":17},{"mode":"obstacle-dash","count":15}]
+  ✓  17 tests/e2e/modes.spec.ts:3:1 › three repeated Dash/Laser mode cycles use authoritative timeouts and release scene bodies (13.7s)
+  ✓  18 tests/e2e/movement.spec.ts:4:5 › real Ammo: cardinal acceleration and braking stay bounded (6.9s)
+  ✓  19 tests/e2e/movement.spec.ts:4:5 › real Ammo: diagonal acceleration and braking stay bounded (7.5s)
+  ✓  20 tests/e2e/movement.spec.ts:40:1 › real Ammo buffers a landing jump, but a held sequence cannot repeatedly jump (6.8s)
+  ✓  21 tests/e2e/movement.spec.ts:57:1 › real Ammo: short hops, committed dives and duplicate edges (10.8s)
+  -  22 tests/e2e/network.spec.ts:5:1 › real WebRTC: two to eight clients, impaired movement, authority, full room, results and rematch
+  -  23 tests/e2e/network.spec.ts:165:1 › real WebRTC Laser: gesture readiness, cover, authoritative tags, faults and eight-client firing
+  -  24 tests/e2e/network.spec.ts:445:1 › real WebRTC Bomb Arena: two, four and eight players, authority, disconnect and rematch
+  ✓  25 tests/e2e/physics.spec.ts:2:1 › real Ammo: ten jumps, ordered triggers, respawn, timeout and rematch (13.6s)
+  ✓  26 tests/e2e/physics.spec.ts:70:1 › eight capsules complete host-authoritative triggers and repeat rematches (12.6s)
+  ✓  27 tests/e2e/physics.spec.ts:106:1 › jump deduplication, pause/resume clock, wall timeout and leaving releases bodies (8.7s)
+  ✓  28 tests/e2e/responsive.spec.ts:7:5 › desktop: home, touch input, portrait hint and no page scroll (8.4s)
+  ✓  29 tests/e2e/responsive.spec.ts:7:5 › phone-portrait: home, touch input, portrait hint and no page scroll (7.3s)
+  ✓  30 tests/e2e/responsive.spec.ts:7:5 › phone-landscape: home, touch input, portrait hint and no page scroll (8.9s)
+  ✓  31 tests/e2e/responsive.spec.ts:57:1 › landscape Laser weapon controls remain clickable above the playfield and clear of diagnostics (8.9s)
+  ✓  32 tests/e2e/smoke.spec.ts:2:1 › solo loads real Ammo, keyboard movement and checkpoint respawn (10.7s)
+  ✓  33 tests/e2e/smoke.spec.ts:27:1 › startup holds room and solo actions until Ammo is ready (4.7s)
+
+  3 skipped
+  30 passed (5.1m)

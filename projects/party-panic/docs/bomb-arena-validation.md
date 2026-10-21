@@ -5,9 +5,8 @@
 Based on Party Panic v0.3 at `b5a28ab` (latest origin/main at task start).
 Upstream reference: `20750b9c37a069831fbb88a41300b815ea006e0d` from
 [statist32/bomberman_multiplayer](https://github.com/statist32/bomberman_multiplayer).
-The implementation commit is the commit introducing `src/bomb/model.ts`;
-retrieve its full ID with `git log --diff-filter=A --format=%H -- src/bomb/model.ts`.
-The final delivery message records that ID and the deployed route.
+Implementation commit: `2303adf2e634290be3ae3e0fc6fc550e743d9236`.
+The final delivery message records the deployed route and release evidence.
 
 The upstream layered board, entity, obstacle, block, character, bomb and fire
 architecture is ported to TypeScript; Draw.js's image cache and tile drawing
@@ -63,7 +62,8 @@ docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -t part
 docker run -p 127.0.0.1:8088:80 party-panic-bomb-arena
 ```
 
-Baseline and release command output is under `docs/evidence/bomb-arena/`.
+Baseline and release command output is under `docs/evidence/bomb-arena/`
+(saved logs have trailing whitespace normalized).
 `replay-inputs.json` records the exact tick schedule used by the deep-equality
 replay test. Focused tests cover walls, directional rate limits, occupancy and
 escape, bomb duplication, exact fuse/fire lifetime, four rays, breakables,
@@ -154,10 +154,13 @@ remains: backgrounding authority pauses the match.
 ## Performance and limits
 
 [Reproducible measurement](evidence/bomb-arena/performance.json): Chrome
-156.0.8078.47 headless SwiftShader, Linux desktop, 844×390, one page with seven
+156.0.8078.47 headless SwiftShader, Linux x86_64 desktop (Intel i7-8565U,
+8 logical CPUs), 844×390, one page with seven
 legal-input bots; four active two-second samples and one result sample,
 followed by five accelerated rematches. Separate connected Chrome computer
-use reported Chrome 154 in its user agent. No CPU/network throttling was used.
+use reported Chrome 154 in its user agent. No CPU/network throttling was used. Docker checks used Node 24.22.1; host
+browser automation used Node 22.22.0, below the package's declared minimum
+22.23.2, so the supported-runtime build evidence is the Docker run.
 
 Active samples: median about 60 FPS, lower fifth-percentile FPS 24–53 across
 these short samples; sampled draw cost 0.3–0.5ms. Fixed-step simulation work

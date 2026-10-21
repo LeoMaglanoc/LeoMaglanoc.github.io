@@ -1,0 +1,207 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 561B 0.0s done
+#1 DONE 0.2s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 1.5s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e 0.0s done
+#3 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 0B / 14.28MB 0.1s
+#3 sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e 9.08kB / 9.08kB done
+#3 sha256:7b32114e84ca21aeb2d6f871a0b62b3a0762193f75d9afd048ee4cbe889f3148 1.13kB / 1.13kB done
+#3 sha256:528c92d70d7e39dbb3dd1c6681f6750c565c7e45b70527cda47c1a61495c1b6a 1.41kB / 1.41kB done
+#3 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 1.05MB / 14.28MB 0.3s
+#3 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 5.24MB / 14.28MB 0.4s
+#3 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 12.58MB / 14.28MB 0.6s
+#3 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 14.28MB / 14.28MB 0.7s
+#3 sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 14.28MB / 14.28MB 0.7s done
+#3 extracting sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 0.1s
+#3 extracting sha256:9d2b4f57f9e20f33279375ce25c6ff14f30f64270ed5c7b613b2b30256754f62 0.1s done
+#3 DONE 1.2s
+
+#4 [internal] load metadata for docker.io/library/node:24-bookworm-slim
+#4 DONE 2.3s
+
+#5 [internal] load metadata for docker.io/library/nginx:1.28-alpine
+#5 DONE 2.5s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 94B done
+#6 DONE 0.1s
+
+#7 [build 1/6] FROM docker.io/library/node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#7 resolve docker.io/library/node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 0.1s done
+#7 sha256:2dd9a4f758e173b65fee15388f7706af6fb01ef50cf7a2c0538711d67a6981ae 1.93kB / 1.93kB done
+#7 sha256:dc1f22974dab4be31a8b56d58cb1f8fc218e83de83ccd831d885b3d7ac1223fb 6.71kB / 6.71kB done
+#7 sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 3.93kB / 3.93kB done
+#7 ...
+
+#8 [internal] load build context
+#8 transferring context: 27.00MB 0.2s done
+#8 DONE 0.3s
+
+#9 [stage-1 1/3] FROM docker.io/library/nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+#9 resolve docker.io/library/nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236 0.1s done
+#9 sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236 10.32kB / 10.32kB done
+#9 sha256:0dcc88822d45581e65ae329f8be769762bf628d3b2bb7d2a077d4aa5c98b30e3 2.49kB / 2.49kB done
+#9 sha256:dc73b49f5124cf2ee538dfbdfbd121f0b4ccdcb20fea30f3a81bd477c02e2bb5 12.29kB / 12.29kB done
+#9 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 0B / 3.86MB 1.5s
+#9 sha256:1d9cbdb003be4f77dc59400a5eb400afcac245934b539c7bffe52abae7720f3c 0B / 1.83MB 1.5s
+#9 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 1.05MB / 3.86MB 2.2s
+#9 sha256:1d9cbdb003be4f77dc59400a5eb400afcac245934b539c7bffe52abae7720f3c 1.05MB / 1.83MB 2.2s
+#9 sha256:1d9cbdb003be4f77dc59400a5eb400afcac245934b539c7bffe52abae7720f3c 1.83MB / 1.83MB 2.3s done
+#9 sha256:e914c6e98e37815624beb8c5043be292f121898059d4d50c0709bc4da661f685 0B / 626B 2.3s
+#9 sha256:e914c6e98e37815624beb8c5043be292f121898059d4d50c0709bc4da661f685 626B / 626B 2.5s done
+#9 sha256:d631a49fb4f72e5bc609d0af4ce6d3ed054498068dc16c730be6b4e37c4a7f6c 0B / 956B 2.5s
+#9 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 2.10MB / 3.86MB 2.7s
+#9 sha256:d631a49fb4f72e5bc609d0af4ce6d3ed054498068dc16c730be6b4e37c4a7f6c 956B / 956B 2.7s
+#9 sha256:d631a49fb4f72e5bc609d0af4ce6d3ed054498068dc16c730be6b4e37c4a7f6c 956B / 956B 2.8s done
+#9 sha256:8f7c784e247120771f7bdb83b2ab8e17af75af4858332b63e0ed40610f5a9b59 0B / 405B 2.8s
+#9 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 3.15MB / 3.86MB 3.0s
+#9 sha256:8f7c784e247120771f7bdb83b2ab8e17af75af4858332b63e0ed40610f5a9b59 405B / 405B 3.0s done
+#9 sha256:44fa0a5a779fdf3b85972e8dfb3b2755a72a97290b682794f57212d88fa3a631 0B / 1.21kB 3.0s
+#9 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 3.86MB / 3.86MB 3.2s done
+#9 sha256:44fa0a5a779fdf3b85972e8dfb3b2755a72a97290b682794f57212d88fa3a631 1.21kB / 1.21kB 3.2s done
+#9 extracting sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 0.1s done
+#9 sha256:98104829f3fe8d2ead9a69b1f56c1f98955fd2b5933f089301331bb1f349683b 0B / 1.40kB 3.2s
+#9 sha256:98104829f3fe8d2ead9a69b1f56c1f98955fd2b5933f089301331bb1f349683b 1.40kB / 1.40kB 3.4s done
+#9 extracting sha256:1d9cbdb003be4f77dc59400a5eb400afcac245934b539c7bffe52abae7720f3c 0.0s done
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 0B / 20.25MB 3.4s
+#9 extracting sha256:e914c6e98e37815624beb8c5043be292f121898059d4d50c0709bc4da661f685 done
+#9 extracting sha256:d631a49fb4f72e5bc609d0af4ce6d3ed054498068dc16c730be6b4e37c4a7f6c done
+#9 extracting sha256:8f7c784e247120771f7bdb83b2ab8e17af75af4858332b63e0ed40610f5a9b59 done
+#9 extracting sha256:44fa0a5a779fdf3b85972e8dfb3b2755a72a97290b682794f57212d88fa3a631 done
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 1.05MB / 20.25MB 3.8s
+#9 extracting sha256:98104829f3fe8d2ead9a69b1f56c1f98955fd2b5933f089301331bb1f349683b done
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 2.10MB / 20.25MB 4.3s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 3.15MB / 20.25MB 4.8s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 4.19MB / 20.25MB 5.0s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 5.24MB / 20.25MB 5.3s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 6.29MB / 20.25MB 5.5s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 8.39MB / 20.25MB 5.8s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 9.44MB / 20.25MB 5.9s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 10.49MB / 20.25MB 6.0s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 11.53MB / 20.25MB 6.1s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 14.68MB / 20.25MB 6.4s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 15.73MB / 20.25MB 6.5s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 17.83MB / 20.25MB 6.6s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 20.25MB / 20.25MB 6.8s
+#9 sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 20.25MB / 20.25MB 6.9s done
+#9 extracting sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c
+#9 extracting sha256:0151c82f84a9c78800cb330f93f88d6ffe39f030ec9a60dbc0a12c4c7109536c 0.4s done
+#9 DONE 8.5s
+
+#7 [build 1/6] FROM docker.io/library/node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#7 sha256:11422d7ca1a44390a32bd8d8d9dc5946b4d053b3bbd9507d682e35584ba84a26 28.25MB / 28.25MB 5.7s done
+#7 sha256:47e82ed2c7200e6bb57827745085027ba425376a5ed4ba4a8e295a4e3b5d1b40 3.31kB / 3.31kB 5.8s done
+#7 extracting sha256:11422d7ca1a44390a32bd8d8d9dc5946b4d053b3bbd9507d682e35584ba84a26 1.0s done
+#7 sha256:c0e48fd1aa256850e18f180365b8fa3e55ae2197e85461fd3392cfb5c4c8e5e7 51.08MB / 51.08MB 8.1s done
+#7 sha256:f2b8e65232e105b573ea2f37c4a2ec56bcf0b63687ae2bbe329cf4252f30bc1d 1.71MB / 1.71MB 6.2s done
+#7 sha256:6d793208473aa7d9ccc02b9de99aee40e4d6e73065d5307d076fad3ba554d580 450B / 450B 6.4s done
+#7 extracting sha256:47e82ed2c7200e6bb57827745085027ba425376a5ed4ba4a8e295a4e3b5d1b40 done
+#7 extracting sha256:c0e48fd1aa256850e18f180365b8fa3e55ae2197e85461fd3392cfb5c4c8e5e7 0.3s
+#7 extracting sha256:c0e48fd1aa256850e18f180365b8fa3e55ae2197e85461fd3392cfb5c4c8e5e7 2.1s done
+#7 extracting sha256:f2b8e65232e105b573ea2f37c4a2ec56bcf0b63687ae2bbe329cf4252f30bc1d
+#7 extracting sha256:f2b8e65232e105b573ea2f37c4a2ec56bcf0b63687ae2bbe329cf4252f30bc1d 0.1s done
+#7 extracting sha256:6d793208473aa7d9ccc02b9de99aee40e4d6e73065d5307d076fad3ba554d580
+#7 extracting sha256:6d793208473aa7d9ccc02b9de99aee40e4d6e73065d5307d076fad3ba554d580 done
+#7 DONE 13.5s
+
+#10 [build 2/6] WORKDIR /app
+#10 DONE 5.9s
+
+#11 [build 3/6] COPY package*.json ./
+#11 DONE 0.1s
+
+#12 [build 4/6] RUN --mount=type=secret,id=proxy_ca NODE_EXTRA_CA_CERTS=/run/secrets/proxy_ca npm ci --strict-ssl=true
+#12 4.529 npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#12 9.840
+#12 9.840 added 182 packages, and audited 183 packages in 9s
+#12 9.841
+#12 9.841 53 packages are looking for funding
+#12 9.841   run `npm fund` for details
+#12 9.843
+#12 9.843 found 0 vulnerabilities
+#12 9.846 npm notice
+#12 9.846 npm notice New major version of npm available! 11.19.1 -> 12.2.0
+#12 9.846 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#12 9.846 npm notice To update run: npm install -g npm@12.2.0
+#12 9.846 npm notice
+#12 DONE 11.7s
+
+#13 [build 5/6] COPY . .
+#13 DONE 0.5s
+
+#14 [build 6/6] RUN npm run typecheck && npm run lint && npm test && npm run build
+#14 0.485
+#14 0.485 > party-panic@0.3.0 typecheck
+#14 0.485 > tsc --noEmit
+#14 0.485
+#14 5.183
+#14 5.183 > party-panic@0.3.0 lint
+#14 5.183 > eslint .
+#14 5.183
+#14 9.607
+#14 9.607 > party-panic@0.3.0 test
+#14 9.607 > vitest run
+#14 9.607
+#14 10.27
+#14 10.27 [1m[30m[46m RUN [49m[39m[22m [36mv5.0.5 [39m[90m/app[39m
+#14 10.27
+#14 10.87  [32m✓[39m tests/input.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 55[2mms[22m[39m
+#14 10.87  [32m✓[39m tests/laser.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 61[2mms[22m[39m
+#14 10.91  [32m✓[39m tests/displayMode.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 192[2mms[22m[39m
+#14 10.93  [32m✓[39m tests/faults.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+#14 11.23  [32m✓[39m tests/bots.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 422[2mms[22m[39m
+#14 11.33  [32m✓[39m tests/protocol.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+#14 11.36  [32m✓[39m tests/prediction.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+#14 11.41  [32m✓[39m tests/movement.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+#14 11.55  [32m✓[39m tests/laserPrediction.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 175[2mms[22m[39m
+#14 11.71  [32m✓[39m tests/weapons.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+#14 13.20  [32m✓[39m tests/readiness.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+#14 13.22  [32m✓[39m tests/modes.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+#14 13.25  [32m✓[39m tests/laserRound.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 60[2mms[22m[39m
+#14 13.26
+#14 13.26 [2m Test Files [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+#14 13.26 [2m      Tests [22m [1m[32m104 passed[39m[22m[90m (104)[39m
+#14 13.26 [2m   Start at [22m 19:09:26
+#14 13.26 [2m   Duration [22m 2.99s[2m (import 68%, transform 19%, tests 11%, worker 1%)[22m
+#14 13.26
+#14 13.52
+#14 13.52 > party-panic@0.3.0 build
+#14 13.52 > vite build
+#14 13.52
+#14 13.99 vite v8.3.4 building client environment for production...
+#14 14.01 transforming...
+#14 14.54 ✓ 1326 modules transformed.
+#14 14.97 rendering chunks...
+#14 15.37 computing gzip size...
+#14 15.41 dist/index.html                     1.09 kB │ gzip:   0.60 kB
+#14 15.41 dist/assets/index-B_WexXAw.css     14.93 kB │ gzip:   3.99 kB
+#14 15.41 dist/assets/index-D61cb1lQ.js   1,325.49 kB │ gzip: 356.43 kB
+#14 15.41
+#14 15.41 ✓ built in 1.42s
+#14 15.42 [plugin builtin:vite-reporter]
+#14 15.42 (!) Some chunks are larger than 500 kB after minification. Consider:
+#14 15.42 - Using dynamic import() to code-split the application
+#14 15.42 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+#14 15.42 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+#14 DONE 15.6s
+
+#15 [stage-1 2/3] COPY --from=build /app/dist /usr/share/nginx/html/party-panic
+#15 DONE 0.2s
+
+#16 [stage-1 3/3] RUN chmod -R a+rX /usr/share/nginx/html/party-panic
+#16 DONE 0.6s
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 0.2s done
+#17 writing image sha256:841ddc09c7f8251837e24c7fd8b33b1df1efc75a1020f9e193ffabdbdcdb7b10
+#17 writing image sha256:841ddc09c7f8251837e24c7fd8b33b1df1efc75a1020f9e193ffabdbdcdb7b10 done
+#17 naming to docker.io/library/party-panic-bomb-baseline 0.0s done
+#17 DONE 0.3s

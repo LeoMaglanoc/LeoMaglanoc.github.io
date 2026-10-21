@@ -1,0 +1,116 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 561B done
+#1 DONE 0.1s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 1.1s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/node:24-bookworm-slim
+#4 DONE 0.0s
+
+#5 [internal] load metadata for docker.io/library/nginx:1.28-alpine
+#5 DONE 0.9s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 94B done
+#6 DONE 0.1s
+
+#7 [build 1/6] FROM docker.io/library/node:24-bookworm-slim
+#7 DONE 0.0s
+
+#8 [stage-1 1/3] FROM docker.io/library/nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+#8 DONE 0.0s
+
+#9 [internal] load build context
+#9 transferring context: 5.46MB 0.3s done
+#9 DONE 0.3s
+
+#10 [build 2/6] WORKDIR /app
+#10 CACHED
+
+#11 [build 3/6] COPY package*.json ./
+#11 DONE 0.2s
+
+#12 [build 4/6] RUN --mount=type=secret,id=proxy_ca NODE_EXTRA_CA_CERTS=/run/secrets/proxy_ca npm ci --strict-ssl=true
+#12 16.82 npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#12 29.28
+#12 29.28 added 182 packages, and audited 183 packages in 28s
+#12 29.28
+#12 29.28 53 packages are looking for funding
+#12 29.28   run `npm fund` for details
+#12 29.29
+#12 29.29 found 0 vulnerabilities
+#12 29.30 npm notice
+#12 29.30 npm notice New major version of npm available! 11.19.1 -> 12.2.0
+#12 29.30 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#12 29.30 npm notice To update run: npm install -g npm@12.2.0
+#12 29.30 npm notice
+#12 DONE 31.2s
+
+#13 [build 5/6] COPY . .
+#13 DONE 0.6s
+
+#14 [build 6/6] RUN npm run typecheck && npm run lint && npm test && npm run build
+#14 0.781
+#14 0.781 > party-panic@0.4.0 typecheck
+#14 0.781 > tsc --noEmit
+#14 0.781
+#14 10.23
+#14 10.23 > party-panic@0.4.0 lint
+#14 10.23 > eslint .
+#14 10.23
+#14 16.04
+#14 16.04 /app/tools/bomb-performance.cjs
+#14 16.04    2:18   error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+#14 16.04    2:18   error  'require' is not defined                 no-undef
+#14 16.04    3:10   error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+#14 16.04    3:10   error  'require' is not defined                 no-undef
+#14 16.04    5:68   error  'process' is not defined                 no-undef
+#14 16.04    7:18   error  'process' is not defined                 no-undef
+#14 16.04    7:118  error  'window' is not defined                  no-undef
+#14 16.04    9:33   error  'window' is not defined                  no-undef
+#14 16.04   10:54   error  'window' is not defined                  no-undef
+#14 16.04   10:96   error  'performance' is not defined             no-undef
+#14 16.04   13:27   error  'window' is not defined                  no-undef
+#14 16.04   16:16   error  'window' is not defined                  no-undef
+#14 16.04   16:60   error  'performance' is not defined             no-undef
+#14 16.04   16:109  error  'performance' is not defined             no-undef
+#14 16.04   17:120  error  'performance' is not defined             no-undef
+#14 16.04   22:27   error  'window' is not defined                  no-undef
+#14 16.04   23:27   error  'window' is not defined                  no-undef
+#14 16.04   24:48   error  'performance' is not defined             no-undef
+#14 16.04   24:95   error  'window' is not defined                  no-undef
+#14 16.04   27:94   error  'console' is not defined                 no-undef
+#14 16.04   28:16   error  'console' is not defined                 no-undef
+#14 16.04   28:33   error  'process' is not defined                 no-undef
+#14 16.04
+#14 16.04 ✖ 22 problems (22 errors, 0 warnings)
+#14 16.04
+#14 ERROR: process "/bin/sh -c npm run typecheck && npm run lint && npm test && npm run build" did not complete successfully: exit code: 1
+------
+ > [build 6/6] RUN npm run typecheck && npm run lint && npm test && npm run build:
+16.04   22:27   error  'window' is not defined                  no-undef
+16.04   23:27   error  'window' is not defined                  no-undef
+16.04   24:48   error  'performance' is not defined             no-undef
+16.04   24:95   error  'window' is not defined                  no-undef
+16.04   27:94   error  'console' is not defined                 no-undef
+16.04   28:16   error  'console' is not defined                 no-undef
+16.04   28:33   error  'process' is not defined                 no-undef
+16.04
+16.04 ✖ 22 problems (22 errors, 0 warnings)
+16.04
+------
+Dockerfile:7
+--------------------
+   5 |     RUN --mount=type=secret,id=proxy_ca NODE_EXTRA_CA_CERTS=/run/secrets/proxy_ca npm ci --strict-ssl=true
+   6 |     COPY . .
+   7 | >>> RUN npm run typecheck && npm run lint && npm test && npm run build
+   8 |     FROM nginx:1.28-alpine
+   9 |     COPY --from=build /app/dist /usr/share/nginx/html/party-panic
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run typecheck && npm run lint && npm test && npm run build" did not complete successfully: exit code: 1

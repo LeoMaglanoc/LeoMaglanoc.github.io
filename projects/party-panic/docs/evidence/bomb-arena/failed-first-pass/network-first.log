@@ -1,0 +1,72 @@
+
+> party-panic@0.4.0 test:e2e
+> playwright test tests/e2e/network.spec.ts --grep real WebRTC Bomb Arena --output /tmp/bomb-network-results --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:160969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+BOMB WEBRTC {"count":2,"bomb":{"id":1,"x":9,"z":7,"at":121,"owner":"62f47c98-c712-4f37-ae2e-3bd4c2e3f38d"},"terminal":{"width":13,"height":9,"tick":121,"seed":2,"tiles":[3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,3,3,0,3,2,3,2,3,2,3,2,3,0,3,3,0,2,2,2,2,2,2,2,2,2,0,3,3,0,3,2,3,2,3,2,3,2,3,0,3,3,0,2,2,2,2,2,2,2,2,2,0,3,3,0,3,2,3,2,3,2,3,0,3,0,3,3,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3],"bombs":[],"flames":[{"x":9,"z":6,"until":151},{"x":7,"z":7,"until":151},{"x":8,"z":7,"until":151},{"x":9,"z":7,"until":151},{"x":10,"z":7,"until":151},{"x":11,"z":7,"until":151}],"ended":true,"winner":"a8cd7274-b8e7-4730-8078-ecef0c77f56a"},"diagnostics":{"links":[{"id":"62f47c98-c712-4f37-ae2e-3bd4c2e3f38d","control":"connected","movement":"connected","signal":"stable"}],"elapsedSeconds":36.661,"ice":"host ↔ host · direct","semantics":"movement: ordered=false, retransmits=unlimited","rtt":16,"bomb":{"renderMs":0.5999999977648258,"bombs":0,"flames":6,"snapshotBytes":1487,"webglRendering":false},"bodies":0,"renderComponents":0,"transientEntities":0,"connectionCount":2,"bufferedBytes":0,"prediction":{"snapshots":0,"corrections":0,"maxCorrection":0},"snapshotAge":0,"display":{"fullscreenSupported":true,"orientationSupported":true,"wakeLockSupported":true,"fullscreen":true,"landscape":true,"portrait":false,"width":915,"height":412,"wakeLockActive":true,"orientationError":"screen.orientation.lock() is not available on this device."},"fps":{"samples":57,"p5":2.141327623126338,"median":6.583278472582523,"p95":11.4547537226972},"measurement":{"scope":{"role":"host","modeId":"bomb-arena","roundId":2},"seconds":10.8845,"phases":["countdown","racing","results"]},"counts":{"sent":106,"received":89,"sentBytes":106159,"receivedBytes":15746,"rejected":2,"droppedBackpressure":0}}}
+BOMB WEBRTC {"count":4,"bomb":{"id":1,"x":9,"z":7,"at":112,"owner":"62f47c98-c712-4f37-ae2e-3bd4c2e3f38d"},"terminal":{"width":13,"height":9,"tick":5400,"seed":4,"tiles":[3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,3,3,0,3,2,3,2,3,2,3,2,3,0,3,3,0,2,2,2,2,2,2,2,2,2,0,3,3,0,3,2,3,2,3,2,3,2,3,0,3,3,0,2,2,2,2,2,2,2,2,2,0,3,3,0,3,2,3,2,3,2,3,0,3,0,3,3,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3],"bombs":[],"flames":[],"ended":true,"winner":null},"diagnostics":{"links":[{"id":"62f47c98-c712-4f37-ae2e-3bd4c2e3f38d","control":"connected","movement":"connected","signal":"stable"},{"id":"68309f5c-7351-4217-a154-a853e9f5cd58","control":"connected","movement":"connected","signal":"stable"},{"id":"f392859b-cb7d-477a-ab31-7cdda9f91739","control":"connected","movement":"connected","signal":"stable"}],"elapsedSeconds":70.065,"ice":"host ↔ host · direct","semantics":"movement: ordered=false, retransmits=unlimited","rtt":16.400000002235174,"bomb":{"renderMs":0.3999999985098839,"bombs":0,"flames":0,"snapshotBytes":2061,"webglRendering":false},"bodies":0,"renderComponents":0,"transientEntities":0,"connectionCount":6,"bufferedBytes":0,"prediction":{"snapshots":0,"corrections":0,"maxCorrection":0},"snapshotAge":0,"display":{"fullscreenSupported":true,"orientationSupported":true,"wakeLockSupported":true,"fullscreen":true,"landscape":true,"portrait":false,"width":915,"height":412,"wakeLockActive":true,"orientationError":"screen.orientation.lock() is not available on this device."},"fps":{"samples":57,"p5":3.511235955046994,"median":6.480881399839088,"p95":10.729613733991354},"measurement":{"scope":{"role":"host","modeId":"bomb-arena","roundId":4},"seconds":9.35160000000149,"phases":["countdown","racing","results"]},"counts":{"sent":702,"received":605,"sentBytes":953958,"receivedBytes":100388,"rejected":4,"droppedBackpressure":0}}}
+  ✘  1 tests/e2e/network.spec.ts:445:1 › real WebRTC Bomb Arena: two, four and eight players, authority, disconnect and rematch (4.0m)
+
+
+  1) tests/e2e/network.spec.ts:445:1 › real WebRTC Bomb Arena: two, four and eight players, authority, disconnect and rematch
+
+    Test timeout of 240000ms exceeded.
+
+    Error: locator.fill: Test ended.
+    Call log:
+      - waiting for locator('#nickname')
+
+
+      460 |         for(const count of [2,4,8]) {
+      461 |             while(pages.length<count) {
+    > 462 |                 const p=await add();await p.goto(link+'&debug=1');await p.locator('#nickname').fill('Bomb Guest '+pages.length);await p.locator('#continue').click();
+          |                                                                                                ^
+      463 |                 await expect(host.locator('#roster')).toContainText('Bomb Guest '+pages.length,{timeout:20000});
+      464 |             }
+      465 |             const arena=await host.evaluate(()=>window.partyDebug.getState().bomb);
+        at /home/leo/Desktop/LeoMaglanoc.github.io/projects/party-panic/tests/e2e/network.spec.ts:462:96
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-7.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-4.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-5.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/test-failed-6.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/error-context.md
+
+    attachment #9: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../../tmp/bomb-network-results/network-real-WebRTC-Bomb-A-89cd2-rity-disconnect-and-rematch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/network.spec.ts:445:1 › real WebRTC Bomb Arena: two, four and eight players, authority, disconnect and rematch
