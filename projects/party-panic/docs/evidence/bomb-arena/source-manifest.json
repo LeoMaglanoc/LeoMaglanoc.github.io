@@ -1,0 +1,55 @@
+{
+  "upstream": "20750b9c37a069831fbb88a41300b815ea006e0d",
+  "assets": {
+    "public/bomb/sprites/block_hard.png": {
+      "upstream": "public/sprites/block_hard.png",
+      "sha256": "188142df9576adc7af13930bcfc6e27d87108640df95b31888104c405d835cbe",
+      "unchanged": true
+    },
+    "public/bomb/sprites/fire.png": {
+      "upstream": "public/sprites/fire.png",
+      "sha256": "49992fbd279eb957d8bdada09cc4d76ab93a14b1e1b4e204820e916132bd989a",
+      "unchanged": true
+    },
+    "public/bomb/sprites/bomb.png": {
+      "upstream": "public/sprites/bomb.png",
+      "sha256": "6b2ae2bac59927c7a24f1218c03977d7308eac3cb72c586c86c4ef92ee67ff81",
+      "unchanged": true
+    },
+    "public/bomb/sprites/block_breakable.png": {
+      "upstream": "public/sprites/block_breakable.png",
+      "sha256": "152030d0e0f5d3d02ffe8150d9ed06fbb414ba85c69f775c3e62795a4782c225",
+      "unchanged": true
+    },
+    "public/bomb/sprites/character.png": {
+      "upstream": "public/sprites/character.png",
+      "sha256": "394805de8f11554804ad6384c6efd94885d1e04cc617725310223aa76d24f3fc",
+      "unchanged": true
+    },
+    "source-assets/bomb-arena/block_breakable.pixil": {
+      "upstream": "public/sprites/block_breakable.pixil",
+      "sha256": "d6cb59d06ad683394ff6bfbb32e50a290c66c56f01366eb07ca71cd3df9deef6",
+      "unchanged": true
+    },
+    "source-assets/bomb-arena/fire.pixil": {
+      "upstream": "public/sprites/fire.pixil",
+      "sha256": "fb0ba5f89270e6ef4a58f7556819e4aa25ef857e6e4291d48b63f6966d686c07",
+      "unchanged": true
+    },
+    "source-assets/bomb-arena/block_hard.pixil": {
+      "upstream": "public/sprites/block_hard.pixil",
+      "sha256": "0dcb30667c7cba72d584b0d75d7baa4b72b6c5a37c46fa8d4917372521bae6d8",
+      "unchanged": true
+    },
+    "source-assets/bomb-arena/bomb.pixil": {
+      "upstream": "public/sprites/bomb.pixil",
+      "sha256": "e14a63980b681a7407f1b92cd8b7dadf4129ad4b37b930b1240416eb711806f4",
+      "unchanged": true
+    },
+    "source-assets/bomb-arena/character.pixil": {
+      "upstream": "public/sprites/character.pixil",
+      "sha256": "146611eaabcee7df4642a61f58768300772ccab7e01843d84b15420d26a8b397",
+      "unchanged": true
+    }
+  }
+}

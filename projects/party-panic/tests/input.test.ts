@@ -26,7 +26,10 @@ function event(target: EventTarget, type: string, fields: Record<string, unknown
 }
 function fixture() {
     const surfaces = Object.fromEntries(
-        ['joystick', 'knob', 'jump', 'dive', 'aim-zone', 'fire', 'application-canvas'].map((id) => [id, new Surface()])
+        ['joystick', 'knob', 'jump', 'dive', 'aim-zone', 'fire', 'application-canvas', 'bomb-button'].map((id) => [
+            id,
+            new Surface()
+        ])
     );
     const document = Object.assign(new EventTarget(), {
         pointerLockElement: null as Surface | null,
@@ -264,4 +267,24 @@ it('reconciles rejected-shot energy during a held burst and resets actions on a 
     expect(controls.sample()).toMatchObject({ life: 1, aim: { fire: false } });
     controls.syncEnergy(1, 1, 3);
     expect(controls.energy).toBe(1);
+});
+
+it('Bomb Arena has edge-triggered keyboard and touch actions with cancel-safe movement', () => {
+    const { controls, surfaces, window } = fixture();
+    controls.setContext('bomb-arena', 1);
+    event(window, 'keydown', { code: 'Space', repeat: false });
+    event(window, 'keydown', { code: 'Space', repeat: true });
+    expect(controls.sample()).toMatchObject({ modeId: 'bomb-arena', bombSequence: 1, jumpSequence: 0 });
+    event(surfaces['bomb-button'], 'click');
+    expect(controls.sample()).toMatchObject({ bombSequence: 2 });
+    event(surfaces.joystick, 'pointerdown', pointer(10, 95, 50));
+    event(surfaces['bomb-button'], 'click');
+    expect(controls.sample()).toMatchObject({ bombSequence: 3 });
+    expect(controls.sample().axes[0]).toBeGreaterThan(0);
+    event(surfaces.joystick, 'pointercancel', pointer(99));
+    expect(controls.sample().axes[0]).toBeGreaterThan(0);
+    event(surfaces.joystick, 'pointercancel', pointer(10));
+    expect(controls.sample().axes).toEqual([0, 0]);
+    controls.setContext('bomb-arena', 2);
+    expect(controls.sample()).toMatchObject({ bombSequence: 0 });
 });

@@ -1,3 +1,5 @@
+import { bombDecision } from './bomb/bot';
+import type { ArenaState } from './bomb/model';
 import { WEAPONS } from './weapons';
 import { LASER, LASER_COVERS, getAimRig, rayBox, resolveShot, type Point } from './laser';
 import { neutral, type Input, type ModeId, type Player } from './protocol';
@@ -30,7 +32,15 @@ export class BotController {
     remove(id: string) {
         this.brains.delete(id);
     }
-    update(p: Player, players: Player[], modeId: ModeId, roundId: number, elapsed: number, dt: number): Input {
+    update(
+        p: Player,
+        players: Player[],
+        modeId: ModeId,
+        roundId: number,
+        elapsed: number,
+        dt: number,
+        arena?: ArenaState
+    ): Input {
         let b = this.brains.get(p.id);
         if (!b || b.round !== roundId || b.mode !== modeId) {
             b = {
@@ -56,6 +66,18 @@ export class BotController {
         input.sequence = ++b.sequence;
         input.clientTime = elapsed * 1000;
         input.jumpSequence = b.jump;
+        if (input.modeId === 'bomb-arena' && arena) {
+            if (p.health > 0) {
+                const d = bombDecision(p, players, arena);
+                input.axes = d.axes;
+                if (d.plant && elapsed - b.fired > 0.3) {
+                    b.fire++;
+                    b.fired = elapsed;
+                }
+            }
+            input.bombSequence = b.fire;
+            return input;
+        }
         if (!p.connected || p.finish !== null || p.respawnAt > elapsed) return input;
         if (modeId === 'obstacle-dash') {
             if (p.respawns !== b.respawns) {

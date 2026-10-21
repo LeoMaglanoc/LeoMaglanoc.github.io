@@ -49,3 +49,18 @@ and independently synthesized audio. No Fall Guys or Star Wars assets.
 
 The two MIT notices also ship with production builds under
 `public/licenses/{wobble-rush,blockyard}-MIT.txt` (served as `licenses/…`).
+
+
+## Bomb Arena (v0.4)
+
+Source port: statist32/bomberman_multiplayer commit
+`20750b9c37a069831fbb88a41300b815ea006e0d`, MIT © 2020 statist32.
+Original board, entities, collision, bomb/fire logic and tile renderer adapted
+in `src/bomb/`. Attribution ships at `public/bomb/LICENSE.txt`.
+Unchanged upstream PNG files: `bomb.png`, `fire.png`, `character.png`,
+`block_hard.png`, `block_breakable.png`, under `public/bomb/sprites/`.
+Matching original `.pixil` files retained under `source-assets/bomb-arena/`.
+Repository MIT grant is the provenance basis; generic Pixil editor metadata
+does not establish an independent artist identity. No separately licensed art
+was identified. Full file mapping, observed defects and reference Chrome
+playtest: [source review](bomb-arena-source-review.md).

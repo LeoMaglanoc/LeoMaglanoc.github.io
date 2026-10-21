@@ -14,7 +14,7 @@ declare global {
             aimAtPlayer: (id: string) => void;
             clearMeasurements: () => void;
             setAim: (yaw: number, pitch: number) => void;
-            selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => boolean | undefined;
+            selectMode: (modeId: 'obstacle-dash' | 'laser-tag' | 'bomb-arena') => boolean | undefined;
             readyTestPlayers: () => void;
             addTestPlayer: (name: string) => unknown;
             getDiagnostics: () => {

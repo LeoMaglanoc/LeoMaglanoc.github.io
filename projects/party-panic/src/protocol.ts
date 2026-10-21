@@ -1,7 +1,8 @@
+import type { ArenaState } from './bomb/model';
 import { isWeapon, type WeaponId } from './weapons';
-export const VERSION = 3;
+export const VERSION = 4;
 export const COLORS = ['#ffcc4a', '#75dfd1', '#ec8ee5', '#9fa7ff', '#ff9376', '#99db67', '#82cfff', '#f3f0cf'];
-export type ModeId = 'obstacle-dash' | 'laser-tag';
+export type ModeId = 'obstacle-dash' | 'laser-tag' | 'bomb-arena';
 export type Phase = 'lobby' | 'countdown' | 'racing' | 'results';
 type InputBase = {
     type: 'input';
@@ -17,7 +18,10 @@ type InputBase = {
     clientTime: number;
 };
 export type Aim = { yaw: number; pitch: number; fire: boolean; sequence: number; weapon: WeaponId };
-export type Input = (InputBase & { modeId: 'obstacle-dash' }) | (InputBase & { modeId: 'laser-tag'; aim: Aim });
+export type Input =
+    | (InputBase & { modeId: 'obstacle-dash' })
+    | (InputBase & { modeId: 'laser-tag'; aim: Aim })
+    | (InputBase & { modeId: 'bomb-arena'; bombSequence: number });
 export type Player = {
     id: string;
     name: string;
@@ -49,6 +53,7 @@ export type Player = {
     shotSequence: number;
 };
 export type Snapshot = {
+    bomb?: ArenaState;
     type: 'snapshot';
     version: number;
     modeId: ModeId;
@@ -81,12 +86,14 @@ export function neutral(modeId: ModeId = 'obstacle-dash', roundId = 0): Input {
     };
     return modeId === 'laser-tag'
         ? { ...base, modeId, aim: { yaw: 0, pitch: 0, fire: false, sequence: 0, weapon: 'quick' } }
-        : { ...base, modeId };
+        : modeId === 'bomb-arena'
+          ? { ...base, modeId, bombSequence: 0 }
+          : { ...base, modeId };
 }
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 const seq = (v: unknown): v is number => Number.isSafeInteger(v) && (v as number) >= 0;
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
-export const isMode = (v: unknown): v is ModeId => v === 'obstacle-dash' || v === 'laser-tag';
+export const isMode = (v: unknown): v is ModeId => v === 'obstacle-dash' || v === 'laser-tag' || v === 'bomb-arena';
 export function parseInput(v: unknown): Input | null {
     if (
         !record(v) ||
@@ -119,6 +126,7 @@ export function parseInput(v: unknown): Input | null {
         'clientTime'
     ];
     if (v.modeId === 'laser-tag') keys.push('aim');
+    if (v.modeId === 'bomb-arena') keys.push('bombSequence');
     if (Object.keys(v).some((k) => !keys.includes(k))) return null;
     let [x, z] = v.axes.map((n) => Math.max(-1, Math.min(1, n)));
     const length = Math.hypot(x, z);
@@ -139,6 +147,8 @@ export function parseInput(v: unknown): Input | null {
         clientTime: v.clientTime
     };
     if (v.modeId === 'obstacle-dash') return { ...base, modeId: v.modeId };
+    if (v.modeId === 'bomb-arena')
+        return seq(v.bombSequence) ? { ...base, modeId: 'bomb-arena', bombSequence: v.bombSequence } : null;
     const a = v.aim;
     if (
         !record(a) ||
@@ -196,6 +206,8 @@ export function isSnapshot(v: unknown): v is Snapshot {
         v.players.length > 8
     )
         return false;
+    if (v.modeId === 'bomb-arena' && !isArena(v.bomb)) return false;
+    if (v.modeId !== 'bomb-arena' && v.bomb !== undefined) return false;
     const ids = new Set<string>();
     return v.players.every((p) => {
         if (
@@ -293,4 +305,49 @@ export class SnapshotGate {
         this.modeId = s.modeId;
         return true;
     }
+}
+
+export function isArena(v: unknown): v is ArenaState {
+    if (
+        !record(v) ||
+        ![13, 17].includes(v.width as number) ||
+        ![9, 11].includes(v.height as number) ||
+        !seq(v.tick) ||
+        !seq(v.seed) ||
+        typeof v.ended !== 'boolean' ||
+        !(v.winner === null || (typeof v.winner === 'string' && v.winner.length <= 100)) ||
+        !Array.isArray(v.tiles) ||
+        v.tiles.length !== Number(v.width) * Number(v.height) ||
+        !v.tiles.every((t) => t === 0 || t === 2 || t === 3) ||
+        !Array.isArray(v.bombs) ||
+        v.bombs.length > 128 ||
+        !Array.isArray(v.flames) ||
+        v.flames.length > 187
+    )
+        return false;
+    const position = (e: Record<string, unknown>) =>
+        seq(e.x) && seq(e.z) && Number(e.x) < Number(v.width) && Number(e.z) < Number(v.height);
+    const ids = new Set<number>();
+    if (
+        !v.bombs.every((b) => {
+            if (
+                !record(b) ||
+                !position(b) ||
+                !seq(b.id) ||
+                ids.has(b.id) ||
+                !seq(b.at) ||
+                b.at < Number(v.tick) ||
+                b.at > Number(v.tick) + 90 ||
+                typeof b.owner !== 'string' ||
+                b.owner.length > 100
+            )
+                return false;
+            ids.add(b.id);
+            return true;
+        })
+    )
+        return false;
+    return v.flames.every(
+        (f) => record(f) && position(f) && seq(f.until) && f.until > Number(v.tick) && f.until <= Number(v.tick) + 30
+    );
 }

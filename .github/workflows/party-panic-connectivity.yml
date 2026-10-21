@@ -11,7 +11,7 @@ permissions:
 jobs:
   chrome-webrtc:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: projects/party-panic

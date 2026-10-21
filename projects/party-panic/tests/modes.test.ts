@@ -130,3 +130,48 @@ describe('authoritative lobby mode selection', () => {
         expect(sim.state.phase).toBe('lobby');
     });
 });
+
+describe('Bomb Arena lifecycle isolation', () => {
+    it('pauses tick timers, consumes paused edges, and rejects previous round actions', () => {
+        const { sim } = simulation();
+        sim.selectMode('bomb-arena');
+        sim.ready('host', sim.state.roundId);
+        sim.ready('guest', sim.state.roundId);
+        sim.start();
+        for (let n = 0; n < 181; n++) sim.step(1 / 60);
+        const epoch = sim.state.roundId;
+        sim.input('host', {
+            ...neutral('bomb-arena', epoch),
+            sequence: 1,
+            bombSequence: 1
+        } as import('../src/protocol').Input);
+        sim.step(1 / 60);
+        expect(sim.state.bomb!.bombs).toHaveLength(1);
+        const tick = sim.state.bomb!.tick;
+        sim.pause(true);
+        sim.update(20);
+        expect(sim.state.bomb!.tick).toBe(tick);
+        sim.input('host', {
+            ...neutral('bomb-arena', epoch),
+            sequence: 2,
+            bombSequence: 2
+        } as import('../src/protocol').Input);
+        sim.pause(false);
+        sim.update(1 / 60);
+        expect(sim.state.bomb!.bombs).toHaveLength(1);
+        sim.transition('results');
+        sim.rematch();
+        expect(sim.state.bomb!.bombs).toHaveLength(0);
+        expect(sim.state.players.every((p) => p.health === 100)).toBe(true);
+        sim.input('host', {
+            ...neutral('bomb-arena', epoch),
+            sequence: 999,
+            bombSequence: 999
+        } as import('../src/protocol').Input);
+        expect(sim.motions.get('host')!.input.sequence).toBe(0);
+        sim.selectMode('laser-tag');
+        expect(sim.state.bomb).toBeUndefined();
+        sim.selectMode('obstacle-dash');
+        expect(sim.state.modeId).toBe('obstacle-dash');
+    });
+});

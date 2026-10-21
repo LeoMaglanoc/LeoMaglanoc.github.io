@@ -1117,3 +1117,127 @@ body.playing .diagnostics {
         bottom: 40px;
     }
 }
+
+/* Bomb Arena owns a separate pixel-art canvas and mode-specific controls. */
+#application-canvas.bomb-hidden {
+    visibility: hidden;
+}
+#bomb-canvas {
+    pointer-events: auto;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(calc(100vw - 320px), calc((100dvh - 96px) * 1.44));
+    height: auto;
+    max-height: calc(100dvh - 96px);
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 3px solid #50656d;
+    border-radius: 6px;
+    box-shadow: 0 10px 65px #0008;
+}
+#bomb-button {
+    pointer-events: auto;
+    position: fixed;
+    right: max(24px, env(safe-area-inset-right));
+    bottom: max(34px, env(safe-area-inset-bottom));
+    width: 112px;
+    height: 100px;
+    border: 2px solid #ffdf87;
+    border-radius: 24px;
+    background: #ffcc4a;
+    color: #17212c;
+    font-weight: 900;
+    font-size: 23px;
+    touch-action: none;
+}
+#bomb-button small {
+    font-size: 11px;
+    opacity: 0.7;
+}
+.bomb-arena .hud {
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 22px;
+}
+.bomb-arena .hud strong {
+    font-size: 22px;
+}
+.bomb-arena .hud small {
+    font-size: 10px;
+}
+.bomb-arena .mode-picker {
+    grid-template-columns: repeat(3, 1fr);
+}
+.bomb-arena:not(.playing) #bomb-canvas {
+    opacity: 0.32;
+}
+@media (max-width: 950px) and (orientation: landscape) {
+    #bomb-canvas {
+        width: min(calc(100vw - 260px), calc((100dvh - 88px) * 1.55));
+        max-height: calc(100dvh - 88px);
+        top: calc(50% + 18px);
+    }
+    #bomb-button {
+        width: 96px;
+        height: 86px;
+        right: 18px;
+        bottom: 28px;
+    }
+    .bomb-arena .hud {
+        gap: 18px;
+        top: 7px;
+    }
+    .bomb-arena .diagnostics {
+        max-width: 150px;
+    }
+    .bomb-arena .leave {
+        top: 10px;
+        bottom: auto;
+    }
+}
+@media (orientation: portrait) {
+    #bomb-canvas {
+        width: calc(100vw - 20px);
+        max-height: calc(100dvh - 260px);
+        top: 46%;
+    }
+    body.bomb-arena.playing .portrait-hint {
+        display: none;
+    }
+    .bomb-arena .hud {
+        top: 58px;
+        white-space: nowrap;
+    }
+    .bomb-arena .keyboard-help {
+        display: none;
+    }
+    .bomb-arena .mode-picker {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (orientation: portrait) {
+    body.bomb-arena.playing .portrait-hint {
+        display: none;
+    }
+    body.bomb-arena .diagnostics {
+        top: 140px;
+        bottom: auto;
+        left: 16px;
+        right: auto;
+        max-width: 210px;
+    }
+}
+@media (max-width: 950px) and (orientation: landscape) {
+    body.bomb-arena .diagnostics {
+        top: 78px;
+        bottom: auto;
+        left: 12px;
+        right: auto;
+        max-width: 140px;
+    }
+}

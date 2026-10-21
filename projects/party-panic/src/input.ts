@@ -87,7 +87,10 @@ export class Controls {
             }
             if (relevant.includes(e.code)) {
                 e.preventDefault();
-                if (e.code === 'Space' && !this.keys.has(e.code)) this.jump();
+                if (e.code === 'Space' && !e.repeat && !this.keys.has(e.code)) {
+                    if (this.value.modeId === 'bomb-arena') this.plant();
+                    else this.jump();
+                }
                 if (e.code.startsWith('Shift') && !this.keys.has(e.code)) this.dive();
                 this.keys.add(e.code);
             }
@@ -164,6 +167,12 @@ export class Controls {
             button.addEventListener('pointercancel', release);
             button.addEventListener('lostpointercapture', release);
         }
+        document.querySelector('#bomb-button')?.addEventListener('click', (e) => {
+            if (this.enabled && this.value.modeId === 'bomb-arena') {
+                e.preventDefault();
+                this.plant();
+            }
+        });
         for (const weapon of ['quick', 'charged'] as const)
             document.querySelector('#weapon-' + weapon)?.addEventListener('click', () => {
                 if (this.laserActive) this.selectWeapon(weapon);
@@ -173,7 +182,13 @@ export class Controls {
         for (const area of [aim, fire, this.canvas]) {
             if (!area) continue;
             area.addEventListener('pointerdown', (e) => {
-                if (!this.enabled || this.aimPointer !== null || (e.pointerType === 'mouse' && e.button !== 0)) return;
+                if (
+                    !this.enabled ||
+                    this.value.modeId === 'bomb-arena' ||
+                    this.aimPointer !== null ||
+                    (e.pointerType === 'mouse' && e.button !== 0)
+                )
+                    return;
                 e.preventDefault();
                 this.aimPointer = e.pointerId;
                 this.aimMouse = e.pointerType === 'mouse';
@@ -259,12 +274,14 @@ export class Controls {
             this.pendingShots = [];
             this.energyTick = -1;
         }
+        const bombSequence = !changedRound && this.value.modeId === 'bomb-arena' ? this.value.bombSequence : 0;
         this.value = {
             ...neutral(modeId, roundId),
             sequence: this.value.sequence,
             jumpSequence: this.value.jumpSequence,
             diveSequence: this.value.diveSequence
         };
+        if (this.value.modeId === 'bomb-arena') this.value.bombSequence = bombSequence;
     }
     setLife(life: number) {
         if (life === this.value.life) return;
@@ -272,6 +289,9 @@ export class Controls {
         this.value.life = life;
         this.pendingShots = [];
         this.energyTick = -1;
+    }
+    plant() {
+        if (this.enabled && this.firingEnabled && this.value.modeId === 'bomb-arena') this.value.bombSequence++;
     }
     jump() {
         if (this.enabled && this.value.modeId === 'obstacle-dash') this.value.jumpSequence++;
@@ -330,7 +350,7 @@ export class Controls {
         x /= n;
         z /= n;
         const now = performance.now();
-        {
+        if (this.value.modeId !== 'bomb-arena') {
             const cos = Math.cos(this.aimYaw),
                 sin = Math.sin(this.aimYaw);
             [x, z] = [x * cos - z * sin, x * sin + z * cos];

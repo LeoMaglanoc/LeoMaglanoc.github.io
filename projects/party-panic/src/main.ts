@@ -1,3 +1,5 @@
+import { Draw as BombDraw } from './bomb/draw';
+import { isMode, type ModeId } from './protocol';
 import { WEAPONS, isWeapon, weaponAim } from './weapons';
 import { LaserPrediction } from './laserPrediction';
 import QRCode from 'qrcode';
@@ -18,16 +20,23 @@ const escape = (s: string) =>
     s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 $('#app').innerHTML =
     `<div class="shade" id="shade"></div><header class="topbar"><a class="brand" href="./">PARTY<br><b>PANIC!</b></a><div class="top-right"><span class="tag">Small party. Big chaos.</span><span class="pill"><i></i>1–8 friends</span></div></header>
-<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="secondary" id="party-enter">Enter Party Panic — Fullscreen</button><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
+<section class="home" id="home"><p class="eyebrow">01 / Obstacle Dash</p><h1>Stay on.<br><em>Dash on.</em></h1><p class="intro">A race against your friends.<br>And your questionable timing.</p><div class="actions"><button class="secondary" id="party-enter">Enter Party Panic — Fullscreen</button><div class="solo-options"><label>Minigame<select id="solo-mode"><option value="obstacle-dash">Obstacle Dash</option><option value="laser-tag">Laser Tag</option><option value="bomb-arena">Bomb Arena</option></select></label><label>AI opponents<select id="bot-count"><option value="0">0 · Practice</option><option value="1">1 bot</option><option value="3" selected>3 bots</option><option value="7">7 bots</option></select></label></div><button class="primary" id="solo" disabled>Loading the course…</button><button class="secondary" id="host" disabled>Host a party <span>＋</span></button><button class="quiet" id="join-open" disabled>Join a room →</button></div><p class="home-note">No download. No account. Just one more rematch.<br>Best with friends on the same Wi-Fi.</p></section>
 <aside class="course-card" id="course-card"><span class="eyebrow">Your first bad idea</span><div class="num">03</div><h3>Ways to lose your footing.</h3><p>Leap the gaps. Dodge the sweepers.<br>Time the bumpers. Make it to the end.</p><div class="stages"><span></span><span></span><span></span></div></aside>
-<footer class="bottom-bar" id="footer"><span>2 MINIGAMES / SOLO AI + MULTIPLAYER</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
-<section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div id="weapon-bar" class="hidden"><button id="weapon-quick" aria-label="Quick Blaster">1 · QUICK</button><button id="weapon-charged" aria-label="Charged Blaster">2 · CHARGED</button><span id="weapon-status"></span></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
-<div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="jump" aria-label="Jump">JUMP ↑</button><button id="dive" aria-label="Dive">DIVE ↗</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
+<footer class="bottom-bar" id="footer"><span>3 MINIGAMES / SOLO AI + MULTIPLAYER</span><a href="../">BACK TO THE DEMOS ↗</a></footer>
+<section class="panel hidden" id="panel"></section><div class="hud hidden" id="hud"></div><canvas id="bomb-canvas" class="hidden" aria-label="Bomb Arena pixel-art playfield"></canvas><div id="labels"></div><div id="aim-zone" class="hidden" aria-label="Drag to aim"></div><div id="reticle" class="hidden" aria-hidden="true">＋</div><div id="tag-board" class="hidden"></div><div id="weapon-bar" class="hidden"><button id="weapon-quick" aria-label="Quick Blaster">1 · QUICK</button><button id="weapon-charged" aria-label="Charged Blaster">2 · CHARGED</button><span id="weapon-status"></span></div><div class="center-message hidden" id="countdown"></div><div class="notice hidden" role="status" id="notice"></div><button class="quiet leave hidden" id="leave">Leave room</button><div class="portrait-hint">↻ Turn sideways for more room to race</div>
+<div class="controls hidden" id="controls"><div id="joystick" role="group" aria-label="Movement joystick"><div id="knob"></div></div><button id="bomb-button" class="hidden" aria-label="Place bomb">BOMB<br><small>SPACE</small></button><button id="jump" aria-label="Jump">JUMP ↑</button><button id="dive" aria-label="Dive">DIVE ↗</button><button id="fire" class="hidden" aria-label="Hold and drag to aim and fire">FIRE<br><small>DRAG TO AIM</small></button></div><div class="keyboard-help hidden" id="keyboard-help">WASD / ARROWS &nbsp; MOVE &nbsp; · &nbsp; SPACE &nbsp; JUMP</div>
 <details class="diagnostics" id="diagnostics"><summary>↗ Connection & performance</summary><pre id="stats">Loading engine…</pre><div id="fault-controls" class="hidden"><button id="fault">80ms ±40 / 3% loss</button></div><button id="export">Save diagnostics</button><button id="display-enter">Enter fullscreen</button><button id="display-exit">Exit fullscreen</button><button id="sound-toggle">Sound on</button><pre id="display-status"></pre></details>`;
 const scene = new Scene(),
     transport = new Transport(),
     controls = new Controls();
 const sound = new AudioFeedback();
+const bombDraw = new BombDraw($<HTMLCanvasElement>('#bomb-canvas'));
+const modeName = (id: ModeId) =>
+    id === 'bomb-arena' ? 'Bomb Arena' : id === 'laser-tag' ? 'Laser Tag' : 'Obstacle Dash';
+const selectedMode = () => {
+    const value = $<HTMLSelectElement>('#solo-mode').value;
+    return isMode(value) ? value : 'obstacle-dash';
+};
 scene.onLanding = (id) => {
     if (id === localId) sound.play('land');
 };
@@ -265,7 +274,12 @@ function syncControls() {
     controls.setContext(
         modeId,
         roundId,
-        !!state && !ended && !state.paused && (state.phase === 'countdown' || state.phase === 'racing') && !p?.respawnAt
+        !!state &&
+            !ended &&
+            !state.paused &&
+            (state.phase === 'countdown' || state.phase === 'racing') &&
+            !p?.respawnAt &&
+            (modeId !== 'bomb-arena' || (p?.health ?? 0) > 0)
     );
     controls.firingEnabled = state?.phase === 'racing' && !state.paused;
     if (p) controls.setLife(p.respawns);
@@ -349,7 +363,7 @@ function solo() {
     localId = 'solo';
     hostId = 'solo';
     sim = new Simulation(scene);
-    const selected = $<HTMLSelectElement>('#solo-mode').value === 'laser-tag' ? 'laser-tag' : 'obstacle-dash';
+    const selected = selectedMode();
     sim.selectMode(selected);
     sim.add(localId, nickname);
     const count = Math.max(0, Math.min(7, Number($<HTMLSelectElement>('#bot-count').value) || 0));
@@ -381,7 +395,7 @@ function showLobby() {
     url.searchParams.set('room', room);
     const link = url.href;
     showPanel(
-        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'Pick a game. Friends stay in this room between rounds.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="mode-picker" id="mode-picker"><button class="mode-choice" data-mode="obstacle-dash"><b>Obstacle Dash</b><small>Race, jump and dodge obstacles.</small></button><button class="mode-choice" data-mode="laser-tag"><b>Laser Tag</b><small>Tag your friends in a chaotic arena.</small></button></div><div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small" id="lobby-help">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
+        `<p class="eyebrow">The calm before the chaos</p><h2>The party room.</h2><p>${isHost ? 'Pick a game. Friends stay in this room between rounds.' : 'Tap Ready to enter game. Your host starts when everyone is ready.'}</p>${isHost && room ? '<div class="share"><canvas id="qr" aria-label="Scan to join this room"></canvas><div><p class="small">Invite friends · same Wi-Fi recommended</p><input id="share-link" readonly aria-label="Room link"><button class="quiet" id="copy">Copy link ↗</button></div></div>' : ''}<div class="mode-picker" id="mode-picker"><button class="mode-choice" data-mode="obstacle-dash"><b>Obstacle Dash</b><small>Race, jump and dodge obstacles.</small></button><button class="mode-choice" data-mode="laser-tag"><b>Laser Tag</b><small>Tag your friends in a chaotic arena.</small></button><button class="mode-choice" data-mode="bomb-arena"><b>Bomb Arena</b><small>Plant bombs. Escape the blast. Last survivor wins.</small></button></div><div class="roster" id="roster"></div><div class="row">${isHost ? '<button class="primary" id="start">Start Obstacle Dash →</button>' : '<button class="primary" id="ready">READY — ENTER GAME</button>'}</div><p class="small" id="lobby-help">WASD + Space on desktop. Joystick + Jump on phones.<br>Fullscreen and landscape are requested when you tap Start or Ready. If unavailable, rotate your phone manually.</p>`
     );
     if (isHost && room) {
         $<HTMLInputElement>('#share-link').value = link;
@@ -428,7 +442,7 @@ function showLobby() {
         button.onclick = () => {
             if (!isHost || !sim) return;
             startRequested = false;
-            sim.selectMode(button.dataset.mode === 'laser-tag' ? 'laser-tag' : 'obstacle-dash');
+            if (isMode(button.dataset.mode)) sim.selectMode(button.dataset.mode);
             sendState(true);
             updateRoster();
         };
@@ -445,13 +459,14 @@ function updateRoster() {
     const help = document.querySelector('#lobby-help');
     if (help)
         help.innerHTML =
-            (state.modeId === 'laser-tag'
-                ? 'Move with the left stick. Hold and drag FIRE to aim and shoot.<br>'
-                : 'WASD + Space on desktop. Joystick + Jump on phones.<br>') +
+            (state.modeId === 'bomb-arena'
+                ? 'WASD / arrows to move. Space or BOMB to plant. Escape the cross blast!<br>'
+                : state.modeId === 'laser-tag'
+                  ? 'Move with the left stick. Hold and drag FIRE to aim and shoot.<br>'
+                  : 'WASD + Space on desktop. Joystick + Jump on phones.<br>') +
             'Ready/Start requests fullscreen and landscape. Rotate manually if unavailable.';
     const startButton = document.querySelector('#start');
-    if (startButton)
-        startButton.textContent = `Start ${state.modeId === 'laser-tag' ? 'Laser Tag' : 'Obstacle Dash'} →`;
+    if (startButton) startButton.textContent = `Start ${modeName(state.modeId)} →`;
     const readyButton = document.querySelector<HTMLButtonElement>('#ready');
     if (readyButton)
         readyButton.textContent = state.players.find((p) => p.id === localId)?.ready
@@ -468,15 +483,24 @@ function results() {
     if (!state) return;
     view = 'results';
     const laser = state.modeId === 'laser-tag';
-    const ranked = laser ? laserRank(state.players) : rank(state.players);
-    const leaders = laser
-        ? ranked.filter((p) => p.score === ranked[0]?.score)
-        : ranked.filter((p) => p.finish !== null && p.finish === ranked[0]?.finish);
+    const bomb = state.modeId === 'bomb-arena';
+    const ranked = bomb
+        ? [...state.players].sort((a, b) => b.score - a.score || b.health - a.health || a.id.localeCompare(b.id))
+        : laser
+          ? laserRank(state.players)
+          : rank(state.players);
+    const leaders = bomb
+        ? ranked.filter((p) => p.id === state!.bomb?.winner)
+        : laser
+          ? ranked.filter((p) => p.score === ranked[0]?.score)
+          : ranked.filter((p) => p.finish !== null && p.finish === ranked[0]?.finish);
     const winner = leaders.length
         ? `${leaders.length > 1 ? 'Tie: ' : 'Winner: '}${leaders.map((p) => escape(p.name)).join(' · ')}`
-        : 'Time’s up! Reach both checkpoints, then cross the gold gate.';
+        : bomb
+          ? 'Draw! No sole survivor.'
+          : 'Time’s up! Reach both checkpoints, then cross the gold gate.';
     showPanel(
-        `<p class="eyebrow">${laser ? 'Good aim. Better rematch.' : 'Every fall was character building'}</p><h2>${laser ? 'Top tags.' : 'That was a dash.'}</h2><p>${winner}</p>${ranked.map((p, i) => `<div class="result-row"><span class="place">${i + 1}</span><i class="dot" style="background:${p.color}"></i><span class="name">${escape(p.name)}${p.id === localId ? ' · you' : p.bot ? ' · AI' : ''}</span><span class="time">${laser ? `${p.score} tags${p.connected ? '' : ' · LEFT'}` : p.finish !== null ? p.finish.toFixed(2) + 's' : 'DNF · CP ' + p.checkpoint + '/2'}</span></div>`).join('')}<div class="row">${role === 'host' ? '<button class="primary" id="rematch">Play again / switch game ↻</button>' : '<p class="status">Waiting for the host to rematch…</p>'}<button class="quiet" id="result-leave">Leave</button></div>`
+        `<p class="eyebrow">${bomb ? 'One more round?' : laser ? 'Good aim. Better rematch.' : 'Every fall was character building'}</p><h2>${bomb ? 'Arena cleared.' : laser ? 'Top tags.' : 'That was a dash.'}</h2><p>${winner}</p>${ranked.map((p, i) => `<div class="result-row"><span class="place">${i + 1}</span><i class="dot" style="background:${p.color}"></i><span class="name">${escape(p.name)}${p.id === localId ? ' · you' : p.bot ? ' · AI' : ''}</span><span class="time">${bomb ? (p.health > 0 ? 'SURVIVED' : 'ELIMINATED') : laser ? `${p.score} tags${p.connected ? '' : ' · LEFT'}` : p.finish !== null ? p.finish.toFixed(2) + 's' : 'DNF · CP ' + p.checkpoint + '/2'}</span></div>`).join('')}<div class="row">${role === 'host' ? '<button class="primary" id="rematch">Play again / switch game ↻</button>' : '<p class="status">Waiting for the host to rematch…</p>'}<button class="quiet" id="result-leave">Leave</button></div>`
     );
     if (role === 'host')
         $('#rematch').onclick = () => {
@@ -490,13 +514,20 @@ function renderState() {
     const active = state.phase === 'racing' || state.phase === 'countdown';
     const laser = state.modeId === 'laser-tag';
     const p = state.players.find((p) => p.id === localId);
-    const dead = !!p?.respawnAt;
+    const bomb = state.modeId === 'bomb-arena';
+    const dead = bomb ? !p?.health : !!p?.respawnAt;
+    document.body.classList.toggle('bomb-arena', bomb);
+    $('#bomb-canvas').classList.toggle('hidden', !bomb);
+    $('#application-canvas').classList.toggle('bomb-hidden', bomb);
+    $('#bomb-button').classList.toggle('hidden', !active || !bomb || dead);
+    if (bomb && state.bomb)
+        $('#bomb-canvas').style.setProperty('--arena-ratio', String(state.bomb.width / state.bomb.height));
     document.body.classList.toggle('playing', active);
     document.body.classList.toggle('laser', laser && active);
     $('#shade').classList.toggle('hidden', active);
     for (const id of ['controls', 'keyboard-help', 'hud']) $('#' + id).classList.toggle('hidden', !active);
-    $('#jump').classList.toggle('hidden', laser);
-    $('#dive').classList.toggle('hidden', laser);
+    $('#jump').classList.toggle('hidden', laser || bomb);
+    $('#dive').classList.toggle('hidden', laser || bomb);
     $('#fire').classList.toggle('hidden', !laser);
     $('#aim-zone').classList.toggle('hidden', !active || !laser || dead);
     $('#reticle').classList.toggle('hidden', !active || !laser || dead);
@@ -508,13 +539,15 @@ function renderState() {
         for (const weapon of ['quick', 'charged'])
             $('#weapon-' + weapon).setAttribute('aria-pressed', String(weapon === controls.weapon));
     }
-    $('#keyboard-help').textContent = laser
-        ? 'WASD MOVE · MOUSE AIM · HOLD FIRE · 1 / 2 WEAPONS · ESC RELEASES MOUSE'
-        : 'WASD / ARROWS MOVE · SPACE HOLD TO JUMP · SHIFT DIVE';
+    $('#keyboard-help').textContent = bomb
+        ? 'WASD / ARROWS MOVE · SPACE PLANTS ONE BOMB · ESCAPE THE BLAST'
+        : laser
+          ? 'WASD MOVE · MOUSE AIM · HOLD FIRE · 1 / 2 WEAPONS · ESC RELEASES MOUSE'
+          : 'WASD / ARROWS MOVE · SPACE HOLD TO JUMP · SHIFT DIVE';
     if (active) {
         $('#panel').classList.add('hidden');
         $('#hud').innerHTML =
-            `<div><small>TIME LEFT</small><strong>${Math.max(0, (laser ? LASER.duration : 120) - state.elapsed).toFixed(1)}<span style="font-size:14px">s</span></strong></div><div><small>${laser ? ((p?.protectedUntil ?? 0) > state.elapsed ? 'SHIELD ACTIVE · TAGS' : 'YOUR TAGS') : 'CHECKPOINT'}</small><strong>${laser ? (p?.score ?? 0) : (p?.checkpoint ?? 0)}${laser ? '' : '<span style="font-size:14px"> / 2</span>'}</strong></div>${laser ? '<div><small>HEALTH</small><strong>' + (p?.health ?? 100) + '</strong></div>' : ''}`;
+            `<div><small>TIME LEFT</small><strong>${Math.max(0, (bomb ? 90 : laser ? LASER.duration : 120) - state.elapsed).toFixed(1)}<span style="font-size:14px">s</span></strong></div><div><small>${bomb ? (dead ? 'SPECTATING' : 'YOU ARE ALIVE') : laser ? ((p?.protectedUntil ?? 0) > state.elapsed ? 'SHIELD ACTIVE · TAGS' : 'YOUR TAGS') : 'CHECKPOINT'}</small><strong>${bomb ? state.players.filter((q) => q.health > 0 && q.connected).length + ' alive' : laser ? (p?.score ?? 0) : (p?.checkpoint ?? 0)}${laser || bomb ? '' : '<span style="font-size:14px"> / 2</span>'}</strong></div>${laser ? '<div><small>HEALTH</small><strong>' + (p?.health ?? 100) + '</strong></div>' : ''}`;
         if (laser)
             $('#tag-board').innerHTML = laserRank(state.players)
                 .slice(0, 3)
@@ -524,15 +557,18 @@ function renderState() {
                 )
                 .join('');
         const count = state.phase === 'countdown';
-        $('#countdown').classList.toggle('hidden', !count && !state.paused && !(laser ? dead : p?.finish !== null));
+        $('#countdown').classList.toggle(
+            'hidden',
+            !count && !state.paused && !(bomb ? false : laser ? dead : p?.finish !== null)
+        );
         if (count)
             $('#countdown').innerHTML =
-                `<strong>${Math.max(1, Math.ceil(state.countdown))}</strong><p>${laser ? 'Find cover. Make your move.' : 'Find your footing.'}</p>`;
+                `<strong>${Math.max(1, Math.ceil(state.countdown))}</strong><p>${bomb ? 'Plant. Escape. Survive.' : laser ? 'Find cover. Make your move.' : 'Find your footing.'}</p>`;
         else if (state.paused) $('#countdown').innerHTML = '<strong>PAUSED</strong><p>Host is in another tab.</p>';
         else if (laser && dead)
             $('#countdown').innerHTML =
                 `<strong>TAGGED!</strong><p>Back in ${Math.max(0, Math.ceil((p?.respawnAt ?? 0) - state.elapsed))}s · then 1s shield</p>`;
-        else if (!laser && p?.finish !== null)
+        else if (!laser && !bomb && p?.finish !== null)
             $('#countdown').innerHTML = '<strong>FINISHED!</strong><p>Waiting for the rest of the party…</p>';
     } else {
         $('#countdown').classList.add('hidden');
@@ -616,7 +652,7 @@ transport.onMessage = (peer, lane, raw) => {
             lastSnapshot = performance.now();
             histories.push({ at: lastSnapshot, state: raw });
             histories = histories.slice(-20);
-            for (const p of raw.players) scene.addPlayer(p, false);
+            if (raw.modeId !== 'bomb-arena') for (const p of raw.players) scene.addPlayer(p, false);
             for (const id of scene.characters.keys()) if (!raw.players.some((p) => p.id === id)) scene.removePlayer(id);
             if (raw.phase === 'lobby' && view !== 'lobby') showLobby();
             renderState();
@@ -703,6 +739,9 @@ function reset(clearNotice = true) {
     laserPrediction.reset();
     snapshotGate.reset();
     scene.setMode('obstacle-dash');
+    document.body.classList.remove('bomb-arena');
+    $('#bomb-canvas').classList.add('hidden');
+    $('#application-canvas').classList.remove('bomb-hidden');
     view = '';
     lastEvent = 0;
     transport.peer = null;
@@ -733,7 +772,18 @@ function reset(clearNotice = true) {
     history.replaceState(null, '', url);
 }
 $('#solo-mode').onchange = () => {
-    const laser = $<HTMLSelectElement>('#solo-mode').value === 'laser-tag';
+    const selected = selectedMode();
+    if (selected === 'bomb-arena') {
+        $('#home .eyebrow').textContent = '03 / Bomb Arena';
+        $('#home h1').innerHTML = 'Plant it.<br><em>Make it out.</em>';
+        $('#home .intro').innerHTML = 'A tiny arena. A very short fuse.<br>Be the last one standing.';
+        $('#course-card .num').textContent = '1.5';
+        $('#course-card h3').textContent = 'Seconds to get out.';
+        $('#course-card p').innerHTML =
+            'Break the blocks. Dodge the flames.<br>Original pixel art. Explosive rematches.';
+        return;
+    }
+    const laser = selected === 'laser-tag';
     $('#home .eyebrow').textContent = laser ? '02 / Laser Tag' : '01 / Obstacle Dash';
     $('#home h1').innerHTML = laser ? 'Aim on.<br><em>Tag on.</em>' : 'Stay on.<br><em>Dash on.</em>';
     $('#home .intro').innerHTML = laser
@@ -916,6 +966,7 @@ function labels() {
 }
 async function boot() {
     try {
+        await bombDraw.load();
         await scene.init($<HTMLCanvasElement>('#application-canvas'));
         scene.resize(display.state.width, display.state.height);
         $('#solo').innerHTML = 'Play solo <span>↗</span>';
@@ -923,7 +974,7 @@ async function boot() {
         log('engine-ready', { version: '2.23.3' });
         $('#stats').textContent = 'Ready. Solo practice needs no signaling.';
         frameAt = performance.now();
-        scene.app.on('update', (delta: number) => {
+        const frameUpdate = (delta: number) => {
             const dt = Math.min(delta, 0.1),
                 now = performance.now(),
                 actualDelta = (now - frameAt) / 1000;
@@ -954,9 +1005,12 @@ async function boot() {
                     lastPacket = now;
                 }
             }
-            if (role === 'guest') renderGuest(dt, now);
+            if (role === 'guest' && state?.modeId !== 'bomb-arena') renderGuest(dt, now);
             if (state && !ended) {
-                if (state.phase === 'countdown' || state.phase === 'racing' || state.phase === 'results') {
+                if (
+                    state.modeId !== 'bomb-arena' &&
+                    (state.phase === 'countdown' || state.phase === 'racing' || state.phase === 'results')
+                ) {
                     if (state.modeId === 'laser-tag') scene.followLaser(localId, controls.aimYaw, controls.aimPitch);
                     else scene.follow(localId, dt, false, controls.aimYaw, controls.aimPitch);
                 }
@@ -966,8 +1020,13 @@ async function boot() {
                     renderState();
                     lastUI = now;
                 }
-                scene.animate(state.players, state.elapsed, dt);
-                labels();
+                if (state.modeId === 'bomb-arena') {
+                    if (state.bomb) bombDraw.render(state.bomb, state.players, localId);
+                    $('#labels').innerHTML = '';
+                } else {
+                    scene.animate(state.players, state.elapsed, dt);
+                    labels();
+                }
             }
             if (now - lastReliable >= 1000) {
                 lastReliable = now;
@@ -984,11 +1043,21 @@ async function boot() {
             if (now - lastStats >= 500) {
                 const secs = Math.max(1, (now - transport.started) / 1000);
                 $('#stats').textContent =
-                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${scene.characters.size} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · Backpressure ${transport.droppedBackpressure} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.3 · real-phone QA pending`;
+                    `${role.toUpperCase()} · ${Math.round(fps)} FPS · ${state?.players.filter((p) => p.connected).length ?? 0} players\nRTT ${Math.round(transport.rtt)} ms · ${transport.ice}\n${transport.semantics}\nTX ${(transport.sentBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.sent / secs).toFixed(1)} msg/s\nRX ${(transport.receivedBytes / secs / 1024).toFixed(1)} KB/s · ${(transport.received / secs).toFixed(1)} msg/s\nRejected ${transport.rejected} · Backpressure ${transport.droppedBackpressure} · tick ${state?.tick ?? 0}\n${state?.phase ?? 'home'} · ${state?.paused ? 'paused' : 'active'}\nBuild 0.4 · real-phone QA pending`;
                 lastStats = now;
             }
             if (now > noticeUntil) $('#notice').classList.add('hidden');
+        };
+        scene.app.on('update', (delta: number) => {
+            if (scene.modeId !== 'bomb-arena') frameUpdate(delta);
         });
+        let bombFrameAt = performance.now();
+        const bombFrame = (now: number) => {
+            if (scene.modeId === 'bomb-arena') frameUpdate((now - bombFrameAt) / 1000);
+            bombFrameAt = now;
+            requestAnimationFrame(bombFrame);
+        };
+        requestAnimationFrame(bombFrame);
         const id = new URLSearchParams(location.search).get('room');
         if (id) {
             nameForm(true);
@@ -1028,7 +1097,7 @@ async function boot() {
                         controls.aimYaw = yaw;
                         controls.aimPitch = pitch;
                     },
-                    selectMode: (modeId: 'obstacle-dash' | 'laser-tag') => sim?.selectMode(modeId),
+                    selectMode: (modeId: ModeId) => sim?.selectMode(modeId),
                     setTestInput: (axes: [number, number], jumpSequence: number, jumpHeld = true, diveSequence = 0) => {
                         if (sim)
                             sim.input(localId, {
@@ -1058,6 +1127,15 @@ async function boot() {
                         ice: transport.ice,
                         semantics: transport.semantics,
                         rtt: transport.rtt,
+                        bomb: state?.bomb
+                            ? {
+                                  renderMs: bombDraw.cost,
+                                  bombs: state.bomb.bombs.length,
+                                  flames: state.bomb.flames.length,
+                                  snapshotBytes: new TextEncoder().encode(JSON.stringify(state)).length,
+                                  webglRendering: scene.app.autoRender
+                              }
+                            : null,
                         bodies: scene.liveBodies.size,
                         renderComponents: scene.app.root.findComponents('render').length,
                         transientEntities: scene.transientCount,

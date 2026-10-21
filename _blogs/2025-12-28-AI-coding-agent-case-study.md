@@ -15,7 +15,7 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 Interactive demos and games, newest first by creation date:
 
 - [YAM Tabletop Sandbox]({{ "/yam-sandbox/" | relative_url }}) · two robot arms, live contact physics
-- [Party Panic — Obstacle Dash]({{ "/party-panic/" | relative_url }}) · solo practice + experimental P2P rooms
+- [Party Panic — Bomb Arena, Laser Tag & Obstacle Dash]({{ "/party-panic/" | relative_url }}) · three minigames, solo bots + 1–8-player P2P rooms
 - [G1 Soccer Lab]({{ "/soccer/" | relative_url }})
 - [CatchBot — outrun a predictive robot]({{ "/catchbot/" | relative_url }})
 - [Portal Puzzle Lab]({{ "/portal/" | relative_url }})

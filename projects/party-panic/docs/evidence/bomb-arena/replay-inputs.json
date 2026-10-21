@@ -1,0 +1,13 @@
+{
+  "simulation": "src/bomb/model.ts Board.update at 60 Hz",
+  "seed": 23,
+  "participants": ["a", "b"],
+  "holdLastInput": true,
+  "maximumTick": 5400,
+  "events": [
+    {"tick": 1, "id": "a", "axes": [1, 0], "bombSequence": 1},
+    {"tick": 10, "id": "a", "axes": [0, 1], "bombSequence": 1},
+    {"tick": 20, "id": "b", "axes": [-1, 0], "bombSequence": 1}
+  ],
+  "assertion": "Two fresh boards replayed to terminal state must be deeply equal (tests/bomb.test.ts)."
+}

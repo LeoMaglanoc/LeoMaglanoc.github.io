@@ -1,0 +1,750 @@
+{
+  "environment": {
+    "browser": "156.0.8078.47",
+    "viewport": "844x390",
+    "renderer": "Chrome headless SwiftShader",
+    "note": "one browser, seven legal-input bots; five samples and five accelerated rematches, not physical-phone certification"
+  },
+  "inputResponseMs": 25,
+  "initial": {
+    "diagnostics": {
+      "links": [],
+      "elapsedSeconds": 4.55539999999851,
+      "ice": "not connected",
+      "semantics": "not connected",
+      "rtt": 0,
+      "bomb": {
+        "renderMs": 0.5999999977648258,
+        "bombs": 2,
+        "flames": 0,
+        "snapshotBytes": 3529,
+        "webglRendering": false
+      },
+      "bodies": 0,
+      "renderComponents": 0,
+      "transientEntities": 0,
+      "connectionCount": 0,
+      "bufferedBytes": 0,
+      "prediction": {
+        "snapshots": 0,
+        "corrections": 0,
+        "maxCorrection": 0
+      },
+      "snapshotAge": 0,
+      "display": {
+        "fullscreenSupported": true,
+        "orientationSupported": true,
+        "wakeLockSupported": true,
+        "fullscreen": true,
+        "landscape": true,
+        "portrait": false,
+        "width": 844,
+        "height": 390,
+        "wakeLockActive": true,
+        "orientationError": "screen.orientation.lock() is not available on this device."
+      },
+      "fps": {
+        "samples": 174,
+        "p5": 46.51162790697675,
+        "median": 60.24096385001409,
+        "p95": 76.92307692307692
+      },
+      "measurement": {
+        "scope": {
+          "role": "host",
+          "modeId": "bomb-arena",
+          "roundId": 2
+        },
+        "seconds": 3.3065,
+        "phases": [
+          "countdown",
+          "racing"
+        ]
+      },
+      "counts": {
+        "sent": 0,
+        "received": 0,
+        "sentBytes": 0,
+        "receivedBytes": 0,
+        "rejected": 0,
+        "droppedBackpressure": 0
+      }
+    },
+    "memory": 55590208
+  },
+  "samples": [
+    {
+      "phase": "racing",
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 6.6528999999985095,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.3999999985098839,
+          "bombs": 9,
+          "flames": 3,
+          "snapshotBytes": 3938,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 120,
+          "p5": 52.08333333535443,
+          "median": 60.24096385001409,
+          "p95": 70.9219858268456
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 2
+          },
+          "seconds": 2.030800000000745,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      },
+      "simulationMsPerStep": 0.4049999999503295,
+      "snapshotBytes": 4517,
+      "memory": 55907460,
+      "mainThreadTaskPercent": 14.029955067398902
+    },
+    {
+      "phase": "racing",
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 8.68489999999851,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.30000000074505806,
+          "bombs": 2,
+          "flames": 13,
+          "snapshotBytes": 3873,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 120,
+          "p5": 53.47593583100763,
+          "median": 60.24096385001409,
+          "p95": 72.99270073389663
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 2
+          },
+          "seconds": 2.0193999999985097,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      },
+      "simulationMsPerStep": 0.12999999995032946,
+      "snapshotBytes": 3702,
+      "memory": 55415613,
+      "mainThreadTaskPercent": 11.862394014962595
+    },
+    {
+      "phase": "racing",
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 14.2095,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.4000000022351742,
+          "bombs": 11,
+          "flames": 0,
+          "snapshotBytes": 3968,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 105,
+          "p5": 24.330900242426864,
+          "median": 59.88023952362959,
+          "p95": 66.66666666666667
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 4
+          },
+          "seconds": 2.026900000002235,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      },
+      "simulationMsPerStep": 0.29499999998758236,
+      "snapshotBytes": 4566,
+      "memory": 50243872,
+      "mainThreadTaskPercent": 12.11452095808383
+    },
+    {
+      "phase": "racing",
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 16.271199999999254,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.5,
+          "bombs": 3,
+          "flames": 13,
+          "snapshotBytes": 3920,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 120,
+          "p5": 48.07692307520095,
+          "median": 60.24096385001409,
+          "p95": 72.99270073389663
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 4
+          },
+          "seconds": 2.029900000002235,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      },
+      "simulationMsPerStep": 0.388333333345751,
+      "snapshotBytes": 3839,
+      "memory": 51256020,
+      "mainThreadTaskPercent": 11.55254745254745
+    },
+    {
+      "phase": "results",
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 18.306699999999253,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.3999999985098839,
+          "bombs": 1,
+          "flames": 8,
+          "snapshotBytes": 3679,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 113,
+          "p5": 51.81347150059047,
+          "median": 59.88023952362959,
+          "p95": 64.51612903225806
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 4
+          },
+          "seconds": 2.009900000002235,
+          "phases": [
+            "racing",
+            "results"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      },
+      "simulationMsPerStep": 0.0016666666915019354,
+      "snapshotBytes": 3679,
+      "memory": 52098483,
+      "mainThreadTaskPercent": 8.79102691924227
+    }
+  ],
+  "rounds": [
+    {
+      "memory": 51368608,
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 18.44560000000149,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.29999999701976776,
+          "bombs": 9,
+          "flames": 0,
+          "snapshotBytes": 3844,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 3,
+          "p5": 40,
+          "median": 49.504950496875445,
+          "p95": 58.479532158646705
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 5
+          },
+          "seconds": 0.0615,
+          "phases": [
+            "lobby"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      }
+    },
+    {
+      "memory": 50653072,
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 18.788,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.5,
+          "bombs": 9,
+          "flames": 0,
+          "snapshotBytes": 3864,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 1,
+          "p5": 31.347962380248646,
+          "median": 31.347962380248646,
+          "p95": 31.347962380248646
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 8
+          },
+          "seconds": 0.0035999999977648256,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      }
+    },
+    {
+      "memory": 53730528,
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 19.070199999999254,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 1.800000000745058,
+          "bombs": 9,
+          "flames": 0,
+          "snapshotBytes": 3866,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 1,
+          "p5": 32.15434083832381,
+          "median": 32.15434083832381,
+          "p95": 32.15434083832381
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 10
+          },
+          "seconds": 0.006,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      }
+    },
+    {
+      "memory": 55864914,
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 19.370300000000746,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.5999999977648258,
+          "bombs": 9,
+          "flames": 0,
+          "snapshotBytes": 3866,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 1,
+          "p5": 33.2225913645933,
+          "median": 33.2225913645933,
+          "p95": 33.2225913645933
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 12
+          },
+          "seconds": 0.003700000002980232,
+          "phases": [
+            "racing"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      }
+    },
+    {
+      "memory": 56859852,
+      "diagnostics": {
+        "links": [],
+        "elapsedSeconds": 19.651699999999256,
+        "ice": "not connected",
+        "semantics": "not connected",
+        "rtt": 0,
+        "bomb": {
+          "renderMs": 0.6000000014901161,
+          "bombs": 9,
+          "flames": 0,
+          "snapshotBytes": 3866,
+          "webglRendering": false
+        },
+        "bodies": 0,
+        "renderComponents": 0,
+        "transientEntities": 0,
+        "connectionCount": 0,
+        "bufferedBytes": 0,
+        "prediction": {
+          "snapshots": 0,
+          "corrections": 0,
+          "maxCorrection": 0
+        },
+        "snapshotAge": 0,
+        "display": {
+          "fullscreenSupported": true,
+          "orientationSupported": true,
+          "wakeLockSupported": true,
+          "fullscreen": true,
+          "landscape": true,
+          "portrait": false,
+          "width": 844,
+          "height": 390,
+          "wakeLockActive": true,
+          "orientationError": "screen.orientation.lock() is not available on this device."
+        },
+        "fps": {
+          "samples": 1,
+          "p5": 51.02040816908365,
+          "median": 51.02040816908365,
+          "p95": 51.02040816908365
+        },
+        "measurement": {
+          "scope": {
+            "role": "host",
+            "modeId": "bomb-arena",
+            "roundId": 14
+          },
+          "seconds": 0.019,
+          "phases": [
+            "countdown"
+          ]
+        },
+        "counts": {
+          "sent": 0,
+          "received": 0,
+          "sentBytes": 0,
+          "receivedBytes": 0,
+          "rejected": 0,
+          "droppedBackpressure": 0
+        }
+      }
+    }
+  ]
+}

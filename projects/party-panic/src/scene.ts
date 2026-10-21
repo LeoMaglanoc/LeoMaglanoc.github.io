@@ -246,7 +246,10 @@ export class Scene {
         this.app.root.addChild(this.world);
         this.app.batcher!.addGroup('course', false, 45, 0);
         if (modeId === 'obstacle-dash') this.level();
-        else this.arena();
+        else if (modeId === 'laser-tag') this.arena();
+        this.app.autoRender = modeId !== 'bomb-arena';
+        this.app.renderNextFrame = modeId !== 'bomb-arena';
+        this.camera.enabled = modeId !== 'bomb-arena';
         this.camera.camera!.fov = modeId === 'laser-tag' ? 70 : 60;
         this.camera.camera!.clearColor =
             modeId === 'laser-tag' ? new Color(0.025, 0.04, 0.09) : new Color(0.075, 0.11, 0.19);

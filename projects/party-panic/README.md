@@ -1,8 +1,7 @@
-# Party Panic v0.3
+# Party Panic v0.4
 
-Two original 3D party games: **Obstacle Dash** and **Laser Tag**. Play solo against
-0/1/3/7 AI opponents, or host a persistent P2P room for 1–8 friends. PlayCanvas,
-Ammo, TypeScript/Vite and PeerJS; no accounts or dedicated simulation server.
+Three party games: **Obstacle Dash**, **Laser Tag**, and **Bomb Arena**. Play solo against
+0/1/3/7 AI opponents, or host a persistent P2P room for 1–8 friends. PlayCanvas/Ammo for the 3D modes, a 2D canvas for Bomb Arena, TypeScript/Vite and PeerJS; no accounts or dedicated simulation server.
 
 **Play:** https://leonardo-maglanoc.com/party-panic/
 
@@ -43,6 +42,15 @@ Fullscreen or browser Escape releases it; the app never forces automatic reentry
 Keep the host tab visible: backgrounding pauses authority. Guest departure is handled;
 host departure ends the session. No host migration or TURN server. Internet is needed
 to load and signal; direct P2P only works where ICE succeeds. Same Wi-Fi is recommended.
+
+- **Bomb Arena:** WASD/arrows or left joystick; Space or BOMB plants once per press.
+  Original pixel art and adapted grid rules from statist32's MIT game. 1.5s fuse,
+  0.5s flames, range-two cross blasts. Solid walls block; breakable walls stop
+  one ray and disappear. Bombs chain immediately. Death means spectating until
+  the last survivor or 90s deadline. Zero survivors or multiple survivors at the
+  deadline draw. Zero-bot practice stays playable. No inventory or powerups.
+  Compact symmetric 13×9 / 17×11 boards support 1–8 participants. Mode protocol
+  version is now 4: reload older clients before joining.
 
 ## Develop and test
 
@@ -95,3 +103,6 @@ See [v0.3 validation](docs/v03-validation.md), [baseline](docs/v03-baseline.md),
 [display lifecycle](docs/v03-display.md) and [asset provenance](docs/assets.md).
 Historical v0.1/v0.2 reports remain under docs; their measurements apply only to
 those recorded releases. Human preference and physical-device acceptance remain open.
+
+Bomb Arena source reuse and provenance: [review](docs/bomb-arena-source-review.md).
+Validation and rollback: [release notes](docs/bomb-arena-validation.md).

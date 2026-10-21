@@ -441,3 +441,129 @@ test('real WebRTC Laser: gesture readiness, cover, authoritative tags, faults an
         for (const context of contexts) await context.close();
     }
 });
+
+test('real WebRTC Bomb Arena: two, four and eight players, authority, disconnect and rematch', async ({
+    browser,
+    baseURL
+}, info) => {
+    test.setTimeout(240000);
+    const context = await browser.newContext({ viewport: { width: 915, height: 412 } });
+    const pages: Page[] = [];
+    const errors: string[] = [];
+    const add = async () => {
+        const p = await context.newPage();
+        pages.push(p);
+        p.on('pageerror', (e) => errors.push(e.message));
+        return p;
+    };
+    const host = await add();
+    try {
+        await host.goto(new URL('?debug=1', baseURL).href);
+        await host.waitForFunction(() => window.partyDebug);
+        await host.locator('#host').click();
+        await host.locator('#nickname').fill('Bomb Host');
+        await host.locator('#continue').click();
+        await expect(host.locator('#share-link')).toBeVisible({ timeout: 20000 });
+        const link = await host.locator('#share-link').inputValue();
+        await host.locator('[data-mode="bomb-arena"]').click();
+        for (const count of [2, 4, 8]) {
+            while (pages.length < count) {
+                const p = await add();
+                await p.goto(link + '&debug=1');
+                await p.locator('#nickname').fill('Bomb Guest ' + pages.length);
+                await p.locator('#continue').click();
+                await expect(host.locator('#roster')).toContainText('Bomb Guest ' + pages.length, { timeout: 20000 });
+            }
+            const arena = await host.evaluate(() => window.partyDebug.getState().bomb);
+            for (const p of pages.slice(1)) {
+                await expect
+                    .poll(() => p.evaluate(() => window.partyDebug.getState()?.bomb?.tiles))
+                    .toEqual(arena!.tiles);
+                await p.locator('#ready').click();
+            }
+            await host.locator('#start').click();
+            await host.waitForFunction(() => window.partyDebug.getState().phase === 'racing');
+            const guest = pages[1];
+            await guest.waitForFunction(() => window.partyDebug.getState().phase === 'racing');
+            const original = await host.evaluate(() =>
+                window.partyDebug.getState().players.find((p) => p.name === 'Bomb Guest 2')!
+            );
+            await guest.keyboard.down('a');
+            await host.waitForFunction(
+                (x) => window.partyDebug.getState().players.find((p) => p.name === 'Bomb Guest 2')!.x < x,
+                original.x
+            );
+            await guest.keyboard.up('a');
+            await guest.keyboard.press('Space');
+            await host.waitForFunction(() => window.partyDebug.getState().bomb!.bombs.length > 0);
+            const bomb = await host.evaluate(() => window.partyDebug.getState().bomb!.bombs[0]);
+            await expect
+                .poll(() => guest.evaluate(() => window.partyDebug.getState().bomb!.bombs.some((b) => b.id === 1)))
+                .toBe(true);
+            // A forged world snapshot on either guest lane cannot alter host tiles or kills.
+            const before = await host.evaluate(() => window.partyDebug.getState());
+            await guest.evaluate(
+                (s) =>
+                    window.partyDebug.sendRaw({
+                        ...s,
+                        bomb: { ...s.bomb, tiles: s.bomb!.tiles.map(() => 0) },
+                        players: s.players.map((p) => ({ ...p, health: 0 }))
+                    }),
+                before
+            );
+            await guest.evaluate((s) => window.partyDebug.sendControl(s), before);
+            await expect
+                .poll(() => host.evaluate(() => window.partyDebug.getDiagnostics().counts.rejected))
+                .toBeGreaterThan(0);
+            await host.waitForFunction(
+                () => window.partyDebug.getState().players.find((p) => p.name === 'Bomb Guest 2')!.health === 0
+            );
+            if (count === 2) await expect(host.locator('#rematch')).toBeVisible();
+            else await host.evaluate(() => window.partyDebug.hostAdvance(91));
+            await host.waitForFunction(() => window.partyDebug.getState().phase === 'results');
+            const terminal = await host.evaluate(() => window.partyDebug.getState());
+            for (const p of pages.slice(1)) {
+                await p.waitForFunction(() => window.partyDebug.getState().phase === 'results');
+                const state = await p.evaluate(() => window.partyDebug.getState());
+                expect(state.bomb).toEqual(terminal.bomb);
+                expect(state.players.map((p) => [p.id, p.health, p.score])).toEqual(
+                    terminal.players.map((p) => [p.id, p.health, p.score])
+                );
+            }
+            await host.screenshot({ path: info.outputPath(`bomb-${count}-results.png`) });
+            console.log(
+                'BOMB WEBRTC',
+                JSON.stringify({
+                    count,
+                    bomb,
+                    terminal: terminal.bomb,
+                    diagnostics: await host.evaluate(() => window.partyDebug.getDiagnostics())
+                })
+            );
+            await host.locator('#rematch').click();
+            for (const p of pages.slice(1))
+                await p.waitForFunction(() => window.partyDebug.getState().phase === 'lobby');
+        }
+        // Live disconnect marks an eliminated participant and cannot keep a round alive.
+        for (const p of pages.slice(1)) await p.locator('#ready').click();
+        await host.locator('#start').click();
+        await host.waitForFunction(() => window.partyDebug.getState().phase === 'racing');
+        await pages[7].close();
+        await expect
+            .poll(() =>
+                host.evaluate(
+                    () => window.partyDebug.getState().players.filter((p) => !p.connected && p.health === 0).length
+                )
+            )
+            .toBe(1);
+        await host.evaluate(() => window.partyDebug.hostAdvance(91));
+        await host.locator('#rematch').click();
+        await host.locator('[data-mode="laser-tag"]').click();
+        await expect(host.locator('#start')).toContainText('Laser Tag');
+        await host.locator('[data-mode="obstacle-dash"]').click();
+        await expect(host.locator('#start')).toContainText('Obstacle Dash');
+        expect(errors).toEqual([]);
+    } finally {
+        await context.close();
+    }
+});

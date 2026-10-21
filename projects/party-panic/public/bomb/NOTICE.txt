@@ -1,0 +1,10 @@
+Bomb Arena includes code adapted from statist32/bomberman_multiplayer,
+commit 20750b9c37a069831fbb88a41300b815ea006e0d.
+Copyright (c) 2020 statist32. MIT License: see LICENSE.txt in this directory.
+https://github.com/statist32/bomberman_multiplayer
+
+Original bomb, fire, character, hard-block and breakable-block PNG sprites are
+reused unchanged under the repository's MIT license. Editable Pixil sources
+are retained in the Party Panic source distribution, source-assets/bomb-arena/.
+Party Panic's PeerJS transport, fixed-step lifecycle and touch controls replace
+the original Socket.IO server and client shell. No commercial branding used.

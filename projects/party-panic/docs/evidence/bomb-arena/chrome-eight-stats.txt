@@ -1,0 +1,8 @@
+HOST · 1 FPS · 0 players
+RTT 44 ms · host ↔ host · direct
+movement: ordered=false, retransmits=unlimited
+TX 17.7 KB/s · 9.6 msg/s
+RX 0.9 KB/s · 7.8 msg/s
+Rejected 10 · Backpressure 0 · tick 4914
+racing · active
+Build 0.4 · real-phone QA pending

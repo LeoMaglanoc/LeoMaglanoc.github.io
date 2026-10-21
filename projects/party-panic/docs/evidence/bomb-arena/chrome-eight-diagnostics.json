@@ -1,0 +1,390 @@
+{
+  "date": "2026-10-21T19:35:13.439Z",
+  "measurement": {
+    "scope": {
+      "role": "host",
+      "modeId": "bomb-arena",
+      "roundId": 6
+    },
+    "seconds": 29.324300000000743,
+    "phases": [
+      "countdown",
+      "racing"
+    ],
+    "rollingFrameLimit": 36000,
+    "rttLimit": 1024
+  },
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "viewport": [
+    1850,
+    876
+  ],
+  "display": {
+    "fullscreenSupported": true,
+    "orientationSupported": true,
+    "wakeLockSupported": true,
+    "fullscreen": false,
+    "landscape": true,
+    "portrait": false,
+    "width": 1850,
+    "height": 876,
+    "wakeLockActive": true,
+    "fullscreenError": "not granted",
+    "orientationError": "screen.orientation.lock() is not available on this device."
+  },
+  "modeId": "bomb-arena",
+  "roundId": 6,
+  "role": "host",
+  "ice": "host ↔ host · direct",
+  "semantics": "movement: ordered=false, retransmits=unlimited",
+  "counts": {
+    "sent": 5052,
+    "received": 4170,
+    "sentBytes": 9211912,
+    "receivedBytes": 543826,
+    "rejected": 10,
+    "droppedBackpressure": 0
+  },
+  "prediction": {
+    "snapshots": 0,
+    "corrections": 0,
+    "maxCorrection": 0
+  },
+  "fps": {
+    "samples": 83,
+    "p5": 0.982511298879218,
+    "median": 25.906735750295233,
+    "p95": 60.97560976163785
+  },
+  "rtt": {
+    "samples": 189,
+    "p5": 16,
+    "median": 26.900000002235174,
+    "p95": 64.60000000149012
+  },
+  "logs": [
+    {
+      "at": "2026-10-21T19:23:18.966Z",
+      "type": "engine-ready",
+      "payload": {
+        "version": "2.23.3"
+      }
+    },
+    {
+      "at": "2026-10-21T19:23:30.216Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-21T19:23:57.109Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-21T19:24:27.169Z",
+      "type": "phase",
+      "payload": {
+        "phase": "results"
+      }
+    },
+    {
+      "at": "2026-10-21T19:25:36.627Z",
+      "type": "phase",
+      "payload": {
+        "phase": "lobby"
+      }
+    },
+    {
+      "at": "2026-10-21T19:26:04.917Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-21T19:26:33.725Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-21T19:27:00.231Z",
+      "type": "phase",
+      "payload": {
+        "phase": "results"
+      }
+    },
+    {
+      "at": "2026-10-21T19:27:55.812Z",
+      "type": "phase",
+      "payload": {
+        "phase": "lobby"
+      }
+    },
+    {
+      "at": "2026-10-21T19:28:00.381Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-21T19:28:25.289Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-21T19:29:05.979Z",
+      "type": "peer-open",
+      "payload": {
+        "role": "host",
+        "id": "043c4782-9292-4bdd-8746-6e57902b8961"
+      }
+    },
+    {
+      "at": "2026-10-21T19:30:11.199Z",
+      "type": "mode",
+      "payload": {
+        "modeId": "bomb-arena"
+      }
+    },
+    {
+      "at": "2026-10-21T19:30:20.538Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "d835de7f-2930-48f0-b077-425d5e9a17c9",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:30:20.540Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "d835de7f-2930-48f0-b077-425d5e9a17c9",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:30:20.547Z",
+      "type": "join",
+      "payload": {
+        "id": "d835de7f-2930-48f0-b077-425d5e9a17c9"
+      }
+    },
+    {
+      "at": "2026-10-21T19:30:31.598Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-21T19:30:59.836Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:18.531Z",
+      "type": "phase",
+      "payload": {
+        "phase": "results"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:40.001Z",
+      "type": "phase",
+      "payload": {
+        "phase": "lobby"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:44.960Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "6ba39e5c-704c-4b0c-ace8-a251ef430187",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:44.964Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "6ba39e5c-704c-4b0c-ace8-a251ef430187",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:44.966Z",
+      "type": "join",
+      "payload": {
+        "id": "6ba39e5c-704c-4b0c-ace8-a251ef430187"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:49.755Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "c1399190-f041-427d-a346-bae58bd0efb3",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:49.759Z",
+      "type": "join",
+      "payload": {
+        "id": "c1399190-f041-427d-a346-bae58bd0efb3"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:49.807Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "c1399190-f041-427d-a346-bae58bd0efb3",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:31:58.570Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-21T19:32:19.247Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    },
+    {
+      "at": "2026-10-21T19:33:16.907Z",
+      "type": "phase",
+      "payload": {
+        "phase": "results"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:00.366Z",
+      "type": "phase",
+      "payload": {
+        "phase": "lobby"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:08.740Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "640de774-369b-4abf-a3ff-1e4012fda868",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:08.740Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "640de774-369b-4abf-a3ff-1e4012fda868",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:08.754Z",
+      "type": "join",
+      "payload": {
+        "id": "640de774-369b-4abf-a3ff-1e4012fda868"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:15.249Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "98200485-d375-4d4b-8196-d6ee14c0fee1",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:15.260Z",
+      "type": "join",
+      "payload": {
+        "id": "98200485-d375-4d4b-8196-d6ee14c0fee1"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:15.297Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "98200485-d375-4d4b-8196-d6ee14c0fee1",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:23.490Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "d6350c0a-e91e-45d0-8b23-658c016a662e",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:23.491Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "d6350c0a-e91e-45d0-8b23-658c016a662e",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:23.495Z",
+      "type": "join",
+      "payload": {
+        "id": "d6350c0a-e91e-45d0-8b23-658c016a662e"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:29.778Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "be1cd598-9731-49eb-9c01-353de1b94e8d",
+        "lane": "control"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:29.782Z",
+      "type": "join",
+      "payload": {
+        "id": "be1cd598-9731-49eb-9c01-353de1b94e8d"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:29.786Z",
+      "type": "channel-open",
+      "payload": {
+        "peer": "be1cd598-9731-49eb-9c01-353de1b94e8d",
+        "lane": "movement"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:43.856Z",
+      "type": "phase",
+      "payload": {
+        "phase": "countdown"
+      }
+    },
+    {
+      "at": "2026-10-21T19:34:58.980Z",
+      "type": "phase",
+      "payload": {
+        "phase": "racing"
+      }
+    }
+  ]
+}

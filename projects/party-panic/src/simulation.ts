@@ -1,3 +1,4 @@
+import { Board, BOMB } from './bomb/model';
 import { Vec3, type Entity } from 'playcanvas';
 import { VERSION, COLORS, neutral, type Input, type Player, type Snapshot, type ModeId } from './protocol';
 import { COURSE, boundedProgress, canTransition, checkpoint, finish, resetPlayer } from './rules';
@@ -21,6 +22,7 @@ export type Motion = {
 };
 export class Simulation {
     scene: Scene;
+    bomb?: Board;
     laser = new LaserRound();
     bots = new BotController();
     state: Snapshot = {
@@ -78,7 +80,8 @@ export class Simulation {
         };
         this.preparePlayer(p, this.state.players.length);
         this.state.players.push(p);
-        this.scene.addPlayer(p, true);
+        if (this.state.modeId !== 'bomb-arena') this.scene.addPlayer(p, true);
+        if (this.state.modeId === 'bomb-arena') this.resetBomb();
         this.motion(id);
         return p;
     }
@@ -132,13 +135,16 @@ export class Simulation {
         this.bots.reset();
         this.state.modeId = modeId;
         this.state.roundId++;
+        delete this.state.bomb;
+        this.bomb = undefined;
         this.scene.setMode(modeId);
         this.state.players.forEach((p, i) => {
             this.scene.removePlayer(p.id);
             this.preparePlayer(p, i);
-            this.scene.addPlayer(p, true);
+            if (modeId !== 'bomb-arena') this.scene.addPlayer(p, true);
             this.motion(p.id);
         });
+        if (modeId === 'bomb-arena') this.resetBomb();
         this.onEvent('mode', { modeId });
         return true;
     }
@@ -164,6 +170,7 @@ export class Simulation {
             this.motion(p.id);
             this.teleport(p);
         });
+        if (this.state.modeId === 'bomb-arena') this.resetBomb();
         this.transition('countdown');
     }
     rematch() {
@@ -179,6 +186,7 @@ export class Simulation {
         });
         this.state.elapsed = 0;
         this.state.countdown = 3;
+        if (this.state.modeId === 'bomb-arena') this.resetBomb();
         this.transition('lobby');
     }
     remove(id: string) {
@@ -194,7 +202,8 @@ export class Simulation {
         else {
             p.connected = false;
             this.motions.get(id)!.input = neutral(this.state.modeId, this.state.roundId);
-            this.scene.characters.get(id)!.enabled = false;
+            const character = this.scene.characters.get(id);
+            if (character) character.enabled = false;
             this.onEvent('disconnect', { id });
         }
     }
@@ -206,11 +215,16 @@ export class Simulation {
             if (m.input.modeId === 'laser-tag') m.input.aim.fire = false;
             m.jumpSeen = m.input.jumpSequence;
             m.diveSeen = m.input.diveSequence;
+            if (m.input.modeId === 'bomb-arena') {
+                const c = this.bomb?.players.get([...this.motions.entries()].find(([, v]) => v === m)?.[0] ?? '');
+                if (c) c.bombSeen = m.input.bombSequence;
+            }
             m.buffer = -100;
         }
         this.onEvent('pause', { paused: value });
     }
     teleport(p: Player) {
+        if (this.state.modeId === 'bomb-arena') return;
         const entity = this.scene.characters.get(p.id)!;
         entity.enabled = p.connected;
         const body = entity.rigidbody!;
@@ -260,7 +274,7 @@ export class Simulation {
     }
     update(dt: number) {
         if (this.state.paused) return;
-        const lost = Math.max(0, dt - 0.1);
+        const lost = this.state.modeId === 'bomb-arena' ? 0 : Math.max(0, dt - 0.1);
         if (this.state.phase === 'racing') this.state.elapsed += lost;
         else if (this.state.phase === 'countdown') this.state.countdown -= lost;
         this.accumulator = Math.min(this.accumulator + dt, 0.1);
@@ -271,18 +285,26 @@ export class Simulation {
     }
     step(dt: number) {
         const s = this.state;
-        const timeout = s.modeId === 'laser-tag' ? LASER.duration : COURSE.timeout;
+        const timeout =
+            s.modeId === 'bomb-arena' ? BOMB.duration : s.modeId === 'laser-tag' ? LASER.duration : COURSE.timeout;
         s.tick++;
         if (s.phase === 'countdown') {
             s.countdown = Math.max(0, s.countdown - dt);
             if (s.countdown <= 0) {
                 this.transition('racing');
+                if (this.bomb)
+                    for (const [id, m] of this.motions)
+                        if (m.input.modeId === 'bomb-arena') this.bomb.players.get(id)!.bombSeen = m.input.bombSequence;
                 for (const m of this.motions.values()) {
                     m.jumpSeen = m.input.jumpSequence;
                     m.diveSeen = m.input.diveSequence;
                     m.buffer = -1;
                 }
             }
+        }
+        if (s.modeId === 'bomb-arena') {
+            this.stepBomb();
+            return;
         }
         if (s.phase === 'racing') {
             s.elapsed += dt;
@@ -346,6 +368,54 @@ export class Simulation {
                 (s.modeId === 'obstacle-dash' && s.players.every((p) => p.finish !== null || !p.connected)))
         )
             this.transition('results');
+    }
+    resetBomb() {
+        this.bomb = new Board(
+            this.state.players.map((p) => p.id),
+            this.state.roundId
+        );
+        this.syncBomb();
+    }
+    syncBomb() {
+        if (!this.bomb) return;
+        this.state.bomb = this.bomb.convertToSendFormat();
+        for (const p of this.state.players) {
+            const c = this.bomb.players.get(p.id);
+            if (!c) continue;
+            p.x = c.column;
+            p.z = c.row;
+            p.y = 0;
+            p.health = c.isAlive ? 100 : 0;
+            p.deaths = c.isAlive ? 0 : 1;
+            p.score = this.bomb.ended && this.bomb.winner === p.id ? 1 : 0;
+        }
+    }
+    stepBomb() {
+        const s = this.state;
+        if (!this.bomb) this.resetBomb();
+        if (s.phase !== 'racing') return;
+        for (const p of s.players)
+            if (p.bot && p.connected)
+                this.input(p.id, this.bots.update(p, s.players, s.modeId, s.roundId, s.elapsed, 1 / 60, s.bomb));
+        const inputs = new Map<string, { axes: [number, number]; bombSequence: number }>();
+        for (const p of s.players) {
+            const m = this.motions.get(p.id)!;
+            const i = m.input;
+            if (i.modeId !== 'bomb-arena') continue;
+            inputs.set(p.id, {
+                axes: performance.now() - m.received < 400 ? i.axes : [0, 0],
+                bombSequence: i.bombSequence
+            });
+            p.inputSequence = i.sequence;
+        }
+        this.bomb!.update(
+            inputs,
+            new Set(s.players.filter((p) => p.connected).map((p) => p.id)),
+            s.players.length === 1
+        );
+        s.elapsed = this.bomb!.tick / 60;
+        this.syncBomb();
+        if (this.bomb!.ended) this.transition('results');
     }
     move(e: Entity, m: Motion, dt: number) {
         const body = e.rigidbody!,
