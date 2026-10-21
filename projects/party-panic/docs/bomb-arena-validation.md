@@ -23,7 +23,7 @@ explosions drain a guarded queue before determining winners; fire and players
 do not terminate a ray, while solid walls and the first breakable do.
 
 Compact deterministic handcrafted 13×9 (up to four) / 17×11 (five to eight)
-layouts use reflected spawns with safe perimeter routes, two starting exits
+layouts use reflected spawns with safe perimeter routes, at least two starting exits
 and no overlap. All non-solid cells connect after breakables are removed.
 There is no random map generator; `seed` records the authoritative round epoch.
 Boards, inputs, outcomes and deadlines are tick driven. At 90 seconds multiple
@@ -204,3 +204,22 @@ workflow publish v0.3 again. Do not reset shared history or overwrite unrelated
 local edits. Reload all peers together after rollback because v3/v4 clients
 intentionally cannot share a room. No server/database migration is involved.
 For a local comparison the pre-change image is `party-panic-bomb-baseline`.
+
+
+## Published verification
+
+Deployed release: `89978fc452bf467f6ffcb61d84d3903b4d7f16fc`.
+Both [Pages deployment](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39665018207)
+and [Chrome connectivity](https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39665018349)
+completed successfully. [Deployment record](evidence/bomb-arena/deployment.json)
+includes authoritative run status and verified screenshot dimensions.
+
+Actual connected Chrome followed the updated link in
+[AI Coding Agent Case Study](https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/)
+to [the live game](https://leonardo-maglanoc.com/party-panic/), started Bomb Arena
+with seven bots, exercised joystick/BOMB in 844×390 landscape and rotated to
+390×844 portrait, observing spectating after elimination. No captured live
+console errors. `live-{desktop,eight-landscape,portrait}.png` and
+`live-blog-link.png` retain the rendered frames and published navigation proof.
+Viewport overrides were reset after testing. Local pre-existing edits in
+`_plugins/cache-bust.rb` and `plan.md` were not included in the release.

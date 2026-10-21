@@ -1,0 +1,65 @@
+{
+  "verifiedAt": "2026-10-21T20:02:13.387301+00:00",
+  "implementationCommit": "2303adf",
+  "deployedCommit": "89978fc452bf467f6ffcb61d84d3903b4d7f16fc",
+  "game": "https://leonardo-maglanoc.com/party-panic/",
+  "blog": "https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/",
+  "runs": {
+    "pages": {
+      "conclusion": "success",
+      "databaseId": 39665018207,
+      "headSha": "89978fc452bf467f6ffcb61d84d3903b4d7f16fc",
+      "status": "completed",
+      "updatedAt": "2026-10-21T19:57:20Z",
+      "url": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39665018207"
+    },
+    "connectivity": {
+      "conclusion": "success",
+      "databaseId": 39665018349,
+      "headSha": "89978fc452bf467f6ffcb61d84d3903b4d7f16fc",
+      "status": "completed",
+      "updatedAt": "2026-10-21T19:55:02Z",
+      "url": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/39665018349"
+    }
+  },
+  "chromeCaptureDimensions": {
+    "live-desktop.png": [
+      1850,
+      876
+    ],
+    "live-eight-landscape.png": [
+      844,
+      390
+    ],
+    "live-portrait.png": [
+      390,
+      844
+    ],
+    "live-blog-link.png": [
+      1835,
+      869
+    ],
+    "docker-landscape.png": [
+      844,
+      390
+    ],
+    "docker-portrait.png": [
+      390,
+      844
+    ],
+    "chrome-844x390.png": [
+      844,
+      390
+    ],
+    "chrome-915x412-bomb.png": [
+      915,
+      412
+    ],
+    "chrome-667x375.png": [
+      667,
+      375
+    ]
+  },
+  "liveConsoleErrors": [],
+  "note": "Actual connected Chrome followed the updated live blog link, selected Bomb Arena, launched seven bots, dragged joystick and activated BOMB, observed elimination/spectating and portrait rotation. Phone sizes are emulation, not physical devices."
+}
