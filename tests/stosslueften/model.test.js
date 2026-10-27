@@ -1,0 +1,6 @@
+const assert=require('node:assert/strict');const {Model,V}=require('../../assets/interactive/stosslueften/model.js');
+function inventory(m){return m.c.reduce((a,b)=>a+b,0)*V}
+let m=new Model();m.config.left=m.config.right='closed';m.rebuild();m.c[0]=0.2;let before=inventory(m);for(let i=0;i<500;i++)m.step();assert.ok(Math.abs(inventory(m)-before)<1e-9,'sealed inventory');
+m=new Model();m.config.bed=false;m.config.living=false;m.rebuild();assert.ok(!m.edges.some(([a,b])=>Math.floor(a/48)===7&&Math.floor(b/48)===8),'closed bedroom wall');before=inventory(m);let out=0;for(let i=0;i<1000;i++)out+=m.step();assert.ok(Math.abs(before-inventory(m)-out)<1e-7,'outflow accounts for tracer loss');assert.ok(m.c.every(x=>x>=0&&x<=1),'bounded tracer');assert.ok(m.metrics()[2]<1e-8,'closed bedroom unchanged');
+m=new Model();m.config.right='closed';m.rebuild();assert.ok(Math.abs(m.source.reduce((a,b)=>a+b,0))<1e-12,'single opening balanced');for(let i=0;i<500;i++)m.step();assert.ok(m.metrics()[0]>0,'single opening exchanges tracer');
+m=new Model();m.config.wind=5;m.rebuild();for(let i=0;i<500;i++)m.step();assert.ok(m.c.every(x=>x>=-1e-9&&x<=1+1e-9),'maximum wind stable');console.log('Conservation, boundaries, single-window balance, and stability checks passed.');
