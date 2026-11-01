@@ -6,8 +6,8 @@ featured_projects:
   - title: "MSc Thesis with Foundation Robotics"
     description: "Language-guided tool-motion generation for dexterous manipulation. Grounds natural-language instructions in parameterized SE(3) motion primitives, combining LLM-level reasoning with a learned low-level policy."
     links:
-      - label: Github
-        url: https://github.com/LeoMaglanoc/lang2tool
+      - label: demo
+        url: /lang2tool/
       - label: startup
         url: https://foundation.bot/
 
