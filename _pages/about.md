@@ -22,8 +22,9 @@ nav_order: 1
     </p>
 
     <p>
-      Contact me via <a href="mailto:leo.maglanoc@gmail.com">email</a> ·
+      <a href="mailto:leo.maglanoc@gmail.com">email</a> ·
       <a href="https://www.linkedin.com/in/leonardo-maglanoc/" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://github.com/{{ site.data.socials.github_username }}" target="_blank" rel="noopener">GitHub</a> ·
       <a href="{{ site.data.socials.cv_pdf | relative_url }}" target="_blank" rel="noopener">CV</a>
     </p>
 
