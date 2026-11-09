@@ -14,11 +14,11 @@ nav_order: 1
     <h1 id="homepage-title">Leonardo Maglanoc</h1>
 
     <p>
-      I’m Leo, a robot learning and AI engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM. I’ve worked across the robotics and AI stack, with experience spanning language-guided dexterous manipulation for my master’s thesis with Foundation Robotics, brain-inspired ML at BMW Research, safe human-robot collaboration at TUM published in IEEE T-RO, and 3D perception/SLAM.
+      I'm Leo, a Robotics & AI Engineer with an M.Sc. in Robotics, Cognition, and Intelligence from TUM. My background spans robot learning (RL/IL), robotics software development (Python, C++, ROS 2), and 3D perception/SLAM. I've worked on language-guided dexterous manipulation with Foundation Robotics, brain-inspired ML at BMW Research, and safe human-robot collaboration at TUM, contributing to a publication in IEEE Transactions on Robotics.
     </p>
 
     <p>
-      Today, I’m focused on foundation models for physical AI and exploring agentic AI through hackathons. Born in Norway and raised in Germany, I’m particularly excited to contribute to Europe’s deep-tech ecosystem and build ambitious robotics and AI systems here.
+      Beyond robotics, I enjoy exploring agentic AI through personal projects and hackathons. Born in Norway and raised in Germany, I'm excited to contribute to Europe's deep-tech ecosystem and build ambitious robotics and AI systems here.
     </p>
 
     <p>
