@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-14",
+  "testedSourceCommit": "7fe51103d0dbb95f506ddeee17e230041bed7679",
+  "siteDeployment": {
+    "commit": "d0cc32a4663326923e40734c2eb7ab2b97e92ac6",
+    "runId": 43608370605,
+    "conclusion": "success",
+    "url": "https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/actions/runs/43608370605"
+  },
+  "dockerValidation": {
+    "runId": 43608516875,
+    "jobId": 132488222222,
+    "commit": "7fe51103d0dbb95f506ddeee17e230041bed7679",
+    "conclusion": "success",
+    "checks": [
+      "Docker image build",
+      "physics and planner unit tests",
+      "ONNX Runtime Web WASM parity",
+      "Chrome desktop portrait landscape interactions"
+    ]
+  },
+  "liveComputerUse": {
+    "browser": "Chrome",
+    "demoURL": "https://leonardo-maglanoc.com/tiny-world-planner/",
+    "blogURL": "https://leonardo-maglanoc.com/blog/AI-coding-agent-case-study/",
+    "checks": [
+      "Published iframe and neural models loaded",
+      "Plan inspection displayed decoded ghosts and finite latent cost",
+      "Executed inspected action; real coverage changed from 38% to 39%; latent prediction MSE .0073",
+      "Dragged goal; real overlap updated and pending plan invalidated",
+      "Continuous replanning executed 100 actions and reported failure honestly at 44% real coverage",
+      "Blog post displayed Tiny World Planner at the top of the demo list; clicking opened the working demo",
+      "Existing TinyDreamer loaded Running locally and produced live reward/model-error values"
+    ],
+    "observedFirstPlanLatencyMs": 17,
+    "observedSubsequentPlanLatencyMs": 5,
+    "physicalAndroidTest": false
+  },
+  "viewportValidation": {
+    "browser": "Chrome for Testing 143.0.7499.4",
+    "desktop": [
+      1440,
+      1000
+    ],
+    "portrait": [
+      393,
+      852
+    ],
+    "landscape": [
+      852,
+      393
+    ],
+    "touchEmulation": true,
+    "result": "all passed; see browser.json",
+    "physicalPhonePerformance": "unverified"
+  },
+  "scientificStatus": {
+    "reliabilityGatePassed": false,
+    "easySuccesses": 0,
+    "easyTrials": 50,
+    "coverageThreshold": 0.95,
+    "consecutiveActions": 3,
+    "representation": "VICReg with disclosed auxiliary pose regression and pose-metric supervision",
+    "classification": "experimental"
+  }
+}
