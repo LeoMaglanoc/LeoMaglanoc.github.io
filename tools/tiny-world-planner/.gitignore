@@ -1,0 +1,8 @@
+node_modules/
+local-data/
+checkpoints/
+__pycache__/
+screenshots/
+results/*.log
+!results/training.log
+!results/dataset.log

@@ -200,6 +200,7 @@ exclude:
   - old_website/
   # Side-project source and tooling are never part of the public site.
   - projects/
+  - tools/tiny-world-planner/
   # Archived exhibit retained in Git, omitted to stay within the Pages size budget.
   - assets/interactive/tiny-ego-vla/
   - tests/dexterous-rl/

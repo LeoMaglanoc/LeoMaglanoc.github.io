@@ -1,0 +1,7 @@
+{
+  "label": "privileged learned numerical dynamics baseline \u2014 offline only",
+  "seed": 815,
+  "oneStepNormalizedStateMSE": 0.154341459274292,
+  "constantStateMSE": 0.21768070757389069,
+  "betterThanStatic": true
+}

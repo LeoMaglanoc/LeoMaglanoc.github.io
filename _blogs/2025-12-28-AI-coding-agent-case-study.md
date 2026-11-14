@@ -14,6 +14,8 @@ I 'vibecoded' in less than an hour without writing a single code line and having
 
 Interactive demos and games, newest first by creation date:
 
+- [Tiny World Planner]({{ "/tiny-world-planner/" | relative_url }}) · image-conditioned neural world model + online planning (experimental)
+
 - [Stoßlüften Simulator]({{ "/assets/interactive/stosslueften/" | relative_url }}) · explore how fresh air moves through an apartment
 
 - [YAM Tabletop Sandbox]({{ "/yam-sandbox/" | relative_url }}) · two robot arms, live contact physics

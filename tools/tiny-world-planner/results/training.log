@@ -1,0 +1,120 @@
+ssl 0 0 49.4968
+ssl 0 200 5.6011
+ssl 0 400 1.8423
+ssl gate 0 {'position_mean_units': 0.5349691584706306, 'orientation_mean_radians': 1.0035847425460815, 'feature_std_mean': 1.0648176670074463}
+auxiliary pose 0 0 779.8567
+auxiliary pose 0 300 4.9206
+auxiliary pose 0 600 2.8137
+auxiliary pose 0 900 3.9306
+auxiliary pose 0 1200 3.2222
+auxiliary pose 0 1500 2.6814
+auxiliary pose 0 1800 2.9799
+auxiliary pose 0 2100 2.6441
+auxiliary pose 0 2400 2.9194
+auxiliary pose 0 2700 2.1242
+auxiliary pose 0 3000 2.2947
+auxiliary pose 0 3300 3.8671
+auxiliary pose 0 3600 2.1066
+auxiliary pose 0 3900 1.9278
+auxiliary pose 0 4200 1.7019
+auxiliary pose 0 4500 2.9045
+auxiliary pose 0 4800 0.8759
+auxiliary pose 0 5100 0.8812
+auxiliary pose 0 5400 0.9068
+auxiliary pose 0 5700 0.6328
+auxiliary pose 0 6000 0.4383
+auxiliary pose 0 6300 0.3968
+auxiliary pose 0 6600 0.298
+auxiliary pose 0 6900 0.3
+auxiliary pose 0 7200 0.2791
+auxiliary pose 0 7500 0.3362
+auxiliary pose 0 7800 0.1972
+ssl 1 0 49.4995
+ssl 1 200 3.3171
+ssl 1 400 1.6603
+ssl gate 1 {'position_mean_units': 2.058357298374176, 'orientation_mean_radians': None, 'feature_std_mean': 1.0412788391113281}
+auxiliary pose 1 0 601.251
+auxiliary pose 1 300 4.1428
+auxiliary pose 1 600 1.0378
+auxiliary pose 1 900 0.6707
+auxiliary pose 1 1200 0.4278
+auxiliary pose 1 1500 0.2825
+auxiliary pose 1 1800 0.1102
+auxiliary pose 1 2100 0.233
+auxiliary pose 1 2400 0.1716
+auxiliary pose 1 2700 0.1383
+auxiliary pose 1 3000 0.1019
+auxiliary pose 1 3300 0.1091
+auxiliary pose 1 3600 0.0895
+auxiliary pose 1 3900 0.0705
+auxiliary pose 1 4200 0.0561
+auxiliary pose 1 4500 0.1055
+auxiliary pose 1 4800 0.0654
+auxiliary pose 1 5100 0.0296
+auxiliary pose 1 5400 0.0401
+auxiliary pose 1 5700 0.0264
+auxiliary pose 1 6000 0.0382
+auxiliary pose 1 6300 0.0282
+auxiliary pose 1 6600 0.029
+auxiliary pose 1 6900 0.0304
+auxiliary pose 1 7200 0.0284
+auxiliary pose 1 7500 0.0393
+auxiliary pose 1 7800 0.0463
+dynamics 0 train 0.05258 val5 0.1244
+dynamics 250 train 0.02583 val5 0.04467
+dynamics 500 train 0.04417 val5 0.03938
+dynamics 750 train 0.03941 val5 0.03261
+dynamics 1000 train 0.03069 val5 0.03173
+dynamics 1250 train 0.03276 val5 0.03085
+dynamics 1500 train 0.03888 val5 0.02905
+dynamics 1750 train 0.03675 val5 0.02845
+dynamics 2000 train 0.03187 val5 0.0289
+dynamics 2250 train 0.03884 val5 0.02844
+dynamics 2500 train 0.03005 val5 0.02852
+dynamics 2750 train 0.02711 val5 0.02928
+dynamics 3000 train 0.02745 val5 0.02859
+dynamics 3250 train 0.02273 val5 0.02889
+dynamics 3499 train 0.01242 val5 0.02837
+[
+  {
+    "horizon": 1,
+    "latent_mse_mean": 0.008811050094664097,
+    "latent_mse_std": 0.02540902979671955,
+    "constant_state_mse": 0.014154922217130661,
+    "position_mean_units": 0.2877379357814789,
+    "orientation_mean_radians": 0.23947206139564514,
+    "contact_mse": 0.03600838780403137,
+    "noncontact_mse": 0.003974035382270813
+  },
+  {
+    "horizon": 3,
+    "latent_mse_mean": 0.02848229557275772,
+    "latent_mse_std": 0.06842420995235443,
+    "constant_state_mse": 0.06362651288509369,
+    "position_mean_units": 0.3270031213760376,
+    "orientation_mean_radians": 0.26868292689323425,
+    "contact_mse": 0.09746295213699341,
+    "noncontact_mse": 0.01608722284436226
+  },
+  {
+    "horizon": 5,
+    "latent_mse_mean": 0.04702705144882202,
+    "latent_mse_std": 0.10776490718126297,
+    "constant_state_mse": 0.12238922715187073,
+    "position_mean_units": 0.3657056987285614,
+    "orientation_mean_radians": 0.29843202233314514,
+    "contact_mse": 0.1391192525625229,
+    "noncontact_mse": 0.030324460938572884
+  },
+  {
+    "horizon": 8,
+    "latent_mse_mean": 0.07430081814527512,
+    "latent_mse_std": 0.15722376108169556,
+    "constant_state_mse": 0.2131449431180954,
+    "position_mean_units": 0.415668785572052,
+    "orientation_mean_radians": 0.337392121553421,
+    "contact_mse": 0.17954176664352417,
+    "noncontact_mse": 0.05520646274089813
+  }
+]
+Finished in 350.1061623096466

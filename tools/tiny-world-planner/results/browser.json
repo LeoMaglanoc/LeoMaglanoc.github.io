@@ -1,0 +1,141 @@
+{
+  "browser": "143.0.7499.4",
+  "backend": "WASM CPU, WebGPU disabled",
+  "results": [
+    {
+      "name": "desktop",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "mobileEmulation": false,
+      "physicalPhone": false,
+      "parity": {
+        "maximum": 0.0000021457672119140625,
+        "passed": true,
+        "batches": [
+          1,
+          64
+        ],
+        "rolloutSteps": 5
+      },
+      "latencyMs": {
+        "samples": 12,
+        "mean": 5.5,
+        "p95": 9
+      },
+      "overflow": false,
+      "errors": [],
+      "snapshot": {
+        "ready": true,
+        "busy": false,
+        "running": false,
+        "count": 0,
+        "version": 6,
+        "coverage": 0.38119552186074956
+      },
+      "checks": [
+        "model initialization",
+        "rotation preserves physics",
+        "pointer/touch goal drag",
+        "neural plan inspection",
+        "one-action execution",
+        "online replanning",
+        "pause",
+        "deterministic reset",
+        "Node/browser replay within 1e-10",
+        "local GET assets only"
+      ]
+    },
+    {
+      "name": "portrait",
+      "viewport": [
+        393,
+        852
+      ],
+      "mobileEmulation": true,
+      "physicalPhone": false,
+      "parity": {
+        "maximum": 0.0000021457672119140625,
+        "passed": true,
+        "batches": [
+          1,
+          64
+        ],
+        "rolloutSteps": 5
+      },
+      "latencyMs": {
+        "samples": 12,
+        "mean": 4.916666666666667,
+        "p95": 6
+      },
+      "overflow": false,
+      "errors": [],
+      "snapshot": {
+        "ready": true,
+        "busy": false,
+        "running": false,
+        "count": 0,
+        "version": 6,
+        "coverage": 0.38119552186074956
+      },
+      "checks": [
+        "model initialization",
+        "rotation preserves physics",
+        "pointer/touch goal drag",
+        "neural plan inspection",
+        "one-action execution",
+        "online replanning",
+        "pause",
+        "deterministic reset",
+        "Node/browser replay within 1e-10",
+        "local GET assets only"
+      ]
+    },
+    {
+      "name": "landscape",
+      "viewport": [
+        852,
+        393
+      ],
+      "mobileEmulation": true,
+      "physicalPhone": false,
+      "parity": {
+        "maximum": 0.0000021457672119140625,
+        "passed": true,
+        "batches": [
+          1,
+          64
+        ],
+        "rolloutSteps": 5
+      },
+      "latencyMs": {
+        "samples": 12,
+        "mean": 4.916666666666667,
+        "p95": 7
+      },
+      "overflow": false,
+      "errors": [],
+      "snapshot": {
+        "ready": true,
+        "busy": false,
+        "running": false,
+        "count": 0,
+        "version": 6,
+        "coverage": 0.38119552186074956
+      },
+      "checks": [
+        "model initialization",
+        "rotation preserves physics",
+        "pointer/touch goal drag",
+        "neural plan inspection",
+        "one-action execution",
+        "online replanning",
+        "pause",
+        "deterministic reset",
+        "Node/browser replay within 1e-10",
+        "local GET assets only"
+      ]
+    }
+  ]
+}

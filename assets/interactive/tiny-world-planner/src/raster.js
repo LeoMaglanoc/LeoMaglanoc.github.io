@@ -1,0 +1,4 @@
+// A deterministic renderer, shared by Node collection and the browser sensor.
+// State is consumed here to make pixels, never in the encoder or planner.
+export const SIZE=64;
+export function renderSensor(object,agent){const rgba=new Uint8Array(SIZE*SIZE*4),c=Math.cos(object.angle),s=Math.sin(object.angle);for(let iy=0;iy<SIZE;iy++)for(let ix=0;ix<SIZE;ix++){let objectCount=0,agentCount=0;for(let sy=0;sy<2;sy++)for(let sx=0;sx<2;sx++){const x=(ix+(sx+.5)/2)*10/SIZE,y=(iy+(sy+.5)/2)*10/SIZE,dx=x-object.x,dy=y-object.y,lx=c*dx+s*dy,ly=-s*dx+c*dy;const t=(Math.abs(lx)<=1.2&&ly>=-1.05&&ly<=-.4)||(Math.abs(lx)<=.325&&ly>=-.4&&ly<=1.05);const p=agent&&(x-agent.x)**2+(y-agent.y)**2<=.23**2;if(p)agentCount++;else if(t)objectCount++;}const o=objectCount/4,a=agentCount/4,i=(iy*SIZE+ix)*4;rgba[i]=Math.round(245-9*o-185*a);rgba[i+1]=Math.round(245-99*o-120*a);rgba[i+2]=Math.round(239-172*o+6*a);rgba[i+3]=255;}return rgba;}

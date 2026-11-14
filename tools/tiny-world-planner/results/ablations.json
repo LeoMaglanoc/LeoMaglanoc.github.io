@@ -1,0 +1,805 @@
+{
+  "backend": "Node ONNX Runtime Web WASM, single thread; development seeds only",
+  "rows": [
+    {
+      "name": "horizon1",
+      "seed": 901000,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.260946212428559,
+      "totalPlanMs": 60.17744599999952
+    },
+    {
+      "name": "horizon1",
+      "seed": 901001,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5512610057935112,
+      "totalPlanMs": 50.06308899999976
+    },
+    {
+      "name": "horizon1",
+      "seed": 901002,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.38016465062291227,
+      "totalPlanMs": 46.062406999999666
+    },
+    {
+      "name": "horizon1",
+      "seed": 901003,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5456498490556558,
+      "totalPlanMs": 46.022013000000584
+    },
+    {
+      "name": "horizon1",
+      "seed": 901004,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.2295876272368171,
+      "totalPlanMs": 40.670239000000606
+    },
+    {
+      "name": "horizon1",
+      "seed": 901005,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0,
+      "totalPlanMs": 43.332443999999214
+    },
+    {
+      "name": "horizon1",
+      "seed": 901006,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.037625572356726755,
+      "totalPlanMs": 42.52492099999995
+    },
+    {
+      "name": "horizon1",
+      "seed": 901007,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4728471660186344,
+      "totalPlanMs": 42.38668900000016
+    },
+    {
+      "name": "horizon1",
+      "seed": 901008,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3471044588662113,
+      "totalPlanMs": 41.64475100000004
+    },
+    {
+      "name": "horizon1",
+      "seed": 901009,
+      "horizon": 1,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.616657597296894,
+      "totalPlanMs": 40.93845299999953
+    },
+    {
+      "name": "horizon4",
+      "seed": 901000,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3329943609446166,
+      "totalPlanMs": 186.22887299999866
+    },
+    {
+      "name": "horizon4",
+      "seed": 901001,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4293601366656608,
+      "totalPlanMs": 155.7803900000008
+    },
+    {
+      "name": "horizon4",
+      "seed": 901002,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.7253245605699792,
+      "totalPlanMs": 170.37824099999852
+    },
+    {
+      "name": "horizon4",
+      "seed": 901003,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4992945167708192,
+      "totalPlanMs": 155.0130170000025
+    },
+    {
+      "name": "horizon4",
+      "seed": 901004,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.2227315472837233,
+      "totalPlanMs": 157.8759200000036
+    },
+    {
+      "name": "horizon4",
+      "seed": 901005,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.44322874878867613,
+      "totalPlanMs": 164.07545300000083
+    },
+    {
+      "name": "horizon4",
+      "seed": 901006,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4023476878594017,
+      "totalPlanMs": 155.8420549999978
+    },
+    {
+      "name": "horizon4",
+      "seed": 901007,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.18564985807039455,
+      "totalPlanMs": 149.34484399999837
+    },
+    {
+      "name": "horizon4",
+      "seed": 901008,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0,
+      "totalPlanMs": 144.89878899999712
+    },
+    {
+      "name": "horizon4",
+      "seed": 901009,
+      "horizon": 4,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.6026229387097444,
+      "totalPlanMs": 143.945229999998
+    },
+    {
+      "name": "horizon8",
+      "seed": 901000,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3838534659533426,
+      "totalPlanMs": 323.66612399999985
+    },
+    {
+      "name": "horizon8",
+      "seed": 901001,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.33363202397866826,
+      "totalPlanMs": 296.56983200000013
+    },
+    {
+      "name": "horizon8",
+      "seed": 901002,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5024639558509155,
+      "totalPlanMs": 317.789577999999
+    },
+    {
+      "name": "horizon8",
+      "seed": 901003,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4278139222533548,
+      "totalPlanMs": 299.9117040000001
+    },
+    {
+      "name": "horizon8",
+      "seed": 901004,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.26280234251679097,
+      "totalPlanMs": 290.98152700000446
+    },
+    {
+      "name": "horizon8",
+      "seed": 901005,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3024630429012835,
+      "totalPlanMs": 303.7370069999979
+    },
+    {
+      "name": "horizon8",
+      "seed": 901006,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5600906878280411,
+      "totalPlanMs": 295.4343900000031
+    },
+    {
+      "name": "horizon8",
+      "seed": 901007,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5024364829124367,
+      "totalPlanMs": 288.9813740000036
+    },
+    {
+      "name": "horizon8",
+      "seed": 901008,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.09643913651614086,
+      "totalPlanMs": 301.23562299999685
+    },
+    {
+      "name": "horizon8",
+      "seed": 901009,
+      "horizon": 8,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4165423138863511,
+      "totalPlanMs": 291.386282999998
+    },
+    {
+      "name": "candidates16",
+      "seed": 901000,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3324090630071462,
+      "totalPlanMs": 126.8000159999965
+    },
+    {
+      "name": "candidates16",
+      "seed": 901001,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5422937455174908,
+      "totalPlanMs": 126.6605669999999
+    },
+    {
+      "name": "candidates16",
+      "seed": 901002,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3377109312944617,
+      "totalPlanMs": 125.368660000001
+    },
+    {
+      "name": "candidates16",
+      "seed": 901003,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.34863441389238653,
+      "totalPlanMs": 121.2140619999991
+    },
+    {
+      "name": "candidates16",
+      "seed": 901004,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.2201306962241184,
+      "totalPlanMs": 118.13795200000459
+    },
+    {
+      "name": "candidates16",
+      "seed": 901005,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3789592713052502,
+      "totalPlanMs": 121.28779699999814
+    },
+    {
+      "name": "candidates16",
+      "seed": 901006,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.619673632399719,
+      "totalPlanMs": 126.60754700000143
+    },
+    {
+      "name": "candidates16",
+      "seed": 901007,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.5615463385217128,
+      "totalPlanMs": 117.6642959999972
+    },
+    {
+      "name": "candidates16",
+      "seed": 901008,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4430528127108056,
+      "totalPlanMs": 126.15214899999955
+    },
+    {
+      "name": "candidates16",
+      "seed": 901009,
+      "horizon": 6,
+      "candidates": 16,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.2659216809950112,
+      "totalPlanMs": 126.72599199999968
+    },
+    {
+      "name": "candidates64",
+      "seed": 901000,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.36107135522530764,
+      "totalPlanMs": 434.5201529999922
+    },
+    {
+      "name": "candidates64",
+      "seed": 901001,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3516195152331979,
+      "totalPlanMs": 473.2061939999894
+    },
+    {
+      "name": "candidates64",
+      "seed": 901002,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.35689358514013314,
+      "totalPlanMs": 440.7487239999937
+    },
+    {
+      "name": "candidates64",
+      "seed": 901003,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.6347968134230298,
+      "totalPlanMs": 411.0106239999968
+    },
+    {
+      "name": "candidates64",
+      "seed": 901004,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3283336778928869,
+      "totalPlanMs": 431.1768799999936
+    },
+    {
+      "name": "candidates64",
+      "seed": 901005,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3317484091229748,
+      "totalPlanMs": 479.26324799999566
+    },
+    {
+      "name": "candidates64",
+      "seed": 901006,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.6453069181174516,
+      "totalPlanMs": 514.923580000006
+    },
+    {
+      "name": "candidates64",
+      "seed": 901007,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3858608553499161,
+      "totalPlanMs": 483.2486389999958
+    },
+    {
+      "name": "candidates64",
+      "seed": 901008,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.30137220964367056,
+      "totalPlanMs": 495.0807230000064
+    },
+    {
+      "name": "candidates64",
+      "seed": 901009,
+      "horizon": 6,
+      "candidates": 64,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3571440345048742,
+      "totalPlanMs": 436.4592159999902
+    },
+    {
+      "name": "candidates128",
+      "seed": 901000,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.10822487276727882,
+      "totalPlanMs": 906.7724840000028
+    },
+    {
+      "name": "candidates128",
+      "seed": 901001,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.07189741847532326,
+      "totalPlanMs": 950.9457740000053
+    },
+    {
+      "name": "candidates128",
+      "seed": 901002,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.2862925061880215,
+      "totalPlanMs": 889.995955999997
+    },
+    {
+      "name": "candidates128",
+      "seed": 901003,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.561107016443563,
+      "totalPlanMs": 870.7760619999972
+    },
+    {
+      "name": "candidates128",
+      "seed": 901004,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.2813309644427729,
+      "totalPlanMs": 802.9398960000108
+    },
+    {
+      "name": "candidates128",
+      "seed": 901005,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4033593119772028,
+      "totalPlanMs": 800.4394830000092
+    },
+    {
+      "name": "candidates128",
+      "seed": 901006,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.7345025829426337,
+      "totalPlanMs": 817.0280459999667
+    },
+    {
+      "name": "candidates128",
+      "seed": 901007,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.14057331761151118,
+      "totalPlanMs": 847.9196059999922
+    },
+    {
+      "name": "candidates128",
+      "seed": 901008,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.6034726391221944,
+      "totalPlanMs": 827.2400160000143
+    },
+    {
+      "name": "candidates128",
+      "seed": 901009,
+      "horizon": 6,
+      "candidates": 128,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.4442948799796208,
+      "totalPlanMs": 802.9269009999844
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901000,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.6184366828518579,
+      "totalPlanMs": 228.02792499999123
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901001,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.36523905196379713,
+      "totalPlanMs": 238.46899900000426
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901002,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.568056215949392,
+      "totalPlanMs": 220.14725200002067
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901003,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.45043849693976235,
+      "totalPlanMs": 268.4005339999967
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901004,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.631988117974916,
+      "totalPlanMs": 247.07016399999338
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901005,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.3998735362954478,
+      "totalPlanMs": 247.6235689999994
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901006,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.2514128301143011,
+      "totalPlanMs": 238.38136699997995
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901007,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.29621032081221843,
+      "totalPlanMs": 227.71414899999945
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901008,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.3032245326942813,
+      "totalPlanMs": 230.02100399999836
+    },
+    {
+      "name": "no-warm-start",
+      "seed": 901009,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": false,
+      "success": false,
+      "finalCoverage": 0.22591189775542386,
+      "totalPlanMs": 223.0897479999985
+    },
+    {
+      "name": "warm-start",
+      "seed": 901000,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.09045552026747133,
+      "totalPlanMs": 235.16389600000912
+    },
+    {
+      "name": "warm-start",
+      "seed": 901001,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.7171116780966905,
+      "totalPlanMs": 265.72244600001795
+    },
+    {
+      "name": "warm-start",
+      "seed": 901002,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.6653228309146358,
+      "totalPlanMs": 237.80805400001555
+    },
+    {
+      "name": "warm-start",
+      "seed": 901003,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.584483877994256,
+      "totalPlanMs": 226.60328600001594
+    },
+    {
+      "name": "warm-start",
+      "seed": 901004,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3031855588631167,
+      "totalPlanMs": 232.97230599999602
+    },
+    {
+      "name": "warm-start",
+      "seed": 901005,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.8222792090388713,
+      "totalPlanMs": 230.21025799999188
+    },
+    {
+      "name": "warm-start",
+      "seed": 901006,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.7196719958330952,
+      "totalPlanMs": 242.80703499999072
+    },
+    {
+      "name": "warm-start",
+      "seed": 901007,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.3290719581203311,
+      "totalPlanMs": 277.81634299998404
+    },
+    {
+      "name": "warm-start",
+      "seed": 901008,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.23476302411079322,
+      "totalPlanMs": 268.39632599999095
+    },
+    {
+      "name": "warm-start",
+      "seed": 901009,
+      "horizon": 6,
+      "candidates": 32,
+      "warm": true,
+      "success": false,
+      "finalCoverage": 0.7394823229040889,
+      "totalPlanMs": 241.4259779999884
+    }
+  ]
+}

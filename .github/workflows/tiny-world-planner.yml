@@ -1,0 +1,36 @@
+name: Tiny World Planner Docker validation
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/interactive/tiny-world-planner/**'
+      - 'tools/tiny-world-planner/**'
+      - '.github/workflows/tiny-world-planner.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            assets/interactive/tiny-world-planner
+            assets/interactive/doom/vendor/ort
+            tools/tiny-world-planner
+      - name: Build isolated browser test image
+        run: docker build -f tools/tiny-world-planner/Dockerfile --target validate -t tiny-world-planner .
+      - name: Run physics, WASM parity and Chromium viewport checks
+        run: |
+          mkdir -p tools/tiny-world-planner/screenshots
+          docker run --rm --ipc=host -v "$PWD/tools/tiny-world-planner/results:/workspace/tools/tiny-world-planner/results" -v "$PWD/tools/tiny-world-planner/screenshots:/workspace/tools/tiny-world-planner/screenshots" tiny-world-planner
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tiny-world-planner-chromium-validation
+          path: |
+            tools/tiny-world-planner/results/browser.json
+            tools/tiny-world-planner/results/wasm-parity.json
+            tools/tiny-world-planner/screenshots/*.png

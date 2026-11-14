@@ -1,0 +1,19 @@
+services:
+  validate:
+    build:
+      context: ../..
+      dockerfile: tools/tiny-world-planner/Dockerfile
+      target: validate
+    volumes:
+      - ./results:/workspace/tools/tiny-world-planner/results
+      - ./screenshots:/workspace/tools/tiny-world-planner/screenshots
+  train:
+    build:
+      context: ../..
+      dockerfile: tools/tiny-world-planner/Dockerfile
+      target: train
+    volumes:
+      - ./local-data:/workspace/tools/tiny-world-planner/local-data
+      - ./checkpoints:/workspace/tools/tiny-world-planner/checkpoints
+      - ./results:/workspace/tools/tiny-world-planner/results
+      - ../../assets/interactive/tiny-world-planner/models:/workspace/assets/interactive/tiny-world-planner/models

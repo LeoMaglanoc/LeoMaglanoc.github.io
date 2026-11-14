@@ -1,0 +1,186 @@
+{
+  "seed": 714,
+  "torch": "2.5.1+cpu",
+  "dataset": {
+    "version": "sensor-v1-planck-1.3.0",
+    "episodes": 700,
+    "steps": 80,
+    "seedBase": 10000,
+    "collectorSeed": 20261114,
+    "imageShape": [
+      700,
+      81,
+      2,
+      64,
+      64
+    ],
+    "stateShape": [
+      700,
+      81,
+      9
+    ],
+    "actionShape": [
+      700,
+      80,
+      2
+    ],
+    "contactFraction": 0.17057142857142857,
+    "movingFraction": 0.26301785714285714,
+    "split": {
+      "train": [
+        0,
+        560
+      ],
+      "validation": [
+        560,
+        630
+      ],
+      "test": [
+        630,
+        700
+      ]
+    },
+    "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
+    "actionScale": 0.48,
+    "actionDuration": 0.1
+  },
+  "architecture": {
+    "image": [
+      1,
+      64,
+      64
+    ],
+    "object": 16,
+    "agent": 8,
+    "state": 48,
+    "hidden": 192
+  },
+  "experiments": [
+    {
+      "stage": "pure_vicreg",
+      "stream": 0,
+      "probe": {
+        "position_mean_units": 0.43944261968135834,
+        "orientation_mean_radians": 0.9949337244033813,
+        "feature_std_mean": 1.0682525634765625
+      }
+    },
+    {
+      "stage": "auxiliary_pose_fallback",
+      "stream": 0,
+      "probe": {
+        "position_mean_units": 0.18654445186257362,
+        "orientation_mean_radians": 0.43278005719184875,
+        "feature_std_mean": 0.6679456233978271
+      }
+    },
+    {
+      "stage": "pure_vicreg",
+      "stream": 1,
+      "probe": {
+        "position_mean_units": 1.4403186738491058,
+        "orientation_mean_radians": null,
+        "feature_std_mean": 1.1207914352416992
+      }
+    },
+    {
+      "stage": "auxiliary_pose_fallback",
+      "stream": 1,
+      "probe": {
+        "position_mean_units": 0.04931690637022257,
+        "orientation_mean_radians": null,
+        "feature_std_mean": 0.7375532388687134
+      }
+    }
+  ],
+  "prediction": [
+    {
+      "horizon": 1,
+      "latent_mse_mean": 0.010004295036196709,
+      "latent_mse_std": 0.02722853235900402,
+      "constant_state_mse": 0.015737906098365784,
+      "position_mean_units": 0.3561933636665344,
+      "orientation_mean_radians": 0.4212576746940613,
+      "contact_mse": 0.038284678012132645,
+      "noncontact_mse": 0.004974662326276302
+    },
+    {
+      "horizon": 3,
+      "latent_mse_mean": 0.0284371729940176,
+      "latent_mse_std": 0.06350398063659668,
+      "constant_state_mse": 0.06489276140928268,
+      "position_mean_units": 0.3879217803478241,
+      "orientation_mean_radians": 0.44709980487823486,
+      "contact_mse": 0.09004215896129608,
+      "noncontact_mse": 0.017367424443364143
+    },
+    {
+      "horizon": 5,
+      "latent_mse_mean": 0.04517770931124687,
+      "latent_mse_std": 0.08912122994661331,
+      "constant_state_mse": 0.12247347831726074,
+      "position_mean_units": 0.4195191264152527,
+      "orientation_mean_radians": 0.4845464527606964,
+      "contact_mse": 0.1220279410481453,
+      "noncontact_mse": 0.031239524483680725
+    },
+    {
+      "horizon": 8,
+      "latent_mse_mean": 0.07013619691133499,
+      "latent_mse_std": 0.11767110973596573,
+      "constant_state_mse": 0.2116318941116333,
+      "position_mean_units": 0.46606436371803284,
+      "orientation_mean_radians": 0.5349178314208984,
+      "contact_mse": 0.1584661453962326,
+      "noncontact_mse": 0.0541100837290287
+    }
+  ],
+  "representation_training": [
+    "vicreg+auxiliary_pose_and_metric",
+    "vicreg+auxiliary_pose_and_metric"
+  ],
+  "action_sensitivity_mse": 0.027704007923603058,
+  "onnx_native_parity": {
+    "object_encoder": [
+      {
+        "batch": 1,
+        "max_absolute_error": 9.5367431640625e-06
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 1.1444091796875e-05
+      }
+    ],
+    "agent_encoder": [
+      {
+        "batch": 1,
+        "max_absolute_error": 1.1444091796875e-05
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 2.09808349609375e-05
+      }
+    ],
+    "latent_dynamics": [
+      {
+        "batch": 1,
+        "max_absolute_error": 2.384185791015625e-07
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 2.384185791015625e-07
+      }
+    ],
+    "diagnostic_decoder": [
+      {
+        "batch": 1,
+        "max_absolute_error": 1.7881393432617188e-07
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 3.5762786865234375e-07
+      }
+    ]
+  },
+  "elapsed_seconds": 308.41816091537476
+}

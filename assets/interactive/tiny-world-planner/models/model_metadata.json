@@ -1,0 +1,145 @@
+{
+  "version": "tiny-world-planner-v2.1",
+  "status": "experimental",
+  "representation_training": [
+    "vicreg+auxiliary_pose_and_metric",
+    "vicreg+auxiliary_pose_and_metric"
+  ],
+  "objectLatent": 16,
+  "agentLatent": 8,
+  "stateDim": 48,
+  "stateOrder": "current object16, current agent8, previous object16, previous agent8",
+  "imageShape": [
+    "batch",
+    1,
+    64,
+    64
+  ],
+  "imageNormalization": "soft color masks in [0,1], quantized to 1/255 from 2x2 antialiased 64x64 RGBA pixels; no crop/translation",
+  "actionShape": [
+    "batch",
+    2
+  ],
+  "actionNormalization": "[-1,1]^2; relative displacement .48 workspace units in .1s",
+  "dynamicBatch": true,
+  "opset": 17,
+  "dataset": {
+    "version": "sensor-v2-antialiased-planck-1.3.0",
+    "episodes": 700,
+    "steps": 80,
+    "seedBase": 10000,
+    "collectorSeed": 20261114,
+    "imageShape": [
+      700,
+      81,
+      2,
+      64,
+      64
+    ],
+    "stateShape": [
+      700,
+      81,
+      9
+    ],
+    "actionShape": [
+      700,
+      80,
+      2
+    ],
+    "contactFraction": 0.17057142857142857,
+    "movingFraction": 0.26301785714285714,
+    "split": {
+      "train": [
+        0,
+        560
+      ],
+      "validation": [
+        560,
+        630
+      ],
+      "test": [
+        630,
+        700
+      ]
+    },
+    "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
+    "actionScale": 0.48,
+    "actionDuration": 0.1
+  },
+  "trainingSeed": 714,
+  "trainingReport": "../../../../tools/tiny-world-planner/results/training.json",
+  "models": {
+    "object_encoder": {
+      "sha256": "83ffc23777b5ea62125d795ff7c47f0f7fb3e7e6da23b01a9eedd89d49cfe40b",
+      "bytes": 283643,
+      "checkpointSha256": "8ffc8d80988f78d7d991d0b92c5240dcedde65fadd6e0540aff3149845c369ca"
+    },
+    "agent_encoder": {
+      "sha256": "956e881ef49ff7c857526a894c45a6fd29b34353650f04d01633e3682546f322",
+      "bytes": 281499,
+      "checkpointSha256": "47fcd0a07ff46b52d039a886c9118083bd43ebc47bdcdd0fb89ce88d6d41e641"
+    },
+    "latent_dynamics": {
+      "sha256": "ea60f71bf345036407cf772defebe920bf3b96f7a9b16e24df1d24955a5aa9ee",
+      "bytes": 207465,
+      "checkpointSha256": "d21d988a5640ccdad7affe3a053268346569492f63a98fbaa5f60eedc2d35e03"
+    },
+    "diagnostic_decoder": {
+      "sha256": "4c3d3254966fee82188433c24f1227f33ed1797f2dfcececef8487a292f899ab",
+      "bytes": 50421,
+      "checkpointSha256": "4afa7f8b0e0616ce0683d520585dbdf73bfeeed807314e7e4370361ec7e28df8"
+    }
+  },
+  "metrics": [
+    {
+      "horizon": 1,
+      "latent_mse_mean": 0.008811050094664097,
+      "latent_mse_std": 0.02540902979671955,
+      "constant_state_mse": 0.014154922217130661,
+      "position_mean_units": 0.2877379357814789,
+      "orientation_mean_radians": 0.23947206139564514,
+      "contact_mse": 0.03600838780403137,
+      "noncontact_mse": 0.003974035382270813
+    },
+    {
+      "horizon": 3,
+      "latent_mse_mean": 0.02848229557275772,
+      "latent_mse_std": 0.06842420995235443,
+      "constant_state_mse": 0.06362651288509369,
+      "position_mean_units": 0.3270031213760376,
+      "orientation_mean_radians": 0.26868292689323425,
+      "contact_mse": 0.09746295213699341,
+      "noncontact_mse": 0.01608722284436226
+    },
+    {
+      "horizon": 5,
+      "latent_mse_mean": 0.04702705144882202,
+      "latent_mse_std": 0.10776490718126297,
+      "constant_state_mse": 0.12238922715187073,
+      "position_mean_units": 0.3657056987285614,
+      "orientation_mean_radians": 0.29843202233314514,
+      "contact_mse": 0.1391192525625229,
+      "noncontact_mse": 0.030324460938572884
+    },
+    {
+      "horizon": 8,
+      "latent_mse_mean": 0.07430081814527512,
+      "latent_mse_std": 0.15722376108169556,
+      "constant_state_mse": 0.2131449431180954,
+      "position_mean_units": 0.415668785572052,
+      "orientation_mean_radians": 0.337392121553421,
+      "contact_mse": 0.17954176664352417,
+      "noncontact_mse": 0.05520646274089813
+    }
+  ],
+  "note": "Controlled-domain pixel masks. Auxiliary pose and pairwise pose-metric supervision were required after frozen-feature probes; this is not purely self-supervised.",
+  "benchmark": {
+    "seeds": "920000..920049",
+    "actions": 100,
+    "easySuccesses": 0,
+    "easyTrials": 50,
+    "successCoverage": 0.95,
+    "requiredConsecutiveActions": 3,
+    "reliabilityGatePassed": false
+  }
+}
