@@ -1,0 +1,36 @@
+{
+  "timingScope": "CEM search only; excludes image encoding and diagnostic decoding",
+  "backend": "ONNX Runtime Web 1.21.0 WASM in Node, single thread; not browser or phone timing",
+  "seeds": 1,
+  "budget": 100,
+  "rows": [
+    {
+      "seed": 902005,
+      "difficulty": "easy",
+      "method": "random",
+      "config": "lite",
+      "success": false,
+      "steps": 100,
+      "initialCoverage": 0.33765118789970505,
+      "finalCoverage": 0.22946932532346612,
+      "bestCoverage": 0.5836500663876044,
+      "latencyMean": 0,
+      "latencyP95": 0,
+      "failure": "contact but inaccurate manipulation"
+    },
+    {
+      "seed": 902005,
+      "difficulty": "easy",
+      "method": "latent-mpc",
+      "config": "lite",
+      "success": true,
+      "steps": 14,
+      "initialCoverage": 0.33765118789970505,
+      "finalCoverage": 0.9592697661909436,
+      "bestCoverage": 0.9626662484389911,
+      "latencyMean": 48.33116614285715,
+      "latencyP95": 97.60845400000005,
+      "failure": null
+    }
+  ]
+}

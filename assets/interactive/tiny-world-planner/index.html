@@ -1,18 +1,203 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5f5ef"><title>Tiny World Planner</title><link rel="stylesheet" href="style.css"></head>
-<body>
-<header><a class="back" href="/blog/AI-coding-agent-case-study/" target="_top" aria-label="Back to Leo’s website">↖ Leo’s lab</a><div class="edition">INTERACTIVE RESEARCH · 02</div><span class="local"><i></i> Local / CPU</span></header>
-<main>
-<section class="workspace"><div class="intro"><div><h1>Tiny World Planner<span>.</span></h1><p>Imagine the future. Plan the next move.</p></div><span class="tag">IMAGE → LATENT → ACTION</span></div>
-<div class="stage"><canvas id="scene" aria-label="PushT manipulation workspace. Drag the green target; use the rotation slider. In disturb mode drag the object or pusher." tabindex="0"></canvas><div class="scene-label"><span class="dot blue"></span>REALITY <span class="dot green"></span>GOAL <span class="dot violet"></span>IMAGINATION</div><div id="stage-status" role="status">Drag the green target to set a goal</div></div>
-<div class="transport"><button id="run" class="primary" disabled>Plan & execute <span>↗</span></button><button id="step" disabled title="Plan and execute exactly one action">Step</button><button id="pause" disabled>Pause</button><button id="reset" title="Replay this seed">↺ Reset</button><button id="next" title="Next deterministic seed">New scene</button></div>
-<div class="hint"><span>✥ Drag the goal</span><span>↻ Rotate below</span><label><input id="disturb" type="checkbox"> Disturb reality</label><span>Arrow keys: manual push</span></div></section>
-<aside>
-<section class="panel"><div class="panel-top"><span class="eyebrow">THE PLANNING LOOP</span><span id="model-badge" class="badge">Loading</span></div><h2>Think. Push. Repeat.</h2><p class="explain">The model sees pixels, imagines action sequences, then executes one push and looks again.</p><p class="explain" style="margin-top:8px;font-size:10px">Experimental: 0/50 easy benchmark goals reached 95% alignment. Useful pushes can still miss the goal.</p>
-<div class="loop"><div><b>01</b><span>Observe<small>Two pixel observations</small></span><canvas id="sensor" width="64" height="64" aria-label="Current 64 pixel sensor view"></canvas></div><div><b>02</b><span>Imagine<small>Learned latent dynamics</small></span><span class="loop-icon">⌁</span></div><div><b>03</b><span>Choose & act<small>CEM search · replan every action</small></span><span class="loop-icon">↗</span></div></div>
-<div class="status-row"><i id="status-light"></i><span id="status" role="status">Loading neural models…</span></div>
-<div class="metrics"><div><span>Real goal coverage</span><strong id="coverage">0<small>%</small></strong></div><div><span>Latent goal cost</span><strong id="cost">—</strong></div><div><span>Planning time</span><strong id="latency">—</strong></div><div><span>Actions executed</span><strong id="actions">0<small> / 100</small></strong></div></div><div class="progress"><i id="progress"></i></div>
-</section>
-<section class="panel controls"><div class="control-head"><label for="rotation">Goal rotation</label><output id="angle">0°</output></div><input id="rotation" type="range" min="-180" max="180" value="0" step="1"><div class="select-row"><label>Scenario<select id="difficulty"><option value="easy">Easy · small displacement</option><option value="medium">Medium · pose change</option><option value="challenge">Challenge · arbitrary goal</option></select></label><label>Compute<select id="compute"><option value="lite">Light · phone</option><option value="standard">Standard · desktop</option></select></label></div><label class="toggle"><input id="ghosts" type="checkbox" checked> Show imagined futures <span>diagnostic decoder</span></label><label class="toggle"><input id="preview" type="checkbox"> Inspect plan before each action</label><button id="execute" hidden>Execute inspected action →</button><div class="prediction"><span>Last prediction error</span><strong id="error">—</strong><canvas id="errors" width="280" height="40" aria-label="Prediction error history"></canvas></div></section>
-<details class="panel"><summary>What am I looking at? <span>+</span></summary><p>Orange and blue are real contact physics. Green is your target image. Violet ghosts are a diagnostic head’s interpretation of predicted latents—not simulated future rollouts or generated video.</p><p id="model-note">Small controlled-domain experiment. Success is measured from actual object overlap, separately from the planner.</p><p>The planner receives images and actions only. Color masks simplify perception. Arbitrary goals may fail.</p><a href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/tools/tiny-world-planner" target="_blank" rel="noopener">Training, results & limitations ↗</a></details>
-</aside></main><footer><span>TINY WORLD PLANNER</span><span>JEPA-inspired experiment · not V-JEPA 2</span><span id="seed">SEED 1</span></footer><script type="module" src="src/main.js"></script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f5f5ef" />
+    <title>Tiny World Planner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a
+        class="back"
+        href="/blog/AI-coding-agent-case-study/"
+        target="_top"
+        aria-label="Back to Leo’s website"
+        >↖ Leo’s lab</a
+      >
+      <div class="edition">INTERACTIVE RESEARCH · 02</div>
+      <span class="local"><i></i> Local / CPU</span>
+    </header>
+    <main>
+      <section class="workspace">
+        <div class="intro">
+          <div>
+            <h1>Tiny World Planner<span>.</span></h1>
+            <p>Imagine the future. Plan the next move.</p>
+          </div>
+          <span class="tag">IMAGE → LATENT → ACTION</span>
+        </div>
+        <div class="stage">
+          <canvas
+            id="scene"
+            aria-label="PushT manipulation workspace. Drag the green target; use the rotation slider. In disturb mode drag the object or pusher."
+            tabindex="0"
+          ></canvas>
+          <div class="scene-label">
+            <span class="dot blue"></span>REALITY
+            <span class="dot green"></span>GOAL
+            <span class="dot violet"></span>IMAGINATION
+          </div>
+          <div id="stage-status" role="status">
+            Drag the green target to set a goal
+          </div>
+        </div>
+        <div class="transport">
+          <button id="run" class="primary" disabled>
+            Plan & execute <span>↗</span></button
+          ><button
+            id="step"
+            disabled
+            title="Plan and execute exactly one action"
+          >
+            Step</button
+          ><button id="pause" disabled>Pause</button
+          ><button id="reset" title="Replay this seed">↺ Reset</button
+          ><button id="next" title="Next deterministic seed">New scene</button>
+        </div>
+        <div class="hint">
+          <span>✥ Drag the goal</span><span>↻ Rotate below</span
+          ><label><input id="disturb" type="checkbox" /> Disturb reality</label
+          ><span>Arrow keys: manual push</span>
+        </div>
+      </section>
+      <aside>
+        <section class="panel">
+          <div class="panel-top">
+            <span class="eyebrow">THE PLANNING LOOP</span
+            ><span id="model-badge" class="badge">Loading</span>
+          </div>
+          <h2>Think. Push. Repeat.</h2>
+          <p class="explain">
+            The model sees pixels, imagines action sequences, then executes one
+            push and looks again.
+          </p>
+          <p
+            id="benchmark-note"
+            class="explain"
+            style="margin-top: 8px; font-size: 10px"
+          >
+            Experimental controller. Arbitrary goals can fail; measured
+            benchmark results load with the model.
+          </p>
+          <div class="loop">
+            <div>
+              <b>01</b><span>Observe<small>Two pixel observations</small></span
+              ><canvas
+                id="sensor"
+                width="64"
+                height="64"
+                aria-label="Current 64 pixel sensor view"
+              ></canvas>
+            </div>
+            <div>
+              <b>02</b><span>Imagine<small>Learned latent dynamics</small></span
+              ><span class="loop-icon">⌁</span>
+            </div>
+            <div>
+              <b>03</b
+              ><span
+                >Choose & act<small
+                  >CEM search · replan every action</small
+                ></span
+              ><span class="loop-icon">↗</span>
+            </div>
+          </div>
+          <div class="status-row">
+            <i id="status-light"></i
+            ><span id="status" role="status">Loading neural models…</span>
+          </div>
+          <div class="metrics">
+            <div>
+              <span>Real goal coverage</span
+              ><strong id="coverage">0<small>%</small></strong>
+            </div>
+            <div><span>Latent goal cost</span><strong id="cost">—</strong></div>
+            <div><span>Planning time</span><strong id="latency">—</strong></div>
+            <div>
+              <span>Actions executed</span
+              ><strong id="actions">0<small> / 100</small></strong>
+            </div>
+          </div>
+          <div class="progress"><i id="progress"></i></div>
+        </section>
+        <section class="panel controls">
+          <div class="control-head">
+            <label for="rotation">Goal rotation</label
+            ><output id="angle">0°</output>
+          </div>
+          <input
+            id="rotation"
+            type="range"
+            min="-180"
+            max="180"
+            value="0"
+            step="1"
+          />
+          <div class="select-row">
+            <label
+              >Scenario<select id="difficulty">
+                <option value="easy">Easy · small displacement</option>
+                <option value="medium">Medium · pose change</option>
+                <option value="challenge">Challenge · arbitrary goal</option>
+              </select></label
+            ><label
+              >Compute<select id="compute">
+                <option value="lite">Light · phone</option>
+                <option value="standard">Standard · desktop</option>
+              </select></label
+            >
+          </div>
+          <label class="toggle"
+            ><input id="ghosts" type="checkbox" checked /> Show imagined futures
+            <span>diagnostic decoder</span></label
+          ><label class="toggle"
+            ><input id="preview" type="checkbox" /> Inspect plan before each
+            action</label
+          ><button id="execute" hidden>Execute inspected action →</button>
+          <div class="prediction">
+            <span>Last prediction error</span><strong id="error">—</strong
+            ><canvas
+              id="errors"
+              width="280"
+              height="40"
+              aria-label="Prediction error history"
+            ></canvas>
+          </div>
+        </section>
+        <details class="panel">
+          <summary>What am I looking at? <span>+</span></summary>
+          <p>
+            Orange and blue are real contact physics. Green is your target
+            image. Violet ghosts are a diagnostic head’s interpretation of
+            predicted latents—not simulated future rollouts or generated video.
+          </p>
+          <p id="model-note">
+            Small controlled-domain experiment. Success is measured from actual
+            object overlap, separately from the planner.
+          </p>
+          <p>
+            The planner receives images and actions only. Color masks simplify
+            perception. Arbitrary goals may fail.
+          </p>
+          <a
+            href="https://github.com/LeoMaglanoc/LeoMaglanoc.github.io/tree/main/tools/tiny-world-planner"
+            target="_blank"
+            rel="noopener"
+            >Training, results & limitations ↗</a
+          >
+        </details>
+      </aside>
+    </main>
+    <footer>
+      <span>TINY WORLD PLANNER</span
+      ><span>Image-goal world model · geometric priors</span
+      ><span id="seed">SEED 1</span>
+    </footer>
+    <script type="module" src="src/main.js?v=2.2"></script>
+  </body>
+</html>

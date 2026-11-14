@@ -1,5 +1,5 @@
 # Tiny World Planner browser release
 
-Static CPU/WASM demo. Open `index.html` through an HTTP server or visit `/tiny-world-planner/` on the website. The application uses Planck 1.3.0 and the site's existing ONNX Runtime Web 1.21.0 assets.
+Static CPU/WASM image-goal planning demo. Visit `/tiny-world-planner/` or serve `index.html` over HTTP. The current experimental model uses explicitly pose-supervised CNN keypoints, geometric priors and a learned action-conditioned transition. It is not purely self-supervised or a V-JEPA reproduction.
 
-Training, reproducible Docker commands, measured results, scientific boundaries and limitations are in [`tools/tiny-world-planner`](../../../tools/tiny-world-planner/README.md). The released model is **experimental and partly pose-supervised**, not a V-JEPA 2 reproduction. Diagnostic ghost poses never contribute to MPC costs.
+The default example computes a fresh successful neural plan; general goals remain unreliable. See [training, results and reproduction](../../../tools/tiny-world-planner/README.md). Diagnostic ghost poses never enter MPC costs. Planck 1.3.0 and the site's existing ONNX Runtime Web 1.21.0 assets run locally, without WebGPU or inference APIs.

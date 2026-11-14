@@ -1,6 +1,32 @@
 // A separate verification Worker, never the deployed planner/action-selection path.
-export async function browserParity(page){return page.evaluate(async()=>{
- const base=new URL('./src/verification.worker.js',location.href).href,modelURL=new URL('./src/model.js',location.href).href,runtimeURL=new URL('../doom/vendor/ort/ort.min.js',location.href).href;
- const code=`importScripts(${JSON.stringify(runtimeURL)});(async()=>{const {WorldModel}=await import(${JSON.stringify(modelURL)});const m=new WorldModel(self.ort,${JSON.stringify(base)});await m.init();const fixtures=await(await fetch(new URL('../models/parity_fixtures.json',${JSON.stringify(base)}))).json();let maximum=0;for(const f of fixtures){let s=Float32Array.from(f.state);const a=Float32Array.from(f.action);for(let k=0;k<f.expectedRollout.length;k++){s=await m.predict(s,a,1);for(let j=0;j<48;j++)maximum=Math.max(maximum,Math.abs(s[j]-f.expectedRollout[k][j]));}const z=await m.encode({object:Float32Array.from(f.object),agent:Float32Array.from(f.agent),previousObject:Float32Array.from(f.object),previousAgent:Float32Array.from(f.agent)});for(let j=0;j<24;j++)maximum=Math.max(maximum,Math.abs(z[j]-f.state[j]));}const f=fixtures[0],s=new Float32Array(64*48),a=new Float32Array(64*2);for(let n=0;n<64;n++){s.set(f.state,n*48);a.set(f.action,n*2);}const result=await m.predict(s,a,64);for(let n=0;n<64;n++)for(let j=0;j<48;j++)maximum=Math.max(maximum,Math.abs(result[n*48+j]-f.expectedNext[j]));self.postMessage({maximum,passed:maximum<1e-4,batches:[1,64],rolloutSteps:5});})().catch(e=>self.postMessage({error:e.message}));`;
- return await new Promise((resolve,reject)=>{const url=URL.createObjectURL(new Blob([code],{type:'text/javascript'})),w=new Worker(url);const timer=setTimeout(()=>{w.terminate();URL.revokeObjectURL(url);reject(Error('Browser parity timeout'));},30000);w.onmessage=e=>{clearTimeout(timer);w.terminate();URL.revokeObjectURL(url);e.data.error?reject(Error(e.data.error)):resolve(e.data);};w.onerror=e=>{clearTimeout(timer);w.terminate();URL.revokeObjectURL(url);reject(Error(e.message));};});
-});}
+export async function browserParity(page) {
+  return page.evaluate(async () => {
+    const base = new URL("./src/verification.worker.js", location.href).href,
+      modelURL = new URL("./src/model.js", location.href).href,
+      runtimeURL = new URL("../doom/vendor/ort/ort.min.js", location.href).href;
+    const code = `importScripts(${JSON.stringify(runtimeURL)});(async()=>{const {WorldModel}=await import(${JSON.stringify(modelURL)});const m=new WorldModel(self.ort,${JSON.stringify(base)});await m.init();const fixtures=await(await fetch(new URL('../models/parity_fixtures.json',${JSON.stringify(base)}))).json();let maximum=0;for(const f of fixtures){let s=Float32Array.from(f.state);const a=Float32Array.from(f.action);for(let k=0;k<f.expectedRollout.length;k++){s=await m.predict(s,a,1);for(let j=0;j<48;j++)maximum=Math.max(maximum,Math.abs(s[j]-f.expectedRollout[k][j]));}const z=await m.encode({object:Float32Array.from(f.object),agent:Float32Array.from(f.agent),previousObject:Float32Array.from(f.object),previousAgent:Float32Array.from(f.agent)});for(let j=0;j<24;j++)maximum=Math.max(maximum,Math.abs(z[j]-f.state[j]));}const f=fixtures[0],s=new Float32Array(64*48),a=new Float32Array(64*2);for(let n=0;n<64;n++){s.set(f.state,n*48);a.set(f.action,n*2);}const result=await m.predict(s,a,64);for(let n=0;n<64;n++)for(let j=0;j<48;j++)maximum=Math.max(maximum,Math.abs(result[n*48+j]-f.expectedNext[j]));self.postMessage({maximum,passed:maximum<1e-4,batches:[1,64],rolloutSteps:5});})().catch(e=>self.postMessage({error:e.message}));`;
+    return await new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(
+          new Blob([code], { type: "text/javascript" }),
+        ),
+        w = new Worker(url);
+      const timer = setTimeout(() => {
+        w.terminate();
+        URL.revokeObjectURL(url);
+        reject(Error("Browser parity timeout"));
+      }, 30000);
+      w.onmessage = (e) => {
+        clearTimeout(timer);
+        w.terminate();
+        URL.revokeObjectURL(url);
+        e.data.error ? reject(Error(e.data.error)) : resolve(e.data);
+      };
+      w.onerror = (e) => {
+        clearTimeout(timer);
+        w.terminate();
+        URL.revokeObjectURL(url);
+        reject(Error(e.message));
+      };
+    });
+  });
+}

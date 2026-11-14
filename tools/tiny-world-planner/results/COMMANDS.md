@@ -19,3 +19,17 @@ Local host: Linux x86_64, AMD EPYC 9V45. Python 3.12, PyTorch 2.5.1+cpu, ONNX 1.
 Docker was unavailable locally (no executable or daemon socket). The committed GitHub Actions workflow builds and runs the Docker `validate` target. Its actual workflow outcome must be checked separately; the presence of a Dockerfile is not a successful container test.
 
 Raw datasets, NumPy arrays and PyTorch checkpoints are not committed. ONNX models include checkpoint/model hashes in metadata. This release deliberately retains a failed reliability gate rather than replacing neural planning with a privileged solver.
+
+## Continued investigation and v2.2 keypoint release
+
+The original 0/50 release was insufficient. Development resumed without replacing neural planning with an oracle. Offline oracle search diagnosed that the old search could fail even with true physics; an improved search solved three privileged development cases. These oracle results are not neural benchmark scores and were never deployed.
+
+The actual model refinements are retained in `keypoints-v3` through `keypoints-v6`. Reproduction is `sh reproduce_keypoints.sh`: supervised CNN points → rigid neural transition → object-frame transition → contact-rich small-action data/rest prior → projected rigid visual features. Encoder seed 731, dynamics seed 733; four CPU threads. The supervised encoder was trained for 4500 object and 2250 agent updates. Original, equivariant, precision and projected dynamics stages used 6000, 6000, 8000 and 6000 updates respectively. The precision and projected stages use the explicitly documented rest-preserving prior.
+
+Two implementation failures occurred and were corrected before final metrics: a float32 ridge normal matrix was singular because repeated latent features are dependent (diagnostic fit now uses float64); the original 80-step validation indexing exceeded the new 60-step data length (validation indices now respect episode length). Cached encoder weights were reused after these failures; dynamics seeds are reset explicitly. Error logs remain in the experiment folders.
+
+The release search uses 128 candidates, horizon 8, six iterations, four action knots and visual hold threshold .0004. Development seeds were 902000 onward. Shorter/longer horizons, image-residual adaptation and an introductory translation scene were evaluated and are not used in the release. The actual default seed 902005 was selected from development successes and is disclosed as such.
+
+Final evaluation: 50 fresh seeds 930000–930049 per difficulty, 100 actions, same seeds for random and neural control. The three difficulty evaluations ran concurrently, so their timing records describe that load. The original controller was evaluated on the same new easy seeds and achieved 0/50; the new controller achieved 3/50 with much higher mean coverage. No evaluation goal or final benchmark trajectory was used for training.
+
+PyTorch/native ONNX and ONNX Runtime Web parity were rerun. Chrome tests also require the default example to actually reach ≥95% for three actions on desktop, phone portrait and landscape; all completed in 14 actions. Physical Android hardware remains untested. Post-update Docker and live computer-use evidence is recorded separately after deployment.

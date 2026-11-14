@@ -1,193 +1,126 @@
 {
-  "seed": 714,
+  "seed": 731,
+  "dynamicsSeed": 733,
   "torch": "2.5.1+cpu",
+  "numpy": "2.3.5",
+  "python": "3.12.14",
   "dataset": {
-    "version": "sensor-v2-antialiased-planck-1.3.0",
-    "episodes": 700,
-    "steps": 80,
-    "seedBase": 10000,
+    "version": "sensor-v3-contact-precision-planck-1.3.0",
+    "episodes": 1400,
+    "steps": 60,
+    "seedBase": 120000,
     "collectorSeed": 20261114,
     "imageShape": [
-      700,
-      81,
+      1400,
+      61,
       2,
       64,
       64
     ],
     "stateShape": [
-      700,
-      81,
+      1400,
+      61,
       9
     ],
     "actionShape": [
-      700,
-      80,
+      1400,
+      60,
       2
     ],
-    "contactFraction": 0.17057142857142857,
-    "movingFraction": 0.26301785714285714,
+    "contactFraction": 0.3866547619047619,
+    "movingFraction": 0.5827380952380953,
     "split": {
       "train": [
         0,
-        560
+        1120
       ],
       "validation": [
-        560,
-        630
+        1120,
+        1260
       ],
       "test": [
-        630,
-        700
+        1260,
+        1400
       ]
     },
     "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
     "actionScale": 0.48,
     "actionDuration": 0.1
   },
-  "architecture": {
-    "image": [
-      1,
-      64,
-      64
-    ],
-    "object": 16,
-    "agent": 8,
-    "state": 48,
-    "hidden": 192
-  },
-  "experiments": [
-    {
-      "stage": "pure_vicreg",
-      "stream": 0,
-      "probe": {
-        "position_mean_units": 0.5349691584706306,
-        "orientation_mean_radians": 1.0035847425460815,
-        "feature_std_mean": 1.0648176670074463
-      }
-    },
-    {
-      "stage": "auxiliary_pose_fallback",
-      "stream": 0,
-      "probe": {
-        "position_mean_units": 0.15196927823126316,
-        "orientation_mean_radians": 0.25661954283714294,
-        "feature_std_mean": 0.6604982614517212
-      }
-    },
-    {
-      "stage": "pure_vicreg",
-      "stream": 1,
-      "probe": {
-        "position_mean_units": 2.058357298374176,
-        "orientation_mean_radians": null,
-        "feature_std_mean": 1.0412788391113281
-      }
-    },
-    {
-      "stage": "auxiliary_pose_fallback",
-      "stream": 1,
-      "probe": {
-        "position_mean_units": 0.03971310332417488,
-        "orientation_mean_radians": null,
-        "feature_std_mean": 0.7527024745941162
-      }
-    }
+  "representation_training": [
+    "explicit_pose_supervised_projected_keypoints",
+    "explicit_pose_supervised_agent_keypoint"
   ],
+  "trainingRecipe": "sh reproduce_keypoints.sh",
   "prediction": [
     {
       "horizon": 1,
-      "latent_mse_mean": 0.008811050094664097,
-      "latent_mse_std": 0.02540902979671955,
-      "constant_state_mse": 0.014154922217130661,
-      "position_mean_units": 0.2877379357814789,
-      "orientation_mean_radians": 0.23947206139564514,
-      "contact_mse": 0.03600838780403137,
-      "noncontact_mse": 0.003974035382270813
+      "latent_mse_mean": 0.000727253092918545,
+      "latent_mse_std": 0.005835209973156452,
+      "constant_state_mse": 0.0067162904888391495,
+      "position_mean_units": 0.02991378679871559,
+      "position_std_units": 0.04714275151491165,
+      "orientation_mean_radians": 0.019139619544148445,
+      "orientation_std_radians": 0.03816356137394905,
+      "contact_mse": 0.0015457344707101583,
+      "noncontact_mse": 0.00018516770796850324,
+      "contactDefinition": "any true contact within prediction horizon"
     },
     {
       "horizon": 3,
-      "latent_mse_mean": 0.02848229557275772,
-      "latent_mse_std": 0.06842420995235443,
-      "constant_state_mse": 0.06362651288509369,
-      "position_mean_units": 0.3270031213760376,
-      "orientation_mean_radians": 0.26868292689323425,
-      "contact_mse": 0.09746295213699341,
-      "noncontact_mse": 0.01608722284436226
+      "latent_mse_mean": 0.004901170264929533,
+      "latent_mse_std": 0.030706513673067093,
+      "constant_state_mse": 0.04377875104546547,
+      "position_mean_units": 0.07109399884939194,
+      "position_std_units": 0.12809868156909943,
+      "orientation_mean_radians": 0.04510875046253204,
+      "orientation_std_radians": 0.09794840216636658,
+      "contact_mse": 0.008516830392181873,
+      "noncontact_mse": 0.0007752252859063447,
+      "contactDefinition": "any true contact within prediction horizon"
     },
     {
       "horizon": 5,
-      "latent_mse_mean": 0.04702705144882202,
-      "latent_mse_std": 0.10776490718126297,
-      "constant_state_mse": 0.12238922715187073,
-      "position_mean_units": 0.3657056987285614,
-      "orientation_mean_radians": 0.29843202233314514,
-      "contact_mse": 0.1391192525625229,
-      "noncontact_mse": 0.030324460938572884
+      "latent_mse_mean": 0.011437777429819107,
+      "latent_mse_std": 0.06885157525539398,
+      "constant_state_mse": 0.0960601270198822,
+      "position_mean_units": 0.108505479991436,
+      "position_std_units": 0.19837592542171478,
+      "orientation_mean_radians": 0.06868357956409454,
+      "orientation_std_radians": 0.1472393125295639,
+      "contact_mse": 0.01768794097006321,
+      "noncontact_mse": 0.001301742042414844,
+      "contactDefinition": "any true contact within prediction horizon"
     },
     {
       "horizon": 8,
-      "latent_mse_mean": 0.07430081814527512,
-      "latent_mse_std": 0.15722376108169556,
-      "constant_state_mse": 0.2131449431180954,
-      "position_mean_units": 0.415668785572052,
-      "orientation_mean_radians": 0.337392121553421,
-      "contact_mse": 0.17954176664352417,
-      "noncontact_mse": 0.05520646274089813
+      "latent_mse_mean": 0.023342858999967575,
+      "latent_mse_std": 0.11804696917533875,
+      "constant_state_mse": 0.18396562337875366,
+      "position_mean_units": 0.16185930371284485,
+      "position_std_units": 0.28225386142730713,
+      "orientation_mean_radians": 0.10224736481904984,
+      "orientation_std_radians": 0.2095876932144165,
+      "contact_mse": 0.03160377964377403,
+      "noncontact_mse": 0.0019199250964447856,
+      "contactDefinition": "any true contact within prediction horizon"
+    },
+    {
+      "horizon": 16,
+      "latent_mse_mean": 0.06074872612953186,
+      "latent_mse_std": 0.2107858955860138,
+      "constant_state_mse": 0.4373224079608917,
+      "position_mean_units": 0.2905765771865845,
+      "position_std_units": 0.4418933391571045,
+      "orientation_mean_radians": 0.18542198836803436,
+      "orientation_std_radians": 0.32369446754455566,
+      "contact_mse": 0.07079432904720306,
+      "noncontact_mse": 0.002718531060963869,
+      "contactDefinition": "any true contact within prediction horizon"
     }
   ],
-  "representation_training": [
-    "vicreg+auxiliary_pose_and_metric",
-    "vicreg+auxiliary_pose_and_metric"
-  ],
-  "action_sensitivity_mse": 0.03410089761018753,
-  "onnx_native_parity": {
-    "object_encoder": [
-      {
-        "batch": 1,
-        "max_absolute_error": 7.62939453125e-06
-      },
-      {
-        "batch": 64,
-        "max_absolute_error": 1.52587890625e-05
-      }
-    ],
-    "agent_encoder": [
-      {
-        "batch": 1,
-        "max_absolute_error": 1.4603137969970703e-06
-      },
-      {
-        "batch": 64,
-        "max_absolute_error": 6.198883056640625e-06
-      }
-    ],
-    "latent_dynamics": [
-      {
-        "batch": 1,
-        "max_absolute_error": 4.172325134277344e-07
-      },
-      {
-        "batch": 64,
-        "max_absolute_error": 2.980232238769531e-07
-      }
-    ],
-    "diagnostic_decoder": [
-      {
-        "batch": 1,
-        "max_absolute_error": 2.980232238769531e-07
-      },
-      {
-        "batch": 64,
-        "max_absolute_error": 3.5762786865234375e-07
-      }
-    ]
-  },
-  "elapsed_seconds": 350.1061623096466,
-  "command": "python -u train/train.py",
-  "arguments": {
-    "ssl_steps": 500,
-    "pose_steps": 8000,
-    "dynamics_steps": 3500,
-    "diagnostic_steps": 1300
-  }
+  "testEpisodes": 140,
+  "action_sensitivity_mse": 0.04716183617711067,
+  "current_position_mean_units": 0.010665336158126593,
+  "elapsed_seconds": 109.6096522808075
 }

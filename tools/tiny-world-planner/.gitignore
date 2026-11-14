@@ -1,6 +1,8 @@
 node_modules/
 local-data/
+local-data-*/
 checkpoints/
+local-models-*/
 __pycache__/
 screenshots/
 results/*.log

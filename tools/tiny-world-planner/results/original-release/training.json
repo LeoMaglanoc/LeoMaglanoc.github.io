@@ -1,0 +1,193 @@
+{
+  "seed": 714,
+  "torch": "2.5.1+cpu",
+  "dataset": {
+    "version": "sensor-v2-antialiased-planck-1.3.0",
+    "episodes": 700,
+    "steps": 80,
+    "seedBase": 10000,
+    "collectorSeed": 20261114,
+    "imageShape": [
+      700,
+      81,
+      2,
+      64,
+      64
+    ],
+    "stateShape": [
+      700,
+      81,
+      9
+    ],
+    "actionShape": [
+      700,
+      80,
+      2
+    ],
+    "contactFraction": 0.17057142857142857,
+    "movingFraction": 0.26301785714285714,
+    "split": {
+      "train": [
+        0,
+        560
+      ],
+      "validation": [
+        560,
+        630
+      ],
+      "test": [
+        630,
+        700
+      ]
+    },
+    "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
+    "actionScale": 0.48,
+    "actionDuration": 0.1
+  },
+  "architecture": {
+    "image": [
+      1,
+      64,
+      64
+    ],
+    "object": 16,
+    "agent": 8,
+    "state": 48,
+    "hidden": 192
+  },
+  "experiments": [
+    {
+      "stage": "pure_vicreg",
+      "stream": 0,
+      "probe": {
+        "position_mean_units": 0.5349691584706306,
+        "orientation_mean_radians": 1.0035847425460815,
+        "feature_std_mean": 1.0648176670074463
+      }
+    },
+    {
+      "stage": "auxiliary_pose_fallback",
+      "stream": 0,
+      "probe": {
+        "position_mean_units": 0.15196927823126316,
+        "orientation_mean_radians": 0.25661954283714294,
+        "feature_std_mean": 0.6604982614517212
+      }
+    },
+    {
+      "stage": "pure_vicreg",
+      "stream": 1,
+      "probe": {
+        "position_mean_units": 2.058357298374176,
+        "orientation_mean_radians": null,
+        "feature_std_mean": 1.0412788391113281
+      }
+    },
+    {
+      "stage": "auxiliary_pose_fallback",
+      "stream": 1,
+      "probe": {
+        "position_mean_units": 0.03971310332417488,
+        "orientation_mean_radians": null,
+        "feature_std_mean": 0.7527024745941162
+      }
+    }
+  ],
+  "prediction": [
+    {
+      "horizon": 1,
+      "latent_mse_mean": 0.008811050094664097,
+      "latent_mse_std": 0.02540902979671955,
+      "constant_state_mse": 0.014154922217130661,
+      "position_mean_units": 0.2877379357814789,
+      "orientation_mean_radians": 0.23947206139564514,
+      "contact_mse": 0.03600838780403137,
+      "noncontact_mse": 0.003974035382270813
+    },
+    {
+      "horizon": 3,
+      "latent_mse_mean": 0.02848229557275772,
+      "latent_mse_std": 0.06842420995235443,
+      "constant_state_mse": 0.06362651288509369,
+      "position_mean_units": 0.3270031213760376,
+      "orientation_mean_radians": 0.26868292689323425,
+      "contact_mse": 0.09746295213699341,
+      "noncontact_mse": 0.01608722284436226
+    },
+    {
+      "horizon": 5,
+      "latent_mse_mean": 0.04702705144882202,
+      "latent_mse_std": 0.10776490718126297,
+      "constant_state_mse": 0.12238922715187073,
+      "position_mean_units": 0.3657056987285614,
+      "orientation_mean_radians": 0.29843202233314514,
+      "contact_mse": 0.1391192525625229,
+      "noncontact_mse": 0.030324460938572884
+    },
+    {
+      "horizon": 8,
+      "latent_mse_mean": 0.07430081814527512,
+      "latent_mse_std": 0.15722376108169556,
+      "constant_state_mse": 0.2131449431180954,
+      "position_mean_units": 0.415668785572052,
+      "orientation_mean_radians": 0.337392121553421,
+      "contact_mse": 0.17954176664352417,
+      "noncontact_mse": 0.05520646274089813
+    }
+  ],
+  "representation_training": [
+    "vicreg+auxiliary_pose_and_metric",
+    "vicreg+auxiliary_pose_and_metric"
+  ],
+  "action_sensitivity_mse": 0.03410089761018753,
+  "onnx_native_parity": {
+    "object_encoder": [
+      {
+        "batch": 1,
+        "max_absolute_error": 7.62939453125e-06
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 1.52587890625e-05
+      }
+    ],
+    "agent_encoder": [
+      {
+        "batch": 1,
+        "max_absolute_error": 1.4603137969970703e-06
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 6.198883056640625e-06
+      }
+    ],
+    "latent_dynamics": [
+      {
+        "batch": 1,
+        "max_absolute_error": 4.172325134277344e-07
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 2.980232238769531e-07
+      }
+    ],
+    "diagnostic_decoder": [
+      {
+        "batch": 1,
+        "max_absolute_error": 2.980232238769531e-07
+      },
+      {
+        "batch": 64,
+        "max_absolute_error": 3.5762786865234375e-07
+      }
+    ]
+  },
+  "elapsed_seconds": 350.1061623096466,
+  "command": "python -u train/train.py",
+  "arguments": {
+    "ssl_steps": 500,
+    "pose_steps": 8000,
+    "dynamics_steps": 3500,
+    "diagnostic_steps": 1300
+  }
+}

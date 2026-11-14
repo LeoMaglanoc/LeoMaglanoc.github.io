@@ -1,0 +1,6 @@
+{
+  "object_encoder": 3.0994415283203125e-06,
+  "agent_encoder": 5.9604644775390625e-06,
+  "latent_dynamics": 4.76837158203125e-07,
+  "diagnostic_decoder": 2.384185791015625e-07
+}

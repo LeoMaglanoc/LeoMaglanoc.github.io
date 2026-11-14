@@ -1,0 +1,105 @@
+{
+  "seed": 731,
+  "arguments": {
+    "data": "local-data",
+    "out": "local-models-keypoints-equivariant",
+    "encoder_steps": 4500,
+    "dynamics_steps": 6000,
+    "reuse_encoders": true,
+    "equivariant": true,
+    "results": "results/keypoints-v4"
+  },
+  "dataset": {
+    "version": "sensor-v2-antialiased-planck-1.3.0",
+    "episodes": 700,
+    "steps": 80,
+    "seedBase": 10000,
+    "collectorSeed": 20261114,
+    "imageShape": [
+      700,
+      81,
+      2,
+      64,
+      64
+    ],
+    "stateShape": [
+      700,
+      81,
+      9
+    ],
+    "actionShape": [
+      700,
+      80,
+      2
+    ],
+    "contactFraction": 0.17057142857142857,
+    "movingFraction": 0.26301785714285714,
+    "split": {
+      "train": [
+        0,
+        560
+      ],
+      "validation": [
+        560,
+        630
+      ],
+      "test": [
+        630,
+        700
+      ]
+    },
+    "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
+    "actionScale": 0.48,
+    "actionDuration": 0.1
+  },
+  "supervision": "explicit image-to-keypoint auxiliary pose supervision, not purely self-supervised",
+  "encoders": [
+    {
+      "stream": 0,
+      "validationKeypointErrorWorldUnits": 0.027283774688839912
+    },
+    {
+      "stream": 1,
+      "validationKeypointErrorWorldUnits": 0.011026288848370314
+    }
+  ],
+  "currentDecodedPositionErrorWorldUnits": 0.014136668760329485,
+  "prediction": [
+    {
+      "horizon": 1,
+      "latentMSE": 0.0005902199191041291,
+      "staticMSE": 0.007440509274601936,
+      "decodedPositionErrorWorldUnits": 0.026338497176766396,
+      "decodedAngleErrorRadians": 0.018408440053462982
+    },
+    {
+      "horizon": 3,
+      "latentMSE": 0.003986972384154797,
+      "staticMSE": 0.04901581257581711,
+      "decodedPositionErrorWorldUnits": 0.0544009692966938,
+      "decodedAngleErrorRadians": 0.03779209405183792
+    },
+    {
+      "horizon": 5,
+      "latentMSE": 0.010253088548779488,
+      "staticMSE": 0.10888244211673737,
+      "decodedPositionErrorWorldUnits": 0.08161772042512894,
+      "decodedAngleErrorRadians": 0.058403536677360535
+    },
+    {
+      "horizon": 8,
+      "latentMSE": 0.022586308419704437,
+      "staticMSE": 0.20926573872566223,
+      "decodedPositionErrorWorldUnits": 0.12196522951126099,
+      "decodedAngleErrorRadians": 0.08812492340803146
+    },
+    {
+      "horizon": 16,
+      "latentMSE": 0.053719412535429,
+      "staticMSE": 0.46916356682777405,
+      "decodedPositionErrorWorldUnits": 0.21449407935142517,
+      "decodedAngleErrorRadians": 0.152792826294899
+    }
+  ],
+  "elapsedSeconds": 90.27318406105042
+}

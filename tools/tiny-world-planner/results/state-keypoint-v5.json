@@ -1,0 +1,36 @@
+{
+  "label": "PRIVILEGED offline exact-keypoint ablation; not deployed",
+  "modelDir": "local-models-keypoints-precision",
+  "rows": [
+    {
+      "seed": 902000,
+      "success": false,
+      "bestCoverage": 0.9044110678470663,
+      "finalCoverage": 0.9044110678470648
+    },
+    {
+      "seed": 902001,
+      "success": false,
+      "bestCoverage": 0.8612657762066737,
+      "finalCoverage": 0.861265776206672
+    },
+    {
+      "seed": 902002,
+      "success": false,
+      "bestCoverage": 0.7728929218280595,
+      "finalCoverage": 0.7467564516280165
+    },
+    {
+      "seed": 902003,
+      "success": false,
+      "bestCoverage": 0.8824688057403057,
+      "finalCoverage": 0.8824688057403057
+    },
+    {
+      "seed": 902004,
+      "success": false,
+      "bestCoverage": 0.899190720149173,
+      "finalCoverage": 0.8977152951004882
+    }
+  ]
+}

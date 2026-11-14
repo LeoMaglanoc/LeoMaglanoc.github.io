@@ -1,145 +1,191 @@
 {
-  "version": "tiny-world-planner-v2.1",
+  "version": "tiny-world-planner-v2.2-keypoints",
   "status": "experimental",
-  "representation_training": [
-    "vicreg+auxiliary_pose_and_metric",
-    "vicreg+auxiliary_pose_and_metric"
-  ],
   "objectLatent": 16,
   "agentLatent": 8,
   "stateDim": 48,
-  "stateOrder": "current object16, current agent8, previous object16, previous agent8",
+  "resolution": 64,
   "imageShape": [
     "batch",
     1,
     64,
     64
   ],
-  "imageNormalization": "soft color masks in [0,1], quantized to 1/255 from 2x2 antialiased 64x64 RGBA pixels; no crop/translation",
+  "inputNormalization": "float32 soft color masks [0,1]; 2x2 antialiasing and 1/255 quantization",
+  "stateOrder": "current object16, current agent8, previous object16, previous agent8",
+  "objectFeatures": "four CNN spatial-softmax keypoints projected to a fixed T constellation; repeated twice / sqrt(2), in image-calibrated workspace units",
+  "agentFeatures": "CNN agent point repeated four times / 2",
+  "dynamicBatch": true,
+  "opset": 17,
   "actionShape": [
     "batch",
     2
   ],
-  "actionNormalization": "[-1,1]^2; relative displacement .48 workspace units in .1s",
-  "dynamicBatch": true,
-  "opset": 17,
+  "actionNormalization": "[-1,1]^2; relative displacement .48 per axis in .1s",
+  "architecture": "pose-supervised CNN keypoints, rigid projection, object-frame learned residual transition with rest-preserving gate, learned pusher action matrix; separate fitted linear diagnostic head",
+  "pureSelfSupervised": false,
+  "onlineAdaptation": false,
   "dataset": {
-    "version": "sensor-v2-antialiased-planck-1.3.0",
-    "episodes": 700,
-    "steps": 80,
-    "seedBase": 10000,
+    "version": "sensor-v3-contact-precision-planck-1.3.0",
+    "episodes": 1400,
+    "steps": 60,
+    "seedBase": 120000,
     "collectorSeed": 20261114,
     "imageShape": [
-      700,
-      81,
+      1400,
+      61,
       2,
       64,
       64
     ],
     "stateShape": [
-      700,
-      81,
+      1400,
+      61,
       9
     ],
     "actionShape": [
-      700,
-      80,
+      1400,
+      60,
       2
     ],
-    "contactFraction": 0.17057142857142857,
-    "movingFraction": 0.26301785714285714,
+    "contactFraction": 0.3866547619047619,
+    "movingFraction": 0.5827380952380953,
     "split": {
       "train": [
         0,
-        560
+        1120
       ],
       "validation": [
-        560,
-        630
+        1120,
+        1260
       ],
       "test": [
-        630,
-        700
+        1260,
+        1400
       ]
     },
     "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
     "actionScale": 0.48,
     "actionDuration": 0.1
   },
-  "trainingSeed": 714,
-  "trainingReport": "../../../../tools/tiny-world-planner/results/training.json",
+  "trainingSeeds": {
+    "encoder": 731,
+    "dynamics": 733
+  },
   "models": {
     "object_encoder": {
-      "sha256": "83ffc23777b5ea62125d795ff7c47f0f7fb3e7e6da23b01a9eedd89d49cfe40b",
-      "bytes": 283643,
-      "checkpointSha256": "8ffc8d80988f78d7d991d0b92c5240dcedde65fadd6e0540aff3149845c369ca"
+      "sha256": "11f3771b37ac9e14ac7d85620a7f9ea404caa2183f4af36bc8141d31cd35f90b",
+      "bytes": 44548,
+      "checkpointSha256": "75925445959ab56bb46b932a45a697319d06530ec608d9b07eb16a690fb1aa6c"
     },
     "agent_encoder": {
-      "sha256": "956e881ef49ff7c857526a894c45a6fd29b34353650f04d01633e3682546f322",
-      "bytes": 281499,
-      "checkpointSha256": "47fcd0a07ff46b52d039a886c9118083bd43ebc47bdcdd0fb89ce88d6d41e641"
+      "sha256": "667a0dda8acae099e5ec316312a202a2ac10ec4477c6b7db4a20bcae9eee2886",
+      "bytes": 40982,
+      "checkpointSha256": "7c73db3a015a4e0b054101a5e47d42b89aa65b80e9e42143ce7d5266005cb23c"
     },
     "latent_dynamics": {
-      "sha256": "ea60f71bf345036407cf772defebe920bf3b96f7a9b16e24df1d24955a5aa9ee",
-      "bytes": 207465,
-      "checkpointSha256": "d21d988a5640ccdad7affe3a053268346569492f63a98fbaa5f60eedc2d35e03"
+      "sha256": "e93cd2f13ee28fc6c6ea981c1fc761c110339c5d819eacf7c737a55a34a45b4b",
+      "bytes": 341461,
+      "checkpointSha256": "e386494480e4091c96667a1822d6445fc8807eb6b13e310108a946b561c864bd"
     },
     "diagnostic_decoder": {
-      "sha256": "4c3d3254966fee82188433c24f1227f33ed1797f2dfcececef8487a292f899ab",
-      "bytes": 50421,
-      "checkpointSha256": "4afa7f8b0e0616ce0683d520585dbdf73bfeeed807314e7e4370361ec7e28df8"
+      "sha256": "9d3b5b62989820bc69857607bf62bc81fcfa7d243b1b65a8c7dfcdfb933d6e74",
+      "bytes": 1288,
+      "checkpointSha256": "288947adb913882e9778ebe41439f9ed6b0fc2b7fc4d91c28fb78af32f5335a3"
     }
   },
   "metrics": [
     {
       "horizon": 1,
-      "latent_mse_mean": 0.008811050094664097,
-      "latent_mse_std": 0.02540902979671955,
-      "constant_state_mse": 0.014154922217130661,
-      "position_mean_units": 0.2877379357814789,
-      "orientation_mean_radians": 0.23947206139564514,
-      "contact_mse": 0.03600838780403137,
-      "noncontact_mse": 0.003974035382270813
+      "latent_mse_mean": 0.000727253092918545,
+      "latent_mse_std": 0.005835209973156452,
+      "constant_state_mse": 0.0067162904888391495,
+      "position_mean_units": 0.02991378679871559,
+      "position_std_units": 0.04714275151491165,
+      "orientation_mean_radians": 0.019139619544148445,
+      "orientation_std_radians": 0.03816356137394905,
+      "contact_mse": 0.0015457344707101583,
+      "noncontact_mse": 0.00018516770796850324,
+      "contactDefinition": "any true contact within prediction horizon"
     },
     {
       "horizon": 3,
-      "latent_mse_mean": 0.02848229557275772,
-      "latent_mse_std": 0.06842420995235443,
-      "constant_state_mse": 0.06362651288509369,
-      "position_mean_units": 0.3270031213760376,
-      "orientation_mean_radians": 0.26868292689323425,
-      "contact_mse": 0.09746295213699341,
-      "noncontact_mse": 0.01608722284436226
+      "latent_mse_mean": 0.004901170264929533,
+      "latent_mse_std": 0.030706513673067093,
+      "constant_state_mse": 0.04377875104546547,
+      "position_mean_units": 0.07109399884939194,
+      "position_std_units": 0.12809868156909943,
+      "orientation_mean_radians": 0.04510875046253204,
+      "orientation_std_radians": 0.09794840216636658,
+      "contact_mse": 0.008516830392181873,
+      "noncontact_mse": 0.0007752252859063447,
+      "contactDefinition": "any true contact within prediction horizon"
     },
     {
       "horizon": 5,
-      "latent_mse_mean": 0.04702705144882202,
-      "latent_mse_std": 0.10776490718126297,
-      "constant_state_mse": 0.12238922715187073,
-      "position_mean_units": 0.3657056987285614,
-      "orientation_mean_radians": 0.29843202233314514,
-      "contact_mse": 0.1391192525625229,
-      "noncontact_mse": 0.030324460938572884
+      "latent_mse_mean": 0.011437777429819107,
+      "latent_mse_std": 0.06885157525539398,
+      "constant_state_mse": 0.0960601270198822,
+      "position_mean_units": 0.108505479991436,
+      "position_std_units": 0.19837592542171478,
+      "orientation_mean_radians": 0.06868357956409454,
+      "orientation_std_radians": 0.1472393125295639,
+      "contact_mse": 0.01768794097006321,
+      "noncontact_mse": 0.001301742042414844,
+      "contactDefinition": "any true contact within prediction horizon"
     },
     {
       "horizon": 8,
-      "latent_mse_mean": 0.07430081814527512,
-      "latent_mse_std": 0.15722376108169556,
-      "constant_state_mse": 0.2131449431180954,
-      "position_mean_units": 0.415668785572052,
-      "orientation_mean_radians": 0.337392121553421,
-      "contact_mse": 0.17954176664352417,
-      "noncontact_mse": 0.05520646274089813
+      "latent_mse_mean": 0.023342858999967575,
+      "latent_mse_std": 0.11804696917533875,
+      "constant_state_mse": 0.18396562337875366,
+      "position_mean_units": 0.16185930371284485,
+      "position_std_units": 0.28225386142730713,
+      "orientation_mean_radians": 0.10224736481904984,
+      "orientation_std_radians": 0.2095876932144165,
+      "contact_mse": 0.03160377964377403,
+      "noncontact_mse": 0.0019199250964447856,
+      "contactDefinition": "any true contact within prediction horizon"
+    },
+    {
+      "horizon": 16,
+      "latent_mse_mean": 0.06074872612953186,
+      "latent_mse_std": 0.2107858955860138,
+      "constant_state_mse": 0.4373224079608917,
+      "position_mean_units": 0.2905765771865845,
+      "position_std_units": 0.4418933391571045,
+      "orientation_mean_radians": 0.18542198836803436,
+      "orientation_std_radians": 0.32369446754455566,
+      "contact_mse": 0.07079432904720306,
+      "noncontact_mse": 0.002718531060963869,
+      "contactDefinition": "any true contact within prediction horizon"
     }
   ],
-  "note": "Controlled-domain pixel masks. Auxiliary pose and pairwise pose-metric supervision were required after frozen-feature probes; this is not purely self-supervised.",
   "benchmark": {
-    "seeds": "920000..920049",
+    "seeds": "930000..930049",
     "actions": 100,
-    "easySuccesses": 0,
+    "easySuccesses": 3,
     "easyTrials": 50,
     "successCoverage": 0.95,
     "requiredConsecutiveActions": 3,
     "reliabilityGatePassed": false
-  }
+  },
+  "planner": {
+    "light": {
+      "horizon": 8,
+      "candidates": 128,
+      "iterations": 6,
+      "knots": 4
+    },
+    "standard": {
+      "horizon": 8,
+      "candidates": 256,
+      "iterations": 8,
+      "knots": 4
+    },
+    "visualHoldThreshold": 0.0004
+  },
+  "demonstrationSeed": 902005,
+  "demonstrationSeedSelection": "selected from development successes; excluded from final benchmark and training",
+  "note": "Experimental fallback: explicitly pose-supervised visual keypoints and geometric rigidity/rest priors. The learned predictor sees image-derived latents and actions only. This is not purely self-supervised, not V-JEPA 2, and not a reliable general manipulation controller."
 }

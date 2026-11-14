@@ -1,9 +1,126 @@
-import {PARTS,RADIUS} from './physics.js';
-export class Renderer{
- constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.transform={s:1,x:0,y:0};}
- point(event){const r=this.canvas.getBoundingClientRect(),t=this.transform;return {x:(event.clientX-r.left-t.x)/t.s,y:(event.clientY-r.top-t.y)/t.s};}
- shape(pose,color,alpha=1,outline=false){const c=this.ctx;c.save();c.globalAlpha=alpha;c.translate(pose.x,pose.y);c.rotate(pose.angle);c.beginPath();c.moveTo(-1.2,-1.05);c.lineTo(1.2,-1.05);c.lineTo(1.2,-.4);c.lineTo(.325,-.4);c.lineTo(.325,1.05);c.lineTo(-.325,1.05);c.lineTo(-.325,-.4);c.lineTo(-1.2,-.4);c.closePath();c.fillStyle=color;c.fill();if(outline){c.strokeStyle=color;c.lineWidth=.025;c.stroke();}c.restore();}
- draw(state,goal,plan,showGhosts){const c=this.ctx,rect=this.canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);if(this.canvas.width!==Math.round(rect.width*dpr)||this.canvas.height!==Math.round(rect.height*dpr)){this.canvas.width=Math.round(rect.width*dpr);this.canvas.height=Math.round(rect.height*dpr);}c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,rect.width,rect.height);const s=Math.min((rect.width-45)/10,(rect.height-70)/10),x=(rect.width-10*s)/2,y=(rect.height-10*s)/2+4;this.transform={s,x,y};c.translate(x,y);c.scale(s,s);c.fillStyle='#f7f8f1';c.fillRect(0,0,10,10);c.lineWidth=.012;c.strokeStyle='#e2e7dc';for(let i=0;i<=20;i++){c.beginPath();c.moveTo(i/2,0);c.lineTo(i/2,10);c.moveTo(0,i/2);c.lineTo(10,i/2);c.stroke();}c.strokeStyle='#cbd4c4';c.lineWidth=.025;c.strokeRect(0,0,10,10);this.shape(goal,'#65a478',.18,true);c.save();c.strokeStyle='#68a47c';c.lineWidth=.025;c.setLineDash([.09,.07]);c.beginPath();c.arc(goal.x,goal.y,1.55,0,2*Math.PI);c.stroke();c.restore();
- if(showGhosts&&plan){for(const candidate of plan.candidates||[])for(let k=2;k<candidate.length;k+=3)this.shape(candidate[k],'#9b83c1',.045);const poses=plan.poses||[];for(let k=0;k<poses.length;k+=2)this.shape(poses[k],'#8662b9',.07+.13*(k+1)/poses.length,true);if(poses.length){c.strokeStyle='#8b6aba';c.lineWidth=.035;c.setLineDash([.08,.1]);c.beginPath();c.moveTo(state.object.x,state.object.y);for(const p of poses)c.lineTo(p.x,p.y);c.stroke();c.setLineDash([]);}}
- c.save();c.shadowColor='rgba(70,50,25,.14)';c.shadowBlur=8;c.shadowOffsetY=3;this.shape(state.object,'#e9a15e');c.restore();this.shape(state.object,'#e9a15e',1,true);c.fillStyle='#4d81d7';c.beginPath();c.arc(state.agent.x,state.agent.y,RADIUS,0,2*Math.PI);c.fill();c.lineWidth=.035;c.strokeStyle='#dce9fc';c.stroke();c.fillStyle='#f7fbff';c.beginPath();c.arc(state.agent.x-.045,state.agent.y-.05,.055,0,2*Math.PI);c.fill();}
+import { PARTS, RADIUS } from "./physics.js";
+export class Renderer {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.transform = { s: 1, x: 0, y: 0 };
+  }
+  point(event) {
+    const r = this.canvas.getBoundingClientRect(),
+      t = this.transform;
+    return {
+      x: (event.clientX - r.left - t.x) / t.s,
+      y: (event.clientY - r.top - t.y) / t.s,
+    };
+  }
+  shape(pose, color, alpha = 1, outline = false) {
+    const c = this.ctx;
+    c.save();
+    c.globalAlpha = alpha;
+    c.translate(pose.x, pose.y);
+    c.rotate(pose.angle);
+    c.beginPath();
+    c.moveTo(-1.2, -1.05);
+    c.lineTo(1.2, -1.05);
+    c.lineTo(1.2, -0.4);
+    c.lineTo(0.325, -0.4);
+    c.lineTo(0.325, 1.05);
+    c.lineTo(-0.325, 1.05);
+    c.lineTo(-0.325, -0.4);
+    c.lineTo(-1.2, -0.4);
+    c.closePath();
+    c.fillStyle = color;
+    c.fill();
+    if (outline) {
+      c.strokeStyle = color;
+      c.lineWidth = 0.025;
+      c.stroke();
+    }
+    c.restore();
+  }
+  draw(state, goal, plan, showGhosts) {
+    const c = this.ctx,
+      rect = this.canvas.getBoundingClientRect(),
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (
+      this.canvas.width !== Math.round(rect.width * dpr) ||
+      this.canvas.height !== Math.round(rect.height * dpr)
+    ) {
+      this.canvas.width = Math.round(rect.width * dpr);
+      this.canvas.height = Math.round(rect.height * dpr);
+    }
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, rect.width, rect.height);
+    const s = Math.min((rect.width - 45) / 10, (rect.height - 70) / 10),
+      x = (rect.width - 10 * s) / 2,
+      y = (rect.height - 10 * s) / 2 + 4;
+    this.transform = { s, x, y };
+    c.translate(x, y);
+    c.scale(s, s);
+    c.fillStyle = "#f7f8f1";
+    c.fillRect(0, 0, 10, 10);
+    c.lineWidth = 0.012;
+    c.strokeStyle = "#e2e7dc";
+    for (let i = 0; i <= 20; i++) {
+      c.beginPath();
+      c.moveTo(i / 2, 0);
+      c.lineTo(i / 2, 10);
+      c.moveTo(0, i / 2);
+      c.lineTo(10, i / 2);
+      c.stroke();
+    }
+    c.strokeStyle = "#cbd4c4";
+    c.lineWidth = 0.025;
+    c.strokeRect(0, 0, 10, 10);
+    this.shape(goal, "#65a478", 0.18, true);
+    c.save();
+    c.strokeStyle = "#68a47c";
+    c.lineWidth = 0.025;
+    c.setLineDash([0.09, 0.07]);
+    c.beginPath();
+    c.arc(goal.x, goal.y, 1.55, 0, 2 * Math.PI);
+    c.stroke();
+    c.restore();
+    if (showGhosts && plan) {
+      for (const candidate of plan.candidates || [])
+        for (let k = 2; k < candidate.length; k += 3)
+          this.shape(candidate[k], "#9b83c1", 0.045);
+      const poses = plan.poses || [];
+      for (let k = 0; k < poses.length; k += 2)
+        this.shape(
+          poses[k],
+          "#8662b9",
+          0.07 + (0.13 * (k + 1)) / poses.length,
+          true,
+        );
+      if (poses.length) {
+        c.strokeStyle = "#8b6aba";
+        c.lineWidth = 0.035;
+        c.setLineDash([0.08, 0.1]);
+        c.beginPath();
+        c.moveTo(state.object.x, state.object.y);
+        for (const p of poses) c.lineTo(p.x, p.y);
+        c.stroke();
+        c.setLineDash([]);
+      }
+    }
+    c.save();
+    c.shadowColor = "rgba(70,50,25,.14)";
+    c.shadowBlur = 8;
+    c.shadowOffsetY = 3;
+    this.shape(state.object, "#e9a15e");
+    c.restore();
+    this.shape(state.object, "#e9a15e", 1, true);
+    c.fillStyle = "#4d81d7";
+    c.beginPath();
+    c.arc(state.agent.x, state.agent.y, RADIUS, 0, 2 * Math.PI);
+    c.fill();
+    c.lineWidth = 0.035;
+    c.strokeStyle = "#dce9fc";
+    c.stroke();
+    c.fillStyle = "#f7fbff";
+    c.beginPath();
+    c.arc(state.agent.x - 0.045, state.agent.y - 0.05, 0.055, 0, 2 * Math.PI);
+    c.fill();
+  }
 }

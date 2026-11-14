@@ -1,5 +1,63 @@
-import fs from 'node:fs';import {loadModel} from './runtime.mjs';
-const model=await loadModel(),fixtures=JSON.parse(fs.readFileSync('../../assets/interactive/tiny-world-planner/models/parity_fixtures.json')),results=[];
-for(const f of fixtures){const actual=await model.predict(Float32Array.from(f.state),Float32Array.from(f.action),1),error=Math.max(...actual.map((v,i)=>Math.abs(v-f.expectedNext[i])));if(error>1e-4)throw Error('WASM dynamics parity failed '+error);const encoded=await model.encode({object:Float32Array.from(f.object),agent:Float32Array.from(f.agent),previousObject:Float32Array.from(f.object),previousAgent:Float32Array.from(f.agent)});const encError=Math.max(...encoded.slice(0,24).map((v,i)=>Math.abs(v-f.state[i])));if(encError>1e-4)throw Error('WASM encoder parity failed '+encError);results.push({batch:1,dynamicsMaxAbsoluteError:error,encoderMaxAbsoluteError:encError});}
-const f=fixtures[0],state=new Float32Array(64*48),action=new Float32Array(64*2);for(let n=0;n<64;n++){state.set(f.state,n*48);action.set(f.action,n*2);}const output=await model.predict(state,action,64);let error=0;for(let n=0;n<64;n++)for(let j=0;j<48;j++)error=Math.max(error,Math.abs(output[n*48+j]-f.expectedNext[j]));if(error>1e-4)throw Error('Batch64 parity failed '+error);results.push({batch:64,dynamicsMaxAbsoluteError:error});fs.writeFileSync('results/wasm-parity.json',JSON.stringify(results,null,2));console.log(results);
-for(const f of fixtures){let s=Float32Array.from(f.state),maximum=0;for(let k=0;k<f.expectedRollout.length;k++){s=await model.predict(s,Float32Array.from(f.action),1);maximum=Math.max(maximum,...s.map((v,j)=>Math.abs(v-f.expectedRollout[k][j])));}if(maximum>1e-4)throw Error('Recurrent parity failed '+maximum);results.push({rolloutSteps:5,maxAbsoluteError:maximum});}fs.writeFileSync('results/wasm-parity.json',JSON.stringify(results,null,2));
+import fs from "node:fs";
+import { loadModel } from "./runtime.mjs";
+const model = await loadModel(),
+  fixtures = JSON.parse(
+    fs.readFileSync(
+      "../../assets/interactive/tiny-world-planner/models/parity_fixtures.json",
+    ),
+  ),
+  results = [];
+for (const f of fixtures) {
+  const actual = await model.predict(
+      Float32Array.from(f.state),
+      Float32Array.from(f.action),
+      1,
+    ),
+    error = Math.max(...actual.map((v, i) => Math.abs(v - f.expectedNext[i])));
+  if (error > 1e-4) throw Error("WASM dynamics parity failed " + error);
+  const encoded = await model.encode({
+    object: Float32Array.from(f.object),
+    agent: Float32Array.from(f.agent),
+    previousObject: Float32Array.from(f.object),
+    previousAgent: Float32Array.from(f.agent),
+  });
+  const encError = Math.max(
+    ...encoded.slice(0, 24).map((v, i) => Math.abs(v - f.state[i])),
+  );
+  if (encError > 1e-4) throw Error("WASM encoder parity failed " + encError);
+  results.push({
+    batch: 1,
+    dynamicsMaxAbsoluteError: error,
+    encoderMaxAbsoluteError: encError,
+  });
+}
+const f = fixtures[0],
+  state = new Float32Array(64 * 48),
+  action = new Float32Array(64 * 2);
+for (let n = 0; n < 64; n++) {
+  state.set(f.state, n * 48);
+  action.set(f.action, n * 2);
+}
+const output = await model.predict(state, action, 64);
+let error = 0;
+for (let n = 0; n < 64; n++)
+  for (let j = 0; j < 48; j++)
+    error = Math.max(error, Math.abs(output[n * 48 + j] - f.expectedNext[j]));
+if (error > 1e-4) throw Error("Batch64 parity failed " + error);
+results.push({ batch: 64, dynamicsMaxAbsoluteError: error });
+fs.writeFileSync("results/wasm-parity.json", JSON.stringify(results, null, 2));
+console.log(results);
+for (const f of fixtures) {
+  let s = Float32Array.from(f.state),
+    maximum = 0;
+  for (let k = 0; k < f.expectedRollout.length; k++) {
+    s = await model.predict(s, Float32Array.from(f.action), 1);
+    maximum = Math.max(
+      maximum,
+      ...s.map((v, j) => Math.abs(v - f.expectedRollout[k][j])),
+    );
+  }
+  if (maximum > 1e-4) throw Error("Recurrent parity failed " + maximum);
+  results.push({ rolloutSteps: 5, maxAbsoluteError: maximum });
+}
+fs.writeFileSync("results/wasm-parity.json", JSON.stringify(results, null, 2));

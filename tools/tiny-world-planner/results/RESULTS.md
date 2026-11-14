@@ -1,39 +1,38 @@
 # Measured release results
 
-Training seed: 714. Dataset: 700 episodes × 80 actions, split by whole episode. True contact fraction: 17.1%; movement fraction: 26.3%.
+The release remains **experimental**. Perception is explicitly pose-supervised, with geometric priors; no privileged simulator state enters the deployed planner.
 
-Representation training: vicreg+auxiliary_pose_and_metric, vicreg+auxiliary_pose_and_metric.
+Dynamics dataset: 1400 episodes × 60 actions. True contact fraction 38.7%. Encoder pretraining used a separate 700×80 dataset.
 
-Training/export elapsed 350.1 seconds on the local CPU; this is an observed run time, not a hardware-independent promise.
+## Held-out image-conditioned prediction
 
-## Prediction on held-out episodes
-
-| Horizon | Latent MSE ± SD | Static MSE | Decoded xy error (units) | Angle error (rad) |
+| Horizon | Latent MSE ± SD | Static MSE | Position error (units) | Angle error (rad) |
 |---:|---:|---:|---:|---:|
-| 1 | 0.0088 ± 0.0254 | 0.0142 | 0.288 | 0.239 |
-| 3 | 0.0285 ± 0.0684 | 0.0636 | 0.327 | 0.269 |
-| 5 | 0.0470 ± 0.1078 | 0.1224 | 0.366 | 0.298 |
-| 8 | 0.0743 ± 0.1572 | 0.2131 | 0.416 | 0.337 |
+| 1 | 0.00073 ± 0.00584 | 0.00672 | 0.0299 | 0.0191 |
+| 3 | 0.00490 ± 0.03071 | 0.04378 | 0.0711 | 0.0451 |
+| 5 | 0.01144 ± 0.06885 | 0.09606 | 0.1085 | 0.0687 |
+| 8 | 0.02334 ± 0.11805 | 0.18397 | 0.1619 | 0.1022 |
+| 16 | 0.06075 ± 0.21079 | 0.43732 | 0.2906 | 0.1854 |
 
-## Planning benchmark
+## Reserved planning benchmark
 
-ONNX Runtime Web 1.21.0 WASM in Node, single thread; not browser or phone timing; CEM search only, excluding image encoding and diagnostic decoding
+50 seeds 930000–930049 per difficulty; paired random actions and neural MPC; 100-action budget. Success requires ≥95% actual geometric coverage for three consecutive actions.
 
-50 reserved seeds per difficulty, 100 actions per task, same seeds for both methods. Success: ≥95% coverage for three consecutive actions. No privileged planner inputs.
-
-| Difficulty | Method | Success | Mean final coverage | Mean planning latency |
+| Difficulty | Method | Success | Mean final coverage | Mean CEM time |
 |---|---|---:|---:|---:|
-| easy | random | 0/50 (0%) | 37.6% | 0.00 ms |
-| easy | latent-mpc | 0/50 (0%) | 40.9% | 2.36 ms |
-| medium | random | 0/50 (0%) | 18.7% | 0.00 ms |
-| medium | latent-mpc | 0/50 (0%) | 27.5% | 2.31 ms |
-| challenge | random | 0/50 (0%) | 7.1% | 0.00 ms |
-| challenge | latent-mpc | 0/50 (0%) | 22.0% | 2.31 ms |
+| easy | random | 0/50 | 33.2% | 0.0 ms |
+| easy | latent-mpc | 3/50 | 85.0% | 49.4 ms |
+| medium | random | 0/50 | 19.5% | 0.0 ms |
+| medium | latent-mpc | 2/50 | 76.0% | 49.1 ms |
+| challenge | random | 0/50 | 7.4% | 0.0 ms |
+| challenge | latent-mpc | 2/50 | 81.9% | 49.1 ms |
 
-**Reliability gate: NOT MET — experimental**. The gate does not change the reported outcomes. A visually useful push is not counted as task success.
+**Reliability gate: NOT MET.** 3/50 easy successes; target was ≥25/50. These results must not be presented as a reliable controller.
 
-Browser viewport results are in `browser.json`. Portrait/landscape use touch emulation, not a physical Android device. Node WASM timing is not a phone benchmark.
+Timing above is Node WASM CEM under concurrent evaluation load, excluding observation encoding and diagnostic decoding. Browser measurements are separate in `browser.json`; mobile viewports are emulated, not physical Android timings.
 
-Failure labels are coarse descriptive categories derived from actual contact and achieved coverage. They do not prove the causal reason for each failure.
+Default seed 902005 is a selected development demonstration, not a final benchmark seed. It succeeds through fresh neural CEM execution, not a replay or scripted controller. Goal edits and disturbances can fail.
 
-The original hard-mask/pose-supervised development experiment missed all 50 easy goals; its negative result is retained in `experiment-v1`. Hyperparameter and representation changes used development seeds; the final benchmark uses separately reserved seeds.
+The original release is retained under `original-release/`. A paired original-controller evaluation on the new easy seeds is under `original-on-new-seeds/`. Privileged oracle diagnostics remain offline under tools; none is imported or substituted by the website.
+
+Development included negative short/long horizon, online residual, and introductory-scene experiments. They are not the final held-out benchmark.

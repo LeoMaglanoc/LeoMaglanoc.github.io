@@ -10,8 +10,17 @@
       ],
       "mobileEmulation": false,
       "physicalPhone": false,
+      "defaultSuccess": {
+        "ready": true,
+        "busy": false,
+        "running": false,
+        "count": 14,
+        "version": 1,
+        "coverage": 0.959269766190944,
+        "planCost": 0.0002545871523196297
+      },
       "parity": {
-        "maximum": 0.0000021457672119140625,
+        "maximum": 0.000007867813110351562,
         "passed": true,
         "batches": [
           1,
@@ -21,8 +30,8 @@
       },
       "latencyMs": {
         "samples": 12,
-        "mean": 5.5,
-        "p95": 9
+        "mean": 60.583333333333336,
+        "p95": 69
       },
       "overflow": false,
       "errors": [],
@@ -31,8 +40,8 @@
         "busy": false,
         "running": false,
         "count": 0,
-        "version": 6,
-        "coverage": 0.38119552186074956
+        "version": 7,
+        "coverage": 0.33765118789970505
       },
       "checks": [
         "model initialization",
@@ -55,8 +64,17 @@
       ],
       "mobileEmulation": true,
       "physicalPhone": false,
+      "defaultSuccess": {
+        "ready": true,
+        "busy": false,
+        "running": false,
+        "count": 14,
+        "version": 1,
+        "coverage": 0.959269766190944,
+        "planCost": 0.0002545871523196297
+      },
       "parity": {
-        "maximum": 0.0000021457672119140625,
+        "maximum": 0.000007867813110351562,
         "passed": true,
         "batches": [
           1,
@@ -66,8 +84,8 @@
       },
       "latencyMs": {
         "samples": 12,
-        "mean": 4.916666666666667,
-        "p95": 6
+        "mean": 57.833333333333336,
+        "p95": 70
       },
       "overflow": false,
       "errors": [],
@@ -76,8 +94,8 @@
         "busy": false,
         "running": false,
         "count": 0,
-        "version": 6,
-        "coverage": 0.38119552186074956
+        "version": 7,
+        "coverage": 0.33765118789970505
       },
       "checks": [
         "model initialization",
@@ -100,8 +118,17 @@
       ],
       "mobileEmulation": true,
       "physicalPhone": false,
+      "defaultSuccess": {
+        "ready": true,
+        "busy": false,
+        "running": false,
+        "count": 14,
+        "version": 1,
+        "coverage": 0.959269766190944,
+        "planCost": 0.0002545871523196297
+      },
       "parity": {
-        "maximum": 0.0000021457672119140625,
+        "maximum": 0.000007867813110351562,
         "passed": true,
         "batches": [
           1,
@@ -111,8 +138,8 @@
       },
       "latencyMs": {
         "samples": 12,
-        "mean": 4.916666666666667,
-        "p95": 7
+        "mean": 63.583333333333336,
+        "p95": 94
       },
       "overflow": false,
       "errors": [],
@@ -121,8 +148,8 @@
         "busy": false,
         "running": false,
         "count": 0,
-        "version": 6,
-        "coverage": 0.38119552186074956
+        "version": 7,
+        "coverage": 0.33765118789970505
       },
       "checks": [
         "model initialization",

@@ -1,0 +1,29 @@
+{
+  "label": "PRIVILEGED OFFLINE PHYSICS DIAGNOSTIC; never deployed",
+  "config": {
+    "N": 256,
+    "H": 16,
+    "I": 8,
+    "budget": 100
+  },
+  "rows": [
+    {
+      "seed": 901500,
+      "success": true,
+      "bestCoverage": 0.9534921248789342,
+      "finalCoverage": 0.9534921248789342
+    },
+    {
+      "seed": 901501,
+      "success": true,
+      "bestCoverage": 0.954014555140482,
+      "finalCoverage": 0.954014555140482
+    },
+    {
+      "seed": 901502,
+      "success": true,
+      "bestCoverage": 0.9757788015142964,
+      "finalCoverage": 0.9757788015142964
+    }
+  ]
+}

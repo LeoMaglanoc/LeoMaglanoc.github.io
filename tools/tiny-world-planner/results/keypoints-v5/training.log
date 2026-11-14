@@ -1,0 +1,146 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/483b627322e9/repo/tools/tiny-world-planner/train/train_keypoints.py", line 45, in <module>
+    with torch.no_grad():v=loss(torch.arange(tr,va).repeat_interleave(8),torch.arange(8).repeat(va-tr)*8,5).item()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/483b627322e9/repo/tools/tiny-world-planner/train/train_keypoints.py", line 39, in loss
+    for k in range(h):state=model(state,actions[e,t+k]);total+=(state[:,:16]-features[e,t+k+1,:16]).square().mean()+.5*(state[:,16:24]-features[e,t+k+1,16:24]).square().mean()
+                                        ~~~~~~~^^^^^^^
+IndexError: index 60 is out of bounds for dimension 1 with size 60
+dynamics 0 0.0012 0.010096
+dynamics 250 0.00156 0.007349
+dynamics 500 0.000912 0.006943
+dynamics 750 0.001104 0.006867
+dynamics 1000 0.003163 0.006794
+dynamics 1250 0.005204 0.007627
+dynamics 1500 0.004952 0.006826
+dynamics 1750 0.004297 0.007364
+dynamics 2000 0.00421 0.006681
+dynamics 2250 0.00318 0.006525
+dynamics 2500 0.007681 0.007339
+dynamics 2750 0.002769 0.006889
+dynamics 3000 0.007232 0.00708
+dynamics 3250 0.003426 0.006983
+dynamics 3500 0.003439 0.007079
+dynamics 3750 0.005493 0.006948
+dynamics 4000 0.004022 0.006638
+dynamics 4250 0.002198 0.006674
+dynamics 4500 0.001926 0.007268
+dynamics 4750 0.003433 0.007937
+dynamics 5000 0.004028 0.007286
+dynamics 5250 0.002319 0.006875
+dynamics 5500 0.002451 0.006738
+dynamics 5750 0.001928 0.006296
+dynamics 6000 0.001629 0.006443
+dynamics 6250 0.003637 0.006348
+dynamics 6500 0.002907 0.00668
+dynamics 6750 0.002015 0.006487
+dynamics 7000 0.002876 0.006386
+dynamics 7250 0.003018 0.006744
+dynamics 7500 0.00132 0.006706
+dynamics 7750 0.002485 0.006379
+{
+  "seed": 731,
+  "arguments": {
+    "data": "local-data-contact",
+    "out": "local-models-keypoints-precision",
+    "encoder_steps": 4500,
+    "dynamics_steps": 8000,
+    "reuse_encoders": true,
+    "equivariant": true,
+    "results": "results/keypoints-v5",
+    "initial_dynamics": "local-models-keypoints-equivariant/dynamics.pt"
+  },
+  "dataset": {
+    "version": "sensor-v3-contact-precision-planck-1.3.0",
+    "episodes": 1400,
+    "steps": 60,
+    "seedBase": 120000,
+    "collectorSeed": 20261114,
+    "imageShape": [
+      1400,
+      61,
+      2,
+      64,
+      64
+    ],
+    "stateShape": [
+      1400,
+      61,
+      9
+    ],
+    "actionShape": [
+      1400,
+      60,
+      2
+    ],
+    "contactFraction": 0.3866547619047619,
+    "movingFraction": 0.5827380952380953,
+    "split": {
+      "train": [
+        0,
+        1120
+      ],
+      "validation": [
+        1120,
+        1260
+      ],
+      "test": [
+        1260,
+        1400
+      ]
+    },
+    "contactDefinition": "true touching pusher/block contact during any of the 12 physics substeps",
+    "actionScale": 0.48,
+    "actionDuration": 0.1
+  },
+  "supervision": "explicit image-to-keypoint auxiliary pose supervision, not purely self-supervised",
+  "encoders": [
+    {
+      "stream": 0,
+      "validationKeypointErrorWorldUnits": 0.01749859075061977
+    },
+    {
+      "stream": 1,
+      "validationKeypointErrorWorldUnits": 0.009416491375304759
+    }
+  ],
+  "currentDecodedPositionErrorWorldUnits": 0.012640765635296702,
+  "prediction": [
+    {
+      "horizon": 1,
+      "latentMSE": 0.0007758765714243054,
+      "staticMSE": 0.0067274123430252075,
+      "decodedPositionErrorWorldUnits": 0.03191928192973137,
+      "decodedAngleErrorRadians": 0.021998384967446327
+    },
+    {
+      "horizon": 3,
+      "latentMSE": 0.004713884089142084,
+      "staticMSE": 0.04375170171260834,
+      "decodedPositionErrorWorldUnits": 0.07075456529855728,
+      "decodedAngleErrorRadians": 0.04589705914258957
+    },
+    {
+      "horizon": 5,
+      "latentMSE": 0.010924436151981354,
+      "staticMSE": 0.0959952250123024,
+      "decodedPositionErrorWorldUnits": 0.1061025932431221,
+      "decodedAngleErrorRadians": 0.06817334145307541
+    },
+    {
+      "horizon": 8,
+      "latentMSE": 0.021663829684257507,
+      "staticMSE": 0.18383754789829254,
+      "decodedPositionErrorWorldUnits": 0.15668147802352905,
+      "decodedAngleErrorRadians": 0.10023754835128784
+    },
+    {
+      "horizon": 16,
+      "latentMSE": 0.056873977184295654,
+      "staticMSE": 0.4369973838329315,
+      "decodedPositionErrorWorldUnits": 0.2802785634994507,
+      "decodedAngleErrorRadians": 0.1817101240158081
+    }
+  ],
+  "elapsedSeconds": 140.44048357009888
+}

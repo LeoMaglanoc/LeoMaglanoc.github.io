@@ -8,7 +8,7 @@ COPY assets/interactive/tiny-world-planner assets/interactive/tiny-world-planner
 COPY tools/tiny-world-planner tools/tiny-world-planner
 WORKDIR /workspace/tools/tiny-world-planner
 RUN npm ci
-CMD ["sh","-c","node generate.mjs 700 80 local-data && python train/train.py && python eval/baseline.py && node eval/parity.mjs"]
+CMD ["sh","reproduce_keypoints.sh"]
 
 FROM mcr.microsoft.com/playwright:v1.57.0-noble AS validate
 WORKDIR /workspace

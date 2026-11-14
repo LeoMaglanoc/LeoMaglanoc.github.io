@@ -1,24 +1,24 @@
 [
   {
     "batch": 1,
-    "dynamicsMaxAbsoluteError": 5.960464477539063e-8,
-    "encoderMaxAbsoluteError": 7.152557373046875e-7
+    "dynamicsMaxAbsoluteError": 0,
+    "encoderMaxAbsoluteError": 0.00000667572021484375
   },
   {
     "batch": 1,
     "dynamicsMaxAbsoluteError": 2.384185791015625e-7,
-    "encoderMaxAbsoluteError": 0.0000021457672119140625
+    "encoderMaxAbsoluteError": 0.000007867813110351562
   },
   {
     "batch": 64,
-    "dynamicsMaxAbsoluteError": 5.960464477539063e-8
+    "dynamicsMaxAbsoluteError": 0
   },
   {
     "rolloutSteps": 5,
-    "maxAbsoluteError": 1.1920928955078125e-7
+    "maxAbsoluteError": 3.5762786865234375e-7
   },
   {
     "rolloutSteps": 5,
-    "maxAbsoluteError": 2.384185791015625e-7
+    "maxAbsoluteError": 4.76837158203125e-7
   }
 ]
