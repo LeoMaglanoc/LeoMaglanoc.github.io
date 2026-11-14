@@ -1,0 +1,17 @@
+**
+!assets/
+!assets/interactive/
+!assets/interactive/tiny-world-planner/
+!assets/interactive/tiny-world-planner/**
+!assets/interactive/doom/
+!assets/interactive/doom/vendor/
+!assets/interactive/doom/vendor/ort/
+!assets/interactive/doom/vendor/ort/**
+!tools/
+!tools/tiny-world-planner/
+!tools/tiny-world-planner/**
+tools/tiny-world-planner/node_modules/
+tools/tiny-world-planner/local-data/
+tools/tiny-world-planner/checkpoints/
+tools/tiny-world-planner/screenshots/
+**/__pycache__/
